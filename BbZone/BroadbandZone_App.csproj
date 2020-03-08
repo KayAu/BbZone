@@ -1,0 +1,571 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{02B73538-E28F-452C-9592-9077AE7F3F6D}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BroadbandZone_App</RootNamespace>
+    <AssemblyName>BroadbandZone_App</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=8.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.8.1.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="BroadbandZone_Data">
+      <HintPath>..\BroadbandZone_Data\bin\Debug\BroadbandZone_Data.dll</HintPath>
+    </Reference>
+    <Reference Include="ClosedXML, Version=0.94.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.94.2\lib\net46\ClosedXML.dll</HintPath>
+    </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ExcelNumberFormat, Version=1.0.3.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.0.3\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
+      <HintPath>..\packages\EnterpriseLibrary.Data.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EnterpriseLibrary.Logging.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Logging.Database">
+      <HintPath>..\packages\EnterpriseLibrary.Logging.Database.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Logging.Database.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.0.1\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.4\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.4\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.4\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActivationController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="EFData\CallLogEntities.cs" />
+    <Compile Include="Enums\Enums.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\ChartHelper.cs" />
+    <Compile Include="Helper\Constants.cs" />
+    <Compile Include="Helper\DataHelper.cs" />
+    <Compile Include="Helper\ExceptionUtility.cs" />
+    <Compile Include="Helper\FileUploadHelper.cs" />
+    <Compile Include="Helper\ModelHelper.cs" />
+    <Compile Include="Helper\UserIdentityHelper.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ChartData.cs" />
+    <Compile Include="Models\UploadedFile.cs" />
+    <Compile Include="Models\FileExportResult.cs" />
+    <Compile Include="Models\Gridview.cs" />
+    <Compile Include="Models\DropdownItem.cs" />
+    <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\StatusAndKeywordParams.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="WebApi\AgentController.cs" />
+    <Compile Include="WebApi\CustomerApplicationrController.cs" />
+    <Compile Include="WebApi\DropdownController.cs" />
+    <Compile Include="WebApi\ProductCategoryController.cs" />
+    <Compile Include="WebApi\ProductPackageController.cs" />
+    <Compile Include="WebApi\ProductController.cs" />
+    <Compile Include="WebApi\RegistrationController.cs" />
+    <Compile Include="WebApi\UserController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\datatables.min.css" />
+    <Content Include="Content\font-awesome\font-awesome.css" />
+    <Content Include="Content\glyphicons\glyphicon.css" />
+    <Content Include="Content\green.png" />
+    <Content Include="Content\material-design-iconic-font\materialdesignicons.css" />
+    <Content Include="Content\patterns\3.png" />
+    <Content Include="Content\patterns\4.png" />
+    <Content Include="Content\patterns\header-profile-skin-1.png" />
+    <Content Include="Content\patterns\header-profile-skin-2.png" />
+    <Content Include="Content\patterns\header-profile-skin-3.png" />
+    <Content Include="Content\patterns\header-profile.png" />
+    <Content Include="Content\patterns\shattered.png" />
+    <Content Include="Content\styles.css" />
+    <Content Include="Content\themify-icons\themify-icons.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="images\avatar_all.png" />
+    <Content Include="images\dashboard.png" />
+    <Content Include="images\date.png" />
+    <Content Include="images\header_one.jpg" />
+    <Content Include="images\header_two.jpg" />
+    <Content Include="images\profile_small.jpg" />
+    <Content Include="images\word_map.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="angular.json" />
+    <Content Include="package.json" />
+    <Content Include="Content\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Content\glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
+    <Content Include="Content\themify-icons\fonts\themify.woff" />
+    <None Include="Properties\PublishProfiles\NeuroCallLog - DEV.pubxml" />
+    <None Include="Properties\PublishProfiles\NeuroCallLog - QA.pubxml" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\broadbandzone.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\libs\main.js" />
+    <Content Include="Scripts\libs\polyfills.js" />
+    <Content Include="Scripts\libs\runtime.js" />
+    <Content Include="Scripts\libs\styles.js" />
+    <Content Include="Scripts\libs\vendor.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\plugins\editabletable.js" />
+    <Content Include="Scripts\plugins\jquery.metisMenu.js" />
+    <Content Include="Scripts\plugins\jquery.slimscroll.js" />
+    <Content Include="Scripts\plugins\jquery.steps.js" />
+    <Content Include="Scripts\template.js" />
+    <Content Include="Scripts\wms.js" />
+    <Content Include="src\app\app.component.css" />
+    <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\components\data-control\data-control.css" />
+    <Content Include="src\app\components\data-control\data-control.html" />
+    <Content Include="src\app\components\data-field\data-field.html" />
+    <Content Include="src\app\components\editable-table\editable-table.html" />
+    <Content Include="src\app\components\file-uploader\file-uploader.css" />
+    <Content Include="src\app\components\file-uploader\file-uploader.html" />
+    <Content Include="src\app\components\gridview\gridview.html" />
+    <Content Include="src\app\components\impersonate-user\impersonate-user.html" />
+    <Content Include="src\app\components\auto-suggest\auto-suggest.css" />
+    <Content Include="src\app\components\auto-suggest\auto-suggest.html" />
+    <Content Include="src\app\components\editable-dropdown\editable-dropdown.html" />
+    <Content Include="src\app\components\editable-yesno\editable-yesno.html" />
+    <Content Include="src\app\components\pagination\pagination.css" />
+    <Content Include="src\app\components\pagination\pagination.html" />
+    <Content Include="src\app\components\product-options\product-options.html" />
+    <Content Include="src\app\components\superior-field\superior-field.html" />
+    <Content Include="src\app\nav-menu\nav-menu.component.css" />
+    <Content Include="src\app\nav-menu\nav-menu.component.html" />
+    <Content Include="src\app\pages\agent-comission\agent-comission.html" />
+    <Content Include="src\app\pages\agent-profile\agent-profile.html" />
+    <Content Include="src\app\pages\agent-registration-list\agent-registration-list.html" />
+    <Content Include="src\app\pages\agent-registration-view\agent-registration-view.html" />
+    <Content Include="src\app\pages\agent-registration\agent-registration.html" />
+    <Content Include="src\app\pages\create-order\create-order.html" />
+    <Content Include="src\app\pages\download-record\download-record.html" />
+    <Content Include="src\app\pages\edit-order\edit-order.html" />
+    <Content Include="src\app\pages\home\home.html" />
+    <Content Include="src\app\pages\login\login.html" />
+    <Content Include="src\app\pages\manage-category\manage-category.html" />
+    <Content Include="src\app\pages\manage-packages\manage-packages.html" />
+    <Content Include="src\app\pages\manage-withdrawal\manage-withdrawal.html" />
+    <Content Include="src\app\pages\manage-product\manage-product.html" />
+    <Content Include="src\app\pages\record-counts\record-counts.html" />
+    <Content Include="src\app\pages\report-chart\report-chart.html" />
+    <Content Include="src\app\pages\user-access\user-access.html" />
+    <Content Include="src\app\pages\view-commission\view-commission.html" />
+    <Content Include="src\app\pages\view-order\view-order.html" />
+    <Content Include="src\favicon.ico" />
+    <Content Include="src\index.html" />
+    <Content Include="src\karma.conf.js" />
+    <Content Include="src\styles.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="tsconfig.json" />
+    <Content Include="src\browserslist" />
+    <Content Include="src\tsconfig.app.json" />
+    <Content Include="src\tsconfig.spec.json" />
+    <Content Include="src\tslint.json" />
+    <Content Include="Scripts\libs\main.js.map" />
+    <Content Include="Scripts\libs\polyfills.js.map" />
+    <Content Include="Scripts\libs\runtime.js.map" />
+    <Content Include="Scripts\libs\styles.js.map" />
+    <Content Include="Scripts\libs\vendor.js.map" />
+    <Content Include="Views\Shared\_Login.cshtml" />
+    <Content Include="Views\Account\Activate.cshtml" />
+    <None Include="Web.QA.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\UploadFiles\" />
+    <Folder Include="node_modules\" />
+    <Folder Include="src\assets\" />
+    <Folder Include="Views\Activation\" />
+    <Folder Include="Views\User\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="packages.config" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="src\app\app.component.ts" />
+    <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\components\back-button\back-button.ts" />
+    <TypeScriptCompile Include="src\app\components\data-control\data-control.ts" />
+    <TypeScriptCompile Include="src\app\components\data-field\data-field.ts" />
+    <TypeScriptCompile Include="src\app\components\editable-table\editable-table.ts" />
+    <TypeScriptCompile Include="src\app\components\file-uploader\file-uploader.ts" />
+    <TypeScriptCompile Include="src\app\components\gridview\gridview.ts" />
+    <TypeScriptCompile Include="src\app\components\impersonate-user\impersonate-user.ts" />
+    <TypeScriptCompile Include="src\app\components\bar-chart\bar-chart.ts" />
+    <TypeScriptCompile Include="src\app\components\auto-suggest\auto-suggest.ts" />
+    <TypeScriptCompile Include="src\app\components\dropdown-action\dropdown-action.ts" />
+    <TypeScriptCompile Include="src\app\components\editable-dropdown\editable-dropdown.ts" />
+    <TypeScriptCompile Include="src\app\components\editable-yesno\editable-yesno.ts" />
+    <TypeScriptCompile Include="src\app\components\loader\loader.ts" />
+    <TypeScriptCompile Include="src\app\components\page-header.ts" />
+    <TypeScriptCompile Include="src\app\components\pagination\pagination.ts" />
+    <TypeScriptCompile Include="src\app\components\product-options\product-options.ts" />
+    <TypeScriptCompile Include="src\app\components\superior-field\superior-field.ts" />
+    <TypeScriptCompile Include="src\app\components\tablerow-buttons\tablerow-buttons.ts" />
+    <TypeScriptCompile Include="src\app\directives\no-empty-row.directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\progress-bar.ts" />
+    <TypeScriptCompile Include="src\app\directives\required.directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\scroll-to-view.ts" />
+    <TypeScriptCompile Include="src\app\enums\dataDisplayType.ts" />
+    <TypeScriptCompile Include="src\app\enums\recordMode.ts" />
+    <TypeScriptCompile Include="src\app\enums\role.ts" />
+    <TypeScriptCompile Include="src\app\enums\typeOfCall.ts" />
+    <TypeScriptCompile Include="src\app\guard\user-auth.guard.ts" />
+    <TypeScriptCompile Include="src\app\interfaces\dataRowAction.ts" />
+    <TypeScriptCompile Include="src\app\interfaces\fieldAction.ts" />
+    <TypeScriptCompile Include="src\app\interfaces\listDataCRUD.ts" />
+    <TypeScriptCompile Include="src\app\interfaces\listEvent.ts" />
+    <TypeScriptCompile Include="src\app\material.ts" />
+    <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\editOrderFields.ts" />
+    <TypeScriptCompile Include="src\app\model\cascade-data.ts" />
+    <TypeScriptCompile Include="src\app\model\form.data.mapping.ts" />
+    <TypeScriptCompile Include="src\app\metadata\searchOrderFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\manageProductColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\viewOrderColumns .ts" />
+    <TypeScriptCompile Include="src\app\model\tablerow.data.mapping.ts" />
+    <TypeScriptCompile Include="src\app\model\data.field.control.ts" />
+    <TypeScriptCompile Include="src\app\model\date.range.ts" />
+    <TypeScriptCompile Include="src\app\model\form-submit.ts" />
+    <TypeScriptCompile Include="src\app\model\login-user.ts" />
+    <TypeScriptCompile Include="src\app\metadata\manageCategoryColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\newOrderFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\managePackageColumns.ts" />
+    <TypeScriptCompile Include="src\app\model\search-params.ts" />
+    <TypeScriptCompile Include="src\app\model\user.role.ts" />
+    <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
+    <TypeScriptCompile Include="src\app\pages\activation.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-profile\agent-profile.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-registration-list\agent-registration-list.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-registration-view\agent-registration-view.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-registration\agent-registration.ts" />
+    <TypeScriptCompile Include="src\app\pages\create-order\create-order.ts" />
+    <TypeScriptCompile Include="src\app\pages\download-record\download-record.ts" />
+    <TypeScriptCompile Include="src\app\pages\edit-order\edit-order.ts" />
+    <TypeScriptCompile Include="src\app\pages\home\home.ts" />
+    <TypeScriptCompile Include="src\app\pages\login\login.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-category\manage-category.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-packages\manage-packages.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-withdrawal\manage-withdrawal.ts" />
+    <TypeScriptCompile Include="src\app\directives\editmode-directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\sort-cell.directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\sortable.directive.ts" />
+    <TypeScriptCompile Include="src\app\enums\apiController.ts" />
+    <TypeScriptCompile Include="src\app\loader\loader.interceptor.ts" />
+    <TypeScriptCompile Include="src\app\loader\loader.service.ts" />
+    <TypeScriptCompile Include="src\app\loader\loader.state.ts" />
+    <TypeScriptCompile Include="src\app\model\dropdown.item.model.ts" />
+    <TypeScriptCompile Include="src\app\model\page.model.ts" />
+    <TypeScriptCompile Include="src\app\model\sort.model.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-product\manage-product.ts" />
+    <TypeScriptCompile Include="src\app\pages\record-counts\record-counts.ts" />
+    <TypeScriptCompile Include="src\app\pages\report-chart\report-chart.ts" />
+    <TypeScriptCompile Include="src\app\pages\user-access\user-access.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-commission\view-commission.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-order\view-order.ts" />
+    <TypeScriptCompile Include="src\app\pipes\enum-to-array.ts" />
+    <TypeScriptCompile Include="src\app\pipes\highlight-search.ts" />
+    <TypeScriptCompile Include="src\app\pipes\search-table.pipe.ts" />
+    <TypeScriptCompile Include="src\app\pipes\sortBy.ts" />
+    <TypeScriptCompile Include="src\app\services\authentication.ts" />
+    <TypeScriptCompile Include="src\app\services\cascade.service.ts" />
+    <TypeScriptCompile Include="src\app\services\data.service.ts" />
+    <TypeScriptCompile Include="src\app\services\broadcast.service.ts" />
+    <TypeScriptCompile Include="src\environments\environment.prod.ts" />
+    <TypeScriptCompile Include="src\environments\environment.ts" />
+    <TypeScriptCompile Include="src\main.ts" />
+    <TypeScriptCompile Include="src\polyfills.ts" />
+    <TypeScriptCompile Include="src\test.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'QA|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>22217</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:4210/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.0\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

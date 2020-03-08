@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Activate";
+    Layout = "~/Views/Shared/_Login.cshtml";
+}
+
+<div id="notfound">
+    <div class="notfound">
+        <div class="notfound-bg">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <h1>oops!</h1>
+        <h2>Invalid Activation Code</h2>
+        <a href='@Url.Action("Index", "Home")'>
+            go back
+        </a>
+    </div>
+</div>

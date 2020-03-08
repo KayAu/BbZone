@@ -1,0 +1,95 @@
+<page-header [title]="'Agent Commissions'" [parentCategory]="''"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <h5>Manage Agent Commissions</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-sm-3 m-b-xs">
+              <select class="form-control-sm form-control input-s-sm inline">
+                <option value="0">Select Product</option>
+                <option value="1">Time</option>
+                <option value="2">Unifi</option>
+                <option value="3">Astro</option>
+              </select>
+            </div>
+            <div class="col-sm-4 m-b-xs">
+              <select class="form-control-sm form-control input-s-sm inline">
+                <option value="0">Select Package</option>
+                <option value="1">Package 1</option>
+                <option value="2">Package 2</option>
+                <option value="3">Package 3</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-striped mrg10T">
+              <thead>
+                <tr>
+                  <th>Agent Id</th>
+                  <th>Agent Name</th>
+                  <th>Product Category</th>
+                  <th>Package Name</th>
+                  <th>Commission(%)</th>
+                  <th>Active</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td><input type="text" class="form-control-sm form-control"></td>
+                  <td>
+                    <select class="form-control-sm form-control input-s-sm inline">
+                      <option value="0">Select Product</option>
+                      <option value="1">Time</option>
+                      <option value="2">Unifi</option>
+                      <option value="3">Astro</option>
+                    </select>
+                  </td>
+                  <td>
+                    <select class="form-control-sm form-control input-s-sm inline">
+                      <option value="0">Select Package</option>
+                      <option value="1">Package 1</option>
+                      <option value="2">Package 2</option>
+                      <option value="3">Package 3</option>
+                    </select>
+                  </td>
+                  <td><input type="text" class="form-control-sm form-control"></td>
+                  <td>
+                    <div class="i-checks">
+                      <div class="icheckbox_square-green checked disabled" style="position: relative;">
+                        <input type="checkbox" value="" disabled="" checked="" style="position: absolute; opacity: 0;">
+                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
+                      </div>
+                    </div>
+                  </td>
+                  <td><button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-plus mrg5R"></i>Add</button></td>
+                </tr>
+                <tr *ngFor="let item of agents; let rowNo = index">
+                  <td>{{item.agentId}}</td>
+                  <td>{{item.agentName}}</td>
+                  <td>{{item.product}}</td>
+                  <td>{{item.package}}</td>
+                  <td>{{item.commission}}</td>
+                  <td>
+                    <i class="fa fa-check text-navy" *ngIf="item.isActive"></i>
+                    <i class="fa fa-times text-danger" *ngIf="!item.isActive"></i>
+                  </td>
+                  <td>
+                    <a class="btn btn-success btn-sm" (click)="setRowOnEdit(rowNo)"><i class="fa fa-edit"></i>&nbsp;&nbsp;<span class="bold">Edit</span></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

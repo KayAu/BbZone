@@ -1,0 +1,209 @@
+﻿using BroadbandZone_App.Helper;
+using BroadbandZone_App.Models;
+using BroadbandZone_Data;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Http;
+using System.Collections.ObjectModel;
+
+namespace BroadbandZone_App.WebApi
+{
+    public class CustomerApplicationController : ApiController
+    {
+        // GET: api/<controller>
+        [HttpGet]
+        public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
+        {
+            try
+            {
+                SearchOrderParams filterBy = JsonConvert.DeserializeObject<SearchOrderParams>(searchParams);
+
+                using (var db = new BroadbandZoneEntities())
+                {
+                    ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    var results = (new BroadbandZoneEntities()).GetCustomerApplication(currentPage, pageSize, sortColumn, sortInAsc,
+                                                                                filterBy.ProductId,
+                                                                                filterBy.ProductCategoryId,
+                                                                                filterBy.ProductPackageId,
+                                                                                filterBy.OrderStatusId,
+                                                                                filterBy.Agent,
+                                                                                filterBy.submittedDate != null ? filterBy.submittedDate.StartDate : null,
+                                                                                filterBy.submittedDate != null ? filterBy.submittedDate.EndDate : null,
+                                                                                totalRecord).ToList();
+                    return Ok(new Gridview<GetCustomerApplication_Result>()
+                    {
+                        DisplayData = results,
+                        TotalRecords = Convert.ToInt32(totalRecord.Value)
+                    });
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // GET api/<controller>/5
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    CustomerApplication app = db.CustomerApplications.Include(ca => ca.ProductPackage)
+                                                                     .Include(ca => ca.CustomerDocuments)
+                                                                     .Where(ca => ca.ApplicationId == id).FirstOrDefault();
+                 
+                    return Ok(app);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // POST api/<controller>
+        public async Task<IHttpActionResult> Post()//[FromBody]CustomerOrder newRecord
+        {
+            try
+            {
+                CustomerApplication newRecord = new CustomerApplication();
+
+                // get the form data contents
+                var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+                // save new customer order 
+                using (var db = new BroadbandZoneEntities())
+                {
+                    newRecord = JsonConvert.DeserializeObject<CustomerApplication>(result.FormData["data"]);
+                    newRecord.AppStatusId = 1;
+                    newRecord.SetDateAndAuthor("Kaye", "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
+                    db.CustomerApplications.Add(newRecord);
+                    db.SaveChanges();
+                }
+
+                // save uploaded file details to database
+                SaveUploadedFilePath(result.FileData, newRecord.ApplicationId);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // PUT api/<controller>/5
+        public async Task<IHttpActionResult> Put(int id)
+        {
+            try
+            {
+                // get the form data contents
+                var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+                CustomerApplication editedRecord = JsonConvert.DeserializeObject<CustomerApplication>(result.FormData["data"]);
+                RemoveUnwantedFiles(editedRecord.CustomerDocuments);
+
+                // save new customer order 
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    editedRecord.CustomerDocuments = null;
+                    editedRecord.SetDateAndAuthor("Kaye", "ModifiedBy", "ModifiedOn");
+                    db.Entry(editedRecord).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+                // save uploaded file details to database
+                SaveUploadedFilePath(result.FileData, id);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        private void SaveUploadedFilePath(Collection<MultipartFileData> multipartFiles,  int appId)
+        {
+            try
+            {
+                if (multipartFiles is null || multipartFiles.Count() == 0) return;
+
+                FileUploadHelper fileUploadHelper = new FileUploadHelper();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    foreach (UploadedFile file in fileUploadHelper.UploadStreams(multipartFiles.ToArray(), appId))
+                    {
+                        db.CustomerDocuments.Add(new CustomerDocument { Name = file.Name, Size = file.Size, ApplicationId = appId });
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        private void RemoveUnwantedFiles(ICollection<CustomerDocument> customerDocs)
+        {
+            try
+            {
+                FileUploadHelper fileUploadHelper = new FileUploadHelper();
+
+                using (var db = new BroadbandZoneEntities())
+                {
+                    foreach (CustomerDocument doc in customerDocs)
+                    {
+                        if (doc.Deleted.HasValue && doc.Deleted == true)
+                        {
+                            db.CustomerDocuments.Remove(db.CustomerDocuments.Find(doc.DocId));
+                            db.SaveChanges();
+
+                            // remove file from disk
+                            fileUploadHelper.RemoveFile(doc.Name);
+                        }
+                    }            
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        //private void SaveUploadedFilePath(List<UploadedFile> uploadedFiles, int appId)
+        //{
+        //    try
+        //    {
+        //        using (var db = new BroadbandZoneEntities())
+        //        {
+        //            foreach (UploadedFile file in uploadedFiles)
+        //            {
+        //                db.CustomerDocuments.Add(new CustomerDocument { Name = file.Name, Size = file.Size, ApplicationId = appId });
+        //                db.SaveChanges();
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+        //    }
+        //}
+    }
+}

@@ -1,0 +1,42 @@
+<div class="dropdown dropdown-lg show editable" [ngClass]="{'open': showSelectionMenu === true}">
+    <button class="btn btn-sm btn-default dropdown-toggle w-p100 text-left font-normal" type="button" (click)="openMenu()">
+        {{selectedItemText}}
+    </button>
+    <div class="dropdown-menu w-p100 pad0T h-550 scrollable-ver">
+      <div class="flexbox pad10A pad5T">
+        <div class="input-group">
+          <input type="text" class="form-control form-control-sm">
+          <span class="input-group-append">
+            <button type="button" class="btn btn-primary btn-sm" (click)="addItem()">
+              Add
+            </button>
+          </span>
+        </div>
+        <!--<div class="input-group input-group-sm">
+          <input type="text" class="form-control" #newItem>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-info" (click)="addItem()">Add</button>
+          </span>
+        </div>-->
+      </div>
+        <div class="dropdown-divider"></div>
+        <h6 class="dropdown-header">
+            Edit {{title}}
+            <mat-slide-toggle class="float-right font-size-12" (change)="setEditMode($event)" [checked]="onEditMode">
+                {{onEditMode? 'On' : 'Off'}}
+            </mat-slide-toggle>
+        </h6>
+        <div class="dropdown-item float-left position-relative form-element" href="#"
+             [ngClass]="{'cursor-pointer': !onEditMode}" [edit-mode]="rowOnEdit(rowNo)" (click)="!onEditMode &&  onItemClicked(rowNo)"
+             *ngFor="let sa of dropdownItems; let rowNo = index">
+            <span>{{sa[dataTextField]}}</span>
+            <input class="dropdown-item-control form-control-sm form-control w-90" type="text" [(ngModel)]="sa[dataTextField]">
+            <div class="btn-group float-right" [ngClass]="{'hidden': !onEditMode}">
+                <dropdown-action [editMode]="rowOnEdit(rowNo)" (onEdit)="editItem(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateItem(rowNo)" (onDelete)="deleteItem(rowNo)" [allowDelete]="sa.deletable"></dropdown-action>
+            </div>
+        </div>
+    </div>
+    <!--<input type="hidden" [(ngModel)]="selectedItemValue" [required]="isRequired">-->
+</div>
+
+

@@ -1,0 +1,27 @@
+<div class="disp-block" *ngIf="pageButtons.length > 0">
+    <div class="col-sm-3 pad0L">
+        <div class="dataTables_info table">{{pageDesc}}</div>
+    </div>
+    <div class="col-sm-9 dataTables_paginate paging_simple_numbers">
+        <ul class="pagination">
+            <li class="paginate_button page-item previous">
+                <a class="page-link" (click)="goFirstPage()" [ngClass]="{'disabled':disabledFirstAndPrevBtn}">First</a>
+            </li>
+            <li class="paginate_button page-item previous">
+                <a class="page-link" (click)="goPrevious()" [ngClass]="{'disabled':disabledFirstAndPrevBtn}"><<</a>
+            </li>
+            <li class="paginate_button page-item" *ngFor="let pageNo of pageButtons"
+                [ngClass]="{'active': isActivePage(pageNo)}">
+                <a class="page-link" (click)="goToPage(pageNo)" >
+                    {{pageNo}}
+                </a>
+            </li>
+            <li class="paginate_button page-item next">
+                <a class="page-link" (click)="goNext()" [ngClass]="{'disabled':disabledNextAndLastBtn}">>></a>
+            </li>
+            <li class="paginate_button page-item next">
+                <a class="page-link" (click)="goLastPage()" [ngClass]="{'disabled':disabledNextAndLastBtn}">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>

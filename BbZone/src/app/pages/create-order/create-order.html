@@ -1,0 +1,64 @@
+<page-header [title]="'Create Order'" [parentCategory]="''"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Create Order <small>* is required field.</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <loading></loading>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">
+                            Product                        
+                        </label>
+                        <div class="col-sm-10">
+                            <product-options (onProductSelected)="loadCategories($event)">
+                            </product-options>
+                        </div>
+                    </div>
+                    <div class="hr-line-dashed"></div>
+                    <form #createOrderForm="ngForm" (ngSubmit)="create()">
+                        <!--PRODUCT TYPES-->
+                        <ng-container *ngFor="let field of formFields">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">
+                                    {{field.displayText}}
+                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                    [field]="field.dataFieldControl" [formName]="'createOrderForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </ng-container>
+                        <!--ATTACH REQUIRED DOCUMENTS-->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Attach required documents</label>
+                            <div class="col-sm-10">
+                                <file-uploader name="relDoc"  [(ngModel)]="newRecord['files']"></file-uploader>
+                                <!--<span class="form-text m-b-none">
+                                    Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com
+                                </span>-->
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <!--SAVE OR CANCEL-->
+                        <div class="form-group row">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-white" type="submit">Cancel</button>
+                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
+                                <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
+                                        [disabled]="isUpdating" style="width: 180px;">
+                                    {{isUpdating ? 'Saving' : 'Save'}}
+                                    <span class="loading"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

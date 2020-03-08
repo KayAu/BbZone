@@ -1,0 +1,1 @@
+{"version":3,"file":"patient-call.model.js","sourceRoot":"","sources":["../../../../src/app/model/patient-call.model.ts"],"names":[],"mappings":";;AACA;IAKI,0BAAY,MAAc,EAAE,mBAA4B,EAAE,OAAY;QAClE,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,mBAAmB,GAAG,mBAAmB,CAAC;QAC/C,IAAI,CAAC,SAAS,GAAG,OAAO,CAAC;IAC7B,CAAC;IAEL,uBAAC;AAAD,CAAC,AAXD,IAWC;AAXY,4CAAgB"}

@@ -1,0 +1,1165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BroadbandZoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fullname" />
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="PasswordHash" />
+            <PropertyRef Name="HasFullControl" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserLogin" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="200" Nullable="false" />
+          <Property Name="HasFullControl" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="25" />
+          <Property Name="Nric" Type="varchar" MaxLength="12" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyRegNo" Type="varchar" MaxLength="25" />
+          <Property Name="Address" Type="varchar" MaxLength="150" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="25" />
+          <Property Name="Postcode" Type="char" MaxLength="10" />
+          <Property Name="Country" Type="varchar" MaxLength="25" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="15" />
+          <Property Name="TelNo" Type="varchar" MaxLength="15" />
+          <Property Name="BankName" Type="varchar" MaxLength="30" />
+          <Property Name="BankAccNo" Type="varchar" MaxLength="20" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="16" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="200" />
+          <Property Name="SuperiorId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ModifiedOn" Type="smalldatetime" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ApplicationStatus">
+          <Key>
+            <PropertyRef Name="AppStatusId" />
+          </Key>
+          <Property Name="AppStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerApplication">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" />
+          <Property Name="ProdPkgId" Type="int" Nullable="false" />
+          <Property Name="Agent" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="100" />
+          <Property Name="CompanyRegNo" Type="varchar" MaxLength="25" />
+          <Property Name="CustomerName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerId" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ResidentialType" Type="varchar" MaxLength="30" />
+          <Property Name="ResidentialName" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerAddr" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Postcode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="CustomerRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="AdminRemarks" Type="varchar" MaxLength="500" />
+          <Property Name="AppStatusId" Type="int" />
+          <Property Name="OrderNo" Type="varchar" MaxLength="25" />
+          <Property Name="SubmitByAgent" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerDocument">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Size" Type="float" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProductId" Type="int" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DefaultCommission" Type="money" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductPackage">
+          <Key>
+            <PropertyRef Name="ProdPkgId" />
+          </Key>
+          <Property Name="ProdPkgId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="PackageName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="Commission" Type="money" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegId" />
+          </Key>
+          <Property Name="RegId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fullname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Nric" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyRegNo" Type="varchar" MaxLength="25" />
+          <Property Name="Address" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="City" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="State" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Postcode" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="Country" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="MobileNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TelNo" Type="varchar" MaxLength="15" />
+          <Property Name="UserLogin" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="PasswordHash" Type="varbinary" MaxLength="200" Nullable="false" />
+          <Property Name="SuperiorId" Type="int" />
+          <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
+          <Property Name="ActivatedOn" Type="smalldatetime" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="ApprovalDate" Type="smalldatetime" />
+          <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedOn" Type="smalldatetime" />
+        </EntityType>
+        <Association Name="FK_CustomerApplication_ApplicationStatus">
+          <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatus">
+              <PropertyRef Name="AppStatusId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="AppStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerApplication_ProductPackage">
+          <End Role="ProductPackage" Type="Self.ProductPackage" Multiplicity="1" />
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPackage">
+              <PropertyRef Name="ProdPkgId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="ProdPkgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDocument_CustomerApplication">
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+          <End Role="CustomerDocument" Type="Self.CustomerDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="CustomerDocument">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
+          <End Role="ProductPackage" Type="Self.ProductPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ProductPackage">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductCategory_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="prc_ActivateAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prActivationCode" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_AuthenticateUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prLogin" Type="nvarchar" Mode="In" />
+          <Parameter Name="prPassword" Type="varchar" Mode="In" />
+          <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
+          <Parameter Name="prImpersonate" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="prc_GenerateEncryptedPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prUserLogin" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_GetAgentProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prUsername" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_GetAgentRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="int" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetCustomerApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prProduct" Type="int" Mode="In" />
+          <Parameter Name="prProductCategory" Type="int" Mode="In" />
+          <Parameter Name="prProductPackage" Type="int" Mode="In" />
+          <Parameter Name="prStatus" Type="int" Mode="In" />
+          <Parameter Name="prAgent" Type="varchar" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetCustomerOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prProduct" Type="int" Mode="In" />
+          <Parameter Name="prProductCategory" Type="int" Mode="In" />
+          <Parameter Name="prProductPackage" Type="int" Mode="In" />
+          <Parameter Name="prStatus" Type="int" Mode="In" />
+          <Parameter Name="prAgent" Type="varchar" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetDropdownItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prFieldName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_GetProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetProductPackages" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prRegId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prc_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prStoreProcName" Type="varchar" Mode="In" />
+          <Parameter Name="ErrorLogID" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_SendActivationCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prRegistrationId" Type="int" Mode="In" />
+          <Parameter Name="prEmail" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="BroadbandZoneModelStoreContainer">
+          <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerApplication" EntityType="Self.CustomerApplication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerDocument" EntityType="Self.CustomerDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminUser" EntityType="Self.AdminUser" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AdminUser].[Id] AS [Id], 
+    [AdminUser].[Fullname] AS [Fullname], 
+    [AdminUser].[UserLogin] AS [UserLogin], 
+    [AdminUser].[PasswordHash] AS [PasswordHash], 
+    [AdminUser].[HasFullControl] AS [HasFullControl], 
+    [AdminUser].[CreatedOn] AS [CreatedOn], 
+    [AdminUser].[CreatedBy] AS [CreatedBy]
+    FROM [dbo].[AdminUser] AS [AdminUser]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="Self.FK_CustomerApplication_ApplicationStatus">
+            <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerApplication_ProductPackage" Association="Self.FK_CustomerApplication_ProductPackage">
+            <End Role="ProductPackage" EntitySet="ProductPackage" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDocument_CustomerApplication" Association="Self.FK_CustomerDocument_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+            <End Role="CustomerDocument" EntitySet="CustomerDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="ProductPackage" EntitySet="ProductPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductCategory_Product" Association="Self.FK_ProductCategory_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BroadbandZoneModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BroadbandZoneEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="GetProductCategory" ReturnType="Collection(BroadbandZoneModel.GetProductCategory_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetProductPackages" ReturnType="Collection(BroadbandZoneModel.GetProductPackages_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Products" EntityType="BroadbandZoneModel.Product" />
+          <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
+          <EntitySet Name="ProductPackages" EntityType="BroadbandZoneModel.ProductPackage" />
+          <AssociationSet Name="FK_ProductCategory_Product" Association="BroadbandZoneModel.FK_ProductCategory_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="BroadbandZoneModel.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductPackage" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <FunctionImport Name="GetProducts" ReturnType="Collection(BroadbandZoneModel.GetProducts_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ApplicationStatus" EntityType="BroadbandZoneModel.ApplicationStatu" />
+          <FunctionImport Name="GetCustomerApplication" ReturnType="Collection(BroadbandZoneModel.GetCustomerApplication_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prProduct" Mode="In" Type="Int32" />
+            <Parameter Name="prProductCategory" Mode="In" Type="Int32" />
+            <Parameter Name="prProductPackage" Mode="In" Type="Int32" />
+            <Parameter Name="prStatus" Mode="In" Type="Int32" />
+            <Parameter Name="prAgent" Mode="In" Type="String" />
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CustomerApplications" EntityType="BroadbandZoneModel.CustomerApplication" />
+          <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus">
+            <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerApplication_ProductPackage" Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage">
+            <End Role="ProductPackage" EntitySet="ProductPackages" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+          </AssociationSet>
+          <FunctionImport Name="GetDropdownItems" ReturnType="Collection(BroadbandZoneModel.GetDropdownItems_Result)">
+          <Parameter Name="prFieldName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CustomerDocuments" EntityType="BroadbandZoneModel.CustomerDocument" />
+          <AssociationSet Name="FK_CustomerDocument_CustomerApplication" Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="CustomerDocument" EntitySet="CustomerDocuments" />
+          </AssociationSet>
+          <FunctionImport Name="GenerateEncryptedPwd" ReturnType="Collection(Binary)">
+          <Parameter Name="prUserLogin" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="AuthenticateUser" ReturnType="Collection(BroadbandZoneModel.AuthenticatedUser)">
+            <Parameter Name="prLogin" Mode="In" Type="String" />
+            <Parameter Name="prPassword" Mode="In" Type="String" />
+            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
+            <Parameter Name="prImpersonate" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="AdminUsers" EntityType="BroadbandZoneModel.AdminUser" />
+          <FunctionImport Name="GetAgentRegistration" ReturnType="Collection(BroadbandZoneModel.GetAgentRegistration_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Int32" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SendActivationCode">
+            <Parameter Name="prRegistrationId" Mode="In" Type="Int32" />
+            <Parameter Name="prEmail" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ActivateAgent" ReturnType="Collection(Boolean)">
+          <Parameter Name="prActivationCode" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Agents" EntityType="BroadbandZoneModel.Agent" />
+          <EntitySet Name="Registrations" EntityType="BroadbandZoneModel.Registration" />
+          <FunctionImport Name="GetAgentProfile" ReturnType="Collection(BroadbandZoneModel.GetAgentProfile_Result)">
+          <Parameter Name="prUsername" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetRegistrationDetails" ReturnType="Collection(BroadbandZoneModel.GetRegistrationDetails_Result)">
+          <Parameter Name="prRegId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="GetProductCategory_Result">
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="DefaultCommission" Nullable="false" Precision="19" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetProductPackages_Result">
+          <Property Type="Int32" Name="ProdPkgId" Nullable="false" />
+          <Property Type="String" Name="CategoryId" Nullable="true" MaxLength="5" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="300" />
+          <Property Type="Decimal" Name="Commission" Nullable="false" Precision="19" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductCategories" Relationship="BroadbandZoneModel.FK_ProductCategory_Product" FromRole="Product" ToRole="ProductCategory" />
+        </EntityType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultCommission" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="BroadbandZoneModel.FK_ProductCategory_Product" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="ProductPackages" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="ProductPackage" />
+        </EntityType>
+        <EntityType Name="ProductPackage">
+          <Key>
+            <PropertyRef Name="ProdPkgId" />
+          </Key>
+          <Property Name="ProdPkgId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="PackageName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="Commission" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductPackage" ToRole="ProductCategory" />
+          <NavigationProperty Name="CustomerApplications" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="ProductPackage" ToRole="CustomerApplication" />
+        </EntityType>
+        <Association Name="FK_ProductCategory_Product">
+          <End Type="BroadbandZoneModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ProductPackage">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetProducts_Result">
+          <Property Type="Int32" Name="ProductId" Nullable="true" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="150" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="CreatedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ModifiedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="ApplicationStatu">
+          <Key>
+            <PropertyRef Name="AppStatusId" />
+          </Key>
+          <Property Name="AppStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerApplications" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="ApplicationStatu" ToRole="CustomerApplication" />
+        </EntityType>
+        <ComplexType Name="GetCustomerApplication_Result">
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Agent" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="CustomerApplication">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="ProdPkgId" Type="Int32" Nullable="false" />
+          <Property Name="Agent" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentialType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerAddr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AdminRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AppStatusId" Type="Int32" />
+          <Property Name="OrderNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitByAgent" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
+          <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
+          <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
+        </EntityType>
+        <Association Name="FK_CustomerApplication_ApplicationStatus">
+          <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatu">
+              <PropertyRef Name="AppStatusId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="AppStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerApplication_ProductPackage">
+          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPackage">
+              <PropertyRef Name="ProdPkgId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="ProdPkgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetDropdownItems_Result">
+          <Property Type="String" Name="Item" Nullable="true" MaxLength="8000" />
+        </ComplexType>
+        <EntityType Name="CustomerDocument">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Double" />
+          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerDocument" ToRole="CustomerApplication" />
+        </EntityType>
+        <Association Name="FK_CustomerDocument_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.CustomerDocument" Role="CustomerDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="CustomerDocument">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="AuthenticatedUser">
+          <Property Type="String" Name="Username" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="5" />
+          <Property Type="Boolean" Name="IsAuthenticated" Nullable="true" />
+          <Property Type="Boolean" Name="IsImpersonated" Nullable="true" />
+          <Property Type="Boolean" Name="IsAdmin" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Fullname" />
+            <PropertyRef Name="UserLogin" />
+            <PropertyRef Name="PasswordHash" />
+            <PropertyRef Name="HasFullControl" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
+          <Property Name="HasFullControl" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetAgentRegistration_Result">
+          <Property Type="Int32" Name="RegId" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="CreatedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="true" />
+          <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ApprovalDate" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="Agent">
+          <Key>
+            <PropertyRef Name="AgentId" />
+          </Key>
+          <Property Name="AgentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Nric" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="BankName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="Binary" MaxLength="200" FixedLength="false" />
+          <Property Name="SuperiorId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegId" />
+          </Key>
+          <Property Name="RegId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Nric" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
+          <Property Name="SuperiorId" Type="Int32" />
+          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivatedOn" Type="DateTime" Precision="0" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
+        </EntityType>
+        <ComplexType Name="GetAgentProfile_Result">
+          <Property Type="Int32" Name="AgentId" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Nric" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyRegNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Postcode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="UserLogin" Nullable="true" MaxLength="16" />
+          <Property Type="Binary" Name="PasswordHash" Nullable="true" MaxLength="200" />
+          <Property Type="Int32" Name="SuperiorId" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetRegistrationDetails_Result">
+          <Property Type="Int32" Name="RegId" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Nric" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyRegNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Address" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="City" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="Postcode" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="MobileNo" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="UserLogin" Nullable="false" MaxLength="16" />
+          <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="SuperiorId" Nullable="true" />
+          <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="ActivatedOn" Nullable="true" Precision="16" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="true" />
+          <Property Type="DateTime" Name="ApprovalDate" Nullable="true" Precision="16" />
+          <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BroadbandZoneModelStoreContainer" CdmEntityContainer="BroadbandZoneEntities">
+          <FunctionImportMapping FunctionImportName="GetProductCategory" FunctionName="BroadbandZoneModel.Store.prc_GetProductCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetProductCategory_Result">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="DefaultCommission" ColumnName="DefaultCommission" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetProductPackages" FunctionName="BroadbandZoneModel.Store.prc_GetProductPackages">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetProductPackages_Result">
+                <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="DefaultCommission" ColumnName="DefaultCommission" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductPackages">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.ProductPackage">
+              <MappingFragment StoreEntitySet="ProductPackage">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetProducts" FunctionName="BroadbandZoneModel.Store.prc_GetProducts">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetProducts_Result">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ApplicationStatus">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.ApplicationStatu">
+              <MappingFragment StoreEntitySet="ApplicationStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AppStatusId" ColumnName="AppStatusId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCustomerApplication" FunctionName="BroadbandZoneModel.Store.prc_GetCustomerApplication">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetCustomerApplication_Result">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CustomerApplications">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.CustomerApplication">
+              <MappingFragment StoreEntitySet="CustomerApplication">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SubmitByAgent" ColumnName="SubmitByAgent" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="AppStatusId" ColumnName="AppStatusId" />
+                <ScalarProperty Name="AdminRemarks" ColumnName="AdminRemarks" />
+                <ScalarProperty Name="CustomerRemarks" ColumnName="CustomerRemarks" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CustomerAddr" ColumnName="CustomerAddr" />
+                <ScalarProperty Name="ResidentialName" ColumnName="ResidentialName" />
+                <ScalarProperty Name="ResidentialType" ColumnName="ResidentialType" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetDropdownItems" FunctionName="BroadbandZoneModel.Store.prc_GetDropdownItems" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetDropdownItems_Result">
+                <ScalarProperty Name="Item" ColumnName="Item" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="CustomerDocuments">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.CustomerDocument">
+              <MappingFragment StoreEntitySet="CustomerDocument">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GenerateEncryptedPwd" FunctionName="BroadbandZoneModel.Store.prc_GenerateEncryptedPwd" />
+          <FunctionImportMapping FunctionImportName="AuthenticateUser" FunctionName="BroadbandZoneModel.Store.prc_AuthenticateUser">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.AuthenticatedUser">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsAuthenticated" ColumnName="IsAuthenticated" />
+                <ScalarProperty Name="IsImpersonated" ColumnName="IsImpersonated" />
+                <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="HasFullControl" ColumnName="HasFullControl" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentRegistration" FunctionName="BroadbandZoneModel.Store.prc_GetAgentRegistration">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAgentRegistration_Result">
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SendActivationCode" FunctionName="BroadbandZoneModel.Store.prc_SendActivationCode" />
+          <FunctionImportMapping FunctionImportName="ActivateAgent" FunctionName="BroadbandZoneModel.Store.prc_ActivateAgent" />
+          <EntitySetMapping Name="Agents">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Agent">
+              <MappingFragment StoreEntitySet="Agent">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ActivatedOn" ColumnName="ActivatedOn" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentProfile" FunctionName="BroadbandZoneModel.Store.prc_GetAgentProfile">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAgentProfile_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetRegistrationDetails" FunctionName="BroadbandZoneModel.Store.prc_GetRegistrationDetails">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetRegistrationDetails_Result">
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="ActivatedOn" ColumnName="ActivatedOn" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

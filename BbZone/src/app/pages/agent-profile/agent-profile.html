@@ -1,0 +1,59 @@
+
+<page-header [title]="'My Profile'" [parentCategory]="''"></page-header>
+
+<div  class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox" *ngIf="!completed">
+                <div class="ibox-title">
+                    <h5>Register to <small>* is required field.</small></h5>
+                </div>
+                <div class="ibox-content">
+                    <loading></loading>
+                    <form #dataForm="ngForm" (ngSubmit)="submit()">
+                        <!--PRODUCT TYPES-->
+                        <ng-container *ngFor="let field of formFields">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">
+                                    {{field.displayText}}
+                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-9">
+                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'dataForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </ng-container>
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">
+                                Superior
+                            </label>
+                            <div class="col-sm-9">
+                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form" 
+                                                [displayText]="formRecord['superiorName']" name="superior" ></superior-field>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <!--SAVE OR CANCEL-->
+                        <div class="form-group row">
+                            <div class="col-sm-12 ">
+                                <a [routerLink]='["/"]' class="btn btn-white float-right">Cancel</a>
+                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
+                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                        [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
+                                    {{isUpdating ? 'Updating' : 'Update'}}
+                                    <span class="loading"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+        
+  

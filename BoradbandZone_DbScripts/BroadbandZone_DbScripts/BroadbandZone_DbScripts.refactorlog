@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="afd31e63-0b38-4747-b058-9abb6bd14658" ChangeDateTime="02/21/2020 06:39:27">
+    <Property Name="ElementName" Value="[dbo].[Agent].[Id]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Agent]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AgentId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="43a4e616-c65d-47b9-859e-75957d19a46d" ChangeDateTime="02/23/2020 03:39:26">
+    <Property Name="ElementName" Value="[dbo].[ProductPackage].[ProductName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ProductPackage]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PackageName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c514bfdf-a996-4bc8-9906-f371186b6b49" ChangeDateTime="02/29/2020 16:49:52">
+    <Property Name="ElementName" Value="[dbo].[ApplicationStatus].[OrderStatusId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AppStatusId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2e683d88-f541-4caf-b2bb-c905e593567a" ChangeDateTime="02/29/2020 16:50:18">
+    <Property Name="ElementName" Value="[dbo].[ApplicationStatus].[OrderStatus]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ApplicationStatus]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Status" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a7a95fa4-2c2a-4dc0-9f58-012493a7faa4" ChangeDateTime="02/29/2020 16:56:55">
+    <Property Name="ElementName" Value="[dbo].[CustomerApplication].[OrderStatusId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CustomerApplication]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AppStatusId" />
+  </Operation>
+</Operations>

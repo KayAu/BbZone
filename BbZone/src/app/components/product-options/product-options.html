@@ -1,0 +1,8 @@
+﻿<div *ngIf="products" class="">
+    <ng-container *ngFor="let prod of products">
+        <!--<label for="opt_{{prod.key}}" class="material-icons"></label>
+        <input id="opt_{{prod.key}}" name="product" type="radio" value="{{prod.key}}" (click)="onClick(prod.key)" />
+        <span>{{prod.value}}</span>-->
+        <button class="btn btn-info  dim btn-large-dim btn-outline" type="button" (click)="onClick(prod.key)">{{prod.value}}</button>
+    </ng-container>
+</div>

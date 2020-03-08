@@ -1,0 +1,63 @@
+<page-header [title]="'View Registration'" [parentCategory]="'Agent Registrations'"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Agent Registration</h5>
+                    <small class="mrg10L text-muted"  *ngIf="formRecord['approvalDate']"><i class="fa fa-clock-o"></i> {{formRecord['approvalDate'] | date: 'dd MMM yyyy'}}, completed by {{formRecord['approvedBy']}}</small>
+                </div>
+                <div class="ibox-tools mrg20R">
+                    <span class="label" [ngClass]="{'label-primary':formRecord['isApproved'] === true,'label-danger' : formRecord['isApproved'] === false}">{{formRecord['isApproved'] === true ? 'Approved': formRecord['isApproved'] == false ? 'Rejected' : ''}}</span>
+                </div>
+                <div class="ibox-content">
+                    <loading></loading>
+                    <form #applicationForm="ngForm" (ngSubmit)="update()">
+                        <!--PRODUCT TYPES-->
+                        <ng-container *ngFor="let field of formFields">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">
+                                    {{field.displayText}}
+                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                </label>
+                                <div class="col-sm-10">
+                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}" [readonly]="field.readonly"></data-control>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </ng-container>
+                        <div class="form-group row" *ngIf="!formRecord['approvalDate']">
+                            <label class="col-sm-2 col-form-label">
+                                Registration Approval
+                            </label>
+                            <div class="col-sm-10">
+                                <span class="display-block mrg10R">
+                                    <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="true" />
+                                    Approve
+                                </span>
+                                <span>
+                                    <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="false" />
+                                    Reject
+                                </span>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <!--SAVE OR CANCEL-->
+                        <div class="form-group row">
+                            <div class="col-sm-12 ">
+                                <back-button>Cancel</back-button>
+                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
+                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                        [disabled]="isUpdating" style="width: 150px;" *ngIf="!formRecord['approvalDate']">
+                                    {{isUpdating ? 'Updating' : 'Update'}}
+                                    <span class="loading"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,101 @@
+﻿/*****************************************
+  upload button styles
+******************************************/
+.file-upload {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    width: 12%;
+}
+
+.file-upload__label {
+    display: block;
+    padding: 7px 12px;
+    color: #fff;
+    background: #1B7BB9;
+    border-radius: .4em;
+    -webkit-transition: background .3s;
+    transition: background .3s;
+    line-height: 1.42857143;
+    width: 150px;
+    text-align: center;
+}
+
+    .file-upload__label:hover {
+        cursor: pointer;
+        background: #000;
+    }
+
+.file-upload__input {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    /*font-size: 1;
+    width: 0;*/
+    height: 100%;
+    opacity: 0;
+}
+
+
+.file-preview {
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+    margin: 16px;
+    min-height: 75px;
+    width: 200px;
+    border-radius: 10px;
+    background: #999;
+    background: linear-gradient(to bottom, #f3f3f3, #e5e5e5);
+}
+
+    .file-preview .file-details {
+        z-index: 20;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 1;
+        font-size: 13px;
+        min-width: 100%;
+        max-width: 100%;
+        padding: 1em;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.9);
+        line-height: 150%;
+    }
+
+        .file-preview .file-details .file-size {
+            margin-bottom: 0.5em;
+            font-size: 16px;
+        }
+
+        .file-preview .file-details .file-filename:not(:hover) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .file-preview .file-details .file-filename {
+            white-space: nowrap;
+            word-wrap: break-word;
+        }
+
+            .file-preview .file-details .file-filename:not(:hover) span {
+                border: 1px solid transparent;
+            }
+
+            .file-preview .file-details .file-filename span{
+                /*background-color: rgba(255, 255, 255, 0.4);*/
+                padding: 0 0.4em;
+                border-radius: 3px;
+            }
+
+.btn-close {
+    position: absolute;
+    z-index: 5000;
+    right: -5px;
+    top: -10px;
+    cursor: pointer;
+}
+         

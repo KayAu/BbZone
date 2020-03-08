@@ -1,0 +1,101 @@
+<page-header [title]="'Manage Withdrawals'" [parentCategory]="''"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="ibox-content m-b-sm border-bottom">
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label class="col-form-label" for="status">Agent</label>
+          <select name="status" id="status" class="form-control">
+            <option value="">-- All --</option>
+            <option value="1">Ben</option>
+            <option value="0">Den</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label class="col-form-label" for="quantity">Status</label>
+          <select name="status" id="status" class="form-control">
+            <option value="">-- All --</option>
+            <option value="0">Completed</option>
+            <option value="2">Pending</option>
+          </select>
+        </div>
+      </div>
+
+
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label class="col-form-label" for="quantity">Submission Date</label>
+          <input type="text"
+                 ngxDaterangepickerMd
+                 class="form-control"
+                 [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
+                 [(ngModel)]="selectedDate"
+                 startKey="startDate"
+                 endKey="endDate" />
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="form-group">
+          <label class="col-form-label" for="quantity">Completed Date</label>
+          <input type="text"
+                 ngxDaterangepickerMd
+                 class="form-control"
+                 [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
+                 [(ngModel)]="selectedDate"
+                 startKey="startDate"
+                 endKey="endDate" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-content">
+
+          <div class="table-responsive">
+            <table class="table table-striped mrg10T">
+              <thead>
+                <tr>
+                  <th>Withdrawal #</th>
+                  <th>Agent Name</th>
+                  <th>Amount</th>
+                  <th>Submitted On</th>
+                  <th>Giro Fee</th>
+                  <th>Status</th>
+                  <th>Completed On</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of withdrawals; let rowNo = index">
+                  <td>{{item.withdrawalID}}</td>
+                  <td>{{item.agent}}</td>
+                  <td>{{item.amount}}</td>
+                  <td>{{item.dateSubmitted}}</td>
+                  <td>{{item.giroFee}}</td>
+                  <td>
+              
+                      <span class="badge badge-primary" *ngIf="item.completed">Completed</span>
+                      <span class="badge badge-warning" *ngIf="!item.completed">Pending</span>
+             
+            
+                  </td>
+                  <td>{{item.completedOn}}</td>
+                  <td>{{item.refNo}}</td>
+                  <td>
+                    <a class="btn btn-success btn-sm " (click)="editRow(rowNo)"><i class="fa fa-edit"></i>&nbsp;&nbsp;<span class="bold">Edit</span></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

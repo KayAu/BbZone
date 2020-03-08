@@ -1,0 +1,59 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+  <div class="sidebar-collapse">
+    <ul class="nav metismenu" id="side-menu">
+      <li class="nav-header">
+        <div class="dropdown profile-element">
+          <img alt="image" class="rounded-circle" src="../assets/images/profile_small.jpg">
+          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+            <span class="block m-t-xs font-bold">{{currentUser.fullname}}</span>
+            <span class="text-muted text-xs block">{{currentUser.role}}<b class="caret"></b></span>
+          </a>
+          <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><a class="dropdown-item" [routerLink]='["/agent-profile"]'>Profile</a></li>
+            <li><a class="dropdown-item" href="contacts.html">Update Password</a></li>
+            <li class="dropdown-divider"></li>
+            <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+          </ul>
+        </div>
+        <div class="logo-element">
+          IN+
+        </div>
+      </li>
+      <li>
+        <a [routerLink]='["/home"]'><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+      </li>
+      <li>
+        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Orders</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+          <li><a [routerLink]='["/view-order"]'><span class="nav-label">View Orders</span></a></li>
+          <li><a [routerLink]='["/create-order"]'><span class="nav-label">New Order</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Agents</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+            <li><a [routerLink]='["/agent-registration-list"]'><span class="nav-label">Agent Registrations</span></a></li>
+            <li><a [routerLink]='["/agent-maintenance"]'><span class="nav-label">Agents Maintenance</span></a></li>
+            <li><a [routerLink]='["/agent-comission"]'><span class="nav-label">Commission Maintenance</span></a></li>
+            <li><a [routerLink]='["/view-commission"]'><span class="nav-label">View Commission</span></a></li>
+        </ul>
+      </li>
+      <li>
+        <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span></a>
+      </li>
+      <li>
+        <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-edit"></i> <span class="nav-label">Manage Transaction</span></a>
+      </li>
+      <li>
+        <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
+        <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+            <li><a [routerLink]='["/view-order"]'><span class="nav-label">User Access</span></a></li>
+            <li><a [routerLink]='["/manage-product"]'><span class="nav-label">Manage Products</span></a></li>
+            <li><a [routerLink]='["/manage-packages"]'><span class="nav-label">Manage Packages</span></a></li>
+            <li><a [routerLink]='["/manage-category"]'><span class="nav-label">Manage Category</span></a></li>
+        </ul>
+      </li>
+    </ul>
+
+  </div>
+</nav>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c90c396048414a4b8550dc1b0ae590b1" Name="Diagram1">
+        <EntityTypeShape EntityType="BroadbandZoneModel.Product" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="2.25" PointY="0.5" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ProductPackage" Width="1.5" PointX="4" PointY="0.5" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Product_ProductCategory" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="7.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.CustomerApplication" Width="1.5" PointX="5.75" PointY="0.5" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.CustomerDocument" Width="1.5" PointX="7.5" PointY="2.375" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.AdminUser" Width="1.5" PointX="2.25" PointY="3.875" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Agent" Width="1.5" PointX="0.5" PointY="3.875" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="4" PointY="4" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,5 @@
+<ng-container [ngSwitch]="displayType" *ngIf="displayValue!=null||displayValue!=undefined">
+  <span *ngSwitchCase="typeOfDisplay.text">{{displayValue}}</span>
+  <i *ngSwitchCase="typeOfDisplay.tick" class="fa" [ngClass]="{'fa-times text-danger': displayValue == false, 'fa-check text-navy' : displayValue == true}"></i>
+
+</ng-container>

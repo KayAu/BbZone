@@ -1,0 +1,6 @@
+﻿<div class="superior-result" *ngIf="displayText">
+    {{displayText}}
+    <a class="superior-result-remove" *ngIf="editable" (click)="clearDisplayText()"></a>
+</div>
+<input name="{{fieldId}}" type="number" class="form-control" [(ngModel)]="data" 
+       (keyup)="onSearchInputChanged($event.target.value)" >

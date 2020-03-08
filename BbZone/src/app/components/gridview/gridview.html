@@ -1,0 +1,40 @@
+<!--<loading></loading>-->
+<table class="table table-striped float-left wp-100" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+    <tbody>
+        <tr *ngIf="dataSource.length">
+            <th class="cell-width-3 pad15L">#</th>
+            <th *ngFor="let columnName of dataColumns">{{columnName}}</th>
+            <th *ngIf="itemLink">View</th>
+        </tr>
+        <tr *ngFor="let row of dataSource; let rowNo = index" class="row-select">
+            <td class="pad15L">{{rowNo + 1}}.</td>
+            <ng-container *ngFor="let value of getRowData(row); let colNo = index">
+                <td *ngIf="!hideColumns.includes(colNo)" [innerHTML]="value">
+                    <!--{{value}}-->
+                </td>
+            </ng-container>
+            <td *ngIf="itemLink">
+                <a [routerLink]='[itemLink, row[itemKey]]'><i class="fa fa-file-text-o"></i></a>
+            </td>
+        </tr>
+        <tr *ngIf="showTotal">
+            <td></td>
+            <td class="font-weight-600">Total</td>
+            <td class="font-weight-600" *ngFor="let item of [].constructor(dataColumns.length-1); let colIndex = index">{{sumColumnTotal(colIndex+1)}}</td>
+        </tr>
+        <tr *ngIf="!dataSource.length">
+            <td class="pad0A">
+                <div class="center-div">
+                    <div class="callout callout-secondary text-center pad45A mrg0B">
+                        <i class="mdi mdi-package-variant font-size-65"></i>
+                        <h2 class="mrg0T">No records found</h2>
+                        <p>
+                            There are no incomplete calls
+                        </p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" *ngIf="showPager"></pager>
