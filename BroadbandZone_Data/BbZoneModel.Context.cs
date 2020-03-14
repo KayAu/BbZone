@@ -36,6 +36,11 @@ namespace BroadbandZone_Data
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<ApplicationRemark> ApplicationRemarks { get; set; }
+        public virtual DbSet<DropdownItem> DropdownItems { get; set; }
+        public virtual DbSet<SProcErrorLog> SProcErrorLogs { get; set; }
+        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -279,6 +284,65 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prRegId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegistrationDetails_Result>("GetRegistrationDetails", prRegIdParameter);
+        }
+    
+        [DbFunction("BroadbandZoneEntities", "fnSplit")]
+        public virtual IQueryable<string> fnSplit(string sourceSql, string strSeprate)
+        {
+            var sourceSqlParameter = sourceSql != null ?
+                new ObjectParameter("SourceSql", sourceSql) :
+                new ObjectParameter("SourceSql", typeof(string));
+    
+            var strSeprateParameter = strSeprate != null ?
+                new ObjectParameter("StrSeprate", strSeprate) :
+                new ObjectParameter("StrSeprate", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<string>("[BroadbandZoneEntities].[fnSplit](@SourceSql, @StrSeprate)", sourceSqlParameter, strSeprateParameter);
+        }
+    
+        public virtual ObjectResult<GetWithdrawal_Result> GetWithdrawal(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<bool> prIsCompleted, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prIsCompletedParameter = prIsCompleted.HasValue ?
+                new ObjectParameter("prIsCompleted", prIsCompleted) :
+                new ObjectParameter("prIsCompleted", typeof(bool));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            var prCompletedFromParameter = prCompletedFrom.HasValue ?
+                new ObjectParameter("prCompletedFrom", prCompletedFrom) :
+                new ObjectParameter("prCompletedFrom", typeof(System.DateTime));
+    
+            var prCompletedToParameter = prCompletedTo.HasValue ?
+                new ObjectParameter("prCompletedTo", prCompletedTo) :
+                new ObjectParameter("prCompletedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawal_Result>("GetWithdrawal", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prIsCompletedParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord);
         }
     }
 }
