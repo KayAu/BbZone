@@ -56,6 +56,15 @@
     <Compile Include="Agent.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AgentCommission.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Announcement.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AnnouncementDocument.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationStatu.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -78,16 +87,34 @@
       <DependentUpon>BbZoneModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="BroadbandZoneEntities.cs" />
+    <Compile Include="CommissionSettings.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Communication.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="CustomerApplication.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CustomerDocument.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DashboardMyTeamSubmissions_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAgentCommissionSettings_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAgentProfile_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAgentRegistration_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAgents_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAnnouncement_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetCustomerApplication_Result.cs">
@@ -120,6 +147,9 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Registration.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SelectItem.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

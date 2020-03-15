@@ -7,5 +7,8 @@ export enum ApiController {
     CustomerApplication = "CustomerApplication",
     Registration = "Registration",
     User = "User",
-    Agent = "Agent"
+    Agent = "Agent",
+    Commission = "Commission",
+    Dashboard = "Dashboard",
+    Announcement = "Announcement",
 }

@@ -80,6 +80,7 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 CustomerApplication newRecord = new CustomerApplication();
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
@@ -90,7 +91,8 @@ namespace BroadbandZone_App.WebApi
                 {
                     newRecord = JsonConvert.DeserializeObject<CustomerApplication>(result.FormData["data"]);
                     newRecord.AppStatusId = 1;
-                    newRecord.SetDateAndAuthor("Kaye", "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
+                    newRecord.Agent = currentUser.Username;
+                    newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
                     db.CustomerApplications.Add(newRecord);
                     db.SaveChanges();
                 }
@@ -111,6 +113,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
@@ -122,7 +125,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     editedRecord.CustomerDocuments = null;
-                    editedRecord.SetDateAndAuthor("Kaye", "ModifiedBy", "ModifiedOn");
+                    editedRecord.SetDateAndAuthor(currentUser.Fullname,"ModifiedBy", "ModifiedOn");
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -144,7 +147,7 @@ namespace BroadbandZone_App.WebApi
             {
                 if (multipartFiles is null || multipartFiles.Count() == 0) return;
 
-                FileUploadHelper fileUploadHelper = new FileUploadHelper();
+                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.UploadFilePath);
                 using (var db = new BroadbandZoneEntities())
                 {
                     foreach (UploadedFile file in fileUploadHelper.UploadStreams(multipartFiles.ToArray(), appId))
@@ -164,7 +167,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                FileUploadHelper fileUploadHelper = new FileUploadHelper();
+                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.UploadFilePath);
 
                 using (var db = new BroadbandZoneEntities())
                 {

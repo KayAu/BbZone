@@ -51,12 +51,70 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ModifiedOn" Type="smalldatetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AgentCommission">
+          <Key>
+            <PropertyRef Name="CommId" />
+            <PropertyRef Name="AgentId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="AgentCommission" />
+            <PropertyRef Name="SuperiorCommission" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="ModifiedOn" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="CommId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="int" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="AgentCommission" Type="smallint" Nullable="false" />
+          <Property Name="SuperiorCommission" Type="smallint" Nullable="false" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="AnncId" />
+          </Key>
+          <Property Name="AnncId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="300" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AnnouncementDocument">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AnncId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="350" Nullable="false" />
+          <Property Name="Size" Type="float" />
+        </EntityType>
         <EntityType Name="ApplicationStatus">
           <Key>
             <PropertyRef Name="AppStatusId" />
           </Key>
           <Property Name="AppStatusId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Status" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Communication">
+          <Key>
+            <PropertyRef Name="CommId" />
+          </Key>
+          <Property Name="CommId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Role" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="CustomerApplication">
           <Key>
@@ -117,6 +175,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ProductId" Type="int" />
           <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DefaultCommission" Type="money" />
+          <Property Name="CommissionPercent" Type="smallint" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
@@ -165,6 +224,54 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <Association Name="FK_AgentCommission_Agent">
+          <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
+          <End Role="AgentCommission" Type="Self.AgentCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="AgentCommission">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentCommission_ProductCategory">
+          <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
+          <End Role="AgentCommission" Type="Self.AgentCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AgentCommission">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AnnouncementDocument_Announcement">
+          <End Role="Announcement" Type="Self.Announcement" Multiplicity="1" />
+          <End Role="AnnouncementDocument" Type="Self.AnnouncementDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcement">
+              <PropertyRef Name="AnncId" />
+            </Principal>
+            <Dependent Role="AnnouncementDocument">
+              <PropertyRef Name="AnncId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Communication_CustomerApplication">
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+          <End Role="Communication" Type="Self.Communication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Communication">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
           <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="*" />
@@ -234,11 +341,20 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
           <Parameter Name="prImpersonate" Type="bit" Mode="In" />
         </Function>
+        <Function Name="prc_DboardMyTeamSubmissions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prUsername" Type="varchar" Mode="In" />
+          <Parameter Name="oTotalAllAgents" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prc_GenerateEncryptedPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prUserLogin" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_GetAgentCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prProductId" Type="int" Mode="In" />
+        </Function>
         <Function Name="prc_GetAgentProfile" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prUsername" Type="varchar" Mode="In" />
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
         </Function>
         <Function Name="prc_GetAgentRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
@@ -248,6 +364,28 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
           <Parameter Name="prRecordStatus" Type="int" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetAgents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetAnnouncement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prTitle" Type="varchar" Mode="In" />
+          <Parameter Name="prIsActive" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prProductId" Type="int" Mode="In" />
+          <Parameter Name="prAgentAcc" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="prc_GetCustomerApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
@@ -280,6 +418,10 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
         <Function Name="prc_GetDropdownItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prFieldName" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_GetMyAgents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prUsername" Type="varchar" Mode="In" />
+          <Parameter Name="oAllowCommConfig" Type="bit" Mode="InOut" />
+        </Function>
         <Function Name="prc_GetProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
           <Parameter Name="prPageSize" Type="int" Mode="In" />
@@ -310,6 +452,10 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
         <Function Name="prc_GetRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prRegId" Type="int" Mode="In" />
         </Function>
+        <Function Name="prc_InsertCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgents" Type="varchar(max)" Mode="In" />
+          <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prc_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prStoreProcName" Type="varchar" Mode="In" />
           <Parameter Name="ErrorLogID" Type="int" Mode="InOut" />
@@ -318,9 +464,16 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Parameter Name="prRegistrationId" Type="int" Mode="In" />
           <Parameter Name="prEmail" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_UpdateCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BroadbandZoneModelStoreContainer">
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AnnouncementDocument" EntityType="Self.AnnouncementDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Communication" EntityType="Self.Communication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerApplication" EntityType="Self.CustomerApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDocument" EntityType="Self.CustomerDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
@@ -338,6 +491,35 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
     [AdminUser].[CreatedBy] AS [CreatedBy]
     FROM [dbo].[AdminUser] AS [AdminUser]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="AgentCommission" EntityType="Self.AgentCommission" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AgentCommission].[CommId] AS [CommId], 
+    [AgentCommission].[AgentId] AS [AgentId], 
+    [AgentCommission].[CategoryId] AS [CategoryId], 
+    [AgentCommission].[AgentCommission] AS [AgentCommission], 
+    [AgentCommission].[SuperiorCommission] AS [SuperiorCommission], 
+    [AgentCommission].[CreatedOn] AS [CreatedOn], 
+    [AgentCommission].[CreatedBy] AS [CreatedBy], 
+    [AgentCommission].[ModifiedOn] AS [ModifiedOn], 
+    [AgentCommission].[ModifiedBy] AS [ModifiedBy]
+    FROM [dbo].[AgentCommission] AS [AgentCommission]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AgentCommission_Agent" Association="Self.FK_AgentCommission_Agent">
+            <End Role="Agent" EntitySet="Agent" />
+            <End Role="AgentCommission" EntitySet="AgentCommission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentCommission_ProductCategory" Association="Self.FK_AgentCommission_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategory" />
+            <End Role="AgentCommission" EntitySet="AgentCommission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AnnouncementDocument_Announcement" Association="Self.FK_AnnouncementDocument_Announcement">
+            <End Role="Announcement" EntitySet="Announcement" />
+            <End Role="AnnouncementDocument" EntitySet="AnnouncementDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Communication_CustomerApplication" Association="Self.FK_Communication_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+            <End Role="Communication" EntitySet="Communication" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="Self.FK_CustomerApplication_ApplicationStatus">
             <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
             <End Role="CustomerApplication" EntitySet="CustomerApplication" />
@@ -383,16 +565,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Products" EntityType="BroadbandZoneModel.Product" />
-          <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
           <EntitySet Name="ProductPackages" EntityType="BroadbandZoneModel.ProductPackage" />
-          <AssociationSet Name="FK_ProductCategory_Product" Association="BroadbandZoneModel.FK_ProductCategory_Product">
-            <End Role="Product" EntitySet="Products" />
-            <End Role="ProductCategory" EntitySet="ProductCategories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Product_ProductCategory" Association="BroadbandZoneModel.FK_Product_ProductCategory">
-            <End Role="ProductCategory" EntitySet="ProductCategories" />
-            <End Role="ProductPackage" EntitySet="ProductPackages" />
-          </AssociationSet>
           <FunctionImport Name="GetProducts" ReturnType="Collection(BroadbandZoneModel.GetProducts_Result)">
             <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
             <Parameter Name="prPageSize" Mode="In" Type="Int32" />
@@ -463,11 +636,79 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <EntitySet Name="Agents" EntityType="BroadbandZoneModel.Agent" />
           <EntitySet Name="Registrations" EntityType="BroadbandZoneModel.Registration" />
           <FunctionImport Name="GetAgentProfile" ReturnType="Collection(BroadbandZoneModel.GetAgentProfile_Result)">
-          <Parameter Name="prUsername" Mode="In" Type="String" />
+            <Parameter Name="prUsername" Mode="In" Type="String" />
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetRegistrationDetails" ReturnType="Collection(BroadbandZoneModel.GetRegistrationDetails_Result)">
           <Parameter Name="prRegId" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="GetAgents" ReturnType="Collection(BroadbandZoneModel.GetAgents_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
+          <AssociationSet Name="FK_ProductCategory_Product" Association="BroadbandZoneModel.FK_ProductCategory_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_ProductCategory" Association="BroadbandZoneModel.FK_Product_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="ProductPackage" EntitySet="ProductPackages" />
+          </AssociationSet>
+          <FunctionImport Name="GetMyAgents" ReturnType="Collection(BroadbandZoneModel.SelectItem)">
+            <Parameter Name="prUsername" Mode="In" Type="String" />
+            <Parameter Name="oAllowCommConfig" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <EntitySet Name="AgentCommissions" EntityType="BroadbandZoneModel.AgentCommission" />
+          <AssociationSet Name="FK_AgentCommission_Agent" Association="BroadbandZoneModel.FK_AgentCommission_Agent">
+            <End Role="Agent" EntitySet="Agents" />
+            <End Role="AgentCommission" EntitySet="AgentCommissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AgentCommission_ProductCategory" Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory">
+            <End Role="ProductCategory" EntitySet="ProductCategories" />
+            <End Role="AgentCommission" EntitySet="AgentCommissions" />
+          </AssociationSet>
+          <FunctionImport Name="InsertCommissionSettings">
+            <Parameter Name="prAgents" Mode="In" Type="String" />
+            <Parameter Name="prCreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetCommissionSettings" ReturnType="Collection(BroadbandZoneModel.CommissionSettings)">
+            <Parameter Name="prProductId" Mode="In" Type="Int32" />
+            <Parameter Name="prAgentAcc" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetAgentCommissionSettings" ReturnType="Collection(BroadbandZoneModel.CommissionSettings)">
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prProductId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="DashboardMyTeamSubmissions" ReturnType="Collection(BroadbandZoneModel.DashboardMyTeamSubmissions_Result)">
+            <Parameter Name="prUsername" Mode="In" Type="String" />
+            <Parameter Name="oTotalAllAgents" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Announcements" EntityType="BroadbandZoneModel.Announcement" />
+          <EntitySet Name="AnnouncementDocuments" EntityType="BroadbandZoneModel.AnnouncementDocument" />
+          <AssociationSet Name="FK_AnnouncementDocument_Announcement" Association="BroadbandZoneModel.FK_AnnouncementDocument_Announcement">
+            <End Role="Announcement" EntitySet="Announcements" />
+            <End Role="AnnouncementDocument" EntitySet="AnnouncementDocuments" />
+          </AssociationSet>
+          <FunctionImport Name="GetAnnouncement" ReturnType="Collection(BroadbandZoneModel.GetAnnouncement_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prTitle" Mode="In" Type="String" />
+            <Parameter Name="prIsActive" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Communications" EntityType="BroadbandZoneModel.Communication" />
+          <AssociationSet Name="FK_Communication_CustomerApplication" Association="BroadbandZoneModel.FK_Communication_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="Communication" EntitySet="Communications" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -480,6 +721,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ProductId" Nullable="true" MaxLength="5" />
           <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+          <Property Type="Int16" Name="CommissionPercent" Nullable="false" />
         </ComplexType>
         <ComplexType Name="GetProductPackages_Result">
           <Property Type="Int32" Name="ProdPkgId" Nullable="false" />
@@ -507,22 +749,6 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ProductCategories" Relationship="BroadbandZoneModel.FK_ProductCategory_Product" FromRole="Product" ToRole="ProductCategory" />
         </EntityType>
-        <EntityType Name="ProductCategory">
-          <Key>
-            <PropertyRef Name="CategoryId" />
-          </Key>
-          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProductId" Type="Int32" />
-          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DefaultCommission" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Product" Relationship="BroadbandZoneModel.FK_ProductCategory_Product" FromRole="ProductCategory" ToRole="Product" />
-          <NavigationProperty Name="ProductPackages" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="ProductPackage" />
-        </EntityType>
         <EntityType Name="ProductPackage">
           <Key>
             <PropertyRef Name="ProdPkgId" />
@@ -537,33 +763,9 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductPackage" ToRole="ProductCategory" />
           <NavigationProperty Name="CustomerApplications" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="ProductPackage" ToRole="CustomerApplication" />
+          <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductPackage" ToRole="ProductCategory" />
         </EntityType>
-        <Association Name="FK_ProductCategory_Product">
-          <End Type="BroadbandZoneModel.Product" Role="Product" Multiplicity="0..1" />
-          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Product">
-              <PropertyRef Name="ProductId" />
-            </Principal>
-            <Dependent Role="ProductCategory">
-              <PropertyRef Name="ProductId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Product_ProductCategory">
-          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductCategory">
-              <PropertyRef Name="CategoryId" />
-            </Principal>
-            <Dependent Role="ProductPackage">
-              <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetProducts_Result">
           <Property Type="Int32" Name="ProductId" Nullable="true" />
           <Property Type="String" Name="ProductName" Nullable="true" MaxLength="150" />
@@ -622,6 +824,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
           <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
           <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
+          <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
         </EntityType>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
@@ -735,6 +938,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedOn" Type="DateTime" Precision="0" />
           <Property Name="ModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgentCommissions" Relationship="BroadbandZoneModel.FK_AgentCommission_Agent" FromRole="Agent" ToRole="AgentCommission" />
         </EntityType>
         <EntityType Name="Registration">
           <Key>
@@ -814,6 +1018,195 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="GetAgents_Result">
+          <Property Type="Int32" Name="AgentId" Nullable="true" />
+          <Property Type="String" Name="Fullname" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CompanyName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MobileNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="ProductCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="Int32" />
+          <Property Name="Category" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DefaultCommission" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CommissionPercent" Type="Int16" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="BroadbandZoneModel.FK_ProductCategory_Product" FromRole="ProductCategory" ToRole="Product" />
+          <NavigationProperty Name="ProductPackages" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductCategory" ToRole="ProductPackage" />
+          <NavigationProperty Name="AgentCommissions" Relationship="BroadbandZoneModel.FK_AgentCommission_ProductCategory" FromRole="ProductCategory" ToRole="AgentCommission" />
+        </EntityType>
+        <Association Name="FK_ProductCategory_Product">
+          <End Type="BroadbandZoneModel.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductId" />
+            </Principal>
+            <Dependent Role="ProductCategory">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_ProductCategory">
+          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="ProductPackage">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="SelectItem">
+          <Property Type="Int32" Name="DisplayValue" Nullable="false" />
+          <Property Type="String" Name="DisplayText" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="AgentCommission">
+          <Key>
+            <PropertyRef Name="CommId" />
+            <PropertyRef Name="AgentId" />
+            <PropertyRef Name="CategoryId" />
+            <PropertyRef Name="AgentCommission1" />
+            <PropertyRef Name="SuperiorCommission" />
+            <PropertyRef Name="CreatedOn" />
+            <PropertyRef Name="CreatedBy" />
+            <PropertyRef Name="ModifiedOn" />
+            <PropertyRef Name="ModifiedBy" />
+          </Key>
+          <Property Name="CommId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" Nullable="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="AgentCommission1" Type="Int16" Nullable="false" />
+          <Property Name="SuperiorCommission" Type="Int16" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Agent" Relationship="BroadbandZoneModel.FK_AgentCommission_Agent" FromRole="AgentCommission" ToRole="Agent" />
+          <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_AgentCommission_ProductCategory" FromRole="AgentCommission" ToRole="ProductCategory" />
+        </EntityType>
+        <Association Name="FK_AgentCommission_Agent">
+          <End Type="BroadbandZoneModel.Agent" Role="Agent" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.AgentCommission" Role="AgentCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agent">
+              <PropertyRef Name="AgentId" />
+            </Principal>
+            <Dependent Role="AgentCommission">
+              <PropertyRef Name="AgentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AgentCommission_ProductCategory">
+          <End Type="BroadbandZoneModel.ProductCategory" Role="ProductCategory" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.AgentCommission" Role="AgentCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="AgentCommission">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="CommissionSettings">
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="SupCommission" Nullable="true" Precision="19" />
+          <Property Type="Int16" Name="AgentCommissionPer" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="GetAgentCommissionSettings_Result">
+          <Property Type="Int32" Name="CommId" Nullable="false" />
+          <Property Type="Int32" Name="AgentId" Nullable="false" />
+          <Property Type="Int16" Name="AgentCommission" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DashboardMyTeamSubmissions_Result">
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalAgents" Nullable="false" />
+          <Property Type="Int32" Name="TotalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="TotalInProgress" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="AnncId" />
+          </Key>
+          <Property Name="AnncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnnouncementDocuments" Relationship="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" FromRole="Announcement" ToRole="AnnouncementDocument" />
+        </EntityType>
+        <EntityType Name="AnnouncementDocument">
+          <Key>
+            <PropertyRef Name="DocId" />
+          </Key>
+          <Property Name="DocId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AnncId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="350" FixedLength="false" Unicode="true" />
+          <Property Name="Size" Type="Double" />
+          <NavigationProperty Name="Announcement" Relationship="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" FromRole="AnnouncementDocument" ToRole="Announcement" />
+        </EntityType>
+        <Association Name="FK_AnnouncementDocument_Announcement">
+          <End Type="BroadbandZoneModel.Announcement" Role="Announcement" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.AnnouncementDocument" Role="AnnouncementDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcement">
+              <PropertyRef Name="AnncId" />
+            </Principal>
+            <Dependent Role="AnnouncementDocument">
+              <PropertyRef Name="AnncId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAnnouncement_Result">
+          <Property Type="Int32" Name="AnncId" Nullable="true" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="200" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ModifiedOn" Nullable="true" MaxLength="4000" />
+        </ComplexType>
+        <EntityType Name="Communication">
+          <Key>
+            <PropertyRef Name="CommId" />
+          </Key>
+          <Property Name="CommId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="Communication" ToRole="CustomerApplication" />
+        </EntityType>
+        <Association Name="FK_Communication_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.Communication" Role="Communication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Communication">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -833,6 +1226,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="CommissionPercent" ColumnName="CommissionPercent" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -863,21 +1257,6 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProductCategories">
-            <EntityTypeMapping TypeName="BroadbandZoneModel.ProductCategory">
-              <MappingFragment StoreEntitySet="ProductCategory">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="DefaultCommission" ColumnName="DefaultCommission" />
-                <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1139,6 +1518,138 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAgents" FunctionName="BroadbandZoneModel.Store.prc_GetAgents">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAgents_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ProductCategories">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.ProductCategory">
+              <MappingFragment StoreEntitySet="ProductCategory">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CommissionPercent" ColumnName="CommissionPercent" />
+                <ScalarProperty Name="DefaultCommission" ColumnName="DefaultCommission" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetMyAgents" FunctionName="BroadbandZoneModel.Store.prc_GetMyAgents">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.SelectItem">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AgentCommissions">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.AgentCommission">
+              <MappingFragment StoreEntitySet="AgentCommission">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="SuperiorCommission" ColumnName="SuperiorCommission" />
+                <ScalarProperty Name="AgentCommission1" ColumnName="AgentCommission" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="CommId" ColumnName="CommId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="InsertCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_InsertCommissionSettings" />
+          <FunctionImportMapping FunctionImportName="GetCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_GetCommissionSettings">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.CommissionSettings">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SupCommission" ColumnName="SupCommission" />
+                <ScalarProperty Name="AgentCommissionPer" ColumnName="AgentCommissionPer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_GetAgentCommissionSettings">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.CommissionSettings">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="SupCommission" ColumnName="SupCommission" />
+                <ScalarProperty Name="AgentCommissionPer" ColumnName="AgentCommissionPer" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DashboardMyTeamSubmissions" FunctionName="BroadbandZoneModel.Store.prc_DboardMyTeamSubmissions">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.DashboardMyTeamSubmissions_Result">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="TotalAgents" ColumnName="TotalAgents" />
+                <ScalarProperty Name="TotalCompleted" ColumnName="TotalCompleted" />
+                <ScalarProperty Name="TotalInProgress" ColumnName="TotalInProgress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcement">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AnncId" ColumnName="AnncId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AnnouncementDocuments">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.AnnouncementDocument">
+              <MappingFragment StoreEntitySet="AnnouncementDocument">
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AnncId" ColumnName="AnncId" />
+                <ScalarProperty Name="DocId" ColumnName="DocId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAnnouncement" FunctionName="BroadbandZoneModel.Store.prc_GetAnnouncement">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAnnouncement_Result">
+                <ScalarProperty Name="AnncId" ColumnName="AnncId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Communications">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Communication">
+              <MappingFragment StoreEntitySet="Communication">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="CommId" ColumnName="CommId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -66,7 +66,6 @@ export class ViewOrder extends ListEvent {
 
         return columnMappings;
     }
-
  
     clearSearchParam() {
         this.searchParams = new SearchOrderParams(null, null, null, null, null, null);

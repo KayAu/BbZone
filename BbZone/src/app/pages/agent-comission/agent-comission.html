@@ -1,95 +1,116 @@
 <page-header [title]="'Agent Commissions'" [parentCategory]="''"></page-header>
 <div class="wrapper wrapper-content animated fadeInRight">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="ibox ">
-        <div class="ibox-title">
-          <h5>Manage Agent Commissions</h5>
-        </div>
-        <div class="ibox-content">
-          <div class="row">
-            <div class="col-sm-3 m-b-xs">
-              <select class="form-control-sm form-control input-s-sm inline">
-                <option value="0">Select Product</option>
-                <option value="1">Time</option>
-                <option value="2">Unifi</option>
-                <option value="3">Astro</option>
-              </select>
-            </div>
-            <div class="col-sm-4 m-b-xs">
-              <select class="form-control-sm form-control input-s-sm inline">
-                <option value="0">Select Package</option>
-                <option value="1">Package 1</option>
-                <option value="2">Package 2</option>
-                <option value="3">Package 3</option>
-              </select>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-striped mrg10T">
-              <thead>
-                <tr>
-                  <th>Agent Id</th>
-                  <th>Agent Name</th>
-                  <th>Product Category</th>
-                  <th>Package Name</th>
-                  <th>Commission(%)</th>
-                  <th>Active</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td></td>
-                  <td><input type="text" class="form-control-sm form-control"></td>
-                  <td>
-                    <select class="form-control-sm form-control input-s-sm inline">
-                      <option value="0">Select Product</option>
-                      <option value="1">Time</option>
-                      <option value="2">Unifi</option>
-                      <option value="3">Astro</option>
-                    </select>
-                  </td>
-                  <td>
-                    <select class="form-control-sm form-control input-s-sm inline">
-                      <option value="0">Select Package</option>
-                      <option value="1">Package 1</option>
-                      <option value="2">Package 2</option>
-                      <option value="3">Package 3</option>
-                    </select>
-                  </td>
-                  <td><input type="text" class="form-control-sm form-control"></td>
-                  <td>
-                    <div class="i-checks">
-                      <div class="icheckbox_square-green checked disabled" style="position: relative;">
-                        <input type="checkbox" value="" disabled="" checked="" style="position: absolute; opacity: 0;">
-                        <ins class="iCheck-helper" style="position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;"></ins>
-                      </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <loading></loading>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li>
+                        <a class="nav-link" [ngClass]="{'active':selectedTab == 1}" data-toggle="tab" href="#addCommission" (click)="selectedTab=1">Add Commission</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" [ngClass]="{'active':selectedTab == 2}" data-toggle="tab" href="#editCommission" (click)="selectedTab=2">Edit Commission</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" id="addCommission" class="tab-pane active">
+                        <div class="panel-body">
+                            <form #dataForm="ngForm" (ngSubmit)="create()">
+                                <fieldset [disabled]="!allowCommConfig">
+                                    <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
+                                        <i class="fa fa-warning"></i>
+                                        Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Agents
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <multiple-checkbox name="selectedAgents" [fieldId]="'selectedAgents'" [dataItems]="myAgents" [(ngModel)]="selectedAgents" [required]="true"></multiple-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Product
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <product-options name="product" [fieldId]="'product'" [required]="true" [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Product Category
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Category</th>
+                                                        <th>Commission (RM)</th>
+                                                        <th>Allocation (%)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of commissionSettings; let itemNo = index">
+                                                        <td>{{itemNo+1}}</td>
+                                                        <td>{{item.category}}</td>
+                                                        <td>{{item.supCommission}}</td>
+                                                        <td>
+                                                            <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" class="form-control" />
+                                                        </td>
+                                                    </tr>
+                                                    <tr *ngIf="commissionSettings.length == 0">
+                                                        <td colspan="4">
+                                                            <div class="mrg45A text-center opacity-40">
+                                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                                <h4>No Records Available</h4>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div>
+                                        <back-button>Cancel</back-button>
+                                        <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                                [disabled]="isUpdating" style="width: 180px;">
+                                            {{isUpdating ? 'Updating' : 'Update'}}
+                                            <span class="loading"></span>
+                                        </button>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
                     </div>
-                  </td>
-                  <td><button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-plus mrg5R"></i>Add</button></td>
-                </tr>
-                <tr *ngFor="let item of agents; let rowNo = index">
-                  <td>{{item.agentId}}</td>
-                  <td>{{item.agentName}}</td>
-                  <td>{{item.product}}</td>
-                  <td>{{item.package}}</td>
-                  <td>{{item.commission}}</td>
-                  <td>
-                    <i class="fa fa-check text-navy" *ngIf="item.isActive"></i>
-                    <i class="fa fa-times text-danger" *ngIf="!item.isActive"></i>
-                  </td>
-                  <td>
-                    <a class="btn btn-success btn-sm" (click)="setRowOnEdit(rowNo)"><i class="fa fa-edit"></i>&nbsp;&nbsp;<span class="bold">Edit</span></a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
+                    <div role="tabpanel" id="editCommission" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">
+                                    Product
+                                </label>
+                                <div class="col-sm-11">
+                                    <product-options name="product" [fieldId]="product" [(ngModel)]="selectedProduct" (onProductSelected)="loadAgentCommissions()"></product-options>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">
+                                    Agents Commission
+                                </label>
+                                <div class="col-sm-11">
+                                    <agent-commission-table></agent-commission-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-  </div>
+    </div>
 </div>

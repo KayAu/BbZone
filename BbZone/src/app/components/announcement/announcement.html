@@ -1,0 +1,35 @@
+﻿<div class="ibox ">
+    <div class="ibox-title">
+        <h5>Messages</h5>
+        <div class="ibox-tools">
+            <a class="collapse-link">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="close-link">
+                <i class="fa fa-times"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content ibox-heading">
+        <h3><i class="fa fa-envelope-o"></i> New Announcement</h3>
+        <small><i class="fa fa-tim"></i> You have {{dataSource.length}} new announcement.</small>
+    </div>
+    <div class="ibox-content">
+        <div class="feed-activity-list">
+            <div class="feed-element" *ngFor="let data of dataSource">
+                <div>
+                    <small class="float-right text-navy">Posted On: {{data.createdOn | date:'dd MMM yyy'}}</small>
+                    <strong>{{data.title}}</strong>
+                    <div class="mrg10T">{{data.descriptions}}</div>
+                    <div class="flexbox mrg10T">
+                        <ng-container *ngFor="let file of data.announcementDocuments; let fileNo = index">
+                            <a href="/App_Data/AnnouncementFiles/{{file}}" download>
+                                View file {{fileNo}}
+                            </a>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

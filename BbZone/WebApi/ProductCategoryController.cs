@@ -39,9 +39,10 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    newProdCategory.SetDateAndAuthor("Kaye", "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
+                    newProdCategory.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
                     db.ProductCategories.Add(newProdCategory);
                     db.SaveChanges();
 
@@ -61,9 +62,10 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    editedRecord.SetDateAndAuthor("Kaye", "ModifiedBy", "ModifiedOn");
+                    editedRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
                 }

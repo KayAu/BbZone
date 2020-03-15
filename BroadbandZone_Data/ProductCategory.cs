@@ -18,12 +18,14 @@ namespace BroadbandZone_Data
         public ProductCategory()
         {
             this.ProductPackages = new HashSet<ProductPackage>();
+            this.AgentCommissions = new HashSet<AgentCommission>();
         }
     
         public int CategoryId { get; set; }
         public Nullable<int> ProductId { get; set; }
         public string Category { get; set; }
         public Nullable<decimal> DefaultCommission { get; set; }
+        public Nullable<short> CommissionPercent { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
@@ -33,5 +35,7 @@ namespace BroadbandZone_Data
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPackage> ProductPackages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AgentCommission> AgentCommissions { get; set; }
     }
 }

@@ -1,17 +1,4 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -23,21 +10,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
-var data_service_1 = require("../../services/data.service");
-var loader_service_1 = require("../../loader/loader.service");
-var listEvent_1 = require("../../interfaces/listEvent");
-var Gridview = /** @class */ (function (_super) {
-    __extends(Gridview, _super);
-    function Gridview(loaderService, dataService) {
-        var _this = _super.call(this, loaderService, dataService, "") || this;
-        _this.loaderService = loaderService;
-        _this.dataService = dataService;
-        _this.showTotal = false;
-        _this.dataColumns = [];
-        _this.showPager = true;
-        _this.hideColumns = [];
-        _this.dataSourceSubject.asObservable().subscribe(function (data) { return _this.setColumnNames(); });
-        return _this;
+var Gridview = /** @class */ (function () {
+    function Gridview() {
+        this.showTotal = false;
+        this.dataColumns = [];
+        this.showPager = true;
+        this.hideColumns = [];
+        this.dataSource = [];
     }
     Object.defineProperty(Gridview.prototype, "displayTotal", {
         set: function (show) {
@@ -55,6 +34,10 @@ var Gridview = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    //constructor(public loaderService: LoaderService, public dataService: DataService) {
+    //    super(loaderService, dataService, "");
+    //    this.dataSourceSubject.asObservable().subscribe(data => this.setColumnNames());
+    //}
     Gridview.prototype.getRowData = function (row) {
         return Object.values(row);
     };
@@ -75,10 +58,6 @@ var Gridview = /** @class */ (function (_super) {
         }
         return null;
     };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Array)
-    ], Gridview.prototype, "dataColumns", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Boolean)
@@ -109,10 +88,9 @@ var Gridview = /** @class */ (function (_super) {
         core_1.Component({
             selector: 'gridview',
             templateUrl: './gridview.html'
-        }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+        })
     ], Gridview);
     return Gridview;
-}(listEvent_1.ListEvent));
+}());
 exports.Gridview = Gridview;
 //# sourceMappingURL=gridview.js.map

@@ -13,6 +13,8 @@ import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SuperiorField } from 'src/app/components/superior-field/superior-field';
+import { AuthenticationService } from 'src/app/services/authentication';
+import { LoginUser } from 'src/app/model/login-user';
 
 @Component({
     selector: 'agent-profile',
@@ -26,9 +28,20 @@ export class AgentProfile {
     formRecord: any = {};
     isUpdating: boolean = false;
     completed: boolean = false;
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
+    agentId: number;
+    currentUser: LoginUser;
+
+    constructor(public loaderService: LoaderService,
+        public dataService: DataService,
+        public formEvent: BroadcastService,
+        private router: Router,
+        private route: ActivatedRoute,
+        private toastr: ToastrService,
+        private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
+        this.agentId = this.route.snapshot.params.id;
+        this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord();
     }
@@ -55,7 +68,7 @@ export class AgentProfile {
 
         this.isUpdating = true;
 
-        this.dataService.update(ApiController.Agent, this.formRecord[AgentProfileFields.keyField] ,this.formRecord).subscribe(data => {
+        this.dataService.update(ApiController.Agent, this.formRecord[AgentProfileFields.keyField], this.formRecord).subscribe(data => {
             this.isUpdating = false;
             this.superiorField.editable = false;
             this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
@@ -63,9 +76,11 @@ export class AgentProfile {
     }
 
     loadRecord() {
-        this.dataService.getAll(`${ApiController.Agent}`).subscribe(results => {
+        let url = this.agentId ? `${ApiController.Agent}/${this.agentId}` : `${ApiController.Agent}`;
+
+        this.dataService.get(url).subscribe(results => {
             this.formRecord = results;
-            this.superiorField.editable = !this.formRecord.superiorId ? true : false;
+            this.superiorField.editable = !this.formRecord.superiorId || this.currentUser.isAdmin ? true : false;
         });
     }
 

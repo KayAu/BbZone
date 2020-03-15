@@ -1,0 +1,47 @@
+﻿
+<div class="ibox ">
+    <div class="ibox-title">
+        <h5>My Team Submissions</h5>
+    </div>
+    <div class="ibox-content pad0A">
+        <p class="pad15L mrg10T text-muted">
+            Your team submissions up to date.
+        </p>
+        <div class="flexbox">
+            <div class="media col-md-4 mrg15T mrg25B">
+                <div class="bg-info h-40 w-40 text-center ico-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="media-body pad10L">
+                    <h6 class="text-uppercase font-bold mrg0T">
+                        Total Agents
+                    </h6>
+                    <h3 class="mrg10T mrg0B">{{totalAgents}}</h3>
+                </div>
+            </div>
+            <div class="media col-md-4 mrg15T mrg25B">
+                <div class="bg-primary h-40 w-40 text-center ico-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="media-body pad10L">
+                    <h6 class="text-uppercase font-bold mrg0T">
+                        Total Completed
+                    </h6>
+                    <h3 class="mrg10T mrg0B">{{totalCompleted}}</h3>
+                </div>
+            </div>
+            <div class="media col-md-4 mrg15T mrg25B">
+                <div class="bg-warning h-40 w-40 text-center ico-box">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                </div>
+                <div class="media-body pad10L">
+                    <h6 class="text-uppercase font-bold mrg0T">
+                        Total In Progress
+                    </h6>
+                    <h3 class="mrg10T mrg0B">{{totalInProgress}}</h3>
+                </div>
+            </div>
+        </div>
+        <gridview [dataItems]="dashboardData"></gridview>
+    </div>
+</div>

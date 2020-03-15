@@ -327,7 +327,7 @@ module.exports = "@media (max-width: 767px) {\r\n  /* On small screens, the nav 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Broadband Zone</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"login.html\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
+module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"login.html\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
 
 /***/ }),
 
@@ -424,7 +424,7 @@ var home_1 = __webpack_require__(/*! ./pages/home/home */ "./src/app/pages/home/
 var create_order_1 = __webpack_require__(/*! ./pages/create-order/create-order */ "./src/app/pages/create-order/create-order.ts");
 var page_header_1 = __webpack_require__(/*! ./components/page-header */ "./src/app/components/page-header.ts");
 var view_order_1 = __webpack_require__(/*! ./pages/view-order/view-order */ "./src/app/pages/view-order/view-order.ts");
-var gridview_1 = __webpack_require__(/*! ./components/gridview/gridview */ "./src/app/components/gridview/gridview.ts");
+var agent_commission_table_1 = __webpack_require__(/*! ./components/agent-commission-table/agent-commission-table */ "./src/app/components/agent-commission-table/agent-commission-table.ts");
 var data_service_1 = __webpack_require__(/*! ./services/data.service */ "./src/app/services/data.service.ts");
 var loader_service_1 = __webpack_require__(/*! ./loader/loader.service */ "./src/app/loader/loader.service.ts");
 var broadcast_service_1 = __webpack_require__(/*! ./services/broadcast.service */ "./src/app/services/broadcast.service.ts");
@@ -446,6 +446,7 @@ var agent_registration_1 = __webpack_require__(/*! ./pages/agent-registration/ag
 var agent_registration_view_1 = __webpack_require__(/*! ./pages/agent-registration-view/agent-registration-view */ "./src/app/pages/agent-registration-view/agent-registration-view.ts");
 var agent_registration_list_1 = __webpack_require__(/*! ./pages/agent-registration-list/agent-registration-list */ "./src/app/pages/agent-registration-list/agent-registration-list.ts");
 var agent_profile_1 = __webpack_require__(/*! ./pages/agent-profile/agent-profile */ "./src/app/pages/agent-profile/agent-profile.ts");
+var agent_maintenance_1 = __webpack_require__(/*! ./pages/agent-maintenance/agent-maintenance */ "./src/app/pages/agent-maintenance/agent-maintenance.ts");
 var tablerow_buttons_1 = __webpack_require__(/*! ./components/tablerow-buttons/tablerow-buttons */ "./src/app/components/tablerow-buttons/tablerow-buttons.ts");
 var editmode_directive_1 = __webpack_require__(/*! ./directives/editmode-directive */ "./src/app/directives/editmode-directive.ts");
 var editable_dropdown_1 = __webpack_require__(/*! ./components/editable-dropdown/editable-dropdown */ "./src/app/components/editable-dropdown/editable-dropdown.ts");
@@ -465,6 +466,13 @@ var angular_user_idle_1 = __webpack_require__(/*! angular-user-idle */ "./node_m
 var back_button_1 = __webpack_require__(/*! ./components/back-button/back-button */ "./src/app/components/back-button/back-button.ts");
 var enum_to_array_1 = __webpack_require__(/*! ./pipes/enum-to-array */ "./src/app/pipes/enum-to-array.ts");
 var superior_field_1 = __webpack_require__(/*! ./components/superior-field/superior-field */ "./src/app/components/superior-field/superior-field.ts");
+var multiple_checkbox_1 = __webpack_require__(/*! ./components/multiple-checkbox/multiple-checkbox */ "./src/app/components/multiple-checkbox/multiple-checkbox.ts");
+var gridview_1 = __webpack_require__(/*! ./components/gridview/gridview */ "./src/app/components/gridview/gridview.ts");
+var team_submission_1 = __webpack_require__(/*! ./components/dashboard/team-submission/team-submission */ "./src/app/components/dashboard/team-submission/team-submission.ts");
+var create_announcement_1 = __webpack_require__(/*! ./pages/create-announcement/create-announcement */ "./src/app/pages/create-announcement/create-announcement.ts");
+var edit_announcement_1 = __webpack_require__(/*! ./pages/edit-announcement/edit-announcement */ "./src/app/pages/edit-announcement/edit-announcement.ts");
+var view_announcement_1 = __webpack_require__(/*! ./pages/view-announcement/view-announcement */ "./src/app/pages/view-announcement/view-announcement.ts");
+var announcement_1 = __webpack_require__(/*! ./components/announcement/announcement */ "./src/app/components/announcement/announcement.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -477,7 +485,7 @@ var AppModule = /** @class */ (function () {
                 create_order_1.CreateOrder,
                 page_header_1.PageHeader,
                 view_order_1.ViewOrder,
-                gridview_1.Gridview,
+                agent_commission_table_1.AgentCommissionTable,
                 pagination_1.Pagination,
                 sort_cell_directive_1.SortCellDirective,
                 sortable_directive_1.SortableDirective,
@@ -492,6 +500,7 @@ var AppModule = /** @class */ (function () {
                 agent_registration_view_1.AgentRegistrationView,
                 agent_registration_list_1.AgentRegistrationList,
                 agent_profile_1.AgentProfile,
+                agent_maintenance_1.AgentMaintenance,
                 tablerow_buttons_1.TableRowButtons,
                 editmode_directive_1.EditModeDirective,
                 editable_dropdown_1.EditableDropdown,
@@ -504,7 +513,14 @@ var AppModule = /** @class */ (function () {
                 login_1.Login,
                 back_button_1.BackButton,
                 enum_to_array_1.EnumToArrayPipe,
-                superior_field_1.SuperiorField
+                superior_field_1.SuperiorField,
+                multiple_checkbox_1.MultipleCheckboxes,
+                gridview_1.Gridview,
+                team_submission_1.TeamSubmission,
+                create_announcement_1.CreateAnnouncement,
+                edit_announcement_1.EditAnnouncement,
+                view_announcement_1.ViewAnnouncement,
+                announcement_1.Announcement,
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -535,7 +551,11 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList },
-                    { path: 'agent-profile', component: agent_profile_1.AgentProfile }
+                    { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
+                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
+                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
+                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement }
                 ])
             ],
             providers: [
@@ -556,6 +576,194 @@ var AppModule = /** @class */ (function () {
     return AppModule;
 }());
 exports.AppModule = AppModule;
+
+
+/***/ }),
+
+/***/ "./src/app/components/agent-commission-table/agent-commission-table.html":
+/*!*******************************************************************************!*\
+  !*** ./src/app/components/agent-commission-table/agent-commission-table.html ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<!--<loading></loading>-->\r\n<table class=\"table table-striped float-left wp-100\">\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <ng-container *ngFor=\"let column of dataColumns; let colNo = index\">\r\n                <th>{{column}}</th>\r\n            </ng-container>\r\n            <th>Action</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td [innerHTML]=\"value\" *ngIf=\"(!row.onEdit && colNo < dataColumns.length) || colNo <= 1\"></td>\r\n            </ng-container>\r\n            <ng-container *ngIf=\"row.onEdit\">\r\n                <td *ngFor=\"let comm of commissionSettings\">\r\n                    <input type=\"number\" min=\"0\" class=\"form-control\" [(ngModel)]=\"comm.agentCommissionPer\" />\r\n                </td>\r\n            </ng-container>\r\n            <td>\r\n                <!--<a (click)=\"editRow(row[itemKey])\"><i class=\"fa fa-edit\"></i></a>-->\r\n                <tablerow-buttons [editMode]=\"row.onEdit\" [hideDelete]=\"true\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\"></tablerow-buttons>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"!dataSource.length\">\r\n            <td class=\"pad0A\" [attr.colspan]=\"dataColumns.length\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2> \r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<!--<pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" *ngIf=\"showPager\"></pager>-->\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/agent-commission-table/agent-commission-table.ts":
+/*!*****************************************************************************!*\
+  !*** ./src/app/components/agent-commission-table/agent-commission-table.ts ***!
+  \*****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var AgentCommissionTable = /** @class */ (function () {
+    //@Input()
+    //set dataItems(data: any[]) {
+    //    this.dataSource = data;
+    //    if (Array.isArray(this.dataColumns) && !this.dataColumns.length)
+    //        this.setColumnNames();
+    //}
+    function AgentCommissionTable(loaderService, dataService) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.dataSource = [];
+        this.dataColumns = [];
+        this.commissionSettings = [];
+        this.editedRecord = {};
+        this.hideColumns = [];
+        this.rowItemClicked = new core_1.EventEmitter();
+    }
+    AgentCommissionTable.prototype.loadData = function (productId) {
+        var _this = this;
+        this.productId = productId;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentCommission", productId).subscribe(function (results) {
+            _this.dataSource = results;
+            _this.setColumnNames();
+        });
+    };
+    AgentCommissionTable.prototype.getRowData = function (row) {
+        return Object.values(row);
+    };
+    AgentCommissionTable.prototype.editRow = function (rowIndex) {
+        var _this = this;
+        this.dataService.getAll(apiController_1.ApiController.Commission + "/GetAgentCommissionSettings/" + this.dataSource[rowIndex].agentId + "/" + this.productId).subscribe(function (results) {
+            _this.hideEditingRow();
+            _this.dataSource[rowIndex].onEdit = true;
+            _this.commissionSettings = results;
+        });
+    };
+    AgentCommissionTable.prototype.updateRow = function (rowIndex) {
+        var _this = this;
+        this.dataService.update(apiController_1.ApiController.Commission, this.dataSource[rowIndex].agentId, this.commissionSettings).subscribe(function (data) {
+            var propertyNames = Object.keys(_this.dataSource[rowIndex]);
+            for (var itemNo = 0; itemNo < _this.commissionSettings.length; itemNo++) {
+                var propertyName = propertyNames[itemNo + 2];
+                _this.dataSource[rowIndex][propertyName] = _this.commissionSettings[itemNo].agentCommissionPer;
+            }
+            _this.dataSource[rowIndex].onEdit = false;
+        });
+    };
+    AgentCommissionTable.prototype.cancelEdit = function (rowIndex) {
+        this.dataSource[rowIndex].onEdit = false;
+        this.commissionSettings = [];
+    };
+    AgentCommissionTable.prototype.hideEditingRow = function () {
+        this.dataSource.forEach(function (element, index, array) {
+            array[index].onEdit = false;
+        });
+    };
+    AgentCommissionTable.prototype.setColumnNames = function () {
+        var _this = this;
+        if (this.dataSource.length === 0)
+            return;
+        var dataKeys = Object.keys(this.dataSource[0]);
+        // get columns which are not visible only
+        dataKeys = dataKeys.filter(function (key, index) { return !_this.hideColumns.includes(index); });
+        this.dataColumns = dataKeys;
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], AgentCommissionTable.prototype, "itemKey", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Array)
+    ], AgentCommissionTable.prototype, "hideColumns", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], AgentCommissionTable.prototype, "rowItemClicked", void 0);
+    AgentCommissionTable = __decorate([
+        core_1.Component({
+            selector: 'agent-commission-table',
+            template: __webpack_require__(/*! ./agent-commission-table.html */ "./src/app/components/agent-commission-table/agent-commission-table.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+    ], AgentCommissionTable);
+    return AgentCommissionTable;
+}());
+exports.AgentCommissionTable = AgentCommissionTable;
+
+
+/***/ }),
+
+/***/ "./src/app/components/announcement/announcement.html":
+/*!***********************************************************!*\
+  !*** ./src/app/components/announcement/announcement.html ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"ibox \">\r\n    <div class=\"ibox-title\">\r\n        <h5>Messages</h5>\r\n        <div class=\"ibox-tools\">\r\n            <a class=\"collapse-link\">\r\n                <i class=\"fa fa-chevron-up\"></i>\r\n            </a>\r\n            <a class=\"close-link\">\r\n                <i class=\"fa fa-times\"></i>\r\n            </a>\r\n        </div>\r\n    </div>\r\n    <div class=\"ibox-content ibox-heading\">\r\n        <h3><i class=\"fa fa-envelope-o\"></i> New Announcement</h3>\r\n        <small><i class=\"fa fa-tim\"></i> You have {{dataSource.length}} new announcement.</small>\r\n    </div>\r\n    <div class=\"ibox-content\">\r\n        <div class=\"feed-activity-list\">\r\n            <div class=\"feed-element\" *ngFor=\"let data of dataSource\">\r\n                <div>\r\n                    <small class=\"float-right text-navy\">Posted On: {{data.createdOn | date:'dd MMM yyy'}}</small>\r\n                    <strong>{{data.title}}</strong>\r\n                    <div class=\"mrg10T\">{{data.descriptions}}</div>\r\n                    <div class=\"flexbox mrg10T\">\r\n                        <ng-container *ngFor=\"let file of data.announcementDocuments; let fileNo = index\">\r\n                            <a href=\"/App_Data/AnnouncementFiles/{{file}}\" download>\r\n                                View file {{fileNo}}\r\n                            </a>\r\n                        </ng-container>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/announcement/announcement.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/components/announcement/announcement.ts ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var Announcement = /** @class */ (function () {
+    function Announcement(loaderService, dataService) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.dataSource = [];
+    }
+    Announcement.prototype.ngOnInit = function () {
+        this.loadData();
+    };
+    Announcement.prototype.loadData = function () {
+        var _this = this;
+        this.dataService.getAll(apiController_1.ApiController.Announcement + "/GetAnnouncements").subscribe(function (results) {
+            _this.dataSource = results;
+        });
+    };
+    Announcement = __decorate([
+        core_1.Component({
+            selector: 'announcement',
+            template: __webpack_require__(/*! ./announcement.html */ "./src/app/components/announcement/announcement.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+    ], Announcement);
+    return Announcement;
+}());
+exports.Announcement = Announcement;
 
 
 /***/ }),
@@ -609,6 +817,71 @@ exports.BackButton = BackButton;
 
 /***/ }),
 
+/***/ "./src/app/components/dashboard/team-submission/team-submission.html":
+/*!***************************************************************************!*\
+  !*** ./src/app/components/dashboard/team-submission/team-submission.html ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n<div class=\"ibox \">\r\n    <div class=\"ibox-title\">\r\n        <h5>My Team Submissions</h5>\r\n    </div>\r\n    <div class=\"ibox-content pad0A\">\r\n        <p class=\"pad15L mrg10T text-muted\">\r\n            Your team submissions up to date.\r\n        </p>\r\n        <div class=\"flexbox\">\r\n            <div class=\"media col-md-4 mrg15T mrg25B\">\r\n                <div class=\"bg-info h-40 w-40 text-center ico-box\">\r\n                    <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-bar-chart-2\"><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"10\"></line><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"4\"></line><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\"></line></svg>\r\n                </div>\r\n                <div class=\"media-body pad10L\">\r\n                    <h6 class=\"text-uppercase font-bold mrg0T\">\r\n                        Total Agents\r\n                    </h6>\r\n                    <h3 class=\"mrg10T mrg0B\">{{totalAgents}}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"media col-md-4 mrg15T mrg25B\">\r\n                <div class=\"bg-primary h-40 w-40 text-center ico-box\">\r\n                    <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-bar-chart-2\"><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"10\"></line><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"4\"></line><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\"></line></svg>\r\n                </div>\r\n                <div class=\"media-body pad10L\">\r\n                    <h6 class=\"text-uppercase font-bold mrg0T\">\r\n                        Total Completed\r\n                    </h6>\r\n                    <h3 class=\"mrg10T mrg0B\">{{totalCompleted}}</h3>\r\n                </div>\r\n            </div>\r\n            <div class=\"media col-md-4 mrg15T mrg25B\">\r\n                <div class=\"bg-warning h-40 w-40 text-center ico-box\">\r\n                    <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"feather feather-bar-chart-2\"><line x1=\"18\" y1=\"20\" x2=\"18\" y2=\"10\"></line><line x1=\"12\" y1=\"20\" x2=\"12\" y2=\"4\"></line><line x1=\"6\" y1=\"20\" x2=\"6\" y2=\"14\"></line></svg>\r\n                </div>\r\n                <div class=\"media-body pad10L\">\r\n                    <h6 class=\"text-uppercase font-bold mrg0T\">\r\n                        Total In Progress\r\n                    </h6>\r\n                    <h3 class=\"mrg10T mrg0B\">{{totalInProgress}}</h3>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <gridview [dataItems]=\"dashboardData\"></gridview>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/components/dashboard/team-submission/team-submission.ts":
+/*!*************************************************************************!*\
+  !*** ./src/app/components/dashboard/team-submission/team-submission.ts ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var TeamSubmission = /** @class */ (function () {
+    function TeamSubmission(dataService) {
+        this.dataService = dataService;
+        this.dashboardData = [];
+        this.loadData();
+    }
+    TeamSubmission.prototype.loadData = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Dashboard + "/GetMyTeamSubmissions").subscribe(function (data) {
+            _this.dashboardData = data.displayData;
+            _this.totalAgents = data.totalAgents;
+            _this.getTotal();
+        });
+    };
+    TeamSubmission.prototype.getTotal = function () {
+        this.totalCompleted = this.dashboardData.map(function (d) { return d.totalCompleted; }).reduce(function (a, b) { return a + b; }, 0);
+        this.totalInProgress = this.dashboardData.map(function (d) { return d.totalInProgress; }).reduce(function (a, b) { return a + b; }, 0);
+    };
+    TeamSubmission = __decorate([
+        core_1.Component({
+            selector: 'team-submission',
+            template: __webpack_require__(/*! ./team-submission.html */ "./src/app/components/dashboard/team-submission/team-submission.html")
+        }),
+        __metadata("design:paramtypes", [data_service_1.DataService])
+    ], TeamSubmission);
+    return TeamSubmission;
+}());
+exports.TeamSubmission = TeamSubmission;
+
+
+/***/ }),
+
 /***/ "./src/app/components/data-control/data-control.html":
 /*!***********************************************************!*\
   !*** ./src/app/components/data-control/data-control.html ***!
@@ -616,7 +889,7 @@ exports.BackButton = BackButton;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\"  [readonly]=\"readonly\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\" \r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n\r\n</div>\r\n\r\n"
+module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\" rows=\"5\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\"\r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\" class=\"checkbox checkbox-primary\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1176,7 +1449,7 @@ exports.EditableDropdown = EditableDropdown;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "/*****************************************\r\n  upload button styles\r\n******************************************/\r\n.file-upload {\r\n    position: relative;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    width: 12%;\r\n}\r\n.file-upload__label {\r\n    display: block;\r\n    padding: 7px 12px;\r\n    color: #fff;\r\n    background: #1B7BB9;\r\n    border-radius: .4em;\r\n    -webkit-transition: background .3s;\r\n    transition: background .3s;\r\n    line-height: 1.42857143;\r\n    width: 150px;\r\n    text-align: center;\r\n}\r\n.file-upload__label:hover {\r\n        cursor: pointer;\r\n        background: #000;\r\n    }\r\n.file-upload__input {\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    /*font-size: 1;\r\n    width: 0;*/\r\n    height: 100%;\r\n    opacity: 0;\r\n}\r\n.file-preview {\r\n    position: relative;\r\n    display: inline-block;\r\n    vertical-align: top;\r\n    margin: 16px;\r\n    min-height: 75px;\r\n    width: 200px;\r\n    border-radius: 10px;\r\n    background: #999;\r\n    background: -webkit-gradient(linear, left top, left bottom, from(#f3f3f3), to(#e5e5e5));\r\n    background: linear-gradient(to bottom, #f3f3f3, #e5e5e5);\r\n}\r\n.file-preview .file-details {\r\n        z-index: 20;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        opacity: 1;\r\n        font-size: 13px;\r\n        min-width: 100%;\r\n        max-width: 100%;\r\n        padding: 1em;\r\n        text-align: center;\r\n        color: rgba(0, 0, 0, 0.9);\r\n        line-height: 150%;\r\n    }\r\n.file-preview .file-details .file-size {\r\n            margin-bottom: 0.5em;\r\n            font-size: 16px;\r\n        }\r\n.file-preview .file-details .file-filename:not(:hover) {\r\n            overflow: hidden;\r\n            text-overflow: ellipsis;\r\n        }\r\n.file-preview .file-details .file-filename {\r\n            white-space: nowrap;\r\n            word-wrap: break-word;\r\n        }\r\n.file-preview .file-details .file-filename:not(:hover) span {\r\n                border: 1px solid transparent;\r\n            }\r\n.file-preview .file-details .file-filename span{\r\n                /*background-color: rgba(255, 255, 255, 0.4);*/\r\n                padding: 0 0.4em;\r\n                border-radius: 3px;\r\n            }\r\n.btn-close {\r\n    position: absolute;\r\n    z-index: 5000;\r\n    right: -5px;\r\n    top: -10px;\r\n    cursor: pointer;\r\n}\r\n         \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9maWxlLXVwbG9hZGVyL2ZpbGUtdXBsb2FkZXIuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzswQ0FFMEM7QUFDMUM7SUFDSSxrQkFBa0I7SUFDbEIscUJBQXFCO0lBQ3JCLGVBQWU7SUFDZixVQUFVO0FBQ2Q7QUFFQTtJQUNJLGNBQWM7SUFDZCxpQkFBaUI7SUFDakIsV0FBVztJQUNYLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFDbkIsa0NBQWtDO0lBQ2xDLDBCQUEwQjtJQUMxQix1QkFBdUI7SUFDdkIsWUFBWTtJQUNaLGtCQUFrQjtBQUN0QjtBQUVJO1FBQ0ksZUFBZTtRQUNmLGdCQUFnQjtJQUNwQjtBQUVKO0lBQ0ksa0JBQWtCO0lBQ2xCLE9BQU87SUFDUCxNQUFNO0lBQ04sUUFBUTtJQUNSLFNBQVM7SUFDVDtjQUNVO0lBQ1YsWUFBWTtJQUNaLFVBQVU7QUFDZDtBQUdBO0lBQ0ksa0JBQWtCO0lBQ2xCLHFCQUFxQjtJQUNyQixtQkFBbUI7SUFDbkIsWUFBWTtJQUNaLGdCQUFnQjtJQUNoQixZQUFZO0lBQ1osbUJBQW1CO0lBQ25CLGdCQUFnQjtJQUNoQix1RkFBd0Q7SUFBeEQsd0RBQXdEO0FBQzVEO0FBRUk7UUFDSSxXQUFXO1FBQ1gsa0JBQWtCO1FBQ2xCLE1BQU07UUFDTixPQUFPO1FBQ1AsVUFBVTtRQUNWLGVBQWU7UUFDZixlQUFlO1FBQ2YsZUFBZTtRQUNmLFlBQVk7UUFDWixrQkFBa0I7UUFDbEIseUJBQXlCO1FBQ3pCLGlCQUFpQjtJQUNyQjtBQUVJO1lBQ0ksb0JBQW9CO1lBQ3BCLGVBQWU7UUFDbkI7QUFFQTtZQUNJLGdCQUFnQjtZQUNoQix1QkFBdUI7UUFDM0I7QUFFQTtZQUNJLG1CQUFtQjtZQUNuQixxQkFBcUI7UUFDekI7QUFFSTtnQkFDSSw2QkFBNkI7WUFDakM7QUFFQTtnQkFDSSw4Q0FBOEM7Z0JBQzlDLGdCQUFnQjtnQkFDaEIsa0JBQWtCO1lBQ3RCO0FBRVo7SUFDSSxrQkFBa0I7SUFDbEIsYUFBYTtJQUNiLFdBQVc7SUFDWCxVQUFVO0lBQ1YsZUFBZTtBQUNuQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvZmlsZS11cGxvYWRlci9maWxlLXVwbG9hZGVyLmNzcyIsInNvdXJjZXNDb250ZW50IjpbIi8qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKlxyXG4gIHVwbG9hZCBidXR0b24gc3R5bGVzXHJcbioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKi9cclxuLmZpbGUtdXBsb2FkIHtcclxuICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIHdpZHRoOiAxMiU7XHJcbn1cclxuXHJcbi5maWxlLXVwbG9hZF9fbGFiZWwge1xyXG4gICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICBwYWRkaW5nOiA3cHggMTJweDtcclxuICAgIGNvbG9yOiAjZmZmO1xyXG4gICAgYmFja2dyb3VuZDogIzFCN0JCOTtcclxuICAgIGJvcmRlci1yYWRpdXM6IC40ZW07XHJcbiAgICAtd2Via2l0LXRyYW5zaXRpb246IGJhY2tncm91bmQgLjNzO1xyXG4gICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAuM3M7XHJcbiAgICBsaW5lLWhlaWdodDogMS40Mjg1NzE0MztcclxuICAgIHdpZHRoOiAxNTBweDtcclxuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcclxufVxyXG5cclxuICAgIC5maWxlLXVwbG9hZF9fbGFiZWw6aG92ZXIge1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgICAgICBiYWNrZ3JvdW5kOiAjMDAwO1xyXG4gICAgfVxyXG5cclxuLmZpbGUtdXBsb2FkX19pbnB1dCB7XHJcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICBsZWZ0OiAwO1xyXG4gICAgdG9wOiAwO1xyXG4gICAgcmlnaHQ6IDA7XHJcbiAgICBib3R0b206IDA7XHJcbiAgICAvKmZvbnQtc2l6ZTogMTtcclxuICAgIHdpZHRoOiAwOyovXHJcbiAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICBvcGFjaXR5OiAwO1xyXG59XHJcblxyXG5cclxuLmZpbGUtcHJldmlldyB7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICB2ZXJ0aWNhbC1hbGlnbjogdG9wO1xyXG4gICAgbWFyZ2luOiAxNnB4O1xyXG4gICAgbWluLWhlaWdodDogNzVweDtcclxuICAgIHdpZHRoOiAyMDBweDtcclxuICAgIGJvcmRlci1yYWRpdXM6IDEwcHg7XHJcbiAgICBiYWNrZ3JvdW5kOiAjOTk5O1xyXG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIGJvdHRvbSwgI2YzZjNmMywgI2U1ZTVlNSk7XHJcbn1cclxuXHJcbiAgICAuZmlsZS1wcmV2aWV3IC5maWxlLWRldGFpbHMge1xyXG4gICAgICAgIHotaW5kZXg6IDIwO1xyXG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgICAgICB0b3A6IDA7XHJcbiAgICAgICAgbGVmdDogMDtcclxuICAgICAgICBvcGFjaXR5OiAxO1xyXG4gICAgICAgIGZvbnQtc2l6ZTogMTNweDtcclxuICAgICAgICBtaW4td2lkdGg6IDEwMCU7XHJcbiAgICAgICAgbWF4LXdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHBhZGRpbmc6IDFlbTtcclxuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgICAgICAgY29sb3I6IHJnYmEoMCwgMCwgMCwgMC45KTtcclxuICAgICAgICBsaW5lLWhlaWdodDogMTUwJTtcclxuICAgIH1cclxuXHJcbiAgICAgICAgLmZpbGUtcHJldmlldyAuZmlsZS1kZXRhaWxzIC5maWxlLXNpemUge1xyXG4gICAgICAgICAgICBtYXJnaW4tYm90dG9tOiAwLjVlbTtcclxuICAgICAgICAgICAgZm9udC1zaXplOiAxNnB4O1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLmZpbGUtcHJldmlldyAuZmlsZS1kZXRhaWxzIC5maWxlLWZpbGVuYW1lOm5vdCg6aG92ZXIpIHtcclxuICAgICAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgICAgICAgdGV4dC1vdmVyZmxvdzogZWxsaXBzaXM7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAuZmlsZS1wcmV2aWV3IC5maWxlLWRldGFpbHMgLmZpbGUtZmlsZW5hbWUge1xyXG4gICAgICAgICAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAgICAgICAgICB3b3JkLXdyYXA6IGJyZWFrLXdvcmQ7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgLmZpbGUtcHJldmlldyAuZmlsZS1kZXRhaWxzIC5maWxlLWZpbGVuYW1lOm5vdCg6aG92ZXIpIHNwYW4ge1xyXG4gICAgICAgICAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdHJhbnNwYXJlbnQ7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5maWxlLXByZXZpZXcgLmZpbGUtZGV0YWlscyAuZmlsZS1maWxlbmFtZSBzcGFue1xyXG4gICAgICAgICAgICAgICAgLypiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuNCk7Ki9cclxuICAgICAgICAgICAgICAgIHBhZGRpbmc6IDAgMC40ZW07XHJcbiAgICAgICAgICAgICAgICBib3JkZXItcmFkaXVzOiAzcHg7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbi5idG4tY2xvc2Uge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgei1pbmRleDogNTAwMDtcclxuICAgIHJpZ2h0OiAtNXB4O1xyXG4gICAgdG9wOiAtMTBweDtcclxuICAgIGN1cnNvcjogcG9pbnRlcjtcclxufVxyXG4gICAgICAgICAiXX0= */"
+module.exports = "/*****************************************\r\n  upload button styles\r\n******************************************/\r\n.file-upload {\r\n    position: relative;\r\n    display: inline-block;\r\n    cursor: pointer;\r\n    width: 12%;\r\n}\r\n.file-upload__label {\r\n    display: block;\r\n    padding: 7px 12px;\r\n    color: #fff;\r\n    background: #1B7BB9;\r\n    border-radius: .4em;\r\n    transition: background .3s;\r\n    line-height: 1.42857143;\r\n    width: 150px;\r\n    text-align: center;\r\n}\r\n.file-upload__label:hover {\r\n        cursor: pointer;\r\n        background: #000;\r\n    }\r\n.file-upload__input {\r\n    position: absolute;\r\n    left: 0;\r\n    top: 0;\r\n    right: 0;\r\n    bottom: 0;\r\n    /*font-size: 1;\r\n    width: 0;*/\r\n    height: 100%;\r\n    opacity: 0;\r\n}\r\n.file-preview {\r\n    position: relative;\r\n    display: inline-block;\r\n    vertical-align: top;\r\n    margin: 16px;\r\n    min-height: 75px;\r\n    width: 200px;\r\n    border-radius: 10px;\r\n    background: #999;\r\n    background: linear-gradient(to bottom, #f3f3f3, #e5e5e5);\r\n}\r\n.file-preview .file-details {\r\n        z-index: 20;\r\n        position: absolute;\r\n        top: 0;\r\n        left: 0;\r\n        opacity: 1;\r\n        font-size: 13px;\r\n        min-width: 100%;\r\n        max-width: 100%;\r\n        padding: 1em;\r\n        text-align: center;\r\n        color: rgba(0, 0, 0, 0.9);\r\n        line-height: 150%;\r\n    }\r\n.file-preview .file-details .file-size {\r\n            margin-bottom: 0.5em;\r\n            font-size: 16px;\r\n        }\r\n.file-preview .file-details .file-filename:not(:hover) {\r\n            overflow: hidden;\r\n            text-overflow: ellipsis;\r\n        }\r\n.file-preview .file-details .file-filename {\r\n            white-space: nowrap;\r\n            word-wrap: break-word;\r\n        }\r\n.file-preview .file-details .file-filename:not(:hover) span {\r\n                border: 1px solid transparent;\r\n            }\r\n.file-preview .file-details .file-filename span{\r\n                /*background-color: rgba(255, 255, 255, 0.4);*/\r\n                padding: 0 0.4em;\r\n                border-radius: 3px;\r\n            }\r\n.btn-close {\r\n    position: absolute;\r\n    z-index: 5000;\r\n    right: -5px;\r\n    top: -10px;\r\n    cursor: pointer;\r\n}\r\n         \r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9maWxlLXVwbG9hZGVyL2ZpbGUtdXBsb2FkZXIuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBOzswQ0FFMEM7QUFDMUM7SUFDSSxrQkFBa0I7SUFDbEIscUJBQXFCO0lBQ3JCLGVBQWU7SUFDZixVQUFVO0FBQ2Q7QUFFQTtJQUNJLGNBQWM7SUFDZCxpQkFBaUI7SUFDakIsV0FBVztJQUNYLG1CQUFtQjtJQUNuQixtQkFBbUI7SUFFbkIsMEJBQTBCO0lBQzFCLHVCQUF1QjtJQUN2QixZQUFZO0lBQ1osa0JBQWtCO0FBQ3RCO0FBRUk7UUFDSSxlQUFlO1FBQ2YsZ0JBQWdCO0lBQ3BCO0FBRUo7SUFDSSxrQkFBa0I7SUFDbEIsT0FBTztJQUNQLE1BQU07SUFDTixRQUFRO0lBQ1IsU0FBUztJQUNUO2NBQ1U7SUFDVixZQUFZO0lBQ1osVUFBVTtBQUNkO0FBR0E7SUFDSSxrQkFBa0I7SUFDbEIscUJBQXFCO0lBQ3JCLG1CQUFtQjtJQUNuQixZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLFlBQVk7SUFDWixtQkFBbUI7SUFDbkIsZ0JBQWdCO0lBQ2hCLHdEQUF3RDtBQUM1RDtBQUVJO1FBQ0ksV0FBVztRQUNYLGtCQUFrQjtRQUNsQixNQUFNO1FBQ04sT0FBTztRQUNQLFVBQVU7UUFDVixlQUFlO1FBQ2YsZUFBZTtRQUNmLGVBQWU7UUFDZixZQUFZO1FBQ1osa0JBQWtCO1FBQ2xCLHlCQUF5QjtRQUN6QixpQkFBaUI7SUFDckI7QUFFSTtZQUNJLG9CQUFvQjtZQUNwQixlQUFlO1FBQ25CO0FBRUE7WUFDSSxnQkFBZ0I7WUFDaEIsdUJBQXVCO1FBQzNCO0FBRUE7WUFDSSxtQkFBbUI7WUFDbkIscUJBQXFCO1FBQ3pCO0FBRUk7Z0JBQ0ksNkJBQTZCO1lBQ2pDO0FBRUE7Z0JBQ0ksOENBQThDO2dCQUM5QyxnQkFBZ0I7Z0JBQ2hCLGtCQUFrQjtZQUN0QjtBQUVaO0lBQ0ksa0JBQWtCO0lBQ2xCLGFBQWE7SUFDYixXQUFXO0lBQ1gsVUFBVTtJQUNWLGVBQWU7QUFDbkIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL2ZpbGUtdXBsb2FkZXIvZmlsZS11cGxvYWRlci5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIvKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKipcclxuICB1cGxvYWQgYnV0dG9uIHN0eWxlc1xyXG4qKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKiovXHJcbi5maWxlLXVwbG9hZCB7XHJcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XHJcbiAgICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICB3aWR0aDogMTIlO1xyXG59XHJcblxyXG4uZmlsZS11cGxvYWRfX2xhYmVsIHtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgcGFkZGluZzogN3B4IDEycHg7XHJcbiAgICBjb2xvcjogI2ZmZjtcclxuICAgIGJhY2tncm91bmQ6ICMxQjdCQjk7XHJcbiAgICBib3JkZXItcmFkaXVzOiAuNGVtO1xyXG4gICAgLXdlYmtpdC10cmFuc2l0aW9uOiBiYWNrZ3JvdW5kIC4zcztcclxuICAgIHRyYW5zaXRpb246IGJhY2tncm91bmQgLjNzO1xyXG4gICAgbGluZS1oZWlnaHQ6IDEuNDI4NTcxNDM7XHJcbiAgICB3aWR0aDogMTUwcHg7XHJcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbn1cclxuXHJcbiAgICAuZmlsZS11cGxvYWRfX2xhYmVsOmhvdmVyIHtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICAgICAgYmFja2dyb3VuZDogIzAwMDtcclxuICAgIH1cclxuXHJcbi5maWxlLXVwbG9hZF9faW5wdXQge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgbGVmdDogMDtcclxuICAgIHRvcDogMDtcclxuICAgIHJpZ2h0OiAwO1xyXG4gICAgYm90dG9tOiAwO1xyXG4gICAgLypmb250LXNpemU6IDE7XHJcbiAgICB3aWR0aDogMDsqL1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgb3BhY2l0eTogMDtcclxufVxyXG5cclxuXHJcbi5maWxlLXByZXZpZXcge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgdmVydGljYWwtYWxpZ246IHRvcDtcclxuICAgIG1hcmdpbjogMTZweDtcclxuICAgIG1pbi1oZWlnaHQ6IDc1cHg7XHJcbiAgICB3aWR0aDogMjAwcHg7XHJcbiAgICBib3JkZXItcmFkaXVzOiAxMHB4O1xyXG4gICAgYmFja2dyb3VuZDogIzk5OTtcclxuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byBib3R0b20sICNmM2YzZjMsICNlNWU1ZTUpO1xyXG59XHJcblxyXG4gICAgLmZpbGUtcHJldmlldyAuZmlsZS1kZXRhaWxzIHtcclxuICAgICAgICB6LWluZGV4OiAyMDtcclxuICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICAgICAgdG9wOiAwO1xyXG4gICAgICAgIGxlZnQ6IDA7XHJcbiAgICAgICAgb3BhY2l0eTogMTtcclxuICAgICAgICBmb250LXNpemU6IDEzcHg7XHJcbiAgICAgICAgbWluLXdpZHRoOiAxMDAlO1xyXG4gICAgICAgIG1heC13aWR0aDogMTAwJTtcclxuICAgICAgICBwYWRkaW5nOiAxZW07XHJcbiAgICAgICAgdGV4dC1hbGlnbjogY2VudGVyO1xyXG4gICAgICAgIGNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuOSk7XHJcbiAgICAgICAgbGluZS1oZWlnaHQ6IDE1MCU7XHJcbiAgICB9XHJcblxyXG4gICAgICAgIC5maWxlLXByZXZpZXcgLmZpbGUtZGV0YWlscyAuZmlsZS1zaXplIHtcclxuICAgICAgICAgICAgbWFyZ2luLWJvdHRvbTogMC41ZW07XHJcbiAgICAgICAgICAgIGZvbnQtc2l6ZTogMTZweDtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIC5maWxlLXByZXZpZXcgLmZpbGUtZGV0YWlscyAuZmlsZS1maWxlbmFtZTpub3QoOmhvdmVyKSB7XHJcbiAgICAgICAgICAgIG92ZXJmbG93OiBoaWRkZW47XHJcbiAgICAgICAgICAgIHRleHQtb3ZlcmZsb3c6IGVsbGlwc2lzO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLmZpbGUtcHJldmlldyAuZmlsZS1kZXRhaWxzIC5maWxlLWZpbGVuYW1lIHtcclxuICAgICAgICAgICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcclxuICAgICAgICAgICAgd29yZC13cmFwOiBicmVhay13b3JkO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5maWxlLXByZXZpZXcgLmZpbGUtZGV0YWlscyAuZmlsZS1maWxlbmFtZTpub3QoOmhvdmVyKSBzcGFuIHtcclxuICAgICAgICAgICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHRyYW5zcGFyZW50O1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuZmlsZS1wcmV2aWV3IC5maWxlLWRldGFpbHMgLmZpbGUtZmlsZW5hbWUgc3BhbntcclxuICAgICAgICAgICAgICAgIC8qYmFja2dyb3VuZC1jb2xvcjogcmdiYSgyNTUsIDI1NSwgMjU1LCAwLjQpOyovXHJcbiAgICAgICAgICAgICAgICBwYWRkaW5nOiAwIDAuNGVtO1xyXG4gICAgICAgICAgICAgICAgYm9yZGVyLXJhZGl1czogM3B4O1xyXG4gICAgICAgICAgICB9XHJcblxyXG4uYnRuLWNsb3NlIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHotaW5kZXg6IDUwMDA7XHJcbiAgICByaWdodDogLTVweDtcclxuICAgIHRvcDogLTEwcHg7XHJcbiAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbn1cclxuICAgICAgICAgIl19 */"
 
 /***/ }),
 
@@ -1283,7 +1556,7 @@ exports.FileUploader = FileUploader;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<loading></loading>-->\r\n<table class=\"table table-striped float-left wp-100\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <th class=\"cell-width-3 pad15L\">#</th>\r\n            <th *ngFor=\"let columnName of dataColumns\">{{columnName}}</th>\r\n            <th *ngIf=\"itemLink\">View</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <td class=\"pad15L\">{{rowNo + 1}}.</td>\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td *ngIf=\"!hideColumns.includes(colNo)\" [innerHTML]=\"value\">\r\n                    <!--{{value}}-->\r\n                </td>\r\n            </ng-container>\r\n            <td *ngIf=\"itemLink\">\r\n                <a [routerLink]='[itemLink, row[itemKey]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"showTotal\">\r\n            <td></td>\r\n            <td class=\"font-weight-600\">Total</td>\r\n            <td class=\"font-weight-600\" *ngFor=\"let item of [].constructor(dataColumns.length-1); let colIndex = index\">{{sumColumnTotal(colIndex+1)}}</td>\r\n        </tr>\r\n        <tr *ngIf=\"!dataSource.length\">\r\n            <td class=\"pad0A\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" *ngIf=\"showPager\"></pager>\r\n"
+module.exports = "<loading></loading>\r\n<table class=\"table wp-100\" >\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <th *ngFor=\"let columnName of dataColumns; let colIndex = index\" [ngClass]=\"{'pad15L':colIndex == 0}\">{{columnName}}</th>\r\n            <th *ngIf=\"itemLink\">View</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td *ngIf=\"!hideColumns.includes(colNo)\"  [ngClass]=\"{'pad15L':colNo == 0}\" [innerHTML]=\"value\">\r\n                </td>\r\n            </ng-container>\r\n        </tr>\r\n        <tr *ngIf=\"showTotal && dataColumns.length > 0\">\r\n            <td></td>\r\n            <td class=\"font-weight-600\">Total</td>\r\n            <td class=\"font-weight-600\" *ngFor=\"let item of [].constructor(dataColumns.length-1); let colIndex = index\">{{sumColumnTotal(colIndex+1)}}</td>\r\n        </tr>\r\n        <tr *ngIf=\"!dataSource.length\">\r\n            <td class=\"pad0A\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<!--<pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" *ngIf=\"showPager\"></pager>-->"
 
 /***/ }),
 
@@ -1296,19 +1569,6 @@ module.exports = "<!--<loading></loading>-->\r\n<table class=\"table table-strip
 
 "use strict";
 
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -1320,21 +1580,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
-var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
-var listEvent_1 = __webpack_require__(/*! ../../interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
-var Gridview = /** @class */ (function (_super) {
-    __extends(Gridview, _super);
-    function Gridview(loaderService, dataService) {
-        var _this = _super.call(this, loaderService, dataService, "") || this;
-        _this.loaderService = loaderService;
-        _this.dataService = dataService;
-        _this.showTotal = false;
-        _this.dataColumns = [];
-        _this.showPager = true;
-        _this.hideColumns = [];
-        _this.dataSourceSubject.asObservable().subscribe(function (data) { return _this.setColumnNames(); });
-        return _this;
+var Gridview = /** @class */ (function () {
+    function Gridview() {
+        this.showTotal = false;
+        this.dataColumns = [];
+        this.showPager = true;
+        this.hideColumns = [];
+        this.dataSource = [];
     }
     Object.defineProperty(Gridview.prototype, "displayTotal", {
         set: function (show) {
@@ -1352,6 +1604,10 @@ var Gridview = /** @class */ (function (_super) {
         enumerable: true,
         configurable: true
     });
+    //constructor(public loaderService: LoaderService, public dataService: DataService) {
+    //    super(loaderService, dataService, "");
+    //    this.dataSourceSubject.asObservable().subscribe(data => this.setColumnNames());
+    //}
     Gridview.prototype.getRowData = function (row) {
         return Object.values(row);
     };
@@ -1372,10 +1628,6 @@ var Gridview = /** @class */ (function (_super) {
         }
         return null;
     };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Array)
-    ], Gridview.prototype, "dataColumns", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Boolean)
@@ -1406,11 +1658,10 @@ var Gridview = /** @class */ (function (_super) {
         core_1.Component({
             selector: 'gridview',
             template: __webpack_require__(/*! ./gridview.html */ "./src/app/components/gridview/gridview.html")
-        }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+        })
     ], Gridview);
     return Gridview;
-}(listEvent_1.ListEvent));
+}());
 exports.Gridview = Gridview;
 
 
@@ -1462,6 +1713,151 @@ var LoaderComponent = /** @class */ (function () {
     return LoaderComponent;
 }());
 exports.LoaderComponent = LoaderComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/components/multiple-checkbox/multiple-checkbox.html":
+/*!*********************************************************************!*\
+  !*** ./src/app/components/multiple-checkbox/multiple-checkbox.html ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"btn-group\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n        <span>{{selectedItemText? selectedItemText : 'Select'}}</span>\r\n    </button>\r\n    <ul class=\"dropdown-menu\">\r\n        <ng-container *ngFor=\"let item of checkboxItems; let itemNo = index\">\r\n            <li class=\"dropdown-item pad10L\">\r\n                <div class=\"checkbox checkbox-primary\">\r\n                    <input id=\"checkbox{{itemNo}}\" type=\"checkbox\" [(ngModel)]=\"item.selected\" (change)=\"itemSelected($event,itemNo)\">\r\n                    <label for=\"checkbox{{itemNo}}\">\r\n                        {{item.displayText}}\r\n                    </label>\r\n                </div>\r\n            </li>\r\n        </ng-container>\r\n    </ul>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/multiple-checkbox/multiple-checkbox.ts":
+/*!*******************************************************************!*\
+  !*** ./src/app/components/multiple-checkbox/multiple-checkbox.ts ***!
+  \*******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var cascade_service_1 = __webpack_require__(/*! src/app/services/cascade.service */ "./src/app/services/cascade.service.ts");
+var MultipleCheckboxes = /** @class */ (function () {
+    function MultipleCheckboxes(el, formEvent, cascadeEvent, dataService) {
+        this.el = el;
+        this.formEvent = formEvent;
+        this.cascadeEvent = cascadeEvent;
+        this.dataService = dataService;
+        this.checkboxItems = [];
+        this.propagateChange = function () { };
+    }
+    MultipleCheckboxes_1 = MultipleCheckboxes;
+    Object.defineProperty(MultipleCheckboxes.prototype, "dataItems", {
+        set: function (data) {
+            this.checkboxItems = data;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    MultipleCheckboxes.prototype.ngOnInit = function () {
+        var _this = this;
+        if (this.required) {
+            this.subscription = this.formEvent.notification.subscribe(function (form) {
+                _this.parentForm = form.template;
+                _this.validate();
+            });
+        }
+    };
+    MultipleCheckboxes.prototype.writeValue = function (data) {
+        this.checkboxItems = data;
+    };
+    MultipleCheckboxes.prototype.registerOnChange = function (fn) {
+        this.propagateChange = fn;
+    };
+    MultipleCheckboxes.prototype.setChanges = function () {
+        //this.propagateChange(this.data);
+    };
+    MultipleCheckboxes.prototype.itemSelected = function (event, itemNo) {
+        this.selectedItemText = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayText; }).join(',');
+        this.selectedItems = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayValue; });
+        this.propagateChange(this.selectedItems);
+    };
+    MultipleCheckboxes.prototype.removeSelection = function () {
+        this.checkboxItems = this.checkboxItems.filter(function (a) { return a.selected === false; });
+        this.selectedItems = null;
+        this.selectedItemText = "";
+    };
+    MultipleCheckboxes.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
+        if (this.selectedItems === null || this.selectedItems === undefined || this.selectedItems.length === 0) {
+            thisElement.next('.text-danger').remove();
+            thisElement.after('<span class= "text-danger display-block">This is required</span>');
+            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+        }
+        else {
+            this.clearErrorMessages(thisElement);
+            this.parentForm.controls[this.fieldId].setErrors(null);
+        }
+    };
+    MultipleCheckboxes.prototype.clearErrorMessages = function (thisElement) {
+        $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
+        this.parentForm.controls[this.fieldId].setErrors(null);
+        thisElement.next().remove();
+    };
+    MultipleCheckboxes.prototype.registerOnTouched = function () { };
+    MultipleCheckboxes.prototype.setDisabledState = function () { };
+    var MultipleCheckboxes_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], MultipleCheckboxes.prototype, "required", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], MultipleCheckboxes.prototype, "fieldId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], MultipleCheckboxes.prototype, "displayText", void 0);
+    __decorate([
+        core_1.Input('dataItems'),
+        __metadata("design:type", Array),
+        __metadata("design:paramtypes", [Array])
+    ], MultipleCheckboxes.prototype, "dataItems", null);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], MultipleCheckboxes.prototype, "propagateChange", void 0);
+    MultipleCheckboxes = MultipleCheckboxes_1 = __decorate([
+        core_1.Component({
+            selector: 'multiple-checkbox',
+            template: __webpack_require__(/*! ./multiple-checkbox.html */ "./src/app/components/multiple-checkbox/multiple-checkbox.html"),
+            providers: [
+                {
+                    provide: forms_1.NG_VALUE_ACCESSOR,
+                    useExisting: core_1.forwardRef(function () { return MultipleCheckboxes_1; }),
+                    multi: true
+                }
+            ]
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            broadcast_service_1.BroadcastService,
+            cascade_service_1.CascadeService,
+            data_service_1.DataService])
+    ], MultipleCheckboxes);
+    return MultipleCheckboxes;
+}());
+exports.MultipleCheckboxes = MultipleCheckboxes;
 
 
 /***/ }),
@@ -1518,7 +1914,7 @@ exports.PageHeader = PageHeader;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "div.dataTables_paginate {\r\n  margin: 0;\r\n  white-space: nowrap;\r\n  text-align: right\r\n}\r\n\r\n  div.dataTables_paginate ul.pagination {\r\n    margin: 2px 0;\r\n    white-space: nowrap;\r\n    -webkit-box-pack: end;\r\n            justify-content: flex-end\r\n  }\r\n\r\n  div.dataTables_paginate ul.pagination {\r\n    margin: 2px 0;\r\n    white-space: nowrap;\r\n    -webkit-box-pack: end;\r\n            justify-content: flex-end;\r\n  }\r\n\r\n  .pagination {\r\n  display: -webkit-box;\r\n  display: flex;\r\n  padding-left: 0;\r\n  list-style: none;\r\n  border-radius: .25rem;\r\n}\r\n\r\n  .dataTables_paginate .paginate_button {\r\n  box-sizing: border-box;\r\n  display: inline-block;\r\n  min-width: 1.5em;\r\n  padding: .5em 1em;\r\n  margin-left: 2px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  cursor: pointer;\r\n  color: #67757c;\r\n  border: 1px solid transparent;\r\n  border-radius: 2px;\r\n  padding: 0;\r\n  background: #fff;\r\n}\r\n\r\n  .dataTables_paginate .page-link.disabled,\r\n.dataTables_paginate .page-link.disabled:active,\r\n.dataTables_paginate .page-link.disabled:hover {\r\n  cursor: not-allowed;\r\n  color: #b3b7b9;\r\n  /* border: 1px solid transparent; */\r\n  background: #f3f5f7;\r\n  box-shadow: none;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmF0aW9uL3BhZ2luYXRpb24uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsU0FBUztFQUNULG1CQUFtQjtFQUNuQjtBQUNGOztFQUVFO0lBQ0UsYUFBYTtJQUNiLG1CQUFtQjtJQUNuQixxQkFBd0I7WUFBeEI7RUFDRjs7RUFFQTtJQUNFLGFBQWE7SUFDYixtQkFBbUI7SUFDbkIscUJBQXlCO1lBQXpCLHlCQUF5QjtFQUMzQjs7RUFFRjtFQUVFLG9CQUFhO0VBQWIsYUFBYTtFQUNiLGVBQWU7RUFDZixnQkFBZ0I7RUFDaEIscUJBQXFCO0FBQ3ZCOztFQUVBO0VBRUUsc0JBQXNCO0VBQ3RCLHFCQUFxQjtFQUNyQixnQkFBZ0I7RUFDaEIsaUJBQWlCO0VBQ2pCLGdCQUFnQjtFQUNoQixrQkFBa0I7RUFDbEIscUJBQXFCO0VBQ3JCLGVBQWU7RUFDZixjQUFjO0VBQ2QsNkJBQTZCO0VBQzdCLGtCQUFrQjtFQUNsQixVQUFVO0VBQ1YsZ0JBQWdCO0FBQ2xCOztFQUVBOzs7RUFHRSxtQkFBbUI7RUFDbkIsY0FBYztFQUNkLG1DQUFtQztFQUNuQyxtQkFBbUI7RUFFbkIsZ0JBQWdCO0FBQ2xCIiwiZmlsZSI6InNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmF0aW9uL3BhZ2luYXRpb24uY3NzIiwic291cmNlc0NvbnRlbnQiOlsiZGl2LmRhdGFUYWJsZXNfcGFnaW5hdGUge1xyXG4gIG1hcmdpbjogMDtcclxuICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gIHRleHQtYWxpZ246IHJpZ2h0XHJcbn1cclxuXHJcbiAgZGl2LmRhdGFUYWJsZXNfcGFnaW5hdGUgdWwucGFnaW5hdGlvbiB7XHJcbiAgICBtYXJnaW46IDJweCAwO1xyXG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcclxuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmRcclxuICB9XHJcblxyXG4gIGRpdi5kYXRhVGFibGVzX3BhZ2luYXRlIHVsLnBhZ2luYXRpb24ge1xyXG4gICAgbWFyZ2luOiAycHggMDtcclxuICAgIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xyXG4gIH1cclxuXHJcbi5wYWdpbmF0aW9uIHtcclxuICBkaXNwbGF5OiAtbXMtZmxleGJveDtcclxuICBkaXNwbGF5OiBmbGV4O1xyXG4gIHBhZGRpbmctbGVmdDogMDtcclxuICBsaXN0LXN0eWxlOiBub25lO1xyXG4gIGJvcmRlci1yYWRpdXM6IC4yNXJlbTtcclxufVxyXG5cclxuLmRhdGFUYWJsZXNfcGFnaW5hdGUgLnBhZ2luYXRlX2J1dHRvbiB7XHJcbiAgLXdlYmtpdC1ib3gtc2l6aW5nOiBib3JkZXItYm94O1xyXG4gIGJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gIG1pbi13aWR0aDogMS41ZW07XHJcbiAgcGFkZGluZzogLjVlbSAxZW07XHJcbiAgbWFyZ2luLWxlZnQ6IDJweDtcclxuICB0ZXh0LWFsaWduOiBjZW50ZXI7XHJcbiAgdGV4dC1kZWNvcmF0aW9uOiBub25lO1xyXG4gIGN1cnNvcjogcG9pbnRlcjtcclxuICBjb2xvcjogIzY3NzU3YztcclxuICBib3JkZXI6IDFweCBzb2xpZCB0cmFuc3BhcmVudDtcclxuICBib3JkZXItcmFkaXVzOiAycHg7XHJcbiAgcGFkZGluZzogMDtcclxuICBiYWNrZ3JvdW5kOiAjZmZmO1xyXG59XHJcblxyXG4uZGF0YVRhYmxlc19wYWdpbmF0ZSAucGFnZS1saW5rLmRpc2FibGVkLFxyXG4uZGF0YVRhYmxlc19wYWdpbmF0ZSAucGFnZS1saW5rLmRpc2FibGVkOmFjdGl2ZSxcclxuLmRhdGFUYWJsZXNfcGFnaW5hdGUgLnBhZ2UtbGluay5kaXNhYmxlZDpob3ZlciB7XHJcbiAgY3Vyc29yOiBub3QtYWxsb3dlZDtcclxuICBjb2xvcjogI2IzYjdiOTtcclxuICAvKiBib3JkZXI6IDFweCBzb2xpZCB0cmFuc3BhcmVudDsgKi9cclxuICBiYWNrZ3JvdW5kOiAjZjNmNWY3O1xyXG4gIC13ZWJraXQtYm94LXNoYWRvdzogbm9uZTtcclxuICBib3gtc2hhZG93OiBub25lO1xyXG59XHJcbiJdfQ== */"
+module.exports = "div.dataTables_paginate {\r\n  margin: 0;\r\n  white-space: nowrap;\r\n  text-align: right\r\n}\r\n\r\n  div.dataTables_paginate ul.pagination {\r\n    margin: 2px 0;\r\n    white-space: nowrap;\r\n    justify-content: flex-end\r\n  }\r\n\r\n  div.dataTables_paginate ul.pagination {\r\n    margin: 2px 0;\r\n    white-space: nowrap;\r\n    justify-content: flex-end;\r\n  }\r\n\r\n  .pagination {\r\n  display: flex;\r\n  padding-left: 0;\r\n  list-style: none;\r\n  border-radius: .25rem;\r\n}\r\n\r\n  .dataTables_paginate .paginate_button {\r\n  box-sizing: border-box;\r\n  display: inline-block;\r\n  min-width: 1.5em;\r\n  padding: .5em 1em;\r\n  margin-left: 2px;\r\n  text-align: center;\r\n  text-decoration: none;\r\n  cursor: pointer;\r\n  color: #67757c;\r\n  border: 1px solid transparent;\r\n  border-radius: 2px;\r\n  padding: 0;\r\n  background: #fff;\r\n}\r\n\r\n  .dataTables_paginate .page-link.disabled,\r\n.dataTables_paginate .page-link.disabled:active,\r\n.dataTables_paginate .page-link.disabled:hover {\r\n  cursor: not-allowed;\r\n  color: #b3b7b9;\r\n  /* border: 1px solid transparent; */\r\n  background: #f3f5f7;\r\n  box-shadow: none;\r\n}\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wYWdpbmF0aW9uL3BhZ2luYXRpb24uY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsU0FBUztFQUNULG1CQUFtQjtFQUNuQjtBQUNGOztFQUVFO0lBQ0UsYUFBYTtJQUNiLG1CQUFtQjtJQUNuQjtFQUNGOztFQUVBO0lBQ0UsYUFBYTtJQUNiLG1CQUFtQjtJQUNuQix5QkFBeUI7RUFDM0I7O0VBRUY7RUFFRSxhQUFhO0VBQ2IsZUFBZTtFQUNmLGdCQUFnQjtFQUNoQixxQkFBcUI7QUFDdkI7O0VBRUE7RUFFRSxzQkFBc0I7RUFDdEIscUJBQXFCO0VBQ3JCLGdCQUFnQjtFQUNoQixpQkFBaUI7RUFDakIsZ0JBQWdCO0VBQ2hCLGtCQUFrQjtFQUNsQixxQkFBcUI7RUFDckIsZUFBZTtFQUNmLGNBQWM7RUFDZCw2QkFBNkI7RUFDN0Isa0JBQWtCO0VBQ2xCLFVBQVU7RUFDVixnQkFBZ0I7QUFDbEI7O0VBRUE7OztFQUdFLG1CQUFtQjtFQUNuQixjQUFjO0VBQ2QsbUNBQW1DO0VBQ25DLG1CQUFtQjtFQUVuQixnQkFBZ0I7QUFDbEIiLCJmaWxlIjoic3JjL2FwcC9jb21wb25lbnRzL3BhZ2luYXRpb24vcGFnaW5hdGlvbi5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJkaXYuZGF0YVRhYmxlc19wYWdpbmF0ZSB7XHJcbiAgbWFyZ2luOiAwO1xyXG4gIHdoaXRlLXNwYWNlOiBub3dyYXA7XHJcbiAgdGV4dC1hbGlnbjogcmlnaHRcclxufVxyXG5cclxuICBkaXYuZGF0YVRhYmxlc19wYWdpbmF0ZSB1bC5wYWdpbmF0aW9uIHtcclxuICAgIG1hcmdpbjogMnB4IDA7XHJcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xyXG4gICAganVzdGlmeS1jb250ZW50OiBmbGV4LWVuZFxyXG4gIH1cclxuXHJcbiAgZGl2LmRhdGFUYWJsZXNfcGFnaW5hdGUgdWwucGFnaW5hdGlvbiB7XHJcbiAgICBtYXJnaW46IDJweCAwO1xyXG4gICAgd2hpdGUtc3BhY2U6IG5vd3JhcDtcclxuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XHJcbiAgfVxyXG5cclxuLnBhZ2luYXRpb24ge1xyXG4gIGRpc3BsYXk6IC1tcy1mbGV4Ym94O1xyXG4gIGRpc3BsYXk6IGZsZXg7XHJcbiAgcGFkZGluZy1sZWZ0OiAwO1xyXG4gIGxpc3Qtc3R5bGU6IG5vbmU7XHJcbiAgYm9yZGVyLXJhZGl1czogLjI1cmVtO1xyXG59XHJcblxyXG4uZGF0YVRhYmxlc19wYWdpbmF0ZSAucGFnaW5hdGVfYnV0dG9uIHtcclxuICAtd2Via2l0LWJveC1zaXppbmc6IGJvcmRlci1ib3g7XHJcbiAgYm94LXNpemluZzogYm9yZGVyLWJveDtcclxuICBkaXNwbGF5OiBpbmxpbmUtYmxvY2s7XHJcbiAgbWluLXdpZHRoOiAxLjVlbTtcclxuICBwYWRkaW5nOiAuNWVtIDFlbTtcclxuICBtYXJnaW4tbGVmdDogMnB4O1xyXG4gIHRleHQtYWxpZ246IGNlbnRlcjtcclxuICB0ZXh0LWRlY29yYXRpb246IG5vbmU7XHJcbiAgY3Vyc29yOiBwb2ludGVyO1xyXG4gIGNvbG9yOiAjNjc3NTdjO1xyXG4gIGJvcmRlcjogMXB4IHNvbGlkIHRyYW5zcGFyZW50O1xyXG4gIGJvcmRlci1yYWRpdXM6IDJweDtcclxuICBwYWRkaW5nOiAwO1xyXG4gIGJhY2tncm91bmQ6ICNmZmY7XHJcbn1cclxuXHJcbi5kYXRhVGFibGVzX3BhZ2luYXRlIC5wYWdlLWxpbmsuZGlzYWJsZWQsXHJcbi5kYXRhVGFibGVzX3BhZ2luYXRlIC5wYWdlLWxpbmsuZGlzYWJsZWQ6YWN0aXZlLFxyXG4uZGF0YVRhYmxlc19wYWdpbmF0ZSAucGFnZS1saW5rLmRpc2FibGVkOmhvdmVyIHtcclxuICBjdXJzb3I6IG5vdC1hbGxvd2VkO1xyXG4gIGNvbG9yOiAjYjNiN2I5O1xyXG4gIC8qIGJvcmRlcjogMXB4IHNvbGlkIHRyYW5zcGFyZW50OyAqL1xyXG4gIGJhY2tncm91bmQ6ICNmM2Y1Zjc7XHJcbiAgLXdlYmtpdC1ib3gtc2hhZG93OiBub25lO1xyXG4gIGJveC1zaGFkb3c6IG5vbmU7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -1680,6 +2076,17 @@ exports.Pagination = Pagination;
 
 /***/ }),
 
+/***/ "./src/app/components/product-options/product-options.css":
+/*!****************************************************************!*\
+  !*** ./src/app/components/product-options/product-options.css ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\r\n\r\n.select {\r\n    position: relative;\r\n    overflow: hidden;\r\n    display: block;\r\n    margin: auto;\r\n    width: 330px;\r\n    height: 100%;\r\n    border-bottom: 0px;\r\n    border-radius: 3px;\r\n    font-size: 12px;\r\n    box-shadow: 0px 1em 2em -1.5em rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n    .select > i.toggle {\r\n        position: absolute;\r\n        z-index: 4;\r\n        right: 1.5em;\r\n        top: 1.6em;\r\n        color: #ccc;\r\n    }\r\n\r\n    .select .title,\r\n    .select .placeholder {\r\n        position: relative;\r\n        display: block;\r\n        width: 100%;\r\n        height: 100%;\r\n        padding: 1.5em 2em;\r\n        background: white;\r\n        border-top: 1px solid rgba(0, 0, 0, 0.05);\r\n        cursor: pointer;\r\n    }\r\n\r\n    .select > input {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        z-index: 1;\r\n        width: 100%;\r\n        height: 100%;\r\n        display: block;\r\n        opacity: 0;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .select > input:checked ~ i.toggle.icon-arrow-down {\r\n            display: none;\r\n        }\r\n\r\n    .select > input:checked ~ i.toggle.icon-arrow-up {\r\n            display: block;\r\n        }\r\n\r\n    .select > input:checked div.options label.option .title {\r\n            display: none !important;\r\n        }\r\n\r\n    .select > input:not(:checked) {\r\n            z-index: 4;\r\n        }\r\n\r\n    .select > input:not(:checked) ~ label.option > span.title {\r\n                display: none;\r\n            }\r\n\r\n    .select > input:not(:checked) ~ i.toggle.icon-arrow-up {\r\n                display: none;\r\n            }\r\n\r\n    .select > input:not(:checked) ~ i.toggle.icon-arrow-down {\r\n                display: block;\r\n            }\r\n\r\n    .select > input:disabled {\r\n            cursor: no-drop;\r\n        }\r\n\r\n    .select > span.placeholder {\r\n        position: relative;\r\n        z-index: 0;\r\n        display: inline-block;\r\n        width: 100%;\r\n        color: #999;\r\n        border-top: 0px;\r\n    }\r\n\r\n    .select label.option {\r\n        display: block;\r\n        overflow: hidden;\r\n        z-index: 1;\r\n        width: 100%;\r\n        transition: all 1s ease-out;\r\n    }\r\n\r\n    .select label.option span.title {\r\n            position: relative;\r\n            z-index: 2;\r\n            transition: background .3s ease-out;\r\n        }\r\n\r\n    .select label.option span.title i.icon {\r\n                padding-right: 8px;\r\n                color: #92a8d1;\r\n            }\r\n\r\n    .select label.option span.title:hover {\r\n                color: #fff;\r\n                background: rgba(255, 255, 255, 0.3);\r\n                box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1);\r\n            }\r\n\r\n    .select label.option input {\r\n            display: none;\r\n        }\r\n\r\n    .select label.option input:checked ~ span.title {\r\n                position: absolute;\r\n                display: block;\r\n                z-index: 3;\r\n                top: 0px;\r\n                font-size: 12px;\r\n                background: #fff;\r\n                border-top: 0px;\r\n                box-shadow: none;\r\n                color: inherit;\r\n                width: 100%;\r\n            }\r\n\r\n    .select label.option input:disabled ~ span.title {\r\n                background: #f9f9f9 !important;\r\n                color: #aaa;\r\n            }\r\n\r\n    .select label.option input:disabled ~ span.title:hover {\r\n                    color: #aaa;\r\n                    background: none;\r\n                    cursor: no-drop;\r\n                }\r\n\r\n    .select2 {\r\n    position: relative;\r\n    overflow: hidden;\r\n    display: block;\r\n    margin: auto;\r\n    width: 330px;\r\n    height: 100%;\r\n    border-bottom: 0px;\r\n    border-radius: 3px;\r\n    font-size: 12px;\r\n    box-shadow: 0px 1em 2em -1.5em rgba(0, 0, 0, 0.5);\r\n}\r\n\r\n    .select2 i.toggle {\r\n        position: absolute;\r\n        z-index: 4;\r\n        right: 1.5em;\r\n        top: 1.6em;\r\n        color: #ccc;\r\n    }\r\n\r\n    .select2 .title,\r\n    .select2 .placeholder {\r\n        position: relative;\r\n        display: block;\r\n        width: 100%;\r\n        height: 100%;\r\n        padding: 1.5em 2em;\r\n        background: white;\r\n        border-top: 1px solid rgba(0, 0, 0, 0.05);\r\n        cursor: pointer;\r\n    }\r\n\r\n    .select2 > label > input {\r\n        position: absolute;\r\n        left: 0px;\r\n        top: 0px;\r\n        z-index: 2;\r\n        width: 100%;\r\n        height: 100%;\r\n        display: block;\r\n        opacity: 0;\r\n        cursor: pointer;\r\n    }\r\n\r\n    .select2 > label > input:checked {\r\n            z-index: 2;\r\n        }\r\n\r\n    .select2 > label > input:checked ~ i.toggle.icon-plus {\r\n                display: none;\r\n            }\r\n\r\n    .select2 > label > input:checked ~ i.toggle.icon-minus {\r\n                display: block;\r\n            }\r\n\r\n    .select2 > label > input:not(:checked) ~ i.toggle.icon-minus {\r\n            display: none;\r\n        }\r\n\r\n    .select2 > label > input:not(:checked) ~ i.toggle.icon-plus {\r\n            display: block;\r\n        }\r\n\r\n    .select2 > label > input:not(:checked) ~ label.option input:not(:checked) ~ .title {\r\n            display: none !important;\r\n        }\r\n\r\n    .select2 > label > input:disabled {\r\n            cursor: no-drop;\r\n        }\r\n\r\n    .select2 label > span.placeholder {\r\n        position: relative;\r\n        z-index: 0;\r\n        display: inline-block;\r\n        width: 100%;\r\n        color: #999;\r\n        border-top: 0px;\r\n    }\r\n\r\n    .select2 label.option {\r\n        display: block;\r\n        overflow: hidden;\r\n        z-index: 1;\r\n        width: 100%;\r\n        transition: all 1s ease-out;\r\n    }\r\n\r\n    .select2 label.option span.title {\r\n            position: relative;\r\n            z-index: 2;\r\n            transition: background .3s ease-out;\r\n        }\r\n\r\n    .select2 label.option span.title i.icon {\r\n                padding-right: 8px;\r\n                color: #92a8d1;\r\n            }\r\n\r\n    .select2 label.option span.title:hover {\r\n                color: #fff;\r\n                background: rgba(146, 168, 209, 0.5);\r\n                box-shadow: inset 0px 1px 0px rgba(0, 0, 0, 0.1);\r\n            }\r\n\r\n    .select2 label.option input {\r\n            display: none;\r\n        }\r\n\r\n    .select2 label.option input:checked ~ span.title {\r\n                position: absolute;\r\n                display: block;\r\n                z-index: 1;\r\n                top: 0px;\r\n                font-size: 12px;\r\n                background: #fff;\r\n                border-top: 0px;\r\n                box-shadow: none;\r\n                color: inherit;\r\n                width: 100%;\r\n            }\r\n\r\n    .select2 label.option input:disabled ~ span.title {\r\n                background: #f9f9f9 !important;\r\n                color: #aaa;\r\n            }\r\n\r\n    .select2 label.option input:disabled ~ span.title:hover {\r\n                    color: #aaa;\r\n                    background: none;\r\n                    cursor: no-drop;\r\n                }\r\n\r\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvY29tcG9uZW50cy9wcm9kdWN0LW9wdGlvbnMvcHJvZHVjdC1vcHRpb25zLmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLGdCQUFnQjtJQUNoQixjQUFjO0lBQ2QsWUFBWTtJQUNaLFlBQVk7SUFDWixZQUFZO0lBQ1osa0JBQWtCO0lBQ2xCLGtCQUFrQjtJQUNsQixlQUFlO0lBQ2YsaURBQWlEO0FBQ3JEOztJQUVJO1FBQ0ksa0JBQWtCO1FBQ2xCLFVBQVU7UUFDVixZQUFZO1FBQ1osVUFBVTtRQUNWLFdBQVc7SUFDZjs7SUFFQTs7UUFFSSxrQkFBa0I7UUFDbEIsY0FBYztRQUNkLFdBQVc7UUFDWCxZQUFZO1FBQ1osa0JBQWtCO1FBQ2xCLGlCQUFpQjtRQUNqQix5Q0FBeUM7UUFDekMsZUFBZTtJQUNuQjs7SUFFQTtRQUNJLGtCQUFrQjtRQUNsQixTQUFTO1FBQ1QsUUFBUTtRQUNSLFVBQVU7UUFDVixXQUFXO1FBQ1gsWUFBWTtRQUNaLGNBQWM7UUFDZCxVQUFVO1FBQ1YsZUFBZTtJQUNuQjs7SUFFSTtZQUNJLGFBQWE7UUFDakI7O0lBRUE7WUFDSSxjQUFjO1FBQ2xCOztJQUVBO1lBQ0ksd0JBQXdCO1FBQzVCOztJQUVBO1lBQ0ksVUFBVTtRQUNkOztJQUVJO2dCQUNJLGFBQWE7WUFDakI7O0lBRUE7Z0JBQ0ksYUFBYTtZQUNqQjs7SUFFQTtnQkFDSSxjQUFjO1lBQ2xCOztJQUVKO1lBQ0ksZUFBZTtRQUNuQjs7SUFFSjtRQUNJLGtCQUFrQjtRQUNsQixVQUFVO1FBQ1YscUJBQXFCO1FBQ3JCLFdBQVc7UUFDWCxXQUFXO1FBQ1gsZUFBZTtJQUNuQjs7SUFFQTtRQUNJLGNBQWM7UUFDZCxnQkFBZ0I7UUFDaEIsVUFBVTtRQUNWLFdBQVc7UUFDWCwyQkFBMkI7SUFDL0I7O0lBRUk7WUFDSSxrQkFBa0I7WUFDbEIsVUFBVTtZQUNWLG1DQUFtQztRQUN2Qzs7SUFFSTtnQkFDSSxrQkFBa0I7Z0JBQ2xCLGNBQWM7WUFDbEI7O0lBRUE7Z0JBQ0ksV0FBVztnQkFDWCxvQ0FBb0M7Z0JBQ3BDLGdEQUFnRDtZQUNwRDs7SUFFSjtZQUNJLGFBQWE7UUFDakI7O0lBRUk7Z0JBQ0ksa0JBQWtCO2dCQUNsQixjQUFjO2dCQUNkLFVBQVU7Z0JBQ1YsUUFBUTtnQkFDUixlQUFlO2dCQUNmLGdCQUFnQjtnQkFDaEIsZUFBZTtnQkFDZixnQkFBZ0I7Z0JBQ2hCLGNBQWM7Z0JBQ2QsV0FBVztZQUNmOztJQUVBO2dCQUNJLDhCQUE4QjtnQkFDOUIsV0FBVztZQUNmOztJQUVJO29CQUNJLFdBQVc7b0JBQ1gsZ0JBQWdCO29CQUNoQixlQUFlO2dCQUNuQjs7SUFFaEI7SUFDSSxrQkFBa0I7SUFDbEIsZ0JBQWdCO0lBQ2hCLGNBQWM7SUFDZCxZQUFZO0lBQ1osWUFBWTtJQUNaLFlBQVk7SUFDWixrQkFBa0I7SUFDbEIsa0JBQWtCO0lBQ2xCLGVBQWU7SUFDZixpREFBaUQ7QUFDckQ7O0lBRUk7UUFDSSxrQkFBa0I7UUFDbEIsVUFBVTtRQUNWLFlBQVk7UUFDWixVQUFVO1FBQ1YsV0FBVztJQUNmOztJQUVBOztRQUVJLGtCQUFrQjtRQUNsQixjQUFjO1FBQ2QsV0FBVztRQUNYLFlBQVk7UUFDWixrQkFBa0I7UUFDbEIsaUJBQWlCO1FBQ2pCLHlDQUF5QztRQUN6QyxlQUFlO0lBQ25COztJQUVBO1FBQ0ksa0JBQWtCO1FBQ2xCLFNBQVM7UUFDVCxRQUFRO1FBQ1IsVUFBVTtRQUNWLFdBQVc7UUFDWCxZQUFZO1FBQ1osY0FBYztRQUNkLFVBQVU7UUFDVixlQUFlO0lBQ25COztJQUVJO1lBQ0ksVUFBVTtRQUNkOztJQUVJO2dCQUNJLGFBQWE7WUFDakI7O0lBRUE7Z0JBQ0ksY0FBYztZQUNsQjs7SUFFSjtZQUNJLGFBQWE7UUFDakI7O0lBRUE7WUFDSSxjQUFjO1FBQ2xCOztJQUVBO1lBQ0ksd0JBQXdCO1FBQzVCOztJQUVBO1lBQ0ksZUFBZTtRQUNuQjs7SUFFSjtRQUNJLGtCQUFrQjtRQUNsQixVQUFVO1FBQ1YscUJBQXFCO1FBQ3JCLFdBQVc7UUFDWCxXQUFXO1FBQ1gsZUFBZTtJQUNuQjs7SUFFQTtRQUNJLGNBQWM7UUFDZCxnQkFBZ0I7UUFDaEIsVUFBVTtRQUNWLFdBQVc7UUFDWCwyQkFBMkI7SUFDL0I7O0lBRUk7WUFDSSxrQkFBa0I7WUFDbEIsVUFBVTtZQUNWLG1DQUFtQztRQUN2Qzs7SUFFSTtnQkFDSSxrQkFBa0I7Z0JBQ2xCLGNBQWM7WUFDbEI7O0lBRUE7Z0JBQ0ksV0FBVztnQkFDWCxvQ0FBb0M7Z0JBQ3BDLGdEQUFnRDtZQUNwRDs7SUFFSjtZQUNJLGFBQWE7UUFDakI7O0lBRUk7Z0JBQ0ksa0JBQWtCO2dCQUNsQixjQUFjO2dCQUNkLFVBQVU7Z0JBQ1YsUUFBUTtnQkFDUixlQUFlO2dCQUNmLGdCQUFnQjtnQkFDaEIsZUFBZTtnQkFDZixnQkFBZ0I7Z0JBQ2hCLGNBQWM7Z0JBQ2QsV0FBVztZQUNmOztJQUVBO2dCQUNJLDhCQUE4QjtnQkFDOUIsV0FBVztZQUNmOztJQUVJO29CQUNJLFdBQVc7b0JBQ1gsZ0JBQWdCO29CQUNoQixlQUFlO2dCQUNuQiIsImZpbGUiOiJzcmMvYXBwL2NvbXBvbmVudHMvcHJvZHVjdC1vcHRpb25zL3Byb2R1Y3Qtb3B0aW9ucy5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcclxuXHJcbi5zZWxlY3Qge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG4gICAgd2lkdGg6IDMzMHB4O1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogM3B4O1xyXG4gICAgZm9udC1zaXplOiAxMnB4O1xyXG4gICAgYm94LXNoYWRvdzogMHB4IDFlbSAyZW0gLTEuNWVtIHJnYmEoMCwgMCwgMCwgMC41KTtcclxufVxyXG5cclxuICAgIC5zZWxlY3QgPiBpLnRvZ2dsZSB7XHJcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICAgIHotaW5kZXg6IDQ7XHJcbiAgICAgICAgcmlnaHQ6IDEuNWVtO1xyXG4gICAgICAgIHRvcDogMS42ZW07XHJcbiAgICAgICAgY29sb3I6ICNjY2M7XHJcbiAgICB9XHJcblxyXG4gICAgLnNlbGVjdCAudGl0bGUsXHJcbiAgICAuc2VsZWN0IC5wbGFjZWhvbGRlciB7XHJcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIGhlaWdodDogMTAwJTtcclxuICAgICAgICBwYWRkaW5nOiAxLjVlbSAyZW07XHJcbiAgICAgICAgYmFja2dyb3VuZDogd2hpdGU7XHJcbiAgICAgICAgYm9yZGVyLXRvcDogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgMC4wNSk7XHJcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xyXG4gICAgfVxyXG5cclxuICAgIC5zZWxlY3QgPiBpbnB1dCB7XHJcbiAgICAgICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgICAgIGxlZnQ6IDBweDtcclxuICAgICAgICB0b3A6IDBweDtcclxuICAgICAgICB6LWluZGV4OiAxO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIGhlaWdodDogMTAwJTtcclxuICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICBvcGFjaXR5OiAwO1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCA+IGlucHV0OmNoZWNrZWQgfiBpLnRvZ2dsZS5pY29uLWFycm93LWRvd24ge1xyXG4gICAgICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCA+IGlucHV0OmNoZWNrZWQgfiBpLnRvZ2dsZS5pY29uLWFycm93LXVwIHtcclxuICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAuc2VsZWN0ID4gaW5wdXQ6Y2hlY2tlZCBkaXYub3B0aW9ucyBsYWJlbC5vcHRpb24gLnRpdGxlIHtcclxuICAgICAgICAgICAgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50O1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCA+IGlucHV0Om5vdCg6Y2hlY2tlZCkge1xyXG4gICAgICAgICAgICB6LWluZGV4OiA0O1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5zZWxlY3QgPiBpbnB1dDpub3QoOmNoZWNrZWQpIH4gbGFiZWwub3B0aW9uID4gc3Bhbi50aXRsZSB7XHJcbiAgICAgICAgICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuc2VsZWN0ID4gaW5wdXQ6bm90KDpjaGVja2VkKSB+IGkudG9nZ2xlLmljb24tYXJyb3ctdXAge1xyXG4gICAgICAgICAgICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgLnNlbGVjdCA+IGlucHV0Om5vdCg6Y2hlY2tlZCkgfiBpLnRvZ2dsZS5pY29uLWFycm93LWRvd24ge1xyXG4gICAgICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCA+IGlucHV0OmRpc2FibGVkIHtcclxuICAgICAgICAgICAgY3Vyc29yOiBuby1kcm9wO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAuc2VsZWN0ID4gc3Bhbi5wbGFjZWhvbGRlciB7XHJcbiAgICAgICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgICAgIHotaW5kZXg6IDA7XHJcbiAgICAgICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIGNvbG9yOiAjOTk5O1xyXG4gICAgICAgIGJvcmRlci10b3A6IDBweDtcclxuICAgIH1cclxuXHJcbiAgICAuc2VsZWN0IGxhYmVsLm9wdGlvbiB7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgICAgICB6LWluZGV4OiAxO1xyXG4gICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAxcyBlYXNlLW91dDtcclxuICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCBsYWJlbC5vcHRpb24gc3Bhbi50aXRsZSB7XHJcbiAgICAgICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgICAgICAgei1pbmRleDogMjtcclxuICAgICAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAuM3MgZWFzZS1vdXQ7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgLnNlbGVjdCBsYWJlbC5vcHRpb24gc3Bhbi50aXRsZSBpLmljb24ge1xyXG4gICAgICAgICAgICAgICAgcGFkZGluZy1yaWdodDogOHB4O1xyXG4gICAgICAgICAgICAgICAgY29sb3I6ICM5MmE4ZDE7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5zZWxlY3QgbGFiZWwub3B0aW9uIHNwYW4udGl0bGU6aG92ZXIge1xyXG4gICAgICAgICAgICAgICAgY29sb3I6ICNmZmY7XHJcbiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuMyk7XHJcbiAgICAgICAgICAgICAgICBib3gtc2hhZG93OiBpbnNldCAwcHggMXB4IDBweCByZ2JhKDAsIDAsIDAsIDAuMSk7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdCBsYWJlbC5vcHRpb24gaW5wdXQge1xyXG4gICAgICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5zZWxlY3QgbGFiZWwub3B0aW9uIGlucHV0OmNoZWNrZWQgfiBzcGFuLnRpdGxlIHtcclxuICAgICAgICAgICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgICAgICAgICAgICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgICAgICAgICAgICAgei1pbmRleDogMztcclxuICAgICAgICAgICAgICAgIHRvcDogMHB4O1xyXG4gICAgICAgICAgICAgICAgZm9udC1zaXplOiAxMnB4O1xyXG4gICAgICAgICAgICAgICAgYmFja2dyb3VuZDogI2ZmZjtcclxuICAgICAgICAgICAgICAgIGJvcmRlci10b3A6IDBweDtcclxuICAgICAgICAgICAgICAgIGJveC1zaGFkb3c6IG5vbmU7XHJcbiAgICAgICAgICAgICAgICBjb2xvcjogaW5oZXJpdDtcclxuICAgICAgICAgICAgICAgIHdpZHRoOiAxMDAlO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuc2VsZWN0IGxhYmVsLm9wdGlvbiBpbnB1dDpkaXNhYmxlZCB+IHNwYW4udGl0bGUge1xyXG4gICAgICAgICAgICAgICAgYmFja2dyb3VuZDogI2Y5ZjlmOSAhaW1wb3J0YW50O1xyXG4gICAgICAgICAgICAgICAgY29sb3I6ICNhYWE7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgICAgICAuc2VsZWN0IGxhYmVsLm9wdGlvbiBpbnB1dDpkaXNhYmxlZCB+IHNwYW4udGl0bGU6aG92ZXIge1xyXG4gICAgICAgICAgICAgICAgICAgIGNvbG9yOiAjYWFhO1xyXG4gICAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IG5vbmU7XHJcbiAgICAgICAgICAgICAgICAgICAgY3Vyc29yOiBuby1kcm9wO1xyXG4gICAgICAgICAgICAgICAgfVxyXG5cclxuLnNlbGVjdDIge1xyXG4gICAgcG9zaXRpb246IHJlbGF0aXZlO1xyXG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcclxuICAgIGRpc3BsYXk6IGJsb2NrO1xyXG4gICAgbWFyZ2luOiBhdXRvO1xyXG4gICAgd2lkdGg6IDMzMHB4O1xyXG4gICAgaGVpZ2h0OiAxMDAlO1xyXG4gICAgYm9yZGVyLWJvdHRvbTogMHB4O1xyXG4gICAgYm9yZGVyLXJhZGl1czogM3B4O1xyXG4gICAgZm9udC1zaXplOiAxMnB4O1xyXG4gICAgYm94LXNoYWRvdzogMHB4IDFlbSAyZW0gLTEuNWVtIHJnYmEoMCwgMCwgMCwgMC41KTtcclxufVxyXG5cclxuICAgIC5zZWxlY3QyIGkudG9nZ2xlIHtcclxuICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICAgICAgei1pbmRleDogNDtcclxuICAgICAgICByaWdodDogMS41ZW07XHJcbiAgICAgICAgdG9wOiAxLjZlbTtcclxuICAgICAgICBjb2xvcjogI2NjYztcclxuICAgIH1cclxuXHJcbiAgICAuc2VsZWN0MiAudGl0bGUsXHJcbiAgICAuc2VsZWN0MiAucGxhY2Vob2xkZXIge1xyXG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICAgICAgcGFkZGluZzogMS41ZW0gMmVtO1xyXG4gICAgICAgIGJhY2tncm91bmQ6IHdoaXRlO1xyXG4gICAgICAgIGJvcmRlci10b3A6IDFweCBzb2xpZCByZ2JhKDAsIDAsIDAsIDAuMDUpO1xyXG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcclxuICAgIH1cclxuXHJcbiAgICAuc2VsZWN0MiA+IGxhYmVsID4gaW5wdXQge1xyXG4gICAgICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgICAgICBsZWZ0OiAwcHg7XHJcbiAgICAgICAgdG9wOiAwcHg7XHJcbiAgICAgICAgei1pbmRleDogMjtcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICBoZWlnaHQ6IDEwMCU7XHJcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgb3BhY2l0eTogMDtcclxuICAgICAgICBjdXJzb3I6IHBvaW50ZXI7XHJcbiAgICB9XHJcblxyXG4gICAgICAgIC5zZWxlY3QyID4gbGFiZWwgPiBpbnB1dDpjaGVja2VkIHtcclxuICAgICAgICAgICAgei1pbmRleDogMjtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuc2VsZWN0MiA+IGxhYmVsID4gaW5wdXQ6Y2hlY2tlZCB+IGkudG9nZ2xlLmljb24tcGx1cyB7XHJcbiAgICAgICAgICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuc2VsZWN0MiA+IGxhYmVsID4gaW5wdXQ6Y2hlY2tlZCB+IGkudG9nZ2xlLmljb24tbWludXMge1xyXG4gICAgICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdDIgPiBsYWJlbCA+IGlucHV0Om5vdCg6Y2hlY2tlZCkgfiBpLnRvZ2dsZS5pY29uLW1pbnVzIHtcclxuICAgICAgICAgICAgZGlzcGxheTogbm9uZTtcclxuICAgICAgICB9XHJcblxyXG4gICAgICAgIC5zZWxlY3QyID4gbGFiZWwgPiBpbnB1dDpub3QoOmNoZWNrZWQpIH4gaS50b2dnbGUuaWNvbi1wbHVzIHtcclxuICAgICAgICAgICAgZGlzcGxheTogYmxvY2s7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAuc2VsZWN0MiA+IGxhYmVsID4gaW5wdXQ6bm90KDpjaGVja2VkKSB+IGxhYmVsLm9wdGlvbiBpbnB1dDpub3QoOmNoZWNrZWQpIH4gLnRpdGxlIHtcclxuICAgICAgICAgICAgZGlzcGxheTogbm9uZSAhaW1wb3J0YW50O1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgLnNlbGVjdDIgPiBsYWJlbCA+IGlucHV0OmRpc2FibGVkIHtcclxuICAgICAgICAgICAgY3Vyc29yOiBuby1kcm9wO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAuc2VsZWN0MiBsYWJlbCA+IHNwYW4ucGxhY2Vob2xkZXIge1xyXG4gICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgICB6LWluZGV4OiAwO1xyXG4gICAgICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcclxuICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICBjb2xvcjogIzk5OTtcclxuICAgICAgICBib3JkZXItdG9wOiAwcHg7XHJcbiAgICB9XHJcblxyXG4gICAgLnNlbGVjdDIgbGFiZWwub3B0aW9uIHtcclxuICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xyXG4gICAgICAgIHotaW5kZXg6IDE7XHJcbiAgICAgICAgd2lkdGg6IDEwMCU7XHJcbiAgICAgICAgdHJhbnNpdGlvbjogYWxsIDFzIGVhc2Utb3V0O1xyXG4gICAgfVxyXG5cclxuICAgICAgICAuc2VsZWN0MiBsYWJlbC5vcHRpb24gc3Bhbi50aXRsZSB7XHJcbiAgICAgICAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcclxuICAgICAgICAgICAgei1pbmRleDogMjtcclxuICAgICAgICAgICAgdHJhbnNpdGlvbjogYmFja2dyb3VuZCAuM3MgZWFzZS1vdXQ7XHJcbiAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgLnNlbGVjdDIgbGFiZWwub3B0aW9uIHNwYW4udGl0bGUgaS5pY29uIHtcclxuICAgICAgICAgICAgICAgIHBhZGRpbmctcmlnaHQ6IDhweDtcclxuICAgICAgICAgICAgICAgIGNvbG9yOiAjOTJhOGQxO1xyXG4gICAgICAgICAgICB9XHJcblxyXG4gICAgICAgICAgICAuc2VsZWN0MiBsYWJlbC5vcHRpb24gc3Bhbi50aXRsZTpob3ZlciB7XHJcbiAgICAgICAgICAgICAgICBjb2xvcjogI2ZmZjtcclxuICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IHJnYmEoMTQ2LCAxNjgsIDIwOSwgMC41KTtcclxuICAgICAgICAgICAgICAgIGJveC1zaGFkb3c6IGluc2V0IDBweCAxcHggMHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAuc2VsZWN0MiBsYWJlbC5vcHRpb24gaW5wdXQge1xyXG4gICAgICAgICAgICBkaXNwbGF5OiBub25lO1xyXG4gICAgICAgIH1cclxuXHJcbiAgICAgICAgICAgIC5zZWxlY3QyIGxhYmVsLm9wdGlvbiBpbnB1dDpjaGVja2VkIH4gc3Bhbi50aXRsZSB7XHJcbiAgICAgICAgICAgICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XHJcbiAgICAgICAgICAgICAgICBkaXNwbGF5OiBibG9jaztcclxuICAgICAgICAgICAgICAgIHotaW5kZXg6IDE7XHJcbiAgICAgICAgICAgICAgICB0b3A6IDBweDtcclxuICAgICAgICAgICAgICAgIGZvbnQtc2l6ZTogMTJweDtcclxuICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6ICNmZmY7XHJcbiAgICAgICAgICAgICAgICBib3JkZXItdG9wOiAwcHg7XHJcbiAgICAgICAgICAgICAgICBib3gtc2hhZG93OiBub25lO1xyXG4gICAgICAgICAgICAgICAgY29sb3I6IGluaGVyaXQ7XHJcbiAgICAgICAgICAgICAgICB3aWR0aDogMTAwJTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgLnNlbGVjdDIgbGFiZWwub3B0aW9uIGlucHV0OmRpc2FibGVkIH4gc3Bhbi50aXRsZSB7XHJcbiAgICAgICAgICAgICAgICBiYWNrZ3JvdW5kOiAjZjlmOWY5ICFpbXBvcnRhbnQ7XHJcbiAgICAgICAgICAgICAgICBjb2xvcjogI2FhYTtcclxuICAgICAgICAgICAgfVxyXG5cclxuICAgICAgICAgICAgICAgIC5zZWxlY3QyIGxhYmVsLm9wdGlvbiBpbnB1dDpkaXNhYmxlZCB+IHNwYW4udGl0bGU6aG92ZXIge1xyXG4gICAgICAgICAgICAgICAgICAgIGNvbG9yOiAjYWFhO1xyXG4gICAgICAgICAgICAgICAgICAgIGJhY2tncm91bmQ6IG5vbmU7XHJcbiAgICAgICAgICAgICAgICAgICAgY3Vyc29yOiBuby1kcm9wO1xyXG4gICAgICAgICAgICAgICAgfVxyXG4iXX0= */"
+
+/***/ }),
+
 /***/ "./src/app/components/product-options/product-options.html":
 /*!*****************************************************************!*\
   !*** ./src/app/components/product-options/product-options.html ***!
@@ -1687,7 +2094,7 @@ exports.Pagination = Pagination;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"products\" class=\"\">\r\n    <ng-container *ngFor=\"let prod of products\">\r\n        <!--<label for=\"opt_{{prod.key}}\" class=\"material-icons\"></label>\r\n        <input id=\"opt_{{prod.key}}\" name=\"product\" type=\"radio\" value=\"{{prod.key}}\" (click)=\"onClick(prod.key)\" />\r\n        <span>{{prod.value}}</span>-->\r\n        <button class=\"btn btn-info  dim btn-large-dim btn-outline\" type=\"button\" (click)=\"onClick(prod.key)\">{{prod.value}}</button>\r\n    </ng-container>\r\n</div>"
+module.exports = "<!--\r\n<div *ngIf=\"products\" class=\"\">\r\n    <ng-container *ngFor=\"let prod of products\">\r\n        <button class=\"btn btn-info  dim btn-large-dim btn-outline\" type=\"button\" (click)=\"onClick(prod.key)\">{{prod.value}}</button>\r\n    </ng-container>\r\n</div>\r\n-->\r\n<!--<div class=\"select animated zoomIn\">\r\n    You can toggle select (disabled)\r\n    <input type=\"radio\" name=\"option\">\r\n    <i class=\"toggle icon icon-arrow-down\"></i>\r\n    <i class=\"toggle icon icon-arrow-up\"></i>\r\n    <span class=\"placeholder\">Choose Product</span>\r\n    <ng-container *ngFor=\"let prod of products\">\r\n        <label class=\"option\">\r\n            <input type=\"radio\" name=\"product\" (click)=\"onClick(prod.key)\">\r\n            <span class=\"title animated fadeIn\"><img src=\"~/images/{{prod.value}}.png\">{{prod.value}}</span>\r\n        </label>\r\n    </ng-container>\r\n\r\n</div>-->\r\n<div class=\"btn-group\">\r\n    <button class=\"btn btn-default dropdown-toggle\" type=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">\r\n        <span *ngIf=\"!selectedProduct\">Select</span>  \r\n        <img  src=\"/images/{{selectedProduct.value}}.png\" *ngIf=\"selectedProduct\"/>\r\n    </button>\r\n    <ul class=\"dropdown-menu\">\r\n        <ng-container *ngFor=\"let prod of products; let itemNo = index\">\r\n            <li class=\"dropdown-item pad5A\">\r\n                <a (click)=\"onClick(prod.key, itemNo)\">\r\n                    <img src=\"/images/{{prod.value}}.png\">\r\n                </a>\r\n            </li>\r\n            <li class=\"dropdown-divider\"></li>\r\n        </ng-container>\r\n    </ul>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -1711,16 +2118,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-;
 var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
 var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
 var ProductOptions = /** @class */ (function () {
-    function ProductOptions(dataService) {
+    function ProductOptions(dataService, el, formEvent) {
         this.dataService = dataService;
+        this.el = el;
+        this.formEvent = formEvent;
         this.onProductSelected = new core_1.EventEmitter();
+        this.propagateChange = function () { };
     }
+    ProductOptions_1 = ProductOptions;
     ProductOptions.prototype.ngOnInit = function () {
+        var _this = this;
         this.loadOptions();
+        if (this.required) {
+            this.subscription = this.formEvent.notification.subscribe(function (form) {
+                _this.parentForm = form.template;
+                _this.validate();
+            });
+        }
     };
     ProductOptions.prototype.loadOptions = function () {
         var _this = this;
@@ -1728,19 +2147,69 @@ var ProductOptions = /** @class */ (function () {
             _this.products = results;
         });
     };
-    ProductOptions.prototype.onClick = function (productId) {
-        this.onProductSelected.emit(productId);
+    ProductOptions.prototype.onClick = function (productId, itemNo) {
+        this.selectedProduct = this.products[itemNo];
+        this.propagateChange(productId);
+        this.onProductSelected.emit();
+        //this.onProductSelected.emit(productId);
     };
+    ProductOptions.prototype.clearSelection = function () {
+        this.selectedProduct = null;
+    };
+    ProductOptions.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
+        if (this.selectedProduct === null || this.selectedProduct === undefined || this.selectedProduct === "") {
+            thisElement.next('.text-danger').remove();
+            thisElement.after('<span class= "text-danger display-block">This is required</span>');
+            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+        }
+        else {
+            this.clearErrorMessages(thisElement);
+            this.parentForm.controls[this.fieldId].setErrors(null);
+        }
+    };
+    ProductOptions.prototype.clearErrorMessages = function (thisElement) {
+        $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
+        thisElement.next().remove();
+    };
+    ProductOptions.prototype.registerOnChange = function (fn) {
+        this.propagateChange = fn;
+    };
+    ProductOptions.prototype.setChanges = function () { };
+    ProductOptions.prototype.writeValue = function () { };
+    ProductOptions.prototype.registerOnTouched = function () { };
+    ProductOptions.prototype.setDisabledState = function () { };
+    var ProductOptions_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], ProductOptions.prototype, "fieldId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], ProductOptions.prototype, "required", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
     ], ProductOptions.prototype, "onProductSelected", void 0);
-    ProductOptions = __decorate([
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], ProductOptions.prototype, "propagateChange", void 0);
+    ProductOptions = ProductOptions_1 = __decorate([
         core_1.Component({
             selector: 'product-options',
-            template: __webpack_require__(/*! ./product-options.html */ "./src/app/components/product-options/product-options.html")
+            template: __webpack_require__(/*! ./product-options.html */ "./src/app/components/product-options/product-options.html"),
+            providers: [
+                {
+                    provide: forms_1.NG_VALUE_ACCESSOR,
+                    useExisting: core_1.forwardRef(function () { return ProductOptions_1; }),
+                    multi: true
+                }
+            ],
+            styles: [__webpack_require__(/*! ./product-options.css */ "./src/app/components/product-options/product-options.css")]
         }),
-        __metadata("design:paramtypes", [data_service_1.DataService])
+        __metadata("design:paramtypes", [data_service_1.DataService, core_1.ElementRef, broadcast_service_1.BroadcastService])
     ], ProductOptions);
     return ProductOptions;
 }());
@@ -2249,6 +2718,9 @@ var ApiController;
     ApiController["Registration"] = "Registration";
     ApiController["User"] = "User";
     ApiController["Agent"] = "Agent";
+    ApiController["Commission"] = "Commission";
+    ApiController["Dashboard"] = "Dashboard";
+    ApiController["Announcement"] = "Announcement";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -2782,6 +3254,20 @@ var ManageCategoryColumns = /** @class */ (function () {
                 "controlType": "textbox",
                 "required": true,
                 "maxLength": 10
+            }
+        },
+        {
+            "fieldName": "commissionPercent",
+            "headerText": "Commission (%)",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": "",
+            "dataFieldControl": {
+                "controlName": "commissionPercent",
+                "controlType": "number",
+                "required": true,
+                "maxLength": 5
             }
         },
         {
@@ -3476,6 +3962,223 @@ var AgentProfileFields = /** @class */ (function () {
     return AgentProfileFields;
 }());
 exports.AgentProfileFields = AgentProfileFields;
+var AgentMaintenanceColumns = /** @class */ (function () {
+    function AgentMaintenanceColumns() {
+    }
+    AgentMaintenanceColumns.fields = [
+        {
+            "fieldName": "agentId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "readonly": true,
+            "colWidth": "cell-width-1"
+        },
+        {
+            "fieldName": "fullname",
+            "headerText": "Fullname",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "superiorName",
+            "headerText": "Superior",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "companyName",
+            "headerText": "Company Name",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "mobileNo",
+            "headerText": "Mobile No",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "telNo",
+            "headerText": "Tel No",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "isActive",
+            "headerText": "Is Active",
+            "displayType": "tick",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
+        },
+    ];
+    return AgentMaintenanceColumns;
+}());
+exports.AgentMaintenanceColumns = AgentMaintenanceColumns;
+
+
+/***/ }),
+
+/***/ "./src/app/metadata/announcementFields.ts":
+/*!************************************************!*\
+  !*** ./src/app/metadata/announcementFields.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var NewAnnouncementFields = /** @class */ (function () {
+    function NewAnnouncementFields() {
+    }
+    NewAnnouncementFields.fields = [
+        {
+            "fieldName": "title",
+            "displayText": "Title",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "title",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 200
+            }
+        },
+        {
+            "fieldName": "descriptions",
+            "displayText": "Descriptions",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "descriptions",
+                "controlType": "textarea",
+                "required": false,
+                "maxLength": 500
+            }
+        },
+        {
+            "fieldName": "isActive",
+            "displayText": "Is Active",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "isActive",
+                "controlType": "checkbox",
+                "required": false
+            }
+        },
+    ];
+    return NewAnnouncementFields;
+}());
+exports.NewAnnouncementFields = NewAnnouncementFields;
+var ViewAnnouncementColumns = /** @class */ (function () {
+    function ViewAnnouncementColumns() {
+    }
+    ViewAnnouncementColumns.fields = [
+        {
+            "fieldName": "anncId",
+            "headerText": "Annc Id",
+            "displayType": "text",
+            "keyField": true,
+            "readonly": false,
+            "colWidth": "cell-width-1"
+        },
+        {
+            "fieldName": "title",
+            "headerText": "Title",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": "cell-width-50"
+        },
+        {
+            "fieldName": "isActive",
+            "headerText": "Is Active",
+            "displayType": "tick",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "modifiedOn",
+            "headerText": "Modified On",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": ""
+        },
+        {
+            "fieldName": "modifiedBy",
+            "headerText": "Modified By",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": ""
+        }
+    ];
+    return ViewAnnouncementColumns;
+}());
+exports.ViewAnnouncementColumns = ViewAnnouncementColumns;
+var EditAnnouncementFields = /** @class */ (function () {
+    function EditAnnouncementFields() {
+    }
+    EditAnnouncementFields.fields = [
+        {
+            "fieldName": "anncId",
+            "displayText": "Id",
+            "readonly": true,
+            "dataFieldControl": {
+                "controlName": "anncId",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "title",
+            "displayText": "Title",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "title",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 200
+            }
+        },
+        {
+            "fieldName": "descriptions",
+            "displayText": "Descriptions",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "descriptions",
+                "controlType": "textarea",
+                "required": false,
+                "maxLength": 500
+            }
+        },
+        {
+            "fieldName": "isActive",
+            "displayText": "Is Active",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "isActive",
+                "controlType": "checkbox",
+                "required": false
+            }
+        }
+    ];
+    return EditAnnouncementFields;
+}());
+exports.EditAnnouncementFields = EditAnnouncementFields;
 
 
 /***/ }),
@@ -4493,7 +5196,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n          <img alt=\"image\" class=\"rounded-circle\" src=\"../assets/images/profile_small.jpg\">\r\n          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n            <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile\"]'>Profile</a></li>\r\n            <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n            <li class=\"dropdown-divider\"></li>\r\n            <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Commission Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span></a>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n          <img alt=\"image\" class=\"rounded-circle\" src=\"../assets/images/profile_small.jpg\">\r\n          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n            <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile\"]'>Profile</a></li>\r\n            <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n            <li class=\"dropdown-divider\"></li>\r\n            <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Commission Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span></a>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -4561,7 +5264,7 @@ exports.NavMenuComponent = NavMenuComponent;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Agent Commissions'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <h5>Manage Agent Commissions</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-3 m-b-xs\">\r\n              <select class=\"form-control-sm form-control input-s-sm inline\">\r\n                <option value=\"0\">Select Product</option>\r\n                <option value=\"1\">Time</option>\r\n                <option value=\"2\">Unifi</option>\r\n                <option value=\"3\">Astro</option>\r\n              </select>\r\n            </div>\r\n            <div class=\"col-sm-4 m-b-xs\">\r\n              <select class=\"form-control-sm form-control input-s-sm inline\">\r\n                <option value=\"0\">Select Package</option>\r\n                <option value=\"1\">Package 1</option>\r\n                <option value=\"2\">Package 2</option>\r\n                <option value=\"3\">Package 3</option>\r\n              </select>\r\n            </div>\r\n          </div>\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-striped mrg10T\">\r\n              <thead>\r\n                <tr>\r\n                  <th>Agent Id</th>\r\n                  <th>Agent Name</th>\r\n                  <th>Product Category</th>\r\n                  <th>Package Name</th>\r\n                  <th>Commission(%)</th>\r\n                  <th>Active</th>\r\n                  <th>Action</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr>\r\n                  <td></td>\r\n                  <td><input type=\"text\" class=\"form-control-sm form-control\"></td>\r\n                  <td>\r\n                    <select class=\"form-control-sm form-control input-s-sm inline\">\r\n                      <option value=\"0\">Select Product</option>\r\n                      <option value=\"1\">Time</option>\r\n                      <option value=\"2\">Unifi</option>\r\n                      <option value=\"3\">Astro</option>\r\n                    </select>\r\n                  </td>\r\n                  <td>\r\n                    <select class=\"form-control-sm form-control input-s-sm inline\">\r\n                      <option value=\"0\">Select Package</option>\r\n                      <option value=\"1\">Package 1</option>\r\n                      <option value=\"2\">Package 2</option>\r\n                      <option value=\"3\">Package 3</option>\r\n                    </select>\r\n                  </td>\r\n                  <td><input type=\"text\" class=\"form-control-sm form-control\"></td>\r\n                  <td>\r\n                    <div class=\"i-checks\">\r\n                      <div class=\"icheckbox_square-green checked disabled\" style=\"position: relative;\">\r\n                        <input type=\"checkbox\" value=\"\" disabled=\"\" checked=\"\" style=\"position: absolute; opacity: 0;\">\r\n                        <ins class=\"iCheck-helper\" style=\"position: absolute; top: 0%; left: 0%; display: block; width: 100%; height: 100%; margin: 0px; padding: 0px; background: rgb(255, 255, 255); border: 0px; opacity: 0;\"></ins>\r\n                      </div>\r\n                    </div>\r\n                  </td>\r\n                  <td><button class=\"btn btn-primary btn-sm\" type=\"submit\"><i class=\"fa fa-plus mrg5R\"></i>Add</button></td>\r\n                </tr>\r\n                <tr *ngFor=\"let item of agents; let rowNo = index\">\r\n                  <td>{{item.agentId}}</td>\r\n                  <td>{{item.agentName}}</td>\r\n                  <td>{{item.product}}</td>\r\n                  <td>{{item.package}}</td>\r\n                  <td>{{item.commission}}</td>\r\n                  <td>\r\n                    <i class=\"fa fa-check text-navy\" *ngIf=\"item.isActive\"></i>\r\n                    <i class=\"fa fa-times text-danger\" *ngIf=\"!item.isActive\"></i>\r\n                  </td>\r\n                  <td>\r\n                    <a class=\"btn btn-success btn-sm\" (click)=\"setRowOnEdit(rowNo)\"><i class=\"fa fa-edit\"></i>&nbsp;&nbsp;<span class=\"bold\">Edit</span></a>\r\n                  </td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Agent Commissions'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"tabs-container\">\r\n                <loading></loading>\r\n                <ul class=\"nav nav-tabs\" role=\"tablist\">\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 1}\" data-toggle=\"tab\" href=\"#addCommission\" (click)=\"selectedTab=1\">Add Commission</a>\r\n                    </li>\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 2}\" data-toggle=\"tab\" href=\"#editCommission\" (click)=\"selectedTab=2\">Edit Commission</a>\r\n                    </li>\r\n                </ul>\r\n                <div class=\"tab-content\">\r\n                    <div role=\"tabpanel\" id=\"addCommission\" class=\"tab-pane active\">\r\n                        <div class=\"panel-body\">\r\n                            <form #dataForm=\"ngForm\" (ngSubmit)=\"create()\">\r\n                                <fieldset [disabled]=\"!allowCommConfig\">\r\n                                    <div class=\"alert alert-warning mrg25B\" *ngIf=\"!allowCommConfig\">\r\n                                        <i class=\"fa fa-warning\"></i>\r\n                                        Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.\r\n                                    </div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Agents\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <multiple-checkbox name=\"selectedAgents\" [fieldId]=\"'selectedAgents'\" [dataItems]=\"myAgents\" [(ngModel)]=\"selectedAgents\" [required]=\"true\"></multiple-checkbox>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <product-options name=\"product\" [fieldId]=\"'product'\" [required]=\"true\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadCategories()\"></product-options>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product Category\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <table class=\"table table-striped\">\r\n                                                <thead>\r\n                                                    <tr>\r\n                                                        <th>#</th>\r\n                                                        <th>Product Category</th>\r\n                                                        <th>Commission (RM)</th>\r\n                                                        <th>Allocation (%)</th>\r\n                                                    </tr>\r\n                                                </thead>\r\n                                                <tbody>\r\n                                                    <tr *ngFor=\"let item of commissionSettings; let itemNo = index\">\r\n                                                        <td>{{itemNo+1}}</td>\r\n                                                        <td>{{item.category}}</td>\r\n                                                        <td>{{item.supCommission}}</td>\r\n                                                        <td>\r\n                                                            <input type=\"number\" [(ngModel)]=\"item.agentCommissionPer\" name=\"agentCommissionPer{{itemNo}}\" class=\"form-control\" />\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr *ngIf=\"commissionSettings.length == 0\">\r\n                                                        <td colspan=\"4\">\r\n                                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                                <h4>No Records Available</h4>\r\n                                                            </div>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div>\r\n                                        <back-button>Cancel</back-button>\r\n                                        <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                                [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                            {{isUpdating ? 'Updating' : 'Update'}}\r\n                                            <span class=\"loading\"></span>\r\n                                        </button>\r\n                                    </div>\r\n                                </fieldset>\r\n                            </form>\r\n                        </div>\r\n                    </div>\r\n                    <div role=\"tabpanel\" id=\"editCommission\" class=\"tab-pane\">\r\n                        <div class=\"panel-body\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Product\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <product-options name=\"product\" [fieldId]=\"product\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadAgentCommissions()\"></product-options>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Agents Commission\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <agent-commission-table></agent-commission-table>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -4585,108 +5288,192 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var multiple_checkbox_1 = __webpack_require__(/*! src/app/components/multiple-checkbox/multiple-checkbox */ "./src/app/components/multiple-checkbox/multiple-checkbox.ts");
+var product_options_1 = __webpack_require__(/*! src/app/components/product-options/product-options */ "./src/app/components/product-options/product-options.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
+var agent_commission_table_1 = __webpack_require__(/*! src/app/components/agent-commission-table/agent-commission-table */ "./src/app/components/agent-commission-table/agent-commission-table.ts");
 var AgentComission = /** @class */ (function () {
-    function AgentComission() {
+    function AgentComission(loaderService, dataService, formEvent, toastr, router) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.toastr = toastr;
+        this.router = router;
+        this.isUpdating = false;
+        this.commissionSettings = [];
+        this.agentCommissions = [];
+        this.selectedTab = 1;
+        this.allowCommConfig = false;
     }
     AgentComission.prototype.ngOnInit = function () {
-        this.loadData();
+        this.loadAgents();
     };
-    AgentComission.prototype.loadData = function () {
-        this.agents = [
-            {
-                "agentId": "1001",
-                "agentName": "Agent 1",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)M2U",
-                "commission": "180%",
-                "isActive": true
-            },
-            {
-                "agentId": "1002",
-                "agentName": "Agent 2",
-                "product": "Unifi ",
-                "package": "ebiz package 30Mbps - RM249(M2U)",
-                "commission": "160%",
-                "isActive": true
-            },
-            {
-                "agentId": "1003",
-                "agentName": "Agent 3",
-                "product": "Unifi ",
-                "package": "ebiz package 30Mbps - RM249(M2U)",
-                "commission": "130%",
-                "isActive": true
-            },
-            {
-                "agentId": "1004",
-                "agentName": "Agent 4",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)newnew",
-                "commission": "100%",
-                "isActive": true
-            },
-            {
-                "agentId": "1005",
-                "agentName": "Agent 5",
-                "product": "Unifi ",
-                "package": "ebiz package 50Mbps - RM299(M2U)",
-                "commission": "150%",
-                "isActive": true
-            },
-            {
-                "agentId": "1006",
-                "agentName": "Agent 6",
-                "product": "Unifi ",
-                "package": "ebiz package 50Mbps - RM299(M2U)",
-                "commission": "170%",
-                "isActive": true
-            },
-            {
-                "agentId": "1007",
-                "agentName": "Agent 7",
-                "product": "Unifi ",
-                "package": "unifi Mobile RM59(12 months)",
-                "commission": "150%",
-                "isActive": true
-            },
-            {
-                "agentId": "1008",
-                "agentName": "Agent 8",
-                "product": "Unifi ",
-                "package": "unifi 30Mbps - Upsizing Promo(M2U)",
-                "commission": "100%",
-                "isActive": true
-            },
-            {
-                "agentId": "1009",
-                "agentName": "Agent 9",
-                "product": "Unifi ",
-                "package": "unifi 30Mbps - Upsizing Promo(M2U)",
-                "commission": "100%",
-                "isActive": false
-            },
-            {
-                "agentId": "1010",
-                "agentName": "Agent 10",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)M2U",
-                "commission": "100%",
-                "isActive": false
-            }
-        ];
+    AgentComission.prototype.loadAgents = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents").subscribe(function (data) {
+            _this.myAgents = data.displayData;
+            _this.allowCommConfig = data.allowCommConfig;
+        });
     };
-    AgentComission.prototype.setRowOnEdit = function (rowIndex) {
+    AgentComission.prototype.loadCategories = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct).subscribe(function (results) {
+            _this.commissionSettings = results;
+        });
     };
+    AgentComission.prototype.loadAgentCommissions = function () {
+        this.agentCommissionTable.loadData(this.selectedProduct);
+        //this.dataService.get(`${ApiController.Commission}/GetMyAgentCommission`, this.selectedProduct).subscribe(results => {
+        //    this.agentCommissions = results;
+        //});
+    };
+    AgentComission.prototype.create = function () {
+        var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid)
+            return;
+        this.isUpdating = true;
+        var newRecord = { agents: this.selectedAgents, commissionSettings: this.commissionSettings };
+        this.dataService.add(apiController_1.ApiController.Commission, newRecord).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+            _this.resetForm();
+        });
+    };
+    AgentComission.prototype.resetForm = function () {
+        this.commissionSettings = [];
+        this.multipleCheckboxes.removeSelection();
+        this.productOptions.clearSelection();
+    };
+    AgentComission.prototype.editAgentCommission = function (categoryId) {
+        console.log(categoryId);
+    };
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], AgentComission.prototype, "form", void 0);
+    __decorate([
+        core_1.ViewChild(multiple_checkbox_1.MultipleCheckboxes),
+        __metadata("design:type", multiple_checkbox_1.MultipleCheckboxes)
+    ], AgentComission.prototype, "multipleCheckboxes", void 0);
+    __decorate([
+        core_1.ViewChild(product_options_1.ProductOptions),
+        __metadata("design:type", product_options_1.ProductOptions)
+    ], AgentComission.prototype, "productOptions", void 0);
+    __decorate([
+        core_1.ViewChild(agent_commission_table_1.AgentCommissionTable),
+        __metadata("design:type", agent_commission_table_1.AgentCommissionTable)
+    ], AgentComission.prototype, "agentCommissionTable", void 0);
     AgentComission = __decorate([
         core_1.Component({
             selector: 'agent-comission',
             template: __webpack_require__(/*! ./agent-comission.html */ "./src/app/pages/agent-comission/agent-comission.html")
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, ngx_toastr_1.ToastrService, router_1.Router])
     ], AgentComission);
     return AgentComission;
 }());
 exports.AgentComission = AgentComission;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/agent-maintenance/agent-maintenance.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/agent-maintenance/agent-maintenance.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Agent Maintenance'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Registration</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6 m-b-xs\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': !searchParams.isActive}\" for=\"all\">\r\n                                    <input type=\"radio\" id=\"all\" name=\"status\" [value]=\"\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> All\r\n                                </label>\r\n                                <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': searchParams.isActive == true}\" for=\"active\">\r\n                                    <input type=\"radio\" id=\"active\" name=\"status\" [value]=\"true\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Active\r\n                                </label>\r\n                                <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': searchParams.isActive == false}\" for=\"inactive\">\r\n                                    <input type=\"radio\" id=\"inactive\" name=\"status\" [value]=\"false\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Inactive\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"input-group\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\"> <span class=\"input-group-append\">\r\n                                    <button type=\"button\" class=\"btn btn-sm btn-primary\" (click)=\"reloadData()\">\r\n                                        Go!\r\n                                    </button>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/agent-profile/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/agent-maintenance/agent-maintenance.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/agent-maintenance/agent-maintenance.ts ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var search_params_1 = __webpack_require__(/*! ../../model/search-params */ "./src/app/model/search-params.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var agentFields_1 = __webpack_require__(/*! src/app/metadata/agentFields */ "./src/app/metadata/agentFields.ts");
+var AgentMaintenance = /** @class */ (function (_super) {
+    __extends(AgentMaintenance, _super);
+    function AgentMaintenance(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, '', false) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        return _this;
+    }
+    AgentMaintenance.prototype.ngOnInit = function () {
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.controllerName = apiController_1.ApiController.Agent;
+        //this.loadDropdown();
+    };
+    AgentMaintenance.prototype.getTablerowDataMapping = function () {
+        var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        return columnMappings;
+    };
+    AgentMaintenance.prototype.clearSearchParam = function () {
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.reloadData();
+    };
+    AgentMaintenance = __decorate([
+        core_1.Component({
+            selector: 'agent-maintenance',
+            template: __webpack_require__(/*! ./agent-maintenance.html */ "./src/app/pages/agent-maintenance/agent-maintenance.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], AgentMaintenance);
+    return AgentMaintenance;
+}(listEvent_1.ListEvent));
+exports.AgentMaintenance = AgentMaintenance;
 
 
 /***/ }),
@@ -4698,7 +5485,7 @@ exports.AgentComission = AgentComission;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<page-header [title]=\"'My Profile'\" [parentCategory]=\"''\"></page-header>\r\n\r\n<div  class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox\" *ngIf=\"!completed\">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Register to <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-3 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-9\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'dataForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-3 col-form-label\">\r\n                                Superior\r\n                            </label>\r\n                            <div class=\"col-sm-9\">\r\n                                <superior-field [(ngModel)]=\"formRecord['superiorId']\" [fieldId]=\"'superior'\" [parentForm]=\"form\" \r\n                                                [displayText]=\"formRecord['superiorName']\" \r\n                                                name=\"superior\" ></superior-field>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <a [routerLink]='[\"/\"]' class=\"btn btn-white float-right\">Cancel</a>\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n        \r\n  "
+module.exports = "\r\n<page-header [title]=\"'My Profile'\" [parentCategory]=\"''\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox\" *ngIf=\"!completed\">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Register to <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-3 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-9\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'dataForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-3 col-form-label\">\r\n                                Superior\r\n                            </label>\r\n                            <div class=\"col-sm-9\">\r\n                                <superior-field [(ngModel)]=\"formRecord['superiorId']\" [fieldId]=\"'superior'\" [parentForm]=\"form\"\r\n                                                [displayText]=\"formRecord['superiorName']\" name=\"superior\"></superior-field>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <back-button>Cancel</back-button>\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -4736,20 +5523,24 @@ var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
 var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var superior_field_1 = __webpack_require__(/*! src/app/components/superior-field/superior-field */ "./src/app/components/superior-field/superior-field.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
 var AgentProfile = /** @class */ (function () {
-    function AgentProfile(loaderService, dataService, formEvent, router, route, toastr) {
+    function AgentProfile(loaderService, dataService, formEvent, router, route, toastr, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
         this.formEvent = formEvent;
         this.router = router;
         this.route = route;
         this.toastr = toastr;
+        this.authenticationService = authenticationService;
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
         this.completed = false;
     }
     AgentProfile.prototype.ngOnInit = function () {
+        this.agentId = this.route.snapshot.params.id;
+        this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord();
     };
@@ -4772,9 +5563,10 @@ var AgentProfile = /** @class */ (function () {
     };
     AgentProfile.prototype.loadRecord = function () {
         var _this = this;
-        this.dataService.getAll("" + apiController_1.ApiController.Agent).subscribe(function (results) {
+        var url = this.agentId ? apiController_1.ApiController.Agent + "/" + this.agentId : "" + apiController_1.ApiController.Agent;
+        this.dataService.get(url).subscribe(function (results) {
             _this.formRecord = results;
-            _this.superiorField.editable = !_this.formRecord.superiorId ? true : false;
+            _this.superiorField.editable = !_this.formRecord.superiorId || _this.currentUser.isAdmin ? true : false;
         });
     };
     __decorate([
@@ -4790,7 +5582,13 @@ var AgentProfile = /** @class */ (function () {
             selector: 'agent-profile',
             template: __webpack_require__(/*! ./agent-profile.html */ "./src/app/pages/agent-profile/agent-profile.html")
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
+            broadcast_service_1.BroadcastService,
+            router_1.Router,
+            router_2.ActivatedRoute,
+            ngx_toastr_1.ToastrService,
+            authentication_1.AuthenticationService])
     ], AgentProfile);
     return AgentProfile;
 }());
@@ -4806,7 +5604,7 @@ exports.AgentProfile = AgentProfile;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Orders'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Registration</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-7 m-b-xs\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-sm btn-white\" for=\"{{mode}}\" *ngFor=\"let mode of approvalMode | enumToArray; let value = index\"\r\n                                       [ngClass]=\"{'active': searchParams.approvalMode == value }\">\r\n                                    <input type=\"radio\" id=\"{{mode}}\" name=\"status\" [value]=\"value\" [(ngModel)]=\"searchParams.approvalMode\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> {{mode}}\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-5\">\r\n                            <div class=\"input-group\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\"> <span class=\"input-group-append\">\r\n                                    <button type=\"button\" class=\"btn btn-sm btn-primary\" (click)=\"reloadData()\">\r\n                                        Go!\r\n                                    </button>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/agent-registration-view/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Agent Registration'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Registration</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-7 m-b-xs\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-sm btn-white\" for=\"{{mode}}\" *ngFor=\"let mode of approvalMode | enumToArray; let value = index\"\r\n                                       [ngClass]=\"{'active': searchParams.approvalMode == value }\">\r\n                                    <input type=\"radio\" id=\"{{mode}}\" name=\"status\" [value]=\"value\" [(ngModel)]=\"searchParams.approvalMode\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> {{mode}}\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-5\">\r\n                            <div class=\"input-group\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\"> <span class=\"input-group-append\">\r\n                                    <button type=\"button\" class=\"btn btn-sm btn-primary\" (click)=\"reloadData()\">\r\n                                        Go!\r\n                                    </button>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm\" [routerLink]='[\"/agent-registration-view/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5105,6 +5903,114 @@ exports.AgentRegistration = AgentRegistration;
 
 /***/ }),
 
+/***/ "./src/app/pages/create-announcement/create-announcement.html":
+/*!********************************************************************!*\
+  !*** ./src/app/pages/create-announcement/create-announcement.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Announcement'\" [parentCategory]=\"'Data Administration'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Announcement <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'dataForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"newRecord['files']\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <button class=\"btn btn-white float-right\" type=\"submit\">Cancel</button>\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/pages/create-announcement/create-announcement.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/pages/create-announcement/create-announcement.ts ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var announcementFields_1 = __webpack_require__(/*! ../../metadata/announcementFields */ "./src/app/metadata/announcementFields.ts");
+var form_data_mapping_1 = __webpack_require__(/*! ../../model/form.data.mapping */ "./src/app/model/form.data.mapping.ts");
+var dataDisplayType_1 = __webpack_require__(/*! ../../enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var data_field_control_1 = __webpack_require__(/*! ../../model/data.field.control */ "./src/app/model/data.field.control.ts");
+var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var router_2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var CreateAnnouncement = /** @class */ (function () {
+    function CreateAnnouncement(loaderService, dataService, formEvent, router, route, toastr) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.router = router;
+        this.route = route;
+        this.toastr = toastr;
+        this.formFields = [];
+        this.newRecord = {};
+        this.isUpdating = false;
+    }
+    CreateAnnouncement.prototype.ngOnInit = function () {
+        this.formFields = this.getFormFeldsMapping();
+        this.loadApplication(this.route.snapshot.params.id);
+    };
+    CreateAnnouncement.prototype.getFormFeldsMapping = function () {
+        var columnMappings = announcementFields_1.NewAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
+        return columnMappings;
+    };
+    CreateAnnouncement.prototype.submit = function () {
+        var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        if (!this.form.valid)
+            return;
+        this.isUpdating = true;
+        var formData = new FormData();
+        formData.append('data', JSON.stringify(this.newRecord));
+        if (this.newRecord.files) {
+            for (var i = 0; i < this.newRecord.files.length; i++) {
+                formData.append("file" + i, this.newRecord.files[i]);
+            }
+        }
+        this.dataService.postForm(apiController_1.ApiController.Announcement, formData).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.router.navigate(['/view-announcement']);
+        });
+    };
+    CreateAnnouncement.prototype.loadApplication = function (applicationId) {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.CustomerApplication, applicationId).subscribe(function (data) {
+            _this.newRecord = data;
+        });
+    };
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], CreateAnnouncement.prototype, "form", void 0);
+    CreateAnnouncement = __decorate([
+        core_1.Component({
+            selector: 'create-announcement',
+            template: __webpack_require__(/*! ./create-announcement.html */ "./src/app/pages/create-announcement/create-announcement.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService,
+            router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+    ], CreateAnnouncement);
+    return CreateAnnouncement;
+}());
+exports.CreateAnnouncement = CreateAnnouncement;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/create-order/create-order.html":
 /*!******************************************************!*\
   !*** ./src/app/pages/create-order/create-order.html ***!
@@ -5211,6 +6117,117 @@ exports.CreateOrder = CreateOrder;
 
 /***/ }),
 
+/***/ "./src/app/pages/edit-announcement/edit-announcement.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/edit-announcement/edit-announcement.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['announcementDocuments']\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <back-button>Cancel</back-button>\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/pages/edit-announcement/edit-announcement.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/edit-announcement/edit-announcement.ts ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var announcementFields_1 = __webpack_require__(/*! ../../metadata/announcementFields */ "./src/app/metadata/announcementFields.ts");
+var form_data_mapping_1 = __webpack_require__(/*! ../../model/form.data.mapping */ "./src/app/model/form.data.mapping.ts");
+var dataDisplayType_1 = __webpack_require__(/*! ../../enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var data_field_control_1 = __webpack_require__(/*! ../../model/data.field.control */ "./src/app/model/data.field.control.ts");
+var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var router_2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var EditAnnouncement = /** @class */ (function () {
+    function EditAnnouncement(loaderService, dataService, formEvent, router, route, toastr) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.router = router;
+        this.route = route;
+        this.toastr = toastr;
+        this.formFields = [];
+        this.formRecord = {};
+        this.isUpdating = false;
+    }
+    EditAnnouncement.prototype.ngOnInit = function () {
+        this.recordId = this.route.snapshot.params.id;
+        this.formFields = this.getFormFeldsMapping();
+        this.loadRecord(this.route.snapshot.params.id);
+    };
+    EditAnnouncement.prototype.getFormFeldsMapping = function () {
+        var columnMappings = announcementFields_1.EditAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
+        return columnMappings;
+    };
+    EditAnnouncement.prototype.submit = function () {
+        var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        if (!this.form.valid)
+            return;
+        this.isUpdating = true;
+        var formData = new FormData();
+        formData.append('data', JSON.stringify(this.formRecord));
+        if (this.formRecord.customerDocuments) {
+            for (var i = 0; i < this.formRecord.announcementDocuments.length; i++) {
+                if (!this.formRecord.customerDocuments[i].deleted) {
+                    formData.append("file" + i, this.formRecord.announcementDocuments[i]);
+                }
+            }
+        }
+        this.dataService.updateForm(apiController_1.ApiController.Announcement, this.recordId, formData).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.router.navigate(['/view-announcement']);
+        });
+    };
+    EditAnnouncement.prototype.loadRecord = function (recordId) {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Announcement, recordId).subscribe(function (data) {
+            _this.formRecord = data;
+        });
+    };
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], EditAnnouncement.prototype, "form", void 0);
+    EditAnnouncement = __decorate([
+        core_1.Component({
+            selector: 'edit-announcement',
+            template: __webpack_require__(/*! ./edit-announcement.html */ "./src/app/pages/edit-announcement/edit-announcement.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService,
+            router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+    ], EditAnnouncement);
+    return EditAnnouncement;
+}());
+exports.EditAnnouncement = EditAnnouncement;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/edit-order/edit-order.html":
 /*!**************************************************!*\
   !*** ./src/app/pages/edit-order/edit-order.html ***!
@@ -5270,9 +6287,9 @@ var EditOrder = /** @class */ (function () {
         this.isUpdating = false;
     }
     EditOrder.prototype.ngOnInit = function () {
-        this.applicationId = this.route.snapshot.params.id;
+        this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
-        this.loadApplication(this.route.snapshot.params.id);
+        this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
@@ -5294,14 +6311,14 @@ var EditOrder = /** @class */ (function () {
                 }
             }
         }
-        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.applicationId, formData).subscribe(function (data) {
+        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.recordId, formData).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/view-order']);
         });
     };
-    EditOrder.prototype.loadApplication = function (applicationId) {
+    EditOrder.prototype.loadRecord = function (recordId) {
         var _this = this;
-        this.dataService.get(apiController_1.ApiController.CustomerApplication, applicationId).subscribe(function (data) {
+        this.dataService.get(apiController_1.ApiController.CustomerApplication, recordId).subscribe(function (data) {
             _this.formRecord = data;
         });
     };
@@ -5331,7 +6348,7 @@ exports.EditOrder = EditOrder;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper wrapper-content\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-info float-right\">Monthly</span>\r\n          <h5>Orders</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">3000</h1>\r\n          <div class=\"stat-percent font-bold text-success\">98% <i class=\"fa fa-bolt\"></i></div>\r\n          <small>Total Orders</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-primary float-right\">Today</span>\r\n          <h5>Pending</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">2200</h1>\r\n          <div class=\"stat-percent font-bold text-navy\">44% <i class=\"fa fa-level-up\"></i></div>\r\n          <small>Total Pending</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-success float-right\">Monthly</span>\r\n          <h5>Completed</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">780</h1>\r\n          <div class=\"stat-percent font-bold text-info\">20% <i class=\"fa fa-level-up\"></i></div>\r\n          <small>Total Completed</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-danger float-right\">Low value</span>\r\n          <h5>Rejected</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">20</h1>\r\n          <div class=\"stat-percent font-bold text-danger\">38% <i class=\"fa fa-level-down\"></i></div>\r\n          <small>Total Rejected</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <h5>Orders</h5>\r\n          <div class=\"float-right\">\r\n            <div class=\"btn-group\">\r\n              <button type=\"button\" class=\"btn btn-xs btn-white active\">Today</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Monthly</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Annual</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <div class=\"row\">\r\n            <div class=\"col-lg-9\">\r\n              <div class=\"flot-chart\">\r\n                  <img src=\"../../../assets/images/dashboard.png\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"col-lg-3\">\r\n              <ul class=\"stat-list\">\r\n                <li>\r\n                  <h2 class=\"no-margins\">2,346</h2>\r\n                  <small>Total orders in period</small>\r\n                  <div class=\"stat-percent\">48% <i class=\"fa fa-level-up text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 48%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">4,422</h2>\r\n                  <small>Orders in last month</small>\r\n                  <div class=\"stat-percent\">60% <i class=\"fa fa-level-down text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 60%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">9,180</h2>\r\n                  <small>Monthly income from orders</small>\r\n                  <div class=\"stat-percent\">22% <i class=\"fa fa-bolt text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 22%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <h5>Messages</h5>\r\n          <div class=\"ibox-tools\">\r\n            <a class=\"collapse-link\">\r\n              <i class=\"fa fa-chevron-up\"></i>\r\n            </a>\r\n            <a class=\"close-link\">\r\n              <i class=\"fa fa-times\"></i>\r\n            </a>\r\n          </div>\r\n        </div>\r\n        <div class=\"ibox-content ibox-heading\">\r\n          <h3><i class=\"fa fa-envelope-o\"></i> New Announcement</h3>\r\n          <small><i class=\"fa fa-tim\"></i> You have 22 new announcement.</small>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <div class=\"feed-activity-list\">\r\n\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right text-navy\">1m ago</small>\r\n                <strong>Monica Smith</strong>\r\n                <div>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum</div>\r\n                <small class=\"text-muted\">Today 5:60 pm - 12.06.2014</small>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">2m ago</small>\r\n                <strong>Jogn Angel</strong>\r\n                <div>There are many variations of passages of Lorem Ipsum available</div>\r\n                <small class=\"text-muted\">Today 2:23 pm - 11.06.2014</small>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">5m ago</small>\r\n                <strong>Jesica Ocean</strong>\r\n                <div>Contrary to popular belief, Lorem Ipsum</div>\r\n                <small class=\"text-muted\">Today 1:00 pm - 08.06.2014</small>\r\n              </div>\r\n            </div>\r\n\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">5m ago</small>\r\n                <strong>Monica Jackson</strong>\r\n                <div>The generated Lorem Ipsum is therefore </div>\r\n                <small class=\"text-muted\">Yesterday 8:48 pm - 10.06.2014</small>\r\n              </div>\r\n            </div>\r\n\r\n\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">5m ago</small>\r\n                <strong>Anna Legend</strong>\r\n                <div>All the Lorem Ipsum generators on the Internet tend to repeat </div>\r\n                <small class=\"text-muted\">Yesterday 8:48 pm - 10.06.2014</small>\r\n              </div>\r\n            </div>\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">5m ago</small>\r\n                <strong>Damian Nowak</strong>\r\n                <div>The standard chunk of Lorem Ipsum used </div>\r\n                <small class=\"text-muted\">Yesterday 8:48 pm - 10.06.2014</small>\r\n              </div>\r\n            </div>\r\n            <div class=\"feed-element\">\r\n              <div>\r\n                <small class=\"float-right\">5m ago</small>\r\n                <strong>Gary Smith</strong>\r\n                <div>200 Latin words, combined with a handful</div>\r\n                <small class=\"text-muted\">Yesterday 8:48 pm - 10.06.2014</small>\r\n              </div>\r\n            </div>\r\n\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-lg-6\">\r\n\r\n      <div class=\"row\">\r\n        <div class=\"col-lg-6\">\r\n          <div class=\"ibox \">\r\n            <div class=\"ibox-title\">\r\n              <h5>Withdrawal Requests</h5>\r\n              <div class=\"ibox-tools\">\r\n                <a class=\"collapse-link\">\r\n                  <i class=\"fa fa-chevron-up\"></i>\r\n                </a>\r\n                <a class=\"close-link\">\r\n                  <i class=\"fa fa-times\"></i>\r\n                </a>\r\n              </div>\r\n            </div>\r\n            <div class=\"ibox-content table-responsive\">\r\n              <table class=\"table table-hover no-margins\">\r\n                <thead>\r\n                  <tr>\r\n                    <th>Status</th>\r\n                    <th>Date</th>\r\n                    <th>Agent</th>\r\n                    <th>Value</th>\r\n                  </tr>\r\n                </thead>\r\n                <tbody>\r\n                  <tr>\r\n                    <td><small>Pending...</small></td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 11:20pm</td>\r\n                    <td>Samantha</td>\r\n                    <td class=\"text-navy\">  RM500 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><span class=\"label label-warning\">Canceled</span> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 10:40am</td>\r\n                    <td>Monica</td>\r\n                    <td class=\"text-navy\">  RM600 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><small>Pending...</small> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 01:30pm</td>\r\n                    <td>John</td>\r\n                    <td class=\"text-navy\">  RM700 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><small>Pending...</small> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 02:20pm</td>\r\n                    <td>Agnes</td>\r\n                    <td class=\"text-navy\">  RM70 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><small>Pending...</small> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 09:40pm</td>\r\n                    <td>Janet</td>\r\n                    <td class=\"text-navy\">  RM800 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><span class=\"label label-primary\">Completed</span> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 04:10am</td>\r\n                    <td>Amelia</td>\r\n                    <td class=\"text-navy\">  RM300 </td>\r\n                  </tr>\r\n                  <tr>\r\n                    <td><small>Pending...</small> </td>\r\n                    <td><i class=\"fa fa-clock-o\"></i> 12:08am</td>\r\n                    <td>Damian</td>\r\n                    <td class=\"text-navy\">  RM250 </td>\r\n                  </tr>\r\n                </tbody>\r\n              </table>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        \r\n      </div>\r\n      \r\n\r\n    </div>\r\n\r\n\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"wrapper wrapper-content\">\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-info float-right\">Monthly</span>\r\n          <h5>Orders</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">3000</h1>\r\n          <div class=\"stat-percent font-bold text-success\">98% <i class=\"fa fa-bolt\"></i></div>\r\n          <small>Total Orders</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-primary float-right\">Today</span>\r\n          <h5>Pending</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">2200</h1>\r\n          <div class=\"stat-percent font-bold text-navy\">44% <i class=\"fa fa-level-up\"></i></div>\r\n          <small>Total Pending</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-success float-right\">Monthly</span>\r\n          <h5>Completed</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">780</h1>\r\n          <div class=\"stat-percent font-bold text-info\">20% <i class=\"fa fa-level-up\"></i></div>\r\n          <small>Total Completed</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n    <div class=\"col-lg-3\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <span class=\"label label-danger float-right\">Low value</span>\r\n          <h5>Rejected</h5>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <h1 class=\"no-margins\">20</h1>\r\n          <div class=\"stat-percent font-bold text-danger\">38% <i class=\"fa fa-level-down\"></i></div>\r\n          <small>Total Rejected</small>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <h5>Orders</h5>\r\n          <div class=\"float-right\">\r\n            <div class=\"btn-group\">\r\n              <button type=\"button\" class=\"btn btn-xs btn-white active\">Today</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Monthly</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Annual</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <div class=\"row\">\r\n            <div class=\"col-lg-9\">\r\n              <div class=\"flot-chart\">\r\n                  <img src=\"../../../assets/images/dashboard.png\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"col-lg-3\">\r\n              <ul class=\"stat-list\">\r\n                <li>\r\n                  <h2 class=\"no-margins\">2,346</h2>\r\n                  <small>Total orders in period</small>\r\n                  <div class=\"stat-percent\">48% <i class=\"fa fa-level-up text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 48%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">4,422</h2>\r\n                  <small>Orders in last month</small>\r\n                  <div class=\"stat-percent\">60% <i class=\"fa fa-level-down text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 60%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">9,180</h2>\r\n                  <small>Monthly income from orders</small>\r\n                  <div class=\"stat-percent\">22% <i class=\"fa fa-bolt text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 22%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <announcement></announcement>\r\n    </div>\r\n    <div class=\"col-lg-6\">\r\n        <team-submission></team-submission>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5944,6 +6961,99 @@ exports.ManageWithdrawal = ManageWithdrawal;
 
 /***/ }),
 
+/***/ "./src/app/pages/view-announcement/view-announcement.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/view-announcement/view-announcement.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'View </'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <a [routerLink]='[\"/create-announcement\"]' class=\"btn btn-primary btn-lg float-right mrg15B\"><i class=\"fa fa-plus\"></i> <span class=\"nav-label\">Create</span></a>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Announcements</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6 m-b-xs\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-sm btn-white active\" for=\"all\">\r\n                                    <input type=\"radio\" id=\"all\" name=\"status\" [value]=\"\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> All\r\n                                </label>\r\n                                <label class=\"btn btn-sm btn-white\" for=\"active\">\r\n                                    <input type=\"radio\" id=\"active\" name=\"status\" [value]=\"true\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Active\r\n                                </label>\r\n                                <label class=\"btn btn-sm btn-white\" for=\"inactive\">\r\n                                    <input type=\"radio\" id=\"inactive\" name=\"status\" [value]=\"false\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Inactive\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <div class=\"input-group\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                                <span class=\"clear-wrapper\" title=\"Clear all\" *ngIf=\"searchParams.keyword!=null\" (click)=\"clearFilter()\"><span class=\"clear\">�</span></span>\r\n                                <span class=\"input-group-append\">\r\n                                    <button type=\"button\" class=\"btn btn-sm btn-primary\" (click)=\"reloadData()\">\r\n                                        Go!\r\n                                    </button>\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-announcement/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/view-announcement/view-announcement.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/view-announcement/view-announcement.ts ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var announcementFields_1 = __webpack_require__(/*! src/app/metadata/announcementFields */ "./src/app/metadata/announcementFields.ts");
+var search_params_1 = __webpack_require__(/*! src/app/model/search-params */ "./src/app/model/search-params.ts");
+var ViewAnnouncement = /** @class */ (function (_super) {
+    __extends(ViewAnnouncement, _super);
+    function ViewAnnouncement(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, "", false) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.searchFields = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        return _this;
+    }
+    ViewAnnouncement.prototype.ngOnInit = function () {
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.controllerName = apiController_1.ApiController.Announcement;
+    };
+    ViewAnnouncement.prototype.getTablerowDataMapping = function () {
+        var columnMappings = announcementFields_1.ViewAnnouncementColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        return columnMappings;
+    };
+    ViewAnnouncement.prototype.clearFilter = function () {
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.reloadData();
+    };
+    ViewAnnouncement = __decorate([
+        core_1.Component({
+            selector: 'view-announcement',
+            template: __webpack_require__(/*! ./view-announcement.html */ "./src/app/pages/view-announcement/view-announcement.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], ViewAnnouncement);
+    return ViewAnnouncement;
+}(listEvent_1.ListEvent));
+exports.ViewAnnouncement = ViewAnnouncement;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/view-commission/view-commission.html":
 /*!************************************************************!*\
   !*** ./src/app/pages/view-commission/view-commission.html ***!
@@ -6103,7 +7213,7 @@ exports.ViewCommission = ViewCommission;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Orders'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-2\" *ngFor=\"let field of searchFields\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                    <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                  [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\" ></data-control>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group\">\r\n                    <button class=\"btn btn-success mrg5R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n            <!--<div class=\"col-sm-3\">\r\n              <div class=\"form-group\">\r\n                <label class=\"col-form-label\" for=\"price\">Product Package</label>\r\n                <select name=\"productPackage\" id=\"status\" class=\"form-control\" [(ngModel)]=\"searchParams.productPackage\">\r\n                    <option value=\"\">-- All --</option>\r\n                    <option *ngFor=\"let option of packages\" [ngValue]=\"option.key\">{{option.value}}</option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-sm-1\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-form-label\" for=\"quantity\">Status</label>\r\n                    <select name=\"status\" id=\"status\" class=\"form-control\" [(ngModel)]=\"searchParams.status\">\r\n                        <option value=\"\">-- All --</option>\r\n                        <option value=\"Pending\">Pending</option>\r\n                        <option value=\"Waiting List\">Waiting List</option>\r\n                        <option value=\"Early Stage\">Early Stage</option>\r\n                        <option value=\"Post Complete\">Post Complete</option>\r\n                        <option value=\"Cancel\">Cancel</option>\r\n                        <option value=\"KIV\">KIV</option>\r\n                        <option value=\"New Area\">New Area</option>\r\n                    </select>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-3\">\r\n              <div class=\"form-group\">\r\n                <label class=\"col-form-label\" for=\"status\">Agent</label>\r\n                <select name=\"agent\" id=\"status\" class=\"form-control\" [(ngModel)]=\"searchParams.agent\">\r\n                    <option value=\"\">-- All --</option>\r\n                    <option *ngFor=\"let option of agents\" [ngValue]=\"option.key\">{{option.value}}</option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-sm-2\">\r\n              <div class=\"form-group\">\r\n                <label class=\"col-form-label\" for=\"quantity\">Submission Date</label>\r\n                <input type=\"text\"\r\n                       ngxDaterangepickerMd\r\n                       class=\"form-control\"\r\n                       name=\"submittedDate\"\r\n                       [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                       [(ngModel)]=\"searchParams.submittedDate\"\r\n                       startKey=\"startDate\"\r\n                       endKey=\"endDate\" />\r\n              </div>\r\n            </div>-->\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-order/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'View Orders'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-2\" *ngFor=\"let field of searchFields\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                    <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                  [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\" ></data-control>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group\">\r\n                    <button class=\"btn btn-success mrg5R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-order/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 

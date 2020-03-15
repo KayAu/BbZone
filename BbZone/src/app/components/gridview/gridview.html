@@ -1,23 +1,17 @@
-<!--<loading></loading>-->
-<table class="table table-striped float-left wp-100" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+﻿<loading></loading>
+<table class="table wp-100" >
     <tbody>
         <tr *ngIf="dataSource.length">
-            <th class="cell-width-3 pad15L">#</th>
-            <th *ngFor="let columnName of dataColumns">{{columnName}}</th>
+            <th *ngFor="let columnName of dataColumns; let colIndex = index" [ngClass]="{'pad15L':colIndex == 0}">{{columnName}}</th>
             <th *ngIf="itemLink">View</th>
         </tr>
         <tr *ngFor="let row of dataSource; let rowNo = index" class="row-select">
-            <td class="pad15L">{{rowNo + 1}}.</td>
             <ng-container *ngFor="let value of getRowData(row); let colNo = index">
-                <td *ngIf="!hideColumns.includes(colNo)" [innerHTML]="value">
-                    <!--{{value}}-->
+                <td *ngIf="!hideColumns.includes(colNo)"  [ngClass]="{'pad15L':colNo == 0}" [innerHTML]="value">
                 </td>
             </ng-container>
-            <td *ngIf="itemLink">
-                <a [routerLink]='[itemLink, row[itemKey]]'><i class="fa fa-file-text-o"></i></a>
-            </td>
         </tr>
-        <tr *ngIf="showTotal">
+        <tr *ngIf="showTotal && dataColumns.length > 0">
             <td></td>
             <td class="font-weight-600">Total</td>
             <td class="font-weight-600" *ngFor="let item of [].constructor(dataColumns.length-1); let colIndex = index">{{sumColumnTotal(colIndex+1)}}</td>
@@ -37,4 +31,4 @@
         </tr>
     </tbody>
 </table>
-<pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" *ngIf="showPager"></pager>
+<!--<pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" *ngIf="showPager"></pager>-->

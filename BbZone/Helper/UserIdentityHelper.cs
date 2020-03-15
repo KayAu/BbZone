@@ -116,7 +116,7 @@ namespace BroadbandZone_App.Helper
         /// Set login account to cookie
         /// </summary>
         /// <param name="userLoginName">User login account</param>
-        public static void SetLoginAccountToCookie(AuthenticatedUser user, bool persistInCookie = false)
+        public static void SetLoginAccountToCookie(AuthenticatedUser user, bool persistInCookie = true)
         {
             try
             {

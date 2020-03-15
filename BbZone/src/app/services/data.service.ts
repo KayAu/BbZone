@@ -12,7 +12,7 @@ export class DataService {
         this.headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }) };
     }
 
-    get(apiControllerName: string, recordId: any): any {
+    get(apiControllerName: string, recordId?: any): any {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
     }
 

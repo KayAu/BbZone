@@ -11,6 +11,11 @@ namespace BroadbandZone_Data
         public bool? Deleted { get; set; }
     }
 
+    public partial class AnnouncementDocument
+    {
+        public bool? Deleted { get; set; }
+    }
+
     public partial class Registration
     {
         public string Password { get; set; }

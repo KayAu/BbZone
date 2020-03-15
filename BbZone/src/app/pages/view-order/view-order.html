@@ -15,52 +15,7 @@
                     <button class="btn btn-clear" (click)="clearSearchParam()">Clear</button>
                 </div>
             </div>
-            <!--<div class="col-sm-3">
-              <div class="form-group">
-                <label class="col-form-label" for="price">Product Package</label>
-                <select name="productPackage" id="status" class="form-control" [(ngModel)]="searchParams.productPackage">
-                    <option value="">-- All --</option>
-                    <option *ngFor="let option of packages" [ngValue]="option.key">{{option.value}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-1">
-                <div class="form-group">
-                    <label class="col-form-label" for="quantity">Status</label>
-                    <select name="status" id="status" class="form-control" [(ngModel)]="searchParams.status">
-                        <option value="">-- All --</option>
-                        <option value="Pending">Pending</option>
-                        <option value="Waiting List">Waiting List</option>
-                        <option value="Early Stage">Early Stage</option>
-                        <option value="Post Complete">Post Complete</option>
-                        <option value="Cancel">Cancel</option>
-                        <option value="KIV">KIV</option>
-                        <option value="New Area">New Area</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="form-group">
-                <label class="col-form-label" for="status">Agent</label>
-                <select name="agent" id="status" class="form-control" [(ngModel)]="searchParams.agent">
-                    <option value="">-- All --</option>
-                    <option *ngFor="let option of agents" [ngValue]="option.key">{{option.value}}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="form-group">
-                <label class="col-form-label" for="quantity">Submission Date</label>
-                <input type="text"
-                       ngxDaterangepickerMd
-                       class="form-control"
-                       name="submittedDate"
-                       [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
-                       [(ngModel)]="searchParams.submittedDate"
-                       startKey="startDate"
-                       endKey="endDate" />
-              </div>
-            </div>-->
+            
         </div>
     </div>
     <loading></loading>

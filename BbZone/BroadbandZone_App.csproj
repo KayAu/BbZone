@@ -231,6 +231,7 @@
     <Compile Include="Helper\UserIdentityHelper.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ChartData.cs" />
+    <Compile Include="Models\NewAgentCommission.cs" />
     <Compile Include="Models\UploadedFile.cs" />
     <Compile Include="Models\FileExportResult.cs" />
     <Compile Include="Models\Gridview.cs" />
@@ -244,7 +245,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="WebApi\AgentController.cs" />
+    <Compile Include="WebApi\AnnouncementController.cs" />
+    <Compile Include="WebApi\CommissionController.cs" />
     <Compile Include="WebApi\CustomerApplicationrController.cs" />
+    <Compile Include="WebApi\DashboardController.cs" />
     <Compile Include="WebApi\DropdownController.cs" />
     <Compile Include="WebApi\ProductCategoryController.cs" />
     <Compile Include="WebApi\ProductPackageController.cs" />
@@ -275,12 +279,19 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\astro.jpg" />
+    <Content Include="images\astro.png" />
     <Content Include="images\avatar_all.png" />
     <Content Include="images\dashboard.png" />
     <Content Include="images\date.png" />
     <Content Include="images\header_one.jpg" />
     <Content Include="images\header_two.jpg" />
+    <Content Include="images\maxis.png" />
+    <Content Include="images\nex.life.png" />
     <Content Include="images\profile_small.jpg" />
+    <Content Include="images\time.png" />
+    <Content Include="images\tm.png" />
+    <Content Include="images\unifi.png" />
     <Content Include="images\word_map.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -328,31 +339,38 @@
     <Content Include="Scripts\wms.js" />
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
+    <Content Include="src\app\components\announcement\announcement.html" />
+    <Content Include="src\app\components\dashboard\team-submission\team-submission.html" />
     <Content Include="src\app\components\data-control\data-control.css" />
     <Content Include="src\app\components\data-control\data-control.html" />
     <Content Include="src\app\components\data-field\data-field.html" />
     <Content Include="src\app\components\editable-table\editable-table.html" />
     <Content Include="src\app\components\file-uploader\file-uploader.css" />
     <Content Include="src\app\components\file-uploader\file-uploader.html" />
+    <Content Include="src\app\components\agent-commission-table\agent-commission-table.html" />
     <Content Include="src\app\components\gridview\gridview.html" />
     <Content Include="src\app\components\impersonate-user\impersonate-user.html" />
     <Content Include="src\app\components\auto-suggest\auto-suggest.css" />
     <Content Include="src\app\components\auto-suggest\auto-suggest.html" />
     <Content Include="src\app\components\editable-dropdown\editable-dropdown.html" />
     <Content Include="src\app\components\editable-yesno\editable-yesno.html" />
+    <Content Include="src\app\components\multiple-checkbox\multiple-checkbox.html" />
     <Content Include="src\app\components\pagination\pagination.css" />
     <Content Include="src\app\components\pagination\pagination.html" />
+    <Content Include="src\app\components\product-options\product-options.css" />
     <Content Include="src\app\components\product-options\product-options.html" />
     <Content Include="src\app\components\superior-field\superior-field.html" />
     <Content Include="src\app\nav-menu\nav-menu.component.css" />
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
+    <Content Include="src\app\pages\agent-maintenance\agent-maintenance.html" />
     <Content Include="src\app\pages\agent-profile\agent-profile.html" />
     <Content Include="src\app\pages\agent-registration-list\agent-registration-list.html" />
     <Content Include="src\app\pages\agent-registration-view\agent-registration-view.html" />
     <Content Include="src\app\pages\agent-registration\agent-registration.html" />
+    <Content Include="src\app\pages\create-announcement\create-announcement.html" />
     <Content Include="src\app\pages\create-order\create-order.html" />
-    <Content Include="src\app\pages\download-record\download-record.html" />
+    <Content Include="src\app\pages\edit-announcement\edit-announcement.html" />
     <Content Include="src\app\pages\edit-order\edit-order.html" />
     <Content Include="src\app\pages\home\home.html" />
     <Content Include="src\app\pages\login\login.html" />
@@ -363,6 +381,7 @@
     <Content Include="src\app\pages\record-counts\record-counts.html" />
     <Content Include="src\app\pages\report-chart\report-chart.html" />
     <Content Include="src\app\pages\user-access\user-access.html" />
+    <Content Include="src\app\pages\view-announcement\view-announcement.html" />
     <Content Include="src\app\pages\view-commission\view-commission.html" />
     <Content Include="src\app\pages\view-order\view-order.html" />
     <Content Include="src\favicon.ico" />
@@ -400,6 +419,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\AnnouncementFiles\" />
     <Folder Include="App_Data\UploadFiles\" />
     <Folder Include="node_modules\" />
     <Folder Include="src\assets\" />
@@ -422,11 +442,14 @@
   <ItemGroup>
     <TypeScriptCompile Include="src\app\app.component.ts" />
     <TypeScriptCompile Include="src\app\app.module.ts" />
+    <TypeScriptCompile Include="src\app\components\announcement\announcement.ts" />
     <TypeScriptCompile Include="src\app\components\back-button\back-button.ts" />
+    <TypeScriptCompile Include="src\app\components\dashboard\team-submission\team-submission.ts" />
     <TypeScriptCompile Include="src\app\components\data-control\data-control.ts" />
     <TypeScriptCompile Include="src\app\components\data-field\data-field.ts" />
     <TypeScriptCompile Include="src\app\components\editable-table\editable-table.ts" />
     <TypeScriptCompile Include="src\app\components\file-uploader\file-uploader.ts" />
+    <TypeScriptCompile Include="src\app\components\agent-commission-table\agent-commission-table.ts" />
     <TypeScriptCompile Include="src\app\components\gridview\gridview.ts" />
     <TypeScriptCompile Include="src\app\components\impersonate-user\impersonate-user.ts" />
     <TypeScriptCompile Include="src\app\components\bar-chart\bar-chart.ts" />
@@ -435,6 +458,7 @@
     <TypeScriptCompile Include="src\app\components\editable-dropdown\editable-dropdown.ts" />
     <TypeScriptCompile Include="src\app\components\editable-yesno\editable-yesno.ts" />
     <TypeScriptCompile Include="src\app\components\loader\loader.ts" />
+    <TypeScriptCompile Include="src\app\components\multiple-checkbox\multiple-checkbox.ts" />
     <TypeScriptCompile Include="src\app\components\page-header.ts" />
     <TypeScriptCompile Include="src\app\components\pagination\pagination.ts" />
     <TypeScriptCompile Include="src\app\components\product-options\product-options.ts" />
@@ -455,12 +479,14 @@
     <TypeScriptCompile Include="src\app\interfaces\listEvent.ts" />
     <TypeScriptCompile Include="src\app\material.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\editOrderFields.ts" />
     <TypeScriptCompile Include="src\app\model\cascade-data.ts" />
     <TypeScriptCompile Include="src\app\model\form.data.mapping.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchOrderFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\manageProductColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\viewOrderColumns .ts" />
+    <TypeScriptCompile Include="src\app\model\select.item.ts" />
     <TypeScriptCompile Include="src\app\model\tablerow.data.mapping.ts" />
     <TypeScriptCompile Include="src\app\model\data.field.control.ts" />
     <TypeScriptCompile Include="src\app\model\date.range.ts" />
@@ -474,12 +500,14 @@
     <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-maintenance\agent-maintenance.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-profile\agent-profile.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-registration-list\agent-registration-list.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-registration-view\agent-registration-view.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-registration\agent-registration.ts" />
+    <TypeScriptCompile Include="src\app\pages\create-announcement\create-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\create-order\create-order.ts" />
-    <TypeScriptCompile Include="src\app\pages\download-record\download-record.ts" />
+    <TypeScriptCompile Include="src\app\pages\edit-announcement\edit-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\edit-order\edit-order.ts" />
     <TypeScriptCompile Include="src\app\pages\home\home.ts" />
     <TypeScriptCompile Include="src\app\pages\login\login.ts" />
@@ -500,6 +528,7 @@
     <TypeScriptCompile Include="src\app\pages\record-counts\record-counts.ts" />
     <TypeScriptCompile Include="src\app\pages\report-chart\report-chart.ts" />
     <TypeScriptCompile Include="src\app\pages\user-access\user-access.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-announcement\view-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\view-commission\view-commission.ts" />
     <TypeScriptCompile Include="src\app\pages\view-order\view-order.ts" />
     <TypeScriptCompile Include="src\app\pipes\enum-to-array.ts" />

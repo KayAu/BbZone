@@ -30,9 +30,13 @@ namespace BroadbandZone_App.Models
         public int? ProductPackageId { get; set; }
         public int? OrderStatusId { get; set; }
         public string Agent { get; set; }
-
         public DateRange submittedDate { get; set; }
     }
 
-
+    public class SearchAnnouncementParams
+    {
+        public string Title { get; set; }
+        public bool? IsActive { get; set; }
+        public DateRange AnnouncementDate { get; set; }
+    }
 }

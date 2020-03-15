@@ -1,7 +1,7 @@
 
 <page-header [title]="'My Profile'" [parentCategory]="''"></page-header>
 
-<div  class="wrapper wrapper-content animated fadeInRight">
+<div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox" *ngIf="!completed">
@@ -30,15 +30,15 @@
                                 Superior
                             </label>
                             <div class="col-sm-9">
-                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form" 
-                                                [displayText]="formRecord['superiorName']" name="superior" ></superior-field>
+                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
+                                                [displayText]="formRecord['superiorName']" name="superior"></superior-field>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
                             <div class="col-sm-12 ">
-                                <a [routerLink]='["/"]' class="btn btn-white float-right">Cancel</a>
+                                <back-button>Cancel</back-button>
                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
                                 <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                         [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
@@ -55,5 +55,4 @@
     </div>
 </div>
 
-        
-  
+

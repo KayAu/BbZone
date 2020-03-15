@@ -1,0 +1,17 @@
+﻿<div class="btn-group">
+    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>{{selectedItemText? selectedItemText : 'Select'}}</span>
+    </button>
+    <ul class="dropdown-menu">
+        <ng-container *ngFor="let item of checkboxItems; let itemNo = index">
+            <li class="dropdown-item pad10L">
+                <div class="checkbox checkbox-primary">
+                    <input id="checkbox{{itemNo}}" type="checkbox" [(ngModel)]="item.selected" (change)="itemSelected($event,itemNo)">
+                    <label for="checkbox{{itemNo}}">
+                        {{item.displayText}}
+                    </label>
+                </div>
+            </li>
+        </ng-container>
+    </ul>
+</div>

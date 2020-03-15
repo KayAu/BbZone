@@ -1,4 +1,4 @@
-﻿<page-header [title]="'View Orders'" [parentCategory]="''"></page-header>
+﻿<page-header [title]="'Agent Registration'" [parentCategory]="''"></page-header>
 <div class="wrapper wrapper-content animated fadeInRight">
     <loading></loading>
     <div class="row">
@@ -43,7 +43,7 @@
                                         </td>
                                     </ng-container>
                                     <td>
-                                        <a class="btn btn-success btn-sm " [routerLink]='["/agent-registration-view/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                        <a class="btn btn-success btn-sm" [routerLink]='["/agent-registration-view/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
                                     </td>
                                 </tr>
                                 <tr *ngIf="dataSource.length === 0">

@@ -1,5 +1,7 @@
 ﻿using BroadbandZone_App.Helper;
+using BroadbandZone_App.Models;
 using BroadbandZone_Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -13,6 +15,21 @@ namespace BroadbandZone_App.WebApi
     public class AgentController : ApiController
     {
         [HttpGet]
+        public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
+        {
+            try
+            {
+                StatusAndKeywordParams filterBy = JsonConvert.DeserializeObject<StatusAndKeywordParams>(searchParams);
+                var records = ModelHelper.GetListdata((new BroadbandZoneEntities()).GetAgents, currentPage, pageSize, sortColumn, sortInAsc, filterBy.Keyword, filterBy.IsActive);
+                return Ok(records);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpGet]
         [Route("api/Agent/CheckValidity/{agentId}")]
         public IHttpActionResult CheckValidity(int agentId)
         {
@@ -20,7 +37,7 @@ namespace BroadbandZone_App.WebApi
             {
                 using (var db = new BroadbandZoneEntities())
                 {
-                    var agentName = db.Agents.Where(a => a.AgentId == agentId).Select(a=>a.Fullname).FirstOrDefault();
+                    var agentName = db.Agents.Where(a => a.AgentId == agentId).Select(a => a.Fullname).FirstOrDefault();
                     return Ok(agentName);
                 }
             }
@@ -31,7 +48,6 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-    
         public IHttpActionResult GetProfile()
         {
             try
@@ -41,7 +57,7 @@ namespace BroadbandZone_App.WebApi
 
                 using (var db = new BroadbandZoneEntities())
                 {
-                    var agent = db.GetAgentProfile(currentUser.Username).FirstOrDefault();
+                    var agent = db.GetAgentProfile(currentUser.Username, null).FirstOrDefault();
                     return Ok(agent);
                 }
             }
@@ -51,12 +67,24 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-        //[HttpGet]
-        //// GET api/<controller>/5
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        [HttpGet]
+        // GET api/<controller>/5
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var agent = db.GetAgentProfile(null, id).FirstOrDefault();
+                    return Ok(agent);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
         [HttpPost]
         // POST api/<controller>
@@ -70,13 +98,14 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.Entry(editedRecord).Property(e => e.UserLogin).IsModified = false;
                     db.Entry(editedRecord).Property(e => e.PasswordHash).IsModified = false;
-                    editedRecord.SetDateAndAuthor("ModifiedBy", "ModifiedOn");
-                  
+                    editedRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
+
                     db.SaveChanges();
                     return Ok(editedRecord);
                 }
@@ -86,6 +115,5 @@ namespace BroadbandZone_App.WebApi
                 throw ex;
             }
         }
-
     }
 }

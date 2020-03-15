@@ -24,20 +24,24 @@ var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var ngx_toastr_1 = require("ngx-toastr");
 var superior_field_1 = require("src/app/components/superior-field/superior-field");
+var authentication_1 = require("src/app/services/authentication");
 var AgentProfile = /** @class */ (function () {
-    function AgentProfile(loaderService, dataService, formEvent, router, route, toastr) {
+    function AgentProfile(loaderService, dataService, formEvent, router, route, toastr, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
         this.formEvent = formEvent;
         this.router = router;
         this.route = route;
         this.toastr = toastr;
+        this.authenticationService = authenticationService;
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
         this.completed = false;
     }
     AgentProfile.prototype.ngOnInit = function () {
+        this.agentId = this.route.snapshot.params.id;
+        this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord();
     };
@@ -60,9 +64,10 @@ var AgentProfile = /** @class */ (function () {
     };
     AgentProfile.prototype.loadRecord = function () {
         var _this = this;
-        this.dataService.getAll("" + apiController_1.ApiController.Agent).subscribe(function (results) {
+        var url = this.agentId ? apiController_1.ApiController.Agent + "/" + this.agentId : "" + apiController_1.ApiController.Agent;
+        this.dataService.get(url).subscribe(function (results) {
             _this.formRecord = results;
-            _this.superiorField.editable = !_this.formRecord.superiorId ? true : false;
+            _this.superiorField.editable = !_this.formRecord.superiorId || _this.currentUser.isAdmin ? true : false;
         });
     };
     __decorate([
@@ -78,7 +83,13 @@ var AgentProfile = /** @class */ (function () {
             selector: 'agent-profile',
             templateUrl: './agent-profile.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
+            broadcast_service_1.BroadcastService,
+            router_1.Router,
+            router_2.ActivatedRoute,
+            ngx_toastr_1.ToastrService,
+            authentication_1.AuthenticationService])
     ], AgentProfile);
     return AgentProfile;
 }());

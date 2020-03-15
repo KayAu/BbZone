@@ -10,104 +10,95 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
+var loader_service_1 = require("src/app/loader/loader.service");
+var data_service_1 = require("src/app/services/data.service");
+var router_1 = require("@angular/router");
+var apiController_1 = require("src/app/enums/apiController");
+var ngx_toastr_1 = require("ngx-toastr");
+var forms_1 = require("@angular/forms");
+var multiple_checkbox_1 = require("src/app/components/multiple-checkbox/multiple-checkbox");
+var product_options_1 = require("src/app/components/product-options/product-options");
+var broadcast_service_1 = require("src/app/services/broadcast.service");
+var form_submit_1 = require("src/app/model/form-submit");
+var agent_commission_table_1 = require("src/app/components/agent-commission-table/agent-commission-table");
 var AgentComission = /** @class */ (function () {
-    function AgentComission() {
+    function AgentComission(loaderService, dataService, formEvent, toastr, router) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.toastr = toastr;
+        this.router = router;
+        this.isUpdating = false;
+        this.commissionSettings = [];
+        this.agentCommissions = [];
+        this.selectedTab = 1;
+        this.allowCommConfig = false;
     }
     AgentComission.prototype.ngOnInit = function () {
-        this.loadData();
+        this.loadAgents();
     };
-    AgentComission.prototype.loadData = function () {
-        this.agents = [
-            {
-                "agentId": "1001",
-                "agentName": "Agent 1",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)M2U",
-                "commission": "180%",
-                "isActive": true
-            },
-            {
-                "agentId": "1002",
-                "agentName": "Agent 2",
-                "product": "Unifi ",
-                "package": "ebiz package 30Mbps - RM249(M2U)",
-                "commission": "160%",
-                "isActive": true
-            },
-            {
-                "agentId": "1003",
-                "agentName": "Agent 3",
-                "product": "Unifi ",
-                "package": "ebiz package 30Mbps - RM249(M2U)",
-                "commission": "130%",
-                "isActive": true
-            },
-            {
-                "agentId": "1004",
-                "agentName": "Agent 4",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)newnew",
-                "commission": "100%",
-                "isActive": true
-            },
-            {
-                "agentId": "1005",
-                "agentName": "Agent 5",
-                "product": "Unifi ",
-                "package": "ebiz package 50Mbps - RM299(M2U)",
-                "commission": "150%",
-                "isActive": true
-            },
-            {
-                "agentId": "1006",
-                "agentName": "Agent 6",
-                "product": "Unifi ",
-                "package": "ebiz package 50Mbps - RM299(M2U)",
-                "commission": "170%",
-                "isActive": true
-            },
-            {
-                "agentId": "1007",
-                "agentName": "Agent 7",
-                "product": "Unifi ",
-                "package": "unifi Mobile RM59(12 months)",
-                "commission": "150%",
-                "isActive": true
-            },
-            {
-                "agentId": "1008",
-                "agentName": "Agent 8",
-                "product": "Unifi ",
-                "package": "unifi 30Mbps - Upsizing Promo(M2U)",
-                "commission": "100%",
-                "isActive": true
-            },
-            {
-                "agentId": "1009",
-                "agentName": "Agent 9",
-                "product": "Unifi ",
-                "package": "unifi 30Mbps - Upsizing Promo(M2U)",
-                "commission": "100%",
-                "isActive": false
-            },
-            {
-                "agentId": "1010",
-                "agentName": "Agent 10",
-                "product": "Unifi ",
-                "package": "unifi 100Mbps - 2020(RM129)M2U",
-                "commission": "100%",
-                "isActive": false
-            }
-        ];
+    AgentComission.prototype.loadAgents = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents").subscribe(function (data) {
+            _this.myAgents = data.displayData;
+            _this.allowCommConfig = data.allowCommConfig;
+        });
     };
-    AgentComission.prototype.setRowOnEdit = function (rowIndex) {
+    AgentComission.prototype.loadCategories = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct).subscribe(function (results) {
+            _this.commissionSettings = results;
+        });
     };
+    AgentComission.prototype.loadAgentCommissions = function () {
+        this.agentCommissionTable.loadData(this.selectedProduct);
+        //this.dataService.get(`${ApiController.Commission}/GetMyAgentCommission`, this.selectedProduct).subscribe(results => {
+        //    this.agentCommissions = results;
+        //});
+    };
+    AgentComission.prototype.create = function () {
+        var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid)
+            return;
+        this.isUpdating = true;
+        var newRecord = { agents: this.selectedAgents, commissionSettings: this.commissionSettings };
+        this.dataService.add(apiController_1.ApiController.Commission, newRecord).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+            _this.resetForm();
+        });
+    };
+    AgentComission.prototype.resetForm = function () {
+        this.commissionSettings = [];
+        this.multipleCheckboxes.removeSelection();
+        this.productOptions.clearSelection();
+    };
+    AgentComission.prototype.editAgentCommission = function (categoryId) {
+        console.log(categoryId);
+    };
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], AgentComission.prototype, "form", void 0);
+    __decorate([
+        core_1.ViewChild(multiple_checkbox_1.MultipleCheckboxes),
+        __metadata("design:type", multiple_checkbox_1.MultipleCheckboxes)
+    ], AgentComission.prototype, "multipleCheckboxes", void 0);
+    __decorate([
+        core_1.ViewChild(product_options_1.ProductOptions),
+        __metadata("design:type", product_options_1.ProductOptions)
+    ], AgentComission.prototype, "productOptions", void 0);
+    __decorate([
+        core_1.ViewChild(agent_commission_table_1.AgentCommissionTable),
+        __metadata("design:type", agent_commission_table_1.AgentCommissionTable)
+    ], AgentComission.prototype, "agentCommissionTable", void 0);
     AgentComission = __decorate([
         core_1.Component({
             selector: 'agent-comission',
             templateUrl: './agent-comission.html'
         }),
-        __metadata("design:paramtypes", [])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, ngx_toastr_1.ToastrService, router_1.Router])
     ], AgentComission);
     return AgentComission;
 }());

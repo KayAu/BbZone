@@ -18,6 +18,7 @@ BEGIN
 		ProductName VARCHAR(50),
 		Category VARCHAR(50),
 		DefaultCommission MONEY NOT NULL,
+		CommissionPercent SMALLINT NOT NULL,
 		IsActive BIT,
 		CreatedOn SMALLDATETIME,
 		CreatedBy VARCHAR(50),
@@ -39,6 +40,7 @@ BEGIN
 			  ,ProductName
 			  ,Category
 			  ,DefaultCommission
+			  ,CommissionPercent
 			  ,p.IsActive
 			  ,pc.CreatedOn 
 			  ,pc.CreatedBy
@@ -67,6 +69,7 @@ BEGIN
 			  ,ProductName
 			  ,Category
 			  ,DefaultCommission
+			  ,CommissionPercent
 			  ,IsActive
 			  ,CreatedOn
 			  ,CreatedBy

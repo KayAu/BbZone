@@ -47,6 +47,20 @@ var ManageCategoryColumns = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "commissionPercent",
+            "headerText": "Commission (%)",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": false,
+            "colWidth": "",
+            "dataFieldControl": {
+                "controlName": "commissionPercent",
+                "controlType": "number",
+                "required": true,
+                "maxLength": 5
+            }
+        },
+        {
             "fieldName": "productName",
             "headerText": "Product",
             "displayType": "text",

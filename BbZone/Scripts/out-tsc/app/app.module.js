@@ -17,7 +17,7 @@ var home_1 = require("./pages/home/home");
 var create_order_1 = require("./pages/create-order/create-order");
 var page_header_1 = require("./components/page-header");
 var view_order_1 = require("./pages/view-order/view-order");
-var gridview_1 = require("./components/gridview/gridview");
+var agent_commission_table_1 = require("./components/agent-commission-table/agent-commission-table");
 var data_service_1 = require("./services/data.service");
 var loader_service_1 = require("./loader/loader.service");
 var broadcast_service_1 = require("./services/broadcast.service");
@@ -39,6 +39,7 @@ var agent_registration_1 = require("./pages/agent-registration/agent-registratio
 var agent_registration_view_1 = require("./pages/agent-registration-view/agent-registration-view");
 var agent_registration_list_1 = require("./pages/agent-registration-list/agent-registration-list");
 var agent_profile_1 = require("./pages/agent-profile/agent-profile");
+var agent_maintenance_1 = require("./pages/agent-maintenance/agent-maintenance");
 var tablerow_buttons_1 = require("./components/tablerow-buttons/tablerow-buttons");
 var editmode_directive_1 = require("./directives/editmode-directive");
 var editable_dropdown_1 = require("./components/editable-dropdown/editable-dropdown");
@@ -58,6 +59,13 @@ var angular_user_idle_1 = require("angular-user-idle");
 var back_button_1 = require("./components/back-button/back-button");
 var enum_to_array_1 = require("./pipes/enum-to-array");
 var superior_field_1 = require("./components/superior-field/superior-field");
+var multiple_checkbox_1 = require("./components/multiple-checkbox/multiple-checkbox");
+var gridview_1 = require("./components/gridview/gridview");
+var team_submission_1 = require("./components/dashboard/team-submission/team-submission");
+var create_announcement_1 = require("./pages/create-announcement/create-announcement");
+var edit_announcement_1 = require("./pages/edit-announcement/edit-announcement");
+var view_announcement_1 = require("./pages/view-announcement/view-announcement");
+var announcement_1 = require("./components/announcement/announcement");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -70,7 +78,7 @@ var AppModule = /** @class */ (function () {
                 create_order_1.CreateOrder,
                 page_header_1.PageHeader,
                 view_order_1.ViewOrder,
-                gridview_1.Gridview,
+                agent_commission_table_1.AgentCommissionTable,
                 pagination_1.Pagination,
                 sort_cell_directive_1.SortCellDirective,
                 sortable_directive_1.SortableDirective,
@@ -85,6 +93,7 @@ var AppModule = /** @class */ (function () {
                 agent_registration_view_1.AgentRegistrationView,
                 agent_registration_list_1.AgentRegistrationList,
                 agent_profile_1.AgentProfile,
+                agent_maintenance_1.AgentMaintenance,
                 tablerow_buttons_1.TableRowButtons,
                 editmode_directive_1.EditModeDirective,
                 editable_dropdown_1.EditableDropdown,
@@ -97,7 +106,14 @@ var AppModule = /** @class */ (function () {
                 login_1.Login,
                 back_button_1.BackButton,
                 enum_to_array_1.EnumToArrayPipe,
-                superior_field_1.SuperiorField
+                superior_field_1.SuperiorField,
+                multiple_checkbox_1.MultipleCheckboxes,
+                gridview_1.Gridview,
+                team_submission_1.TeamSubmission,
+                create_announcement_1.CreateAnnouncement,
+                edit_announcement_1.EditAnnouncement,
+                view_announcement_1.ViewAnnouncement,
+                announcement_1.Announcement,
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -128,7 +144,11 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList },
-                    { path: 'agent-profile', component: agent_profile_1.AgentProfile }
+                    { path: 'agent-profile', component: agent_profile_1.AgentProfile },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
+                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
+                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
+                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement }
                 ])
             ],
             providers: [

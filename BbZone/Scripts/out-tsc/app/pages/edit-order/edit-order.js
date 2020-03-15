@@ -38,9 +38,9 @@ var EditOrder = /** @class */ (function () {
         this.isUpdating = false;
     }
     EditOrder.prototype.ngOnInit = function () {
-        this.applicationId = this.route.snapshot.params.id;
+        this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
-        this.loadApplication(this.route.snapshot.params.id);
+        this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
@@ -62,14 +62,14 @@ var EditOrder = /** @class */ (function () {
                 }
             }
         }
-        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.applicationId, formData).subscribe(function (data) {
+        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.recordId, formData).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/view-order']);
         });
     };
-    EditOrder.prototype.loadApplication = function (applicationId) {
+    EditOrder.prototype.loadRecord = function (recordId) {
         var _this = this;
-        this.dataService.get(apiController_1.ApiController.CustomerApplication, applicationId).subscribe(function (data) {
+        this.dataService.get(apiController_1.ApiController.CustomerApplication, recordId).subscribe(function (data) {
             _this.formRecord = data;
         });
     };

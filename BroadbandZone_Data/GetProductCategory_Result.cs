@@ -23,5 +23,6 @@ namespace BroadbandZone_Data
         public string ModifiedBy { get; set; }
         public string ProductId { get; set; }
         public string ProductName { get; set; }
+        public short CommissionPercent { get; set; }
     }
 }

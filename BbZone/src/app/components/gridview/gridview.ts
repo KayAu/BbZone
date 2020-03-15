@@ -1,25 +1,26 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+﻿import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { LoaderService } from '../../loader/loader.service';
-import { ListEvent } from '../../interfaces/listEvent';
+import { ListEvent } from 'src/app/interfaces/listEvent';
 
 @Component({
     selector: 'gridview',
     templateUrl: './gridview.html'
 })
 
-export class Gridview extends ListEvent
+export class Gridview // extends ListEvent
 {
     showTotal: boolean = false;
-    @Input() dataColumns: any[] = [];
+    dataColumns: any[] = [];
     @Input() showPager: boolean = true;
     @Input() itemLink: string;
     @Input() itemKey: string;
     @Input() hideColumns: number[] = [];
-
+    dataSource: any[] = [];
     @Input()
     set displayTotal(show: boolean) {
         this.showTotal = show;
+     
     }
 
     @Input()
@@ -29,10 +30,10 @@ export class Gridview extends ListEvent
             this.setColumnNames();
     }
 
-    constructor(public loaderService: LoaderService, public dataService: DataService) {
-        super(loaderService, dataService, "");
-        this.dataSourceSubject.asObservable().subscribe(data => this.setColumnNames());
-    }
+    //constructor(public loaderService: LoaderService, public dataService: DataService) {
+    //    super(loaderService, dataService, "");
+    //    this.dataSourceSubject.asObservable().subscribe(data => this.setColumnNames());
+    //}
 
     getRowData(row: any): any[] {
         return Object.values(row);

@@ -88,6 +88,8 @@ img {
 }
 svg:not(:root) {
   overflow: hidden;
+  overflow: hidden;
+  vertical-align: middle;
 }
 figure {
   margin: 1em 40px;
@@ -1114,6 +1116,10 @@ figure {
 }
 img {
   vertical-align: middle;
+  width: 56px;
+  height: 40px;
+  /* max-width: 100%; */
+  object-fit: cover;
 }
 .img-responsive,
 .thumbnail > img,
@@ -3522,7 +3528,7 @@ tbody.collapse.in {
   top: 100%;
   left: 0;
   z-index: 1000;
-  display: none;
+  /* display: none; */
   float: left;
   min-width: 160px;
   padding: 5px 0;
@@ -3532,12 +3538,12 @@ tbody.collapse.in {
   list-style: none;
   background-color: #fff;
   -webkit-background-clip: padding-box;
-          background-clip: padding-box;
+  background-clip: padding-box;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, .15);
   border-radius: 4px;
   -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
-          box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
 }
 .dropdown-menu.pull-right {
   right: 0;
@@ -3646,7 +3652,7 @@ tbody.collapse.in {
 .btn-group-vertical {
   position: relative;
   display: inline-block;
-  vertical-align: middle;
+  /* vertical-align: middle; */
 }
 .btn-group > .btn,
 .btn-group-vertical > .btn {
@@ -6755,3 +6761,4 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+ap */

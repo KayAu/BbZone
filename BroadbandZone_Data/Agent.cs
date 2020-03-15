@@ -14,6 +14,12 @@ namespace BroadbandZone_Data
     
     public partial class Agent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Agent()
+        {
+            this.AgentCommissions = new HashSet<AgentCommission>();
+        }
+    
         public int AgentId { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
@@ -37,5 +43,8 @@ namespace BroadbandZone_Data
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AgentCommission> AgentCommissions { get; set; }
     }
 }

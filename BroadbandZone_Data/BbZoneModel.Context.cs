@@ -28,7 +28,6 @@ namespace BroadbandZone_Data
         }
     
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
@@ -36,6 +35,11 @@ namespace BroadbandZone_Data
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<AgentCommission> AgentCommissions { get; set; }
+        public virtual DbSet<Announcement> Announcements { get; set; }
+        public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
+        public virtual DbSet<Communication> Communications { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -263,13 +267,17 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("ActivateAgent", prActivationCodeParameter);
         }
     
-        public virtual ObjectResult<GetAgentProfile_Result> GetAgentProfile(string prUsername)
+        public virtual ObjectResult<GetAgentProfile_Result> GetAgentProfile(string prUsername, Nullable<int> prAgentId)
         {
             var prUsernameParameter = prUsername != null ?
                 new ObjectParameter("prUsername", prUsername) :
                 new ObjectParameter("prUsername", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentProfile_Result>("GetAgentProfile", prUsernameParameter);
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentProfile_Result>("GetAgentProfile", prUsernameParameter, prAgentIdParameter);
         }
     
         public virtual ObjectResult<GetRegistrationDetails_Result> GetRegistrationDetails(Nullable<int> prRegId)
@@ -279,6 +287,121 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prRegId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetRegistrationDetails_Result>("GetRegistrationDetails", prRegIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAgents_Result> GetAgents(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            var prRecordStatusParameter = prRecordStatus.HasValue ?
+                new ObjectParameter("prRecordStatus", prRecordStatus) :
+                new ObjectParameter("prRecordStatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgents_Result>("GetAgents", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<SelectItem> GetMyAgents(string prUsername, ObjectParameter oAllowCommConfig)
+        {
+            var prUsernameParameter = prUsername != null ?
+                new ObjectParameter("prUsername", prUsername) :
+                new ObjectParameter("prUsername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectItem>("GetMyAgents", prUsernameParameter, oAllowCommConfig);
+        }
+    
+        public virtual int InsertCommissionSettings(string prAgents, string prCreatedBy)
+        {
+            var prAgentsParameter = prAgents != null ?
+                new ObjectParameter("prAgents", prAgents) :
+                new ObjectParameter("prAgents", typeof(string));
+    
+            var prCreatedByParameter = prCreatedBy != null ?
+                new ObjectParameter("prCreatedBy", prCreatedBy) :
+                new ObjectParameter("prCreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertCommissionSettings", prAgentsParameter, prCreatedByParameter);
+        }
+    
+        public virtual ObjectResult<CommissionSettings> GetCommissionSettings(Nullable<int> prProductId, string prAgentAcc)
+        {
+            var prProductIdParameter = prProductId.HasValue ?
+                new ObjectParameter("prProductId", prProductId) :
+                new ObjectParameter("prProductId", typeof(int));
+    
+            var prAgentAccParameter = prAgentAcc != null ?
+                new ObjectParameter("prAgentAcc", prAgentAcc) :
+                new ObjectParameter("prAgentAcc", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommissionSettings>("GetCommissionSettings", prProductIdParameter, prAgentAccParameter);
+        }
+    
+        public virtual ObjectResult<CommissionSettings> GetAgentCommissionSettings(Nullable<int> prAgentId, Nullable<int> prProductId)
+        {
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prProductIdParameter = prProductId.HasValue ?
+                new ObjectParameter("prProductId", prProductId) :
+                new ObjectParameter("prProductId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommissionSettings>("GetAgentCommissionSettings", prAgentIdParameter, prProductIdParameter);
+        }
+    
+        public virtual ObjectResult<DashboardMyTeamSubmissions_Result> DashboardMyTeamSubmissions(string prUsername, ObjectParameter oTotalAllAgents)
+        {
+            var prUsernameParameter = prUsername != null ?
+                new ObjectParameter("prUsername", prUsername) :
+                new ObjectParameter("prUsername", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DashboardMyTeamSubmissions_Result>("DashboardMyTeamSubmissions", prUsernameParameter, oTotalAllAgents);
+        }
+    
+        public virtual ObjectResult<GetAnnouncement_Result> GetAnnouncement(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prTitle, Nullable<bool> prIsActive, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prTitleParameter = prTitle != null ?
+                new ObjectParameter("prTitle", prTitle) :
+                new ObjectParameter("prTitle", typeof(string));
+    
+            var prIsActiveParameter = prIsActive.HasValue ?
+                new ObjectParameter("prIsActive", prIsActive) :
+                new ObjectParameter("prIsActive", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAnnouncement_Result>("GetAnnouncement", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prTitleParameter, prIsActiveParameter, oTotalRecord);
         }
     }
 }

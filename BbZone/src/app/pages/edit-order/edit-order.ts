@@ -25,15 +25,15 @@ export class EditOrder {
     formFields: FormDataMapping[] = [];
     formRecord: any = {};
     isUpdating: boolean = false;
-    applicationId: number;
+    recordId: number;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService,
         private cascadeService: CascadeService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
     ngOnInit() {
-        this.applicationId = this.route.snapshot.params.id;
+        this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
-        this.loadApplication(this.route.snapshot.params.id);
+        this.loadRecord(this.route.snapshot.params.id);
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
@@ -70,14 +70,14 @@ export class EditOrder {
             }
         }
 
-        this.dataService.updateForm(ApiController.CustomerApplication, this.applicationId, formData).subscribe(data => {
+        this.dataService.updateForm(ApiController.CustomerApplication, this.recordId, formData).subscribe(data => {
             this.isUpdating = false;
             this.router.navigate(['/view-order']);
         });
     }
 
-    private loadApplication(applicationId:number) {
-        this.dataService.get(ApiController.CustomerApplication, applicationId).subscribe(data => {
+    private loadRecord(recordId:number) {
+        this.dataService.get(ApiController.CustomerApplication, recordId).subscribe(data => {
             this.formRecord = data;
         });
     }

@@ -9,7 +9,7 @@ import { Home } from './pages/home/home';
 import { CreateOrder } from './pages/create-order/create-order';
 import { PageHeader } from './components/page-header';
 import { ViewOrder } from "./pages/view-order/view-order";
-import { Gridview } from "./components/gridview/gridview";
+import { AgentCommissionTable } from "./components/agent-commission-table/agent-commission-table";
 import { DataService } from './services/data.service';
 import { LoaderService } from './loader/loader.service';
 import { BroadcastService } from './services/broadcast.service';
@@ -31,6 +31,7 @@ import { AgentRegistration } from './pages/agent-registration/agent-registration
 import { AgentRegistrationView } from './pages/agent-registration-view/agent-registration-view';
 import { AgentRegistrationList } from './pages/agent-registration-list/agent-registration-list';
 import { AgentProfile } from './pages/agent-profile/agent-profile';
+import { AgentMaintenance } from './pages/agent-maintenance/agent-maintenance';
 import { TableRowButtons } from './components/tablerow-buttons/tablerow-buttons';
 import { EditModeDirective } from './directives/editmode-directive';
 import { EditableDropdown } from './components/editable-dropdown/editable-dropdown';
@@ -50,7 +51,13 @@ import { UserIdleModule } from 'angular-user-idle';
 import { BackButton } from './components/back-button/back-button'
 import { EnumToArrayPipe } from './pipes/enum-to-array';
 import { SuperiorField } from './components/superior-field/superior-field';
-
+import { MultipleCheckboxes } from './components/multiple-checkbox/multiple-checkbox';
+import { Gridview } from './components/gridview/gridview';
+import { TeamSubmission } from './components/dashboard/team-submission/team-submission';
+import { CreateAnnouncement } from './pages/create-announcement/create-announcement';
+import { EditAnnouncement } from './pages/edit-announcement/edit-announcement';
+import { ViewAnnouncement } from './pages/view-announcement/view-announcement';
+import { Announcement } from './components/announcement/announcement';
 @NgModule({
   declarations: [
         AppComponent,
@@ -59,7 +66,7 @@ import { SuperiorField } from './components/superior-field/superior-field';
         CreateOrder,
         PageHeader,
         ViewOrder,
-        Gridview,
+        AgentCommissionTable,
         Pagination,
         SortCellDirective,
         SortableDirective,
@@ -74,6 +81,7 @@ import { SuperiorField } from './components/superior-field/superior-field';
         AgentRegistrationView,
         AgentRegistrationList,
         AgentProfile,
+        AgentMaintenance,
         TableRowButtons,
         EditModeDirective,
         EditableDropdown,
@@ -86,7 +94,14 @@ import { SuperiorField } from './components/superior-field/superior-field';
         Login,
         BackButton,
         EnumToArrayPipe,
-        SuperiorField
+        SuperiorField,
+        MultipleCheckboxes,
+        Gridview,
+        TeamSubmission,
+        CreateAnnouncement,
+        EditAnnouncement,
+        ViewAnnouncement,
+        Announcement,
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -117,8 +132,11 @@ import { SuperiorField } from './components/superior-field/superior-field';
             { path: 'agent-registration', component: AgentRegistration},
             { path: 'agent-registration-view/:id', component: AgentRegistrationView },
             { path: 'agent-registration-list', component: AgentRegistrationList },
-            { path: 'agent-profile', component: AgentProfile }
-           
+            { path: 'agent-profile/:id', component: AgentProfile },
+            { path: 'agent-maintenance', component: AgentMaintenance },
+            { path: 'create-announcement', component: CreateAnnouncement },
+            { path: 'edit-announcement/:id', component: EditAnnouncement },
+            { path: 'view-announcement', component: ViewAnnouncement }
     ])
   ],
   providers: [

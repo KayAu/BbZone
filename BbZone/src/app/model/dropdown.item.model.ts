@@ -1,5 +1,5 @@
 ﻿export class DropdownItem {
-    public id: number;
+    public id: any;
     public title: string;
     public selected: boolean;
 }

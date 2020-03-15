@@ -581,4 +581,68 @@ var AgentProfileFields = /** @class */ (function () {
     return AgentProfileFields;
 }());
 exports.AgentProfileFields = AgentProfileFields;
+var AgentMaintenanceColumns = /** @class */ (function () {
+    function AgentMaintenanceColumns() {
+    }
+    AgentMaintenanceColumns.fields = [
+        {
+            "fieldName": "agentId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "readonly": true,
+            "colWidth": "cell-width-1"
+        },
+        {
+            "fieldName": "fullname",
+            "headerText": "Fullname",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "superiorName",
+            "headerText": "Superior",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "companyName",
+            "headerText": "Company Name",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-20"
+        },
+        {
+            "fieldName": "mobileNo",
+            "headerText": "Mobile No",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "telNo",
+            "headerText": "Tel No",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "isActive",
+            "headerText": "Is Active",
+            "displayType": "tick",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
+        },
+    ];
+    return AgentMaintenanceColumns;
+}());
+exports.AgentMaintenanceColumns = AgentMaintenanceColumns;
 //# sourceMappingURL=agentFields.js.map

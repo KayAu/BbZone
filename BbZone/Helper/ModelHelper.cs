@@ -8,17 +8,17 @@ using System.Web;
 using System.Diagnostics;
 using BroadbandZone_App.Models;
 using BroadbandZone_Data;
-
+using System.Data;
 
 namespace BroadbandZone_App.Helper
 {
     public static class ModelHelper
     {
-        public static void SetDateAndAuthor<T>(this T model,  params string[] propertyNames)
+        public static void SetDateAndAuthor<T>(this T model, string username, params string[] propertyNames)
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+              
                 Type modelType = model.GetType();
 
                 foreach (string propName in propertyNames)
@@ -32,7 +32,7 @@ namespace BroadbandZone_App.Helper
                     }
                     else if (propInfo.PropertyType == typeof(string))
                     {
-                        propInfo.SetValue(model, currentUser.Fullname);
+                        propInfo.SetValue(model, username);
                     }
                 }
             }
@@ -132,6 +132,22 @@ namespace BroadbandZone_App.Helper
             return Convert.ChangeType(value, t);
         }
 
+        public static DataTable ToDataTable<T>(this IEnumerable<T> entityList) where T : class
+        {
+            var properties = typeof(T).GetProperties();
+            var table = new DataTable();
+
+            foreach (var property in properties)
+            {
+                var type = Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType;
+                table.Columns.Add(property.Name, type);
+            }
+            foreach (var entity in entityList)
+            {
+                table.Rows.Add(properties.Select(p => p.GetValue(entity, null)).ToArray());
+            }
+            return table;
+        }
 
         public static void AddEditItemsToDb<T>(this ICollection<T> listItems, string keyField) where T : class
         {

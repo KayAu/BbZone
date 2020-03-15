@@ -1,6 +1,7 @@
 ﻿
 CREATE PROCEDURE [dbo].[prc_GetAgentProfile]
-	@prUsername VARCHAR(16)
+	@prUsername VARCHAR(16) = NULL,
+	@prAgentId INT = NULL
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
@@ -33,7 +34,10 @@ BEGIN
 		      ,SuperiorName = CASE WHEN NOT a1.SuperiorId IS NULL THEN LTRIM(RTRIM(CAST(a1.SuperiorId AS CHAR(4)))) + ' - ' + a2.Fullname ELSE NULL END
 		FROM Agent a1
 		LEFT JOIN Agent a2 ON a1.SuperiorId = a2.AgentId
-		WHERE a1.UserLogin = @prUsername
+		WHERE 1 = CASE WHEN NOT @prUsername IS NULL AND a1.UserLogin = @prUsername THEN 1
+					   WHEN NOT @prAgentId IS NULL AND a1.AgentId = @prAgentId THEN 1
+					   ELSE 0 
+				  END
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

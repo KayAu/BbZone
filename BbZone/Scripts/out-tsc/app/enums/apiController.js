@@ -11,5 +11,8 @@ var ApiController;
     ApiController["Registration"] = "Registration";
     ApiController["User"] = "User";
     ApiController["Agent"] = "Agent";
+    ApiController["Commission"] = "Commission";
+    ApiController["Dashboard"] = "Dashboard";
+    ApiController["Announcement"] = "Announcement";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map
