@@ -94,6 +94,9 @@
     <Build Include="dbo\Stored Procedures\prc_GetAgentRegistration.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetAgentProfile.sql" />
     <Build Include="dbo\Stored Procedures\prc_ActivateAgent.sql" />
+    <Build Include="dbo\Tables\Withdrawal.sql" />
+    <Build Include="dbo\Tables\ApplicationRemark.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawal.sql" />
     <Build Include="dbo\Tables\Communication.sql" />
     <Build Include="dbo\Tables\AnnouncementDocument.sql" />
     <Build Include="dbo\Tables\Announcement.sql" />

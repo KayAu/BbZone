@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BroadbandZoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AdminUser">
@@ -155,6 +161,14 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
           <Property Name="Name" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="Size" Type="float" />
         </EntityType>
+        <EntityType Name="DropdownItems">
+          <Key>
+            <PropertyRef Name="RecId" />
+          </Key>
+          <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Options" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -272,6 +286,50 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SProcErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="StoredProcedure" Type="varchar" MaxLength="50" />
+          <Property Name="ErrorNumber" Type="int" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorState" Type="varchar" MaxLength="150" />
+          <Property Name="ErrorProcedure" Type="varchar" MaxLength="500" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorMessage" Type="text" />
+          <Property Name="ErrorDate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Withdrawal">
+          <Key>
+            <PropertyRef Name="WithdrawalId" />
+          </Key>
+          <Property Name="WithdrawalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Agent" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="GiroFee" Type="money" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="CompletedOn" Type="smalldatetime" />
+          <Property Name="CompletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_ApplicationRemark_CustomerApplication">
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+          <End Role="ApplicationRemark" Type="Self.ApplicationRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="ApplicationRemark">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
           <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="*" />
@@ -332,6 +390,23 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_GenerateDynamicQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="fnSplit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SourceSql" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StrSeprate" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ExtractedText" Type="varchar" MaxLength="8000" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="prc_ActivateAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prActivationCode" Type="varchar" Mode="In" />
         </Function>
@@ -452,6 +527,19 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
         <Function Name="prc_GetRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prRegId" Type="int" Mode="In" />
         </Function>
+        <Function Name="prc_GetWithdrawal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prIsCompleted" Type="bit" Mode="In" />
+          <Parameter Name="prAgent" Type="varchar" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prc_InsertCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prAgents" Type="varchar(max)" Mode="In" />
           <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
@@ -468,18 +556,25 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
           <Parameter Name="prAgentId" Type="int" Mode="In" />
           <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Split_On_Upper_Case" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="Temp" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BroadbandZoneModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationRemark" EntityType="Self.ApplicationRemark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementDocument" EntityType="Self.AnnouncementDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Communication" EntityType="Self.Communication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerApplication" EntityType="Self.CustomerApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDocument" EntityType="Self.CustomerDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DropdownItems" EntityType="Self.DropdownItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Withdrawal" EntityType="Self.Withdrawal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminUser" EntityType="Self.AdminUser" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [AdminUser].[Id] AS [Id], 
@@ -519,6 +614,24 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
           <AssociationSet Name="FK_Communication_CustomerApplication" Association="Self.FK_Communication_CustomerApplication">
             <End Role="CustomerApplication" EntitySet="CustomerApplication" />
             <End Role="Communication" EntitySet="Communication" />
+          </AssociationSet>
+          <EntitySet Name="SProcErrorLog" EntityType="Self.SProcErrorLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SProcErrorLog].[Id] AS [Id], 
+    [SProcErrorLog].[UserName] AS [UserName], 
+    [SProcErrorLog].[StoredProcedure] AS [StoredProcedure], 
+    [SProcErrorLog].[ErrorNumber] AS [ErrorNumber], 
+    [SProcErrorLog].[ErrorSeverity] AS [ErrorSeverity], 
+    [SProcErrorLog].[ErrorState] AS [ErrorState], 
+    [SProcErrorLog].[ErrorProcedure] AS [ErrorProcedure], 
+    [SProcErrorLog].[ErrorLine] AS [ErrorLine], 
+    [SProcErrorLog].[ErrorMessage] AS [ErrorMessage], 
+    [SProcErrorLog].[ErrorDate] AS [ErrorDate]
+    FROM [dbo].[SProcErrorLog] AS [SProcErrorLog]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ApplicationRemark_CustomerApplication" Association="Self.FK_ApplicationRemark_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+            <End Role="ApplicationRemark" EntitySet="ApplicationRemark" />
           </AssociationSet>
           <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="Self.FK_CustomerApplication_ApplicationStatus">
             <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
@@ -824,6 +937,7 @@ warning 6002: The table/view 'BbZone.dbo.AgentCommission' does not have a primar
           <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
           <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
           <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
+          <NavigationProperty Name="ApplicationRemarks" Relationship="BroadbandZoneModel.FK_ApplicationRemark_CustomerApplication" FromRole="CustomerApplication" ToRole="ApplicationRemark" />
           <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
         </EntityType>
         <Association Name="FK_CustomerApplication_ApplicationStatus">

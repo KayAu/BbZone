@@ -33,6 +33,13 @@ namespace BroadbandZone_App.Models
         public DateRange submittedDate { get; set; }
     }
 
+    public class SearchWithdrawalParams
+    {
+        public string Agent { get; set; }
+        public bool? IsCompleted { get; set; }
+        public DateRange SubmittedDate { get; set; }
+        public DateRange CompletedDate { get; set; }
+    }
     public class SearchAnnouncementParams
     {
         public string Title { get; set; }

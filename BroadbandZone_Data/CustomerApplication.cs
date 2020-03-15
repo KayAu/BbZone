@@ -19,6 +19,7 @@ namespace BroadbandZone_Data
         {
             this.CustomerDocuments = new HashSet<CustomerDocument>();
             this.Communications = new HashSet<Communication>();
+            this.ApplicationRemarks = new HashSet<ApplicationRemark>();
         }
     
         public int ApplicationId { get; set; }
@@ -53,5 +54,7 @@ namespace BroadbandZone_Data
         public virtual ICollection<CustomerDocument> CustomerDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Communication> Communications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ApplicationRemark> ApplicationRemarks { get; set; }
     }
 }

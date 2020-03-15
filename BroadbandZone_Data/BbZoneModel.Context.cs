@@ -35,6 +35,11 @@ namespace BroadbandZone_Data
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<C__RefactorLog> C__RefactorLog { get; set; }
+        public virtual DbSet<ApplicationRemark> ApplicationRemarks { get; set; }
+        public virtual DbSet<DropdownItem> DropdownItems { get; set; }
+        public virtual DbSet<SProcErrorLog> SProcErrorLogs { get; set; }
+        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<AgentCommission> AgentCommissions { get; set; }
         public virtual DbSet<Announcement> Announcements { get; set; }
