@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using DropdownItem = BroadbandZone_App.Models.DropdownItem;
 
 namespace BroadbandZone_App.WebApi
 {

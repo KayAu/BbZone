@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BroadbandZoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AdminUser">
@@ -51,6 +57,16 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ModifiedOn" Type="smalldatetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="ApplicationRemark">
+          <Key>
+            <PropertyRef Name="RemarkId" />
+          </Key>
+          <Property Name="RemarkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RemarkText" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="ApplicationStatus">
           <Key>
             <PropertyRef Name="AppStatusId" />
@@ -96,6 +112,14 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ApplicationId" Type="int" Nullable="false" />
           <Property Name="Name" Type="nvarchar" MaxLength="350" Nullable="false" />
           <Property Name="Size" Type="float" />
+        </EntityType>
+        <EntityType Name="DropdownItems">
+          <Key>
+            <PropertyRef Name="RecId" />
+          </Key>
+          <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Options" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -165,6 +189,50 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Name="ApprovedBy" Type="varchar" MaxLength="50" />
           <Property Name="CreatedOn" Type="smalldatetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="SProcErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+          <Property Name="StoredProcedure" Type="varchar" MaxLength="50" />
+          <Property Name="ErrorNumber" Type="int" />
+          <Property Name="ErrorSeverity" Type="int" />
+          <Property Name="ErrorState" Type="varchar" MaxLength="150" />
+          <Property Name="ErrorProcedure" Type="varchar" MaxLength="500" />
+          <Property Name="ErrorLine" Type="int" />
+          <Property Name="ErrorMessage" Type="text" />
+          <Property Name="ErrorDate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="Withdrawal">
+          <Key>
+            <PropertyRef Name="WithdrawalId" />
+          </Key>
+          <Property Name="WithdrawalId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Agent" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="GiroFee" Type="money" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsCompleted" Type="bit" Nullable="false" />
+          <Property Name="CompletedOn" Type="smalldatetime" />
+          <Property Name="CompletedBy" Type="varchar" MaxLength="50" />
+          <Property Name="ReferenceNo" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <Association Name="FK_ApplicationRemark_CustomerApplication">
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+          <End Role="ApplicationRemark" Type="Self.ApplicationRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="ApplicationRemark">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Role="ApplicationStatus" Type="Self.ApplicationStatus" Multiplicity="0..1" />
           <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="*" />
@@ -225,6 +293,23 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_GenerateDynamicQuery" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="fnSplit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SourceSql" Type="varchar(max)" Mode="In" />
+          <Parameter Name="StrSeprate" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="ExtractedText" Type="varchar" MaxLength="8000" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <Function Name="prc_ActivateAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prActivationCode" Type="varchar" Mode="In" />
         </Function>
@@ -310,6 +395,19 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
         <Function Name="prc_GetRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prRegId" Type="int" Mode="In" />
         </Function>
+        <Function Name="prc_GetWithdrawal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prIsCompleted" Type="bit" Mode="In" />
+          <Parameter Name="prAgent" Type="varchar" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prc_LogError" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prStoreProcName" Type="varchar" Mode="In" />
           <Parameter Name="ErrorLogID" Type="int" Mode="InOut" />
@@ -318,15 +416,22 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Parameter Name="prRegistrationId" Type="int" Mode="In" />
           <Parameter Name="prEmail" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="Split_On_Upper_Case" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="Temp" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="BroadbandZoneModelStoreContainer">
+          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ApplicationRemark" EntityType="Self.ApplicationRemark" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerApplication" EntityType="Self.CustomerApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDocument" EntityType="Self.CustomerDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DropdownItems" EntityType="Self.DropdownItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Withdrawal" EntityType="Self.Withdrawal" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminUser" EntityType="Self.AdminUser" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [AdminUser].[Id] AS [Id], 
@@ -338,6 +443,24 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
     [AdminUser].[CreatedBy] AS [CreatedBy]
     FROM [dbo].[AdminUser] AS [AdminUser]</DefiningQuery>
           </EntitySet>
+          <EntitySet Name="SProcErrorLog" EntityType="Self.SProcErrorLog" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [SProcErrorLog].[Id] AS [Id], 
+    [SProcErrorLog].[UserName] AS [UserName], 
+    [SProcErrorLog].[StoredProcedure] AS [StoredProcedure], 
+    [SProcErrorLog].[ErrorNumber] AS [ErrorNumber], 
+    [SProcErrorLog].[ErrorSeverity] AS [ErrorSeverity], 
+    [SProcErrorLog].[ErrorState] AS [ErrorState], 
+    [SProcErrorLog].[ErrorProcedure] AS [ErrorProcedure], 
+    [SProcErrorLog].[ErrorLine] AS [ErrorLine], 
+    [SProcErrorLog].[ErrorMessage] AS [ErrorMessage], 
+    [SProcErrorLog].[ErrorDate] AS [ErrorDate]
+    FROM [dbo].[SProcErrorLog] AS [SProcErrorLog]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_ApplicationRemark_CustomerApplication" Association="Self.FK_ApplicationRemark_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+            <End Role="ApplicationRemark" EntitySet="ApplicationRemark" />
+          </AssociationSet>
           <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="Self.FK_CustomerApplication_ApplicationStatus">
             <End Role="ApplicationStatus" EntitySet="ApplicationStatus" />
             <End Role="CustomerApplication" EntitySet="CustomerApplication" />
@@ -467,6 +590,32 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           </FunctionImport>
           <FunctionImport Name="GetRegistrationDetails" ReturnType="Collection(BroadbandZoneModel.GetRegistrationDetails_Result)">
           <Parameter Name="prRegId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="C__RefactorLog" EntityType="BroadbandZoneModel.C__RefactorLog" />
+          <EntitySet Name="ApplicationRemarks" EntityType="BroadbandZoneModel.ApplicationRemark" />
+          <EntitySet Name="DropdownItems" EntityType="BroadbandZoneModel.DropdownItem" />
+          <EntitySet Name="SProcErrorLogs" EntityType="BroadbandZoneModel.SProcErrorLog" />
+          <AssociationSet Name="FK_ApplicationRemark_CustomerApplication" Association="BroadbandZoneModel.FK_ApplicationRemark_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="ApplicationRemark" EntitySet="ApplicationRemarks" />
+          </AssociationSet>
+          <FunctionImport Name="fnSplit" IsComposable="true" ReturnType="Collection(String)">
+            <Parameter Name="SourceSql" Mode="In" Type="String" />
+            <Parameter Name="StrSeprate" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Withdrawals" EntityType="BroadbandZoneModel.Withdrawal" />
+          <FunctionImport Name="GetWithdrawal" ReturnType="Collection(BroadbandZoneModel.GetWithdrawal_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prIsCompleted" Mode="In" Type="Boolean" />
+            <Parameter Name="prAgent" Mode="In" Type="String" />
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="prCompletedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prCompletedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
@@ -622,6 +771,7 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
           <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
           <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
+          <NavigationProperty Name="ApplicationRemarks" Relationship="BroadbandZoneModel.FK_ApplicationRemark_CustomerApplication" FromRole="CustomerApplication" ToRole="ApplicationRemark" />
         </EntityType>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
@@ -813,6 +963,83 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
           <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="C__RefactorLog">
+          <Key>
+            <PropertyRef Name="OperationKey" />
+          </Key>
+          <Property Name="OperationKey" Type="Guid" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ApplicationRemark">
+          <Key>
+            <PropertyRef Name="RemarkId" />
+          </Key>
+          <Property Name="RemarkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="RemarkText" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_ApplicationRemark_CustomerApplication" FromRole="ApplicationRemark" ToRole="CustomerApplication" />
+        </EntityType>
+        <EntityType Name="DropdownItem">
+          <Key>
+            <PropertyRef Name="RecId" />
+          </Key>
+          <Property Name="RecId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Options" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="SProcErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StoredProcedure" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorNumber" Type="Int32" />
+          <Property Name="ErrorSeverity" Type="Int32" />
+          <Property Name="ErrorState" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorProcedure" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorLine" Type="Int32" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ErrorDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_ApplicationRemark_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.ApplicationRemark" Role="ApplicationRemark" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="ApplicationRemark">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Withdrawal">
+          <Key>
+            <PropertyRef Name="WithdrawalId" />
+          </Key>
+          <Property Name="WithdrawalId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Agent" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="GiroFee" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsCompleted" Type="Boolean" Nullable="false" />
+          <Property Name="CompletedOn" Type="DateTime" Precision="0" />
+          <Property Name="CompletedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ReferenceNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetWithdrawal_Result">
+          <Property Type="Int32" Name="WithdrawalId" Nullable="true" />
+          <Property Type="String" Name="Agent" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="GiroFee" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="IsCompleted" Nullable="true" />
+          <Property Type="String" Name="CompletedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="ReferenceNo" Nullable="true" MaxLength="25" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1136,6 +1363,80 @@ warning 6002: The table/view 'BbZone.dbo.AdminUser' does not have a primary key 
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="C__RefactorLog">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.C__RefactorLog">
+              <MappingFragment StoreEntitySet="__RefactorLog">
+                <ScalarProperty Name="OperationKey" ColumnName="OperationKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ApplicationRemarks">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.ApplicationRemark">
+              <MappingFragment StoreEntitySet="ApplicationRemark">
+                <ScalarProperty Name="RemarkText" ColumnName="RemarkText" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="RemarkId" ColumnName="RemarkId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DropdownItems">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.DropdownItem">
+              <MappingFragment StoreEntitySet="DropdownItems">
+                <ScalarProperty Name="Options" ColumnName="Options" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="RecId" ColumnName="RecId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SProcErrorLogs">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.SProcErrorLog">
+              <MappingFragment StoreEntitySet="SProcErrorLog">
+                <ScalarProperty Name="ErrorDate" ColumnName="ErrorDate" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="ErrorLine" ColumnName="ErrorLine" />
+                <ScalarProperty Name="ErrorProcedure" ColumnName="ErrorProcedure" />
+                <ScalarProperty Name="ErrorState" ColumnName="ErrorState" />
+                <ScalarProperty Name="ErrorSeverity" ColumnName="ErrorSeverity" />
+                <ScalarProperty Name="ErrorNumber" ColumnName="ErrorNumber" />
+                <ScalarProperty Name="StoredProcedure" ColumnName="StoredProcedure" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="fnSplit" FunctionName="BroadbandZoneModel.Store.fnSplit" />
+          <EntitySetMapping Name="Withdrawals">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Withdrawal">
+              <MappingFragment StoreEntitySet="Withdrawal">
+                <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="GiroFee" ColumnName="GiroFee" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWithdrawal" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawal_Result">
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="GiroFee" ColumnName="GiroFee" />
+                <ScalarProperty Name="IsCompleted" ColumnName="IsCompleted" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+                <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
