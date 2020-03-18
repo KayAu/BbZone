@@ -13,9 +13,9 @@ namespace BroadbandZone_Data
     
     public partial class CommissionSettings
     {
-        public int CategoryId { get; set; }
+        public Nullable<int> CategoryId { get; set; }
         public string Category { get; set; }
-        public Nullable<decimal> SupCommission { get; set; }
-        public short AgentCommissionPer { get; set; }
+        public Nullable<short> SupCommission { get; set; }
+        public Nullable<short> AgentCommissionPer { get; set; }
     }
 }

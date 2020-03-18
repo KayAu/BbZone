@@ -31,7 +31,6 @@ export class MultipleCheckboxes implements ControlValueAccessor {
     private parentForm: NgForm;
 
     @Input() required: boolean;
-   // @Input() parentForm: NgForm;
     @Input() fieldId: string;
     @Input() displayText: string;
     @Input('dataItems')

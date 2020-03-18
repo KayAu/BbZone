@@ -24,12 +24,34 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalAgents = new ObjectParameter("oTotalAllAgents", typeof(int));
-                    var results = (new BroadbandZoneEntities()).DashboardMyTeamSubmissions(currentUser.Username, totalAgents).ToList();
+                    var results = (new BroadbandZoneEntities()).DashboardMyTeamSubmissions(currentUser.AgentId, totalAgents).ToList();
                     return Ok(new
                     {
                         DisplayData = results,
-                        TotalAgents = Convert.ToInt32(totalAgents.Value)
+                        TotalAgents =  Convert.ToInt32(totalAgents.Value)
                     });
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        // GET api/<controller>
+        [HttpGet]
+        [Route("api/Dashboard/GetSubmissionStatusCount/{year}")]
+        // GET api/<controller>
+        public IHttpActionResult GetSubmissionStatusCount(int year)
+        {
+            try
+            {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    ObjectParameter totalAgents = new ObjectParameter("oTotalAllAgents", typeof(int));
+                    var results = (new BroadbandZoneEntities()).DboardSubmissionStatusCount(currentUser.AgentId, year).FirstOrDefault();
+                    return Ok(results);
                 }
             }
             catch (Exception ex)

@@ -229,7 +229,28 @@ public static fields = [
             "maxLength": 25
         }
     },
-
+    {
+        "fieldName": "userId",
+        "displayText": "User Id",
+        "readonly": false,
+        "dataFieldControl": {
+            "controlName": "userId",
+            "controlType": "textbox",
+            "required": false,
+            "maxLength": 25
+        }
+    },
+    {
+        "fieldName": "telNo",
+        "displayText": "Tel No",
+        "readonly": false,
+        "dataFieldControl": {
+            "controlName": "userId",
+            "controlType": "textbox",
+            "required": false,
+            "maxLength": 25
+        }
+    },
 ]
 
 }

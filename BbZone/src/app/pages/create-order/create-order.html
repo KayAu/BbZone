@@ -13,8 +13,7 @@
                             Product                        
                         </label>
                         <div class="col-sm-10">
-                            <product-options (onProductSelected)="loadCategories($event)">
-                            </product-options>
+                            <product-options [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>
@@ -47,13 +46,12 @@
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
                             <div class="col-sm-4 col-sm-offset-2">
-                                <button class="btn btn-white" type="submit">Cancel</button>
-                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
                                 <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
                                         [disabled]="isUpdating" style="width: 180px;">
                                     {{isUpdating ? 'Saving' : 'Save'}}
                                     <span class="loading"></span>
                                 </button>
+                                <back-button>Cancel</back-button>
                             </div>
                         </div>
                     </form>

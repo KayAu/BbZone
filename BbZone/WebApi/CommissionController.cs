@@ -48,7 +48,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter allowCommConfig = new ObjectParameter("oAllowCommConfig", typeof(bool));
-                    var results = (new BroadbandZoneEntities()).GetMyAgents(currentUser.Username, allowCommConfig).ToList();
+                    var results = (new BroadbandZoneEntities()).GetMyAgents(currentUser.AgentId, allowCommConfig).ToList();
                     return Ok(new 
                     {
                         DisplayData = results,
@@ -110,9 +110,9 @@ namespace BroadbandZone_App.WebApi
                         prProductId.Value = productId;
 
                         DbParameter prUsername = cmd.CreateParameter();
-                        prUsername.ParameterName = "@prUserName";
+                        prUsername.ParameterName = "@prSuperiorId";
                         prUsername.DbType = System.Data.DbType.String;
-                        prUsername.Value = currentUser.Username;
+                        prUsername.Value = currentUser.AgentId;
 
                         cmd.Parameters.Add(prProductId);
                         cmd.Parameters.Add(prUsername);

@@ -16,7 +16,7 @@ namespace BroadbandZone_App.Helper
 
         public FileUploadHelper (string uploadFilePath)
         {
-            this._UploadFilePath = HttpContext.Current.Server.MapPath(uploadFilePath); // HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath);
+            this._UploadFilePath =  HttpContext.Current.Server.MapPath(uploadFilePath);
         }
 
         public IEnumerable<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, int fileId)

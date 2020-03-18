@@ -22,6 +22,7 @@ export class CreateOrder {
     @ViewChild(NgForm) form: NgForm;
     formFields: FormDataMapping[] = [];
     selectedCategory: number;
+    selectedProduct: number;
     newRecord: any  = {};
     isUpdating: boolean = false;
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router) {}
@@ -69,7 +70,7 @@ export class CreateOrder {
     }
 
     loadCategories(productId: number) {
-        this.cascadeService.subject.next(new CascadeData("categoryId", productId));
+        this.cascadeService.subject.next(new CascadeData("categoryId", this.selectedProduct));
     }
 
     clearPackages() {

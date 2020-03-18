@@ -18,7 +18,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": false,
-            "colWidth": "cell-width-30"
+            "colWidth": "cell-width-20"
         },
         {
             "fieldName": "packageName",
@@ -26,7 +26,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": false,
-            "colWidth": "cell-width-30"
+            "colWidth": "cell-width-25"
         },
         {
             "fieldName": "category",
@@ -34,7 +34,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": false,
-            "colWidth": ""
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "agent",
@@ -58,7 +58,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": false,
-            "colWidth": "cell-width-10"
+            "colWidth": ""
         }
     ];
     return ViewOrderColumns;

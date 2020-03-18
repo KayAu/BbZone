@@ -49,7 +49,7 @@
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Product Category</th>
-                                                        <th>Commission (RM)</th>
+                                                        <th>Commission (%)</th>
                                                         <th>Allocation (%)</th>
                                                     </tr>
                                                 </thead>
@@ -59,7 +59,11 @@
                                                         <td>{{item.category}}</td>
                                                         <td>{{item.supCommission}}</td>
                                                         <td>
-                                                            <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" class="form-control" />
+                                                            <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" #name="ngModel"
+                                                                   validateLessThan [compare-value]="item.supCommission" class="form-control" />
+                                                            <span *ngIf="name.errors?.validateLessThan" class="text-danger">
+                                                                Allocation percentage must be lesser than superior's commission
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                     <tr *ngIf="commissionSettings.length == 0">
@@ -77,8 +81,8 @@
                                     <div class="hr-line-dashed"></div>
                                     <div>
                                         <back-button>Cancel</back-button>
-                                        <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
-                                                [disabled]="isUpdating" style="width: 180px;">
+                                        <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
+                                                [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
                                             {{isUpdating ? 'Updating' : 'Update'}}
                                             <span class="loading"></span>
                                         </button>

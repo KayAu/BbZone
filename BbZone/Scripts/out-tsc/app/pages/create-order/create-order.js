@@ -61,7 +61,7 @@ var CreateOrder = /** @class */ (function () {
         });
     };
     CreateOrder.prototype.loadCategories = function (productId) {
-        this.cascadeService.subject.next(new cascade_data_1.CascadeData("categoryId", productId));
+        this.cascadeService.subject.next(new cascade_data_1.CascadeData("categoryId", this.selectedProduct));
     };
     CreateOrder.prototype.clearPackages = function () {
         this.selectedCategory = null;

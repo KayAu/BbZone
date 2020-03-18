@@ -58,6 +58,10 @@ import { CreateAnnouncement } from './pages/create-announcement/create-announcem
 import { EditAnnouncement } from './pages/edit-announcement/edit-announcement';
 import { ViewAnnouncement } from './pages/view-announcement/view-announcement';
 import { Announcement } from './components/announcement/announcement';
+import { UserCommunication } from './components/user-communication/user-communication';
+import { LessThanValidator } from './directives/less-than-validator.directive';
+import { SubmissionStatusCount } from './components/dashboard/submission-status-count/submission-status-count';
+
 @NgModule({
   declarations: [
         AppComponent,
@@ -102,6 +106,9 @@ import { Announcement } from './components/announcement/announcement';
         EditAnnouncement,
         ViewAnnouncement,
         Announcement,
+        UserCommunication,
+        LessThanValidator,
+        SubmissionStatusCount
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

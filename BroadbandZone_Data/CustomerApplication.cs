@@ -17,9 +17,9 @@ namespace BroadbandZone_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CustomerApplication()
         {
-            this.CustomerDocuments = new HashSet<CustomerDocument>();
             this.Communications = new HashSet<Communication>();
-            this.ApplicationRemarks = new HashSet<ApplicationRemark>();
+            this.CustomerDocuments = new HashSet<CustomerDocument>();
+            this.Withdrawals = new HashSet<Withdrawal>();
         }
     
         public int ApplicationId { get; set; }
@@ -42,6 +42,8 @@ namespace BroadbandZone_Data
         public string AdminRemarks { get; set; }
         public Nullable<int> AppStatusId { get; set; }
         public string OrderNo { get; set; }
+        public string UserId { get; set; }
+        public string TelNo { get; set; }
         public Nullable<bool> SubmitByAgent { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
@@ -49,12 +51,12 @@ namespace BroadbandZone_Data
         public string ModifiedBy { get; set; }
     
         public virtual ApplicationStatu ApplicationStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Communication> Communications { get; set; }
         public virtual ProductPackage ProductPackage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDocument> CustomerDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Communication> Communications { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ApplicationRemark> ApplicationRemarks { get; set; }
+        public virtual ICollection<Withdrawal> Withdrawals { get; set; }
     }
 }

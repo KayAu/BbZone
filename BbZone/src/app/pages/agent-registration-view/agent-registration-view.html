@@ -27,7 +27,7 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                         </ng-container>
-                        <div class="form-group row" *ngIf="!formRecord['approvalDate']">
+                        <div class="form-group row" *ngIf="!formRecord['isApproved']">
                             <label class="col-sm-2 col-form-label">
                                 Registration Approval
                             </label>
@@ -46,13 +46,13 @@
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
                             <div class="col-sm-12 ">
-                                <back-button>Cancel</back-button>
                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
                                 <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                         [disabled]="isUpdating" style="width: 150px;" *ngIf="!formRecord['approvalDate']">
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>
                                 </button>
+                                <back-button>Cancel</back-button>
                             </div>
                         </div>
                     </form>

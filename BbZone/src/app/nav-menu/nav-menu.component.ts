@@ -10,12 +10,12 @@ import { Router } from '@angular/router';
 
 export class NavMenuComponent {
     isExpanded = false;
-    @Input() currentUser: LoginUser = new LoginUser()
-
+    @Input() currentUser: LoginUser = new LoginUser();
+    
     constructor(private router: Router) { }
 
     collapse() {
-        this.isExpanded = false;
+        this.isExpanded = false; 
     }
 
     toggle() {

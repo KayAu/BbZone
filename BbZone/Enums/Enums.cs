@@ -10,4 +10,5 @@ namespace BroadbandZone_App.Enums
         ResidentialType,
         ApplicationStatus
     }
+
 }

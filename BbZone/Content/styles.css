@@ -5596,7 +5596,7 @@ dd.project-people {
   display: block;
 }
 .chat-discussion {
-  background: #eee;
+  background: #fbfbfb;
   padding: 15px;
   height: 400px;
   overflow-y: auto;
@@ -7770,7 +7770,7 @@ body.rtls .timeline-item .content {
   border-right: 1px solid #e7eaec;
   border-left: none;
 }
-body.rtls .theme-config {
+body.rtls .user-comm {
   left: 0;
   right: auto;
 }
@@ -7824,11 +7824,11 @@ body.rtls .dd-list .dd-list {
 body.rtls .dd-item > button {
   float: right;
 }
-body.rtls .theme-config-box {
+body.rtls .user-comm-box {
   margin-left: -220px;
   margin-right: 0;
 }
-body.rtls .theme-config-box.show {
+body.rtls .user-comm-box.show {
   margin-left: 0;
   margin-right: 0;
 }
@@ -7961,19 +7961,19 @@ body.rtls.top-navigation .footer.fixed {
  *   Use only in demo theme
  *
 */
-.theme-config {
+.user-comm {
   position: absolute;
   top: 90px;
   right: 0;
   overflow: hidden;
 }
-.theme-config-box {
-  margin-right: -220px;
+.user-comm-box {
+  margin-right: -380px;
   position: relative;
   z-index: 2100;
   transition-duration: 0.8s;
 }
-.theme-config-box.show {
+.user-comm-box.show {
   margin-right: 0;
 }
 .spin-icon {
@@ -7989,7 +7989,7 @@ body.rtls.top-navigation .footer.fixed {
   cursor: pointer;
 }
 .skin-settings {
-  width: 220px;
+  width: 380px;
   margin-left: 40px;
   background: #f3f3f4;
 }
@@ -9033,6 +9033,22 @@ body.md-skin {
 
 .mrg25L {
   margin-left: 25px !important;
+}
+
+.mrg30A {
+  margin: 30px !important;
+}
+
+.mrg30T {
+  margin-top: 30px !important;
+}
+
+.mrg30R {
+  margin-right: 30px !important;
+}
+
+.mrg30B {
+  margin-bottom: 30px !important;
 }
 
 .mrg35A {
@@ -10420,4 +10436,26 @@ input[type="radio"] .styled:checked + label::after {
     align-items: center !important;
     justify-content: center;
     display: flex !important;
+}
+
+.user-comm .message-avatar-text {
+    line-height: 2;
+    font-size: 21px;
+    /* background-color: #191919c7; */
+    color: #fff;
+    text-align: center;
+}
+
+.justify-content-md-center {
+    justify-content: center !important;
+    display: flex;
+}
+
+.justify-content-none {
+    justify-content: initial !important;
+}
+
+.justify-content-md-center {
+    justify-content: space-between !important;
+    display: flex;
 }

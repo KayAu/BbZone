@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
     selector: 'back-button',
-    template: `<button type="button" class="btn btn-default float-right" (click)="backToPrev()">Cancel</button>`
+    template: `<button type="button" class="btn btn-default mrg10L" (click)="backToPrev()">Cancel</button>`
 })
 
 export class BackButton {

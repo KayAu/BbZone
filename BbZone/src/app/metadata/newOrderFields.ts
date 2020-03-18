@@ -48,7 +48,7 @@ public static fields = [
         "dataFieldControl": {
             "controlName": "companyName",
             "controlType": "textbox",
-            "required": true,
+            "required": false,
             "maxLength": 100
         }
     },
@@ -182,8 +182,41 @@ public static fields = [
         "dataFieldControl": {
             "controlName": "customerRemarks",
             "controlType": "textarea",
-            "required": true,
+            "required": false,
             "maxLength": 500
+        }
+    },
+    {
+        "fieldName": "orderNo",
+        "displayText": "Order No",
+        "readonly": false,
+        "dataFieldControl": {
+            "controlName": "orderNo",
+            "controlType": "textbox",
+            "required": false,
+            "maxLength": 25
+        }
+    },
+    {
+        "fieldName": "userId",
+        "displayText": "User Id",
+        "readonly": false,
+        "dataFieldControl": {
+            "controlName": "userId",
+            "controlType": "textbox",
+            "required": false,
+            "maxLength": 25
+        }
+    },
+    {
+        "fieldName": "telNo",
+        "displayText": "Tel No",
+        "readonly": false,
+        "dataFieldControl": {
+            "controlName": "userId",
+            "controlType": "textbox",
+            "required": false,
+            "maxLength": 25
         }
     },
     {

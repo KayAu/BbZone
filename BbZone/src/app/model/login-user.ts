@@ -3,9 +3,9 @@
     password: string;
     fullname: string;
     role: string;
-    email: string;
-    empId: string;
     isAuthenticated?: boolean;
     isImpersonated: boolean;
-    isAdmin:boolean;
+    isAdmin: boolean;
+    agentId: number;
 }
+

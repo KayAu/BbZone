@@ -11,4 +11,5 @@ export enum ApiController {
     Commission = "Commission",
     Dashboard = "Dashboard",
     Announcement = "Announcement",
+    Communication = "Communication",
 }

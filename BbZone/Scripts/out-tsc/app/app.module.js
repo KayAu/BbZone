@@ -66,6 +66,9 @@ var create_announcement_1 = require("./pages/create-announcement/create-announce
 var edit_announcement_1 = require("./pages/edit-announcement/edit-announcement");
 var view_announcement_1 = require("./pages/view-announcement/view-announcement");
 var announcement_1 = require("./components/announcement/announcement");
+var user_communication_1 = require("./components/user-communication/user-communication");
+var less_than_validator_directive_1 = require("./directives/less-than-validator.directive");
+var submission_status_count_1 = require("./components/dashboard/submission-status-count/submission-status-count");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -114,6 +117,9 @@ var AppModule = /** @class */ (function () {
                 edit_announcement_1.EditAnnouncement,
                 view_announcement_1.ViewAnnouncement,
                 announcement_1.Announcement,
+                user_communication_1.UserCommunication,
+                less_than_validator_directive_1.LessThanValidator,
+                submission_status_count_1.SubmissionStatusCount
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -144,7 +150,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList },
-                    { path: 'agent-profile', component: agent_profile_1.AgentProfile },
+                    { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
                     { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
                     { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },

@@ -25,13 +25,6 @@ var MaxDirective = /** @class */ (function () {
     });
     MaxDirective.prototype.validate = function (thisControl) {
         return this._validator(thisControl);
-        //if (thisControl.value) {
-        //    if (thisControl.value > this.maxValue) {
-        //        thisControl.setValue(this.maxValue);
-        //        return { max: true };
-        //    }
-        //}
-        //return null;
     };
     var MaxDirective_1;
     __decorate([

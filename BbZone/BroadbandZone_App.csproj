@@ -247,6 +247,7 @@
     <Compile Include="WebApi\AgentController.cs" />
     <Compile Include="WebApi\AnnouncementController.cs" />
     <Compile Include="WebApi\CommissionController.cs" />
+    <Compile Include="WebApi\CommunicationController.cs" />
     <Compile Include="WebApi\CustomerApplicationrController.cs" />
     <Compile Include="WebApi\DashboardController.cs" />
     <Compile Include="WebApi\DropdownController.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="WebApi\ProductController.cs" />
     <Compile Include="WebApi\RegistrationController.cs" />
     <Compile Include="WebApi\UserController.cs" />
+    <Compile Include="WebApi\WithdrawalController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -340,6 +342,8 @@
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\components\announcement\announcement.html" />
+    <Content Include="src\app\components\dashboard\submission-status-count\submission-status-count.css" />
+    <Content Include="src\app\components\dashboard\submission-status-count\submission-status-count.html" />
     <Content Include="src\app\components\dashboard\team-submission\team-submission.html" />
     <Content Include="src\app\components\data-control\data-control.css" />
     <Content Include="src\app\components\data-control\data-control.html" />
@@ -360,6 +364,7 @@
     <Content Include="src\app\components\product-options\product-options.css" />
     <Content Include="src\app\components\product-options\product-options.html" />
     <Content Include="src\app\components\superior-field\superior-field.html" />
+    <Content Include="src\app\components\user-communication\user-communication.html" />
     <Content Include="src\app\nav-menu\nav-menu.component.css" />
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
@@ -444,6 +449,7 @@
     <TypeScriptCompile Include="src\app\app.module.ts" />
     <TypeScriptCompile Include="src\app\components\announcement\announcement.ts" />
     <TypeScriptCompile Include="src\app\components\back-button\back-button.ts" />
+    <TypeScriptCompile Include="src\app\components\dashboard\submission-status-count\submission-status-count.ts" />
     <TypeScriptCompile Include="src\app\components\dashboard\team-submission\team-submission.ts" />
     <TypeScriptCompile Include="src\app\components\data-control\data-control.ts" />
     <TypeScriptCompile Include="src\app\components\data-field\data-field.ts" />
@@ -464,6 +470,9 @@
     <TypeScriptCompile Include="src\app\components\product-options\product-options.ts" />
     <TypeScriptCompile Include="src\app\components\superior-field\superior-field.ts" />
     <TypeScriptCompile Include="src\app\components\tablerow-buttons\tablerow-buttons.ts" />
+    <TypeScriptCompile Include="src\app\components\user-communication\user-communication.ts" />
+    <TypeScriptCompile Include="src\app\directives\less-than-validator.directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\max-validator.ts" />
     <TypeScriptCompile Include="src\app\directives\no-empty-row.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\progress-bar.ts" />
     <TypeScriptCompile Include="src\app\directives\required.directive.ts" />

@@ -43,15 +43,26 @@ var SearchOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "appStatusId",
-            "displayText": "Status",
+            "fieldName": "residentialType",
+            "displayText": "Residential Type",
             "readonly": false,
             "dataFieldControl": {
-                "controlName": "appStatusId",
+                "controlName": "residentialType",
                 "controlType": "select",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetStatus"
+                "datasourceUrl": "GetResidentialType"
+            }
+        },
+        {
+            "fieldName": "residentialName",
+            "displayText": "Residential Name",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "residentialName",
+                "controlType": "textbox",
+                "required": false,
+                "maxLength": 50
             }
         },
         {
@@ -64,6 +75,18 @@ var SearchOrderFields = /** @class */ (function () {
                 "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetAgents"
+            }
+        },
+        {
+            "fieldName": "appStatusId",
+            "displayText": "Status",
+            "readonly": false,
+            "dataFieldControl": {
+                "controlName": "appStatusId",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetStatus"
             }
         },
         {

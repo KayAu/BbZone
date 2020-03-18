@@ -35,13 +35,13 @@
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
                             <div class="col-sm-12 ">
-                                <button class="btn btn-white float-right" type="submit">Cancel</button>
                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
                                 <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                         [disabled]="isUpdating" style="width: 180px;">
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>
                                 </button>
+                                <back-button>Cancel</back-button>
                             </div>
                         </div>
                     </form>

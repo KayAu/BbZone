@@ -20,7 +20,6 @@ declare var $: any;
     ]
 })
 
-
 export class SuperiorField implements ControlValueAccessor {
     data: any;
     @Input() editable: boolean;

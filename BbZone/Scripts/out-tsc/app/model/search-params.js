@@ -9,13 +9,15 @@ var StatusAndKeywordParams = /** @class */ (function () {
 }());
 exports.StatusAndKeywordParams = StatusAndKeywordParams;
 var SearchOrderParams = /** @class */ (function () {
-    function SearchOrderParams(productId, productCategoryId, productPackageId, orderStatusId, agent, submittedDate) {
+    function SearchOrderParams(productId, productCategoryId, productPackageId, orderStatusId, agent, submittedDate, residentialType, residentialName) {
         this.productId = productId;
         this.productCategoryId = productCategoryId;
         this.productPackageId = productPackageId;
         this.orderStatusId = orderStatusId;
         this.agent = agent;
         this.submittedDate = submittedDate;
+        this.residentialType = residentialType;
+        this.residentialName = residentialName;
     }
     return SearchOrderParams;
 }());

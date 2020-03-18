@@ -31,6 +31,8 @@ namespace BroadbandZone_App.Models
         public int? OrderStatusId { get; set; }
         public string Agent { get; set; }
         public DateRange submittedDate { get; set; }
+        public string ResidentialType { get; set; }
+        public string ResidentialName { get; set; }
     }
 
     public class SearchWithdrawalParams

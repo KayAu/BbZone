@@ -45,7 +45,7 @@ var ViewOrder = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null);
+        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
         return _this;
     }
     ViewOrder.prototype.ngOnInit = function () {
@@ -65,7 +65,7 @@ var ViewOrder = /** @class */ (function (_super) {
         return columnMappings;
     };
     ViewOrder.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null);
+        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
         this.reloadData();
     };
     ViewOrder = __decorate([

@@ -17,8 +17,8 @@ namespace BroadbandZone_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ProductCategory()
         {
-            this.ProductPackages = new HashSet<ProductPackage>();
             this.AgentCommissions = new HashSet<AgentCommission>();
+            this.ProductPackages = new HashSet<ProductPackage>();
         }
     
         public int CategoryId { get; set; }
@@ -32,10 +32,10 @@ namespace BroadbandZone_Data
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AgentCommission> AgentCommissions { get; set; }
         public virtual Product Product { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProductPackage> ProductPackages { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AgentCommission> AgentCommissions { get; set; }
     }
 }

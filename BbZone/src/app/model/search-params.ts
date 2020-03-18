@@ -16,7 +16,9 @@ export class SearchOrderParams {
         public productPackageId: number,
         public orderStatusId: number,
         public agent: string,
-        public submittedDate: DateRange
+        public submittedDate: DateRange,
+        public residentialType: string,
+        public residentialName: string
     ) { }
 
 }

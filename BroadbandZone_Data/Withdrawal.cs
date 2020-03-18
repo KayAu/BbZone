@@ -15,6 +15,7 @@ namespace BroadbandZone_Data
     public partial class Withdrawal
     {
         public int WithdrawalId { get; set; }
+        public int ApplicationId { get; set; }
         public string Agent { get; set; }
         public decimal Amount { get; set; }
         public Nullable<decimal> GiroFee { get; set; }
@@ -24,5 +25,7 @@ namespace BroadbandZone_Data
         public Nullable<System.DateTime> CompletedOn { get; set; }
         public string CompletedBy { get; set; }
         public string ReferenceNo { get; set; }
+    
+        public virtual CustomerApplication CustomerApplication { get; set; }
     }
 }

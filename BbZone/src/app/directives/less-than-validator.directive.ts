@@ -1,4 +1,4 @@
-﻿import { Directive, forwardRef, Attribute } from '@angular/core';
+﻿import { Directive, forwardRef, Attribute, Input } from '@angular/core';
 import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
 @Directive({
@@ -9,17 +9,20 @@ import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 })
 
 export class LessThanValidator implements Validator {
-    constructor(@Attribute('validateLessThan') public targetControlName: string) { }
+    //constructor(@Attribute('validateLessThan') public targetControlName: string) { }
+    private _valueToCompare: number;
+
+    @Input('compare-value')
+    set valueToCompare(val: number) {
+        this._valueToCompare = val;
+    }
 
     validate(thisControl: AbstractControl): { [key: string]: any } {
         let myValue = thisControl.value;
 
         if (myValue) {
-            // control value (e.g. password)
-            let targetControl = thisControl.root.get(this.targetControlName);
-
             // value not equal
-            if (targetControl && myValue > targetControl.value)
+            if (this._valueToCompare && myValue > this._valueToCompare)
                 return { validateLessThan: true };
         }
 

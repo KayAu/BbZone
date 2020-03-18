@@ -17,7 +17,7 @@ export class ViewOrderColumns {
       "displayType": "text",
       "keyField": false,
       "readonly": false,
-      "colWidth": "cell-width-30"
+      "colWidth": "cell-width-20"
     },
     {
         "fieldName": "packageName",
@@ -25,7 +25,7 @@ export class ViewOrderColumns {
       "displayType": "text",
       "keyField": false,
       "readonly": false,
-      "colWidth": "cell-width-30"
+      "colWidth": "cell-width-25"
       },
       {
           "fieldName": "category",
@@ -33,7 +33,7 @@ export class ViewOrderColumns {
           "displayType": "text",
           "keyField": false,
           "readonly": false,
-          "colWidth": ""
+          "colWidth": "cell-width-15"
       },
     {
         "fieldName": "agent",
@@ -57,7 +57,7 @@ export class ViewOrderColumns {
         "displayType": "text",
         "keyField": false,
         "readonly": false,
-        "colWidth": "cell-width-10"
+        "colWidth": ""
     }
   ]
 

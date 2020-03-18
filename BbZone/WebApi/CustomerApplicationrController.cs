@@ -25,6 +25,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 SearchOrderParams filterBy = JsonConvert.DeserializeObject<SearchOrderParams>(searchParams);
 
                 using (var db = new BroadbandZoneEntities())
@@ -38,6 +39,10 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.Agent,
                                                                                 filterBy.submittedDate != null ? filterBy.submittedDate.StartDate : null,
                                                                                 filterBy.submittedDate != null ? filterBy.submittedDate.EndDate : null,
+                                                                                filterBy.ResidentialType,
+                                                                                filterBy.ResidentialName,
+                                                                                currentUser.IsAdmin,
+                                                                                currentUser.AgentId,
                                                                                 totalRecord).ToList();
                     return Ok(new Gridview<GetCustomerApplication_Result>()
                     {
@@ -50,7 +55,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -70,7 +75,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -90,8 +95,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     newRecord = JsonConvert.DeserializeObject<CustomerApplication>(result.FormData["data"]);
-                    newRecord.AppStatusId = 1;
-                    newRecord.Agent = currentUser.Username;
+                    newRecord.AppStatusId = newRecord.SubmitByAgent.GetValueOrDefault() == true ? 8 : 1 ;
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
                     db.CustomerApplications.Add(newRecord);
                     db.SaveChanges();
@@ -104,7 +108,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -137,7 +141,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -146,7 +150,7 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 if (multipartFiles is null || multipartFiles.Count() == 0) return;
-
+            
                 FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.UploadFilePath);
                 using (var db = new BroadbandZoneEntities())
                 {

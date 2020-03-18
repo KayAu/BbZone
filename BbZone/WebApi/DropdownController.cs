@@ -1,4 +1,5 @@
 ﻿using BroadbandZone_App.Enums;
+using BroadbandZone_App.Helper;
 using BroadbandZone_App.Models;
 using BroadbandZone_Data;
 using System;
@@ -163,10 +164,21 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                List<DropdownItem> dropdownItems;
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
                 using (var db = new BroadbandZoneEntities())
                 {
-                    List<DropdownItem> dropdownItems = db.Agents.Where(pc => pc.IsActive == true)
-                                                               .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
+                    if (currentUser.IsAdmin.GetValueOrDefault() == true)
+                    {
+                        dropdownItems = db.Agents.Where(pc => pc.IsActive == true)
+                                                 .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
+                    }
+                    else
+                    {
+                        dropdownItems = db.Agents.Where(pc => pc.IsActive == true && pc.SuperiorId == currentUser.AgentId)
+                                                 .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
+                    }
                     return Ok(dropdownItems);
                 }
             }

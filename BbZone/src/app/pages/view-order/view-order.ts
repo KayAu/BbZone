@@ -23,7 +23,7 @@ export class ViewOrder extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     searchFields: FormDataMapping[] = [];
     displayType = DataDisplayType;
-    searchParams = new SearchOrderParams(null, null, null, null, null, null);
+    searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
 
     keyField: string;
 
@@ -68,7 +68,7 @@ export class ViewOrder extends ListEvent {
     }
  
     clearSearchParam() {
-        this.searchParams = new SearchOrderParams(null, null, null, null, null, null);
+        this.searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
         this.reloadData();
     }
 }
