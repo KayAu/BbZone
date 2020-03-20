@@ -11,15 +11,13 @@ namespace BroadbandZone_Data
 {
     using System;
     
-    public partial class GetWithdrawal_Result
+    public partial class GetWithdrawalToSubmit_Result
     {
-        public Nullable<int> WithdrawalId { get; set; }
-        public string Agent { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public Nullable<int> ApplicationId { get; set; }
+        public string CustomerName { get; set; }
+        public string PackageName { get; set; }
+        public string Category { get; set; }
         public string SubmittedOn { get; set; }
-        public Nullable<decimal> GiroFee { get; set; }
-        public Nullable<bool> IsCompleted { get; set; }
-        public string CompletedOn { get; set; }
-        public string ReferenceNo { get; set; }
+        public Nullable<decimal> ClaimAmount { get; set; }
     }
 }

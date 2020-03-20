@@ -16,26 +16,27 @@
                     <div role="tabpanel" id="addCommission" class="tab-pane active">
                         <div class="panel-body">
                             <form #dataForm="ngForm" (ngSubmit)="create()">
-                                <fieldset [disabled]="!allowCommConfig">
-                                    <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
-                                        <i class="fa fa-warning"></i>
-                                        Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
+
+                                <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
+                                    <i class="fa fa-warning"></i>
+                                    Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">
+                                        Product
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <product-options name="product" [fieldId]="'product'" [required]="true" [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
                                     </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <fieldset [disabled]="!allowCommConfig">
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">
                                             Agents
                                         </label>
                                         <div class="col-sm-10">
                                             <multiple-checkbox name="selectedAgents" [fieldId]="'selectedAgents'" [dataItems]="myAgents" [(ngModel)]="selectedAgents" [required]="true"></multiple-checkbox>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group row">
-                                        <label class="col-sm-2 col-form-label">
-                                            Product
-                                        </label>
-                                        <div class="col-sm-10">
-                                            <product-options name="product" [fieldId]="'product'" [required]="true" [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>

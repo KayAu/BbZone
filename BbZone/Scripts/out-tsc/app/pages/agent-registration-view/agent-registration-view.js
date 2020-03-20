@@ -43,7 +43,7 @@ var AgentRegistrationView = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     AgentRegistrationView.prototype.getFormFeldsMapping = function () {
-        var columnMappings = agentFields_1.AgentRegistrationViewFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = agentFields_1.AgentRegistrationViewFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };

@@ -7,7 +7,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "applicationId",
             "displayText": "Application Id",
-            "readonly": true,
+            "hidden": true,
             "dataFieldControl": {
                 "controlName": "applicationId",
                 "controlType": "label",
@@ -18,7 +18,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "categoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "categoryId",
                 "controlType": "select",
@@ -31,7 +31,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "prodPkgId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "prodPkgId",
                 "controlType": "cascadeDropdown",
@@ -43,7 +43,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "agent",
             "displayText": "Agent Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -55,7 +55,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -66,7 +66,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Registration No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -77,7 +77,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerName",
             "displayText": "Customer Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerName",
                 "controlType": "textbox",
@@ -88,7 +88,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerId",
             "displayText": "Customer IC / Passport No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerId",
                 "controlType": "textbox",
@@ -99,7 +99,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -111,7 +111,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -122,7 +122,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerAddr",
             "displayText": "Customer Address",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerAddr",
                 "controlType": "textbox",
@@ -133,7 +133,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -144,7 +144,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -155,7 +155,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -167,7 +167,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "contactNo",
             "displayText": "Contact No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "contactNo",
                 "controlType": "textbox",
@@ -178,7 +178,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -189,18 +189,18 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerRemarks",
             "displayText": "Remarks",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerRemarks",
                 "controlType": "textarea",
-                "required": true,
+                "required": false,
                 "maxLength": 500
             }
         },
         {
             "fieldName": "submitByAgent",
             "displayText": "Submitted By Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submitByAgent",
                 "controlType": "checkbox",
@@ -211,7 +211,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "appStatusId",
             "displayText": "Status",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",
@@ -223,7 +223,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "orderNo",
             "displayText": "Order No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "orderNo",
                 "controlType": "textbox",
@@ -234,7 +234,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "userId",
             "displayText": "User Id",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",
@@ -245,7 +245,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",

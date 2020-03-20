@@ -15,7 +15,6 @@ public static fields = [
     "headerText": "Id",
     "displayType": "text",
     "keyField": true,
-    "readonly": true,
     "colWidth": "cell-width-1",
     "dataFieldControl": {
         "controlName": "prodPkgId",
@@ -29,7 +28,6 @@ public static fields = [
         "headerText": "Package Name",
         "displayType": "text",
         "keyField": false,
-        "readonly": false,
         "colWidth": "cell-width-20",
         "dataFieldControl": {
             "controlName": "packageName",
@@ -43,7 +41,6 @@ public static fields = [
     "headerText": "Description",
     "displayType": "text",
     "keyField": false,
-    "readonly": false,
     "colWidth": "cell-width-40",
     "dataFieldControl": {
       "controlName": "description",
@@ -57,7 +54,6 @@ public static fields = [
     "headerText": "Commission",
     "displayType": "text",
     "keyField": false,
-    "readonly": false,
     "colWidth": "cell-width-10",
     "dataFieldControl": {
       "controlName": "commission",
@@ -71,7 +67,6 @@ public static fields = [
     "headerText": "Category",
     "displayType": "text",
     "keyField": false,
-    "readonly": false,
     "colWidth": "",
     "dataFieldControl": {
       "controlName": "categoryId",
@@ -86,7 +81,6 @@ public static fields = [
     "headerText": "Active",
     "displayType": "tick",
     "keyField": false,
-    "readonly": false,
     "colWidth": "cell-width-1", 
     "dataFieldControl": {
       "controlName": "isActive",

@@ -13,7 +13,7 @@ BEGIN
 		INSERT INTO @vCommissionSetting
 		SELECT pc.CategoryId,
 		pc.Category,
-		((ac.AgentCommission * 1.0) * pc.DefaultCommission)/100,
+		ac.AgentCommission, --((ac.AgentCommission * 1.0) * pc.DefaultCommission)/100,
 		0 
 		FROM ProductCategory pc
 		LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  

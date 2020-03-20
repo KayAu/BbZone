@@ -37,7 +37,7 @@ namespace BroadbandZone_App.WebApi
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    newRecord.Role = currentUser.IsAdmin.Value == false ? "AG" : "AD";
+                    newRecord.Role = currentUser.IsAdmin ? "AD" : "AG";
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn");
                     db.Communications.Add(newRecord);
                     db.SaveChanges();

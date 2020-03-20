@@ -7,7 +7,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productId",
             "displayText": "Product",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productId",
                 "controlType": "select",
@@ -20,7 +20,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productCategoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productCategoryId",
                 "controlType": "cascadeDropdown",
@@ -33,7 +33,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productPackageId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productPackageId",
                 "controlType": "cascadeDropdown",
@@ -45,7 +45,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -57,7 +57,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -68,7 +68,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "agent",
             "displayText": "Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -80,7 +80,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "appStatusId",
             "displayText": "Status",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",
@@ -92,7 +92,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "submittedDate",
             "displayText": "Submitted Date",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submittedDate",
                 "controlType": "dateRange",

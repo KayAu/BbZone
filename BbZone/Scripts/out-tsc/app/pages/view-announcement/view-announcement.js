@@ -51,7 +51,7 @@ var ViewAnnouncement = /** @class */ (function (_super) {
         this.controllerName = apiController_1.ApiController.Announcement;
     };
     ViewAnnouncement.prototype.getTablerowDataMapping = function () {
-        var columnMappings = announcementFields_1.ViewAnnouncementColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = announcementFields_1.ViewAnnouncementColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     ViewAnnouncement.prototype.clearFilter = function () {

@@ -327,7 +327,7 @@ module.exports = "@media (max-width: 767px) {\r\n  /* On small screens, the nav 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a href=\"login.html\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
+module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a (click)=\"logout()\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
 
 /***/ }),
 
@@ -369,6 +369,10 @@ var AppComponent = /** @class */ (function () {
     }
     AppComponent.prototype.unloadHandler = function (event) {
         localStorage.removeItem('currentUser');
+    };
+    AppComponent.prototype.logout = function () {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/']);
     };
     __decorate([
         core_1.ViewChild('navMenu'),
@@ -438,7 +442,7 @@ var ngx_daterangepicker_material_1 = __webpack_require__(/*! ngx-daterangepicker
 var edit_order_1 = __webpack_require__(/*! ./pages/edit-order/edit-order */ "./src/app/pages/edit-order/edit-order.ts");
 var agent_comission_1 = __webpack_require__(/*! ./pages/agent-comission/agent-comission */ "./src/app/pages/agent-comission/agent-comission.ts");
 var view_commission_1 = __webpack_require__(/*! ./pages/view-commission/view-commission */ "./src/app/pages/view-commission/view-commission.ts");
-var manage_withdrawal_1 = __webpack_require__(/*! ./pages/manage-withdrawal/manage-withdrawal */ "./src/app/pages/manage-withdrawal/manage-withdrawal.ts");
+var view_withdrawal_1 = __webpack_require__(/*! ./pages/view-withdrawal/view-withdrawal */ "./src/app/pages/view-withdrawal/view-withdrawal.ts");
 var manage_product_1 = __webpack_require__(/*! ./pages/manage-product/manage-product */ "./src/app/pages/manage-product/manage-product.ts");
 var manage_packages_1 = __webpack_require__(/*! ./pages/manage-packages/manage-packages */ "./src/app/pages/manage-packages/manage-packages.ts");
 var manage_category_1 = __webpack_require__(/*! ./pages/manage-category/manage-category */ "./src/app/pages/manage-category/manage-category.ts");
@@ -476,6 +480,8 @@ var announcement_1 = __webpack_require__(/*! ./components/announcement/announcem
 var user_communication_1 = __webpack_require__(/*! ./components/user-communication/user-communication */ "./src/app/components/user-communication/user-communication.ts");
 var less_than_validator_directive_1 = __webpack_require__(/*! ./directives/less-than-validator.directive */ "./src/app/directives/less-than-validator.directive.ts");
 var submission_status_count_1 = __webpack_require__(/*! ./components/dashboard/submission-status-count/submission-status-count */ "./src/app/components/dashboard/submission-status-count/submission-status-count.ts");
+var create_withdrawal_1 = __webpack_require__(/*! ./pages/create-withdrawal/create-withdrawal */ "./src/app/pages/create-withdrawal/create-withdrawal.ts");
+var edit_withdrawal_1 = __webpack_require__(/*! ./pages/edit-withdrawal/edit-withdrawal */ "./src/app/pages/edit-withdrawal/edit-withdrawal.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -495,7 +501,7 @@ var AppModule = /** @class */ (function () {
                 edit_order_1.EditOrder,
                 agent_comission_1.AgentComission,
                 view_commission_1.ViewCommission,
-                manage_withdrawal_1.ManageWithdrawal,
+                view_withdrawal_1.ViewWithdrawal,
                 manage_product_1.ManageProduct,
                 manage_packages_1.ManagePackage,
                 manage_category_1.ManageCategory,
@@ -526,7 +532,9 @@ var AppModule = /** @class */ (function () {
                 announcement_1.Announcement,
                 user_communication_1.UserCommunication,
                 less_than_validator_directive_1.LessThanValidator,
-                submission_status_count_1.SubmissionStatusCount
+                submission_status_count_1.SubmissionStatusCount,
+                create_withdrawal_1.CreateWithdrawal,
+                edit_withdrawal_1.EditWithdrawal
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -549,7 +557,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'edit-order/:id', component: edit_order_1.EditOrder },
                     { path: 'agent-comission', component: agent_comission_1.AgentComission },
                     { path: 'view-commission', component: view_commission_1.ViewCommission },
-                    { path: 'manage-withdrawal', component: manage_withdrawal_1.ManageWithdrawal },
+                    { path: 'view-withdrawal', component: view_withdrawal_1.ViewWithdrawal },
                     { path: 'manage-product', component: manage_product_1.ManageProduct },
                     { path: 'manage-packages', component: manage_packages_1.ManagePackage },
                     { path: 'manage-category', component: manage_category_1.ManageCategory },
@@ -561,7 +569,9 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
                     { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
-                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement }
+                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
+                    { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
+                    { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
                 ])
             ],
             providers: [
@@ -1550,7 +1560,7 @@ module.exports = "/*****************************************\r\n  upload button 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div classs=\"btn btn-primary file-upload pos-rel \">\r\n    <label for=\"upload\" class=\"file-upload__label\">\r\n        <i class=\"fa fa-upload mrg5R\"></i> Upload Files\r\n    </label>\r\n    <input #file class=\"file-upload__input\" type=\"file\" name=\"file-upload\" (change)=\"uploadFile(file.files)\" multiple>\r\n</div>\r\n\r\n<div class=\"dropzone mrg5B\">\r\n    <ng-container *ngFor=\"let file of uploadedFiles; let fileNo = index\">\r\n        <div class=\"file-preview\" *ngIf=\"!file.deleted\">\r\n            <button class=\"btn btn-warning btn-circle btn-xs btn-close\" type=\"button\" (click)=\"removeFile(fileNo)\">×</button>\r\n            <a href=\"{{file.name}}\" download>\r\n                <div class=\"file-details\">\r\n                    <div class=\"file-size\">\r\n                        <span><strong>{{getFileSize(file.size)}}</strong> KB</span>\r\n                    </div>\r\n                    <div class=\"file-filename\">\r\n                        <span>{{file.name}}</span>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </ng-container></div>\r\n<span class=\"form-text m-b-none\">\r\n    Allowed file types are \".gif\", \".jpg\", \".jpeg\", \".png\", \".pdf\". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com\r\n</span>"
+module.exports = "\r\n<div classs=\"btn btn-primary file-upload pos-rel \">\r\n    <label for=\"upload\" class=\"file-upload__label\">\r\n        <i class=\"fa fa-upload mrg5R\"></i> Upload Files\r\n    </label>\r\n    <input #file class=\"file-upload__input\" type=\"file\" name=\"file-upload\" (change)=\"uploadFile(file.files)\" multiple>\r\n</div>\r\n\r\n<div class=\"dropzone mrg5B\">\r\n    <ng-container *ngFor=\"let file of uploadedFiles; let fileNo = index\">\r\n        <div class=\"file-preview\" *ngIf=\"!file.deleted\">\r\n            <button class=\"btn btn-warning btn-circle btn-xs btn-close\" type=\"button\" (click)=\"removeFile(fileNo)\">×</button>\r\n            <a href=\"{{file.path}}\" target=\"_blank\" download=\"{{file.name}}\">\r\n                <div class=\"file-details\">\r\n                    <div class=\"file-size\">\r\n                        <span><strong>{{getFileSize(file.size)}}</strong> KB</span>\r\n                    </div>\r\n                    <div class=\"file-filename\">\r\n                        <span>{{file.name}}</span>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </ng-container></div>\r\n<span class=\"form-text m-b-none\">\r\n    Allowed file types are \".gif\", \".jpg\", \".jpeg\", \".png\", \".pdf\". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com\r\n</span>"
 
 /***/ }),
 
@@ -1575,9 +1585,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var file_download_1 = __webpack_require__(/*! src/app/services/file-download */ "./src/app/services/file-download.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
 var FileUploader = /** @class */ (function () {
-    function FileUploader(el) {
+    function FileUploader(el, dataService) {
         this.el = el;
+        this.dataService = dataService;
         this.uploadedFiles = [];
         this.propagateChange = function () { };
     }
@@ -1603,6 +1616,15 @@ var FileUploader = /** @class */ (function () {
         Array.prototype.push.apply(this.uploadedFiles, files);
         this.propagateChange(this.uploadedFiles);
     };
+    FileUploader.prototype.downloadFile = function (fileUrl, fileName) {
+        if (!fileUrl)
+            return;
+        // Process the file downloaded
+        this.dataService.download(fileUrl).subscribe(function (res) {
+            //let fileName = getFileNameFromResponseContentDisposition(res);
+            file_download_1.saveFile(res.blob, fileName);
+        });
+    };
     FileUploader.prototype.removeFile = function (fileNo) {
         this.uploadedFiles[fileNo].deleted = true;
         this.propagateChange(this.uploadedFiles);
@@ -1613,6 +1635,10 @@ var FileUploader = /** @class */ (function () {
     FileUploader.prototype.registerOnTouched = function () { };
     FileUploader.prototype.setDisabledState = function () { };
     var FileUploader_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], FileUploader.prototype, "filePath", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -1630,7 +1656,7 @@ var FileUploader = /** @class */ (function () {
             ],
             styles: [__webpack_require__(/*! ./file-uploader.css */ "./src/app/components/file-uploader/file-uploader.css")]
         }),
-        __metadata("design:paramtypes", [core_1.ElementRef])
+        __metadata("design:paramtypes", [core_1.ElementRef, data_service_1.DataService])
     ], FileUploader);
     return FileUploader;
 }());
@@ -2957,6 +2983,8 @@ var ApiController;
     ApiController["Dashboard"] = "Dashboard";
     ApiController["Announcement"] = "Announcement";
     ApiController["Communication"] = "Communication";
+    ApiController["WithdrawalView"] = "WithdrawalView";
+    ApiController["WithdrawalSubmit"] = "WithdrawalSubmit";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -3455,7 +3483,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "categoryId",
@@ -3469,7 +3496,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-70",
             "dataFieldControl": {
                 "controlName": "category",
@@ -3483,7 +3509,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Default Commission (RM)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
@@ -3497,7 +3522,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Commission (%)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "commissionPercent",
@@ -3511,7 +3535,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Product",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "productId",
@@ -3526,7 +3549,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "isActive",
@@ -3562,7 +3584,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "productId",
@@ -3576,7 +3597,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "ProductName",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "productName",
@@ -3590,7 +3610,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-5",
             "dataFieldControl": {
                 "controlName": "isActive",
@@ -3624,7 +3643,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -3635,7 +3654,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -3646,7 +3665,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -3657,7 +3676,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -3668,7 +3687,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -3679,7 +3698,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -3690,7 +3709,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -3701,7 +3720,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -3713,7 +3732,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "number",
@@ -3724,7 +3743,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -3735,7 +3754,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -3746,7 +3765,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -3757,7 +3776,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "superiorId",
             "displayText": "Superior Id",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "superiorId",
                 "controlType": "number",
@@ -3768,7 +3787,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "userLogin",
             "displayText": "User Login",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userLogin",
                 "controlType": "textbox",
@@ -3779,7 +3798,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "password",
             "displayText": "Password",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "password",
                 "controlType": "password",
@@ -3878,7 +3897,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -3889,7 +3908,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -3900,7 +3919,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -3911,7 +3930,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -3922,7 +3941,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -3933,7 +3952,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -3944,7 +3963,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -3955,7 +3974,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -3967,7 +3986,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "number",
@@ -3978,7 +3997,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -3989,7 +4008,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -4000,7 +4019,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -4011,7 +4030,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "superiorName",
             "displayText": "Superior/Upline",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "superiorName",
                 "controlType": "textbox",
@@ -4031,7 +4050,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "agentId",
             "displayText": "Agent Id",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agentId",
                 "controlType": "label",
@@ -4042,7 +4061,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -4053,7 +4072,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -4064,7 +4083,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -4075,7 +4094,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -4086,7 +4105,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -4097,7 +4116,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -4108,7 +4127,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -4119,7 +4138,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -4131,7 +4150,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -4142,7 +4161,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -4153,7 +4172,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -4164,7 +4183,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -4175,7 +4194,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "bankName",
             "displayText": "Bank Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankName",
                 "controlType": "textbox",
@@ -4186,7 +4205,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "bankAccNo",
             "displayText": "Bank Acc No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankAccNo",
                 "controlType": "textbox",
@@ -4283,7 +4302,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -4294,7 +4313,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -4305,7 +4324,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",
@@ -4325,7 +4344,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Annc Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": false,
             "colWidth": "cell-width-1"
         },
         {
@@ -4333,7 +4351,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Title",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-50"
         },
         {
@@ -4341,7 +4358,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Is Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10"
         },
         {
@@ -4349,7 +4365,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Modified On",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         },
         {
@@ -4357,7 +4372,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Modified By",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         }
     ];
@@ -4371,7 +4385,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "anncId",
             "displayText": "Id",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "anncId",
                 "controlType": "label",
@@ -4382,7 +4396,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -4393,7 +4407,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -4404,7 +4418,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",
@@ -4415,6 +4429,77 @@ var EditAnnouncementFields = /** @class */ (function () {
     return EditAnnouncementFields;
 }());
 exports.EditAnnouncementFields = EditAnnouncementFields;
+
+
+/***/ }),
+
+/***/ "./src/app/metadata/createWithdrawalColumns.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/metadata/createWithdrawalColumns.ts ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+//SELECT ApplicationId,
+//    CustomerName,
+//    PackageName,
+//    Category,
+//    SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
+//    ClaimAmount
+Object.defineProperty(exports, "__esModule", { value: true });
+var CreateWithdrawalColumns = /** @class */ (function () {
+    function CreateWithdrawalColumns() {
+    }
+    CreateWithdrawalColumns.fields = [
+        //{
+        //  "fieldName": "applicationId",
+        //  "headerText": "Id",
+        //  "displayType": "text",
+        //  "keyField": true,
+        //  "hidden": true,
+        //  "colWidth": "cell-width-1"
+        //},
+        {
+            "fieldName": "customerName",
+            "headerText": "Customer Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-30"
+        },
+        {
+            "fieldName": "packageName",
+            "headerText": "Product Package",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-25"
+        },
+        {
+            "fieldName": "category",
+            "headerText": "Category",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "submittedOn",
+            "headerText": "Submitted On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "claimAmount",
+            "headerText": "Claim Amount",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        }
+    ];
+    return CreateWithdrawalColumns;
+}());
+exports.CreateWithdrawalColumns = CreateWithdrawalColumns;
 
 
 /***/ }),
@@ -4436,7 +4521,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "applicationId",
             "displayText": "Application Id",
-            "readonly": true,
+            "hidden": true,
             "dataFieldControl": {
                 "controlName": "applicationId",
                 "controlType": "label",
@@ -4447,7 +4532,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "categoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "categoryId",
                 "controlType": "select",
@@ -4460,7 +4545,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "prodPkgId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "prodPkgId",
                 "controlType": "cascadeDropdown",
@@ -4472,7 +4557,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "agent",
             "displayText": "Agent Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -4484,7 +4569,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -4495,7 +4580,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Registration No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -4506,7 +4591,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerName",
             "displayText": "Customer Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerName",
                 "controlType": "textbox",
@@ -4517,7 +4602,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerId",
             "displayText": "Customer IC / Passport No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerId",
                 "controlType": "textbox",
@@ -4528,7 +4613,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -4540,7 +4625,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -4551,7 +4636,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerAddr",
             "displayText": "Customer Address",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerAddr",
                 "controlType": "textbox",
@@ -4562,7 +4647,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -4573,7 +4658,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -4584,7 +4669,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -4596,7 +4681,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "contactNo",
             "displayText": "Contact No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "contactNo",
                 "controlType": "textbox",
@@ -4607,7 +4692,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -4618,18 +4703,18 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerRemarks",
             "displayText": "Remarks",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerRemarks",
                 "controlType": "textarea",
-                "required": true,
+                "required": false,
                 "maxLength": 500
             }
         },
         {
             "fieldName": "submitByAgent",
             "displayText": "Submitted By Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submitByAgent",
                 "controlType": "checkbox",
@@ -4640,7 +4725,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "appStatusId",
             "displayText": "Status",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",
@@ -4652,7 +4737,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "orderNo",
             "displayText": "Order No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "orderNo",
                 "controlType": "textbox",
@@ -4663,7 +4748,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "userId",
             "displayText": "User Id",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",
@@ -4674,7 +4759,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",
@@ -4715,7 +4800,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "prodPkgId",
@@ -4729,7 +4813,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Package Name",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-20",
             "dataFieldControl": {
                 "controlName": "packageName",
@@ -4743,7 +4826,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Description",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-40",
             "dataFieldControl": {
                 "controlName": "description",
@@ -4757,7 +4839,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Commission",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10",
             "dataFieldControl": {
                 "controlName": "commission",
@@ -4771,7 +4852,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "categoryId",
@@ -4786,7 +4866,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "isActive",
@@ -4820,7 +4899,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "categoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "categoryId",
                 "controlType": "cascadeDropdown",
@@ -4833,7 +4912,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "prodPkgId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "prodPkgId",
                 "controlType": "cascadeDropdown",
@@ -4845,7 +4924,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "agent",
             "displayText": "Agent Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -4857,7 +4936,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -4868,7 +4947,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Registration No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -4879,7 +4958,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerName",
             "displayText": "Customer Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerName",
                 "controlType": "textbox",
@@ -4890,7 +4969,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerId",
             "displayText": "Customer IC / Passport No.",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerId",
                 "controlType": "textbox",
@@ -4901,7 +4980,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -4913,7 +4992,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -4924,7 +5003,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerAddr",
             "displayText": "Customer Address",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerAddr",
                 "controlType": "textbox",
@@ -4935,7 +5014,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -4946,7 +5025,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -4957,7 +5036,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -4969,7 +5048,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "contactNo",
             "displayText": "Contact No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "contactNo",
                 "controlType": "textbox",
@@ -4980,7 +5059,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "Email",
                 "controlType": "textbox",
@@ -4991,7 +5070,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "customerRemarks",
             "displayText": "Remarks",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "customerRemarks",
                 "controlType": "textarea",
@@ -5002,7 +5081,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "orderNo",
             "displayText": "Order No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "orderNo",
                 "controlType": "textbox",
@@ -5013,7 +5092,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "userId",
             "displayText": "User Id",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",
@@ -5024,9 +5103,9 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
-                "controlName": "userId",
+                "controlName": "telNo",
                 "controlType": "textbox",
                 "required": false,
                 "maxLength": 25
@@ -5035,7 +5114,7 @@ var NewOrderFields = /** @class */ (function () {
         {
             "fieldName": "submitByAgent",
             "displayText": "Submitted By Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submitByAgent",
                 "controlType": "checkbox",
@@ -5068,7 +5147,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productId",
             "displayText": "Product",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productId",
                 "controlType": "select",
@@ -5081,7 +5160,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productCategoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productCategoryId",
                 "controlType": "cascadeDropdown",
@@ -5094,7 +5173,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "productPackageId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productPackageId",
                 "controlType": "cascadeDropdown",
@@ -5106,7 +5185,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -5118,7 +5197,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -5129,7 +5208,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "agent",
             "displayText": "Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -5141,7 +5220,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "appStatusId",
             "displayText": "Status",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",
@@ -5153,7 +5232,7 @@ var SearchOrderFields = /** @class */ (function () {
         {
             "fieldName": "submittedDate",
             "displayText": "Submitted Date",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submittedDate",
                 "controlType": "dateRange",
@@ -5165,6 +5244,75 @@ var SearchOrderFields = /** @class */ (function () {
     return SearchOrderFields;
 }());
 exports.SearchOrderFields = SearchOrderFields;
+
+
+/***/ }),
+
+/***/ "./src/app/metadata/searchWithdrawalFields.ts":
+/*!****************************************************!*\
+  !*** ./src/app/metadata/searchWithdrawalFields.ts ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var SearchWithdrawalFields = /** @class */ (function () {
+    function SearchWithdrawalFields() {
+    }
+    SearchWithdrawalFields.fields = [
+        {
+            "fieldName": "agent",
+            "displayText": "Agent",
+            "hidden": false,
+            "fieldForAdmin": true,
+            "dataFieldControl": {
+                "controlName": "agent",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetAgents",
+            }
+        },
+        {
+            "fieldName": "status",
+            "displayText": "Status",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "status",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetWithdrawalStatus"
+            }
+        },
+        {
+            "fieldName": "submittedDate",
+            "displayText": "Submitted Date",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "submittedDate",
+                "controlType": "dateRange",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "completedDate",
+            "displayText": "Completed Date",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "completedDate",
+                "controlType": "dateRange",
+                "required": false,
+                "maxLength": 0
+            }
+        }
+    ];
+    return SearchWithdrawalFields;
+}());
+exports.SearchWithdrawalFields = SearchWithdrawalFields;
 
 
 /***/ }),
@@ -5188,7 +5336,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1"
         },
         {
@@ -5196,7 +5343,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Customer Name",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-20"
         },
         {
@@ -5204,7 +5350,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-25"
         },
         {
@@ -5212,7 +5357,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-15"
         },
         {
@@ -5220,7 +5364,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Agent",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10"
         },
         {
@@ -5228,7 +5371,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Submitted On",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-5"
         },
         {
@@ -5236,13 +5378,83 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Status",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         }
     ];
     return ViewOrderColumns;
 }());
 exports.ViewOrderColumns = ViewOrderColumns;
+
+
+/***/ }),
+
+/***/ "./src/app/metadata/viewWithdrawalColumns.ts":
+/*!***************************************************!*\
+  !*** ./src/app/metadata/viewWithdrawalColumns.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ViewWithdrawalColumns = /** @class */ (function () {
+    function ViewWithdrawalColumns() {
+    }
+    ViewWithdrawalColumns.fields = [
+        {
+            "fieldName": "withdrawalId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-3"
+        },
+        {
+            "fieldName": "agent",
+            "headerText": "Agent",
+            "displayType": "amount",
+            "keyField": false,
+            "colWidth": "cell-width-30"
+        },
+        {
+            "fieldName": "amount",
+            "headerText": "Amount",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "status",
+            "headerText": "Status",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "referenceNo",
+            "headerText": "Reference No",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "createdOn",
+            "headerText": "Submitted On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+        {
+            "fieldName": "completedOn",
+            "headerText": "Completed On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+    ];
+    return ViewWithdrawalColumns;
+}());
+exports.ViewWithdrawalColumns = ViewWithdrawalColumns;
 
 
 /***/ }),
@@ -5348,10 +5560,10 @@ exports.FormSubmit = FormSubmit;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var FormDataMapping = /** @class */ (function () {
-    function FormDataMapping(fieldName, displayText, readonly, dataFieldControl) {
+    function FormDataMapping(fieldName, displayText, hidden, dataFieldControl) {
         this.fieldName = fieldName;
         this.displayText = displayText;
-        this.readonly = readonly;
+        this.hidden = hidden;
         this.dataFieldControl = dataFieldControl;
     }
     return FormDataMapping;
@@ -5441,6 +5653,24 @@ var ApprovalParams = /** @class */ (function () {
     return ApprovalParams;
 }());
 exports.ApprovalParams = ApprovalParams;
+var SearchWithdrawalToSubmitParams = /** @class */ (function () {
+    function SearchWithdrawalToSubmitParams(keyword, submittedDate) {
+        this.keyword = keyword;
+        this.submittedDate = submittedDate;
+    }
+    return SearchWithdrawalToSubmitParams;
+}());
+exports.SearchWithdrawalToSubmitParams = SearchWithdrawalToSubmitParams;
+var SearchWithdrawalViewParams = /** @class */ (function () {
+    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
+        this.agent = agent;
+        this.status = status;
+        this.submittedDate = submittedDate;
+        this.completedDate = completedDate;
+    }
+    return SearchWithdrawalViewParams;
+}());
+exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
 
 
 /***/ }),
@@ -5478,12 +5708,11 @@ exports.Sort = Sort;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var TablerowDataMapping = /** @class */ (function () {
-    function TablerowDataMapping(fieldName, headerText, displayType, keyField, readonly, colWidth, dataFieldControl) {
+    function TablerowDataMapping(fieldName, headerText, displayType, keyField, colWidth, dataFieldControl) {
         this.fieldName = fieldName;
         this.headerText = headerText;
         this.displayType = displayType;
         this.keyField = keyField;
-        this.readonly = readonly;
         this.colWidth = colWidth;
         this.dataFieldControl = dataFieldControl;
     }
@@ -5512,7 +5741,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n          <img alt=\"image\" class=\"rounded-circle\" src=\"../assets/images/profile_small.jpg\">\r\n          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Commission Maintenance</span></a></li>\r\n            <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span></a>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Commission Maintenance</span></a></li>\r\n            <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n        </ul>\r\n      </li>\r\n      <li>\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n          </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -5580,7 +5809,7 @@ exports.NavMenuComponent = NavMenuComponent;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Agent Commissions'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"tabs-container\">\r\n                <loading></loading>\r\n                <ul class=\"nav nav-tabs\" role=\"tablist\">\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 1}\" data-toggle=\"tab\" href=\"#addCommission\" (click)=\"selectedTab=1\">Add Commission</a>\r\n                    </li>\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 2}\" data-toggle=\"tab\" href=\"#editCommission\" (click)=\"selectedTab=2\">Edit Commission</a>\r\n                    </li>\r\n                </ul>\r\n                <div class=\"tab-content\">\r\n                    <div role=\"tabpanel\" id=\"addCommission\" class=\"tab-pane active\">\r\n                        <div class=\"panel-body\">\r\n                            <form #dataForm=\"ngForm\" (ngSubmit)=\"create()\">\r\n                                <fieldset [disabled]=\"!allowCommConfig\">\r\n                                    <div class=\"alert alert-warning mrg25B\" *ngIf=\"!allowCommConfig\">\r\n                                        <i class=\"fa fa-warning\"></i>\r\n                                        Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.\r\n                                    </div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Agents\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <multiple-checkbox name=\"selectedAgents\" [fieldId]=\"'selectedAgents'\" [dataItems]=\"myAgents\" [(ngModel)]=\"selectedAgents\" [required]=\"true\"></multiple-checkbox>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <product-options name=\"product\" [fieldId]=\"'product'\" [required]=\"true\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadCategories()\"></product-options>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product Category\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <table class=\"table table-striped\">\r\n                                                <thead>\r\n                                                    <tr>\r\n                                                        <th>#</th>\r\n                                                        <th>Product Category</th>\r\n                                                        <th>Commission (%)</th>\r\n                                                        <th>Allocation (%)</th>\r\n                                                    </tr>\r\n                                                </thead>\r\n                                                <tbody>\r\n                                                    <tr *ngFor=\"let item of commissionSettings; let itemNo = index\">\r\n                                                        <td>{{itemNo+1}}</td>\r\n                                                        <td>{{item.category}}</td>\r\n                                                        <td>{{item.supCommission}}</td>\r\n                                                        <td>\r\n                                                            <input type=\"number\" [(ngModel)]=\"item.agentCommissionPer\" name=\"agentCommissionPer{{itemNo}}\" #name=\"ngModel\"\r\n                                                                   validateLessThan [compare-value]=\"item.supCommission\" class=\"form-control\" />\r\n                                                            <span *ngIf=\"name.errors?.validateLessThan\" class=\"text-danger\">\r\n                                                                Allocation percentage must be lesser than superior's commission\r\n                                                            </span>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr *ngIf=\"commissionSettings.length == 0\">\r\n                                                        <td colspan=\"4\">\r\n                                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                                <h4>No Records Available</h4>\r\n                                                            </div>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div>\r\n                                        <back-button>Cancel</back-button>\r\n                                        <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }\"\r\n                                                [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                            {{isUpdating ? 'Updating' : 'Update'}}\r\n                                            <span class=\"loading\"></span>\r\n                                        </button>\r\n                                    </div>\r\n                                </fieldset>\r\n                            </form>\r\n                        </div>\r\n                    </div>\r\n                    <div role=\"tabpanel\" id=\"editCommission\" class=\"tab-pane\">\r\n                        <div class=\"panel-body\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Product\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <product-options name=\"product\" [fieldId]=\"product\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadAgentCommissions()\"></product-options>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Agents Commission\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <agent-commission-table></agent-commission-table>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Agent Commissions'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"tabs-container\">\r\n                <loading></loading>\r\n                <ul class=\"nav nav-tabs\" role=\"tablist\">\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 1}\" data-toggle=\"tab\" href=\"#addCommission\" (click)=\"selectedTab=1\">Add Commission</a>\r\n                    </li>\r\n                    <li>\r\n                        <a class=\"nav-link\" [ngClass]=\"{'active':selectedTab == 2}\" data-toggle=\"tab\" href=\"#editCommission\" (click)=\"selectedTab=2\">Edit Commission</a>\r\n                    </li>\r\n                </ul>\r\n                <div class=\"tab-content\">\r\n                    <div role=\"tabpanel\" id=\"addCommission\" class=\"tab-pane active\">\r\n                        <div class=\"panel-body\">\r\n                            <form #dataForm=\"ngForm\" (ngSubmit)=\"create()\">\r\n\r\n                                <div class=\"alert alert-warning mrg25B\" *ngIf=\"!allowCommConfig\">\r\n                                    <i class=\"fa fa-warning\"></i>\r\n                                    Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.\r\n                                </div>\r\n                                <div class=\"form-group row\">\r\n                                    <label class=\"col-sm-2 col-form-label\">\r\n                                        Product\r\n                                    </label>\r\n                                    <div class=\"col-sm-10\">\r\n                                        <product-options name=\"product\" [fieldId]=\"'product'\" [required]=\"true\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadCategories()\"></product-options>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"hr-line-dashed\"></div>\r\n                                <fieldset [disabled]=\"!allowCommConfig\">\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Agents\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <multiple-checkbox name=\"selectedAgents\" [fieldId]=\"'selectedAgents'\" [dataItems]=\"myAgents\" [(ngModel)]=\"selectedAgents\" [required]=\"true\"></multiple-checkbox>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product Category\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <table class=\"table table-striped\">\r\n                                                <thead>\r\n                                                    <tr>\r\n                                                        <th>#</th>\r\n                                                        <th>Product Category</th>\r\n                                                        <th>Commission (%)</th>\r\n                                                        <th>Allocation (%)</th>\r\n                                                    </tr>\r\n                                                </thead>\r\n                                                <tbody>\r\n                                                    <tr *ngFor=\"let item of commissionSettings; let itemNo = index\">\r\n                                                        <td>{{itemNo+1}}</td>\r\n                                                        <td>{{item.category}}</td>\r\n                                                        <td>{{item.supCommission}}</td>\r\n                                                        <td>\r\n                                                            <input type=\"number\" [(ngModel)]=\"item.agentCommissionPer\" name=\"agentCommissionPer{{itemNo}}\" #name=\"ngModel\"\r\n                                                                   validateLessThan [compare-value]=\"item.supCommission\" class=\"form-control\" />\r\n                                                            <span *ngIf=\"name.errors?.validateLessThan\" class=\"text-danger\">\r\n                                                                Allocation percentage must be lesser than superior's commission\r\n                                                            </span>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                    <tr *ngIf=\"commissionSettings.length == 0\">\r\n                                                        <td colspan=\"4\">\r\n                                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                                <h4>No Records Available</h4>\r\n                                                            </div>\r\n                                                        </td>\r\n                                                    </tr>\r\n                                                </tbody>\r\n                                            </table>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div>\r\n                                        <back-button>Cancel</back-button>\r\n                                        <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }\"\r\n                                                [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                            {{isUpdating ? 'Updating' : 'Update'}}\r\n                                            <span class=\"loading\"></span>\r\n                                        </button>\r\n                                    </div>\r\n                                </fieldset>\r\n                            </form>\r\n                        </div>\r\n                    </div>\r\n                    <div role=\"tabpanel\" id=\"editCommission\" class=\"tab-pane\">\r\n                        <div class=\"panel-body\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Product\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <product-options name=\"product\" [fieldId]=\"product\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadAgentCommissions()\"></product-options>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-1 col-form-label\">\r\n                                    Agents Commission\r\n                                </label>\r\n                                <div class=\"col-sm-11\">\r\n                                    <agent-commission-table></agent-commission-table>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -5615,6 +5844,7 @@ var product_options_1 = __webpack_require__(/*! src/app/components/product-optio
 var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
 var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
 var agent_commission_table_1 = __webpack_require__(/*! src/app/components/agent-commission-table/agent-commission-table */ "./src/app/components/agent-commission-table/agent-commission-table.ts");
+var rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var AgentComission = /** @class */ (function () {
     function AgentComission(loaderService, dataService, formEvent, toastr, router) {
         this.loaderService = loaderService;
@@ -5626,29 +5856,25 @@ var AgentComission = /** @class */ (function () {
         this.commissionSettings = [];
         this.agentCommissions = [];
         this.selectedTab = 1;
-        this.allowCommConfig = false;
+        this.allowCommConfig = true;
     }
-    AgentComission.prototype.ngOnInit = function () {
-        this.loadAgents();
-    };
-    AgentComission.prototype.loadAgents = function () {
-        var _this = this;
-        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents").subscribe(function (data) {
-            _this.myAgents = data.displayData;
-            _this.allowCommConfig = data.allowCommConfig;
-        });
-    };
+    AgentComission.prototype.ngOnInit = function () { };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
-        this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct).subscribe(function (results) {
-            _this.commissionSettings = results;
+        rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct),
+            this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents", this.selectedProduct)]).subscribe(function (results) {
+            _this.commissionSettings = results[0];
+            _this.loadAgents(results[1]);
         });
+    };
+    AgentComission.prototype.loadAgents = function (data) {
+        // this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
+        this.myAgents = data.displayData;
+        this.allowCommConfig = data.allowCommConfig;
+        //});
     };
     AgentComission.prototype.loadAgentCommissions = function () {
         this.agentCommissionTable.loadData(this.selectedProduct);
-        //this.dataService.get(`${ApiController.Commission}/GetMyAgentCommission`, this.selectedProduct).subscribe(results => {
-        //    this.agentCommissions = results;
-        //});
     };
     AgentComission.prototype.create = function () {
         var _this = this;
@@ -5773,7 +5999,7 @@ var AgentMaintenance = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     AgentMaintenance.prototype.getTablerowDataMapping = function () {
-        var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     AgentMaintenance.prototype.clearSearchParam = function () {
@@ -5861,7 +6087,7 @@ var AgentProfile = /** @class */ (function () {
         this.loadRecord();
     };
     AgentProfile.prototype.getFormFeldsMapping = function () {
-        var fields = agentFields_1.AgentProfileFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var fields = agentFields_1.AgentProfileFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return fields;
     };
@@ -5987,13 +6213,13 @@ var AgentRegistrationList = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     AgentRegistrationList.prototype.getTablerowDataMapping = function () {
-        var columnMappings = agentFields_1.AgentRegistrationColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = agentFields_1.AgentRegistrationColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     //getSearchFeldsMapping(): FormDataMapping[] {
     //    let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
     //        o.displayText,
-    //        o.readonly,
+    //        o.hidden,
     //        !o.dataFieldControl ? null :
     //            new DataFieldControl(
     //                o.dataFieldControl.controlName,
@@ -6087,7 +6313,7 @@ var AgentRegistrationView = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     AgentRegistrationView.prototype.getFormFeldsMapping = function () {
-        var columnMappings = agentFields_1.AgentRegistrationViewFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = agentFields_1.AgentRegistrationViewFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -6134,7 +6360,7 @@ exports.AgentRegistrationView = AgentRegistrationView;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"middle-box  w-800\">\r\n    <div class=\"wrapper wrapper-content animated fadeInRight\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12\">\r\n                <div class=\"ibox\" *ngIf=\"!completed\">\r\n                    <div class=\"ibox-title\">\r\n                        <h5>Register to <small>* is required field.</small></h5>\r\n                    </div>\r\n                    <div class=\"ibox-content\">\r\n                        <loading></loading>\r\n                        <form #applicationForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                            <!--PRODUCT TYPES-->\r\n                            <ng-container *ngFor=\"let field of formFields\">\r\n                                <div class=\"form-group row\">\r\n                                    <label class=\"col-sm-3 col-form-label\">\r\n                                        {{field.displayText}}\r\n                                        <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                    </label>\r\n                                    <div class=\"col-sm-9\">\r\n                                        <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                      [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"hr-line-dashed\"></div>\r\n                            </ng-container>\r\n                            <!--SAVE OR CANCEL-->\r\n                            <div class=\"form-group row\">\r\n                                <div class=\"col-sm-12 \">\r\n                                    <a [routerLink]='[\"/\"]' class=\"btn btn-white float-right\">Cancel</a>\r\n                                    <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                    <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                            [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                        {{isUpdating ? 'Registering' : 'Register'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n                <div class=\"text-center\" *ngIf=\"completed\">\r\n                    <div class=\"widget-head-color-box navy-bg p-lg\">\r\n                        <i class=\"fa fa-thumbs-up big-icon\"></i>\r\n                        <h1>Registration Completed</h1>\r\n                        <p class=\"mrg20T\">\r\n                            Thank you for registering to be one of our agents. We will review your submission. An activation code will be send to your email once your submission is verified.\r\n                        </p>\r\n                    </div>\r\n                    <a [routerLink]='[\"/\"]' class=\"btn btn-w-m btn-link text-white \">\r\n                        Back To Login\r\n                    </a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"middle-box  w-800\">\r\n    <div class=\"wrapper wrapper-content animated fadeInRight\">\r\n        <div class=\"row\">\r\n            <div class=\"col-lg-12\">\r\n                <div class=\"ibox\" *ngIf=\"!completed\">\r\n                    <div class=\"ibox-title\">\r\n                        <h5>Register to <small>* is required field.</small></h5>\r\n                    </div>\r\n                    <div class=\"ibox-content\">\r\n                        <loading></loading>\r\n                        <form #applicationForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                            <!--PRODUCT TYPES-->\r\n                            <ng-container *ngFor=\"let field of formFields\">\r\n                                <div class=\"form-group row\" *ngIf=\"!field.hidden\">\r\n                                    <label class=\"col-sm-3 col-form-label\">\r\n                                        {{field.displayText}}\r\n                                        <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                    </label>\r\n                                    <div class=\"col-sm-9\">\r\n                                        <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                      [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"hr-line-dashed\"></div>\r\n                            </ng-container>\r\n                            <!--SAVE OR CANCEL-->\r\n                            <div class=\"form-group row\">\r\n                                <div class=\"col-sm-12 \">\r\n                                    <a [routerLink]='[\"/\"]' class=\"btn btn-white float-right\">Cancel</a>\r\n                                    <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                    <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                            [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                        {{isUpdating ? 'Registering' : 'Register'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n                <div class=\"text-center\" *ngIf=\"completed\">\r\n                    <div class=\"widget-head-color-box navy-bg p-lg\">\r\n                        <i class=\"fa fa-thumbs-up big-icon\"></i>\r\n                        <h1>Registration Completed</h1>\r\n                        <p class=\"mrg20T\">\r\n                            Thank you for registering to be one of our agents. We will review your submission. An activation code will be send to your email once your submission is verified.\r\n                        </p>\r\n                    </div>\r\n                    <a [routerLink]='[\"/\"]' class=\"btn btn-w-m btn-link text-white \">\r\n                        Back To Login\r\n                    </a>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6186,7 +6412,7 @@ var AgentRegistration = /** @class */ (function () {
         this.formFields = this.getFormFeldsMapping();
     };
     AgentRegistration.prototype.getFormFeldsMapping = function () {
-        var fields = agentFields_1.AgentRegistrationFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var fields = agentFields_1.AgentRegistrationFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return fields;
     };
@@ -6280,7 +6506,7 @@ var CreateAnnouncement = /** @class */ (function () {
         this.loadApplication(this.route.snapshot.params.id);
     };
     CreateAnnouncement.prototype.getFormFeldsMapping = function () {
-        var columnMappings = announcementFields_1.NewAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = announcementFields_1.NewAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -6386,7 +6612,7 @@ var CreateOrder = /** @class */ (function () {
         this.formFields = this.getFormFeldsMapping();
     };
     CreateOrder.prototype.getFormFeldsMapping = function () {
-        var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
         return columnMappings;
     };
@@ -6429,6 +6655,151 @@ var CreateOrder = /** @class */ (function () {
     return CreateOrder;
 }());
 exports.CreateOrder = CreateOrder;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/create-withdrawal/create-withdrawal.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/create-withdrawal/create-withdrawal.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Submit Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{amountToDeduct}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 pad0L mrg20B flexbox\">\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                            <input type=\"text\"\r\n                                   ngxDaterangepickerMd\r\n                                   class=\"form-control form-control-sm mrg10R \"\r\n                                   [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                   [(ngModel)]=\"searchParams.submittedDate\"\r\n                                   (ngModelChange)=\"reloadData()\"\r\n                                   placeholder=\"Submission date\"\r\n                                   startKey=\"startDate\"\r\n                                   endKey=\"endDate\" />\r\n                        </div>\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\r\n                            <input placeholder=\"Application Id or Customer Name\" type=\"text\" class=\"form-control form-control-sm\"\r\n                                   (keydown.enter)=\"reloadData()\" [(ngModel)]=\"searchParams.keyword\">\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-outline btn-default\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div class=\"col-md-12 pad0L mrg25B mrg20T\" *ngIf=\"selectedItems.length > 0\">\r\n                            <div class=\"display-table\">\r\n                                <div class=\"display-cell\">\r\n                                    <span>Selected records count: {{selectedItems.length}}</span>\r\n                                </div>\r\n                                <div class=\"display-cell pad25L\">\r\n                                    <button type=\"button\" class=\"btn btn-default mrg10R\" (click)=\"showSelectedItems()\">\r\n                                        {{viewSelectedItems? 'Hide': 'View'}} Selection\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner disabled':isUpdating }\"\r\n                                            [disabled]=\"!allowSubmit || isUpdating\" (click)=\"submit()\">\r\n                                        {{isUpdating ? 'Submitting' : 'Submit'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <table class=\"table table-striped mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th></th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <td>\r\n                                        <div class=\"checkbox checkbox-primary mrg0A\">\r\n                                            <input id=\"checkbox{{rowNo}}\" type=\"checkbox\" [(ngModel)]=\"record.selected\" (ngModelChange)=\"itemSelected(record)\">\r\n                                            <label for=\"checkbox{{rowNo}}\" class=\"pad0L\">\r\n                                            </label>\r\n                                        </div>\r\n                                    </td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/create-withdrawal/create-withdrawal.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/create-withdrawal/create-withdrawal.ts ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var createWithdrawalColumns_1 = __webpack_require__(/*! ../../metadata/createWithdrawalColumns */ "./src/app/metadata/createWithdrawalColumns.ts");
+var search_params_1 = __webpack_require__(/*! src/app/model/search-params */ "./src/app/model/search-params.ts");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var CreateWithdrawal = /** @class */ (function (_super) {
+    __extends(CreateWithdrawal, _super);
+    function CreateWithdrawal(loaderService, dataService, formEvent, router) {
+        var _this = _super.call(this, loaderService, dataService, '', false) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.router = router;
+        _this.isUpdating = false;
+        _this.dataRowMapper = [];
+        _this.selectedItems = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.amountToDeduct = 0;
+        _this.totalSelectedAmount = 0;
+        _this.totalClaimableAmount = 0;
+        _this.allowSubmit = true;
+        _this.oriDataSource = [];
+        _this.viewSelectedItems = false;
+        _this.dataSourceSubject.asObservable().subscribe(function (data) { return _this.setSelectedItems(); });
+        return _this;
+    }
+    CreateWithdrawal.prototype.ngOnInit = function () {
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
+        this.controllerName = apiController_1.ApiController.WithdrawalSubmit;
+    };
+    CreateWithdrawal.prototype.getTablerowDataMapping = function () {
+        var columnMappings = createWithdrawalColumns_1.CreateWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    CreateWithdrawal.prototype.itemSelected = function (item) {
+        if (item.selected) {
+            if (!this.selectedItems.includes(item))
+                this.selectedItems.push(item);
+        }
+        else {
+            var index = this.selectedItems.findIndex(function (p) { return p.applicationId === item.applicationId; });
+            if (index >= 0)
+                this.selectedItems.splice(index, 1);
+        }
+        this.totalSelectedAmount = this.selectedItems.map(function (d) { return d.claimAmount; }).reduce(function (a, b) { return a + b; }, 0);
+        this.totalClaimableAmount = this.totalSelectedAmount - this.amountToDeduct;
+        this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
+    };
+    CreateWithdrawal.prototype.submit = function () {
+        var _this = this;
+        var newRecord = {
+            applicationId: this.selectedItems.map(function (d) { return d.applicationId; }).join('|'),
+            amount: this.totalClaimableAmount
+        };
+        this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.router.navigate(['/view-withdrawal']);
+        });
+    };
+    CreateWithdrawal.prototype.setSelectedItems = function () {
+        var _this = this;
+        this.dataSource.forEach(function (selectedItem, i, self) {
+            if (_this.selectedItems.find(function (p) { return p.applicationId === selectedItem.applicationId; })) {
+                self[i].selected = true;
+            }
+        });
+    };
+    CreateWithdrawal.prototype.showSelectedItems = function () {
+        this.viewSelectedItems = !this.viewSelectedItems;
+        if (this.viewSelectedItems) {
+            this.oriDataSource = Object.assign(this.oriDataSource, this.dataSource);
+            this.dataSource = this.selectedItems;
+        }
+        else {
+            this.dataSource = this.oriDataSource;
+        }
+    };
+    CreateWithdrawal.prototype.clearSearchParam = function () {
+        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
+        this.reloadData();
+    };
+    CreateWithdrawal = __decorate([
+        core_1.Component({
+            selector: 'create-withdrawal',
+            template: __webpack_require__(/*! ./create-withdrawal.html */ "./src/app/pages/create-withdrawal/create-withdrawal.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router])
+    ], CreateWithdrawal);
+    return CreateWithdrawal;
+}(listEvent_1.ListEvent));
+exports.CreateWithdrawal = CreateWithdrawal;
 
 
 /***/ }),
@@ -6495,7 +6866,7 @@ var EditAnnouncement = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditAnnouncement.prototype.getFormFeldsMapping = function () {
-        var columnMappings = announcementFields_1.EditAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = announcementFields_1.EditAnnouncementFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -6551,7 +6922,7 @@ exports.EditAnnouncement = EditAnnouncement;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['customerDocuments']\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<user-communication [applicationId]=\"recordId\"></user-communication>"
+module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['customerDocuments']\" [filePath]></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<user-communication [applicationId]=\"recordId\"></user-communication>"
 
 /***/ }),
 
@@ -6608,7 +6979,7 @@ var EditOrder = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
-        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
         return columnMappings;
     };
@@ -6653,6 +7024,89 @@ var EditOrder = /** @class */ (function () {
     return EditOrder;
 }());
 exports.EditOrder = EditOrder;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/edit-withdrawal/edit-withdrawal.html":
+/*!************************************************************!*\
+  !*** ./src/app/pages/edit-withdrawal/edit-withdrawal.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{amountToDeduct}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <table class=\"table table-striped mrg10T dataTable\" >\r\n                            <thead>\r\n                                <tr>\r\n                                    <th>#</th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of formRecord.withdrawalItems; let rowNo = index\">\r\n                                    <td>{{rowNo+1}}</td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                                \r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+
+/***/ }),
+
+/***/ "./src/app/pages/edit-withdrawal/edit-withdrawal.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/edit-withdrawal/edit-withdrawal.ts ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var createWithdrawalColumns_1 = __webpack_require__(/*! ../../metadata/createWithdrawalColumns */ "./src/app/metadata/createWithdrawalColumns.ts");
+var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var router_2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+var EditWithdrawal = /** @class */ (function () {
+    function EditWithdrawal(loaderService, dataService, formEvent, router, route) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.router = router;
+        this.route = route;
+        this.dataRowMapper = [];
+        this.formRecord = {};
+        this.isUpdating = false;
+        //super(loaderService, dataService, '', false);
+    }
+    EditWithdrawal.prototype.ngOnInit = function () {
+        this.recordId = this.route.snapshot.params.id;
+        this.loadRecord(this.route.snapshot.params.id);
+        this.dataRowMapper = this.getTablerowDataMapping();
+    };
+    EditWithdrawal.prototype.getTablerowDataMapping = function () {
+        var columnMappings = createWithdrawalColumns_1.CreateWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    EditWithdrawal.prototype.submit = function () {
+    };
+    EditWithdrawal.prototype.loadRecord = function (recordId) {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.WithdrawalView, recordId).subscribe(function (data) {
+            _this.formRecord = data;
+        });
+    };
+    EditWithdrawal = __decorate([
+        core_1.Component({
+            selector: 'edit-withdrawal',
+            template: __webpack_require__(/*! ./edit-withdrawal.html */ "./src/app/pages/edit-withdrawal/edit-withdrawal.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router, router_2.ActivatedRoute])
+    ], EditWithdrawal);
+    return EditWithdrawal;
+}());
+exports.EditWithdrawal = EditWithdrawal;
 
 
 /***/ }),
@@ -6863,7 +7317,7 @@ var ManageCategory = /** @class */ (function (_super) {
         this.initDataRecord(this.dataRowMapper);
     };
     ManageCategory.prototype.getTablerowDataMapping = function () {
-        var columnMappings = ManageCategoryColumns_1.ManageCategoryColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth, !o.dataFieldControl ? null :
+        var columnMappings = ManageCategoryColumns_1.ManageCategoryColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -6956,7 +7410,7 @@ var ManagePackage = /** @class */ (function (_super) {
         this.initDataRecord(this.dataRowMapper);
     };
     ManagePackage.prototype.getTablerowDataMapping = function () {
-        var columnMappings = managePackageColumns_1.ManagePackageColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth, !o.dataFieldControl ? null :
+        var columnMappings = managePackageColumns_1.ManagePackageColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -7048,7 +7502,7 @@ var ManageProduct = /** @class */ (function (_super) {
         this.initDataRecord(this.dataRowMapper);
     };
     ManageProduct.prototype.getTablerowDataMapping = function () {
-        var columnMappings = ManageProductColumns_1.ManageProductColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth, !o.dataFieldControl ? null :
+        var columnMappings = ManageProductColumns_1.ManageProductColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };
@@ -7066,213 +7520,6 @@ var ManageProduct = /** @class */ (function (_super) {
     return ManageProduct;
 }(ListDataCrud_1.ListDataCrud));
 exports.ManageProduct = ManageProduct;
-
-
-/***/ }),
-
-/***/ "./src/app/pages/manage-withdrawal/manage-withdrawal.html":
-/*!****************************************************************!*\
-  !*** ./src/app/pages/manage-withdrawal/manage-withdrawal.html ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<page-header [title]=\"'Manage Withdrawals'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n  <div class=\"ibox-content m-b-sm border-bottom\">\r\n    <div class=\"row\">\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <label class=\"col-form-label\" for=\"status\">Agent</label>\r\n          <select name=\"status\" id=\"status\" class=\"form-control\">\r\n            <option value=\"\">-- All --</option>\r\n            <option value=\"1\">Ben</option>\r\n            <option value=\"0\">Den</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-sm-2\">\r\n        <div class=\"form-group\">\r\n          <label class=\"col-form-label\" for=\"quantity\">Status</label>\r\n          <select name=\"status\" id=\"status\" class=\"form-control\">\r\n            <option value=\"\">-- All --</option>\r\n            <option value=\"0\">Completed</option>\r\n            <option value=\"2\">Pending</option>\r\n          </select>\r\n        </div>\r\n      </div>\r\n\r\n\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <label class=\"col-form-label\" for=\"quantity\">Submission Date</label>\r\n          <input type=\"text\"\r\n                 ngxDaterangepickerMd\r\n                 class=\"form-control\"\r\n                 [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                 [(ngModel)]=\"selectedDate\"\r\n                 startKey=\"startDate\"\r\n                 endKey=\"endDate\" />\r\n        </div>\r\n      </div>\r\n      <div class=\"col-sm-3\">\r\n        <div class=\"form-group\">\r\n          <label class=\"col-form-label\" for=\"quantity\">Completed Date</label>\r\n          <input type=\"text\"\r\n                 ngxDaterangepickerMd\r\n                 class=\"form-control\"\r\n                 [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                 [(ngModel)]=\"selectedDate\"\r\n                 startKey=\"startDate\"\r\n                 endKey=\"endDate\" />\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-content\">\r\n\r\n          <div class=\"table-responsive\">\r\n            <table class=\"table table-striped mrg10T\">\r\n              <thead>\r\n                <tr>\r\n                  <th>Withdrawal #</th>\r\n                  <th>Agent Name</th>\r\n                  <th>Amount</th>\r\n                  <th>Submitted On</th>\r\n                  <th>Giro Fee</th>\r\n                  <th>Status</th>\r\n                  <th>Completed On</th>\r\n                  <th>Action</th>\r\n                </tr>\r\n              </thead>\r\n              <tbody>\r\n                <tr *ngFor=\"let item of withdrawals; let rowNo = index\">\r\n                  <td>{{item.withdrawalID}}</td>\r\n                  <td>{{item.agent}}</td>\r\n                  <td>{{item.amount}}</td>\r\n                  <td>{{item.dateSubmitted}}</td>\r\n                  <td>{{item.giroFee}}</td>\r\n                  <td>\r\n              \r\n                      <span class=\"badge badge-primary\" *ngIf=\"item.completed\">Completed</span>\r\n                      <span class=\"badge badge-warning\" *ngIf=\"!item.completed\">Pending</span>\r\n             \r\n            \r\n                  </td>\r\n                  <td>{{item.completedOn}}</td>\r\n                  <td>{{item.refNo}}</td>\r\n                  <td>\r\n                    <a class=\"btn btn-success btn-sm \" (click)=\"editRow(rowNo)\"><i class=\"fa fa-edit\"></i>&nbsp;&nbsp;<span class=\"bold\">Edit</span></a>\r\n                  </td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n\r\n  </div>\r\n</div>\r\n"
-
-/***/ }),
-
-/***/ "./src/app/pages/manage-withdrawal/manage-withdrawal.ts":
-/*!**************************************************************!*\
-  !*** ./src/app/pages/manage-withdrawal/manage-withdrawal.ts ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var ManageWithdrawal = /** @class */ (function () {
-    function ManageWithdrawal() {
-    }
-    ManageWithdrawal.prototype.ngOnInit = function () {
-        this.loadData();
-    };
-    ManageWithdrawal.prototype.loadData = function () {
-        this.withdrawals = [
-            {
-                "withdrawalID": 1465,
-                "agent": "amirulannuar87",
-                "amount": "RM600.00",
-                "dateSubmitted": "27 Jan 2020",
-                "giroFee": "RM2.00",
-                "completed": false,
-                "completedOn": "",
-                "refNo": ""
-            },
-            {
-                "withdrawalID": 1464,
-                "agent": "danielho",
-                "amount": "RM1,900.00",
-                "dateSubmitted": "27 Jan 2020",
-                "giroFee": "RM0",
-                "completed": false,
-                "completedOn": "",
-                "refNo": ""
-            },
-            {
-                "withdrawalID": 1463,
-                "agent": "samlee2234",
-                "amount": "RM928.70",
-                "dateSubmitted": "27 Jan 2020",
-                "giroFee": "RM0",
-                "completed": false,
-                "completedOn": "",
-                "refNo": ""
-            },
-            {
-                "withdrawalID": 1462,
-                "agent": "sayang",
-                "amount": "RM2,207.90",
-                "dateSubmitted": "24 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308836054"
-            },
-            {
-                "withdrawalID": 1461,
-                "agent": "BIG-WAN",
-                "amount": "RM159.00",
-                "dateSubmitted": "23 Jan 2020",
-                "giroFee": "RM2.00",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308840034"
-            },
-            {
-                "withdrawalID": 1459,
-                "agent": "BIG-KUSYAFIQ",
-                "amount": "RM1,100.00",
-                "dateSubmitted": "23 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308833218"
-            },
-            {
-                "withdrawalID": 1458,
-                "agent": "ZEN",
-                "amount": "RM174.70",
-                "dateSubmitted": "23 Jan 2020",
-                "giroFee": "RM2.00",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308843640"
-            },
-            {
-                "withdrawalID": 1457,
-                "agent": "mryandao",
-                "amount": "RM5,785.10",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": false,
-                "completedOn": "",
-                "refNo": ""
-            },
-            {
-                "withdrawalID": 1456,
-                "agent": "BIG-APEK",
-                "amount": "RM150.00",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308829116"
-            },
-            {
-                "withdrawalID": 1455,
-                "agent": "carol8788",
-                "amount": "RM5,411.80",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM2.00",
-                "completed": false,
-                "completedOn": "",
-                "refNo": ""
-            },
-            {
-                "withdrawalID": 1454,
-                "agent": "BIG-MAZLAN",
-                "amount": "RM206.70",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308825816"
-            },
-            {
-                "withdrawalID": 1452,
-                "agent": "miri-chee hao",
-                "amount": "RM3,000.00",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308888709"
-            },
-            {
-                "withdrawalID": 1451,
-                "agent": "kalyn90",
-                "amount": "RM118.80",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308891548"
-            },
-            {
-                "withdrawalID": 1450,
-                "agent": "bbchee",
-                "amount": "RM302.10",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7308893883"
-            },
-            {
-                "withdrawalID": 1449,
-                "agent": "MSKL-JCCH",
-                "amount": "RM356.40",
-                "dateSubmitted": "22 Jan 2020",
-                "giroFee": "RM0",
-                "completed": true,
-                "completedOn": "24 Jan 2020",
-                "refNo": "7311006791"
-            }
-        ];
-    };
-    ManageWithdrawal.prototype.editRow = function (rowIndex) {
-    };
-    ManageWithdrawal = __decorate([
-        core_1.Component({
-            selector: 'manage-withdrawal',
-            template: __webpack_require__(/*! ./manage-withdrawal.html */ "./src/app/pages/manage-withdrawal/manage-withdrawal.html")
-        }),
-        __metadata("design:paramtypes", [])
-    ], ManageWithdrawal);
-    return ManageWithdrawal;
-}());
-exports.ManageWithdrawal = ManageWithdrawal;
 
 
 /***/ }),
@@ -7349,7 +7596,7 @@ var ViewAnnouncement = /** @class */ (function (_super) {
         this.controllerName = apiController_1.ApiController.Announcement;
     };
     ViewAnnouncement.prototype.getTablerowDataMapping = function () {
-        var columnMappings = announcementFields_1.ViewAnnouncementColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = announcementFields_1.ViewAnnouncementColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     ViewAnnouncement.prototype.clearFilter = function () {
@@ -7599,11 +7846,11 @@ var ViewOrder = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     ViewOrder.prototype.getTablerowDataMapping = function () {
-        var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     ViewOrder.prototype.getSearchFeldsMapping = function () {
-        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
         return columnMappings;
     };
@@ -7621,6 +7868,113 @@ var ViewOrder = /** @class */ (function (_super) {
     return ViewOrder;
 }(listEvent_1.ListEvent));
 exports.ViewOrder = ViewOrder;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/view-withdrawal/view-withdrawal.html":
+/*!************************************************************!*\
+  !*** ./src/app/pages/view-withdrawal/view-withdrawal.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'View Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-withdrawal/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/view-withdrawal/view-withdrawal.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/view-withdrawal/view-withdrawal.ts ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var data_field_control_1 = __webpack_require__(/*! src/app/model/data.field.control */ "./src/app/model/data.field.control.ts");
+var viewWithdrawalColumns_1 = __webpack_require__(/*! src/app/metadata/viewWithdrawalColumns */ "./src/app/metadata/viewWithdrawalColumns.ts");
+var form_data_mapping_1 = __webpack_require__(/*! src/app/model/form.data.mapping */ "./src/app/model/form.data.mapping.ts");
+var search_params_1 = __webpack_require__(/*! src/app/model/search-params */ "./src/app/model/search-params.ts");
+var searchWithdrawalFields_1 = __webpack_require__(/*! src/app/metadata/searchWithdrawalFields */ "./src/app/metadata/searchWithdrawalFields.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
+var ViewWithdrawal = /** @class */ (function (_super) {
+    __extends(ViewWithdrawal, _super);
+    function ViewWithdrawal(loaderService, dataService, formEvent, authenticationService) {
+        var _this = _super.call(this, loaderService, dataService, "", false) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.authenticationService = authenticationService;
+        _this.dataRowMapper = [];
+        _this.searchFields = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        return _this;
+    }
+    ViewWithdrawal.prototype.ngOnInit = function () {
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchFields = this.getSearchFeldsMapping();
+        this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.controllerName = apiController_1.ApiController.WithdrawalView;
+        this.currentUser = this.authenticationService.currentUserValue;
+    };
+    ViewWithdrawal.prototype.getTablerowDataMapping = function () {
+        var columnMappings = viewWithdrawalColumns_1.ViewWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    ViewWithdrawal.prototype.getSearchFeldsMapping = function () {
+        var _this = this;
+        var fieldMappings = searchWithdrawalFields_1.SearchWithdrawalFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.fieldForAdmin !== undefined ? (o.fieldForAdmin && !_this.currentUser.isAdmin ? true : false) : o.hidden, // hide the field
+        !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl.datasourceUrl)); });
+        return fieldMappings;
+    };
+    ViewWithdrawal.prototype.clearFilter = function () {
+        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        this.reloadData();
+    };
+    ViewWithdrawal = __decorate([
+        core_1.Component({
+            selector: 'view-withdrawal',
+            template: __webpack_require__(/*! ./view-withdrawal.html */ "./src/app/pages/view-withdrawal/view-withdrawal.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, authentication_1.AuthenticationService])
+    ], ViewWithdrawal);
+    return ViewWithdrawal;
+}(listEvent_1.ListEvent));
+exports.ViewWithdrawal = ViewWithdrawal;
 
 
 /***/ }),
@@ -7840,6 +8194,9 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
     }
+    DataService.prototype.download = function (fileUrl) {
+        return this.http.get(fileUrl, { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
+    };
     DataService.prototype.get = function (apiControllerName, recordId) {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
     };
@@ -7899,6 +8256,42 @@ var DataService = /** @class */ (function () {
     return DataService;
 }());
 exports.DataService = DataService;
+
+
+/***/ }),
+
+/***/ "./src/app/services/file-download.ts":
+/*!*******************************************!*\
+  !*** ./src/app/services/file-download.ts ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+/**
+ * Saves a file by opening file-save-as dialog in the browser
+ * using file-save library.
+ * @param blobContent file content as a Blob
+ * @param fileName name file should be saved as
+ */
+exports.saveFile = function (blobContent, fileName) {
+    var blob = new Blob([blobContent], { type: 'application/octet-stream' });
+    file_saver_1.saveAs(blob, fileName);
+};
+/**
+ * Derives file name from the http response
+ * by looking inside content-disposition
+ * @param res http Response
+ */
+exports.getFileNameFromResponseContentDisposition = function (res) {
+    var contentDisposition = res.headers.get('content-disposition') || '';
+    var matches = /filename=([^;]+)/ig.exec(contentDisposition);
+    var fileName = (matches[1] || 'untitled').trim();
+    return fileName;
+};
 
 
 /***/ }),

@@ -44,7 +44,6 @@ export class ViewOrder extends ListEvent {
             o.headerText,
             DataDisplayType[o.displayType],
             o.keyField,
-            o.readonly,
             o.colWidth));
 
         return columnMappings;
@@ -53,7 +52,7 @@ export class ViewOrder extends ListEvent {
     getSearchFeldsMapping(): FormDataMapping[] {
         let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
             o.displayText,
-            o.readonly,
+            o.hidden,
             !o.dataFieldControl ? null :
                 new DataFieldControl(
                     o.dataFieldControl.controlName,

@@ -19,7 +19,7 @@ namespace BroadbandZone_Data
         public string Role { get; set; }
         public Nullable<bool> IsAuthenticated { get; set; }
         public Nullable<bool> IsImpersonated { get; set; }
-        public Nullable<bool> IsAdmin { get; set; }
+        public bool IsAdmin { get; set; }
         public Nullable<int> AgentId { get; set; }
     }
 }

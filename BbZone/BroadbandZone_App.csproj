@@ -256,7 +256,8 @@
     <Compile Include="WebApi\ProductController.cs" />
     <Compile Include="WebApi\RegistrationController.cs" />
     <Compile Include="WebApi\UserController.cs" />
-    <Compile Include="WebApi\WithdrawalController.cs" />
+    <Compile Include="WebApi\WithdrawalSubmitController.cs" />
+    <Compile Include="WebApi\WithdrawalViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -375,13 +376,15 @@
     <Content Include="src\app\pages\agent-registration\agent-registration.html" />
     <Content Include="src\app\pages\create-announcement\create-announcement.html" />
     <Content Include="src\app\pages\create-order\create-order.html" />
+    <Content Include="src\app\pages\create-withdrawal\create-withdrawal.html" />
+    <Content Include="src\app\pages\edit-withdrawal\edit-withdrawal.html" />
     <Content Include="src\app\pages\edit-announcement\edit-announcement.html" />
     <Content Include="src\app\pages\edit-order\edit-order.html" />
     <Content Include="src\app\pages\home\home.html" />
     <Content Include="src\app\pages\login\login.html" />
     <Content Include="src\app\pages\manage-category\manage-category.html" />
     <Content Include="src\app\pages\manage-packages\manage-packages.html" />
-    <Content Include="src\app\pages\manage-withdrawal\manage-withdrawal.html" />
+    <Content Include="src\app\pages\view-withdrawal\view-withdrawal.html" />
     <Content Include="src\app\pages\manage-product\manage-product.html" />
     <Content Include="src\app\pages\record-counts\record-counts.html" />
     <Content Include="src\app\pages\report-chart\report-chart.html" />
@@ -489,6 +492,9 @@
     <TypeScriptCompile Include="src\app\material.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\searchWithdrawalFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\viewWithdrawalColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\createWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\editOrderFields.ts" />
     <TypeScriptCompile Include="src\app\model\cascade-data.ts" />
     <TypeScriptCompile Include="src\app\model\form.data.mapping.ts" />
@@ -516,13 +522,15 @@
     <TypeScriptCompile Include="src\app\pages\agent-registration\agent-registration.ts" />
     <TypeScriptCompile Include="src\app\pages\create-announcement\create-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\create-order\create-order.ts" />
+    <TypeScriptCompile Include="src\app\pages\create-withdrawal\create-withdrawal.ts" />
+    <TypeScriptCompile Include="src\app\pages\edit-withdrawal\edit-withdrawal.ts" />
     <TypeScriptCompile Include="src\app\pages\edit-announcement\edit-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\edit-order\edit-order.ts" />
     <TypeScriptCompile Include="src\app\pages\home\home.ts" />
     <TypeScriptCompile Include="src\app\pages\login\login.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-category\manage-category.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-packages\manage-packages.ts" />
-    <TypeScriptCompile Include="src\app\pages\manage-withdrawal\manage-withdrawal.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-withdrawal\view-withdrawal.ts" />
     <TypeScriptCompile Include="src\app\directives\editmode-directive.ts" />
     <TypeScriptCompile Include="src\app\directives\sort-cell.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\sortable.directive.ts" />
@@ -548,6 +556,7 @@
     <TypeScriptCompile Include="src\app\services\cascade.service.ts" />
     <TypeScriptCompile Include="src\app\services\data.service.ts" />
     <TypeScriptCompile Include="src\app\services\broadcast.service.ts" />
+    <TypeScriptCompile Include="src\app\services\file-download.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />

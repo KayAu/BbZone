@@ -4,7 +4,7 @@
             {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "fullname",
                     "controlType": "textbox",
@@ -15,7 +15,7 @@
             {
                 "fieldName": "email",
                 "displayText": "Email",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "email",
                     "controlType": "textbox",
@@ -26,7 +26,7 @@
             {
                 "fieldName": "nric",
                 "displayText": "NRIC",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "nric",
                     "controlType": "textbox",
@@ -37,7 +37,7 @@
             {
                 "fieldName": "companyName",
                 "displayText": "Company Name",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyName",
                     "controlType": "textbox",
@@ -48,7 +48,7 @@
             {
                 "fieldName": "companyRegNo",
                 "displayText": "Company Reg. No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyRegNo",
                     "controlType": "textbox",
@@ -59,7 +59,7 @@
             {
                 "fieldName": "address",
                 "displayText": "Address",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "address",
                     "controlType": "textbox",
@@ -70,7 +70,7 @@
             {
                 "fieldName": "city",
                 "displayText": "City",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "city",
                     "controlType": "textbox",
@@ -81,7 +81,7 @@
             {
                 "fieldName": "state",
                 "displayText": "State",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "state",
                     "controlType": "select",
@@ -93,7 +93,7 @@
             {
                 "fieldName": "postcode",
                 "displayText": "Postcode",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "postcode",
                     "controlType": "number",
@@ -104,7 +104,7 @@
             {
                 "fieldName": "country",
                 "displayText": "Country",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "country",
                     "controlType": "textbox",
@@ -115,7 +115,7 @@
             {
                 "fieldName": "mobileNo",
                 "displayText": "Mobile No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "mobileNo",
                     "controlType": "textbox",
@@ -126,7 +126,7 @@
             {
                 "fieldName": "telNo",
                 "displayText": "Tel No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "telNo",
                     "controlType": "textbox",
@@ -137,7 +137,7 @@
             {
                 "fieldName": "superiorId",
                 "displayText": "Superior Id",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "superiorId",
                     "controlType": "number",
@@ -148,7 +148,7 @@
             {
                 "fieldName": "userLogin",
                 "displayText": "User Login",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "userLogin",
                     "controlType": "textbox",
@@ -159,7 +159,7 @@
             {
                 "fieldName": "password",
                 "displayText": "Password",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "password",
                     "controlType": "password",
@@ -253,7 +253,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "fullname",
                     "controlType": "textbox",
@@ -264,7 +264,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "email",
                 "displayText": "Email",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "email",
                     "controlType": "textbox",
@@ -275,7 +275,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "nric",
                 "displayText": "NRIC",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "nric",
                     "controlType": "textbox",
@@ -286,7 +286,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "companyName",
                 "displayText": "Company Name",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyName",
                     "controlType": "textbox",
@@ -297,7 +297,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "companyRegNo",
                 "displayText": "Company Reg. No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyRegNo",
                     "controlType": "textbox",
@@ -308,7 +308,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "address",
                 "displayText": "Address",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "address",
                     "controlType": "textbox",
@@ -319,7 +319,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "city",
                 "displayText": "City",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "city",
                     "controlType": "textbox",
@@ -330,7 +330,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "state",
                 "displayText": "State",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "state",
                     "controlType": "select",
@@ -342,7 +342,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "postcode",
                 "displayText": "Postcode",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "postcode",
                     "controlType": "number",
@@ -353,7 +353,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "country",
                 "displayText": "Country",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "country",
                     "controlType": "textbox",
@@ -364,7 +364,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "mobileNo",
                 "displayText": "Mobile No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "mobileNo",
                     "controlType": "textbox",
@@ -375,7 +375,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "telNo",
                 "displayText": "Tel No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "telNo",
                     "controlType": "textbox",
@@ -386,7 +386,7 @@ export class AgentRegistrationViewFields {
             {
                 "fieldName": "superiorName",
                 "displayText": "Superior/Upline",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "superiorName",
                     "controlType": "textbox",
@@ -404,7 +404,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "agentId",
                 "displayText": "Agent Id",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "agentId",
                     "controlType": "label",
@@ -415,7 +415,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "fullname",
                     "controlType": "textbox",
@@ -426,7 +426,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "email",
                 "displayText": "Email",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "email",
                     "controlType": "textbox",
@@ -437,7 +437,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "nric",
                 "displayText": "NRIC",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "nric",
                     "controlType": "textbox",
@@ -448,7 +448,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "companyName",
                 "displayText": "Company Name",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyName",
                     "controlType": "textbox",
@@ -459,7 +459,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "companyRegNo",
                 "displayText": "Company Reg. No",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "companyRegNo",
                     "controlType": "textbox",
@@ -470,7 +470,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "address",
                 "displayText": "Address",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "address",
                     "controlType": "textbox",
@@ -481,7 +481,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "city",
                 "displayText": "City",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "city",
                     "controlType": "textbox",
@@ -492,7 +492,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "state",
                 "displayText": "State",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "state",
                     "controlType": "select",
@@ -504,7 +504,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "postcode",
                 "displayText": "Postcode",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "postcode",
                     "controlType": "textbox",
@@ -515,7 +515,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "country",
                 "displayText": "Country",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "country",
                     "controlType": "textbox",
@@ -526,7 +526,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "mobileNo",
                 "displayText": "Mobile No",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "mobileNo",
                     "controlType": "textbox",
@@ -537,7 +537,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "telNo",
                 "displayText": "Tel No",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "telNo",
                     "controlType": "textbox",
@@ -548,7 +548,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "bankName",
                 "displayText": "Bank Name",
-                "readonly": false,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "bankName",
                     "controlType": "textbox",
@@ -559,7 +559,7 @@ export class AgentProfileFields {
             {
                 "fieldName": "bankAccNo",
                 "displayText": "Bank Acc No",
-                "readonly": true,
+                "hidden": false,
                 "dataFieldControl": {
                     "controlName": "bankAccNo",
                     "controlType": "textbox",
@@ -570,7 +570,7 @@ export class AgentProfileFields {
             //{
             //    "fieldName": "userLogin",
             //    "displayText": "User Login",
-            //    "readonly": false,
+            //    "hidden": false,
             //    "dataFieldControl": {
             //        "controlName": "userLogin",
             //        "controlType": "textbox",
@@ -581,7 +581,7 @@ export class AgentProfileFields {
             //{
             //    "fieldName": "password",
             //    "displayText": "Password",
-            //    "readonly": false,
+            //    "hidden": false,
             //    "dataFieldControl": {
             //        "controlName": "password",
             //        "controlType": "password",

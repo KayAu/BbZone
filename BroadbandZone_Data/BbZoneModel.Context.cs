@@ -31,17 +31,17 @@ namespace BroadbandZone_Data
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<AgentCommission> AgentCommissions { get; set; }
         public virtual DbSet<Announcement> Announcements { get; set; }
-        public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<Communication> Communications { get; set; }
-        public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<DropdownItem> DropdownItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
-        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
+        public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
+        public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
+        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -336,13 +336,17 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgents_Result>("GetAgents", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<SelectItem> GetMyAgents(Nullable<int> prSuperiorId, ObjectParameter oAllowCommConfig)
+        public virtual ObjectResult<SelectItem> GetMyAgents(Nullable<int> prSuperiorId, Nullable<int> prProductID, ObjectParameter oAllowCommConfig)
         {
             var prSuperiorIdParameter = prSuperiorId.HasValue ?
                 new ObjectParameter("prSuperiorId", prSuperiorId) :
                 new ObjectParameter("prSuperiorId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectItem>("GetMyAgents", prSuperiorIdParameter, oAllowCommConfig);
+            var prProductIDParameter = prProductID.HasValue ?
+                new ObjectParameter("prProductID", prProductID) :
+                new ObjectParameter("prProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectItem>("GetMyAgents", prSuperiorIdParameter, prProductIDParameter, oAllowCommConfig);
         }
     
         public virtual int InsertCommissionSettings(string prAgents, string prCreatedBy)
@@ -422,7 +426,20 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAnnouncement_Result>("GetAnnouncement", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prTitleParameter, prIsActiveParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<GetWithdrawal_Result> GetWithdrawal(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<bool> prIsCompleted, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<DboardSubmissionStatusCount_Result> DboardSubmissionStatusCount(Nullable<int> prSuperiorId, Nullable<int> prYear)
+        {
+            var prSuperiorIdParameter = prSuperiorId.HasValue ?
+                new ObjectParameter("prSuperiorId", prSuperiorId) :
+                new ObjectParameter("prSuperiorId", typeof(int));
+    
+            var prYearParameter = prYear.HasValue ?
+                new ObjectParameter("prYear", prYear) :
+                new ObjectParameter("prYear", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardSubmissionStatusCount_Result>("DboardSubmissionStatusCount", prSuperiorIdParameter, prYearParameter);
+        }
+    
+        public virtual ObjectResult<GetWithdrawalSubmitted_Result> GetWithdrawalSubmitted(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo, ObjectParameter oTotalRecord)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -440,9 +457,9 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prSortInAsc", prSortInAsc) :
                 new ObjectParameter("prSortInAsc", typeof(bool));
     
-            var prIsCompletedParameter = prIsCompleted.HasValue ?
-                new ObjectParameter("prIsCompleted", prIsCompleted) :
-                new ObjectParameter("prIsCompleted", typeof(bool));
+            var prStatusParameter = prStatus != null ?
+                new ObjectParameter("prStatus", prStatus) :
+                new ObjectParameter("prStatus", typeof(string));
     
             var prAgentParameter = prAgent != null ?
                 new ObjectParameter("prAgent", prAgent) :
@@ -464,20 +481,53 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prCompletedTo", prCompletedTo) :
                 new ObjectParameter("prCompletedTo", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawal_Result>("GetWithdrawal", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prIsCompletedParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmitted_Result>("GetWithdrawalSubmitted", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<DboardSubmissionStatusCount_Result> DboardSubmissionStatusCount(Nullable<int> prSuperiorId, Nullable<int> prYear)
+        public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord)
         {
-            var prSuperiorIdParameter = prSuperiorId.HasValue ?
-                new ObjectParameter("prSuperiorId", prSuperiorId) :
-                new ObjectParameter("prSuperiorId", typeof(int));
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
     
-            var prYearParameter = prYear.HasValue ?
-                new ObjectParameter("prYear", prYear) :
-                new ObjectParameter("prYear", typeof(int));
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardSubmissionStatusCount_Result>("DboardSubmissionStatusCount", prSuperiorIdParameter, prYearParameter);
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<GetWithdrawalItems_Result> GetWithdrawalItems(Nullable<int> prWithdrawalId)
+        {
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalItems_Result>("GetWithdrawalItems", prWithdrawalIdParameter);
         }
     }
 }

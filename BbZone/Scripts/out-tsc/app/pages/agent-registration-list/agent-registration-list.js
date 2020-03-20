@@ -53,13 +53,13 @@ var AgentRegistrationList = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     AgentRegistrationList.prototype.getTablerowDataMapping = function () {
-        var columnMappings = agentFields_1.AgentRegistrationColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = agentFields_1.AgentRegistrationColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     //getSearchFeldsMapping(): FormDataMapping[] {
     //    let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
     //        o.displayText,
-    //        o.readonly,
+    //        o.hidden,
     //        !o.dataFieldControl ? null :
     //            new DataFieldControl(
     //                o.dataFieldControl.controlName,

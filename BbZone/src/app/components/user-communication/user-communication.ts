@@ -1,7 +1,6 @@
 ﻿import { Component, EventEmitter, Input, Output, ElementRef } from '@angular/core';
 import { LoaderService } from 'src/app/loader/loader.service';
 import { DataService } from 'src/app/services/data.service';
-import { AuthenticationService } from 'src/app/services/authentication';
 import { LoginUser } from 'src/app/model/login-user';
 import { ApiController } from '../../enums/apiController';
 

@@ -37,7 +37,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
         // GET api/<controller>/5
@@ -53,7 +53,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -100,7 +100,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 

@@ -17,7 +17,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {               
-                var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin.Value ,false);
+                var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin ,false);
 
                 if (user.IsAuthenticated == true)
                 {

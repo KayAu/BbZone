@@ -64,6 +64,7 @@
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Functions" />
     <Folder Include="dbo\User Defined Types\" />
+    <Folder Include="dbo\Views\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\ProductCategory.sql" />
@@ -95,8 +96,6 @@
     <Build Include="dbo\Stored Procedures\prc_GetAgentProfile.sql" />
     <Build Include="dbo\Stored Procedures\prc_ActivateAgent.sql" />
     <Build Include="dbo\Tables\Withdrawal.sql" />
-    <Build Include="dbo\Tables\ApplicationRemark.sql" />
-    <Build Include="dbo\Stored Procedures\prc_GetWithdrawal.sql" />
     <Build Include="dbo\Tables\Communication.sql" />
     <Build Include="dbo\Tables\AnnouncementDocument.sql" />
     <Build Include="dbo\Tables\Announcement.sql" />
@@ -111,6 +110,13 @@
     <Build Include="dbo\Stored Procedures\prc_GetAgentCommissionSettings.sql" />
     <Build Include="dbo\Stored Procedures\prc_DboardMyTeamSubmissions.sql" />
     <Build Include="dbo\User Defined Types\udt_CommissionSetting.sql" />
+    <Build Include="dbo\Views\vwWithdrawalItems.sql" />
+    <Build Include="dbo\Functions\fnGetMyAgents.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawalToSubmit.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawalSubmitted.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawalItems.sql" />
+    <Build Include="dbo\Stored Procedures\prc_DboardSubmissionStatusCount.sql" />
+    <Build Include="dbo\User Defined Types\udt_AgentHierarchy.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />

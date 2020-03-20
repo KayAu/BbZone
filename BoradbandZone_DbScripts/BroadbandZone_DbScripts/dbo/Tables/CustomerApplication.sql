@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CustomerApplication] (
-    [ApplicationId]   INT           IDENTITY (1, 1) NOT NULL,
+    [ApplicationId]   INT           IDENTITY (1, 1014) NOT NULL,
     [CategoryId]      INT           NULL,
     [ProdPkgId]       INT           NOT NULL,
     [Agent]           VARCHAR (25)  NOT NULL,
@@ -19,6 +19,8 @@
     [AdminRemarks]    VARCHAR (500) NULL,
     [AppStatusId]     INT           NULL,
     [OrderNo]         VARCHAR (25)  NULL,
+    [UserId]          VARCHAR (25)  NULL,
+    [TelNo]           VARCHAR (15)  NULL,
     [SubmitByAgent]   BIT           NULL,
     [CreatedOn]       SMALLDATETIME NOT NULL,
     [CreatedBy]       VARCHAR (50)  NOT NULL,
@@ -28,6 +30,8 @@
     CONSTRAINT [FK_CustomerApplication_ApplicationStatus] FOREIGN KEY ([AppStatusId]) REFERENCES [dbo].[ApplicationStatus] ([AppStatusId]),
     CONSTRAINT [FK_CustomerApplication_ProductPackage] FOREIGN KEY ([ProdPkgId]) REFERENCES [dbo].[ProductPackage] ([ProdPkgId])
 );
+
+
 
 
 

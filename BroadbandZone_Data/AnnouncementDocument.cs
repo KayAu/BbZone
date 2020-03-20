@@ -17,6 +17,7 @@ namespace BroadbandZone_Data
         public int DocId { get; set; }
         public int AnncId { get; set; }
         public string Name { get; set; }
+        public string Path { get; set; }
         public Nullable<double> Size { get; set; }
     
         public virtual Announcement Announcement { get; set; }

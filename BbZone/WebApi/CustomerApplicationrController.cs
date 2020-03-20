@@ -156,7 +156,7 @@ namespace BroadbandZone_App.WebApi
                 {
                     foreach (UploadedFile file in fileUploadHelper.UploadStreams(multipartFiles.ToArray(), appId))
                     {
-                        db.CustomerDocuments.Add(new CustomerDocument { Name = file.Name, Size = file.Size, ApplicationId = appId });
+                        db.CustomerDocuments.Add(new CustomerDocument { Name = file.Name, Path = file.FilePath, Size = file.Size, ApplicationId = appId });
                         db.SaveChanges();
                     }
                 }

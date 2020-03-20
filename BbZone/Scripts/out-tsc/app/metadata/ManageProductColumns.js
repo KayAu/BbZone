@@ -9,7 +9,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "productId",
@@ -23,7 +22,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "ProductName",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "productName",
@@ -37,7 +35,6 @@ var ManageProductColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-5",
             "dataFieldControl": {
                 "controlName": "isActive",

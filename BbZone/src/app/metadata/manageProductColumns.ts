@@ -10,7 +10,6 @@ public static fields = [
     "headerText": "Id",
     "displayType": "text",
     "keyField": true,
-    "readonly": true,
     "colWidth": "cell-width-1",
     "dataFieldControl": {
       "controlName": "productId",
@@ -24,7 +23,6 @@ public static fields = [
     "headerText": "ProductName",
     "displayType": "text",
     "keyField": false,
-    "readonly": false,
     "colWidth": "",
     "dataFieldControl": {
       "controlName": "productName",
@@ -38,7 +36,6 @@ public static fields = [
     "headerText": "Active",
     "displayType": "tick",
     "keyField": false,
-    "readonly": false,
     "colWidth": "cell-width-5", 
     "dataFieldControl": {
       "controlName": "isActive",

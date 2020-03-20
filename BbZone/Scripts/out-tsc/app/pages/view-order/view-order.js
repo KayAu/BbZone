@@ -56,11 +56,11 @@ var ViewOrder = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     ViewOrder.prototype.getTablerowDataMapping = function () {
-        var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     ViewOrder.prototype.getSearchFeldsMapping = function () {
-        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.readonly, !o.dataFieldControl ? null :
+        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
         return columnMappings;
     };

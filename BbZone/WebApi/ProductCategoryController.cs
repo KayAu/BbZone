@@ -1,8 +1,6 @@
 ﻿using BroadbandZone_App.Helper;
 using BroadbandZone_App.Models;
 using BroadbandZone_Data;
-using BroadbandZone_App.Helper;
-using BroadbandZone_App.Models;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
@@ -29,7 +27,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                 throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -52,7 +50,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -74,7 +72,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 

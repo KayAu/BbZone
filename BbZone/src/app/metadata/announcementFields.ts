@@ -3,7 +3,7 @@
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -14,7 +14,7 @@
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -25,7 +25,7 @@
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",
@@ -44,7 +44,6 @@ export class ViewAnnouncementColumns {
             "headerText": "Annc Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": false,
             "colWidth": "cell-width-1"
         },
         {
@@ -52,7 +51,6 @@ export class ViewAnnouncementColumns {
             "headerText": "Title",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-50"
         },
         {
@@ -60,7 +58,6 @@ export class ViewAnnouncementColumns {
             "headerText": "Is Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10"
         },
         {
@@ -68,7 +65,6 @@ export class ViewAnnouncementColumns {
             "headerText": "Modified On",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         },
         {
@@ -76,7 +72,6 @@ export class ViewAnnouncementColumns {
             "headerText": "Modified By",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         }
     ]
@@ -87,7 +82,7 @@ export class EditAnnouncementFields {
         {
             "fieldName": "anncId",
             "displayText": "Id",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "anncId",
                 "controlType": "label",
@@ -98,7 +93,7 @@ export class EditAnnouncementFields {
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -109,7 +104,7 @@ export class EditAnnouncementFields {
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -120,7 +115,7 @@ export class EditAnnouncementFields {
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",

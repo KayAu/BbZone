@@ -9,7 +9,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1"
         },
         {
@@ -17,7 +16,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Customer Name",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-20"
         },
         {
@@ -25,7 +23,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-25"
         },
         {
@@ -33,7 +30,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-15"
         },
         {
@@ -41,7 +37,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Agent",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10"
         },
         {
@@ -49,7 +44,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Submitted On",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-5"
         },
         {
@@ -57,7 +51,6 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Status",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         }
     ];

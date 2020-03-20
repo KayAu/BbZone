@@ -8,7 +8,6 @@ export class ViewOrderColumns {
       "headerText": "Id",
       "displayType": "text",
       "keyField": true,
-      "readonly": true,
       "colWidth": "cell-width-1"
     },
     {
@@ -16,7 +15,6 @@ export class ViewOrderColumns {
       "headerText": "Customer Name",
       "displayType": "text",
       "keyField": false,
-      "readonly": false,
       "colWidth": "cell-width-20"
     },
     {
@@ -24,7 +22,6 @@ export class ViewOrderColumns {
       "headerText": "Product Package",
       "displayType": "text",
       "keyField": false,
-      "readonly": false,
       "colWidth": "cell-width-25"
       },
       {
@@ -32,7 +29,6 @@ export class ViewOrderColumns {
           "headerText": "Category",
           "displayType": "text",
           "keyField": false,
-          "readonly": false,
           "colWidth": "cell-width-15"
       },
     {
@@ -40,7 +36,6 @@ export class ViewOrderColumns {
         "headerText": "Agent",
         "displayType": "text",
         "keyField": false,
-        "readonly": false,
         "colWidth": "cell-width-10"
     },
     {
@@ -48,7 +43,6 @@ export class ViewOrderColumns {
       "headerText": "Submitted On",
       "displayType": "text",
       "keyField": false,
-      "readonly": false,
       "colWidth": "cell-width-5"
     },
     {
@@ -56,7 +50,6 @@ export class ViewOrderColumns {
         "headerText": "Status",
         "displayType": "text",
         "keyField": false,
-        "readonly": false,
         "colWidth": ""
     }
   ]

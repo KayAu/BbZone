@@ -11,6 +11,7 @@ import { ProductOptions } from 'src/app/components/product-options/product-optio
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { AgentCommissionTable } from 'src/app/components/agent-commission-table/agent-commission-table';
+import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'agent-comission',
@@ -24,7 +25,7 @@ export class AgentComission {
     selectedAgents: string[];
     selectedProduct: number;
     selectedTab: number = 1;
-    allowCommConfig: boolean = false;
+    allowCommConfig: boolean = true;
     myAgents: SelectItem[];
     @ViewChild(NgForm) form: NgForm;
     @ViewChild(MultipleCheckboxes) multipleCheckboxes: MultipleCheckboxes;
@@ -33,28 +34,28 @@ export class AgentComission {
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private toastr: ToastrService, private router: Router) { }
 
-    ngOnInit() {
-        this.loadAgents();
-    }
+    ngOnInit() {}
 
-    loadAgents() {
-        this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
-            this.myAgents = data.displayData;
-            this.allowCommConfig = data.allowCommConfig;
-        });
-    }
 
     loadCategories() {
-        this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct).subscribe(results => {
-            this.commissionSettings = results;
+        forkJoin([this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct),
+                  this.dataService.get(`${ApiController.Commission}/GetMyAgents`, this.selectedProduct)]).subscribe(results => {
+            this.commissionSettings = results[0];
+            this.loadAgents(results[1]);
+       
         });
+
+    }
+
+    loadAgents(data: any) {
+        // this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
+        this.myAgents = data.displayData;
+        this.allowCommConfig = data.allowCommConfig;
+        //});
     }
 
     loadAgentCommissions() {
         this.agentCommissionTable.loadData(this.selectedProduct);
-        //this.dataService.get(`${ApiController.Commission}/GetMyAgentCommission`, this.selectedProduct).subscribe(results => {
-        //    this.agentCommissions = results;
-        //});
     }
 
     create() {

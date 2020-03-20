@@ -91,7 +91,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -123,7 +123,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -157,7 +157,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -172,7 +172,7 @@ namespace BroadbandZone_App.WebApi
                 {
                     foreach (UploadedFile file in fileUploadHelper.UploadStreams(multipartFiles.ToArray(), announcementId))
                     {
-                        db.AnnouncementDocuments.Add(new AnnouncementDocument { Name = file.Name, Size = file.Size, AnncId = announcementId });
+                        db.AnnouncementDocuments.Add(new AnnouncementDocument { Name = file.Name, Path = file.FilePath, Size = file.Size, AnncId = announcementId });
                         db.SaveChanges();
                     }
                 }

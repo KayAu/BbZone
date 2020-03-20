@@ -54,7 +54,7 @@ var ManagePackage = /** @class */ (function (_super) {
         this.initDataRecord(this.dataRowMapper);
     };
     ManagePackage.prototype.getTablerowDataMapping = function () {
-        var columnMappings = managePackageColumns_1.ManagePackageColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth, !o.dataFieldControl ? null :
+        var columnMappings = managePackageColumns_1.ManagePackageColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
         return columnMappings;
     };

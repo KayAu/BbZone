@@ -8,7 +8,6 @@ export class ManageCategoryColumns {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "categoryId",
@@ -22,7 +21,6 @@ export class ManageCategoryColumns {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-70",
             "dataFieldControl": {
                 "controlName": "category",
@@ -36,7 +34,6 @@ export class ManageCategoryColumns {
             "headerText": "Default Commission (RM)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
@@ -50,7 +47,6 @@ export class ManageCategoryColumns {
             "headerText": "Commission (%)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "commissionPercent",
@@ -64,7 +60,6 @@ export class ManageCategoryColumns {
             "headerText": "Product",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "productId",
@@ -79,7 +74,6 @@ export class ManageCategoryColumns {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "isActive",

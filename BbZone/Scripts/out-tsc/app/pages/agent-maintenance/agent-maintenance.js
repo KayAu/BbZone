@@ -51,7 +51,7 @@ var AgentMaintenance = /** @class */ (function (_super) {
         //this.loadDropdown();
     };
     AgentMaintenance.prototype.getTablerowDataMapping = function () {
-        var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.readonly, o.colWidth); });
+        var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     AgentMaintenance.prototype.clearSearchParam = function () {

@@ -33,7 +33,7 @@ export class AgentRegistration {
     getFormFeldsMapping(): FormDataMapping[] {
         let fields = AgentRegistrationFields.fields.map(o => new FormDataMapping(o.fieldName,
             o.displayText,
-            o.readonly,
+            o.hidden,
             !o.dataFieldControl ? null :
                 new DataFieldControl(
                     o.dataFieldControl.controlName,

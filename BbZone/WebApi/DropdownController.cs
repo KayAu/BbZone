@@ -28,7 +28,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -52,7 +52,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -73,7 +73,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -97,7 +97,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -121,7 +121,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -155,7 +155,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -169,7 +169,7 @@ namespace BroadbandZone_App.WebApi
 
                 using (var db = new BroadbandZoneEntities())
                 {
-                    if (currentUser.IsAdmin.GetValueOrDefault() == true)
+                    if (currentUser.IsAdmin)
                     {
                         dropdownItems = db.Agents.Where(pc => pc.IsActive == true)
                                                  .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
@@ -184,7 +184,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -201,7 +201,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -218,9 +218,31 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
+
+
+        [Route("api/Dropdown/GetWithdrawalStatus")]
+        public IHttpActionResult GetWithdrwalStatus()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var withdrawalStatuses = Enum.GetValues(typeof(WithdrawalStatus)).Cast<WithdrawalStatus>();   
+                    List<DropdownItem> dropdownItems = withdrawalStatuses.Select(i => new DropdownItem { Key = i.ToString(), Value = i.ToString()}).ToList();
+                    return Ok(dropdownItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+
+
     }
 
 

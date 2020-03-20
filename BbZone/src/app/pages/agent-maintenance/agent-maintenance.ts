@@ -37,7 +37,6 @@ export class AgentMaintenance extends ListEvent {
             o.headerText,
             DataDisplayType[o.displayType],
             o.keyField,
-            o.readonly,
             o.colWidth));
 
         return columnMappings;

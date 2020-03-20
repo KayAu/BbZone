@@ -37,9 +37,9 @@ namespace BroadbandZone_App.WebApi
         }
 
         [HttpGet]
-        [Route("api/Commission/GetMyAgents")]
+        [Route("api/Commission/GetMyAgents/{productId}")]
         // GET api/<controller>
-        public IHttpActionResult GetMyAgents()
+        public IHttpActionResult GetMyAgents(int productId)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter allowCommConfig = new ObjectParameter("oAllowCommConfig", typeof(bool));
-                    var results = (new BroadbandZoneEntities()).GetMyAgents(currentUser.AgentId, allowCommConfig).ToList();
+                    var results = (new BroadbandZoneEntities()).GetMyAgents(currentUser.AgentId, productId, allowCommConfig).ToList();
                     return Ok(new 
                     {
                         DisplayData = results,
@@ -64,7 +64,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -83,7 +83,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -126,7 +126,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -160,7 +160,7 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -192,13 +192,10 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw ex;
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+
     }
 }

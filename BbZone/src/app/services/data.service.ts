@@ -12,6 +12,10 @@ export class DataService {
         this.headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }) };
     }
 
+    download(fileUrl: string): any {
+        return this.http.get(fileUrl, { headers: new HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
+    }
+
     get(apiControllerName: string, recordId?: any): any {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
     }

@@ -34,7 +34,7 @@ export class CreateOrder {
     getFormFeldsMapping(): FormDataMapping[] {
         let columnMappings = NewOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
             o.displayText,
-            o.readonly,
+            o.hidden,
             !o.dataFieldControl ? null :
                 new DataFieldControl(
                     o.dataFieldControl.controlName,

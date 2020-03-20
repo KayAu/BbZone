@@ -7,7 +7,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -18,7 +18,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -29,7 +29,7 @@ var NewAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",
@@ -49,7 +49,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Annc Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": false,
             "colWidth": "cell-width-1"
         },
         {
@@ -57,7 +56,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Title",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-50"
         },
         {
@@ -65,7 +63,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Is Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10"
         },
         {
@@ -73,7 +70,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Modified On",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         },
         {
@@ -81,7 +77,6 @@ var ViewAnnouncementColumns = /** @class */ (function () {
             "headerText": "Modified By",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": ""
         }
     ];
@@ -95,7 +90,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "anncId",
             "displayText": "Id",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "anncId",
                 "controlType": "label",
@@ -106,7 +101,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "title",
             "displayText": "Title",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "title",
                 "controlType": "textbox",
@@ -117,7 +112,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "descriptions",
             "displayText": "Descriptions",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
                 "controlType": "textarea",
@@ -128,7 +123,7 @@ var EditAnnouncementFields = /** @class */ (function () {
         {
             "fieldName": "isActive",
             "displayText": "Is Active",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",

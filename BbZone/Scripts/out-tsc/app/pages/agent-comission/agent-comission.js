@@ -21,6 +21,7 @@ var product_options_1 = require("src/app/components/product-options/product-opti
 var broadcast_service_1 = require("src/app/services/broadcast.service");
 var form_submit_1 = require("src/app/model/form-submit");
 var agent_commission_table_1 = require("src/app/components/agent-commission-table/agent-commission-table");
+var rxjs_1 = require("rxjs");
 var AgentComission = /** @class */ (function () {
     function AgentComission(loaderService, dataService, formEvent, toastr, router) {
         this.loaderService = loaderService;
@@ -32,29 +33,25 @@ var AgentComission = /** @class */ (function () {
         this.commissionSettings = [];
         this.agentCommissions = [];
         this.selectedTab = 1;
-        this.allowCommConfig = false;
+        this.allowCommConfig = true;
     }
-    AgentComission.prototype.ngOnInit = function () {
-        this.loadAgents();
-    };
-    AgentComission.prototype.loadAgents = function () {
-        var _this = this;
-        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents").subscribe(function (data) {
-            _this.myAgents = data.displayData;
-            _this.allowCommConfig = data.allowCommConfig;
-        });
-    };
+    AgentComission.prototype.ngOnInit = function () { };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
-        this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct).subscribe(function (results) {
-            _this.commissionSettings = results;
+        rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct),
+            this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents", this.selectedProduct)]).subscribe(function (results) {
+            _this.commissionSettings = results[0];
+            _this.loadAgents(results[1]);
         });
+    };
+    AgentComission.prototype.loadAgents = function (data) {
+        // this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
+        this.myAgents = data.displayData;
+        this.allowCommConfig = data.allowCommConfig;
+        //});
     };
     AgentComission.prototype.loadAgentCommissions = function () {
         this.agentCommissionTable.loadData(this.selectedProduct);
-        //this.dataService.get(`${ApiController.Commission}/GetMyAgentCommission`, this.selectedProduct).subscribe(results => {
-        //    this.agentCommissions = results;
-        //});
     };
     AgentComission.prototype.create = function () {
         var _this = this;

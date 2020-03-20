@@ -11,9 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
+var file_download_1 = require("src/app/services/file-download");
+var data_service_1 = require("../../services/data.service");
 var FileUploader = /** @class */ (function () {
-    function FileUploader(el) {
+    function FileUploader(el, dataService) {
         this.el = el;
+        this.dataService = dataService;
         this.uploadedFiles = [];
         this.propagateChange = function () { };
     }
@@ -39,6 +42,15 @@ var FileUploader = /** @class */ (function () {
         Array.prototype.push.apply(this.uploadedFiles, files);
         this.propagateChange(this.uploadedFiles);
     };
+    FileUploader.prototype.downloadFile = function (fileUrl, fileName) {
+        if (!fileUrl)
+            return;
+        // Process the file downloaded
+        this.dataService.download(fileUrl).subscribe(function (res) {
+            //let fileName = getFileNameFromResponseContentDisposition(res);
+            file_download_1.saveFile(res.blob, fileName);
+        });
+    };
     FileUploader.prototype.removeFile = function (fileNo) {
         this.uploadedFiles[fileNo].deleted = true;
         this.propagateChange(this.uploadedFiles);
@@ -49,6 +61,10 @@ var FileUploader = /** @class */ (function () {
     FileUploader.prototype.registerOnTouched = function () { };
     FileUploader.prototype.setDisabledState = function () { };
     var FileUploader_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], FileUploader.prototype, "filePath", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -66,7 +82,7 @@ var FileUploader = /** @class */ (function () {
                 }
             ]
         }),
-        __metadata("design:paramtypes", [core_1.ElementRef])
+        __metadata("design:paramtypes", [core_1.ElementRef, data_service_1.DataService])
     ], FileUploader);
     return FileUploader;
 }());

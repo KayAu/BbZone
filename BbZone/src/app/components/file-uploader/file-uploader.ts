@@ -1,5 +1,7 @@
 ﻿import { Component, EventEmitter, Input, Output, ElementRef, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { getFileNameFromResponseContentDisposition, saveFile } from 'src/app/services/file-download';
+import { DataService } from '../../services/data.service';
 
 @Component({
     selector: 'file-uploader',
@@ -17,9 +19,11 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class FileUploader implements ControlValueAccessor {
     uploadedFiles: any[] = [];
     onEdit: boolean;
+    @Input() filePath: string;
     @Output() propagateChange: any = () => { };
 
-    constructor(private el: ElementRef) { }
+    constructor(private el: ElementRef, private dataService: DataService) { }
+
 
     clear() {
         this.uploadedFiles = null;
@@ -45,6 +49,15 @@ export class FileUploader implements ControlValueAccessor {
        
         Array.prototype.push.apply(this.uploadedFiles, files);
         this.propagateChange(this.uploadedFiles);
+    }
+
+    downloadFile(fileUrl: string, fileName: string) {
+        if (!fileUrl) return;
+        // Process the file downloaded
+        this.dataService.download(fileUrl).subscribe(res => {
+           //let fileName = getFileNameFromResponseContentDisposition(res);
+            saveFile(res.blob, fileName);
+        });
     }
 
     removeFile(fileNo: number) {

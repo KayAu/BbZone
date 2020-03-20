@@ -7,7 +7,7 @@ public static fields = [
     {
         "fieldName": "categoryId",
         "displayText": "Product Category",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "categoryId",
             "controlType": "cascadeDropdown",
@@ -20,7 +20,7 @@ public static fields = [
     {
         "fieldName": "prodPkgId",
         "displayText": "Product Package",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "prodPkgId",
             "controlType": "cascadeDropdown",
@@ -32,7 +32,7 @@ public static fields = [
     {
         "fieldName": "agent",
         "displayText": "Agent Name",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "agent",
             "controlType": "select",
@@ -44,7 +44,7 @@ public static fields = [
     {
         "fieldName": "companyName",
         "displayText": "Company Name",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "companyName",
             "controlType": "textbox",
@@ -55,7 +55,7 @@ public static fields = [
     {
         "fieldName": "companyRegNo",
         "displayText": "Company Registration No.",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "companyRegNo",
             "controlType": "textbox",
@@ -66,7 +66,7 @@ public static fields = [
     {
         "fieldName": "customerName",
         "displayText": "Customer Name",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "customerName",
             "controlType": "textbox",
@@ -77,7 +77,7 @@ public static fields = [
     {
         "fieldName": "customerId",
         "displayText": "Customer IC / Passport No.",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "customerId",
             "controlType": "textbox",
@@ -88,7 +88,7 @@ public static fields = [
     {
         "fieldName": "residentialType",
         "displayText": "Residential Type",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "residentialType",
             "controlType": "select",
@@ -100,7 +100,7 @@ public static fields = [
     {
         "fieldName": "residentialName",
         "displayText": "Residential Name",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "residentialName",
             "controlType": "textbox",
@@ -111,7 +111,7 @@ public static fields = [
     {
         "fieldName": "customerAddr",
         "displayText": "Customer Address",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "customerAddr",
             "controlType": "textbox",
@@ -122,7 +122,7 @@ public static fields = [
     {
         "fieldName": "city",
         "displayText": "City",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "city",
             "controlType": "textbox",
@@ -133,7 +133,7 @@ public static fields = [
     {
         "fieldName": "postcode",
         "displayText": "Postcode",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "postcode",
             "controlType": "textbox",
@@ -144,7 +144,7 @@ public static fields = [
     {
         "fieldName": "state",
         "displayText": "State",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "state",
             "controlType": "select",
@@ -156,7 +156,7 @@ public static fields = [
     {
         "fieldName": "contactNo",
         "displayText": "Contact No",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "contactNo",
             "controlType": "textbox",
@@ -167,7 +167,7 @@ public static fields = [
     {
         "fieldName": "email",
         "displayText": "Email",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "Email",
             "controlType": "textbox",
@@ -178,7 +178,7 @@ public static fields = [
     {
         "fieldName": "customerRemarks",
         "displayText": "Remarks",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "customerRemarks",
             "controlType": "textarea",
@@ -189,7 +189,7 @@ public static fields = [
     {
         "fieldName": "orderNo",
         "displayText": "Order No",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "orderNo",
             "controlType": "textbox",
@@ -200,7 +200,7 @@ public static fields = [
     {
         "fieldName": "userId",
         "displayText": "User Id",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "userId",
             "controlType": "textbox",
@@ -211,9 +211,9 @@ public static fields = [
     {
         "fieldName": "telNo",
         "displayText": "Tel No",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
-            "controlName": "userId",
+            "controlName": "telNo",
             "controlType": "textbox",
             "required": false,
             "maxLength": 25
@@ -222,7 +222,7 @@ public static fields = [
     {
         "fieldName": "submitByAgent",
         "displayText": "Submitted By Agent",
-        "readonly": false,
+        "hidden": false,
         "dataFieldControl": {
             "controlName": "submitByAgent",
             "controlType": "checkbox",

@@ -9,7 +9,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "categoryId",
@@ -23,7 +22,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-70",
             "dataFieldControl": {
                 "controlName": "category",
@@ -37,7 +35,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Default Commission (RM)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
@@ -51,7 +48,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Commission (%)",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "commissionPercent",
@@ -65,7 +61,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Product",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "productId",
@@ -80,7 +75,6 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "isActive",

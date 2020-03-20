@@ -23,7 +23,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { EditOrder } from './pages/edit-order/edit-order';
 import { AgentComission } from './pages/agent-comission/agent-comission';
 import { ViewCommission } from './pages/view-commission/view-commission';
-import { ManageWithdrawal } from './pages/manage-withdrawal/manage-withdrawal';
+import { ViewWithdrawal } from './pages/view-withdrawal/view-withdrawal';
 import { ManageProduct } from './pages/manage-product/manage-product';
 import { ManagePackage } from './pages/manage-packages/manage-packages';
 import { ManageCategory } from './pages/manage-category/manage-category';
@@ -61,6 +61,8 @@ import { Announcement } from './components/announcement/announcement';
 import { UserCommunication } from './components/user-communication/user-communication';
 import { LessThanValidator } from './directives/less-than-validator.directive';
 import { SubmissionStatusCount } from './components/dashboard/submission-status-count/submission-status-count';
+import { CreateWithdrawal } from './pages/create-withdrawal/create-withdrawal';
+import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
 
 @NgModule({
   declarations: [
@@ -77,7 +79,7 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
         EditOrder,
         AgentComission,
         ViewCommission,
-        ManageWithdrawal,
+        ViewWithdrawal,
         ManageProduct,
         ManagePackage,
         ManageCategory,
@@ -108,7 +110,9 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
         Announcement,
         UserCommunication,
         LessThanValidator,
-        SubmissionStatusCount
+        SubmissionStatusCount,
+        CreateWithdrawal,
+        EditWithdrawal
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -131,7 +135,7 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
             { path: 'edit-order/:id', component: EditOrder },
             { path: 'agent-comission', component: AgentComission },
             { path: 'view-commission', component: ViewCommission },
-            { path: 'manage-withdrawal', component: ManageWithdrawal },
+            { path: 'view-withdrawal', component: ViewWithdrawal },
             { path: 'manage-product', component: ManageProduct },
             { path: 'manage-packages', component: ManagePackage },
             { path: 'manage-category', component: ManageCategory },
@@ -143,7 +147,9 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
             { path: 'agent-maintenance', component: AgentMaintenance },
             { path: 'create-announcement', component: CreateAnnouncement },
             { path: 'edit-announcement/:id', component: EditAnnouncement },
-            { path: 'view-announcement', component: ViewAnnouncement }
+            { path: 'view-announcement', component: ViewAnnouncement },
+            { path: 'create-withdrawal', component: CreateWithdrawal },
+            { path: 'edit-withdrawal/:id', component: EditWithdrawal },
     ])
   ],
   providers: [

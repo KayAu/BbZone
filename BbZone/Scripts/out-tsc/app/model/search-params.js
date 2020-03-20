@@ -30,4 +30,22 @@ var ApprovalParams = /** @class */ (function () {
     return ApprovalParams;
 }());
 exports.ApprovalParams = ApprovalParams;
+var SearchWithdrawalToSubmitParams = /** @class */ (function () {
+    function SearchWithdrawalToSubmitParams(keyword, submittedDate) {
+        this.keyword = keyword;
+        this.submittedDate = submittedDate;
+    }
+    return SearchWithdrawalToSubmitParams;
+}());
+exports.SearchWithdrawalToSubmitParams = SearchWithdrawalToSubmitParams;
+var SearchWithdrawalViewParams = /** @class */ (function () {
+    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
+        this.agent = agent;
+        this.status = status;
+        this.submittedDate = submittedDate;
+        this.completedDate = completedDate;
+    }
+    return SearchWithdrawalViewParams;
+}());
+exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
 //# sourceMappingURL=search-params.js.map

@@ -1,37 +1,36 @@
 ﻿
 CREATE PROCEDURE [dbo].[prc_GetMyAgents]
-	@prUsername VARCHAR(16) = NULL,
+	@prSuperiorId INT = NULL,
+	@prProductID INT,
 	@oAllowCommConfig BIT OUTPUT
 AS
 BEGIN
-	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
-			@vSuperiorId INT
+	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID)
 
 	BEGIN TRY
-		SELECT @vSuperiorId = a.AgentId
-			   ,@oAllowCommConfig = CAST(CASE WHEN NOT ac.AgentId IS NULL AND COUNT(a.AgentId) > 0 THEN 1
-			                                  ELSE 0 END AS BIT)
-		FROM Agent a 
-		LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId
-		WHERE a.UserLogin = @prUsername 
-		GROUP BY a.AgentId, ac.AgentId
+		SET @oAllowCommConfig = 0
 
+	    -- check if this agent has commission set for the product selected
+		IF EXISTS (SELECT  1
+				FROM AgentCommission ac 
+				LEFT JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId 
+				WHERE ac.AgentId = @prSuperiorId
+				AND pc.ProductId = @prProductID)
+		SET @oAllowCommConfig = 1
+
+		-- get the list of subordinates who do not have their commission set up yet for the selected product  
 		SELECT a1.AgentId AS [DisplayValue] 
 			  ,a1.Fullname AS [DisplayText]
 			  ,CAST(0 AS BIT) AS Selected
 		FROM Agent a1
-		LEFT JOIN AgentCommission ac ON a1.AgentId = ac.AgentId
-		WHERE a1.SuperiorId = @vSuperiorId
-		AND ac.CommId IS NULL
-
-		--SELECT a1.AgentId AS [DisplayValue] 
-		--	  ,a1.Fullname AS [DisplayText]
-		--	  ,CAST(0 AS BIT) AS Selected
-		--FROM Agent a1
-		--LEFT JOIN Agent a2 ON a1.SuperiorId = a2.AgentId
-		--LEFT JOIN AgentCommission ac ON a1.AgentId = ac.AgentId
-		--WHERE a2.UserLogin = @prUsername
-		--AND ac.CommId IS NULL
+		WHERE NOT a1.AgentId IN 
+		(
+			SELECT AgentId
+			FROM AgentCommission ac
+		    INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId 
+		    WHERE pc.ProductId = @prProductID
+		)
+	    AND a1.SuperiorId = @prSuperiorId
 
 	END TRY 
 	BEGIN CATCH

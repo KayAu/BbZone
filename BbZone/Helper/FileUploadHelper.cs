@@ -16,7 +16,7 @@ namespace BroadbandZone_App.Helper
 
         public FileUploadHelper (string uploadFilePath)
         {
-            this._UploadFilePath =  HttpContext.Current.Server.MapPath(uploadFilePath);
+            this._UploadFilePath =  uploadFilePath;
         }
 
         public IEnumerable<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, int fileId)
@@ -25,12 +25,12 @@ namespace BroadbandZone_App.Helper
             {
                 if (!string.IsNullOrEmpty(file.Headers.ContentDisposition.FileName))
                 {
-                    double filesize = Math.Round((File.ReadAllBytes(file.LocalFileName).Length * 1.0) / 1024);
+                    double filesize = File.ReadAllBytes(file.LocalFileName).Length;
                     string fileName = file.Headers.ContentDisposition.FileName;
                     fileName = fileName.Insert(fileName.IndexOf("."), $"_{fileId.ToString()}").Replace("\"", "");
-                    File.Move(file.LocalFileName, Path.Combine(this._UploadFilePath, fileName));
+                    File.Move(file.LocalFileName, GetFileUploadLocation(fileName));
 
-                    yield return new UploadedFile { Name = fileName, Size = filesize };
+                    yield return new UploadedFile { Name = fileName, FilePath = $"{this._UploadFilePath}/{fileName}", Size = filesize };
                 }
             }
         }
@@ -46,6 +46,11 @@ namespace BroadbandZone_App.Helper
             {
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
+        }
+
+        private string GetFileUploadLocation(string fileName)
+        {
+            return Path.Combine(HttpContext.Current.Server.MapPath(this._UploadFilePath), fileName);
         }
         //public List<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, int fileId)
         //{

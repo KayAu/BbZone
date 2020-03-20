@@ -12,4 +12,6 @@ export enum ApiController {
     Dashboard = "Dashboard",
     Announcement = "Announcement",
     Communication = "Communication",
+    WithdrawalView = "WithdrawalView",
+    WithdrawalSubmit = "WithdrawalSubmit",
 }

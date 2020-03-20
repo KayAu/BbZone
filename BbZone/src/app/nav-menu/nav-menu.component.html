@@ -43,7 +43,12 @@
         </ul>
       </li>
       <li>
-        <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span></a>
+          <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span><span class="fa arrow"></span></a>
+          <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+              <li><a [routerLink]='["/view-withdrawal"]'><span class="nav-label">View Withdrawal</span></a></li>
+              <li><a [routerLink]='["/create-withdrawal"]'><span class="nav-label">Submit Withdrawal</span></a></li>
+              <!--<li><a [routerLink]='["/view-commission"]'><span class="nav-label">View Commission</span></a></li>-->
+          </ul>
       </li>
       <li>
         <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-edit"></i> <span class="nav-label">Manage Transaction</span></a>

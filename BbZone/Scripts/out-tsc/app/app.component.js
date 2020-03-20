@@ -29,6 +29,10 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.unloadHandler = function (event) {
         localStorage.removeItem('currentUser');
     };
+    AppComponent.prototype.logout = function () {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/']);
+    };
     __decorate([
         core_1.ViewChild('navMenu'),
         __metadata("design:type", nav_menu_component_1.NavMenuComponent)

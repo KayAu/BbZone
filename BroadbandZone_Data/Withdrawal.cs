@@ -15,17 +15,17 @@ namespace BroadbandZone_Data
     public partial class Withdrawal
     {
         public int WithdrawalId { get; set; }
-        public int ApplicationId { get; set; }
+        public string ApplicationId { get; set; }
         public string Agent { get; set; }
-        public decimal Amount { get; set; }
-        public Nullable<decimal> GiroFee { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
-        public bool IsCompleted { get; set; }
+        public Nullable<decimal> Amount { get; set; }
+        public string ReferenceNo { get; set; }
+        public string Status { get; set; }
+        public string Remarks { get; set; }
         public Nullable<System.DateTime> CompletedOn { get; set; }
         public string CompletedBy { get; set; }
-        public string ReferenceNo { get; set; }
-    
-        public virtual CustomerApplication CustomerApplication { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
+        public System.DateTime ModifiedOn { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

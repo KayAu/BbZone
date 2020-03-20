@@ -34,6 +34,10 @@ export class AppComponent {
         localStorage.removeItem('currentUser');
     }
 
+    logout() {
+        localStorage.removeItem('currentUser');
+        this.router.navigate(['/']);
+    }
 }
 
 

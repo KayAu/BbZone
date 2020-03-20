@@ -11,11 +11,13 @@ namespace BroadbandZone_Data
 {
     using System;
     
-    public partial class prc_DboardSubmissionStatusCount_Result
+    public partial class GetWithdrawalItems_Result
     {
-        public Nullable<int> TotalSubmitted { get; set; }
-        public int TotalCompleted { get; set; }
-        public int TotalInProgress { get; set; }
-        public int TotalCancelled { get; set; }
+        public int ApplicationId { get; set; }
+        public string CustomerName { get; set; }
+        public string PackageName { get; set; }
+        public string Category { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public Nullable<decimal> ClaimAmount { get; set; }
     }
 }

@@ -38,7 +38,8 @@ namespace BroadbandZone_App.Models
     public class SearchWithdrawalParams
     {
         public string Agent { get; set; }
-        public bool? IsCompleted { get; set; }
+        public string Status { get; set; }
+        public string Keyword { get; set; }
         public DateRange SubmittedDate { get; set; }
         public DateRange CompletedDate { get; set; }
     }

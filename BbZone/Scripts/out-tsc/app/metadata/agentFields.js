@@ -7,7 +7,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -18,7 +18,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -29,7 +29,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -40,7 +40,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -51,7 +51,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -62,7 +62,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -73,7 +73,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -84,7 +84,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -96,7 +96,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "number",
@@ -107,7 +107,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -118,7 +118,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -129,7 +129,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -140,7 +140,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "superiorId",
             "displayText": "Superior Id",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "superiorId",
                 "controlType": "number",
@@ -151,7 +151,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "userLogin",
             "displayText": "User Login",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "userLogin",
                 "controlType": "textbox",
@@ -162,7 +162,7 @@ var AgentRegistrationFields = /** @class */ (function () {
         {
             "fieldName": "password",
             "displayText": "Password",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "password",
                 "controlType": "password",
@@ -261,7 +261,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -272,7 +272,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -283,7 +283,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -294,7 +294,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -305,7 +305,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -316,7 +316,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -327,7 +327,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -338,7 +338,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -350,7 +350,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "number",
@@ -361,7 +361,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -372,7 +372,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -383,7 +383,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -394,7 +394,7 @@ var AgentRegistrationViewFields = /** @class */ (function () {
         {
             "fieldName": "superiorName",
             "displayText": "Superior/Upline",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "superiorName",
                 "controlType": "textbox",
@@ -414,7 +414,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "agentId",
             "displayText": "Agent Id",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agentId",
                 "controlType": "label",
@@ -425,7 +425,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "fullname",
             "displayText": "Full Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "fullname",
                 "controlType": "textbox",
@@ -436,7 +436,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "email",
             "displayText": "Email",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -447,7 +447,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "nric",
             "displayText": "NRIC",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "nric",
                 "controlType": "textbox",
@@ -458,7 +458,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -469,7 +469,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "companyRegNo",
             "displayText": "Company Reg. No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -480,7 +480,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "address",
             "displayText": "Address",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "address",
                 "controlType": "textbox",
@@ -491,7 +491,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "city",
             "displayText": "City",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -502,7 +502,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "state",
             "displayText": "State",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -514,7 +514,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "postcode",
             "displayText": "Postcode",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -525,7 +525,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "country",
             "displayText": "Country",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "country",
                 "controlType": "textbox",
@@ -536,7 +536,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "mobileNo",
             "displayText": "Mobile No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "mobileNo",
                 "controlType": "textbox",
@@ -547,7 +547,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -558,7 +558,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "bankName",
             "displayText": "Bank Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankName",
                 "controlType": "textbox",
@@ -569,7 +569,7 @@ var AgentProfileFields = /** @class */ (function () {
         {
             "fieldName": "bankAccNo",
             "displayText": "Bank Acc No",
-            "readonly": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankAccNo",
                 "controlType": "textbox",

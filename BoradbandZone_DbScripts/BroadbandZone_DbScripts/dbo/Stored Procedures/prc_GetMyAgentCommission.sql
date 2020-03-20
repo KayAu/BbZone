@@ -1,6 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[prc_GetMyAgentCommission]
 	@prProductId INT,
-	@prUserName VARCHAR(50)
+	@prSuperiorId INT
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
@@ -19,9 +19,9 @@ BEGIN
 		FROM AgentCommission ac
 		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
 		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
-		INNER JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
+		--INNER JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
 		WHERE pc.ProductId = @prProductId
-		AND a2.UserLogin = @prUserName
+		AND a1.SuperiorId = @prSuperiorId
 		ORDER BY pc.Category
 
 		SELECT @vCols = STUFF((SELECT DISTINCT ',' + QUOTENAME(c.category) 

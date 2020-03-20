@@ -15,7 +15,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Id",
             "displayType": "text",
             "keyField": true,
-            "readonly": true,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "prodPkgId",
@@ -29,7 +28,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Package Name",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-20",
             "dataFieldControl": {
                 "controlName": "packageName",
@@ -43,7 +41,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Description",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-40",
             "dataFieldControl": {
                 "controlName": "description",
@@ -57,7 +54,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Commission",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-10",
             "dataFieldControl": {
                 "controlName": "commission",
@@ -71,7 +67,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "readonly": false,
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "categoryId",
@@ -86,7 +81,6 @@ var ManagePackageColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "readonly": false,
             "colWidth": "cell-width-1",
             "dataFieldControl": {
                 "controlName": "isActive",

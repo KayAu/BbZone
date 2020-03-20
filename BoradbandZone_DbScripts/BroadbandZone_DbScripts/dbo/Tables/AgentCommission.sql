@@ -8,7 +8,10 @@
     [CreatedBy]          VARCHAR (50)  NOT NULL,
     [ModifiedOn]         SMALLDATETIME NOT NULL,
     [ModifiedBy]         VARCHAR (50)  NOT NULL,
+    CONSTRAINT [PK_AgentCommission] PRIMARY KEY CLUSTERED ([CommId] ASC),
     CONSTRAINT [FK_AgentCommission_Agent] FOREIGN KEY ([AgentId]) REFERENCES [dbo].[Agent] ([AgentId]),
     CONSTRAINT [FK_AgentCommission_ProductCategory] FOREIGN KEY ([CategoryId]) REFERENCES [dbo].[ProductCategory] ([CategoryId])
 );
+
+
 

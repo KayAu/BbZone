@@ -11,4 +11,13 @@ namespace BroadbandZone_App.Enums
         ApplicationStatus
     }
 
+    public enum WithdrawalStatus
+    {
+        OnHold,
+        Pending,
+        Processing,
+        Cancelled,
+        Completed
+    }
+
 }

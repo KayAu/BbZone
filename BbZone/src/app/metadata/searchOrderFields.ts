@@ -5,7 +5,7 @@ export class SearchOrderFields {
         {
             "fieldName": "productId",
             "displayText": "Product",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productId",
                 "controlType": "select",
@@ -18,7 +18,7 @@ export class SearchOrderFields {
         {
             "fieldName": "productCategoryId",
             "displayText": "Product Category",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productCategoryId",
                 "controlType": "cascadeDropdown",
@@ -31,7 +31,7 @@ export class SearchOrderFields {
         {
             "fieldName": "productPackageId",
             "displayText": "Product Package",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "productPackageId",
                 "controlType": "cascadeDropdown",
@@ -43,7 +43,7 @@ export class SearchOrderFields {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -55,7 +55,7 @@ export class SearchOrderFields {
         {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -66,7 +66,7 @@ export class SearchOrderFields {
         {
             "fieldName": "agent",
             "displayText": "Agent",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
@@ -78,7 +78,7 @@ export class SearchOrderFields {
         {
             "fieldName": "appStatusId",
             "displayText": "Status",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",
@@ -90,7 +90,7 @@ export class SearchOrderFields {
         {
             "fieldName": "submittedDate",
             "displayText": "Submitted Date",
-            "readonly": false,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "submittedDate",
                 "controlType": "dateRange",

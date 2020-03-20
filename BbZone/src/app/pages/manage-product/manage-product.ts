@@ -39,7 +39,6 @@ export class ManageProduct extends ListDataCrud {
             o.headerText,
             DataDisplayType[o.displayType],
             o.keyField,
-            o.readonly,
             o.colWidth,
             !o.dataFieldControl ? null :
                 new DataFieldControl(

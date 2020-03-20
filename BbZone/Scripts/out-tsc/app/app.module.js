@@ -31,7 +31,7 @@ var ngx_daterangepicker_material_1 = require("ngx-daterangepicker-material");
 var edit_order_1 = require("./pages/edit-order/edit-order");
 var agent_comission_1 = require("./pages/agent-comission/agent-comission");
 var view_commission_1 = require("./pages/view-commission/view-commission");
-var manage_withdrawal_1 = require("./pages/manage-withdrawal/manage-withdrawal");
+var view_withdrawal_1 = require("./pages/view-withdrawal/view-withdrawal");
 var manage_product_1 = require("./pages/manage-product/manage-product");
 var manage_packages_1 = require("./pages/manage-packages/manage-packages");
 var manage_category_1 = require("./pages/manage-category/manage-category");
@@ -69,6 +69,8 @@ var announcement_1 = require("./components/announcement/announcement");
 var user_communication_1 = require("./components/user-communication/user-communication");
 var less_than_validator_directive_1 = require("./directives/less-than-validator.directive");
 var submission_status_count_1 = require("./components/dashboard/submission-status-count/submission-status-count");
+var create_withdrawal_1 = require("./pages/create-withdrawal/create-withdrawal");
+var edit_withdrawal_1 = require("./pages/edit-withdrawal/edit-withdrawal");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -88,7 +90,7 @@ var AppModule = /** @class */ (function () {
                 edit_order_1.EditOrder,
                 agent_comission_1.AgentComission,
                 view_commission_1.ViewCommission,
-                manage_withdrawal_1.ManageWithdrawal,
+                view_withdrawal_1.ViewWithdrawal,
                 manage_product_1.ManageProduct,
                 manage_packages_1.ManagePackage,
                 manage_category_1.ManageCategory,
@@ -119,7 +121,9 @@ var AppModule = /** @class */ (function () {
                 announcement_1.Announcement,
                 user_communication_1.UserCommunication,
                 less_than_validator_directive_1.LessThanValidator,
-                submission_status_count_1.SubmissionStatusCount
+                submission_status_count_1.SubmissionStatusCount,
+                create_withdrawal_1.CreateWithdrawal,
+                edit_withdrawal_1.EditWithdrawal
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -142,7 +146,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'edit-order/:id', component: edit_order_1.EditOrder },
                     { path: 'agent-comission', component: agent_comission_1.AgentComission },
                     { path: 'view-commission', component: view_commission_1.ViewCommission },
-                    { path: 'manage-withdrawal', component: manage_withdrawal_1.ManageWithdrawal },
+                    { path: 'view-withdrawal', component: view_withdrawal_1.ViewWithdrawal },
                     { path: 'manage-product', component: manage_product_1.ManageProduct },
                     { path: 'manage-packages', component: manage_packages_1.ManagePackage },
                     { path: 'manage-category', component: manage_category_1.ManageCategory },
@@ -154,7 +158,9 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
                     { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
-                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement }
+                    { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
+                    { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
+                    { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
                 ])
             ],
             providers: [

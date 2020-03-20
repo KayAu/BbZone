@@ -141,13 +141,16 @@
     <Compile Include="GetRegistrationDetails_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetWithdrawal_Result.cs">
+    <Compile Include="GetWithdrawalItems_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetWithdrawalSubmitted_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetWithdrawalToSubmit_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PartialClass\PartialClass.cs" />
-    <Compile Include="prc_DboardSubmissionStatusCount_Result.cs">
-      <DependentUpon>BbZoneModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

@@ -29,5 +29,24 @@ export class ApprovalParams {
         public approvalMode: ApprovalMode,
         public keyword: string
     ) { }
+}
+
+export class SearchWithdrawalToSubmitParams {
+    constructor(
+        public keyword: string,
+        public submittedDate: DateRange
+    ) { }
 
 }
+
+
+export class SearchWithdrawalViewParams {
+    constructor(
+        public agent: number,
+        public status: string,
+        public submittedDate: DateRange,
+        public completedDate: DateRange,
+    ) { }
+
+}
+

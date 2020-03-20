@@ -20,6 +20,9 @@ namespace BroadbandZone_Data
     {
         public string Password { get; set; }
     }
-
+    public partial class Withdrawal
+    {
+        public List<GetWithdrawalItems_Result> WithdrawalItems { get; set; }
+    }
 
 }

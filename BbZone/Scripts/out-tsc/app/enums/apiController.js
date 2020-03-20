@@ -15,5 +15,7 @@ var ApiController;
     ApiController["Dashboard"] = "Dashboard";
     ApiController["Announcement"] = "Announcement";
     ApiController["Communication"] = "Communication";
+    ApiController["WithdrawalView"] = "WithdrawalView";
+    ApiController["WithdrawalSubmit"] = "WithdrawalSubmit";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map
