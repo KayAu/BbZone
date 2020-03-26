@@ -19,18 +19,18 @@ var CreateWithdrawalColumns = /** @class */ (function () {
         //  "colWidth": "cell-width-1"
         //},
         {
-            "fieldName": "customerName",
-            "headerText": "Customer Name",
+            "fieldName": "transactionDetails",
+            "headerText": "Transaction Details",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-30"
+            "colWidth": "cell-width-25"
         },
         {
             "fieldName": "packageName",
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-25"
+            "colWidth": "cell-width-20"
         },
         {
             "fieldName": "category",
@@ -40,18 +40,25 @@ var CreateWithdrawalColumns = /** @class */ (function () {
             "colWidth": "cell-width-15"
         },
         {
-            "fieldName": "submittedOn",
-            "headerText": "Submitted On",
+            "fieldName": "date",
+            "headerText": "Date",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "claimAmount",
-            "headerText": "Claim Amount",
+            "headerText": "Claim Amount (RM)",
             "displayType": "text",
             "keyField": false,
-            "colWidth": ""
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "deductAmount",
+            "headerText": "Deduct Amount (RM)",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
         }
     ];
     return CreateWithdrawalColumns;

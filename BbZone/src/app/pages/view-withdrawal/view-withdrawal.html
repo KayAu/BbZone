@@ -34,18 +34,29 @@
                             <thead>
                                 <tr>
                                     <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                    <th class="cell-width-5">Action</th>
+                                    <th class="cell-width-6">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let record of dataSource; let rowNo = index">
                                     <ng-container *ngFor="let field of dataRowMapper">
                                         <td>
-                                            <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <ng-template #displayBadge>
+                                                <span class="badge " [ngClass]="{'badge-danger': record.status == 'Terminated',
+                                                                                  'badge-primary': record.status == 'Completed',
+                                                                                  'badge-warning': record.status == 'Rejected',
+                                                                                  'badge-info': (record.status == 'Pending' || field.status == 'Processing')}">
+                                                    {{record.status}}
+                                                </span>
+                                            </ng-template>
                                         </td>
                                     </ng-container>
                                     <td>
-                                        <a class="btn btn-success btn-sm " [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                        <a class="btn btn-success btn-sm" [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                        <a class="btn btn-info btn-sm mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'">
+                                            <i class="fa fa-print"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

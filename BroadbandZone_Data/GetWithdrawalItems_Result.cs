@@ -13,11 +13,12 @@ namespace BroadbandZone_Data
     
     public partial class GetWithdrawalItems_Result
     {
-        public int ApplicationId { get; set; }
-        public string CustomerName { get; set; }
+        public Nullable<int> ApplicationId { get; set; }
         public string PackageName { get; set; }
         public string Category { get; set; }
-        public System.DateTime CreatedOn { get; set; }
         public Nullable<decimal> ClaimAmount { get; set; }
+        public string Date { get; set; }
+        public Nullable<decimal> DeductAmount { get; set; }
+        public string TransactionDetails { get; set; }
     }
 }

@@ -13,11 +13,11 @@ namespace BroadbandZone_App.Enums
 
     public enum WithdrawalStatus
     {
-        OnHold,
         Pending,
         Processing,
-        Cancelled,
-        Completed
+        Terminated,
+        Completed,
+        Rejected,
     }
 
 }

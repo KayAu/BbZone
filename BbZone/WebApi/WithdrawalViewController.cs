@@ -25,13 +25,13 @@ namespace BroadbandZone_App.WebApi
 
             {
                 SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
-
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
                     var results = (new BroadbandZoneEntities()).GetWithdrawalSubmitted(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.Status,
-                                                                                filterBy.Agent,
+                                                                                 !currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.StartDate : null,
@@ -55,10 +55,17 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                using (var db = new BroadbandZoneEntities())
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                using (var db = new BroadbandZoneEntities(true))
                 {
                     var withdrawal = db.Withdrawals.Find(id);
+                    withdrawal.AllowEdit = !currentUser.IsAdmin ||
+                                            withdrawal.Status == WithdrawalStatus.Completed.ToString() ||
+                                            withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
+                    withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
                     withdrawal.WithdrawalItems = db.GetWithdrawalItems(withdrawal.WithdrawalId).ToList();
+                    withdrawal.TotalAmountToDeduct = withdrawal.WithdrawalItems.Select(w => w.DeductAmount).Sum();
+                    withdrawal.TotalSelectedAmount = withdrawal.Amount + withdrawal.TotalAmountToDeduct;
                     return Ok(withdrawal);
                 }
             }
@@ -78,7 +85,7 @@ namespace BroadbandZone_App.WebApi
                 {
                     if (editRecord.Status == WithdrawalStatus.Completed.ToString())
                     {
-                        editRecord.SetDateAndAuthor("Kaye", "CompletedOn","CompletedBy", "ModifiedBy", "ModifiedOn");
+                        editRecord.SetDateAndAuthor("Kaye", "CompletedOn", "CompletedBy", "ModifiedBy", "ModifiedOn");
                     }
                     else
                     {
@@ -96,8 +103,8 @@ namespace BroadbandZone_App.WebApi
         }
 
 
-        [HttpPut]
-        [Route("api/WithdrawalSubmit/Cancel/{id}")]
+        [HttpGet]
+        [Route("api/WithdrawalView/Cancel/{id}")]
         // DELETE api/<controller>/5
         public IHttpActionResult Cancel(int id)
         {
@@ -110,11 +117,51 @@ namespace BroadbandZone_App.WebApi
                     if (editRecord is null)
                         return Content(HttpStatusCode.BadRequest, "Invalid ID");
 
-                    editRecord.Status = WithdrawalStatus.Cancelled.ToString();
+                    editRecord.Status = WithdrawalStatus.Terminated.ToString();
                     editRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                     db.Entry(editRecord).State = EntityState.Modified;
                     db.SaveChanges();
                     return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        [HttpGet]
+        [Route("api/WithdrawalView/GetPaymentVoucher/{id}")]
+        // DELETE api/<controller>/5
+        public IHttpActionResult GetPaymentVoucher(int id)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    Withdrawal withdrawal = db.Withdrawals.Find(id);
+
+                    if (withdrawal is null)
+                        return Content(HttpStatusCode.BadRequest, "Invalid ID");
+
+                    PaymentVoucher paymentVoucher = new PaymentVoucher();
+                    paymentVoucher.RefNumber = withdrawal.ReferenceNo;
+                    paymentVoucher.PaymentAmount = $"RM {string.Format("{0:C2}", withdrawal.Amount)}";
+                    paymentVoucher.PaymentDate = withdrawal.CreatedOn.ToString("yyyy-MM-dd");
+                    paymentVoucher.PaymentItems = db.GetPaymentDetails(id).ToList();
+
+                    Agent agent = db.Agents.Where(a => a.UserLogin == withdrawal.Agent).FirstOrDefault();
+
+                    if (agent != null)
+                    {
+                        paymentVoucher.AgentFullname = agent.Fullname;
+                        paymentVoucher.AgentId = agent.AgentId.ToString();
+                        paymentVoucher.IcNo = agent.Nric;
+                        paymentVoucher.Bank = agent.BankName;
+                        paymentVoucher.BankAccount = agent.BankAccNo;
+                    }
+
+                    return Ok(paymentVoucher);
                 }
             }
             catch (Exception ex)

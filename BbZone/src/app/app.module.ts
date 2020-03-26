@@ -63,6 +63,7 @@ import { LessThanValidator } from './directives/less-than-validator.directive';
 import { SubmissionStatusCount } from './components/dashboard/submission-status-count/submission-status-count';
 import { CreateWithdrawal } from './pages/create-withdrawal/create-withdrawal';
 import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
+import { AgentChanges } from './pages/agent-charges/agent-charges';
 
 @NgModule({
   declarations: [
@@ -112,7 +113,8 @@ import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
         LessThanValidator,
         SubmissionStatusCount,
         CreateWithdrawal,
-        EditWithdrawal
+        EditWithdrawal,
+        AgentChanges
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -150,6 +152,7 @@ import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
             { path: 'view-announcement', component: ViewAnnouncement },
             { path: 'create-withdrawal', component: CreateWithdrawal },
             { path: 'edit-withdrawal/:id', component: EditWithdrawal },
+            { path: 'agent-charges', component: AgentChanges }
     ])
   ],
   providers: [

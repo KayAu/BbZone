@@ -51,6 +51,21 @@
           <Property Name="ModifiedOn" Type="smalldatetime" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AgentCharge">
+          <Key>
+            <PropertyRef Name="ChargeId" />
+          </Key>
+          <Property Name="ChargeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="Amount" Type="money" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="WithdrawalId" Type="int" />
+          <Property Name="Cancelled" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="AgentCommission">
           <Key>
             <PropertyRef Name="CommId" />
@@ -244,6 +259,31 @@
           <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'BbZone.dbo.vwWithdrawalItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwWithdrawalItems">
+          <Key>
+            <PropertyRef Name="WithdrawalId" />
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="WithdrawalId" Type="int" Nullable="false" />
+          <Property Name="ApplicationId" Type="varchar" MaxLength="800" Nullable="false" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="16" />
+          <Property Name="Status" Type="varchar" MaxLength="20" />
+          <Property Name="WithdrawalAppId" Type="varchar" MaxLength="8000" />
+        </EntityType>
+        <Association Name="FK_AgentCharges_Withdrawal">
+          <End Role="Withdrawal" Type="Self.Withdrawal" Multiplicity="0..1" />
+          <End Role="AgentCharge" Type="Self.AgentCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
+            </Principal>
+            <Dependent Role="AgentCharge">
+              <PropertyRef Name="WithdrawalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_AgentCommission_Agent">
           <End Role="Agent" Type="Self.Agent" Multiplicity="1" />
           <End Role="AgentCommission" Type="Self.AgentCommission" Multiplicity="*" />
@@ -389,6 +429,15 @@
         <Function Name="prc_GenerateEncryptedPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prUserLogin" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_GetAgentCharges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prRecordStatus" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prc_GetAgentCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prAgentId" Type="int" Mode="In" />
           <Parameter Name="prProductId" Type="int" Mode="In" />
@@ -468,6 +517,9 @@
           <Parameter Name="prProductID" Type="int" Mode="In" />
           <Parameter Name="oAllowCommConfig" Type="bit" Mode="InOut" />
         </Function>
+        <Function Name="prc_GetPaymentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prWithdrawalId" Type="int" Mode="In" />
+        </Function>
         <Function Name="prc_GetProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
           <Parameter Name="prPageSize" Type="int" Mode="In" />
@@ -537,6 +589,10 @@
           <Parameter Name="prRegistrationId" Type="int" Mode="In" />
           <Parameter Name="prEmail" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_UpdateAgentCharges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgent" Type="varchar" Mode="In" />
+          <Parameter Name="prWithdrawalId" Type="int" Mode="In" />
+        </Function>
         <Function Name="prc_UpdateCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prAgentId" Type="int" Mode="In" />
           <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
@@ -548,6 +604,7 @@
           <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgentCharge" EntityType="Self.AgentCharge" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgentCommission" EntityType="Self.AgentCommission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementDocument" EntityType="Self.AnnouncementDocument" Schema="dbo" store:Type="Tables" />
@@ -561,6 +618,19 @@
           <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Withdrawal" EntityType="Self.Withdrawal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwWithdrawalItems" EntityType="Self.vwWithdrawalItems" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwWithdrawalItems].[WithdrawalId] AS [WithdrawalId], 
+    [vwWithdrawalItems].[ApplicationId] AS [ApplicationId], 
+    [vwWithdrawalItems].[Agent] AS [Agent], 
+    [vwWithdrawalItems].[Status] AS [Status], 
+    [vwWithdrawalItems].[WithdrawalAppId] AS [WithdrawalAppId]
+    FROM [dbo].[vwWithdrawalItems] AS [vwWithdrawalItems]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AgentCharges_Withdrawal" Association="Self.FK_AgentCharges_Withdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawal" />
+            <End Role="AgentCharge" EntitySet="AgentCharge" />
+          </AssociationSet>
           <AssociationSet Name="FK_AgentCommission_Agent" Association="Self.FK_AgentCommission_Agent">
             <End Role="Agent" EntitySet="Agent" />
             <End Role="AgentCommission" EntitySet="AgentCommission" />
@@ -803,6 +873,28 @@
           <EntitySet Name="Withdrawals" EntityType="BroadbandZoneModel.Withdrawal" />
           <FunctionImport Name="GetWithdrawalItems" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalItems_Result)">
           <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="AgentCharges" EntityType="BroadbandZoneModel.AgentCharge" />
+          <EntitySet Name="vwWithdrawalItems" EntityType="BroadbandZoneModel.vwWithdrawalItem" />
+          <AssociationSet Name="FK_AgentCharges_Withdrawal" Association="BroadbandZoneModel.FK_AgentCharges_Withdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawals" />
+            <End Role="AgentCharge" EntitySet="AgentCharges" />
+          </AssociationSet>
+          <FunctionImport Name="GetAgentCharges" ReturnType="Collection(BroadbandZoneModel.GetAgentCharges_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateAgentCharges">
+            <Parameter Name="prAgent" Mode="In" Type="String" />
+            <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetPaymentDetails" ReturnType="Collection(BroadbandZoneModel.GetPaymentDetails_Result)">
+            <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
@@ -1234,14 +1326,6 @@
           <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
         </ComplexType>
-        <ComplexType Name="GetWithdrawalToSubmit_Result">
-          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
-          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
-          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
-          <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="19" />
-        </ComplexType>
         <EntityType Name="CustomerApplication">
           <Key>
             <PropertyRef Name="ApplicationId" />
@@ -1343,14 +1427,88 @@
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AgentCharges" Relationship="BroadbandZoneModel.FK_AgentCharges_Withdrawal" FromRole="Withdrawal" ToRole="AgentCharge" />
         </EntityType>
         <ComplexType Name="GetWithdrawalItems_Result">
-          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
-          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="150" />
-          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
           <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="26" Scale="9" />
+          <Property Type="String" Name="Date" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="DeductAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="TransactionDetails" Nullable="false" MaxLength="250" />
+        </ComplexType>
+        <EntityType Name="AgentCharge">
+          <Key>
+            <PropertyRef Name="ChargeId" />
+          </Key>
+          <Property Name="ChargeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Agent" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="WithdrawalId" Type="Int32" />
+          <Property Name="Cancelled" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Withdrawal" Relationship="BroadbandZoneModel.FK_AgentCharges_Withdrawal" FromRole="AgentCharge" ToRole="Withdrawal" />
+        </EntityType>
+        <EntityType Name="vwWithdrawalItem">
+          <Key>
+            <PropertyRef Name="WithdrawalId" />
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="WithdrawalId" Type="Int32" Nullable="false" />
+          <Property Name="ApplicationId" Type="String" Nullable="false" MaxLength="800" FixedLength="false" Unicode="false" />
+          <Property Name="Agent" Type="String" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="WithdrawalAppId" Type="String" MaxLength="8000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_AgentCharges_Withdrawal">
+          <End Type="BroadbandZoneModel.Withdrawal" Role="Withdrawal" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.AgentCharge" Role="AgentCharge" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
+            </Principal>
+            <Dependent Role="AgentCharge">
+              <PropertyRef Name="WithdrawalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetAgentCharges_Result">
+          <Property Type="Int32" Name="ChargeId" Nullable="false" />
+          <Property Type="String" Name="Agent" Nullable="false" MaxLength="16" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="19" />
+          <Property Type="String" Name="Description" Nullable="false" MaxLength="250" />
+          <Property Type="Int32" Name="WithdrawalId" Nullable="true" />
+          <Property Type="Boolean" Name="Cancelled" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="50" />
+          </ComplexType>
+        <ComplexType Name="GetWithdrawalToSubmit_Result">
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="TransactionDetails" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DeductAmount" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="GetPaymentDetails_Result">
+          <Property Type="Int32" Name="AgentId" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Nric" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ReferenceNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="PaymentAmount" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="PaymentDate" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="PaymentItemsStr" Nullable="true" />
+          <Property Type="String" Name="SlipNo" Nullable="true" MaxLength="6" />
         </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1800,14 +1958,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetWithdrawalToSubmit" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalToSubmit">
-          <ResultMapping>
+            <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalToSubmit_Result">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
                 <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1867,11 +2026,72 @@
           <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalItems_Result">
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="AgentCharges">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.AgentCharge">
+              <MappingFragment StoreEntitySet="AgentCharge">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwWithdrawalItems">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.vwWithdrawalItem">
+              <MappingFragment StoreEntitySet="vwWithdrawalItems">
+                <ScalarProperty Name="WithdrawalAppId" ColumnName="WithdrawalAppId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetAgentCharges" FunctionName="BroadbandZoneModel.Store.prc_GetAgentCharges">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAgentCharges_Result">
+                <ScalarProperty Name="ChargeId" ColumnName="ChargeId" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateAgentCharges" FunctionName="BroadbandZoneModel.Store.prc_UpdateAgentCharges" />
+          <FunctionImportMapping FunctionImportName="GetPaymentDetails" FunctionName="BroadbandZoneModel.Store.prc_GetPaymentDetails">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetPaymentDetails_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
+                <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentItemsStr" ColumnName="PaymentItemsStr" />
+                <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

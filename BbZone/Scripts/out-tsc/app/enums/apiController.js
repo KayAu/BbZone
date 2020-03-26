@@ -11,6 +11,7 @@ var ApiController;
     ApiController["Registration"] = "Registration";
     ApiController["User"] = "User";
     ApiController["Agent"] = "Agent";
+    ApiController["AgentCharges"] = "AgentCharges";
     ApiController["Commission"] = "Commission";
     ApiController["Dashboard"] = "Dashboard";
     ApiController["Announcement"] = "Announcement";

@@ -26,7 +26,7 @@ var SearchWithdrawalFields = /** @class */ (function () {
                 "controlType": "select",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetWithdrwalStatus"
+                "datasourceUrl": "GetWithdrawalStatus"
             }
         },
         {

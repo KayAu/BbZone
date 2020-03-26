@@ -20,23 +20,23 @@ import { AuthenticationService } from 'src/app/services/authentication';
 })
 
 export class ViewWithdrawal extends ListEvent {
-
+    currentUser: LoginUser;
     dataRowMapper: TablerowDataMapping[] = [];
     searchFields: FormDataMapping[] = [];
     displayType = DataDisplayType;
     searchParams = new SearchWithdrawalViewParams(null, null, null, null);
-    keyField: string;
-    currentUser: LoginUser;
+    keyField: string;   
+
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private authenticationService: AuthenticationService) {
         super(loaderService, dataService, "", false);
     }
 
     ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(d => d.keyField === true).fieldName;
         this.controllerName = ApiController.WithdrawalView;
-        this.currentUser = this.authenticationService.currentUserValue;
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {
@@ -65,7 +65,7 @@ export class ViewWithdrawal extends ListEvent {
         return fieldMappings;
     }
 
-    clearFilter() {
+    clearSearchParam() {
         this.searchParams = new SearchWithdrawalViewParams(null, null, null, null);
         this.reloadData();
     }

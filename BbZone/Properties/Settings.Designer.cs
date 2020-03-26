@@ -40,5 +40,14 @@ namespace BroadbandZone_App.Properties {
                 return ((string)(this["AnnouncementFilePath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/Content/payment-voucher.css")]
+        public string PaymentVoucherCssFile {
+            get {
+                return ((string)(this["PaymentVoucherCssFile"]));
+            }
+        }
     }
 }

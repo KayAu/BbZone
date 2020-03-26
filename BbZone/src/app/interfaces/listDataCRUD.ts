@@ -54,6 +54,7 @@ export abstract class ListDataCrud extends ListEvent  {
     this.dataSource[rowIndex] = this.editedRecord;
     this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(data => {
         this.dataSource[rowIndex] = data;
+        this.dataSource[rowIndex].onEdit = false;
     });
   }
 
@@ -66,6 +67,13 @@ export abstract class ListDataCrud extends ListEvent  {
   cancelEdit(rowIndex: number) {
     this.dataSource[rowIndex].onEdit = false;
   }
+
+    clearSearchParam() {
+        for (let [key, value] of Object.entries(this.searchParams)) {
+            this.searchParams[key] = null;
+        }
+        this.reloadData();
+    }
 
   private setKeyField() {
     let field = this.fieldMapper.filter(f => f.keyField === true);

@@ -51,11 +51,11 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         return _this;
     }
     ViewWithdrawal.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
         this.controllerName = apiController_1.ApiController.WithdrawalView;
-        this.currentUser = this.authenticationService.currentUserValue;
     };
     ViewWithdrawal.prototype.getTablerowDataMapping = function () {
         var columnMappings = viewWithdrawalColumns_1.ViewWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
@@ -68,7 +68,7 @@ var ViewWithdrawal = /** @class */ (function (_super) {
             new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl.datasourceUrl)); });
         return fieldMappings;
     };
-    ViewWithdrawal.prototype.clearFilter = function () {
+    ViewWithdrawal.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
         this.reloadData();
     };

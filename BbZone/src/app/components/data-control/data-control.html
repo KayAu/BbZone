@@ -16,13 +16,13 @@
 
     <!-- TEXTAREA -->
     <textarea *ngSwitchCase="controlType.textarea" id="{{fieldId}}" name="{{fieldId}}" class="form-control" maxlength="{{field.maxLength}}" rows="5"
-              [required]="field.required" [(ngModel)]="data" (ngModelChange)="setChanges()" [readonly]="readonly" autosize></textarea>
+              [required]="field.required" [(ngModel)]="data" (ngModelChange)="setChanges()" [disabled]="disabled" autosize></textarea>
 
     <!-- DROPDOWN  -->
     <select *ngSwitchCase="field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1"
             id="{{fieldId}}" name="{{fieldId}}" class="form-control" [required]="field.required" [disabled]="disabled"
             [(ngModel)]="data" (ngModelChange)="setChanges()">
-        <option [ngValue]="" *ngIf="!onEdit">Please select</option>
+        <option [ngValue]="null" *ngIf="!onEdit">Please select</option>
         <option *ngFor="let option of dropdownItems" [ngValue]="option.key.toString()">{{option.value}}</option>
     </select>
 

@@ -19,18 +19,14 @@ namespace BroadbandZone_App
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute (
-                name: "ActivateAgent",
-                url: "{controller}/{action}/{activationCode}",
-               defaults : new { controller = "Account", action = "Activate" }
-           );
-
-
-            //routes.MapRoute(
-            //    name: "StorageLocation",
-            //    url: "storagelocation",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            //routes.MapRoute (
+            //    name: "ActivateAgent",
+            //    url: "{controller}/{action}/{activationCode}",
+            //   defaults : new { controller = "Account", action = "Activate" }
             //);
+
+      
+            
         }
     }
 }

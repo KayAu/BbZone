@@ -13,23 +13,16 @@ export class ViewWithdrawalColumns {
         {
             "fieldName": "agent",
             "headerText": "Agent",
-            "displayType": "amount",
+            "displayType": "text",
             "keyField": false,
             "colWidth": "cell-width-30"
         },
         {
             "fieldName": "amount",
-            "headerText": "Amount",
+            "headerText": "Amount Claimed (RM)",
             "displayType": "text",
             "keyField": false,
             "colWidth": "cell-width-15"
-        },
-        {
-            "fieldName": "status",
-            "headerText": "Status",
-            "displayType": "text",
-            "keyField": false,
-            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "referenceNo",
@@ -39,11 +32,18 @@ export class ViewWithdrawalColumns {
             "colWidth": "cell-width-10"
         },
         {
-            "fieldName": "createdOn",
+            "fieldName": "submittedOn",
             "headerText": "Submitted On",
             "displayType": "text",
             "keyField": false,
             "colWidth": ""
+        },
+        {
+            "fieldName": "status",
+            "headerText": "Status",
+            "displayType": "badge",
+            "keyField": false,
+            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "completedOn",

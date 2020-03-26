@@ -45,13 +45,16 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.selectedItems = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.amountToDeduct = 0;
+        _this.totalAmountToDeduct = 0;
         _this.totalSelectedAmount = 0;
         _this.totalClaimableAmount = 0;
         _this.allowSubmit = true;
         _this.oriDataSource = [];
         _this.viewSelectedItems = false;
-        _this.dataSourceSubject.asObservable().subscribe(function (data) { return _this.setSelectedItems(); });
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalAmountToDeduct = data.totalAmountToDeduct;
+            _this.setSelectedItems();
+        });
         return _this;
     }
     CreateWithdrawal.prototype.ngOnInit = function () {
@@ -74,7 +77,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
                 this.selectedItems.splice(index, 1);
         }
         this.totalSelectedAmount = this.selectedItems.map(function (d) { return d.claimAmount; }).reduce(function (a, b) { return a + b; }, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount - this.amountToDeduct;
+        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : this.totalSelectedAmount - this.totalAmountToDeduct;
         this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
     };
     CreateWithdrawal.prototype.submit = function () {

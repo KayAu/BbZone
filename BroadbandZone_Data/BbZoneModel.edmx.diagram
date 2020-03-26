@@ -30,6 +30,9 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Withdrawal" Width="1.5" PointX="6.375" PointY="4.75" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.AgentCharge" Width="1.5" PointX="8.625" PointY="5" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.vwWithdrawalItem" Width="1.5" PointX="6.375" PointY="9.75" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_AgentCharges_Withdrawal" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

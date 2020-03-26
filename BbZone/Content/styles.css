@@ -10092,6 +10092,10 @@ button.show-spinner .loading {
     filter: alpha(opacity:40) !important;
 }
 
+.font-size-18 {
+    font-size: 18px;
+}
+
 .font-size-35
 {
     font-size:35px;
@@ -10504,4 +10508,20 @@ input[type="radio"] .styled:checked + label::after {
 .amt-claimable {
     font-size: 40px;
     line-height: 40px;
+}
+
+.credit td span{
+  color:#173cbc;
+}
+
+.btn.disabled, .btn:disabled {
+    opacity: .65;
+    cursor: initial;
+}
+
+.admin-box {
+    background: #FAFAFB;
+    border: 1px solid #e7eaec;
+    border-radius: 2px;
+    padding:20px;
 }

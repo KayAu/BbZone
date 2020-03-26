@@ -28,7 +28,7 @@ var BackButton = /** @class */ (function () {
     BackButton = __decorate([
         core_1.Component({
             selector: 'back-button',
-            template: "<button type=\"button\" class=\"btn btn-default mrg10L\" (click)=\"backToPrev()\">Cancel</button>"
+            template: "<button type=\"button\" class=\"btn btn-default mrg10L\" (click)=\"backToPrev()\" >Cancel</button>"
         }),
         __metadata("design:paramtypes", [common_1.Location, router_1.Router])
     ], BackButton);

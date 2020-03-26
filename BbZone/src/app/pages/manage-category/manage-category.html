@@ -8,28 +8,23 @@
         </div>
         <div class="ibox-content">
           <div class="row">
-              <div class="col-sm-6 m-b-xs">
+              <div class="col-sm-12 m-b-xs flexbox">
                   <div class="btn-group btn-group-toggle">
-                      <label class="btn btn-sm btn-white active" for="all">
+                      <label class="btn btn-white" for="all" [ngClass]="{'active': searchParams.isActive == '' || searchParams.isActive == null }">
                           <input type="radio" id="all" name="status" [value]="" [(ngModel)]="searchParams.isActive" (ngModelChange)="reloadData()" class="hidden"> All
                       </label>
-                      <label class="btn btn-sm btn-white" for="active">
+                      <label class="btn btn-white" for="active" [ngClass]="{'active': searchParams.isActive == false }">
                           <input type="radio" id="active" name="status" [value]="true" [(ngModel)]="searchParams.isActive" (ngModelChange)="reloadData()" class="hidden"> Active
                       </label>
-                      <label class="btn btn-sm btn-white" for="inactive">
+                      <label class="btn btn-white" for="inactive" [ngClass]="{'active': searchParams.isActive == false }">
                           <input type="radio" id="inactive" name="status" [value]="false" [(ngModel)]="searchParams.isActive" (ngModelChange)="reloadData()" class="hidden"> Inactive
                       </label>
                   </div>
-              </div>
-              <div class="col-sm-6">
-                  <div class="input-group">
-                    <input placeholder="Search" type="text" class="form-control form-control-sm" [(ngModel)]="searchParams.keyword"> <span class="input-group-append">
-                      <button type="button" class="btn btn-sm btn-primary" (click)="reloadData()">
-                        Go!
-                      </button>
-                    </span>
+                  <div class="mrg10L cell-width-30">
+                      <input placeholder="Search" type="text" class="form-control form-control-sm" [(ngModel)]="searchParams.keyword" (keydown.enter)="reloadData()">
                   </div>
-               </div>
+                  <button class="btn btn-outline btn-default mrg10L" (click)="clearSearchParam()">Clear</button>
+              </div>          
           </div>
           <div class="table-responsive">
               <loading></loading>

@@ -8,6 +8,7 @@ export enum ApiController {
     Registration = "Registration",
     User = "User",
     Agent = "Agent",
+    AgentCharges = "AgentCharges",
     Commission = "Commission",
     Dashboard = "Dashboard",
     Announcement = "Announcement",

@@ -71,6 +71,8 @@ var less_than_validator_directive_1 = require("./directives/less-than-validator.
 var submission_status_count_1 = require("./components/dashboard/submission-status-count/submission-status-count");
 var create_withdrawal_1 = require("./pages/create-withdrawal/create-withdrawal");
 var edit_withdrawal_1 = require("./pages/edit-withdrawal/edit-withdrawal");
+var agent_charges_1 = require("./pages/agent-charges/agent-charges");
+var payment_voucher_1 = require("./components/payment-voucher/payment-voucher");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -123,7 +125,9 @@ var AppModule = /** @class */ (function () {
                 less_than_validator_directive_1.LessThanValidator,
                 submission_status_count_1.SubmissionStatusCount,
                 create_withdrawal_1.CreateWithdrawal,
-                edit_withdrawal_1.EditWithdrawal
+                edit_withdrawal_1.EditWithdrawal,
+                agent_charges_1.AgentChanges,
+                payment_voucher_1.PaymentVoucher
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -161,6 +165,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
+                    { path: 'agent-charges', component: agent_charges_1.AgentChanges }
                 ])
             ],
             providers: [

@@ -20,7 +20,7 @@ export class CreateWithdrawal extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     selectedItems: any[] = []; 
     displayType = DataDisplayType;
-    amountToDeduct: any = 0;
+    totalAmountToDeduct: any = 0;
     totalSelectedAmount: any = 0;
     totalClaimableAmount: any = 0;
     allowSubmit: boolean = true;
@@ -29,7 +29,10 @@ export class CreateWithdrawal extends ListEvent {
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router) {
         super(loaderService, dataService, '', false);
-        this.dataSourceSubject.asObservable().subscribe(data => this.setSelectedItems());
+        this.dataSourceSubject.asObservable().subscribe((data: any)  => {
+            this.totalAmountToDeduct = data.totalAmountToDeduct;
+            this.setSelectedItems();
+        });
     }
 
     ngOnInit() {
@@ -60,7 +63,7 @@ export class CreateWithdrawal extends ListEvent {
         }
 
         this.totalSelectedAmount = this.selectedItems.map(d => d.claimAmount).reduce((a, b) => a + b, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount - this.amountToDeduct;
+        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : this.totalSelectedAmount - this.totalAmountToDeduct;
         this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
     }
 

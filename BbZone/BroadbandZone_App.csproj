@@ -75,6 +75,15 @@
     <Reference Include="FastMember, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.1.3.0\lib\net45\FastMember.dll</HintPath>
     </Reference>
+    <Reference Include="HtmlRenderer, Version=1.5.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlRenderer.Core.1.5.0.5\lib\net45\HtmlRenderer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13.1\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.13.1, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.13.1\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -109,6 +118,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -232,18 +242,21 @@
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ChartData.cs" />
     <Compile Include="Models\NewAgentCommission.cs" />
+    <Compile Include="Models\PaymentVoucher.cs" />
     <Compile Include="Models\UploadedFile.cs" />
     <Compile Include="Models\FileExportResult.cs" />
     <Compile Include="Models\Gridview.cs" />
     <Compile Include="Models\DropdownItem.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\StatusAndKeywordParams.cs" />
+    <Compile Include="Models\WithdrawalView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="WebApi\AgentChargesController.cs" />
     <Compile Include="WebApi\AgentController.cs" />
     <Compile Include="WebApi\AnnouncementController.cs" />
     <Compile Include="WebApi\CommissionController.cs" />
@@ -251,6 +264,7 @@
     <Compile Include="WebApi\CustomerApplicationrController.cs" />
     <Compile Include="WebApi\DashboardController.cs" />
     <Compile Include="WebApi\DropdownController.cs" />
+    <Compile Include="WebApi\PaymentVoucherController.cs" />
     <Compile Include="WebApi\ProductCategoryController.cs" />
     <Compile Include="WebApi\ProductPackageController.cs" />
     <Compile Include="WebApi\ProductController.cs" />
@@ -260,6 +274,7 @@
     <Compile Include="WebApi\WithdrawalViewController.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\payment-voucher.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -296,6 +311,7 @@
     <Content Include="images\tm.png" />
     <Content Include="images\unifi.png" />
     <Content Include="images\word_map.png" />
+    <Content Include="paymentVoucher.html" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -382,6 +398,7 @@
     <Content Include="src\app\pages\edit-order\edit-order.html" />
     <Content Include="src\app\pages\home\home.html" />
     <Content Include="src\app\pages\login\login.html" />
+    <Content Include="src\app\pages\agent-charges\agent-charges.html" />
     <Content Include="src\app\pages\manage-category\manage-category.html" />
     <Content Include="src\app\pages\manage-packages\manage-packages.html" />
     <Content Include="src\app\pages\view-withdrawal\view-withdrawal.html" />
@@ -422,6 +439,7 @@
     <Content Include="Scripts\libs\vendor.js.map" />
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Account\Activate.cshtml" />
+    <Content Include="Views\Payment\Print.cshtml" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -431,7 +449,7 @@
     <Folder Include="App_Data\UploadFiles\" />
     <Folder Include="node_modules\" />
     <Folder Include="src\assets\" />
-    <Folder Include="Views\Activation\" />
+    <Folder Include="Views\PaymentV\" />
     <Folder Include="Views\User\" />
   </ItemGroup>
   <ItemGroup>
@@ -492,6 +510,7 @@
     <TypeScriptCompile Include="src\app\material.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\agentChargesColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchWithdrawalFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\viewWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\createWithdrawalColumns.ts" />
@@ -528,6 +547,7 @@
     <TypeScriptCompile Include="src\app\pages\edit-order\edit-order.ts" />
     <TypeScriptCompile Include="src\app\pages\home\home.ts" />
     <TypeScriptCompile Include="src\app\pages\login\login.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-charges\agent-charges.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-category\manage-category.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-packages\manage-packages.ts" />
     <TypeScriptCompile Include="src\app\pages\view-withdrawal\view-withdrawal.ts" />

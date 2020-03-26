@@ -42,6 +42,8 @@ namespace BroadbandZone_Data
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
         public virtual DbSet<Withdrawal> Withdrawals { get; set; }
+        public virtual DbSet<AgentCharge> AgentCharges { get; set; }
+        public virtual DbSet<vwWithdrawalItem> vwWithdrawalItems { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -528,6 +530,57 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prWithdrawalId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalItems_Result>("GetWithdrawalItems", prWithdrawalIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAgentCharges_Result> GetAgentCharges(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            var prRecordStatusParameter = prRecordStatus.HasValue ?
+                new ObjectParameter("prRecordStatus", prRecordStatus) :
+                new ObjectParameter("prRecordStatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentCharges_Result>("GetAgentCharges", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
+        }
+    
+        public virtual int UpdateAgentCharges(string prAgent, Nullable<int> prWithdrawalId)
+        {
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAgentCharges", prAgentParameter, prWithdrawalIdParameter);
+        }
+    
+        public virtual ObjectResult<GetPaymentDetails_Result> GetPaymentDetails(Nullable<int> prWithdrawalId)
+        {
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPaymentDetails_Result>("GetPaymentDetails", prWithdrawalIdParameter);
         }
     }
 }

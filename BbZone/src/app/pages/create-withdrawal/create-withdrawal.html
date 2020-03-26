@@ -23,7 +23,7 @@
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{amountToDeduct}}</span>
+                        <span class="font-size-35 mrg10R line-height-8">RM {{totalAmountToDeduct}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
@@ -89,9 +89,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let record of dataSource; let rowNo = index">
+                                <tr *ngFor="let record of dataSource; let rowNo = index" [ngClass]="{'credit': !record.applicationId}">
                                     <td>
-                                        <div class="checkbox checkbox-primary mrg0A">
+                                        <div class="checkbox checkbox-primary mrg0A" *ngIf="record.applicationId!=null">
                                             <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
                                             <label for="checkbox{{rowNo}}" class="pad0L">
                                             </label>

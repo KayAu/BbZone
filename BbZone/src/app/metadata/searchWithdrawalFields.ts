@@ -25,7 +25,7 @@ export class SearchWithdrawalFields {
                 "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetWithdrawalStatus"
-            }
+            }  
         },
         {
             "fieldName": "submittedDate",

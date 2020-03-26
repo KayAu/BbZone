@@ -14,6 +14,12 @@ namespace BroadbandZone_Data
     
     public partial class Withdrawal
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Withdrawal()
+        {
+            this.AgentCharges = new HashSet<AgentCharge>();
+        }
+    
         public int WithdrawalId { get; set; }
         public string ApplicationId { get; set; }
         public string Agent { get; set; }
@@ -27,5 +33,8 @@ namespace BroadbandZone_Data
         public string CreatedBy { get; set; }
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AgentCharge> AgentCharges { get; set; }
     }
 }

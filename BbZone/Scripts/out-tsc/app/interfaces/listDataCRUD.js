@@ -73,6 +73,7 @@ var ListDataCrud = /** @class */ (function (_super) {
         this.dataSource[rowIndex] = this.editedRecord;
         this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(function (data) {
             _this.dataSource[rowIndex] = data;
+            _this.dataSource[rowIndex].onEdit = false;
         });
     };
     ListDataCrud.prototype.deleteRow = function (rowIndex) {
@@ -83,6 +84,13 @@ var ListDataCrud = /** @class */ (function (_super) {
     };
     ListDataCrud.prototype.cancelEdit = function (rowIndex) {
         this.dataSource[rowIndex].onEdit = false;
+    };
+    ListDataCrud.prototype.clearSearchParam = function () {
+        for (var _i = 0, _a = Object.entries(this.searchParams); _i < _a.length; _i++) {
+            var _b = _a[_i], key = _b[0], value = _b[1];
+            this.searchParams[key] = null;
+        }
+        this.reloadData();
     };
     ListDataCrud.prototype.setKeyField = function () {
         var field = this.fieldMapper.filter(function (f) { return f.keyField === true; });
