@@ -15,12 +15,16 @@ BEGIN
 			@vSelectQuery NVARCHAR(MAX)
 
 	DECLARE @var_Table TABLE(
-		ApplicationId INT,
-		CustomerName VARCHAR(25),
+	    ApplicationId INT,
+		ClaimCommId INT,
+		TransactionDetails VARCHAR(250),
 		PackageName VARCHAR(150),
-		Category VARCHAR(50),
-		SubmittedOn SMALLDATETIME,
+		CreatedOn SMALLDATETIME,
+		PackageComm MONEY,
+		AgentComm SMALLINT,
 		ClaimAmount MONEY,
+		DeductAmount MONEY,
+		TransactionType VARCHAR(50),		
 		RowNum INT
 	)
 
@@ -28,50 +32,82 @@ BEGIN
 		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
 
 		-- get row from and row to based on current page
-		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
+		SELECT @vSelectQuery = dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
 		SELECT 
 			ca.ApplicationId,
-			ca.CustomerName,
+			cc.ClaimCommId,
+			ca.CustomerName AS [TransactionDetails],
 			pp.PackageName,
-			pc.Category,
 			ca.CreatedOn,
-			(pp.Commission * ac.AgentCommission) * 1.0 / 100 AS ClaimAmount
+			cc.PackageCommOnDate,
+			cc.AgentCommOnDate,
+			ClaimAmount = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
+			DeductAmount = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
+			TransactionType = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Clawback'
+								   WHEN cc.IsOverride = 1  THEN 'Override' 
+								   ELSE 'Own Sales' 
+						      END
 		INTO ##temp_Table
-		FROM CustomerApplication ca 
-		INNER JOIN Agent a ON ca.Agent = a.UserLogin
-		INNER JOIN AgentCommission ac ON ac.CategoryId = ca.CategoryId AND a.AgentId = ac.AgentId
+		FROM ClaimableCommission cc
+		INNER JOIN Agent a ON cc.AgentId = a.AgentId
+		INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
 		INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
-		INNER JOIN ProductCategory pc ON pp.CategoryId = pc.CategoryId
-		INNER JOIN ApplicationStatus s ON s.AppStatusId = ca.AppStatusId
-		LEFT JOIN vwWithdrawalItems w ON ca.ApplicationId = w.WithdrawalAppId
-		WHERE w.WithdrawalAppId IS NULL
-		AND ca.Agent = @prAgent
-		AND s.Status = 'Post Complete'
-	    AND 1 = CASE WHEN ISNULL(@prSubmittedFrom,'') = '' AND  ISNULL(@prSubmittedTo,'') = '' THEN 1
+		LEFT JOIN Clawback c ON c.ApplicationId = ca.ApplicationId
+		WHERE a.UserLogin = @prAgent
+		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN 1
+					 WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
+					 ELSE 0
+				END
+	    AND 1 = CASE WHEN ISNULL(@prSubmittedFrom,'') = '' AND ISNULL(@prSubmittedTo,'') = '' THEN 1
 					 WHEN ca.CreatedOn  BETWEEN @prSubmittedFrom AND @prSubmittedTo THEN 1
 					 ELSE 0
 				END
 	    AND 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = '' THEN 1
 					 WHEN ca.CustomerName LIKE '%' + @prSearchKeyword + '%' THEN 1
-					 WHEN CAST(ca.ApplicationId AS VARCHAR(150)) LIKE '%' + @prSearchKeyword + '%' THEN 1
+					 WHEN CAST(ca.OrderNo AS VARCHAR(150)) LIKE '%' + @prSearchKeyword + '%' THEN 1
 					 ELSE 0
 				END
 
 		PRINT @vSelectQuery
+
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table
 		EXEC SP_ExecuteSQL @vSelectQuery
 
-		SELECT ApplicationId,
-			   CustomerName,
-			   PackageName,
-			   Category,
-			   SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
-			   ClaimAmount
-		FROM  @var_Table
+		SELECT *
+		FROM
+		(
+		    -- SALES COMMISSION INCLUDING OVERRIDING
+			SELECT ClaimCommId,
+				   TransactionDetails,
+				   PackageName,
+				   [Date] = FORMAT(CreatedOn, 'MM/dd/yyyy'),
+				   PackageComm,
+				   AgentComm,
+				   ClaimAmount,
+				   DeductAmount,
+				   TransactionType
+			FROM  @var_Table
+			UNION ALL
+			-- AGENT CHARGES
+			SELECT ClaimCommId = NULL,        
+				   TransactionDetails = ac.Description, 
+				   PackageName = NULL, 
+				   [Date] = FORMAT(ac.CreatedOn, 'MM/dd/yyyy'), 
+				   PackageComm = NULL,
+				   AgentComm = NULL, 
+				   ClaimAmount = NULL, 
+				   DeductAmount = ac.Amount,
+				   TransactionType = 'Purchase'
+			FROM AgentCharge ac
+			WHERE ac.Agent = @prAgent
+			AND ISNULL(Cancelled, 0) = 0
+			AND ac.WithdrawalId IS NULL
+		) a 
+		ORDER BY [Date]
 
-		SELECT @oTotalRecord = COUNT(ApplicationId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(ClaimCommId) FROM @var_Table
 
 		DROP TABLE  ##temp_Table
 

@@ -1,6 +1,6 @@
 <div [ngSwitch]="field.controlType">
     <!-- LABEL -->
-    <label *ngSwitchCase="controlType.label">{{data}}</label>
+    <label *ngSwitchCase="controlType.label" class="font-normal">{{data}}</label>
 
     <!-- TEXT -->
     <input *ngSwitchCase="controlType.textbox" id="{{fieldId}}" name="{{fieldId}}" type="text" class="form-control" maxlength="{{field.maxLength}}"
@@ -43,7 +43,6 @@
                startKey="startDate"
                endKey="endDate" />
     </div>
-
 
 
 

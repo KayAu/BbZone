@@ -483,7 +483,8 @@ var submission_status_count_1 = __webpack_require__(/*! ./components/dashboard/s
 var create_withdrawal_1 = __webpack_require__(/*! ./pages/create-withdrawal/create-withdrawal */ "./src/app/pages/create-withdrawal/create-withdrawal.ts");
 var edit_withdrawal_1 = __webpack_require__(/*! ./pages/edit-withdrawal/edit-withdrawal */ "./src/app/pages/edit-withdrawal/edit-withdrawal.ts");
 var agent_charges_1 = __webpack_require__(/*! ./pages/agent-charges/agent-charges */ "./src/app/pages/agent-charges/agent-charges.ts");
-var payment_voucher_1 = __webpack_require__(/*! ./components/payment-voucher/payment-voucher */ "./src/app/components/payment-voucher/payment-voucher.ts");
+var customer_finder_1 = __webpack_require__(/*! ./components/customer-finder/customer-finder */ "./src/app/components/customer-finder/customer-finder.ts");
+var manage_clawback_1 = __webpack_require__(/*! ./pages/manage-clawback/manage-clawback */ "./src/app/pages/manage-clawback/manage-clawback.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -538,7 +539,8 @@ var AppModule = /** @class */ (function () {
                 create_withdrawal_1.CreateWithdrawal,
                 edit_withdrawal_1.EditWithdrawal,
                 agent_charges_1.AgentChanges,
-                payment_voucher_1.PaymentVoucher
+                customer_finder_1.CustomerFinder,
+                manage_clawback_1.ManageClawback
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -576,7 +578,8 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
-                    { path: 'agent-charges', component: agent_charges_1.AgentChanges }
+                    { path: 'agent-charges', component: agent_charges_1.AgentChanges },
+                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback }
                 ])
             ],
             providers: [
@@ -838,6 +841,171 @@ exports.BackButton = BackButton;
 
 /***/ }),
 
+/***/ "./src/app/components/customer-finder/customer-finder.html":
+/*!*****************************************************************!*\
+  !*** ./src/app/components/customer-finder/customer-finder.html ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<section class=\"filter-wrapper\">\r\n    <div class=\"input-group\">\r\n        <span *ngIf=\"disabledEdit\">{{selectedCustomer}}</span>\r\n        <input type=\"text\" class=\"form-control\" placeholder=\"Search\" maxlength=\"150\" [ngModel]=\"selectedCustomer\"\r\n               (keyup)=\"onSearchInputChanged($event.target.value)\" *ngIf=\"!disabledEdit\" #searchInput/>\r\n    </div>\r\n    <div class=\"dropdown-menu pos-init pad0A h-550 w-p100 scrollable-ver scrollable-hor-hidden\"  [ngClass]=\"{'show': loadData}\">\r\n        <div class=\"pad0A\" *ngIf=\"dropdownItems.length > 0; else noResults\">\r\n            <a class=\"dropdown-item pad15T pad10B mrg0A bb-1 flexbox\" (click)=\"onItemClicked(rowNo)\" *ngFor=\"let item of dropdownItems; let rowNo = index\">\r\n                <div class=\"media-body mrg15L\">\r\n                    <strong>{{item.customerName\r\n            }}</strong>\r\n            <div class=\"font-size-13 mrg0B mrg5T\" style=\"line-height: 1.2;\">Order No: {{item.orderNo}}</div>\r\n            <small class=\"\">Applicatiom #: {{item.applicationId}}</small>\r\n</div>\r\n            </a>\r\n        </div>\r\n        <ng-template #noResults>\r\n            <div class=\"pad15A w-450\" [ngClass]=\"{'show-spinner':startSearching}\">\r\n                {{startSearching? 'Searching ': 'No results found.'}}\r\n                <span class=\"loading\"></span>\r\n            </div>\r\n        </ng-template>\r\n    </div>\r\n</section>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/customer-finder/customer-finder.ts":
+/*!***************************************************************!*\
+  !*** ./src/app/components/customer-finder/customer-finder.ts ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var CustomerFinder = /** @class */ (function () {
+    function CustomerFinder(el, formEvent, dataService) {
+        var _this = this;
+        this.el = el;
+        this.formEvent = formEvent;
+        this.dataService = dataService;
+        this.selectedCustomer = null;
+        this.dropdownItems = [];
+        this.loadData = false;
+        this.startSearching = false;
+        this.searchFieldInput = new rxjs_1.Subject();
+        this.onItemSelected = new core_1.EventEmitter();
+        this.disabledEdit = false;
+        this.subscription = this.formEvent.notification.subscribe(function (form) {
+            _this.parentForm = form.template;
+            _this.validate();
+        });
+    }
+    CustomerFinder_1 = CustomerFinder;
+    Object.defineProperty(CustomerFinder.prototype, "displayText", {
+        set: function (data) {
+            this.selectedCustomer = data;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    CustomerFinder.prototype.ngOnInit = function () {
+        var _this = this;
+        this.searchFieldInput.asObservable().debounceTime(500).distinctUntilChanged().subscribe(function (data) {
+            _this.search(data);
+        });
+    };
+    CustomerFinder.prototype.onItemClicked = function (selectedIndex) {
+        this.selectedCustomer = this.dropdownItems[selectedIndex].customerName;
+        this.onItemSelected.emit(this.dropdownItems[selectedIndex]);
+        this.hideDropwdown();
+        this.clearErrorMessages();
+    };
+    CustomerFinder.prototype.onSearchInputChanged = function (keyword) {
+        this.searchFieldInput.next(keyword);
+        if (!keyword) {
+            this.selectedCustomer = null;
+            this.hideDropwdown();
+            this.onItemSelected.emit(null);
+        }
+    };
+    CustomerFinder.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
+        if (this.selectedCustomer === null) {
+            thisElement.next('.text-danger').remove();
+            thisElement.after('<span class= "text-danger">This is required</span>');
+            $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+        }
+        else {
+            this.clearErrorMessages();
+            this.parentForm.controls[this.fieldId].setErrors(null);
+        }
+    };
+    CustomerFinder.prototype.clearErrorMessages = function () {
+        var thisElement = $(this.el.nativeElement);
+        $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
+        thisElement.next().remove();
+    };
+    CustomerFinder.prototype.search = function (keyword) {
+        var _this = this;
+        if (!keyword)
+            return;
+        this.loadData = true;
+        this.startSearching = true;
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/Find/" + keyword).subscribe(function (data) {
+            _this.startSearching = false;
+            _this.dropdownItems = !data ? [] : data;
+        });
+    };
+    CustomerFinder.prototype.hideDropwdown = function () {
+        this.loadData = false;
+        this.dropdownItems = [];
+    };
+    CustomerFinder.prototype.writeValue = function (val) { };
+    CustomerFinder.prototype.registerOnChange = function (fn) { };
+    CustomerFinder.prototype.registerOnTouched = function () { };
+    CustomerFinder.prototype.setDisabledState = function () { };
+    var CustomerFinder_1;
+    __decorate([
+        core_1.ViewChild('searchInput'),
+        __metadata("design:type", core_1.ElementRef)
+    ], CustomerFinder.prototype, "searchInput", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], CustomerFinder.prototype, "onItemSelected", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], CustomerFinder.prototype, "disabledEdit", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], CustomerFinder.prototype, "fieldId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object),
+        __metadata("design:paramtypes", [Object])
+    ], CustomerFinder.prototype, "displayText", null);
+    CustomerFinder = CustomerFinder_1 = __decorate([
+        core_1.Component({
+            selector: 'customer-finder',
+            template: __webpack_require__(/*! ./customer-finder.html */ "./src/app/components/customer-finder/customer-finder.html"),
+            providers: [
+                {
+                    provide: forms_1.NG_VALUE_ACCESSOR,
+                    useExisting: core_1.forwardRef(function () { return CustomerFinder_1; }),
+                    multi: true
+                }
+                //,{ provide: NG_VALIDATORS, useExisting: forwardRef(() => FieldBuilder), multi: true }
+            ]
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            broadcast_service_1.BroadcastService,
+            data_service_1.DataService])
+    ], CustomerFinder);
+    return CustomerFinder;
+}());
+exports.CustomerFinder = CustomerFinder;
+
+
+/***/ }),
+
 /***/ "./src/app/components/dashboard/submission-status-count/submission-status-count.css":
 /*!******************************************************************************************!*\
   !*** ./src/app/components/dashboard/submission-status-count/submission-status-count.css ***!
@@ -994,7 +1162,7 @@ exports.TeamSubmission = TeamSubmission;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\" rows=\"5\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [disabled]=\"disabled\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\"\r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\" class=\"checkbox checkbox-primary\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n\r\n</div>\r\n\r\n"
+module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\" class=\"font-normal\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\" rows=\"5\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [disabled]=\"disabled\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\"\r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\" class=\"checkbox checkbox-primary\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1068,9 +1236,9 @@ var DataControl = /** @class */ (function () {
     };
     DataControl.prototype.setChanges = function () {
         this.propagateChange(this.data);
-        //if (this.onModelChanged.observers.length > 0) {
-        //    this.onModelChanged.emit();
-        //}
+        if (this.onModelChanged.observers.length > 0) {
+            this.onModelChanged.emit();
+        }
         if (this.field.cascadeTo) {
             this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
         }
@@ -2197,77 +2365,6 @@ exports.Pagination = Pagination;
 
 /***/ }),
 
-/***/ "./src/app/components/payment-voucher/payment-voucher.html":
-/*!*****************************************************************!*\
-  !*** ./src/app/components/payment-voucher/payment-voucher.html ***!
-  \*****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"card invoice-print-area\">\r\n    <div class=\"card-content\">\r\n        <div class=\"card-body pb-0 mx-25\">\r\n            <!-- header section -->\r\n            <div class=\"row\">\r\n                <div class=\"col-md-4\">\r\n                    <span class=\"invoice-number mr-50\">Slip#</span>\r\n                    <span>{{SlipNo}}</span>\r\n                </div>\r\n                <div class=\"col-md-8\">\r\n                    <div class=\"float-right\">                      \r\n                        <small class=\"text-muted\">Date Due:</small>\r\n                        <span>{{PaymentDate}}</span>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <!-- logo and title -->\r\n            <div class=\"row my-3\">\r\n                <div class=\"col-6\">\r\n                    <h4 class=\"text-primary\">Payment Voucher</h4>\r\n                    <span>Sales Commission</span>\r\n                </div>\r\n                <div class=\"col-6 d-flex justify-content-end\">\r\n                    <img src=\"../../../app-assets/images/pages/pixinvent-logo.png\" alt=\"logo\" height=\"46\" width=\"164\">\r\n                </div>\r\n            </div>\r\n            <hr>\r\n            <!-- invoice address and contact -->\r\n            <div class=\"row invoice-info\">\r\n                <div class=\"col-sm-6 mrg45T\">\r\n                    <label class=\"\">Pay To</label>\r\n                    <ul class=\"list-unstyled lh-7\">\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Agent Name</span>\r\n                            <span>{{Fullname}}</span>\r\n                        </li>\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Agent ID</span>\r\n                            <span>{{AgentId}}</span>\r\n                        </li>\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Nric</span>\r\n                            <span>{{Nric}}</span>\r\n                        </li>\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Bank Name</span>\r\n                            <span>{{BankName}} - {{BankAccNo}}</span>\r\n                        </li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"col-6 mrg45T\">\r\n                    <label class=\"\">Payment Info</label>\r\n                    <ul class=\"list-unstyled lh-7\">\r\n\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Payment Amount</span>\r\n                            <span>{{PaymentAmount}}</span>\r\n                        </li>\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Payment Date</span>\r\n                            <span>{{PaymentDate}}</span>\r\n                        </li>\r\n                        <li class=\"flexbox-space-between\">\r\n                            <span>Reference No</span>\r\n                            <span>{{ReferenceNo}}</span>\r\n                        </li>\r\n                        =\r\n                    </ul>\r\n                </div>\r\n            </div>\r\n            <hr>\r\n        </div>\r\n        <!-- product details table-->\r\n        <div class=\"table-responsive\">\r\n            <table class=\"table table-striped table-bordered mrg10T dataTable\">\r\n                <thead>\r\n                    <tr class=\"border-0\">\r\n                        <th>App ID</th>\r\n                        <th>Customer Name</th>\r\n                        <th>Package</th>\r\n                        <th>Category</th>\r\n                        <th>Order No</th>\r\n                        <th>Category</th>\r\n                        <th>Date</th>\r\n                        <th>Comm. Rate</th>\r\n                        <th>Amount</th>\r\n                    </tr>\r\n                </thead>\r\n                <tbody>\r\n                    {{PaymentItemsStr\r\n                                }}\r\n                                </tbody>\r\n                                </table>\r\n</div>\r\n\r\n    </div>\r\n</div>"
-
-/***/ }),
-
-/***/ "./src/app/components/payment-voucher/payment-voucher.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/components/payment-voucher/payment-voucher.ts ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
-var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
-var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
-var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
-var viewWithdrawalColumns_1 = __webpack_require__(/*! src/app/metadata/viewWithdrawalColumns */ "./src/app/metadata/viewWithdrawalColumns.ts");
-var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
-var PaymentVoucher = /** @class */ (function () {
-    function PaymentVoucher(loaderService, dataService) {
-        this.loaderService = loaderService;
-        this.dataService = dataService;
-        this.dataRowMapper = [];
-    }
-    PaymentVoucher.prototype.loadPaymentVoucher = function () {
-        var _this = this;
-        this.dataService.get(apiController_1.ApiController.WithdrawalView + "/GetPaymentVoucher", this.withdrawalId).subscribe(function (results) {
-            _this.payment = results;
-        });
-    };
-    PaymentVoucher.prototype.getTablerowDataMapping = function () {
-        var columnMappings = viewWithdrawalColumns_1.ViewWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
-        return columnMappings;
-    };
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", String)
-    ], PaymentVoucher.prototype, "withdrawalId", void 0);
-    PaymentVoucher = __decorate([
-        core_1.Component({
-            selector: 'payment-voucher',
-            template: __webpack_require__(/*! ./payment-voucher.html */ "./src/app/components/payment-voucher/payment-voucher.html")
-        }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
-    ], PaymentVoucher);
-    return PaymentVoucher;
-}());
-exports.PaymentVoucher = PaymentVoucher;
-
-
-/***/ }),
-
 /***/ "./src/app/components/product-options/product-options.css":
 /*!****************************************************************!*\
   !*** ./src/app/components/product-options/product-options.css ***!
@@ -2591,6 +2688,8 @@ var TableRowButtons = /** @class */ (function (_super) {
     function TableRowButtons() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.hideDelete = false;
+        _this.disabledEdit = false;
+        _this.disabledDelete = false;
         _this.onEdit = new core_1.EventEmitter();
         _this.onDelete = new core_1.EventEmitter();
         _this.onUpdate = new core_1.EventEmitter();
@@ -2619,6 +2718,14 @@ var TableRowButtons = /** @class */ (function (_super) {
         __metadata("design:type", Boolean)
     ], TableRowButtons.prototype, "hideDelete", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TableRowButtons.prototype, "disabledEdit", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TableRowButtons.prototype, "disabledDelete", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
     ], TableRowButtons.prototype, "onEdit", void 0);
@@ -2637,7 +2744,7 @@ var TableRowButtons = /** @class */ (function (_super) {
     TableRowButtons = __decorate([
         core_1.Component({
             selector: 'tablerow-buttons',
-            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
+            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
         })
     ], TableRowButtons);
     return TableRowButtons;
@@ -3062,6 +3169,7 @@ var ApiController;
     ApiController["Communication"] = "Communication";
     ApiController["WithdrawalView"] = "WithdrawalView";
     ApiController["WithdrawalSubmit"] = "WithdrawalSubmit";
+    ApiController["Clawback"] = "Clawback";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -3095,6 +3203,7 @@ var ControlType;
     ControlType[ControlType["dateRange"] = 7] = "dateRange";
     ControlType[ControlType["password"] = 8] = "password";
     ControlType[ControlType["number"] = 9] = "number";
+    ControlType[ControlType["customerFinder"] = 10] = "customerFinder";
 })(ControlType = exports.ControlType || (exports.ControlType = {}));
 
 
@@ -4619,6 +4728,106 @@ exports.EditAnnouncementFields = EditAnnouncementFields;
 
 /***/ }),
 
+/***/ "./src/app/metadata/clawbackColumns.ts":
+/*!*********************************************!*\
+  !*** ./src/app/metadata/clawbackColumns.ts ***!
+  \*********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ClawbackColumns = /** @class */ (function () {
+    function ClawbackColumns() {
+    }
+    ClawbackColumns.fields = [
+        {
+            "fieldName": "clawbackId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-1",
+            "dataFieldControl": {
+                "controlName": "ClawbackId",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "customerName",
+            "headerText": "Customer Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "col-width-20",
+            "dataFieldControl": {
+                "controlName": "customerName",
+                "controlType": "customerFinder",
+                "required": true,
+                "maxLength": 50
+            }
+        },
+        {
+            "fieldName": "orderNo",
+            "headerText": "OrderNo",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "orderNo",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 25
+            }
+        },
+        {
+            "fieldName": "agent",
+            "headerText": "Agent",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "agent",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 25
+            }
+        },
+        {
+            "fieldName": "remarks",
+            "headerText": "Remarks",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-45",
+            "dataFieldControl": {
+                "controlName": "remarks",
+                "controlType": "textarea",
+                "required": true,
+                "maxLength": 200
+            }
+        },
+        {
+            "fieldName": "deductedOn",
+            "headerText": "DeductedOn",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "deductedOn",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 20
+            }
+        }
+    ];
+    return ClawbackColumns;
+}());
+exports.ClawbackColumns = ClawbackColumns;
+
+
+/***/ }),
+
 /***/ "./src/app/metadata/createWithdrawalColumns.ts":
 /*!*****************************************************!*\
   !*** ./src/app/metadata/createWithdrawalColumns.ts ***!
@@ -4652,26 +4861,26 @@ var CreateWithdrawalColumns = /** @class */ (function () {
             "headerText": "Transaction Details",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-25"
+            "colWidth": "cell-width-35"
         },
         {
             "fieldName": "packageName",
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-20"
-        },
-        {
-            "fieldName": "category",
-            "headerText": "Category",
-            "displayType": "text",
-            "keyField": false,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-25"
         },
         {
             "fieldName": "date",
             "headerText": "Date",
             "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "transactionType",
+            "headerText": "Transaction Type",
+            "displayType": "badge",
             "keyField": false,
             "colWidth": "cell-width-10"
         },
@@ -5934,7 +6143,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n            <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n        </ul>\r\n      </li>\r\n      <li>\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n          </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n            <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n        </ul>\r\n      </li>\r\n      <li>\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -6951,7 +7160,7 @@ exports.CreateOrder = CreateOrder;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Submit Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalAmountToDeduct}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 pad0L mrg20B flexbox\">\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                            <input type=\"text\"\r\n                                   ngxDaterangepickerMd\r\n                                   class=\"form-control form-control-sm mrg10R \"\r\n                                   [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                   [(ngModel)]=\"searchParams.submittedDate\"\r\n                                   (ngModelChange)=\"reloadData()\"\r\n                                   placeholder=\"Submission date\"\r\n                                   startKey=\"startDate\"\r\n                                   endKey=\"endDate\" />\r\n                        </div>\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\r\n                            <input placeholder=\"Application Id or Customer Name\" type=\"text\" class=\"form-control form-control-sm\"\r\n                                   (keydown.enter)=\"reloadData()\" [(ngModel)]=\"searchParams.keyword\">\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-outline btn-default\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div class=\"col-md-12 pad0L mrg25B mrg20T\" *ngIf=\"selectedItems.length > 0\">\r\n                            <div class=\"display-table\">\r\n                                <div class=\"display-cell\">\r\n                                    <span>Selected records count: {{selectedItems.length}}</span>\r\n                                </div>\r\n                                <div class=\"display-cell pad25L\">\r\n                                    <button type=\"button\" class=\"btn btn-default mrg10R\" (click)=\"showSelectedItems()\">\r\n                                        {{viewSelectedItems? 'Hide': 'View'}} Selection\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner disabled':isUpdating }\"\r\n                                            [disabled]=\"!allowSubmit || isUpdating\" (click)=\"submit()\">\r\n                                        {{isUpdating ? 'Submitting' : 'Submit'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <table class=\"table table-striped mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th></th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\" [ngClass]=\"{'credit': !record.applicationId}\">\r\n                                    <td>\r\n                                        <div class=\"checkbox checkbox-primary mrg0A\" *ngIf=\"record.applicationId!=null\">\r\n                                            <input id=\"checkbox{{rowNo}}\" type=\"checkbox\" [(ngModel)]=\"record.selected\" (ngModelChange)=\"itemSelected(record)\">\r\n                                            <label for=\"checkbox{{rowNo}}\" class=\"pad0L\">\r\n                                            </label>\r\n                                        </div>\r\n                                    </td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Submit Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount | number:'1.2-2'}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 pad0L mrg20B flexbox\">\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                            <input type=\"text\"\r\n                                   ngxDaterangepickerMd\r\n                                   class=\"form-control form-control-sm mrg10R \"\r\n                                   [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                   [(ngModel)]=\"searchParams.submittedDate\"\r\n                                   (ngModelChange)=\"reloadData()\"\r\n                                   placeholder=\"Submission date\"\r\n                                   startKey=\"startDate\"\r\n                                   endKey=\"endDate\" />\r\n                        </div>\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\r\n                            <input placeholder=\"Application Id or Customer Name\" type=\"text\" class=\"form-control form-control-sm\"\r\n                                   (keydown.enter)=\"reloadData()\" [(ngModel)]=\"searchParams.keyword\">\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-outline btn-default\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div class=\"col-md-12 pad0L mrg25B mrg20T\" *ngIf=\"selectedItems.length > 0\">\r\n                            <div class=\"display-table\">\r\n                                <div class=\"display-cell\">\r\n                                    <span>Selected records count: {{selectedItems.length}}</span>\r\n                                </div>\r\n                                <div class=\"display-cell pad25L\">\r\n                                    <button type=\"button\" class=\"btn btn-default mrg10R\" (click)=\"showSelectedItems()\">\r\n                                        {{viewSelectedItems? 'Hide': 'View'}} Selection\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner disabled':isUpdating }\"\r\n                                            [disabled]=\"!allowSubmit || isUpdating\" (click)=\"submit()\">\r\n                                        {{isUpdating ? 'Submitting' : 'Submit'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <table class=\"table table-striped mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th></th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\" >\r\n                                    <td>\r\n                                        <div class=\"checkbox checkbox-primary mrg0A\" *ngIf=\"record.claimCommId!=null\">\r\n                                            <input id=\"checkbox{{rowNo}}\" type=\"checkbox\" [(ngModel)]=\"record.selected\" (ngModelChange)=\"itemSelected(record)\">\r\n                                            <label for=\"checkbox{{rowNo}}\" class=\"pad0L\">\r\n                                            </label>\r\n                                        </div>\r\n                                    </td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            <ng-template #displayBadge>\r\n                                                <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                      [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                  'badge-warning': record.transactionType == 'Purchase',\r\n                                                                  'badge-success': record.transactionType == 'Own Sales',\r\n                                                                  'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                    {{record.transactionType}}\r\n                                                </span>\r\n                                                <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                            </ng-template>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -7037,7 +7246,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
                 this.selectedItems.push(item);
         }
         else {
-            var index = this.selectedItems.findIndex(function (p) { return p.applicationId === item.applicationId; });
+            var index = this.selectedItems.findIndex(function (p) { return p.claimCommId === item.claimCommId; });
             if (index >= 0)
                 this.selectedItems.splice(index, 1);
         }
@@ -7048,7 +7257,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     CreateWithdrawal.prototype.submit = function () {
         var _this = this;
         var newRecord = {
-            applicationId: this.selectedItems.map(function (d) { return d.applicationId; }).join('|'),
+            ClaimCommItemsId: this.selectedItems.map(function (d) { return d.claimCommId; }).join('|'),
             amount: this.totalClaimableAmount
         };
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
@@ -7059,7 +7268,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     CreateWithdrawal.prototype.setSelectedItems = function () {
         var _this = this;
         this.dataSource.forEach(function (selectedItem, i, self) {
-            if (_this.selectedItems.find(function (p) { return p.applicationId === selectedItem.applicationId; })) {
+            if (_this.selectedItems.find(function (p) { return p.claimCommId === selectedItem.claimCommId; })) {
                 self[i].selected = true;
             }
         });
@@ -7323,7 +7532,7 @@ exports.EditOrder = EditOrder;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    \r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{formRecord.totalSelectedAmount}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{formRecord.totalAmountToDeduct}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold text-success\">RM {{formRecord.amount}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Withdrawal: ID-{{formRecord.withdrawalId}}</h5>\r\n                    <span class=\"mrg15L badge\" [ngClass]=\"{'badge-danger': formRecord.status == 'Terminated',\r\n                              'badge-primary': formRecord.status == 'Completed',\r\n                              'badge-warning': formRecord.status == 'OnHold',\r\n                              'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}\">\r\n                        {{formRecord.status}}\r\n                    </span>\r\n                    <div class=\"ibox-tools\">\r\n                        <a class=\"font-size-18\" href=\"/api/PaymentVoucher/Print/{{formRecord.recordId}}\" *ngIf=\"formRecord.status == 'Completed'\">\r\n                            <i class=\"fa fa-print\"></i>\r\n                        </a>\r\n                    </div>\r\n                </div>\r\n                <loading></loading>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <label>Claimed Commission(s)</label>\r\n                        <table class=\"table table-bordered mrg10T dataTable\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th class=\"cell-width-3\">#</th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of formRecord.withdrawalItems; let rowNo = index\">\r\n                                    <td>{{rowNo+1}}</td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n\r\n        \r\n                    <div class=\"hr-line-dashed\"></div>\r\n                    <label>Admin Input</label>\r\n                    <div class=\"admin-box\">\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Reference. No</label>\r\n                            <input name=\"referenceNo\" type=\"text\" class=\"form-control\" maxlength=\"25\" [(ngModel)]=\"formRecord.referenceNo\" [disabled]=\"!formRecord.allowEdit\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Remarks</label>\r\n                            <textarea name=\"remarks\" class=\"form-control\" maxlength=\"250\" rows=\"8\" [(ngModel)]=\"formRecord.remarks\" [disabled]=\"!formRecord.allowEdit\" ></textarea>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Withdrawal Status</label>\r\n                            <select name=\"status\" class=\"form-control\" [(ngModel)]=\"formRecord.status\" [disabled]=\"!formRecord.allowEdit\">\r\n                                <option [ngValue]=\"null\">Please select</option>\r\n                                <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                 \r\n                    <div class=\"hr-line-dashed\"></div>\r\n                    <!--SAVE OR CANCEL-->\r\n                    <div class=\"form-group row\">\r\n                        <div class=\"text-right pad20R\">\r\n                            <button type=\"button\" class=\"btn btn-primary\" (click)=\"update()\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                    [disabled]=\"isUpdating\" *ngIf=\"currentUser.isAdmin && formRecord.allowEdit\">\r\n                                {{isUpdating ? 'Updating' : 'Update'}}\r\n                                <span class=\"loading\"></span>\r\n                            </button>\r\n                            <button type=\"button\" class=\"btn btn-primary\" (click)=\"cancel()\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                    [disabled]=\"isUpdating\" *ngIf=\"!currentUser.isAdmin && formRecord.allowTerminate\">\r\n                                {{isUpdating ? 'Terminating' : 'Terminate Submission'}}\r\n                                <span class=\"loading\"></span>\r\n                            </button>\r\n                            <back-button></back-button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    \r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{formRecord.totalSelectedAmount | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{formRecord.totalAmountToDeduct | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold text-success\">RM {{formRecord.amount | number:'1.2-2'}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Withdrawal: ID-{{formRecord.withdrawalId}}</h5>\r\n                    <span class=\"mrg15L badge\" [ngClass]=\"{'badge-danger': formRecord.status == 'Terminated',\r\n                              'badge-primary': formRecord.status == 'Completed',\r\n                              'badge-warning': formRecord.status == 'OnHold',\r\n                              'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}\">\r\n                        {{formRecord.status}}\r\n                    </span>\r\n                    <div class=\"ibox-tools\">\r\n                        <a class=\"font-size-18\" href=\"/api/PaymentVoucher/Print/{{recordId}}\" *ngIf=\"formRecord.status == 'Completed'\">\r\n                            <i class=\"fa fa-print\"></i>\r\n                        </a>\r\n                    </div>\r\n                </div>\r\n                <loading></loading>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <label>Claimed Commission(s)</label>\r\n                        <table class=\"table table-bordered mrg10T dataTable\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th class=\"cell-width-3\">#</th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of formRecord.withdrawalItems; let rowNo = index\">\r\n                                    <td>{{rowNo+1}}</td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\"  [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            <ng-template #displayBadge>\r\n                                                <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                      [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                  'badge-warning': record.transactionType == 'Purchase',\r\n                                                                  'badge-success': record.transactionType == 'Own Sales',\r\n                                                                  'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                    {{record.transactionType}}\r\n                                                </span>\r\n                                                <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                            </ng-template>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                    </div>\r\n\r\n        \r\n                    <div class=\"hr-line-dashed\"></div>\r\n                    <label>Admin Input</label>\r\n                    <div class=\"admin-box\">\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Reference. No</label>\r\n                            <input name=\"referenceNo\" type=\"text\" class=\"form-control\" maxlength=\"25\" [(ngModel)]=\"formRecord.referenceNo\" [disabled]=\"!formRecord.allowEdit\">\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Remarks</label>\r\n                            <textarea name=\"remarks\" class=\"form-control\" maxlength=\"250\" rows=\"8\" [(ngModel)]=\"formRecord.remarks\" [disabled]=\"!formRecord.allowEdit\" ></textarea>\r\n                        </div>\r\n                        <div class=\"form-group\">\r\n                            <label class=\"font-normal\">Withdrawal Status</label>\r\n                            <select name=\"status\" class=\"form-control\" *ngIf=\"currentUser.isAdmin\" [(ngModel)]=\"formRecord.status\" [disabled]=\"!formRecord.allowEdit\">\r\n                                <option [ngValue]=\"null\">Please select</option>\r\n                                <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n                            </select>\r\n                        </div>\r\n                    </div>\r\n                 \r\n                    <div class=\"hr-line-dashed\"></div>\r\n                    <!--SAVE OR CANCEL-->\r\n                    <div class=\"form-group row\">\r\n                        <div class=\"text-right pad20R\">\r\n                            <button type=\"button\" class=\"btn btn-primary\" (click)=\"update()\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                    [disabled]=\"isUpdating\" *ngIf=\"currentUser.isAdmin && formRecord.allowEdit\">\r\n                                {{isUpdating ? 'Updating' : 'Update'}}\r\n                                <span class=\"loading\"></span>\r\n                            </button>\r\n                            <button type=\"button\" class=\"btn btn-primary\" (click)=\"cancel()\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                    [disabled]=\"isUpdating\" *ngIf=\"!currentUser.isAdmin && formRecord.allowTerminate\">\r\n                                {{isUpdating ? 'Terminating' : 'Terminate Submission'}}\r\n                                <span class=\"loading\"></span>\r\n                            </button>\r\n                            <back-button></back-button>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -7369,6 +7578,7 @@ var EditWithdrawal = /** @class */ (function () {
         this.formRecord = {};
         this.isUpdating = false;
         this.allowEdit = true;
+        this.displayType = dataDisplayType_1.DataDisplayType;
         this.currentUser = this.authenticationService.currentUserValue;
     }
     EditWithdrawal.prototype.ngOnInit = function () {
@@ -7643,6 +7853,122 @@ var ManageCategory = /** @class */ (function (_super) {
     return ManageCategory;
 }(ListDataCrud_1.ListDataCrud));
 exports.ManageCategory = ManageCategory;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/manage-clawback/manage-clawback.html":
+/*!************************************************************!*\
+  !*** ./src/app/pages/manage-clawback/manage-clawback.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Manage Agent Charges'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Manage Agent Charges</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12 m-b-xs flexbox\">\r\n                            <div class=\"mrg10L cell-width-20\">\r\n                                <input placeholder=\"Search by customer name, agent name or order no\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                            </div>\r\n                            <button class=\"btn btn-outline btn-default mrg10L\" (click)=\"clearSearchParam()\">Clear</button>\r\n                        </div>\r\n                        <loading></loading>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <loading></loading>\r\n                        <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                        <form #tableForm=\"ngForm\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                        <td *ngFor=\"let field of dataRowMapper\">\r\n                                            <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                          [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                            <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                             (onItemSelected)=\"setNewCustomerDetails($event)\"></customer-finder>\r\n                                        </td>\r\n                                        <td>\r\n                                            <button class=\"btn btn-primary btn-sm\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                            <button type=\"button\" class=\"btn btn-sm btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                <i class=\"fa fa-times\"></i>\r\n                                            </button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td *ngIf=\"!record.onEdit\">\r\n                                                <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            </td>\r\n                                            <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                [displayText]=\"editedRecord[field.dataFieldControl.controlName]\" [disabledEdit]=\"true\"  (onItemSelected)=\"setEditCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                        <td>\r\n                                            <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\" [disabledEdit]=\"!record.editable\" [disabledDelete]=\"!record.editable\"></tablerow-buttons>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </form>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/manage-clawback/manage-clawback.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/manage-clawback/manage-clawback.ts ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var clawbackColumns_1 = __webpack_require__(/*! ../../metadata/clawbackColumns */ "./src/app/metadata/clawbackColumns.ts");
+var tablerow_data_mapping_1 = __webpack_require__(/*! ../../model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var dataDisplayType_1 = __webpack_require__(/*! ../../enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var ListDataCrud_1 = __webpack_require__(/*! ../../interfaces/ListDataCrud */ "./src/app/interfaces/ListDataCrud.ts");
+var data_field_control_1 = __webpack_require__(/*! ../../model/data.field.control */ "./src/app/model/data.field.control.ts");
+var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var search_params_1 = __webpack_require__(/*! ../../model/search-params */ "./src/app/model/search-params.ts");
+var ManageClawback = /** @class */ (function (_super) {
+    __extends(ManageClawback, _super);
+    function ManageClawback(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, 'clawbackId', formEvent) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.controlType = dataDisplayType_1.ControlType;
+        return _this;
+    }
+    ManageClawback.prototype.ngOnInit = function () {
+        this.formName = "tableForm";
+        this.controllerName = apiController_1.ApiController.Clawback;
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.initDataRecord(this.dataRowMapper);
+    };
+    ManageClawback.prototype.getTablerowDataMapping = function () {
+        var columnMappings = clawbackColumns_1.ClawbackColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
+        return columnMappings;
+    };
+    ManageClawback.prototype.setNewCustomerDetails = function (data) {
+        if (data) {
+            this.newRecord['applicationId'] = data.applicationId;
+            this.newRecord['orderNo'] = data.orderNo;
+            this.newRecord['agent'] = data.agent;
+        }
+        else {
+            this.newRecord['applicationId'] = '';
+            this.newRecord['orderNo'] = '';
+            this.newRecord['agent'] = '';
+        }
+    };
+    ManageClawback.prototype.setEditCustomerDetails = function (data) {
+        if (data) {
+            this.editedRecord['applicationId'] = data.applicationId;
+            this.editedRecord['orderNo'] = data.orderNo;
+            this.editedRecord['agent'] = data.agent;
+        }
+        else {
+            this.editedRecord['applicationId'] = '';
+            this.editedRecord['orderNo'] = '';
+            this.editedRecord['agent'] = '';
+        }
+    };
+    ManageClawback = __decorate([
+        core_1.Component({
+            selector: 'manage-clawback',
+            template: __webpack_require__(/*! ./manage-clawback.html */ "./src/app/pages/manage-clawback/manage-clawback.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], ManageClawback);
+    return ManageClawback;
+}(ListDataCrud_1.ListDataCrud));
+exports.ManageClawback = ManageClawback;
 
 
 /***/ }),

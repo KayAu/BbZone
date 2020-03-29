@@ -82,14 +82,16 @@ export class DataControl implements ControlValueAccessor {
 
     setChanges() {
         this.propagateChange(this.data);
-        //if (this.onModelChanged.observers.length > 0) {
-        //    this.onModelChanged.emit();
-        //}
+
+        if (this.onModelChanged.observers.length > 0) {
+            this.onModelChanged.emit();
+        }
 
         if (this.field.cascadeTo) {
             this.cascadeEvent.subject.next(new CascadeData(this.field.cascadeTo, this.data));
         }
     }
+
 
     private loadOptions() {
         if (!this.field.datasourceUrl) return;

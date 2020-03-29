@@ -4,11 +4,11 @@ import { DataRowAction } from "../../interfaces/dataRowAction";
 @Component({
   selector: 'tablerow-buttons',
   template: `<div *ngIf="!editMode; else editActions">
-              <button type="button" class="btn btn-success mrg5R" (click)="editRow()" [ngClass]="{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }">
+              <button type="button" class="btn btn-success mrg5R" (click)="editRow()" [ngClass]="{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }" [disabled]="disabledEdit">
                 <i class="fa fa-edit"></i>
                  <span *ngIf="hideDelete">Edit</span>
               </button>
-              <button type="button" class="btn btn-xs btn-info" (click)="deleteRow()" *ngIf="!hideDelete">
+              <button type="button" class="btn btn-xs btn-info" (click)="deleteRow()" *ngIf="!hideDelete" [disabled]="disabledDelete">
                 <i class="fa fa-trash"></i>
               </button>
             </div>
@@ -23,29 +23,30 @@ import { DataRowAction } from "../../interfaces/dataRowAction";
 })
 
 export class TableRowButtons extends DataRowAction {
-  @Input() editMode: boolean;
-  @Input() hideDelete: boolean = false;
- 
-  @Output() onEdit = new EventEmitter();
-  @Output() onDelete = new EventEmitter();
-  @Output() onUpdate = new EventEmitter();
-  @Output() onCancelEdit = new EventEmitter();
+    @Input() editMode: boolean;
+    @Input() hideDelete: boolean = false;
+    @Input() disabledEdit: boolean = false;
+    @Input() disabledDelete: boolean = false;
+    @Output() onEdit = new EventEmitter();
+    @Output() onDelete = new EventEmitter();
+    @Output() onUpdate = new EventEmitter();
+    @Output() onCancelEdit = new EventEmitter();
 
-  editRow() {
-    this.onEdit.emit();
-  }
+    editRow() {
+        this.onEdit.emit();
+    }
 
-  updateRow() {
-    this.onUpdate.emit();
-  }
+    updateRow() {
+        this.onUpdate.emit();
+    }
 
-  deleteRow() {
-    this.onDelete.emit();
-  }
+    deleteRow() {
+        this.onDelete.emit();
+    }
 
-  cancelEdit() {
-    this.onCancelEdit.emit();
-  }
+    cancelEdit() {
+        this.onCancelEdit.emit();
+    }
 
-  addRow() { }
+    addRow() { }
 }

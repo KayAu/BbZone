@@ -59,11 +59,15 @@ namespace BroadbandZone_App.WebApi
             {
                 using (var db = new BroadbandZoneEntities())
                 {
+                    // Create Withdrawal transaction
                     newRecord.Agent = currentUser.Username;
                     newRecord.Status = WithdrawalStatus.Pending.ToString();
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
                     db.Withdrawals.Add(newRecord);
                     db.SaveChanges();
+
+                    // Update claim able commission with the new Withdrawal transaction id
+                    db.UpdateClaimableCommission(newRecord.WithdrawalId, newRecord.ClaimCommItemsId);
 
                     // update agent charges with the newly submitted withdrawal Id
                     db.UpdateAgentCharges(currentUser.Username, newRecord.WithdrawalId);

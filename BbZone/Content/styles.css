@@ -9527,6 +9527,9 @@ body.md-skin {
   overflow-x: auto;
 }
 
+.scrollable-hor-hidden {
+  overflow-x: hidden;
+}
 .dropdown-item:hover {
   background-color: #f9fafb;
 }
@@ -10525,3 +10528,61 @@ input[type="radio"] .styled:checked + label::after {
     border-radius: 2px;
     padding:20px;
 }
+
+.filter-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+.pos-init {
+    top: initial !important;
+    left: initial !important;
+    right: initial !important;
+    bottom: initial !important;
+}
+
+.bb-1 {
+    border-bottom: 1px solid #ebebeb !important;
+}
+
+.show-spinner {
+    cursor: not-allowed;
+    pointer-events: none !important;
+}
+
+.loading {
+    display: none;
+}
+
+.show-spinner .loading {
+    display: inline-block;
+    overflow: hidden;
+    height: 1.3em;
+    margin-top: -0.3em;
+    line-height: 1.5em;
+    vertical-align: text-bottom;
+}
+
+    .show-spinner .loading::after {
+        content: "\A.\A..\A...\A....\A.....";
+        animation: spin6 2s steps(6) infinite;
+        display: inline-table;
+        white-space: pre;
+        text-align: left;
+    }
+
+@keyframes spin6 {
+    to {
+        transform: translateY( -9.0em);
+    }
+}
+
+.table-bordered > thead > tr.new-row td, .edit-row {
+    background-color: #fdfdfd !important;
+}
+
+    .new-row td:first-child,
+    .edit-row:first-child {
+        border-left: 3px solid #1c84c6 !important;
+    }

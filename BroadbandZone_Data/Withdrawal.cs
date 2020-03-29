@@ -21,7 +21,7 @@ namespace BroadbandZone_Data
         }
     
         public int WithdrawalId { get; set; }
-        public string ApplicationId { get; set; }
+        public string ClaimCommItemsId { get; set; }
         public string Agent { get; set; }
         public Nullable<decimal> Amount { get; set; }
         public string ReferenceNo { get; set; }

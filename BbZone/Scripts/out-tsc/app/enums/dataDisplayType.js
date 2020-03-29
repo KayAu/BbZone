@@ -18,5 +18,6 @@ var ControlType;
     ControlType[ControlType["dateRange"] = 7] = "dateRange";
     ControlType[ControlType["password"] = 8] = "password";
     ControlType[ControlType["number"] = 9] = "number";
+    ControlType[ControlType["customerFinder"] = 10] = "customerFinder";
 })(ControlType = exports.ControlType || (exports.ControlType = {}));
 //# sourceMappingURL=dataDisplayType.js.map

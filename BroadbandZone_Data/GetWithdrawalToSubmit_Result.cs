@@ -13,12 +13,14 @@ namespace BroadbandZone_Data
     
     public partial class GetWithdrawalToSubmit_Result
     {
-        public Nullable<int> ApplicationId { get; set; }
         public string TransactionDetails { get; set; }
         public string PackageName { get; set; }
-        public string Category { get; set; }
         public Nullable<decimal> ClaimAmount { get; set; }
         public Nullable<decimal> DeductAmount { get; set; }
-        public Nullable<System.DateTime> Date { get; set; }
+        public string Date { get; set; }
+        public Nullable<int> ClaimCommId { get; set; }
+        public Nullable<decimal> PackageComm { get; set; }
+        public Nullable<short> AgentComm { get; set; }
+        public string TransactionType { get; set; }
     }
 }

@@ -11,7 +11,7 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.Agent" Width="1.5" PointX="4.25" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCommission" Width="1.5" PointX="2.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Announcement" Width="1.5" PointX="6" PointY="0.5" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="2.125" PointY="11.125" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="0.5" PointY="11.125" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Communication" Width="1.5" PointX="4.25" PointY="8.625" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Product" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.25" />
@@ -29,11 +29,14 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_Communication_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.Withdrawal" Width="1.5" PointX="6.375" PointY="4.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCharge" Width="1.5" PointX="8.625" PointY="5" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.vwWithdrawalItem" Width="1.5" PointX="6.375" PointY="9.75" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Withdrawal" Width="1.5" PointX="6.625" PointY="5" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AgentCharges_Withdrawal" />
-      </Diagram>
+        <EntityTypeShape EntityType="BroadbandZoneModel.ClaimableCommission" Width="1.5" PointX="4.625" PointY="12.625" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Clawback" Width="1.5" PointX="4.625" PointY="16.75" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Clawback_CustomerApplication" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

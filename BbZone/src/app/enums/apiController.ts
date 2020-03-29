@@ -15,4 +15,5 @@ export enum ApiController {
     Communication = "Communication",
     WithdrawalView = "WithdrawalView",
     WithdrawalSubmit = "WithdrawalSubmit",
+    Clawback = "Clawback"
 }

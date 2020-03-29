@@ -23,26 +23,26 @@ var CreateWithdrawalColumns = /** @class */ (function () {
             "headerText": "Transaction Details",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-25"
+            "colWidth": "cell-width-35"
         },
         {
             "fieldName": "packageName",
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-20"
-        },
-        {
-            "fieldName": "category",
-            "headerText": "Category",
-            "displayType": "text",
-            "keyField": false,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-25"
         },
         {
             "fieldName": "date",
             "headerText": "Date",
             "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "transactionType",
+            "headerText": "Transaction Type",
+            "displayType": "badge",
             "keyField": false,
             "colWidth": "cell-width-10"
         },

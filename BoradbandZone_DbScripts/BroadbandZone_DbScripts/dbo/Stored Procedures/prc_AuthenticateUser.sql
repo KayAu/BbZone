@@ -45,7 +45,7 @@ BEGIN
 					'Agent',
 					CAST(1 AS BIT),
 					@prImpersonate,
-					CAST(1 AS BIT),
+					CAST(0 AS BIT),
 					AgentId
 			FROM Agent
 			WHERE @prLogin = UserLogin 

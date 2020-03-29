@@ -19,6 +19,25 @@ namespace BroadbandZone_App.WebApi
 {
     public class CustomerApplicationController : ApiController
     {
+        [HttpGet]
+        [Route("api/CustomerApplication/Find/{keyword}")]
+        public IHttpActionResult Find(string keyword)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    var results = db.FindCustomerApplication(keyword).ToList();
+                    return Ok(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.NotImplemented, ex.Message);
+            }
+        }
+
         // GET: api/<controller>
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
@@ -118,6 +137,7 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
@@ -132,11 +152,14 @@ namespace BroadbandZone_App.WebApi
                     editedRecord.SetDateAndAuthor(currentUser.Fullname,"ModifiedBy", "ModifiedOn");
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    // Update agent current commission if the application is completed
+                    db.UpdateCompletedAppCommission(id, currentUser.AgentId, currentUser.Fullname);
                 }
 
                 // save uploaded file details to database
                 SaveUploadedFilePath(result.FileData, id);
-
+             
                 return Ok();
             }
             catch (Exception ex)

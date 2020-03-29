@@ -117,6 +117,18 @@
     <Build Include="dbo\Stored Procedures\prc_GetWithdrawalItems.sql" />
     <Build Include="dbo\Stored Procedures\prc_DboardSubmissionStatusCount.sql" />
     <Build Include="dbo\User Defined Types\udt_AgentHierarchy.sql" />
+    <Build Include="dbo\Tables\Clawback.sql" />
+    <Build Include="dbo\Tables\ClaimableCommission.sql" />
+    <Build Include="dbo\Tables\AgentCharge.sql" />
+    <Build Include="dbo\Functions\fnGetMySuperiors.sql" />
+    <Build Include="dbo\Functions\fnGetMyEarningHierarchy.sql" />
+    <Build Include="dbo\Stored Procedures\prc_UpdateCompletedAppCommission.sql" />
+    <Build Include="dbo\Stored Procedures\prc_UpdateAgentCharges.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetPaymentDetails.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetClawback.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetAgentCharges.sql" />
+    <Build Include="dbo\Stored Procedures\prc_FindCustomerApplication.sql" />
+    <Build Include="dbo\Stored Procedures\prc_UpdateClaimableCommission.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />

@@ -72,7 +72,8 @@ var submission_status_count_1 = require("./components/dashboard/submission-statu
 var create_withdrawal_1 = require("./pages/create-withdrawal/create-withdrawal");
 var edit_withdrawal_1 = require("./pages/edit-withdrawal/edit-withdrawal");
 var agent_charges_1 = require("./pages/agent-charges/agent-charges");
-var payment_voucher_1 = require("./components/payment-voucher/payment-voucher");
+var customer_finder_1 = require("./components/customer-finder/customer-finder");
+var manage_clawback_1 = require("./pages/manage-clawback/manage-clawback");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -127,7 +128,8 @@ var AppModule = /** @class */ (function () {
                 create_withdrawal_1.CreateWithdrawal,
                 edit_withdrawal_1.EditWithdrawal,
                 agent_charges_1.AgentChanges,
-                payment_voucher_1.PaymentVoucher
+                customer_finder_1.CustomerFinder,
+                manage_clawback_1.ManageClawback
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -165,7 +167,8 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
-                    { path: 'agent-charges', component: agent_charges_1.AgentChanges }
+                    { path: 'agent-charges', component: agent_charges_1.AgentChanges },
+                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback }
                 ])
             ],
             providers: [

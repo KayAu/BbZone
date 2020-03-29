@@ -18,5 +18,6 @@ var ApiController;
     ApiController["Communication"] = "Communication";
     ApiController["WithdrawalView"] = "WithdrawalView";
     ApiController["WithdrawalSubmit"] = "WithdrawalSubmit";
+    ApiController["Clawback"] = "Clawback";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map

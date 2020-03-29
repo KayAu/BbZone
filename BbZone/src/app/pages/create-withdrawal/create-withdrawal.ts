@@ -57,7 +57,7 @@ export class CreateWithdrawal extends ListEvent {
                 this.selectedItems.push(item);
         }
         else {
-            let index = this.selectedItems.findIndex(p => p.applicationId === item.applicationId);
+            let index = this.selectedItems.findIndex(p => p.claimCommId === item.claimCommId);
             if (index >= 0)
                 this.selectedItems.splice(index, 1);
         }
@@ -69,7 +69,7 @@ export class CreateWithdrawal extends ListEvent {
 
     submit() {
         let newRecord = {
-            applicationId: this.selectedItems.map(d => d.applicationId).join('|'),
+            ClaimCommItemsId : this.selectedItems.map(d => d.claimCommId).join('|'),
             amount: this.totalClaimableAmount
         }
 
@@ -81,7 +81,7 @@ export class CreateWithdrawal extends ListEvent {
 
     setSelectedItems() {
         this.dataSource.forEach((selectedItem, i, self) => {
-            if (this.selectedItems.find(p => p.applicationId === selectedItem.applicationId)) {
+            if (this.selectedItems.find(p => p.claimCommId === selectedItem.claimCommId)) {
                 self[i].selected = true;
             }
         });

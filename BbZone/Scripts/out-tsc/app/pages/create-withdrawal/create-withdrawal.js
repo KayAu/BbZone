@@ -72,7 +72,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
                 this.selectedItems.push(item);
         }
         else {
-            var index = this.selectedItems.findIndex(function (p) { return p.applicationId === item.applicationId; });
+            var index = this.selectedItems.findIndex(function (p) { return p.claimCommId === item.claimCommId; });
             if (index >= 0)
                 this.selectedItems.splice(index, 1);
         }
@@ -83,7 +83,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     CreateWithdrawal.prototype.submit = function () {
         var _this = this;
         var newRecord = {
-            applicationId: this.selectedItems.map(function (d) { return d.applicationId; }).join('|'),
+            ClaimCommItemsId: this.selectedItems.map(function (d) { return d.claimCommId; }).join('|'),
             amount: this.totalClaimableAmount
         };
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
@@ -94,7 +94,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     CreateWithdrawal.prototype.setSelectedItems = function () {
         var _this = this;
         this.dataSource.forEach(function (selectedItem, i, self) {
-            if (_this.selectedItems.find(function (p) { return p.applicationId === selectedItem.applicationId; })) {
+            if (_this.selectedItems.find(function (p) { return p.claimCommId === selectedItem.claimCommId; })) {
                 self[i].selected = true;
             }
         });

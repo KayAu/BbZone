@@ -14,5 +14,6 @@ export enum ControlType {
     cascadeDropdown,
     dateRange,
     password,
-    number
+    number,
+    customerFinder
 }

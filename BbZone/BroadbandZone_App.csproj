@@ -259,6 +259,7 @@
     <Compile Include="WebApi\AgentChargesController.cs" />
     <Compile Include="WebApi\AgentController.cs" />
     <Compile Include="WebApi\AnnouncementController.cs" />
+    <Compile Include="WebApi\ClawbackController.cs" />
     <Compile Include="WebApi\CommissionController.cs" />
     <Compile Include="WebApi\CommunicationController.cs" />
     <Compile Include="WebApi\CustomerApplicationrController.cs" />
@@ -378,12 +379,14 @@
     <Content Include="src\app\components\multiple-checkbox\multiple-checkbox.html" />
     <Content Include="src\app\components\pagination\pagination.css" />
     <Content Include="src\app\components\pagination\pagination.html" />
+    <Content Include="src\app\components\customer-finder\customer-finder.html" />
     <Content Include="src\app\components\product-options\product-options.css" />
     <Content Include="src\app\components\product-options\product-options.html" />
     <Content Include="src\app\components\superior-field\superior-field.html" />
     <Content Include="src\app\components\user-communication\user-communication.html" />
     <Content Include="src\app\nav-menu\nav-menu.component.css" />
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
+    <Content Include="src\app\pages\manage-clawback\manage-clawback.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
     <Content Include="src\app\pages\agent-maintenance\agent-maintenance.html" />
     <Content Include="src\app\pages\agent-profile\agent-profile.html" />
@@ -488,6 +491,7 @@
     <TypeScriptCompile Include="src\app\components\multiple-checkbox\multiple-checkbox.ts" />
     <TypeScriptCompile Include="src\app\components\page-header.ts" />
     <TypeScriptCompile Include="src\app\components\pagination\pagination.ts" />
+    <TypeScriptCompile Include="src\app\components\customer-finder\customer-finder.ts" />
     <TypeScriptCompile Include="src\app\components\product-options\product-options.ts" />
     <TypeScriptCompile Include="src\app\components\superior-field\superior-field.ts" />
     <TypeScriptCompile Include="src\app\components\tablerow-buttons\tablerow-buttons.ts" />
@@ -508,6 +512,7 @@
     <TypeScriptCompile Include="src\app\interfaces\listDataCRUD.ts" />
     <TypeScriptCompile Include="src\app\interfaces\listEvent.ts" />
     <TypeScriptCompile Include="src\app\material.ts" />
+    <TypeScriptCompile Include="src\app\metadata\clawbackColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentChargesColumns.ts" />
@@ -533,6 +538,7 @@
     <TypeScriptCompile Include="src\app\model\user.role.ts" />
     <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-clawback\manage-clawback.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-maintenance\agent-maintenance.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-profile\agent-profile.ts" />

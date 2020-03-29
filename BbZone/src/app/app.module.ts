@@ -64,6 +64,8 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
 import { CreateWithdrawal } from './pages/create-withdrawal/create-withdrawal';
 import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
 import { AgentChanges } from './pages/agent-charges/agent-charges';
+import { CustomerFinder } from './components/customer-finder/customer-finder';
+import { ManageClawback } from './pages/manage-clawback/manage-clawback';
 
 @NgModule({
   declarations: [
@@ -114,7 +116,9 @@ import { AgentChanges } from './pages/agent-charges/agent-charges';
         SubmissionStatusCount,
         CreateWithdrawal,
         EditWithdrawal,
-        AgentChanges
+        AgentChanges,
+        CustomerFinder,
+        ManageClawback
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -152,7 +156,8 @@ import { AgentChanges } from './pages/agent-charges/agent-charges';
             { path: 'view-announcement', component: ViewAnnouncement },
             { path: 'create-withdrawal', component: CreateWithdrawal },
             { path: 'edit-withdrawal/:id', component: EditWithdrawal },
-            { path: 'agent-charges', component: AgentChanges }
+            { path: 'agent-charges', component: AgentChanges },
+            { path: 'manage-clawback', component: ManageClawback }
     ])
   ],
   providers: [

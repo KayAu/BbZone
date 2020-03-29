@@ -10,14 +10,13 @@
 namespace BroadbandZone_Data
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class vwWithdrawalItem
+    public partial class FindCustomerApplication_Result
     {
-        public int WithdrawalId { get; set; }
-        public string ApplicationId { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerId { get; set; }
+        public int ApplicationId { get; set; }
+        public string OrderNo { get; set; }
         public string Agent { get; set; }
-        public string Status { get; set; }
-        public string WithdrawalAppId { get; set; }
     }
 }

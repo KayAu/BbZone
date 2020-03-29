@@ -9,7 +9,7 @@
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalSelectedAmount}}</span>
+                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalSelectedAmount | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
@@ -23,7 +23,7 @@
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalAmountToDeduct}}</span>
+                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalAmountToDeduct | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-6 mrg10T mrg25B text-right">
             <label class="text-uppercase font-normal">Claimable Amount</label>
-            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.amount}}</div>
+            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.amount | number:'1.2-2'}}</div>
         </div>
         <div class="col-lg-12">
             <div class="ibox ">
@@ -68,7 +68,17 @@
                                     <td>{{rowNo+1}}</td>
                                     <ng-container *ngFor="let field of dataRowMapper">
                                         <td>
-                                            <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge"  [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <ng-template #displayBadge>
+                                                <span class="badge" *ngIf="record.transactionType"
+                                                      [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                                                  'badge-warning': record.transactionType == 'Purchase',
+                                                                  'badge-success': record.transactionType == 'Own Sales',
+                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                    {{record.transactionType}}
+                                                </span>
+                                                <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
+                                            </ng-template>
                                         </td>
                                     </ng-container>
                                 </tr>
@@ -90,7 +100,7 @@
                         </div>
                         <div class="form-group">
                             <label class="font-normal">Withdrawal Status</label>
-                            <select name="status" class="form-control" [(ngModel)]="formRecord.status" [disabled]="!formRecord.allowEdit">
+                            <select name="status" class="form-control" *ngIf="currentUser.isAdmin" [(ngModel)]="formRecord.status" [disabled]="!formRecord.allowEdit">
                                 <option [ngValue]="null">Please select</option>
                                 <option *ngFor="let option of dropdownItems" [ngValue]="option.key.toString()">{{option.value}}</option>
                             </select>

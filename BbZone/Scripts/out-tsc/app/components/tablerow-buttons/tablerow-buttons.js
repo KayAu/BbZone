@@ -29,6 +29,8 @@ var TableRowButtons = /** @class */ (function (_super) {
     function TableRowButtons() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.hideDelete = false;
+        _this.disabledEdit = false;
+        _this.disabledDelete = false;
         _this.onEdit = new core_1.EventEmitter();
         _this.onDelete = new core_1.EventEmitter();
         _this.onUpdate = new core_1.EventEmitter();
@@ -57,6 +59,14 @@ var TableRowButtons = /** @class */ (function (_super) {
         __metadata("design:type", Boolean)
     ], TableRowButtons.prototype, "hideDelete", void 0);
     __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TableRowButtons.prototype, "disabledEdit", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], TableRowButtons.prototype, "disabledDelete", void 0);
+    __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
     ], TableRowButtons.prototype, "onEdit", void 0);
@@ -75,7 +85,7 @@ var TableRowButtons = /** @class */ (function (_super) {
     TableRowButtons = __decorate([
         core_1.Component({
             selector: 'tablerow-buttons',
-            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
+            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
         })
     ], TableRowButtons);
     return TableRowButtons;

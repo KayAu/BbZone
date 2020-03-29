@@ -60,9 +60,9 @@ var DataControl = /** @class */ (function () {
     };
     DataControl.prototype.setChanges = function () {
         this.propagateChange(this.data);
-        //if (this.onModelChanged.observers.length > 0) {
-        //    this.onModelChanged.emit();
-        //}
+        if (this.onModelChanged.observers.length > 0) {
+            this.onModelChanged.emit();
+        }
         if (this.field.cascadeTo) {
             this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
         }

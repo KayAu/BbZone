@@ -75,6 +75,7 @@ namespace BroadbandZone_App.WebApi
 
             return body;
         }
+
         private byte[] CreatePdf(string htmlContent)
         {
             try

@@ -41,9 +41,10 @@ namespace BroadbandZone_Data
         public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
-        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<AgentCharge> AgentCharges { get; set; }
-        public virtual DbSet<vwWithdrawalItem> vwWithdrawalItems { get; set; }
+        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
+        public virtual DbSet<ClaimableCommission> ClaimableCommissions { get; set; }
+        public virtual DbSet<Clawback> Clawbacks { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -581,6 +582,70 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prWithdrawalId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPaymentDetails_Result>("GetPaymentDetails", prWithdrawalIdParameter);
+        }
+    
+        public virtual int UpdateCompletedAppCommission(Nullable<int> prAppId, Nullable<int> prAgentId, string prCreatedBy)
+        {
+            var prAppIdParameter = prAppId.HasValue ?
+                new ObjectParameter("prAppId", prAppId) :
+                new ObjectParameter("prAppId", typeof(int));
+    
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prCreatedByParameter = prCreatedBy != null ?
+                new ObjectParameter("prCreatedBy", prCreatedBy) :
+                new ObjectParameter("prCreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompletedAppCommission", prAppIdParameter, prAgentIdParameter, prCreatedByParameter);
+        }
+    
+        public virtual ObjectResult<FindCustomerApplication_Result> FindCustomerApplication(string prSearchKeyword)
+        {
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCustomerApplication_Result>("FindCustomerApplication", prSearchKeywordParameter);
+        }
+    
+        public virtual ObjectResult<GetClawback_Result> GetClawback(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClawback_Result>("GetClawback", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, oTotalRecord);
+        }
+    
+        public virtual int UpdateClaimableCommission(Nullable<int> prWithdrawalId, string prClaimableItemsId)
+        {
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            var prClaimableItemsIdParameter = prClaimableItemsId != null ?
+                new ObjectParameter("prClaimableItemsId", prClaimableItemsId) :
+                new ObjectParameter("prClaimableItemsId", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClaimableCommission", prWithdrawalIdParameter, prClaimableItemsIdParameter);
         }
     }
 }

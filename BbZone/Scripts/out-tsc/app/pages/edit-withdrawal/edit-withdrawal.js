@@ -32,6 +32,7 @@ var EditWithdrawal = /** @class */ (function () {
         this.formRecord = {};
         this.isUpdating = false;
         this.allowEdit = true;
+        this.displayType = dataDisplayType_1.DataDisplayType;
         this.currentUser = this.authenticationService.currentUserValue;
     }
     EditWithdrawal.prototype.ngOnInit = function () {

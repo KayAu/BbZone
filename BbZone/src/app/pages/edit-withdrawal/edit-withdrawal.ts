@@ -24,6 +24,7 @@ export class EditWithdrawal  { //extends ListEvent
     recordId: number;
     dropdownItems: any[];
     allowEdit: boolean = true;
+    displayType = DataDisplayType;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) {
         this.currentUser = this.authenticationService.currentUserValue;

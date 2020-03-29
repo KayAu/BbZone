@@ -62,6 +62,26 @@ namespace BroadbandZone_App.Helper
                 throw new Exception($"ModelHelper.{(new StackTrace()).GetFrame(0).GetMethod().Name} : {ex.Message}");
             }
         }
+        public static Gridview<T> GetListdata<T>(Func<int?, int?, string, bool?, string,  ObjectParameter, ObjectResult<T>> callDbMethod, int currentPage = 1, int pageSize = Constants.DefaultPageSize, string sortColumn = "", bool sortInAsc = false, string searchKeyword = "")
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    var results = callDbMethod(currentPage, pageSize, sortColumn, sortInAsc, searchKeyword, totalRecord).ToList();
+                    return new Gridview<T>()
+                    {
+                        DisplayData = results,
+                        TotalRecords = Convert.ToInt32(totalRecord.Value)
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"ModelHelper.{(new StackTrace()).GetFrame(0).GetMethod().Name} : {ex.Message}");
+            }
+        }
 
         public static void CopyPropertiesTo<FR, TO>(this FR source, out TO dest)
         {
