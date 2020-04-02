@@ -20,6 +20,12 @@ namespace BroadbandZone_Data
     {
         public string Password { get; set; }
     }
+
+    public partial class AdminUser
+    {
+        public string Password { get; set; }
+    }
+
     public partial class Withdrawal
     {
         public bool AllowEdit { get; set; }

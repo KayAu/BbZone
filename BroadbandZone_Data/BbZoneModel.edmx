@@ -20,6 +20,7 @@
           <Property Name="UserLogin" Type="varchar" MaxLength="16" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary" MaxLength="200" Nullable="false" />
           <Property Name="HasFullControl" Type="bit" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -177,9 +178,7 @@
           <Property Name="UserId" Type="varchar" MaxLength="25" />
           <Property Name="TelNo" Type="varchar" MaxLength="15" />
           <Property Name="SubmitByAgent" Type="bit" />
-          <Property Name="PackagePriceOnDate" Type="money" />
-          <Property Name="AgentCommOnDate" Type="smallint" />
-          <Property Name="SuperiorCommOnDate" Type="smallint" />
+          <Property Name="DocumentCompleted" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
@@ -202,6 +201,29 @@
           <Property Name="RecId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FieldName" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="Options" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IncentiveReceived">
+          <Key>
+            <PropertyRef Name="IncPymntId" />
+          </Key>
+          <Property Name="IncPymntId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApplicationId" Type="int" Nullable="false" />
+          <Property Name="IncentiveAmt" Type="money" Nullable="false" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LoginPageBanner">
+          <Key>
+            <PropertyRef Name="BannerId" />
+          </Key>
+          <Property Name="BannerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FilePath" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -338,15 +360,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ClaimableCommission_ClaimableCommission">
-          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+        <Association Name="FK_ClaimableCommission_ClaimedWithdrawal">
+          <End Role="Withdrawal" Type="Self.Withdrawal" Multiplicity="0..1" />
           <End Role="ClaimableCommission" Type="Self.ClaimableCommission" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CustomerApplication">
-              <PropertyRef Name="ApplicationId" />
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
             </Principal>
             <Dependent Role="ClaimableCommission">
-              <PropertyRef Name="ApplicationId" />
+              <PropertyRef Name="ClaimWithdrawalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimableCommission_DeductedWithdrawal">
+          <End Role="Withdrawal" Type="Self.Withdrawal" Multiplicity="0..1" />
+          <End Role="ClaimableCommission" Type="Self.ClaimableCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
+            </Principal>
+            <Dependent Role="ClaimableCommission">
+              <PropertyRef Name="DeductedWithdrawalId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -410,6 +444,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IncentivePayment_CustomerApplication">
+          <End Role="CustomerApplication" Type="Self.CustomerApplication" Multiplicity="1" />
+          <End Role="IncentiveReceived" Type="Self.IncentiveReceived" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="IncentiveReceived">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Product_ProductCategory">
           <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="1" />
           <End Role="ProductPackage" Type="Self.ProductPackage" Multiplicity="*" />
@@ -460,6 +506,7 @@
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
           <Parameter Name="prImpersonate" Type="bit" Mode="In" />
         </Function>
+        <Function Name="prc_DboardMonthlyApplications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prc_DboardMyTeamSubmissions" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prSuperiorId" Type="int" Mode="In" />
           <Parameter Name="oTotalAllAgents" Type="int" Mode="InOut" />
@@ -468,11 +515,29 @@
           <Parameter Name="prSuperiorId" Type="int" Mode="In" />
           <Parameter Name="prYear" Type="int" Mode="In" />
         </Function>
-        <Function Name="prc_FindCustomerApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="prc_DboardTopSalesPackage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prAgentName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_DboardTotalSalesAndCommission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prAgentName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_FindClaimedApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_FindCompletedApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prc_GenerateEncryptedPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prUserLogin" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_GetAdminUsers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
         </Function>
         <Function Name="prc_GetAgentCharges" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
@@ -565,6 +630,34 @@
         <Function Name="prc_GetDropdownItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prFieldName" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_GetIncentivesReceived" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prProduct" Type="int" Mode="In" />
+          <Parameter Name="prProductCategory" Type="int" Mode="In" />
+          <Parameter Name="prProductPackage" Type="int" Mode="In" />
+          <Parameter Name="prKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prReceivedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prReceivedUntil" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetIncentivesReceivedForDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prProduct" Type="int" Mode="In" />
+          <Parameter Name="prProductCategory" Type="int" Mode="In" />
+          <Parameter Name="prProductPackage" Type="int" Mode="In" />
+          <Parameter Name="prKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prReceivedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prReceivedUntil" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="prc_GetLoginBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prc_GetMyAgents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prSuperiorId" Type="int" Mode="In" />
           <Parameter Name="prProductID" Type="int" Mode="In" />
@@ -618,6 +711,14 @@
           <Parameter Name="prCompletedFrom" Type="smalldatetime" Mode="In" />
           <Parameter Name="prCompletedTo" Type="smalldatetime" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetWithdrawalSubmittedForDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prStatus" Type="varchar" Mode="In" />
+          <Parameter Name="prAgent" Type="nvarchar" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prCompletedTo" Type="smalldatetime" Mode="In" />
         </Function>
         <Function Name="prc_GetWithdrawalToSubmit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
@@ -677,6 +778,8 @@
           <EntitySet Name="CustomerApplication" EntityType="Self.CustomerApplication" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CustomerDocument" EntityType="Self.CustomerDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DropdownItems" EntityType="Self.DropdownItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IncentiveReceived" EntityType="Self.IncentiveReceived" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginPageBanner" EntityType="Self.LoginPageBanner" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
@@ -698,8 +801,12 @@
             <End Role="Announcement" EntitySet="Announcement" />
             <End Role="AnnouncementDocument" EntitySet="AnnouncementDocument" />
           </AssociationSet>
-          <AssociationSet Name="FK_ClaimableCommission_ClaimableCommission" Association="Self.FK_ClaimableCommission_ClaimableCommission">
-            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+          <AssociationSet Name="FK_ClaimableCommission_ClaimedWithdrawal" Association="Self.FK_ClaimableCommission_ClaimedWithdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawal" />
+            <End Role="ClaimableCommission" EntitySet="ClaimableCommission" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimableCommission_DeductedWithdrawal" Association="Self.FK_ClaimableCommission_DeductedWithdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawal" />
             <End Role="ClaimableCommission" EntitySet="ClaimableCommission" />
           </AssociationSet>
           <AssociationSet Name="FK_Clawback_CustomerApplication" Association="Self.FK_Clawback_CustomerApplication">
@@ -721,6 +828,10 @@
           <AssociationSet Name="FK_CustomerDocument_CustomerApplication" Association="Self.FK_CustomerDocument_CustomerApplication">
             <End Role="CustomerApplication" EntitySet="CustomerApplication" />
             <End Role="CustomerDocument" EntitySet="CustomerDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IncentivePayment_CustomerApplication" Association="Self.FK_IncentivePayment_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplication" />
+            <End Role="IncentiveReceived" EntitySet="IncentiveReceived" />
           </AssociationSet>
           <AssociationSet Name="FK_Product_ProductCategory" Association="Self.FK_Product_ProductCategory">
             <End Role="ProductCategory" EntitySet="ProductCategory" />
@@ -858,7 +969,6 @@
           <EntitySet Name="AdminUsers" EntityType="BroadbandZoneModel.AdminUser" />
           <EntitySet Name="Agents" EntityType="BroadbandZoneModel.Agent" />
           <EntitySet Name="AgentCommissions" EntityType="BroadbandZoneModel.AgentCommission" />
-          <EntitySet Name="Announcements" EntityType="BroadbandZoneModel.Announcement" />
           <EntitySet Name="ApplicationStatus" EntityType="BroadbandZoneModel.ApplicationStatu" />
           <EntitySet Name="Communications" EntityType="BroadbandZoneModel.Communication" />
           <EntitySet Name="DropdownItems" EntityType="BroadbandZoneModel.DropdownItem" />
@@ -888,10 +998,6 @@
           </FunctionImport>
           <EntitySet Name="CustomerDocuments" EntityType="BroadbandZoneModel.CustomerDocument" />
           <EntitySet Name="AnnouncementDocuments" EntityType="BroadbandZoneModel.AnnouncementDocument" />
-          <AssociationSet Name="FK_AnnouncementDocument_Announcement" Association="BroadbandZoneModel.FK_AnnouncementDocument_Announcement">
-            <End Role="Announcement" EntitySet="Announcements" />
-            <End Role="AnnouncementDocument" EntitySet="AnnouncementDocuments" />
-          </AssociationSet>
           <FunctionImport Name="GetWithdrawalSubmitted" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalSubmitted_Result)">
             <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
             <Parameter Name="prPageSize" Mode="In" Type="Int32" />
@@ -916,23 +1022,6 @@
             <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="CustomerApplications" EntityType="BroadbandZoneModel.CustomerApplication" />
-          <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus">
-            <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
-            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Communication_CustomerApplication" Association="BroadbandZoneModel.FK_Communication_CustomerApplication">
-            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
-            <End Role="Communication" EntitySet="Communications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerApplication_ProductPackage" Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage">
-            <End Role="ProductPackage" EntitySet="ProductPackages" />
-            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CustomerDocument_CustomerApplication" Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication">
-            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
-            <End Role="CustomerDocument" EntitySet="CustomerDocuments" />
-          </AssociationSet>
           <FunctionImport Name="GetWithdrawalItems" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalItems_Result)">
           <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -963,7 +1052,7 @@
             <End Role="Withdrawal" EntitySet="Withdrawals" />
             <End Role="AgentCharge" EntitySet="AgentCharges" />
           </AssociationSet>
-          <FunctionImport Name="FindCustomerApplication" ReturnType="Collection(BroadbandZoneModel.FindCustomerApplication_Result)">
+          <FunctionImport Name="FindClaimedApplication" ReturnType="Collection(BroadbandZoneModel.FindClaimedApplication_Result)">
           <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetClawback" ReturnType="Collection(BroadbandZoneModel.GetClawback_Result)">
@@ -980,6 +1069,11 @@
           </FunctionImport>
           <EntitySet Name="ClaimableCommissions" EntityType="BroadbandZoneModel.ClaimableCommission" />
           <EntitySet Name="Clawbacks" EntityType="BroadbandZoneModel.Clawback" />
+          <EntitySet Name="CustomerApplications" EntityType="BroadbandZoneModel.CustomerApplication" />
+          <AssociationSet Name="FK_CustomerApplication_ApplicationStatus" Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus">
+            <End Role="ApplicationStatu" EntitySet="ApplicationStatus" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+          </AssociationSet>
           <AssociationSet Name="FK_ClaimableCommission_ClaimableCommission" Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission">
             <End Role="CustomerApplication" EntitySet="CustomerApplications" />
             <End Role="ClaimableCommission" EntitySet="ClaimableCommissions" />
@@ -988,6 +1082,92 @@
             <End Role="CustomerApplication" EntitySet="CustomerApplications" />
             <End Role="Clawback" EntitySet="Clawbacks" />
           </AssociationSet>
+          <AssociationSet Name="FK_Communication_CustomerApplication" Association="BroadbandZoneModel.FK_Communication_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="Communication" EntitySet="Communications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerApplication_ProductPackage" Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage">
+            <End Role="ProductPackage" EntitySet="ProductPackages" />
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerDocument_CustomerApplication" Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="CustomerDocument" EntitySet="CustomerDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimableCommission_ClaimedWithdrawal" Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimedWithdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawals" />
+            <End Role="ClaimableCommission" EntitySet="ClaimableCommissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClaimableCommission_DeductedWithdrawal" Association="BroadbandZoneModel.FK_ClaimableCommission_DeductedWithdrawal">
+            <End Role="Withdrawal" EntitySet="Withdrawals" />
+            <End Role="ClaimableCommission" EntitySet="ClaimableCommissions" />
+          </AssociationSet>
+          <EntitySet Name="IncentiveReceiveds" EntityType="BroadbandZoneModel.IncentiveReceived" />
+          <AssociationSet Name="FK_IncentivePayment_CustomerApplication" Association="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="IncentiveReceived" EntitySet="IncentiveReceiveds" />
+          </AssociationSet>
+          <FunctionImport Name="GetIncentivesReceived" ReturnType="Collection(BroadbandZoneModel.GetIncentivesReceived_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prProduct" Mode="In" Type="Int32" />
+            <Parameter Name="prProductCategory" Mode="In" Type="Int32" />
+            <Parameter Name="prProductPackage" Mode="In" Type="Int32" />
+            <Parameter Name="prKeyword" Mode="In" Type="String" />
+            <Parameter Name="prReceivedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prReceivedUntil" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="FindCompletedApplication" ReturnType="Collection(BroadbandZoneModel.FindCompletedApplication_Result)">
+          <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="GetIncentivesReceivedForDownload" ReturnType="Collection(BroadbandZoneModel.GetIncentivesReceivedForDownload_Result)">
+            <Parameter Name="prProduct" Mode="In" Type="Int32" />
+            <Parameter Name="prProductCategory" Mode="In" Type="Int32" />
+            <Parameter Name="prProductPackage" Mode="In" Type="Int32" />
+            <Parameter Name="prKeyword" Mode="In" Type="String" />
+            <Parameter Name="prReceivedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prReceivedUntil" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="GetAdminUsers" ReturnType="Collection(BroadbandZoneModel.GetAdminUsers_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetWithdrawalSubmittedForDownload" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalSubmittedForDownload_Result)">
+            <Parameter Name="prStatus" Mode="In" Type="String" />
+            <Parameter Name="prAgent" Mode="In" Type="String" />
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="prCompletedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prCompletedTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="DboardMonthlyApplications" ReturnType="Collection(BroadbandZoneModel.DboardMonthlyApplications_Result)" />
+          <FunctionImport Name="DboardTopSalesPackage" ReturnType="Collection(BroadbandZoneModel.DboardTopSalesPackage_Result)" >
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prAgentName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="DboardTotalSalesAndCommission" ReturnType="Collection(BroadbandZoneModel.DboardTotalSalesAndCommission_Result)">
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prAgentName" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Announcements" EntityType="BroadbandZoneModel.Announcement" />
+          <AssociationSet Name="FK_AnnouncementDocument_Announcement" Association="BroadbandZoneModel.FK_AnnouncementDocument_Announcement">
+            <End Role="Announcement" EntitySet="Announcements" />
+            <End Role="AnnouncementDocument" EntitySet="AnnouncementDocuments" />
+          </AssociationSet>
+          <FunctionImport Name="GetLoginBanners" ReturnType="Collection(BroadbandZoneModel.GetLoginBanners_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="LoginPageBanners" EntityType="BroadbandZoneModel.LoginPageBanner" />
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -1157,6 +1337,7 @@
           <Property Name="HasFullControl" Type="Boolean" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Precision="0" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" />
         </EntityType>
         <EntityType Name="Agent">
           <Key>
@@ -1202,21 +1383,6 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Agent" Relationship="BroadbandZoneModel.FK_AgentCommission_Agent" FromRole="AgentCommission" ToRole="Agent" />
           <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_AgentCommission_ProductCategory" FromRole="AgentCommission" ToRole="ProductCategory" />
-        </EntityType>
-        <EntityType Name="Announcement">
-          <Key>
-            <PropertyRef Name="AnncId" />
-          </Key>
-          <Property Name="AnncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="FilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
-          <Property Name="IsActive" Type="Boolean" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AnnouncementDocuments" Relationship="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" FromRole="Announcement" ToRole="AnnouncementDocument" />
         </EntityType>
         <EntityType Name="ApplicationStatu">
           <Key>
@@ -1397,18 +1563,6 @@
           <Property Name="Size" Type="Double" />
           <NavigationProperty Name="Announcement" Relationship="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" FromRole="AnnouncementDocument" ToRole="Announcement" />
         </EntityType>
-        <Association Name="FK_AnnouncementDocument_Announcement">
-          <End Type="BroadbandZoneModel.Announcement" Role="Announcement" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.AnnouncementDocument" Role="AnnouncementDocument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Announcement">
-              <PropertyRef Name="AnncId" />
-            </Principal>
-            <Dependent Role="AnnouncementDocument">
-              <PropertyRef Name="AnncId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetWithdrawalSubmitted_Result">
           <Property Type="Int32" Name="WithdrawalId" Nullable="true" />
           <Property Type="String" Name="Agent" Nullable="true" MaxLength="50" />
@@ -1418,95 +1572,6 @@
           <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
         </ComplexType>
-        <EntityType Name="CustomerApplication">
-          <Key>
-            <PropertyRef Name="ApplicationId" />
-          </Key>
-          <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="CategoryId" Type="Int32" />
-          <Property Name="ProdPkgId" Type="Int32" Nullable="false" />
-          <Property Name="Agent" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="ResidentialType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="ResidentialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerAddr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
-          <Property Name="CustomerRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="AdminRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="AppStatusId" Type="Int32" />
-          <Property Name="OrderNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="UserId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="SubmitByAgent" Type="Boolean" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
-          <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
-          <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
-          <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
-          <Property Name="PackagePriceOnDate" Type="Decimal" Precision="19" Scale="4" />
-          <Property Name="AgentCommOnDate" Type="Int16" />
-          <Property Name="SuperiorCommOnDate" Type="Int16" />
-          <NavigationProperty Name="ClaimableCommissions" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" FromRole="CustomerApplication" ToRole="ClaimableCommission" />
-          <NavigationProperty Name="Clawbacks" Relationship="BroadbandZoneModel.FK_Clawback_CustomerApplication" FromRole="CustomerApplication" ToRole="Clawback" />
-        </EntityType>
-        <Association Name="FK_CustomerApplication_ApplicationStatus">
-          <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
-          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ApplicationStatu">
-              <PropertyRef Name="AppStatusId" />
-            </Principal>
-            <Dependent Role="CustomerApplication">
-              <PropertyRef Name="AppStatusId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Communication_CustomerApplication">
-          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.Communication" Role="Communication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerApplication">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="Communication">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerApplication_ProductPackage">
-          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProductPackage">
-              <PropertyRef Name="ProdPkgId" />
-            </Principal>
-            <Dependent Role="CustomerApplication">
-              <PropertyRef Name="ProdPkgId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CustomerDocument_CustomerApplication">
-          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.CustomerDocument" Role="CustomerDocument" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerApplication">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="CustomerDocument">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="GetWithdrawalItems_Result">
           <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
           <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="19" />
@@ -1587,6 +1652,8 @@
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AgentCharges" Relationship="BroadbandZoneModel.FK_AgentCharges_Withdrawal" FromRole="Withdrawal" ToRole="AgentCharge" />
+          <NavigationProperty Name="ClaimableCommissions" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimedWithdrawal" FromRole="Withdrawal" ToRole="ClaimableCommission" />
+          <NavigationProperty Name="ClaimableCommissions1" Relationship="BroadbandZoneModel.FK_ClaimableCommission_DeductedWithdrawal" FromRole="Withdrawal" ToRole="ClaimableCommission" />
         </EntityType>
         <Association Name="FK_AgentCharges_Withdrawal">
           <End Type="BroadbandZoneModel.Withdrawal" Role="Withdrawal" Multiplicity="0..1" />
@@ -1600,13 +1667,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="FindCustomerApplication_Result">
-          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="15" />
-          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
-          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="Agent" Nullable="false" MaxLength="25" />
-        </ComplexType>
         <ComplexType Name="GetClawback_Result">
           <Property Type="Int32" Name="ClawbackId" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
@@ -1631,6 +1691,8 @@
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" FromRole="ClaimableCommission" ToRole="CustomerApplication" />
+          <NavigationProperty Name="Withdrawal" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimedWithdrawal" FromRole="ClaimableCommission" ToRole="Withdrawal" />
+          <NavigationProperty Name="Withdrawal1" Relationship="BroadbandZoneModel.FK_ClaimableCommission_DeductedWithdrawal" FromRole="ClaimableCommission" ToRole="Withdrawal" />
         </EntityType>
         <EntityType Name="Clawback">
           <Key>
@@ -1645,6 +1707,58 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_Clawback_CustomerApplication" FromRole="Clawback" ToRole="CustomerApplication" />
         </EntityType>
+        <EntityType Name="CustomerApplication">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryId" Type="Int32" />
+          <Property Name="ProdPkgId" Type="Int32" Nullable="false" />
+          <Property Name="Agent" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerId" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentialType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ResidentialName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerAddr" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AdminRemarks" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AppStatusId" Type="Int32" />
+          <Property Name="OrderNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SubmitByAgent" Type="Boolean" />
+          <Property Name="DocumentCompleted" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
+          <NavigationProperty Name="ClaimableCommissions" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" FromRole="CustomerApplication" ToRole="ClaimableCommission" />
+          <NavigationProperty Name="Clawbacks" Relationship="BroadbandZoneModel.FK_Clawback_CustomerApplication" FromRole="CustomerApplication" ToRole="Clawback" />
+          <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
+          <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
+          <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
+          <NavigationProperty Name="IncentiveReceiveds" Relationship="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" FromRole="CustomerApplication" ToRole="IncentiveReceived" />
+        </EntityType>
+        <Association Name="FK_CustomerApplication_ApplicationStatus">
+          <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ApplicationStatu">
+              <PropertyRef Name="AppStatusId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="AppStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ClaimableCommission_ClaimableCommission">
           <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
           <End Type="BroadbandZoneModel.ClaimableCommission" Role="ClaimableCommission" Multiplicity="*" />
@@ -1669,6 +1783,220 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Communication_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.Communication" Role="Communication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Communication">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerApplication_ProductPackage">
+          <End Type="BroadbandZoneModel.ProductPackage" Role="ProductPackage" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductPackage">
+              <PropertyRef Name="ProdPkgId" />
+            </Principal>
+            <Dependent Role="CustomerApplication">
+              <PropertyRef Name="ProdPkgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerDocument_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.CustomerDocument" Role="CustomerDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="CustomerDocument">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimableCommission_ClaimedWithdrawal">
+          <End Type="BroadbandZoneModel.Withdrawal" Role="Withdrawal" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.ClaimableCommission" Role="ClaimableCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
+            </Principal>
+            <Dependent Role="ClaimableCommission">
+              <PropertyRef Name="ClaimWithdrawalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClaimableCommission_DeductedWithdrawal">
+          <End Type="BroadbandZoneModel.Withdrawal" Role="Withdrawal" Multiplicity="0..1" />
+          <End Type="BroadbandZoneModel.ClaimableCommission" Role="ClaimableCommission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Withdrawal">
+              <PropertyRef Name="WithdrawalId" />
+            </Principal>
+            <Dependent Role="ClaimableCommission">
+              <PropertyRef Name="DeductedWithdrawalId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="IncentiveReceived">
+          <Key>
+            <PropertyRef Name="IncPymntId" />
+          </Key>
+          <Property Name="IncPymntId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="IncentiveAmt" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" FromRole="IncentiveReceived" ToRole="CustomerApplication" />
+        </EntityType>
+        <Association Name="FK_IncentivePayment_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.IncentiveReceived" Role="IncentiveReceived" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="IncentiveReceived">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetIncentivesReceived_Result">
+          <Property Type="Int32" Name="IncPymntId" Nullable="true" />
+          <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="IncentiveAmt" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="String" Name="CreatedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="FindClaimedApplication_Result">
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CustomerId" Nullable="false" MaxLength="15" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="Agent" Nullable="false" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="FindCompletedApplication_Result">
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="GetIncentivesReceivedForDownload_Result">
+          <Property Type="Int32" Name="IncPymntId" Nullable="false" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="150" />
+          <Property Type="Decimal" Name="IncentiveAmt" Nullable="false" Precision="19" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAdminUsers_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserLogin" Nullable="false" MaxLength="16" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="6" />
+          <Property Type="Boolean" Name="HasFullControl" Nullable="true" />
+          <Property Type="Boolean" Name="IsActive" Nullable="true" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="GetWithdrawalSubmittedForDownload_Result">
+          <Property Type="Int32" Name="WithdrawalId" Nullable="false" />
+          <Property Type="String" Name="Agent" Nullable="true" MaxLength="16" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="ReferenceNo" Nullable="true" MaxLength="25" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="20" />
+          <Property Type="DateTime" Name="CompletedOn" Nullable="true" Precision="16" />
+        </ComplexType>
+        <ComplexType Name="DboardMonthlyApplications_Result">
+          <Property Type="String" Name="Mth" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="TotalApplications" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="DboardTopSalesPackage_Result">
+          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="Commission" Nullable="false" Precision="19" />
+          <Property Type="Int32" Name="TotalApplications" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="prc_DboardTotalSalesAndCommission_Result">
+          <Property Type="Int32" Name="TotalApplications" Nullable="true" />
+          <Property Type="Decimal" Name="TotalCommission" Nullable="true" Precision="19" />
+        </ComplexType>
+        <ComplexType Name="DboardTotalSalesAndCommission_Result">
+          <Property Type="Int32" Name="TotalApplications" Nullable="true" />
+          <Property Type="Decimal" Name="TotalCommission" Nullable="true" Precision="19" />
+        </ComplexType>
+        <EntityType Name="Announcement">
+          <Key>
+            <PropertyRef Name="AnncId" />
+          </Key>
+          <Property Name="AnncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="FilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AnnouncementDocuments" Relationship="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" FromRole="Announcement" ToRole="AnnouncementDocument" />
+        </EntityType>
+        <Association Name="FK_AnnouncementDocument_Announcement">
+          <End Type="BroadbandZoneModel.Announcement" Role="Announcement" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.AnnouncementDocument" Role="AnnouncementDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Announcement">
+              <PropertyRef Name="AnncId" />
+            </Principal>
+            <Dependent Role="AnnouncementDocument">
+              <PropertyRef Name="AnncId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="prc_GetLoginBanners_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetLoginBanners_Result">
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="CreatedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="BannerId" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="LoginPageBanner">
+          <Key>
+            <PropertyRef Name="BannerId" />
+          </Key>
+          <Property Name="BannerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FilePath" Type="String" Nullable="false" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1900,6 +2228,7 @@
           <EntitySetMapping Name="AdminUsers">
             <EntityTypeMapping TypeName="BroadbandZoneModel.AdminUser">
               <MappingFragment StoreEntitySet="AdminUser">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="HasFullControl" ColumnName="HasFullControl" />
@@ -1951,21 +2280,6 @@
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="AgentId" ColumnName="AgentId" />
                 <ScalarProperty Name="CommId" ColumnName="CommId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Announcements">
-            <EntityTypeMapping TypeName="BroadbandZoneModel.Announcement">
-              <MappingFragment StoreEntitySet="Announcement">
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
-                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="AnncId" ColumnName="AnncId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2131,42 +2445,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <EntitySetMapping Name="CustomerApplications">
-            <EntityTypeMapping TypeName="BroadbandZoneModel.CustomerApplication">
-              <MappingFragment StoreEntitySet="CustomerApplication">
-                <ScalarProperty Name="SuperiorCommOnDate" ColumnName="SuperiorCommOnDate" />
-                <ScalarProperty Name="AgentCommOnDate" ColumnName="AgentCommOnDate" />
-                <ScalarProperty Name="PackagePriceOnDate" ColumnName="PackagePriceOnDate" />
-                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="SubmitByAgent" ColumnName="SubmitByAgent" />
-                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="AppStatusId" ColumnName="AppStatusId" />
-                <ScalarProperty Name="AdminRemarks" ColumnName="AdminRemarks" />
-                <ScalarProperty Name="CustomerRemarks" ColumnName="CustomerRemarks" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="CustomerAddr" ColumnName="CustomerAddr" />
-                <ScalarProperty Name="ResidentialName" ColumnName="ResidentialName" />
-                <ScalarProperty Name="ResidentialType" ColumnName="ResidentialType" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Agent" ColumnName="Agent" />
-                <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetWithdrawalItems" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalItems">
           <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalItems_Result">
@@ -2252,17 +2530,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="FindCustomerApplication" FunctionName="BroadbandZoneModel.Store.prc_FindCustomerApplication">
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="BroadbandZoneModel.FindCustomerApplication_Result">
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
-                <ScalarProperty Name="Agent" ColumnName="Agent" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetClawback" FunctionName="BroadbandZoneModel.Store.prc_GetClawback">
           <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetClawback_Result">
@@ -2303,6 +2570,191 @@
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="ClawbackId" ColumnName="ClawbackId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerApplications">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.CustomerApplication">
+              <MappingFragment StoreEntitySet="CustomerApplication">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="DocumentCompleted" ColumnName="DocumentCompleted" />
+                <ScalarProperty Name="SubmitByAgent" ColumnName="SubmitByAgent" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="AppStatusId" ColumnName="AppStatusId" />
+                <ScalarProperty Name="AdminRemarks" ColumnName="AdminRemarks" />
+                <ScalarProperty Name="CustomerRemarks" ColumnName="CustomerRemarks" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="CustomerAddr" ColumnName="CustomerAddr" />
+                <ScalarProperty Name="ResidentialName" ColumnName="ResidentialName" />
+                <ScalarProperty Name="ResidentialType" ColumnName="ResidentialType" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IncentiveReceiveds">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.IncentiveReceived">
+              <MappingFragment StoreEntitySet="IncentiveReceived">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IncentiveAmt" ColumnName="IncentiveAmt" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="IncPymntId" ColumnName="IncPymntId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetIncentivesReceived" FunctionName="BroadbandZoneModel.Store.prc_GetIncentivesReceived">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetIncentivesReceived_Result">
+                <ScalarProperty Name="IncPymntId" ColumnName="IncPymntId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="IncentiveAmt" ColumnName="IncentiveAmt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FindCompletedApplication" FunctionName="BroadbandZoneModel.Store.prc_FindCompletedApplication">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.FindCompletedApplication_Result">
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FindClaimedApplication" FunctionName="BroadbandZoneModel.Store.prc_FindClaimedApplication" />
+          <FunctionImportMapping FunctionImportName="GetIncentivesReceivedForDownload" FunctionName="BroadbandZoneModel.Store.prc_GetIncentivesReceivedForDownload">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetIncentivesReceivedForDownload_Result">
+                <ScalarProperty Name="IncPymntId" ColumnName="IncPymntId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+                <ScalarProperty Name="IncentiveAmt" ColumnName="IncentiveAmt" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAdminUsers" FunctionName="BroadbandZoneModel.Store.prc_GetAdminUsers">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAdminUsers_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="HasFullControl" ColumnName="HasFullControl" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetWithdrawalSubmittedForDownload" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalSubmittedForDownload">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalSubmittedForDownload_Result">
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="ReferenceNo" ColumnName="ReferenceNo" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CompletedOn" ColumnName="CompletedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DboardMonthlyApplications" FunctionName="BroadbandZoneModel.Store.prc_DboardMonthlyApplications">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.DboardMonthlyApplications_Result">
+                <ScalarProperty Name="Mth" ColumnName="Mth" />
+                <ScalarProperty Name="TotalApplications" ColumnName="TotalApplications" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DboardTopSalesPackage" FunctionName="BroadbandZoneModel.Store.prc_DboardTopSalesPackage">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.DboardTopSalesPackage_Result">
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="TotalApplications" ColumnName="TotalApplications" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DboardTotalSalesAndCommission" FunctionName="BroadbandZoneModel.Store.prc_DboardTotalSalesAndCommission">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.DboardTotalSalesAndCommission_Result">
+                <ScalarProperty Name="TotalApplications" ColumnName="TotalApplications" />
+                <ScalarProperty Name="TotalCommission" ColumnName="TotalCommission" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Announcements">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Announcement">
+              <MappingFragment StoreEntitySet="Announcement">
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="Descriptions" ColumnName="Descriptions" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="AnncId" ColumnName="AnncId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetLoginBanners" FunctionName="BroadbandZoneModel.Store.prc_GetLoginBanners">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetLoginBanners_Result">
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="BannerId" ColumnName="BannerId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="LoginPageBanners">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.LoginPageBanner">
+              <MappingFragment StoreEntitySet="LoginPageBanner">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FilePath" ColumnName="FilePath" />
+                <ScalarProperty Name="BannerId" ColumnName="BannerId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

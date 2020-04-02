@@ -50,3 +50,13 @@ export class SearchWithdrawalViewParams {
 
 }
 
+export class SearchIncentivesParams {
+    constructor(
+        public keyword: string,
+        public productId: number,
+        public productCategoryId: number,
+        public productPackageId: number,
+        public receivedDate: DateRange
+    ) { }
+
+}

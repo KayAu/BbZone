@@ -12,8 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiController } from '../../enums/apiController';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
-import { CascadeData } from 'src/app/model/cascade-data';
+import { LoginUser } from 'src/app/model/login-user';
 import { CascadeService } from 'src/app/services/cascade.service';
+import { AuthenticationService } from 'src/app/services/authentication';
 
 @Component({
   selector: 'edit-order',
@@ -26,11 +27,17 @@ export class EditOrder {
     formRecord: any = {};
     isUpdating: boolean = false;
     recordId: number;
+    currentUser: LoginUser;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService,
-        private cascadeService: CascadeService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
+    constructor(public loaderService: LoaderService,
+                public dataService: DataService,
+                public formEvent: BroadcastService,
+                private router: Router,
+                private route: ActivatedRoute,
+                private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord(this.route.snapshot.params.id);
@@ -46,9 +53,14 @@ export class EditOrder {
                     ControlType[o.dataFieldControl.controlType],
                     o.dataFieldControl.required,
                     o.dataFieldControl.maxLength,
-                    o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null,
-                    o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null
+                    o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null,
+                    o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null,
+                    o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false
                 )));
+
+        if (!this.currentUser.isAdmin) {
+            columnMappings = columnMappings.filter(c => c.dataFieldControl.adminField === false);
+        }
 
         return columnMappings;
     }

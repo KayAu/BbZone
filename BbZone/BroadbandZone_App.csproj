@@ -85,6 +85,10 @@
       <HintPath>..\packages\itextsharp.xmlworker.5.5.13.1\lib\itextsharp.xmlworker.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=e44a2bc38ed2c13c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
@@ -235,6 +239,7 @@
     <Compile Include="Helper\ChartHelper.cs" />
     <Compile Include="Helper\Constants.cs" />
     <Compile Include="Helper\DataHelper.cs" />
+    <Compile Include="Helper\ExcelHelper.cs" />
     <Compile Include="Helper\ExceptionUtility.cs" />
     <Compile Include="Helper\FileUploadHelper.cs" />
     <Compile Include="Helper\ModelHelper.cs" />
@@ -249,6 +254,7 @@
     <Compile Include="Models\DropdownItem.cs" />
     <Compile Include="Models\Report.cs" />
     <Compile Include="Models\StatusAndKeywordParams.cs" />
+    <Compile Include="Models\IncentivesView.cs" />
     <Compile Include="Models\WithdrawalView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -256,15 +262,19 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="WebApi\AdminUserController.cs" />
     <Compile Include="WebApi\AgentChargesController.cs" />
     <Compile Include="WebApi\AgentController.cs" />
     <Compile Include="WebApi\AnnouncementController.cs" />
     <Compile Include="WebApi\ClawbackController.cs" />
     <Compile Include="WebApi\CommissionController.cs" />
     <Compile Include="WebApi\CommunicationController.cs" />
-    <Compile Include="WebApi\CustomerApplicationrController.cs" />
+    <Compile Include="WebApi\CustomerApplicationController.cs" />
     <Compile Include="WebApi\DashboardController.cs" />
     <Compile Include="WebApi\DropdownController.cs" />
+    <Compile Include="WebApi\IncentivesController.cs" />
+    <Compile Include="WebApi\IncentivesUploadController.cs" />
+    <Compile Include="WebApi\LoginBannerController.cs" />
     <Compile Include="WebApi\PaymentVoucherController.cs" />
     <Compile Include="WebApi\ProductCategoryController.cs" />
     <Compile Include="WebApi\ProductPackageController.cs" />
@@ -305,6 +315,7 @@
     <Content Include="images\date.png" />
     <Content Include="images\header_one.jpg" />
     <Content Include="images\header_two.jpg" />
+    <Content Include="images\login.png" />
     <Content Include="images\maxis.png" />
     <Content Include="images\nex.life.png" />
     <Content Include="images\profile_small.jpg" />
@@ -360,6 +371,7 @@
     <Content Include="src\app\app.component.css" />
     <Content Include="src\app\app.component.html" />
     <Content Include="src\app\components\announcement\announcement.html" />
+    <Content Include="src\app\components\dashboard\monthly-applications\monthly-applications.html" />
     <Content Include="src\app\components\dashboard\submission-status-count\submission-status-count.css" />
     <Content Include="src\app\components\dashboard\submission-status-count\submission-status-count.html" />
     <Content Include="src\app\components\dashboard\team-submission\team-submission.html" />
@@ -386,6 +398,7 @@
     <Content Include="src\app\components\user-communication\user-communication.html" />
     <Content Include="src\app\nav-menu\nav-menu.component.css" />
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
+    <Content Include="src\app\pages\admin-access\admin-access.html" />
     <Content Include="src\app\pages\manage-clawback\manage-clawback.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
     <Content Include="src\app\pages\agent-maintenance\agent-maintenance.html" />
@@ -404,6 +417,9 @@
     <Content Include="src\app\pages\agent-charges\agent-charges.html" />
     <Content Include="src\app\pages\manage-category\manage-category.html" />
     <Content Include="src\app\pages\manage-packages\manage-packages.html" />
+    <Content Include="src\app\pages\manage-login-banner\manage-login-banner.html" />
+    <Content Include="src\app\pages\upload-incentives\upload-incentives.html" />
+    <Content Include="src\app\pages\view-incentives\view-incentives.html" />
     <Content Include="src\app\pages\view-withdrawal\view-withdrawal.html" />
     <Content Include="src\app\pages\manage-product\manage-product.html" />
     <Content Include="src\app\pages\record-counts\record-counts.html" />
@@ -443,12 +459,15 @@
     <Content Include="Views\Shared\_Login.cshtml" />
     <Content Include="Views\Account\Activate.cshtml" />
     <Content Include="Views\Payment\Print.cshtml" />
+    <Content Include="Templates\IncentivesUploadTemplate.xlsx" />
     <None Include="Web.QA.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\AnnouncementFiles\" />
+    <Folder Include="App_Data\IncentiveFiles\" />
+    <Folder Include="App_Data\LoginBannerFiles\" />
     <Folder Include="App_Data\UploadFiles\" />
     <Folder Include="node_modules\" />
     <Folder Include="src\assets\" />
@@ -473,6 +492,7 @@
     <TypeScriptCompile Include="src\app\app.module.ts" />
     <TypeScriptCompile Include="src\app\components\announcement\announcement.ts" />
     <TypeScriptCompile Include="src\app\components\back-button\back-button.ts" />
+    <TypeScriptCompile Include="src\app\components\dashboard\monthly-applications\monthly-applications.ts" />
     <TypeScriptCompile Include="src\app\components\dashboard\submission-status-count\submission-status-count.ts" />
     <TypeScriptCompile Include="src\app\components\dashboard\team-submission\team-submission.ts" />
     <TypeScriptCompile Include="src\app\components\data-control\data-control.ts" />
@@ -512,11 +532,15 @@
     <TypeScriptCompile Include="src\app\interfaces\listDataCRUD.ts" />
     <TypeScriptCompile Include="src\app\interfaces\listEvent.ts" />
     <TypeScriptCompile Include="src\app\material.ts" />
+    <TypeScriptCompile Include="src\app\metadata\adminAccessColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\clawbackColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentChargesColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\manageLoginBannerColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\searchIncentiveFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchWithdrawalFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\viewIncentiveColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\viewWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\createWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\editOrderFields.ts" />
@@ -538,6 +562,7 @@
     <TypeScriptCompile Include="src\app\model\user.role.ts" />
     <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
+    <TypeScriptCompile Include="src\app\pages\admin-access\admin-access.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-clawback\manage-clawback.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-maintenance\agent-maintenance.ts" />
@@ -556,6 +581,9 @@
     <TypeScriptCompile Include="src\app\pages\agent-charges\agent-charges.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-category\manage-category.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-packages\manage-packages.ts" />
+    <TypeScriptCompile Include="src\app\pages\manage-login-banner\manage-login-banner.ts" />
+    <TypeScriptCompile Include="src\app\pages\upload-incentives\upload-incentives.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-incentives\view-incentives.ts" />
     <TypeScriptCompile Include="src\app\pages\view-withdrawal\view-withdrawal.ts" />
     <TypeScriptCompile Include="src\app\directives\editmode-directive.ts" />
     <TypeScriptCompile Include="src\app\directives\sort-cell.directive.ts" />

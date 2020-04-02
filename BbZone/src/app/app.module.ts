@@ -61,11 +61,17 @@ import { Announcement } from './components/announcement/announcement';
 import { UserCommunication } from './components/user-communication/user-communication';
 import { LessThanValidator } from './directives/less-than-validator.directive';
 import { SubmissionStatusCount } from './components/dashboard/submission-status-count/submission-status-count';
+import { MonthlyApplicationDashboard } from './components/dashboard/monthly-applications/monthly-applications';
 import { CreateWithdrawal } from './pages/create-withdrawal/create-withdrawal';
 import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
 import { AgentChanges } from './pages/agent-charges/agent-charges';
 import { CustomerFinder } from './components/customer-finder/customer-finder';
 import { ManageClawback } from './pages/manage-clawback/manage-clawback';
+import { UploadIncentives } from './pages/upload-incentives/upload-incentives';
+import { ViewIncentives } from './pages/view-incentives/view-incentives';
+import { AdminAccess } from './pages/admin-access/admin-access';
+import { ManageLoginBanner } from './pages/manage-login-banner/manage-login-banner';
+import { Role } from './enums/role';
 
 @NgModule({
   declarations: [
@@ -118,7 +124,12 @@ import { ManageClawback } from './pages/manage-clawback/manage-clawback';
         EditWithdrawal,
         AgentChanges,
         CustomerFinder,
-        ManageClawback
+        ManageClawback,
+        UploadIncentives,
+        ViewIncentives,
+        AdminAccess,
+        MonthlyApplicationDashboard,
+        ManageLoginBanner
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -142,22 +153,25 @@ import { ManageClawback } from './pages/manage-clawback/manage-clawback';
             { path: 'agent-comission', component: AgentComission },
             { path: 'view-commission', component: ViewCommission },
             { path: 'view-withdrawal', component: ViewWithdrawal },
-            { path: 'manage-product', component: ManageProduct },
-            { path: 'manage-packages', component: ManagePackage },
-            { path: 'manage-category', component: ManageCategory },
-            //{ path: 'agent-registration', component: AgentRegistration },
+            { path: 'manage-product', component: ManageProduct, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'manage-packages', component: ManagePackage, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'manage-category', component: ManageCategory, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'agent-registration', component: AgentRegistration},
-            { path: 'agent-registration-view/:id', component: AgentRegistrationView },
-            { path: 'agent-registration-list', component: AgentRegistrationList },
+            { path: 'agent-registration-view/:id', component: AgentRegistrationView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'agent-registration-list', component: AgentRegistrationList, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'agent-profile/:id', component: AgentProfile },
-            { path: 'agent-maintenance', component: AgentMaintenance },
-            { path: 'create-announcement', component: CreateAnnouncement },
-            { path: 'edit-announcement/:id', component: EditAnnouncement },
+            { path: 'agent-maintenance', component: AgentMaintenance, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'create-announcement', component: CreateAnnouncement, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'edit-announcement/:id', component: EditAnnouncement, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'view-announcement', component: ViewAnnouncement },
             { path: 'create-withdrawal', component: CreateWithdrawal },
             { path: 'edit-withdrawal/:id', component: EditWithdrawal },
-            { path: 'agent-charges', component: AgentChanges },
-            { path: 'manage-clawback', component: ManageClawback }
+            { path: 'agent-charges', component: AgentChanges, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'manage-clawback', component: ManageClawback, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'upload-incentives', component: UploadIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'view-incentives', component: ViewIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'admin-access', component: AdminAccess, canActivate: [UserAuthGuard], data: { roles: [ Role.SuperAdmin] } },
+            { path: 'manage-login-banner', component: ManageLoginBanner, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
     ])
   ],
   providers: [

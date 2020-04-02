@@ -17,3 +17,8 @@ export enum ControlType {
     number,
     customerFinder
 }
+
+export enum CustomerSearchType {
+    completed,
+    commissionClaimed
+}

@@ -6,6 +6,7 @@ import { BroadcastService } from 'src/app/services/broadcast.service';
 import { Subscription } from 'rxjs';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CustomerSearchType } from 'src/app/enums/dataDisplayType';
 declare var $: any;
 
 @Component({
@@ -29,10 +30,12 @@ export class CustomerFinder implements ControlValueAccessor  {
     loadData: boolean = false;
     startSearching: boolean = false;
     searchFieldInput: Subject<string> = new Subject();
+
     @ViewChild('searchInput') searchInput: ElementRef;
     @Output() onItemSelected = new EventEmitter();
     @Input() disabledEdit: boolean = false;
     @Input() fieldId: string;
+    @Input() searchType: CustomerSearchType;
     @Input()
     set displayText(data: any) {
         this.selectedCustomer = data;
@@ -97,9 +100,10 @@ export class CustomerFinder implements ControlValueAccessor  {
     private search(keyword) {
         if (!keyword) return;
 
+        let searchMethod = this.searchType === CustomerSearchType.commissionClaimed ? 'FindClaimedApplication' : 'FindCompletedApplication';
         this.loadData = true;
         this.startSearching = true;
-        this.dataService.get(`${ApiController.CustomerApplication}/Find/${keyword}`).subscribe(data => {
+        this.dataService.get(`${ApiController.CustomerApplication}/${searchMethod}/${keyword}`).subscribe(data => {
             this.startSearching = false;
             this.dropdownItems = !data ? [] : data;
         });

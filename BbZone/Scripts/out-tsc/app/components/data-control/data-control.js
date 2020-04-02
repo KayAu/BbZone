@@ -48,11 +48,16 @@ var DataControl = /** @class */ (function () {
         }
     };
     DataControl.prototype.writeValue = function (val) {
-        if (!val)
-            return;
-        this.data = this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown ? val.toString() : val;
-        if (this.field.cascadeTo) {
-            this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
+        if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
+            if (val) {
+                this.data = val.toString();
+                if (this.field.cascadeTo) {
+                    this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
+                }
+            }
+        }
+        else {
+            this.data = val;
         }
     };
     DataControl.prototype.registerOnChange = function (fn) {

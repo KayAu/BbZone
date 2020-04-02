@@ -13,6 +13,8 @@ import { SearchWithdrawalViewParams } from 'src/app/model/search-params';
 import { SearchWithdrawalFields } from 'src/app/metadata/searchWithdrawalFields';
 import { LoginUser } from 'src/app/model/login-user';
 import { AuthenticationService } from 'src/app/services/authentication';
+import { saveAs } from 'file-saver';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'view-withdrawal',
@@ -26,9 +28,15 @@ export class ViewWithdrawal extends ListEvent {
     displayType = DataDisplayType;
     searchParams = new SearchWithdrawalViewParams(null, null, null, null);
     keyField: string;   
+    totalAmountPayout: any;
+    totalAmountClaimed: any;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private authenticationService: AuthenticationService) {
         super(loaderService, dataService, "", false);
+        this.dataSourceSubject.asObservable().subscribe((data: any) => {
+            this.totalAmountPayout = data.totalAmountPayout;
+            this.totalAmountClaimed = data.totalAmountClaimed;
+        });
     }
 
     ngOnInit() {
@@ -68,6 +76,14 @@ export class ViewWithdrawal extends ListEvent {
     clearSearchParam() {
         this.searchParams = new SearchWithdrawalViewParams(null, null, null, null);
         this.reloadData();
+    }
+
+    exportRecords() {
+        this.dataService.export(`${ApiController.WithdrawalView}/Download`, this.searchParams).subscribe(data => {
+            let filename = `Withdrawal_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
+            const file: Blob = new Blob([data], { type: 'application/xlsx' });
+            saveAs(file, filename);
+        });
     }
 }
 

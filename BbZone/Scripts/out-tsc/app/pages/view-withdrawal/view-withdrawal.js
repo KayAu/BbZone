@@ -36,6 +36,8 @@ var form_data_mapping_1 = require("src/app/model/form.data.mapping");
 var search_params_1 = require("src/app/model/search-params");
 var searchWithdrawalFields_1 = require("src/app/metadata/searchWithdrawalFields");
 var authentication_1 = require("src/app/services/authentication");
+var file_saver_1 = require("file-saver");
+var common_1 = require("@angular/common");
 var ViewWithdrawal = /** @class */ (function (_super) {
     __extends(ViewWithdrawal, _super);
     function ViewWithdrawal(loaderService, dataService, formEvent, authenticationService) {
@@ -48,6 +50,10 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalAmountPayout = data.totalAmountPayout;
+            _this.totalAmountClaimed = data.totalAmountClaimed;
+        });
         return _this;
     }
     ViewWithdrawal.prototype.ngOnInit = function () {
@@ -71,6 +77,13 @@ var ViewWithdrawal = /** @class */ (function (_super) {
     ViewWithdrawal.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
         this.reloadData();
+    };
+    ViewWithdrawal.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.WithdrawalView + "/Download", this.searchParams).subscribe(function (data) {
+            var filename = "Withdrawal_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
     };
     ViewWithdrawal = __decorate([
         core_1.Component({

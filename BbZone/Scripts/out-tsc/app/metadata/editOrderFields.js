@@ -217,7 +217,9 @@ var EditOrderFields = /** @class */ (function () {
                 "controlType": "select",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetStatus"
+                "datasourceUrl": "GetStatus",
+                "cascadeTo": "",
+                "adminField": true
             }
         },
         {
@@ -228,7 +230,10 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "orderNo",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
         {
@@ -239,7 +244,10 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "userId",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
         {
@@ -250,7 +258,24 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "userId",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "documentCompleted",
+            "displayText": "Document Completed",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "documentCompleted",
+                "controlType": "checkbox",
+                "required": false,
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
     ];

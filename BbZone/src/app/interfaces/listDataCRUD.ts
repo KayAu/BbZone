@@ -53,7 +53,7 @@ export abstract class ListDataCrud extends ListEvent  {
 
     this.dataSource[rowIndex] = this.editedRecord;
     this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(data => {
-        this.dataSource[rowIndex] = data;
+        this.dataSource[rowIndex] = data ? data : this.editedRecord;
         this.dataSource[rowIndex].onEdit = false;
     });
   }
@@ -75,6 +75,10 @@ export abstract class ListDataCrud extends ListEvent  {
         this.reloadData();
     }
 
+    public resetPageAndColSort() {
+        this.resetSorting();
+        this.listPage.currentPage = 1;
+    }
   private setKeyField() {
     let field = this.fieldMapper.filter(f => f.keyField === true);
     if (field.length > 0)
@@ -95,8 +99,4 @@ export abstract class ListDataCrud extends ListEvent  {
       this.showNewRow = false;
   }
 
-    private resetPageAndColSort() {
-        this.resetSorting();
-        this.listPage.currentPage = 1;
-    }
 }

@@ -6,7 +6,8 @@ export class DataFieldControl {
               public required: boolean,
               public maxLength?: number,
               public datasourceUrl?: string,
-              public cascadeTo?: string
+              public cascadeTo?: string,
+              public adminField?: boolean
   ) { }
 
 }

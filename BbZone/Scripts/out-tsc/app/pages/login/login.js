@@ -16,9 +16,12 @@ var broadcast_service_1 = require("src/app/services/broadcast.service");
 var router_1 = require("@angular/router");
 var authentication_1 = require("src/app/services/authentication");
 var login_user_1 = require("src/app/model/login-user");
+var data_service_1 = require("src/app/services/data.service");
+var apiController_1 = require("src/app/enums/apiController");
 var Login = /** @class */ (function () {
-    function Login(loaderService, formSubmission, route, router, authenticationService) {
+    function Login(loaderService, dataService, formSubmission, route, router, authenticationService) {
         this.loaderService = loaderService;
+        this.dataService = dataService;
         this.formSubmission = formSubmission;
         this.route = route;
         this.router = router;
@@ -26,9 +29,8 @@ var Login = /** @class */ (function () {
         this.error = '';
     }
     Login.prototype.ngOnInit = function () {
+        this.loadBanner();
         this.user = new login_user_1.LoginUser();
-        //this.user.isAdmin = true;
-        // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
     };
     Login.prototype.login = function () {
@@ -45,6 +47,12 @@ var Login = /** @class */ (function () {
             }
         });
     };
+    Login.prototype.loadBanner = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.LoginBanner).subscribe(function (results) {
+            _this.bannerImage = !results ? "../../../../images/login.png" : results;
+        });
+    };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
         __metadata("design:type", Object)
@@ -55,6 +63,7 @@ var Login = /** @class */ (function () {
             templateUrl: './login.html'
         }),
         __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
             broadcast_service_1.BroadcastService,
             router_1.ActivatedRoute,
             router_1.Router,

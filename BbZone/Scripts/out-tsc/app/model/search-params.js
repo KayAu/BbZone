@@ -48,4 +48,15 @@ var SearchWithdrawalViewParams = /** @class */ (function () {
     return SearchWithdrawalViewParams;
 }());
 exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
+var SearchIncentivesParams = /** @class */ (function () {
+    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate) {
+        this.keyword = keyword;
+        this.productId = productId;
+        this.productCategoryId = productCategoryId;
+        this.productPackageId = productPackageId;
+        this.receivedDate = receivedDate;
+    }
+    return SearchIncentivesParams;
+}());
+exports.SearchIncentivesParams = SearchIncentivesParams;
 //# sourceMappingURL=search-params.js.map

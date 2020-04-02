@@ -37,9 +37,10 @@ namespace BroadbandZone_App.Models
 
     public class SearchWithdrawalParams
     {
+        public string Keyword { get; set; }
         public string Agent { get; set; }
         public string Status { get; set; }
-        public string Keyword { get; set; }
+        
         public DateRange SubmittedDate { get; set; }
         public DateRange CompletedDate { get; set; }
     }
@@ -48,5 +49,13 @@ namespace BroadbandZone_App.Models
         public string Title { get; set; }
         public bool? IsActive { get; set; }
         public DateRange AnnouncementDate { get; set; }
+    }
+    public class SearchIncentivesParams
+    {
+        public string Keyword { get; set; }
+        public int? ProductId { get; set; }
+        public int? ProductCategoryId { get; set; }
+        public int? ProductPackageId { get; set; }
+        public DateRange ReceivedDate { get; set; }
     }
 }

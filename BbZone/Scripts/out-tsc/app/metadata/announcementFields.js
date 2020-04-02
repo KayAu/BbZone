@@ -27,6 +27,16 @@ var NewAnnouncementFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "showsAtLoginPage",
+            "displayText": "Shows At Login Page",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "showsAtLoginPage",
+                "controlType": "checkbox",
+                "required": false
+            }
+        },
+        {
             "fieldName": "isActive",
             "displayText": "Is Active",
             "hidden": false,

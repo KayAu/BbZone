@@ -17,10 +17,11 @@ namespace BroadbandZone_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CustomerApplication()
         {
-            this.Communications = new HashSet<Communication>();
-            this.CustomerDocuments = new HashSet<CustomerDocument>();
             this.ClaimableCommissions = new HashSet<ClaimableCommission>();
             this.Clawbacks = new HashSet<Clawback>();
+            this.Communications = new HashSet<Communication>();
+            this.CustomerDocuments = new HashSet<CustomerDocument>();
+            this.IncentiveReceiveds = new HashSet<IncentiveReceived>();
         }
     
         public int ApplicationId { get; set; }
@@ -46,23 +47,23 @@ namespace BroadbandZone_Data
         public string UserId { get; set; }
         public string TelNo { get; set; }
         public Nullable<bool> SubmitByAgent { get; set; }
+        public Nullable<bool> DocumentCompleted { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
-        public Nullable<decimal> PackagePriceOnDate { get; set; }
-        public Nullable<short> AgentCommOnDate { get; set; }
-        public Nullable<short> SuperiorCommOnDate { get; set; }
     
         public virtual ApplicationStatu ApplicationStatu { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClaimableCommission> ClaimableCommissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clawback> Clawbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Communication> Communications { get; set; }
         public virtual ProductPackage ProductPackage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDocument> CustomerDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ClaimableCommission> ClaimableCommissions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clawback> Clawbacks { get; set; }
+        public virtual ICollection<IncentiveReceived> IncentiveReceiveds { get; set; }
     }
 }

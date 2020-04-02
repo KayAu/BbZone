@@ -12,14 +12,13 @@ namespace BroadbandZone_App.Helper
     public class FileUploadHelper
     {
         private string _UploadFilePath;
-        //public string UploadFilePath { get { return _UploadFilePath; }}
 
         public FileUploadHelper (string uploadFilePath)
         {
             this._UploadFilePath =  uploadFilePath;
         }
 
-        public IEnumerable<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, int fileId)
+        public IEnumerable<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, dynamic fileId)
         {
             foreach (MultipartFileData file in multipartFiles)
             {
@@ -33,6 +32,20 @@ namespace BroadbandZone_App.Helper
                     yield return new UploadedFile { Name = fileName, FilePath = $"{this._UploadFilePath}/{fileName}", Size = filesize };
                 }
             }
+        }
+
+        public UploadedFile UploadStreams(MultipartFileData file, dynamic fileId)
+        {
+            if (!string.IsNullOrEmpty(file.Headers.ContentDisposition.FileName))
+            {
+                double filesize = File.ReadAllBytes(file.LocalFileName).Length;
+                string fileName = file.Headers.ContentDisposition.FileName;
+                fileName = fileName.Insert(fileName.IndexOf("."), $"_{fileId.ToString()}").Replace("\"", "");
+                File.Move(file.LocalFileName, GetFileUploadLocation(fileName));
+
+                return new UploadedFile { Name = fileName, FilePath = $"{this._UploadFilePath}/{fileName}", Size = filesize };
+            }
+            return null;
         }
 
         public void RemoveFile(string fileName)
@@ -52,32 +65,6 @@ namespace BroadbandZone_App.Helper
         {
             return Path.Combine(HttpContext.Current.Server.MapPath(this._UploadFilePath), fileName);
         }
-        //public List<UploadedFile> UploadStreams(MultipartFileData[] multipartFiles, int fileId)
-        //{
-        //    List<UploadedFile> uploadedFiles = new List<UploadedFile>();
-        //    try
-        //    {
-        //        foreach (MultipartFileData file in multipartFiles)
-        //        {
-
-        //            if (!string.IsNullOrEmpty(file.Headers.ContentDisposition.FileName))
-        //            {
-        //                string fileName = file.Headers.ContentDisposition.FileName;
-        //                fileName = fileName.Insert(fileName.IndexOf("."), $"_{fileId.ToString()}").Replace("\"", "");
-        //                File.Move(file.LocalFileName, Path.Combine(this._UploadFilePath, fileName));
-        //                uploadedFiles.Add(new UploadedFile { Name = $"{Properties.Settings.Default.UploadFilePath}/{fileName}", Size = file.Headers.ContentDisposition.Size });
-        //            }
-        //        }
-
-        //        return uploadedFiles;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
-        //    }
-        //}
-
-
 
     }
 }

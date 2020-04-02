@@ -15,7 +15,7 @@ export class NavMenuComponent {
     constructor(private router: Router) { }
 
     collapse() {
-        this.isExpanded = false; 
+        this.isExpanded = false;
     }
 
     toggle() {

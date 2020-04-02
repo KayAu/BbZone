@@ -20,14 +20,33 @@ namespace BroadbandZone_App.WebApi
     public class CustomerApplicationController : ApiController
     {
         [HttpGet]
-        [Route("api/CustomerApplication/Find/{keyword}")]
+        [Route("api/CustomerApplication/FindClaimedApplication/{keyword}")]
         public IHttpActionResult Find(string keyword)
         {
             try
             {
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    var results = db.FindCustomerApplication(keyword).ToList();
+                    var results = db.FindClaimedApplication(keyword).ToList();
+                    return Ok(results);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.NotImplemented, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/CustomerApplication/FindCompletedApplication/{keyword}")]
+        public IHttpActionResult FindCompleated(string keyword)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    var results = db.FindCompletedApplication(keyword).ToList();
                     return Ok(results);
                 }
             }

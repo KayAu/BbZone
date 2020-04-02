@@ -1,0 +1,58 @@
+﻿<page-header [title]="'Upload Incentives'" [parentCategory]="'Manage Incentives'"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title">
+                    <h5>Upload file</h5>
+                </div>
+                <div class="ibox-content">
+                    <fieldset class="instruction" [disabled]="uploading">
+                        <h3>Step 1</h3>
+                        <p>Download file template <a href="../../../../Templates/IncentivesUploadTemplate.xlsx">here</a></p>
+                        <h3>Step 2</h3>
+                        <p>Concolidate incentives details from one or more telcos into the downloaded template file. Please ensure the data is updated into the correct column.</p>
+                        <h3>Step 3</h3>
+                        <div>
+                            <div class="mrg5B">Get the file you have updated</div>
+                            <div class="custom-file w-p50">
+                                <input #file id="file" type="file" class="custom-file-input" (change)="fileSelected(file)" readonly>
+                                <label for="logo" class="custom-file-label">{{selectedFile ? selectedFile.name : 'Choose file...'}}</label>
+                            </div>
+                        </div>
+                        <h3>Step 4</h3>
+                        <div class="flexbox">
+                            <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':uploading}"
+                                    [disabled]="uploading" (click)="uploadFile()">
+                                {{uploading ? 'Uploading' : 'Upload File'}}
+                                <span class="loading"></span>
+                            </button>
+                        </div>
+                    </fieldset>
+                    <loading></loading>
+                    <hr />
+                    <div class="m-b-lg alert alert-warning pad20A" *ngIf="incentivesNotUpdated">
+                        <div class="mrg10T">
+                            <strong>Found {{incentivesNotUpdated.length }} issues</strong>
+                            <p class="mrg5T">The following items are not updated due to the order number could not be matched.</p>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <tbody>
+                                    <tr *ngFor="let item of incentivesNotUpdated; let fileNo = index">
+                                        <td><span class="label label-danger">Error</span></td>
+                                        <td>{{item.customerName}}</td>
+                                        <td>{{item.orderNo}}</td>
+                                        <td>RM {{item.incentive}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+ v

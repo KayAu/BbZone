@@ -69,11 +69,17 @@ var announcement_1 = require("./components/announcement/announcement");
 var user_communication_1 = require("./components/user-communication/user-communication");
 var less_than_validator_directive_1 = require("./directives/less-than-validator.directive");
 var submission_status_count_1 = require("./components/dashboard/submission-status-count/submission-status-count");
+var monthly_applications_1 = require("./components/dashboard/monthly-applications/monthly-applications");
 var create_withdrawal_1 = require("./pages/create-withdrawal/create-withdrawal");
 var edit_withdrawal_1 = require("./pages/edit-withdrawal/edit-withdrawal");
 var agent_charges_1 = require("./pages/agent-charges/agent-charges");
 var customer_finder_1 = require("./components/customer-finder/customer-finder");
 var manage_clawback_1 = require("./pages/manage-clawback/manage-clawback");
+var upload_incentives_1 = require("./pages/upload-incentives/upload-incentives");
+var view_incentives_1 = require("./pages/view-incentives/view-incentives");
+var admin_access_1 = require("./pages/admin-access/admin-access");
+var manage_login_banner_1 = require("./pages/manage-login-banner/manage-login-banner");
+var role_1 = require("./enums/role");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -129,7 +135,12 @@ var AppModule = /** @class */ (function () {
                 edit_withdrawal_1.EditWithdrawal,
                 agent_charges_1.AgentChanges,
                 customer_finder_1.CustomerFinder,
-                manage_clawback_1.ManageClawback
+                manage_clawback_1.ManageClawback,
+                upload_incentives_1.UploadIncentives,
+                view_incentives_1.ViewIncentives,
+                admin_access_1.AdminAccess,
+                monthly_applications_1.MonthlyApplicationDashboard,
+                manage_login_banner_1.ManageLoginBanner
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -153,22 +164,25 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-comission', component: agent_comission_1.AgentComission },
                     { path: 'view-commission', component: view_commission_1.ViewCommission },
                     { path: 'view-withdrawal', component: view_withdrawal_1.ViewWithdrawal },
-                    { path: 'manage-product', component: manage_product_1.ManageProduct },
-                    { path: 'manage-packages', component: manage_packages_1.ManagePackage },
-                    { path: 'manage-category', component: manage_category_1.ManageCategory },
-                    //{ path: 'agent-registration', component: AgentRegistration },
+                    { path: 'manage-product', component: manage_product_1.ManageProduct, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-packages', component: manage_packages_1.ManagePackage, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-category', component: manage_category_1.ManageCategory, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
-                    { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView },
-                    { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList },
+                    { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
-                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
-                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
-                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
-                    { path: 'agent-charges', component: agent_charges_1.AgentChanges },
-                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback }
+                    { path: 'agent-charges', component: agent_charges_1.AgentChanges, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'upload-incentives', component: upload_incentives_1.UploadIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                 ])
             ],
             providers: [

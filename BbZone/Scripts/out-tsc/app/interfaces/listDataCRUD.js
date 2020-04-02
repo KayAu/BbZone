@@ -72,7 +72,7 @@ var ListDataCrud = /** @class */ (function (_super) {
             return;
         this.dataSource[rowIndex] = this.editedRecord;
         this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(function (data) {
-            _this.dataSource[rowIndex] = data;
+            _this.dataSource[rowIndex] = data ? data : _this.editedRecord;
             _this.dataSource[rowIndex].onEdit = false;
         });
     };
@@ -92,6 +92,10 @@ var ListDataCrud = /** @class */ (function (_super) {
         }
         this.reloadData();
     };
+    ListDataCrud.prototype.resetPageAndColSort = function () {
+        this.resetSorting();
+        this.listPage.currentPage = 1;
+    };
     ListDataCrud.prototype.setKeyField = function () {
         var field = this.fieldMapper.filter(function (f) { return f.keyField === true; });
         if (field.length > 0)
@@ -109,10 +113,6 @@ var ListDataCrud = /** @class */ (function (_super) {
             this.newRecord[field.dataFieldControl.controlName] = '';
         }
         this.showNewRow = false;
-    };
-    ListDataCrud.prototype.resetPageAndColSort = function () {
-        this.resetSorting();
-        this.listPage.currentPage = 1;
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

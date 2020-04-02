@@ -16,6 +16,14 @@ export class DataService {
         return this.http.get(fileUrl, { headers: new HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
     }
 
+    export(apiControllerName: string,  filterParams: any) {
+        //let searchParams = typeof filterParams === 'object' ? JSON.stringify(filterParams) : filterParams;
+        //let params = new HttpParams();
+        //params = params.append('searchParams', searchParams);
+        let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
+        return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' } ).catch(this.errorHandler);
+    }
+
     get(apiControllerName: string, recordId?: any): any {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
     }

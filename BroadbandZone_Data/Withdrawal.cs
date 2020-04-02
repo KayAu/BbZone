@@ -18,6 +18,8 @@ namespace BroadbandZone_Data
         public Withdrawal()
         {
             this.AgentCharges = new HashSet<AgentCharge>();
+            this.ClaimableCommissions = new HashSet<ClaimableCommission>();
+            this.ClaimableCommissions1 = new HashSet<ClaimableCommission>();
         }
     
         public int WithdrawalId { get; set; }
@@ -36,5 +38,9 @@ namespace BroadbandZone_Data
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AgentCharge> AgentCharges { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClaimableCommission> ClaimableCommissions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ClaimableCommission> ClaimableCommissions1 { get; set; }
     }
 }

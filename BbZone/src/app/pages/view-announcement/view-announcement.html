@@ -47,6 +47,14 @@
                                         <a class="btn btn-success btn-sm " [routerLink]='["/edit-announcement/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
                                     </td>
                                 </tr>
+                                <tr *ngIf="dataSource.length === 0">
+                                    <td [attr.colspan]="dataRowMapper.length+1">
+                                        <div class="mrg45A text-center opacity-40">
+                                            <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                            <h4>No Records Available</h4>
+                                        </div>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                         <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>

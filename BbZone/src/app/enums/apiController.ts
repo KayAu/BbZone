@@ -6,8 +6,9 @@ export enum ApiController {
     Impersonation = "Impersonation",
     CustomerApplication = "CustomerApplication",
     Registration = "Registration",
-    User = "User",
+    AdminUser = "AdminUser",
     Agent = "Agent",
+    User = "User",
     AgentCharges = "AgentCharges",
     Commission = "Commission",
     Dashboard = "Dashboard",
@@ -15,5 +16,8 @@ export enum ApiController {
     Communication = "Communication",
     WithdrawalView = "WithdrawalView",
     WithdrawalSubmit = "WithdrawalSubmit",
-    Clawback = "Clawback"
+    Clawback = "Clawback",
+    Incentives = "Incentives",
+    IncentivesUpload = "IncentivesUpload",
+    LoginBanner = "LoginBanner",
 }

@@ -19,7 +19,7 @@ export class UserCommunication  {
     @Input() applicationId: number;
 
     constructor(public loaderService: LoaderService,
-                public dataService: DataService) { }
+        public dataService: DataService) { }
 
     ngOnInit() { 
         //this.currentUser = this.authenticationService.currentUserValue;

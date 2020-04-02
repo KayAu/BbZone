@@ -2,13 +2,18 @@
 using BroadbandZone_App.Helper;
 using BroadbandZone_App.Models;
 using BroadbandZone_Data;
+using ClosedXML.Excel;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 using System.Web.Http;
 
@@ -17,6 +22,46 @@ namespace BroadbandZone_App.WebApi
     public class WithdrawalViewController : ApiController
     {
         private AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
+        [HttpGet]
+        //[Route("api/Incentives/Download/{searchParams}")]
+        public HttpResponseMessage Download([FromUri] SearchWithdrawalParams filterBy)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        //SearchIncentivesParams filterBy = JsonConvert.DeserializeObject<SearchIncentivesParams>(searchParams);
+                        var results = db.GetWithdrawalSubmittedForDownload(filterBy.Status,
+                                                                        filterBy.Agent,
+                                                                        filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
+                                                                        filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
+                                                                        filterBy.CompletedDate != null ? filterBy.CompletedDate.StartDate : null,
+                                                                        filterBy.CompletedDate != null ? filterBy.CompletedDate.EndDate : null).ToList();
+                        DataTable dt = results.ToDataTable();
+                        wb.Worksheets.Add(dt, "Withdrawals");
+                        MemoryStream stream = new MemoryStream();
+                        wb.SaveAs(stream);
+
+                        var result = new HttpResponseMessage(HttpStatusCode.OK);
+                        result.Content = new ByteArrayContent(stream.ToArray());
+                        result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                        result.Content.Headers.ContentDisposition.FileName = $"Withdrawals_{DateTime.Now.ToShortDateString()}.xlsx";
+                        result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                        return result;
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
+            }
+        }
+
         // GET: /api/<controller>
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
@@ -31,16 +76,18 @@ namespace BroadbandZone_App.WebApi
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
                     var results = (new BroadbandZoneEntities()).GetWithdrawalSubmitted(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.Status,
-                                                                                 !currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
+                                                                                !currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.StartDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.EndDate : null,
                                                                                 totalRecord).ToList();
-                    return Ok(new Gridview<GetWithdrawalSubmitted_Result>()
+                    return Ok(new WithdrawalView<GetWithdrawalSubmitted_Result>()
                     {
                         DisplayData = results,
-                        TotalRecords = Convert.ToInt32(totalRecord.Value)
+                        TotalRecords = Convert.ToInt32(totalRecord.Value),
+                        TotalAmountClaimed = results.Select(r=>r.Amount).Sum(),
+                        TotalAmountPayout = results.Where(r=>r.Status== "Completed").Select(r => r.Amount).Sum()
                     });
                 }
             }

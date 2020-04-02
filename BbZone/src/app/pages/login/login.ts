@@ -5,6 +5,8 @@ import { BroadcastService } from 'src/app/services/broadcast.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/app/services/authentication';
 import { LoginUser } from 'src/app/model/login-user';
+import { DataService } from 'src/app/services/data.service';
+import { ApiController } from 'src/app/enums/apiController';
 
 @Component({
     selector: 'login',
@@ -16,8 +18,10 @@ export class Login {
     user: LoginUser;
     returnUrl: string;
     error: string = '';
+    bannerImage: string;
 
     constructor(public loaderService: LoaderService,
+        private dataService: DataService,
         private formSubmission: BroadcastService,
         private route: ActivatedRoute,
         private router: Router,
@@ -25,9 +29,8 @@ export class Login {
     }
     
     ngOnInit() {
+        this.loadBanner();
         this.user = new LoginUser();
-        //this.user.isAdmin = true;
-        // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
     }
 
@@ -47,4 +50,9 @@ export class Login {
             }});
     }
 
+    loadBanner() {
+        this.dataService.get(ApiController.LoginBanner).subscribe(results => {
+            this.bannerImage = !results ? "../../../../images/login.png" : results ;
+        });
+    }
 }

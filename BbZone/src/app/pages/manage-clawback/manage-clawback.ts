@@ -1,7 +1,7 @@
 import { Component, Inject, ViewChild } from '@angular/core';
 import { ClawbackColumns } from '../../metadata/clawbackColumns';
 import { TablerowDataMapping } from '../../model/tablerow.data.mapping';
-import { DataDisplayType, ControlType } from '../../enums/dataDisplayType';
+import { DataDisplayType, ControlType, CustomerSearchType } from '../../enums/dataDisplayType';
 import { ListDataCrud } from '../../interfaces/ListDataCrud';
 import { DataFieldControl } from '../../model/data.field.control';
 import { BroadcastService } from '../../services/broadcast.service';
@@ -20,6 +20,7 @@ export class ManageClawback extends ListDataCrud {
     dataRowMapper: TablerowDataMapping[] = [];
     displayType = DataDisplayType;
     controlType = ControlType;
+    customerSearchType = CustomerSearchType;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
         super(loaderService, dataService, 'clawbackId', formEvent);

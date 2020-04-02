@@ -111,13 +111,28 @@
     <Compile Include="DashboardMyTeamSubmissions_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DboardMonthlyApplications_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="DboardSubmissionStatusCount_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DboardTopSalesPackage_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DboardTotalSalesAndCommission_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="DropdownItem.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="FindCustomerApplication_Result.cs">
+    <Compile Include="FindClaimedApplication_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FindCompletedApplication_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAdminUsers_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAgentCharges_Result.cs">
@@ -147,6 +162,15 @@
     <Compile Include="GetDropdownItems_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetIncentivesReceivedForDownload_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetIncentivesReceived_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetLoginBanners_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetPaymentDetails_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -165,13 +189,28 @@
     <Compile Include="GetWithdrawalItems_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetWithdrawalSubmittedForDownload_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetWithdrawalSubmitted_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetWithdrawalToSubmit_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IncentiveReceived.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginPageBanner.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PartialClass\PartialClass.cs" />
+    <Compile Include="prc_DboardTotalSalesAndCommission_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prc_GetLoginBanners_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

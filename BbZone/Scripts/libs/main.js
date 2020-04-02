@@ -327,7 +327,7 @@ module.exports = "@media (max-width: 767px) {\r\n  /* On small screens, the nav 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a (click)=\"logout()\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
+module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n                        <!--<a class=\"dropdown-toggle count-info\" data-toggle=\"dropdown\" href=\"#\">\r\n                            <i class=\"fa fa-envelope\"></i>  <span class=\"label label-warning\">16</span>\r\n                        </a>-->\r\n                        <!--<ul class=\"dropdown-menu dropdown-messages\">\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a7.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">46h ago</small>\r\n                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">3 days ago at 7:58 pm - 10.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/a4.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right text-navy\">5h ago</small>\r\n                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">Yesterday 1:21 pm - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"dropdown-messages-box\">\r\n                                    <a class=\"dropdown-item float-left\" href=\"profile.html\">\r\n                                        <img alt=\"image\" class=\"rounded-circle\" src=\"img/profile.jpg\">\r\n                                    </a>\r\n                                    <div>\r\n                                        <small class=\"float-right\">23h ago</small>\r\n                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>\r\n                                        <small class=\"text-muted\">2 days ago at 2:30 am - 11.06.2014</small>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                            <li class=\"dropdown-divider\"></li>\r\n                            <li>\r\n                                <div class=\"text-center link-block\">\r\n                                    <a href=\"mailbox.html\" class=\"dropdown-item\">\r\n                                        <i class=\"fa fa-envelope\"></i> <strong>Read All Messages</strong>\r\n                                    </a>\r\n                                </div>\r\n                            </li>\r\n                        </ul>-->\r\n                    </li>\r\n                    <li>\r\n                        <a (click)=\"logout()\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
 
 /***/ }),
 
@@ -480,11 +480,17 @@ var announcement_1 = __webpack_require__(/*! ./components/announcement/announcem
 var user_communication_1 = __webpack_require__(/*! ./components/user-communication/user-communication */ "./src/app/components/user-communication/user-communication.ts");
 var less_than_validator_directive_1 = __webpack_require__(/*! ./directives/less-than-validator.directive */ "./src/app/directives/less-than-validator.directive.ts");
 var submission_status_count_1 = __webpack_require__(/*! ./components/dashboard/submission-status-count/submission-status-count */ "./src/app/components/dashboard/submission-status-count/submission-status-count.ts");
+var monthly_applications_1 = __webpack_require__(/*! ./components/dashboard/monthly-applications/monthly-applications */ "./src/app/components/dashboard/monthly-applications/monthly-applications.ts");
 var create_withdrawal_1 = __webpack_require__(/*! ./pages/create-withdrawal/create-withdrawal */ "./src/app/pages/create-withdrawal/create-withdrawal.ts");
 var edit_withdrawal_1 = __webpack_require__(/*! ./pages/edit-withdrawal/edit-withdrawal */ "./src/app/pages/edit-withdrawal/edit-withdrawal.ts");
 var agent_charges_1 = __webpack_require__(/*! ./pages/agent-charges/agent-charges */ "./src/app/pages/agent-charges/agent-charges.ts");
 var customer_finder_1 = __webpack_require__(/*! ./components/customer-finder/customer-finder */ "./src/app/components/customer-finder/customer-finder.ts");
 var manage_clawback_1 = __webpack_require__(/*! ./pages/manage-clawback/manage-clawback */ "./src/app/pages/manage-clawback/manage-clawback.ts");
+var upload_incentives_1 = __webpack_require__(/*! ./pages/upload-incentives/upload-incentives */ "./src/app/pages/upload-incentives/upload-incentives.ts");
+var view_incentives_1 = __webpack_require__(/*! ./pages/view-incentives/view-incentives */ "./src/app/pages/view-incentives/view-incentives.ts");
+var admin_access_1 = __webpack_require__(/*! ./pages/admin-access/admin-access */ "./src/app/pages/admin-access/admin-access.ts");
+var manage_login_banner_1 = __webpack_require__(/*! ./pages/manage-login-banner/manage-login-banner */ "./src/app/pages/manage-login-banner/manage-login-banner.ts");
+var role_1 = __webpack_require__(/*! ./enums/role */ "./src/app/enums/role.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -540,7 +546,12 @@ var AppModule = /** @class */ (function () {
                 edit_withdrawal_1.EditWithdrawal,
                 agent_charges_1.AgentChanges,
                 customer_finder_1.CustomerFinder,
-                manage_clawback_1.ManageClawback
+                manage_clawback_1.ManageClawback,
+                upload_incentives_1.UploadIncentives,
+                view_incentives_1.ViewIncentives,
+                admin_access_1.AdminAccess,
+                monthly_applications_1.MonthlyApplicationDashboard,
+                manage_login_banner_1.ManageLoginBanner
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -564,22 +575,25 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-comission', component: agent_comission_1.AgentComission },
                     { path: 'view-commission', component: view_commission_1.ViewCommission },
                     { path: 'view-withdrawal', component: view_withdrawal_1.ViewWithdrawal },
-                    { path: 'manage-product', component: manage_product_1.ManageProduct },
-                    { path: 'manage-packages', component: manage_packages_1.ManagePackage },
-                    { path: 'manage-category', component: manage_category_1.ManageCategory },
-                    //{ path: 'agent-registration', component: AgentRegistration },
+                    { path: 'manage-product', component: manage_product_1.ManageProduct, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-packages', component: manage_packages_1.ManagePackage, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-category', component: manage_category_1.ManageCategory, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
-                    { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView },
-                    { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList },
+                    { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
-                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance },
-                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement },
-                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
-                    { path: 'agent-charges', component: agent_charges_1.AgentChanges },
-                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback }
+                    { path: 'agent-charges', component: agent_charges_1.AgentChanges, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'upload-incentives', component: upload_incentives_1.UploadIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                 ])
             ],
             providers: [
@@ -877,6 +891,7 @@ var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./sr
 var rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
 var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
 var CustomerFinder = /** @class */ (function () {
     function CustomerFinder(el, formEvent, dataService) {
         var _this = this;
@@ -945,9 +960,10 @@ var CustomerFinder = /** @class */ (function () {
         var _this = this;
         if (!keyword)
             return;
+        var searchMethod = this.searchType === dataDisplayType_1.CustomerSearchType.commissionClaimed ? 'FindClaimedApplication' : 'FindCompletedApplication';
         this.loadData = true;
         this.startSearching = true;
-        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/Find/" + keyword).subscribe(function (data) {
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/" + searchMethod + "/" + keyword).subscribe(function (data) {
             _this.startSearching = false;
             _this.dropdownItems = !data ? [] : data;
         });
@@ -979,6 +995,10 @@ var CustomerFinder = /** @class */ (function () {
     ], CustomerFinder.prototype, "fieldId", void 0);
     __decorate([
         core_1.Input(),
+        __metadata("design:type", Number)
+    ], CustomerFinder.prototype, "searchType", void 0);
+    __decorate([
+        core_1.Input(),
         __metadata("design:type", Object),
         __metadata("design:paramtypes", [Object])
     ], CustomerFinder.prototype, "displayText", null);
@@ -1002,6 +1022,135 @@ var CustomerFinder = /** @class */ (function () {
     return CustomerFinder;
 }());
 exports.CustomerFinder = CustomerFinder;
+
+
+/***/ }),
+
+/***/ "./src/app/components/dashboard/monthly-applications/monthly-applications.html":
+/*!*************************************************************************************!*\
+  !*** ./src/app/components/dashboard/monthly-applications/monthly-applications.html ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"col-lg-9\">\r\n    <div class=\"box \">\r\n        <div class=\"box-header mrg20B\">\r\n            <div class=\"box-title font-bold\">Monthly Customer Applications</div>\r\n            <small>Total customer applications for past 12 months excluding KIV and cancelled.</small>\r\n        </div>\r\n        <div class=\"box-body border-radius-none\">\r\n            <div class=\"w-p100\">\r\n                <canvas id=\"monthlyCallStatus\" style=\"height: 240px;\"  #monthlyApplications>{{chart}}</canvas>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<div class=\"col-lg-3\">\r\n    <div class=\"row m-t-xs\">\r\n        <div class=\"col-md-6\">\r\n            <h5 class=\"m-b-xs\">Sales last 12 months</h5>\r\n            <h1 class=\"no-margins float-left\">{{totalApplications}} </h1>\r\n            <i class=\"fa fa-bolt pos-rel mrg5L text-navy pos-t-12\"></i>\r\n        </div>\r\n        <div class=\"col-md-6\">\r\n            <h5 class=\"m-b-xs\">Commissions last 12 month</h5>\r\n            <h1 class=\"no-margins float-left\">RM {{totalCommissions}}</h1>\r\n            <i class=\"fa fa-bolt pos-rel mrg5L text-navy pos-t-12\"></i>\r\n        </div>\r\n    </div>\r\n    <div class=\"font-bold mrg20T\">Top 5 best selling package</div>\r\n    <table class=\"table small m-t-sm mrg5B\">\r\n        <tbody>\r\n            <tr *ngFor=\"let record of topSellers; let rowNo = index\">\r\n                <td>\r\n                    {{record.packageName}}\r\n                </td>\r\n                <td class=\"text-right\">\r\n                    <strong>{{record.totalApplications}}</strong>\r\n                </td>\r\n            </tr>\r\n        </tbody>\r\n    </table>\r\n    <small class=\"smaller\">\r\n        The best seller rolling up from past 12 months\r\n    </small>\r\n</div>\r\n\r\n\r\n"
+
+/***/ }),
+
+/***/ "./src/app/components/dashboard/monthly-applications/monthly-applications.ts":
+/*!***********************************************************************************!*\
+  !*** ./src/app/components/dashboard/monthly-applications/monthly-applications.ts ***!
+  \***********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var Chart = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
+var pluginDataLabels = __webpack_require__(/*! chartjs-plugin-datalabels */ "./node_modules/chartjs-plugin-datalabels/dist/chartjs-plugin-datalabels.js");
+var MonthlyApplicationDashboard = /** @class */ (function () {
+    function MonthlyApplicationDashboard(loaderService, dataService) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.topSellers = [];
+        this.barChartType = 'bar';
+        this.barChartLegend = false;
+        this.barChartPlugins = [pluginDataLabels];
+        this.barColors = [{ backgroundColor: 'rgba(5, 176, 133, 0.45)' }];
+    }
+    MonthlyApplicationDashboard.prototype.ngOnInit = function () {
+        //this.setChartOptions();
+        this.loadData();
+    };
+    MonthlyApplicationDashboard.prototype.loadData = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Dashboard.toString() + "/GetMonthlyApplications").subscribe(function (data) {
+            _this.monthlyApplications = data.monthlyApplications;
+            _this.topSellers = data.topSellers;
+            _this.totalApplications = data.totalApplications;
+            _this.totalCommissions = data.totalCommission;
+            _this.drawChart();
+        });
+    };
+    MonthlyApplicationDashboard.prototype.drawChart = function () {
+        this.chart = new Chart(this.chartRef.nativeElement, {
+            type: 'bar',
+            data: {
+                labels: this.monthlyApplications.labels,
+                datasets: this.monthlyApplications.datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                legend: {
+                    display: false,
+                    position: 'bottom'
+                },
+                scales: {
+                    xAxes: [
+                        {
+                            stacked: false,
+                        },
+                        {
+                            display: false,
+                            stacked: false,
+                            ticks: { padding: 0 }
+                        }
+                    ],
+                    yAxes: [{
+                            stacked: false,
+                            ticks: {
+                                beginAtZero: true,
+                            },
+                            gridLines: {
+                                display: true,
+                                color: 'rgba(97, 106, 120, 0.07)',
+                                tickMarkLength: 10
+                            },
+                        }]
+                },
+                plugins: {
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'end',
+                        offset: 1,
+                        clamp: true,
+                        font: {
+                            size: 11,
+                        }
+                    }
+                }
+            }
+        });
+    };
+    __decorate([
+        core_1.ViewChild('monthlyApplications'),
+        __metadata("design:type", Object)
+    ], MonthlyApplicationDashboard.prototype, "chartRef", void 0);
+    MonthlyApplicationDashboard = __decorate([
+        core_1.Component({
+            selector: 'monthly-applications',
+            template: __webpack_require__(/*! ./monthly-applications.html */ "./src/app/components/dashboard/monthly-applications/monthly-applications.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+    ], MonthlyApplicationDashboard);
+    return MonthlyApplicationDashboard;
+}());
+exports.MonthlyApplicationDashboard = MonthlyApplicationDashboard;
 
 
 /***/ }),
@@ -1224,11 +1373,16 @@ var DataControl = /** @class */ (function () {
         }
     };
     DataControl.prototype.writeValue = function (val) {
-        if (!val)
-            return;
-        this.data = this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown ? val.toString() : val;
-        if (this.field.cascadeTo) {
-            this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
+        if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
+            if (val) {
+                this.data = val.toString();
+                if (this.field.cascadeTo) {
+                    this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
+                }
+            }
+        }
+        else {
+            this.data = val;
         }
     };
     DataControl.prototype.registerOnChange = function (fn) {
@@ -1845,7 +1999,7 @@ exports.FileUploader = FileUploader;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<loading></loading>\r\n<table class=\"table wp-100\" >\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <th *ngFor=\"let columnName of dataColumns; let colIndex = index\" [ngClass]=\"{'pad15L':colIndex == 0}\">{{columnName}}</th>\r\n            <th *ngIf=\"itemLink\">View</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td *ngIf=\"!hideColumns.includes(colNo)\"  [ngClass]=\"{'pad15L':colNo == 0}\" [innerHTML]=\"value\">\r\n                </td>\r\n            </ng-container>\r\n        </tr>\r\n        <tr *ngIf=\"showTotal && dataColumns.length > 0\">\r\n            <td></td>\r\n            <td class=\"font-weight-600\">Total</td>\r\n            <td class=\"font-weight-600\" *ngFor=\"let item of [].constructor(dataColumns.length-1); let colIndex = index\">{{sumColumnTotal(colIndex+1)}}</td>\r\n        </tr>\r\n        <tr *ngIf=\"!dataSource.length\">\r\n            <td class=\"pad0A\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<!--<pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" *ngIf=\"showPager\"></pager>-->"
+module.exports = "\r\n<table class=\"table wp-100\" >\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <th *ngFor=\"let columnName of dataColumns; let colIndex = index\" [ngClass]=\"{'pad15L':colIndex == 0}\">{{columnName}}</th>\r\n            <th *ngIf=\"itemLink\">View</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td *ngIf=\"!hideColumns.includes(colNo)\"  [ngClass]=\"{'pad15L':colNo == 0}\" [innerHTML]=\"value\">\r\n                </td>\r\n            </ng-container>\r\n        </tr>\r\n        <tr *ngIf=\"showTotal && dataColumns.length > 0\">\r\n            <td></td>\r\n            <td class=\"font-weight-600\">Total</td>\r\n            <td class=\"font-weight-600\" *ngFor=\"let item of [].constructor(dataColumns.length-1); let colIndex = index\">{{sumColumnTotal(colIndex+1)}}</td>\r\n        </tr>\r\n        <tr *ngIf=\"!dataSource.length\">\r\n            <td class=\"pad0A\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n<!--<pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" *ngIf=\"showPager\"></pager>-->"
 
 /***/ }),
 
@@ -2214,7 +2368,7 @@ module.exports = "div.dataTables_paginate {\r\n  margin: 0;\r\n  white-space: no
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"disp-block\" *ngIf=\"pageButtons.length > 0\">\r\n    <div class=\"col-sm-3 pad0L\">\r\n        <div class=\"dataTables_info table\">{{pageDesc}}</div>\r\n    </div>\r\n    <div class=\"col-sm-9 dataTables_paginate paging_simple_numbers\">\r\n        <ul class=\"pagination\">\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goFirstPage()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\">First</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goPrevious()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\"><<</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item\" *ngFor=\"let pageNo of pageButtons\"\r\n                [ngClass]=\"{'active': isActivePage(pageNo)}\">\r\n                <a class=\"page-link\" (click)=\"goToPage(pageNo)\" >\r\n                    {{pageNo}}\r\n                </a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goNext()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">>></a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goLastPage()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">Last</a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"disp-block\" *ngIf=\"pageButtons.length > 0\">\r\n    <div class=\"col-sm-3 pad0L\">\r\n        <div class=\"dataTables_info table\">{{pageDesc}}</div>\r\n    </div>\r\n    <div class=\"col-sm-9 dataTables_paginate paging_simple_numbers pad0R\">\r\n        <ul class=\"pagination\">\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goFirstPage()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\">First</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goPrevious()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\"><<</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item\" *ngFor=\"let pageNo of pageButtons\"\r\n                [ngClass]=\"{'active': isActivePage(pageNo)}\">\r\n                <a class=\"page-link\" (click)=\"goToPage(pageNo)\" >\r\n                    {{pageNo}}\r\n                </a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goNext()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">>></a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goLastPage()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">Last</a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -2688,6 +2842,7 @@ var TableRowButtons = /** @class */ (function (_super) {
     function TableRowButtons() {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.hideDelete = false;
+        _this.hideEdit = false;
         _this.disabledEdit = false;
         _this.disabledDelete = false;
         _this.onEdit = new core_1.EventEmitter();
@@ -2720,6 +2875,10 @@ var TableRowButtons = /** @class */ (function (_super) {
     __decorate([
         core_1.Input(),
         __metadata("design:type", Boolean)
+    ], TableRowButtons.prototype, "hideEdit", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
     ], TableRowButtons.prototype, "disabledEdit", void 0);
     __decorate([
         core_1.Input(),
@@ -2744,7 +2903,7 @@ var TableRowButtons = /** @class */ (function (_super) {
     TableRowButtons = __decorate([
         core_1.Component({
             selector: 'tablerow-buttons',
-            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
+            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\" *ngIf=\"!hideEdit\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
         })
     ], TableRowButtons);
     return TableRowButtons;
@@ -3160,8 +3319,9 @@ var ApiController;
     ApiController["Impersonation"] = "Impersonation";
     ApiController["CustomerApplication"] = "CustomerApplication";
     ApiController["Registration"] = "Registration";
-    ApiController["User"] = "User";
+    ApiController["AdminUser"] = "AdminUser";
     ApiController["Agent"] = "Agent";
+    ApiController["User"] = "User";
     ApiController["AgentCharges"] = "AgentCharges";
     ApiController["Commission"] = "Commission";
     ApiController["Dashboard"] = "Dashboard";
@@ -3170,6 +3330,9 @@ var ApiController;
     ApiController["WithdrawalView"] = "WithdrawalView";
     ApiController["WithdrawalSubmit"] = "WithdrawalSubmit";
     ApiController["Clawback"] = "Clawback";
+    ApiController["Incentives"] = "Incentives";
+    ApiController["IncentivesUpload"] = "IncentivesUpload";
+    ApiController["LoginBanner"] = "LoginBanner";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -3205,6 +3368,31 @@ var ControlType;
     ControlType[ControlType["number"] = 9] = "number";
     ControlType[ControlType["customerFinder"] = 10] = "customerFinder";
 })(ControlType = exports.ControlType || (exports.ControlType = {}));
+var CustomerSearchType;
+(function (CustomerSearchType) {
+    CustomerSearchType[CustomerSearchType["completed"] = 0] = "completed";
+    CustomerSearchType[CustomerSearchType["commissionClaimed"] = 1] = "commissionClaimed";
+})(CustomerSearchType = exports.CustomerSearchType || (exports.CustomerSearchType = {}));
+
+
+/***/ }),
+
+/***/ "./src/app/enums/role.ts":
+/*!*******************************!*\
+  !*** ./src/app/enums/role.ts ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var Role;
+(function (Role) {
+    Role["Admin"] = "Admin";
+    Role["Agent"] = "Agent";
+    Role["SuperAdmin"] = "SuperAdmin";
+})(Role = exports.Role || (exports.Role = {}));
 
 
 /***/ }),
@@ -3346,7 +3534,7 @@ var ListDataCrud = /** @class */ (function (_super) {
             return;
         this.dataSource[rowIndex] = this.editedRecord;
         this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(function (data) {
-            _this.dataSource[rowIndex] = data;
+            _this.dataSource[rowIndex] = data ? data : _this.editedRecord;
             _this.dataSource[rowIndex].onEdit = false;
         });
     };
@@ -3366,6 +3554,10 @@ var ListDataCrud = /** @class */ (function (_super) {
         }
         this.reloadData();
     };
+    ListDataCrud.prototype.resetPageAndColSort = function () {
+        this.resetSorting();
+        this.listPage.currentPage = 1;
+    };
     ListDataCrud.prototype.setKeyField = function () {
         var field = this.fieldMapper.filter(function (f) { return f.keyField === true; });
         if (field.length > 0)
@@ -3383,10 +3575,6 @@ var ListDataCrud = /** @class */ (function (_super) {
             this.newRecord[field.dataFieldControl.controlName] = '';
         }
         this.showNewRow = false;
-    };
-    ListDataCrud.prototype.resetPageAndColSort = function () {
-        this.resetSorting();
-        this.listPage.currentPage = 1;
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
@@ -3759,6 +3947,56 @@ exports.ManageCategoryColumns = ManageCategoryColumns;
 
 /***/ }),
 
+/***/ "./src/app/metadata/ManageLoginBannerColumns.ts":
+/*!******************************************************!*\
+  !*** ./src/app/metadata/ManageLoginBannerColumns.ts ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ManageLoginBannerColumns = /** @class */ (function () {
+    function ManageLoginBannerColumns() {
+    }
+    ManageLoginBannerColumns.fields = [
+        {
+            "fieldName": "bannerId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-1"
+        },
+        {
+            "fieldName": "fileName",
+            "headerText": "Filename",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-60"
+        },
+        {
+            "fieldName": "createdOn",
+            "headerText": "Created On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+        {
+            "fieldName": "createdBy",
+            "headerText": "Created By",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+    ];
+    return ManageLoginBannerColumns;
+}());
+exports.ManageLoginBannerColumns = ManageLoginBannerColumns;
+
+
+/***/ }),
+
 /***/ "./src/app/metadata/ManageProductColumns.ts":
 /*!**************************************************!*\
   !*** ./src/app/metadata/ManageProductColumns.ts ***!
@@ -3816,6 +4054,106 @@ var ManageProductColumns = /** @class */ (function () {
     return ManageProductColumns;
 }());
 exports.ManageProductColumns = ManageProductColumns;
+
+
+/***/ }),
+
+/***/ "./src/app/metadata/adminAccessColumns.ts":
+/*!************************************************!*\
+  !*** ./src/app/metadata/adminAccessColumns.ts ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var AdminAccessColumns = /** @class */ (function () {
+    function AdminAccessColumns() {
+    }
+    AdminAccessColumns.fields = [
+        {
+            "fieldName": "id",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-1",
+            "dataFieldControl": {
+                "controlName": "id",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "fullname",
+            "headerText": "Fullname",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "",
+            "dataFieldControl": {
+                "controlName": "fullname",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 50
+            }
+        },
+        {
+            "fieldName": "userLogin",
+            "headerText": "User Login",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "",
+            "dataFieldControl": {
+                "controlName": "userLogin",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 16
+            }
+        },
+        {
+            "fieldName": "password",
+            "headerText": "Password",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "",
+            "dataFieldControl": {
+                "controlName": "password",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 16
+            }
+        },
+        {
+            "fieldName": "hasFullControl",
+            "headerText": "Full Control",
+            "displayType": "tick",
+            "keyField": false,
+            "colWidth": "cell-width-5",
+            "dataFieldControl": {
+                "controlName": "hasFullControl",
+                "controlType": "checkbox",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "isActive",
+            "headerText": "Active",
+            "displayType": "tick",
+            "keyField": false,
+            "colWidth": "cell-width-5",
+            "dataFieldControl": {
+                "controlName": "isActive",
+                "controlType": "checkbox",
+                "required": false,
+                "maxLength": 0
+            }
+        }
+    ];
+    return AdminAccessColumns;
+}());
+exports.AdminAccessColumns = AdminAccessColumns;
 
 
 /***/ }),
@@ -4617,6 +4955,16 @@ var NewAnnouncementFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "showsAtLoginPage",
+            "displayText": "Shows At Login Page",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "showsAtLoginPage",
+                "controlType": "checkbox",
+                "required": false
+            }
+        },
+        {
             "fieldName": "isActive",
             "displayText": "Is Active",
             "hidden": false,
@@ -5133,7 +5481,9 @@ var EditOrderFields = /** @class */ (function () {
                 "controlType": "select",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetStatus"
+                "datasourceUrl": "GetStatus",
+                "cascadeTo": "",
+                "adminField": true
             }
         },
         {
@@ -5144,7 +5494,10 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "orderNo",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
         {
@@ -5155,7 +5508,10 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "userId",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
         {
@@ -5166,7 +5522,24 @@ var EditOrderFields = /** @class */ (function () {
                 "controlName": "userId",
                 "controlType": "textbox",
                 "required": false,
-                "maxLength": 25
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "documentCompleted",
+            "displayText": "Document Completed",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "documentCompleted",
+                "controlType": "checkbox",
+                "required": false,
+                "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
             }
         },
     ];
@@ -5532,6 +5905,88 @@ exports.NewOrderFields = NewOrderFields;
 
 /***/ }),
 
+/***/ "./src/app/metadata/searchIncentiveFields.ts":
+/*!***************************************************!*\
+  !*** ./src/app/metadata/searchIncentiveFields.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var SearchIncentiveFields = /** @class */ (function () {
+    function SearchIncentiveFields() {
+    }
+    SearchIncentiveFields.fields = [
+        {
+            "fieldName": "keyword",
+            "displayText": "Customer Name or Order No",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "keyword",
+                "controlType": "textbox",
+                "required": false,
+                "maxLength": 50
+            }
+        },
+        {
+            "fieldName": "productId",
+            "displayText": "Product",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "productId",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetProducts",
+                "cascadeTo": "productCategoryId"
+            }
+        },
+        {
+            "fieldName": "productCategoryId",
+            "displayText": "Product Category",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "productCategoryId",
+                "controlType": "cascadeDropdown",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetCategoriesByProduct",
+                "cascadeTo": "productPackageId"
+            }
+        },
+        {
+            "fieldName": "productPackageId",
+            "displayText": "Product Package",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "productPackageId",
+                "controlType": "cascadeDropdown",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetPackagesByCategory"
+            }
+        },
+        {
+            "fieldName": "receivedDate",
+            "displayText": "Received Date",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "receivedDate",
+                "controlType": "dateRange",
+                "required": false,
+                "maxLength": 0
+            }
+        }
+    ];
+    return SearchIncentiveFields;
+}());
+exports.SearchIncentiveFields = SearchIncentiveFields;
+
+
+/***/ }),
+
 /***/ "./src/app/metadata/searchOrderFields.ts":
 /*!***********************************************!*\
   !*** ./src/app/metadata/searchOrderFields.ts ***!
@@ -5719,6 +6174,131 @@ exports.SearchWithdrawalFields = SearchWithdrawalFields;
 
 /***/ }),
 
+/***/ "./src/app/metadata/viewIncentiveColumns.ts":
+/*!**************************************************!*\
+  !*** ./src/app/metadata/viewIncentiveColumns.ts ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ViewIncentiveReceivedColumns = /** @class */ (function () {
+    function ViewIncentiveReceivedColumns() {
+    }
+    ViewIncentiveReceivedColumns.fields = [{
+            "fieldName": "incPymntId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-1",
+            "dataFieldControl": {
+                "controlName": "incPymntId",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "customerName",
+            "headerText": "Customer Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "col-width-20",
+            "dataFieldControl": {
+                "controlName": "customerName",
+                "controlType": "customerFinder",
+                "required": true,
+                "maxLength": 50
+            }
+        },
+        {
+            "fieldName": "orderNo",
+            "headerText": "OrderNo",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "orderNo",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 25
+            }
+        },
+        {
+            "fieldName": "packageName",
+            "headerText": "Package",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15",
+            "dataFieldControl": {
+                "controlName": "packageName",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 150
+            }
+        },
+        {
+            "fieldName": "category",
+            "headerText": "Category",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15",
+            "dataFieldControl": {
+                "controlName": "category",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 50
+            }
+        },
+        {
+            "fieldName": "productName",
+            "headerText": "Product",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15",
+            "dataFieldControl": {
+                "controlName": "productName",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 150
+            }
+        },
+        {
+            "fieldName": "incentiveAmt",
+            "headerText": "Incentive (RM)",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "incentiveAmt",
+                "controlType": "number",
+                "required": true,
+                "maxLength": 25
+            }
+        },
+        {
+            "fieldName": "createdOn",
+            "headerText": "Received On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "createdOn",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 25
+            }
+        }
+    ];
+    return ViewIncentiveReceivedColumns;
+}());
+exports.ViewIncentiveReceivedColumns = ViewIncentiveReceivedColumns;
+
+
+/***/ }),
+
 /***/ "./src/app/metadata/viewOrderColumns .ts":
 /*!***********************************************!*\
   !*** ./src/app/metadata/viewOrderColumns .ts ***!
@@ -5894,13 +6474,14 @@ exports.CascadeData = CascadeData;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var DataFieldControl = /** @class */ (function () {
-    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo) {
+    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo, adminField) {
         this.controlName = controlName;
         this.controlType = controlType;
         this.required = required;
         this.maxLength = maxLength;
         this.datasourceUrl = datasourceUrl;
         this.cascadeTo = cascadeTo;
+        this.adminField = adminField;
     }
     return DataFieldControl;
 }());
@@ -6073,6 +6654,17 @@ var SearchWithdrawalViewParams = /** @class */ (function () {
     return SearchWithdrawalViewParams;
 }());
 exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
+var SearchIncentivesParams = /** @class */ (function () {
+    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate) {
+        this.keyword = keyword;
+        this.productId = productId;
+        this.productCategoryId = productCategoryId;
+        this.productPackageId = productPackageId;
+        this.receivedDate = receivedDate;
+    }
+    return SearchIncentivesParams;
+}());
+exports.SearchIncentivesParams = SearchIncentivesParams;
 
 
 /***/ }),
@@ -6143,7 +6735,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav metismenu\" id=\"side-menu\">\r\n      <li class=\"nav-header\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n          <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n          <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n        </ul>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n            <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n            <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n        </ul>\r\n      </li>\r\n      <li>\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li>\r\n        <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Transaction</span></a>\r\n      </li>\r\n      <li>\r\n        <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n        <ul class=\"nav nav-second-level collapse\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n            <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">User Access</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n            <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n            <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">View Announcement</span></a></li>\r\n        </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" role=\"navigation\" *ngIf=\"currentUser\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav tree\" id=\"side-menu\" data-widget=\"tree\">\r\n      <li class=\"nav-header w-p100\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li><a class=\"dropdown-item\" *ngIf=\"!currentUser.isAdmin\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n              <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n              <!--<li><a [routerLink]='[\"/view-commission\"]'><span class=\"nav-label\">View Commission</span></a></li>-->\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/upload-incentives\"]'><span class=\"nav-label\">Upload Incentives</span></a></li>\r\n              <li><a [routerLink]='[\"/view-incentives\"]'><span class=\"nav-label\">View Incentives</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/admin-access\"]'><span class=\"nav-label\">Admin Access</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n              <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">Manage Announcement</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-login-banner\"]'><span class=\"nav-label\">Manage Login Banner</span></a></li>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -6200,6 +6792,98 @@ var NavMenuComponent = /** @class */ (function () {
     return NavMenuComponent;
 }());
 exports.NavMenuComponent = NavMenuComponent;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/admin-access/admin-access.html":
+/*!******************************************************!*\
+  !*** ./src/app/pages/admin-access/admin-access.html ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Manage Admin Access'\" [parentCategory]=\"'Data Administration'\"></page-header>\r\n<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Admin Access</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    \r\n                    <div class=\"table-responsive\">\r\n                        <loading></loading>\r\n                        <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                        <form #tableForm=\"ngForm\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngIf=\"showNewRow\">\r\n                                        <td *ngFor=\"let field of dataRowMapper\">\r\n                                            <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                        </td>\r\n                                        <td>\r\n                                            <button class=\"btn btn-primary btn-sm\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                            <button type=\"button\" class=\"btn btn-sm btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                <i class=\"fa fa-times\"></i>\r\n                                            </button>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td *ngIf=\"!record.onEdit\">\r\n                                                <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            </td>\r\n                                            <td *ngIf=\"record.onEdit\">\r\n                                                <data-control [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                        <td>\r\n                                            <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"true\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\"></tablerow-buttons>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </form>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/admin-access/admin-access.ts":
+/*!****************************************************!*\
+  !*** ./src/app/pages/admin-access/admin-access.ts ***!
+  \****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var adminAccessColumns_1 = __webpack_require__(/*! ../../metadata/adminAccessColumns */ "./src/app/metadata/adminAccessColumns.ts");
+var tablerow_data_mapping_1 = __webpack_require__(/*! ../../model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var dataDisplayType_1 = __webpack_require__(/*! ../../enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var ListDataCrud_1 = __webpack_require__(/*! ../../interfaces/ListDataCrud */ "./src/app/interfaces/ListDataCrud.ts");
+var data_field_control_1 = __webpack_require__(/*! ../../model/data.field.control */ "./src/app/model/data.field.control.ts");
+var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var search_params_1 = __webpack_require__(/*! ../../model/search-params */ "./src/app/model/search-params.ts");
+var AdminAccess = /** @class */ (function (_super) {
+    __extends(AdminAccess, _super);
+    function AdminAccess(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, 'Id', formEvent) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.controlType = dataDisplayType_1.ControlType;
+        return _this;
+    }
+    AdminAccess.prototype.ngOnInit = function () {
+        this.formName = "tableForm";
+        this.controllerName = apiController_1.ApiController.AdminUser;
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.initDataRecord(this.dataRowMapper);
+    };
+    AdminAccess.prototype.getTablerowDataMapping = function () {
+        var columnMappings = adminAccessColumns_1.AdminAccessColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
+        return columnMappings;
+    };
+    AdminAccess = __decorate([
+        core_1.Component({
+            selector: 'admin-access',
+            template: __webpack_require__(/*! ./admin-access.html */ "./src/app/pages/admin-access/admin-access.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], AdminAccess);
+    return AdminAccess;
+}(ListDataCrud_1.ListDataCrud));
+exports.AdminAccess = AdminAccess;
 
 
 /***/ }),
@@ -7451,33 +8135,35 @@ var data_field_control_1 = __webpack_require__(/*! ../../model/data.field.contro
 var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
 var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
 var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
-var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
 var router_2 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
 var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-var cascade_service_1 = __webpack_require__(/*! src/app/services/cascade.service */ "./src/app/services/cascade.service.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
 var EditOrder = /** @class */ (function () {
-    function EditOrder(loaderService, dataService, formEvent, cascadeService, router, route, toastr) {
+    function EditOrder(loaderService, dataService, formEvent, router, route, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
         this.formEvent = formEvent;
-        this.cascadeService = cascadeService;
         this.router = router;
         this.route = route;
-        this.toastr = toastr;
+        this.authenticationService = authenticationService;
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
     }
     EditOrder.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+        if (!this.currentUser.isAdmin) {
+            columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
+        }
         return columnMappings;
     };
     EditOrder.prototype.update = function () {
@@ -7515,8 +8201,12 @@ var EditOrder = /** @class */ (function () {
             selector: 'edit-order',
             template: __webpack_require__(/*! ./edit-order.html */ "./src/app/pages/edit-order/edit-order.html")
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService,
-            cascade_service_1.CascadeService, router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
+            broadcast_service_1.BroadcastService,
+            router_1.Router,
+            router_2.ActivatedRoute,
+            authentication_1.AuthenticationService])
     ], EditOrder);
     return EditOrder;
 }());
@@ -7640,7 +8330,7 @@ exports.EditWithdrawal = EditWithdrawal;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper wrapper-content\">\r\n  <div class=\"row\">\r\n    <submission-status-count></submission-status-count>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-title\">\r\n          <h5>Orders</h5>\r\n          <div class=\"float-right\">\r\n            <div class=\"btn-group\">\r\n              <button type=\"button\" class=\"btn btn-xs btn-white active\">Today</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Monthly</button>\r\n              <button type=\"button\" class=\"btn btn-xs btn-white\">Annual</button>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"ibox-content\">\r\n          <div class=\"row\">\r\n            <div class=\"col-lg-9\">\r\n              <div class=\"flot-chart\">\r\n                  <img src=\"../../../assets/images/dashboard.png\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"col-lg-3\">\r\n              <ul class=\"stat-list\">\r\n                <li>\r\n                  <h2 class=\"no-margins\">2,346</h2>\r\n                  <small>Total orders in period</small>\r\n                  <div class=\"stat-percent\">48% <i class=\"fa fa-level-up text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 48%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">4,422</h2>\r\n                  <small>Orders in last month</small>\r\n                  <div class=\"stat-percent\">60% <i class=\"fa fa-level-down text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 60%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n                <li>\r\n                  <h2 class=\"no-margins \">9,180</h2>\r\n                  <small>Monthly income from orders</small>\r\n                  <div class=\"stat-percent\">22% <i class=\"fa fa-bolt text-navy\"></i></div>\r\n                  <div class=\"progress progress-mini\">\r\n                    <div style=\"width: 22%;\" class=\"progress-bar\"></div>\r\n                  </div>\r\n                </li>\r\n              </ul>\r\n            </div>\r\n          </div>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-6\">\r\n      <announcement></announcement>\r\n    </div>\r\n    <div class=\"col-lg-6\">\r\n        <team-submission></team-submission>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"wrapper wrapper-content\">\r\n  <div class=\"row\">\r\n    <submission-status-count></submission-status-count>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-content\">\r\n            <div class=\"row\">\r\n                <monthly-applications></monthly-applications>\r\n            </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n      <loading></loading>\r\n      <div class=\"col-lg-6\">\r\n          <announcement></announcement>\r\n      </div>\r\n      <div class=\"col-lg-6\">\r\n          <team-submission></team-submission>\r\n      </div>\r\n  </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -7684,7 +8374,7 @@ exports.Home = Home;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"loginColumns animated fadeInDown\">\r\n    <div class=\"row\">\r\n        <div>\r\n            <h1 class=\"logo-name\">IN+</h1>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Sign In to Account</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-6 b-r\">\r\n                            <h3 class=\"m-t-none m-b\">Sign in</h3>\r\n                            <p>Enter you login details below</p>\r\n                            <form role=\"form\">\r\n                                <div class=\"form-group\">\r\n                                    <div class=\"btn-group btn-group-toggle\">\r\n                                        <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': user.isAdmin == true }\">\r\n                                            <input type=\"radio\" id=\"admin\" name=\"role\" [value]=\"true\" [(ngModel)]=\"user.isAdmin\" class=\"hidden\"> Admin\r\n                                        </label>\r\n                                        <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': user.isAdmin == false }\">\r\n                                            <input type=\"radio\" id=\"agent\" name=\"role\" [value]=\"false\" [(ngModel)]=\"user.isAdmin\" class=\"hidden\"> Agent\r\n                                        </label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"form-group\">\r\n                                    <label>Email</label>\r\n                                    <input type=\"text\" class=\"form-control\" placeholder=\"Login Name\" [(ngModel)]=\"user.username\" name=\"username\" #username=\"ngModel\" required>\r\n                                </div>\r\n                                <div class=\"form-group\">\r\n                                    <label>Password</label>\r\n                                    <input type=\"password\" class=\"form-control\" placeholder=\"Password\" [(ngModel)]=\"user.password\" name=\"password\" #password=\"ngModel\" required>\r\n                                    <div *ngIf=\"error\" class=\"text-danger mrg10T\">{{error}}</div>\r\n                                </div>\r\n                                <loading></loading>\r\n                                <div class=\"form-group\">\r\n                                    <!--<a  class=\"btn btn-info btn-block margin-top-10\" (click)=\"login()\">Sign In</a>-->\r\n                                    <button type=\"submit\" class=\"btn btn-info btn-block margin-top-10\" (click)=\"login()\">Sign In</button>\r\n                                </div>\r\n                            </form>\r\n                        </div>\r\n                        <div class=\"col-sm-6\">\r\n                            <h4>Not an agent yet?</h4>\r\n                            <p>You can create an account:</p>\r\n                            <p class=\"text-center\">\r\n                                <a [routerLink]='[\"/agent-registration\"]'><i class=\"fa fa-sign-in big-icon\"></i></a>\r\n                            </p>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n"
+module.exports = "\r\n<div class=\"loginColumns animated fadeInDown\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox bg-authentication\">\r\n                <div class=\"ibox-content pad0A\">\r\n                    <div class=\"row mrg0A\">\r\n                        <div class=\"col-sm-7 pad0L\" style=\"height: 470px;\">\r\n                            <!--<img src=\"../../../../images/login.png\" />-->\r\n                            <img [src]=\"bannerImage\" />\r\n                        </div>\r\n                        <div class=\"col-sm-5 pad20A\">\r\n                            <h2 class=\"m-t-none mrg30B mrg30T font-bold\">Welcome Back</h2>\r\n                            <p>Enter you login details below</p>\r\n                            <form role=\"form\">\r\n                                <div class=\"form-group\">\r\n                                    <div class=\"btn-group btn-group-toggle\">\r\n                                        <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': user.isAdmin == true }\">\r\n                                            <input type=\"radio\" id=\"admin\" name=\"role\" [value]=\"true\" [(ngModel)]=\"user.isAdmin\" class=\"hidden\"> Admin\r\n                                        </label>\r\n                                        <label class=\"btn btn-sm btn-white\" [ngClass]=\"{'active': user.isAdmin == false }\">\r\n                                            <input type=\"radio\" id=\"agent\" name=\"role\" [value]=\"false\" [(ngModel)]=\"user.isAdmin\" class=\"hidden\"> Agent\r\n                                        </label>\r\n                                    </div>\r\n                                </div>\r\n                                <div class=\"form-group\">\r\n                                    <label>Email</label>\r\n                                    <input type=\"text\" class=\"form-control\" placeholder=\"Login Name\" [(ngModel)]=\"user.username\" name=\"username\" #username=\"ngModel\" required>\r\n                                </div>\r\n                                <div class=\"form-group\">\r\n                                    <label>Password</label>\r\n                                    <input type=\"password\" class=\"form-control\" placeholder=\"Password\" [(ngModel)]=\"user.password\" name=\"password\" #password=\"ngModel\" required>\r\n                                    <div *ngIf=\"error\" class=\"text-danger mrg10T\">{{error}}</div>\r\n                                </div>\r\n                                <loading></loading>\r\n                                <div class=\"form-group\">\r\n                                    <!--<a  class=\"btn btn-info btn-block margin-top-10\" (click)=\"login()\">Sign In</a>-->\r\n                                    <button type=\"submit\" class=\"btn btn-success btn-block mrg20B\" (click)=\"login()\">Sign In</button>\r\n                                </div>\r\n                                <hr />\r\n                                <p class=\"text-center mrg30B\">\r\n                                    <small>Not an agent yet?</small>\r\n                                    <a [routerLink]='[\"/agent-registration\"]' class=\"smaller\"> Sign up<i class=\"fa fa-sign-in mrg5L\"></i></a>\r\n                                </p>\r\n                            </form>\r\n                        </div>\r\n\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -7714,9 +8404,12 @@ var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.ser
 var router_1 = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
 var login_user_1 = __webpack_require__(/*! src/app/model/login-user */ "./src/app/model/login-user.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
 var Login = /** @class */ (function () {
-    function Login(loaderService, formSubmission, route, router, authenticationService) {
+    function Login(loaderService, dataService, formSubmission, route, router, authenticationService) {
         this.loaderService = loaderService;
+        this.dataService = dataService;
         this.formSubmission = formSubmission;
         this.route = route;
         this.router = router;
@@ -7724,9 +8417,8 @@ var Login = /** @class */ (function () {
         this.error = '';
     }
     Login.prototype.ngOnInit = function () {
+        this.loadBanner();
         this.user = new login_user_1.LoginUser();
-        //this.user.isAdmin = true;
-        // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
     };
     Login.prototype.login = function () {
@@ -7743,6 +8435,12 @@ var Login = /** @class */ (function () {
             }
         });
     };
+    Login.prototype.loadBanner = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.LoginBanner).subscribe(function (results) {
+            _this.bannerImage = !results ? "../../../../images/login.png" : results;
+        });
+    };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
         __metadata("design:type", Object)
@@ -7753,6 +8451,7 @@ var Login = /** @class */ (function () {
             template: __webpack_require__(/*! ./login.html */ "./src/app/pages/login/login.html")
         }),
         __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
             broadcast_service_1.BroadcastService,
             router_1.ActivatedRoute,
             router_1.Router,
@@ -7864,7 +8563,7 @@ exports.ManageCategory = ManageCategory;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Manage Agent Charges'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Manage Agent Charges</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12 m-b-xs flexbox\">\r\n                            <div class=\"mrg10L cell-width-20\">\r\n                                <input placeholder=\"Search by customer name, agent name or order no\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                            </div>\r\n                            <button class=\"btn btn-outline btn-default mrg10L\" (click)=\"clearSearchParam()\">Clear</button>\r\n                        </div>\r\n                        <loading></loading>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <loading></loading>\r\n                        <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                        <form #tableForm=\"ngForm\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                        <td *ngFor=\"let field of dataRowMapper\">\r\n                                            <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                          [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                            <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                             (onItemSelected)=\"setNewCustomerDetails($event)\"></customer-finder>\r\n                                        </td>\r\n                                        <td>\r\n                                            <button class=\"btn btn-primary btn-sm\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                            <button type=\"button\" class=\"btn btn-sm btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                <i class=\"fa fa-times\"></i>\r\n                                            </button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td *ngIf=\"!record.onEdit\">\r\n                                                <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            </td>\r\n                                            <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                [displayText]=\"editedRecord[field.dataFieldControl.controlName]\" [disabledEdit]=\"true\"  (onItemSelected)=\"setEditCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                        <td>\r\n                                            <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\" [disabledEdit]=\"!record.editable\" [disabledDelete]=\"!record.editable\"></tablerow-buttons>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </form>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Clawback'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Manage Clawback</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"m-b-xs flexbox\">\r\n                            <div class=\"mrg15L cell-width-20\">\r\n                                <input placeholder=\"Search by customer name, agent name or order no\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                            </div>\r\n                            <button class=\"btn btn-outline btn-default mrg10L\" (click)=\"clearSearchParam()\">Clear</button>\r\n                        </div>\r\n                        <loading></loading>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <loading></loading>\r\n                        <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                        <form #tableForm=\"ngForm\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                        <td *ngFor=\"let field of dataRowMapper\">\r\n                                            <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                          [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                            <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                             (onItemSelected)=\"setNewCustomerDetails($event)\" [searchType]=\"customerSearchType.commissionClaimed\"></customer-finder>\r\n                                        </td>\r\n                                        <td>\r\n                                            <button class=\"btn btn-primary btn-sm mrg5R\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                            <button type=\"button\" class=\"btn btn-sm btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                <i class=\"fa fa-times\"></i>\r\n                                            </button>\r\n                                        </td>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td *ngIf=\"!record.onEdit\">\r\n                                                <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            </td>\r\n                                            <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                [displayText]=\"editedRecord[field.dataFieldControl.controlName]\"  [disabledEdit]=\"true\"  (onItemSelected)=\"setEditCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                        <td>\r\n                                            <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\" [disabledEdit]=\"!record.editable\" [disabledDelete]=\"!record.editable\"></tablerow-buttons>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </form>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -7921,6 +8620,7 @@ var ManageClawback = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
+        _this.customerSearchType = dataDisplayType_1.CustomerSearchType;
         return _this;
     }
     ManageClawback.prototype.ngOnInit = function () {
@@ -7969,6 +8669,118 @@ var ManageClawback = /** @class */ (function (_super) {
     return ManageClawback;
 }(ListDataCrud_1.ListDataCrud));
 exports.ManageClawback = ManageClawback;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/manage-login-banner/manage-login-banner.html":
+/*!********************************************************************!*\
+  !*** ./src/app/pages/manage-login-banner/manage-login-banner.html ***!
+  \********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Manage Login Banner'\" [parentCategory]=\"'Data Administration'\"></page-header>\r\n<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Manage Login Banner</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    \r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n                            <loading></loading>\r\n                            <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                            <form #tableForm=\"ngForm\">\r\n                                <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                            <th class=\"cell-width-8\">Action</th>\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngIf=\"showNewRow\">\r\n                                            <td></td>\r\n                                            <td>\r\n                                                <div class=\"custom-file w-p100\">\r\n                                                    <input #file id=\"banner\" type=\"file\" class=\"custom-file-input\" (change)=\"fileSelected(file)\" accept=\"image/*\" readonly>\r\n                                                    <label for=\"banner\" class=\"custom-file-label\">{{selectedFile ? selectedFile.name : 'Choose file...'}}</label>\r\n                                                </div>\r\n                                            </td>\r\n                                            <td></td>\r\n                                            <td></td>\r\n                                            <td>\r\n                                                <button class=\"btn btn-primary btn-sm\" (click)=\"uploadFile()\"><i class=\"fa fa-save\"></i></button>\r\n                                                <button type=\"button\" class=\"btn btn-sm btn-warning\" (click)=\"clearSelectedFile()\">\r\n                                                    <i class=\"fa fa-times\"></i>\r\n                                                </button>\r\n                                            </td>\r\n\r\n\r\n                                        </tr>\r\n                                        <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                            <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                                <td *ngIf=\"!record.onEdit\">\r\n                                                    <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                </td>\r\n                                            </ng-container>\r\n                                            <td>\r\n                                                <tablerow-buttons [hideEdit]=\"true\" [hideDelete]=\"false\" (onDelete)=\"deleteRow(rowNo)\"></tablerow-buttons>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"dataSource.length === 0\">\r\n                                            <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                                <div class=\"mrg45A text-center opacity-40\">\r\n                                                    <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                    <h4>No Records Available</h4>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </form>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/manage-login-banner/manage-login-banner.ts":
+/*!******************************************************************!*\
+  !*** ./src/app/pages/manage-login-banner/manage-login-banner.ts ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var ManageLoginBannerColumns_1 = __webpack_require__(/*! ../../metadata/ManageLoginBannerColumns */ "./src/app/metadata/ManageLoginBannerColumns.ts");
+var tablerow_data_mapping_1 = __webpack_require__(/*! ../../model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var dataDisplayType_1 = __webpack_require__(/*! ../../enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var ListDataCrud_1 = __webpack_require__(/*! ../../interfaces/ListDataCrud */ "./src/app/interfaces/ListDataCrud.ts");
+var broadcast_service_1 = __webpack_require__(/*! ../../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
+var loader_service_1 = __webpack_require__(/*! ../../loader/loader.service */ "./src/app/loader/loader.service.ts");
+var apiController_1 = __webpack_require__(/*! ../../enums/apiController */ "./src/app/enums/apiController.ts");
+var search_params_1 = __webpack_require__(/*! ../../model/search-params */ "./src/app/model/search-params.ts");
+var ManageLoginBanner = /** @class */ (function (_super) {
+    __extends(ManageLoginBanner, _super);
+    function ManageLoginBanner(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, 'BannerId', formEvent) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.controlType = dataDisplayType_1.ControlType;
+        return _this;
+    }
+    ManageLoginBanner.prototype.ngOnInit = function () {
+        this.formName = "tableForm";
+        this.controllerName = apiController_1.ApiController.LoginBanner;
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.initDataRecord(this.dataRowMapper);
+    };
+    ManageLoginBanner.prototype.getTablerowDataMapping = function () {
+        var columnMappings = ManageLoginBannerColumns_1.ManageLoginBannerColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    ManageLoginBanner.prototype.clearSelectedFile = function () {
+        this.selectedFile = null;
+        this.showNewRow = false;
+    };
+    ManageLoginBanner.prototype.fileSelected = function (file) {
+        this.selectedFile = file.files[0];
+        console.log(file);
+    };
+    ManageLoginBanner.prototype.uploadFile = function () {
+        var _this = this;
+        if (this.selectedFile) {
+            var formData = new FormData();
+            formData.append("file", this.selectedFile);
+            this.uploading = true;
+            this.dataService.postForm(apiController_1.ApiController.LoginBanner, formData).subscribe(function (data) {
+                _this.uploading = false;
+                _this.clearSelectedFile();
+                _this.setListDisplay(data);
+                _this.resetPageAndColSort();
+            });
+        }
+    };
+    ManageLoginBanner = __decorate([
+        core_1.Component({
+            selector: 'manage-login-banner',
+            template: __webpack_require__(/*! ./manage-login-banner.html */ "./src/app/pages/manage-login-banner/manage-login-banner.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], ManageLoginBanner);
+    return ManageLoginBanner;
+}(ListDataCrud_1.ListDataCrud));
+exports.ManageLoginBanner = ManageLoginBanner;
 
 
 /***/ }),
@@ -8162,6 +8974,81 @@ exports.ManageProduct = ManageProduct;
 
 /***/ }),
 
+/***/ "./src/app/pages/upload-incentives/upload-incentives.html":
+/*!****************************************************************!*\
+  !*** ./src/app/pages/upload-incentives/upload-incentives.html ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Upload Incentives'\" [parentCategory]=\"'Manage Incentives'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Upload file</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <fieldset class=\"instruction\" [disabled]=\"uploading\">\r\n                        <h3>Step 1</h3>\r\n                        <p>Download file template <a href=\"../../../../Templates/IncentivesUploadTemplate.xlsx\">here</a></p>\r\n                        <h3>Step 2</h3>\r\n                        <p>Concolidate incentives details from one or more telcos into the downloaded template file. Please ensure the data is updated into the correct column.</p>\r\n                        <h3>Step 3</h3>\r\n                        <div>\r\n                            <div class=\"mrg5B\">Get the file you have updated</div>\r\n                            <div class=\"custom-file w-p50\">\r\n                                <input #file id=\"file\" type=\"file\" class=\"custom-file-input\" (change)=\"fileSelected(file)\" readonly>\r\n                                <label for=\"logo\" class=\"custom-file-label\">{{selectedFile ? selectedFile.name : 'Choose file...'}}</label>\r\n                            </div>\r\n                        </div>\r\n                        <h3>Step 4</h3>\r\n                        <div class=\"flexbox\">\r\n                            <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':uploading}\"\r\n                                    [disabled]=\"uploading\" (click)=\"uploadFile()\">\r\n                                {{uploading ? 'Uploading' : 'Upload File'}}\r\n                                <span class=\"loading\"></span>\r\n                            </button>\r\n                        </div>\r\n                    </fieldset>\r\n                    <loading></loading>\r\n                    <hr />\r\n                    <div class=\"m-b-lg alert alert-warning pad20A\" *ngIf=\"incentivesNotUpdated\">\r\n                        <div class=\"mrg10T\">\r\n                            <strong>Found {{incentivesNotUpdated.length }} issues</strong>\r\n                            <p class=\"mrg5T\">The following items are not updated due to the order number could not be matched.</p>\r\n                        </div>\r\n                        <div class=\"table-responsive\">\r\n                            <table class=\"table\">\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let item of incentivesNotUpdated; let fileNo = index\">\r\n                                        <td><span class=\"label label-danger\">Error</span></td>\r\n                                        <td>{{item.customerName}}</td>\r\n                                        <td>{{item.orderNo}}</td>\r\n                                        <td>RM {{item.incentive}}</td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n v"
+
+/***/ }),
+
+/***/ "./src/app/pages/upload-incentives/upload-incentives.ts":
+/*!**************************************************************!*\
+  !*** ./src/app/pages/upload-incentives/upload-incentives.ts ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var UploadIncentives = /** @class */ (function () {
+    function UploadIncentives(loaderService, dataService, toastr) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.toastr = toastr;
+    }
+    UploadIncentives.prototype.ngOnInit = function () { };
+    UploadIncentives.prototype.fileSelected = function (file) {
+        this.selectedFile = file.files[0];
+        console.log(file);
+    };
+    UploadIncentives.prototype.uploadFile = function () {
+        var _this = this;
+        if (this.selectedFile) {
+            var formData = new FormData();
+            formData.append("file", this.selectedFile);
+            this.uploading = true;
+            this.dataService.postForm(apiController_1.ApiController.IncentivesUpload, formData).subscribe(function (data) {
+                _this.uploading = false;
+                _this.incentivesNotUpdated = data;
+                if (!_this.incentivesNotUpdated) {
+                    _this.toastr.success('The payment incentives is updated successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+                }
+            });
+        }
+    };
+    UploadIncentives = __decorate([
+        core_1.Component({
+            selector: 'upload-incentives',
+            template: __webpack_require__(/*! ./upload-incentives.html */ "./src/app/pages/upload-incentives/upload-incentives.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, ngx_toastr_1.ToastrService])
+    ], UploadIncentives);
+    return UploadIncentives;
+}());
+exports.UploadIncentives = UploadIncentives;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/view-announcement/view-announcement.html":
 /*!****************************************************************!*\
   !*** ./src/app/pages/view-announcement/view-announcement.html ***!
@@ -8169,7 +9056,7 @@ exports.ManageProduct = ManageProduct;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Announcement'\" [parentCategory]=\"'Data Administration'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <a [routerLink]='[\"/create-announcement\"]' class=\"btn btn-primary btn-lg float-right mrg15B\"><i class=\"fa fa-plus\"></i> <span class=\"nav-label\">Create</span></a>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Announcements</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12 m-b-xs flexbox\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-white\" for=\"all\" [ngClass]=\"{'active': searchParams.isActive == '' || searchParams.isActive == null }\">\r\n                                    <input type=\"radio\" id=\"all\" name=\"status\" [value]=\"\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> All\r\n                                </label>\r\n                                <label class=\"btn btn-white\" for=\"active\" [ngClass]=\"{'active': searchParams.isActive == false }\">\r\n                                    <input type=\"radio\" id=\"active\" name=\"status\" [value]=\"true\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Active\r\n                                </label>\r\n                                <label class=\"btn btn-white\" for=\"inactive\" [ngClass]=\"{'active': searchParams.isActive == false }\">\r\n                                    <input type=\"radio\" id=\"inactive\" name=\"status\" [value]=\"false\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Inactive\r\n                                </label>\r\n                            </div>\r\n                            <div class=\"mrg10L cell-width-30\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                            </div>\r\n                            <button class=\"btn btn-outline btn-default mrg10L\" (click)=\"clearSearchParam()\">Clear</button>\r\n                        </div>                    \r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-announcement/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'View Announcement'\" [parentCategory]=\"'Data Administration'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <a [routerLink]='[\"/create-announcement\"]' class=\"btn btn-primary btn-lg float-right mrg15B\"><i class=\"fa fa-plus\"></i> <span class=\"nav-label\">Create</span></a>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Announcements</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <div class=\"col-sm-12 m-b-xs flexbox\">\r\n                            <div class=\"btn-group btn-group-toggle\">\r\n                                <label class=\"btn btn-white\" for=\"all\" [ngClass]=\"{'active': searchParams.isActive == '' || searchParams.isActive == null }\">\r\n                                    <input type=\"radio\" id=\"all\" name=\"status\" [value]=\"\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> All\r\n                                </label>\r\n                                <label class=\"btn btn-white\" for=\"active\" [ngClass]=\"{'active': searchParams.isActive == false }\">\r\n                                    <input type=\"radio\" id=\"active\" name=\"status\" [value]=\"true\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Active\r\n                                </label>\r\n                                <label class=\"btn btn-white\" for=\"inactive\" [ngClass]=\"{'active': searchParams.isActive == false }\">\r\n                                    <input type=\"radio\" id=\"inactive\" name=\"status\" [value]=\"false\" [(ngModel)]=\"searchParams.isActive\" (ngModelChange)=\"reloadData()\" class=\"hidden\"> Inactive\r\n                                </label>\r\n                            </div>\r\n                            <div class=\"mrg10L cell-width-30\">\r\n                                <input placeholder=\"Search\" type=\"text\" class=\"form-control form-control-sm\" [(ngModel)]=\"searchParams.keyword\" (keydown.enter)=\"reloadData()\">\r\n                            </div>\r\n                            <button class=\"btn btn-outline btn-default mrg10L\" (click)=\"clearSearchParam()\">Clear</button>\r\n                        </div>                    \r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-5\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm \" [routerLink]='[\"/edit-announcement/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                    </td>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -8407,6 +9294,141 @@ exports.ViewCommission = ViewCommission;
 
 /***/ }),
 
+/***/ "./src/app/pages/view-incentives/view-incentives.html":
+/*!************************************************************!*\
+  !*** ./src/app/pages/view-incentives/view-incentives.html ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'View Incentives'\" [parentCategory]=\"'Manage Incentives'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Incentives</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n\r\n                            <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                            <button class=\"btn btn-warning btn-sm mrg10T mrg10L\"  (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\" ></i>Export</button>\r\n                            <div class=\"float-right text-right incentives-amt\">\r\n                                <h4>RM {{totalAmountReceived| number:'1.2-2'}}</h4>\r\n                                <small>Total Incentives</small>\r\n                            </div>\r\n                            <form #tableForm=\"ngForm\">\r\n                                <table class=\"table table-striped table-bordered mrg15T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                            <th class=\"cell-width-6\">Action</th>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                            <td *ngFor=\"let field of dataRowMapper\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                              [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                 [searchType]=\"customerSearchType.completed\" (onItemSelected)=\"setNewCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                            <td>\r\n                                                <button class=\"btn btn-primary btn-xs mrg5R\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                                <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                    <i class=\"fa fa-times\"></i>\r\n                                                </button>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                            <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                                <td *ngIf=\"!record.onEdit\">\r\n                                                    <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                </td>\r\n                                                <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                    <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                    <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                     [displayText]=\"editedRecord[field.dataFieldControl.controlName]\" [disabledEdit]=\"true\"></customer-finder>\r\n                                                </td>\r\n                                            </ng-container>\r\n                                            <td>\r\n                                                <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\"></tablerow-buttons>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"dataSource.length === 0\">\r\n                                            <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                                <div class=\"mrg45A text-center opacity-40\">\r\n                                                    <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                    <h4>No Records Available</h4>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </form>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/view-incentives/view-incentives.ts":
+/*!**********************************************************!*\
+  !*** ./src/app/pages/view-incentives/view-incentives.ts ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var data_field_control_1 = __webpack_require__(/*! src/app/model/data.field.control */ "./src/app/model/data.field.control.ts");
+var form_data_mapping_1 = __webpack_require__(/*! ../../model/form.data.mapping */ "./src/app/model/form.data.mapping.ts");
+var viewIncentiveColumns_1 = __webpack_require__(/*! src/app/metadata/viewIncentiveColumns */ "./src/app/metadata/viewIncentiveColumns.ts");
+var search_params_1 = __webpack_require__(/*! src/app/model/search-params */ "./src/app/model/search-params.ts");
+var searchIncentiveFields_1 = __webpack_require__(/*! src/app/metadata/searchIncentiveFields */ "./src/app/metadata/searchIncentiveFields.ts");
+var ListDataCrud_1 = __webpack_require__(/*! src/app/interfaces/ListDataCrud */ "./src/app/interfaces/ListDataCrud.ts");
+var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+var common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+var ViewIncentives = /** @class */ (function (_super) {
+    __extends(ViewIncentives, _super);
+    function ViewIncentives(loaderService, dataService, formEvent) {
+        var _this = _super.call(this, loaderService, dataService, 'incPymntId', formEvent) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.formEvent = formEvent;
+        _this.dataRowMapper = [];
+        _this.searchFields = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.controlType = dataDisplayType_1.ControlType;
+        _this.customerSearchType = dataDisplayType_1.CustomerSearchType;
+        _this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalAmountReceived = data.totalAmountReceived;
+        });
+        return _this;
+    }
+    ViewIncentives.prototype.ngOnInit = function () {
+        this.dataRowMapper = this.getTablerowDataMapping();
+        this.searchFields = this.getSearchFeldsMapping();
+        this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.controllerName = apiController_1.ApiController.Incentives;
+    };
+    ViewIncentives.prototype.getTablerowDataMapping = function () {
+        var columnMappings = viewIncentiveColumns_1.ViewIncentiveReceivedColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null)); });
+        return columnMappings;
+    };
+    ViewIncentives.prototype.getSearchFeldsMapping = function () {
+        var columnMappings = searchIncentiveFields_1.SearchIncentiveFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
+        return columnMappings;
+    };
+    ViewIncentives.prototype.clearSearchParam = function () {
+        this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        this.reloadData();
+    };
+    ViewIncentives.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.Incentives + "/Download", this.searchParams).subscribe(function (data) {
+            var filename = "Incentives_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
+    };
+    ViewIncentives.prototype.setNewCustomerDetails = function (data) {
+        if (data) {
+            this.newRecord['applicationId'] = data.applicationId;
+            this.newRecord['orderNo'] = data.orderNo;
+            this.newRecord['packageName'] = data.packageName;
+            this.newRecord['productName'] = data.productName;
+            this.newRecord['category'] = data.category;
+            this.newRecord['isActive'] = true;
+        }
+        else {
+            this.newRecord['applicationId'] = '';
+            this.newRecord['orderNo'] = '';
+            this.newRecord['packageName'] = '';
+            this.newRecord['productName'] = '';
+            this.newRecord['category'] = '';
+            this.newRecord['isActive'] = true;
+        }
+    };
+    ViewIncentives = __decorate([
+        core_1.Component({
+            selector: 'view-incentives',
+            template: __webpack_require__(/*! ./view-incentives.html */ "./src/app/pages/view-incentives/view-incentives.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+    ], ViewIncentives);
+    return ViewIncentives;
+}(ListDataCrud_1.ListDataCrud));
+exports.ViewIncentives = ViewIncentives;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/view-order/view-order.html":
 /*!**************************************************!*\
   !*** ./src/app/pages/view-order/view-order.html ***!
@@ -8517,7 +9539,7 @@ exports.ViewOrder = ViewOrder;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-6\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            <ng-template #displayBadge>\r\n                                                <span class=\"badge \" [ngClass]=\"{'badge-danger': record.status == 'Terminated',\r\n                                                                                  'badge-primary': record.status == 'Completed',\r\n                                                                                  'badge-warning': record.status == 'Rejected',\r\n                                                                                  'badge-info': (record.status == 'Pending' || field.status == 'Processing')}\">\r\n                                                    {{record.status}}\r\n                                                </span>\r\n                                            </ng-template>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-sm\" [routerLink]='[\"/edit-withdrawal/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                        <a class=\"btn btn-info btn-sm mrg5L\" href=\"/api/PaymentVoucher/Print/{{record[keyField]}}\" [class.disabled]=\"record.status != 'Completed'\">\r\n                                            <i class=\"fa fa-print\"></i>\r\n                                        </a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'View Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <button class=\"btn btn-warning btn-sm mrg10T\" *ngIf=\"currentUser.isAdmin\" (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\"></i>Export</button>\r\n                        <div class=\"float-right text-right incentives-amt\">\r\n                            <h4>RM {{totalAmountPayout| number:'1.2-2'}}</h4>\r\n                            <small>Total Payout</small>\r\n                        </div>\r\n                        <div class=\"float-right text-right incentives-amt mrg25R\">\r\n                            <h4>RM {{totalAmountClaimed| number:'1.2-2'}}</h4>\r\n                            <small>Total Claimed</small>\r\n                        </div>\r\n\r\n                        <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    <th class=\"cell-width-6\">Action</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            <ng-template #displayBadge>\r\n                                                <span class=\"badge \" [ngClass]=\"{'badge-danger': record.status == 'Terminated',\r\n                                                                                  'badge-primary': record.status == 'Completed',\r\n                                                                                  'badge-warning': record.status == 'Rejected',\r\n                                                                                  'badge-info': (record.status == 'Pending' || field.status == 'Processing')}\">\r\n                                                    {{record.status}}\r\n                                                </span>\r\n                                            </ng-template>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                    <td>\r\n                                        <a class=\"btn btn-success btn-xs\" [routerLink]='[\"/edit-withdrawal/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                        <a class=\"btn btn-info btn-xs mrg5L\" href=\"/api/PaymentVoucher/Print/{{record[keyField]}}\" [class.disabled]=\"record.status != 'Completed'\">\r\n                                            <i class=\"fa fa-print\"></i>\r\n                                        </a>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -8567,6 +9589,8 @@ var form_data_mapping_1 = __webpack_require__(/*! src/app/model/form.data.mappin
 var search_params_1 = __webpack_require__(/*! src/app/model/search-params */ "./src/app/model/search-params.ts");
 var searchWithdrawalFields_1 = __webpack_require__(/*! src/app/metadata/searchWithdrawalFields */ "./src/app/metadata/searchWithdrawalFields.ts");
 var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
+var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+var common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
 var ViewWithdrawal = /** @class */ (function (_super) {
     __extends(ViewWithdrawal, _super);
     function ViewWithdrawal(loaderService, dataService, formEvent, authenticationService) {
@@ -8579,6 +9603,10 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalAmountPayout = data.totalAmountPayout;
+            _this.totalAmountClaimed = data.totalAmountClaimed;
+        });
         return _this;
     }
     ViewWithdrawal.prototype.ngOnInit = function () {
@@ -8602,6 +9630,13 @@ var ViewWithdrawal = /** @class */ (function (_super) {
     ViewWithdrawal.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
         this.reloadData();
+    };
+    ViewWithdrawal.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.WithdrawalView + "/Download", this.searchParams).subscribe(function (data) {
+            var filename = "Withdrawal_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
     };
     ViewWithdrawal = __decorate([
         core_1.Component({
@@ -8834,6 +9869,13 @@ var DataService = /** @class */ (function () {
     }
     DataService.prototype.download = function (fileUrl) {
         return this.http.get(fileUrl, { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
+    };
+    DataService.prototype.export = function (apiControllerName, filterParams) {
+        //let searchParams = typeof filterParams === 'object' ? JSON.stringify(filterParams) : filterParams;
+        //let params = new HttpParams();
+        //params = params.append('searchParams', searchParams);
+        var headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
+        return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' }).catch(this.errorHandler);
     };
     DataService.prototype.get = function (apiControllerName, recordId) {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);

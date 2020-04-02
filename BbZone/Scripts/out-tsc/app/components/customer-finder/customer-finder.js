@@ -15,6 +15,7 @@ var apiController_1 = require("../../enums/apiController");
 var rxjs_1 = require("rxjs");
 var broadcast_service_1 = require("src/app/services/broadcast.service");
 var forms_1 = require("@angular/forms");
+var dataDisplayType_1 = require("src/app/enums/dataDisplayType");
 var CustomerFinder = /** @class */ (function () {
     function CustomerFinder(el, formEvent, dataService) {
         var _this = this;
@@ -83,9 +84,10 @@ var CustomerFinder = /** @class */ (function () {
         var _this = this;
         if (!keyword)
             return;
+        var searchMethod = this.searchType === dataDisplayType_1.CustomerSearchType.commissionClaimed ? 'FindClaimedApplication' : 'FindCompletedApplication';
         this.loadData = true;
         this.startSearching = true;
-        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/Find/" + keyword).subscribe(function (data) {
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/" + searchMethod + "/" + keyword).subscribe(function (data) {
             _this.startSearching = false;
             _this.dropdownItems = !data ? [] : data;
         });
@@ -115,6 +117,10 @@ var CustomerFinder = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", String)
     ], CustomerFinder.prototype, "fieldId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Number)
+    ], CustomerFinder.prototype, "searchType", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object),

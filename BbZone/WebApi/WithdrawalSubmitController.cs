@@ -36,7 +36,7 @@ namespace BroadbandZone_App.WebApi
                                                                                     filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
                                                                                     totalRecord).ToList();
 
-                    return Ok(new WithdrawalView<GetWithdrawalToSubmit_Result>()
+                    return Ok(new WithdrawalSubmit<GetWithdrawalToSubmit_Result>()
                     {
                         DisplayData = results,
                         TotalRecords = Convert.ToInt32(totalRecord.Value),

@@ -30,7 +30,6 @@ namespace BroadbandZone_Data
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<AgentCommission> AgentCommissions { get; set; }
-        public virtual DbSet<Announcement> Announcements { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<Communication> Communications { get; set; }
         public virtual DbSet<DropdownItem> DropdownItems { get; set; }
@@ -40,11 +39,14 @@ namespace BroadbandZone_Data
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
-        public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
         public virtual DbSet<AgentCharge> AgentCharges { get; set; }
         public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<ClaimableCommission> ClaimableCommissions { get; set; }
         public virtual DbSet<Clawback> Clawbacks { get; set; }
+        public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
+        public virtual DbSet<IncentiveReceived> IncentiveReceiveds { get; set; }
+        public virtual DbSet<Announcement> Announcements { get; set; }
+        public virtual DbSet<LoginPageBanner> LoginPageBanners { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -601,13 +603,13 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompletedAppCommission", prAppIdParameter, prAgentIdParameter, prCreatedByParameter);
         }
     
-        public virtual ObjectResult<FindCustomerApplication_Result> FindCustomerApplication(string prSearchKeyword)
+        public virtual ObjectResult<FindClaimedApplication_Result> FindClaimedApplication(string prSearchKeyword)
         {
             var prSearchKeywordParameter = prSearchKeyword != null ?
                 new ObjectParameter("prSearchKeyword", prSearchKeyword) :
                 new ObjectParameter("prSearchKeyword", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCustomerApplication_Result>("FindCustomerApplication", prSearchKeywordParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindClaimedApplication_Result>("FindClaimedApplication", prSearchKeywordParameter);
         }
     
         public virtual ObjectResult<GetClawback_Result> GetClawback(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, ObjectParameter oTotalRecord)
@@ -646,6 +648,191 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prClaimableItemsId", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClaimableCommission", prWithdrawalIdParameter, prClaimableItemsIdParameter);
+        }
+    
+        public virtual ObjectResult<GetIncentivesReceived_Result> GetIncentivesReceived(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prProductParameter = prProduct.HasValue ?
+                new ObjectParameter("prProduct", prProduct) :
+                new ObjectParameter("prProduct", typeof(int));
+    
+            var prProductCategoryParameter = prProductCategory.HasValue ?
+                new ObjectParameter("prProductCategory", prProductCategory) :
+                new ObjectParameter("prProductCategory", typeof(int));
+    
+            var prProductPackageParameter = prProductPackage.HasValue ?
+                new ObjectParameter("prProductPackage", prProductPackage) :
+                new ObjectParameter("prProductPackage", typeof(int));
+    
+            var prKeywordParameter = prKeyword != null ?
+                new ObjectParameter("prKeyword", prKeyword) :
+                new ObjectParameter("prKeyword", typeof(string));
+    
+            var prReceivedFromParameter = prReceivedFrom.HasValue ?
+                new ObjectParameter("prReceivedFrom", prReceivedFrom) :
+                new ObjectParameter("prReceivedFrom", typeof(System.DateTime));
+    
+            var prReceivedUntilParameter = prReceivedUntil.HasValue ?
+                new ObjectParameter("prReceivedUntil", prReceivedUntil) :
+                new ObjectParameter("prReceivedUntil", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceived_Result>("GetIncentivesReceived", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<FindCompletedApplication_Result> FindCompletedApplication(string prSearchKeyword)
+        {
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCompletedApplication_Result>("FindCompletedApplication", prSearchKeywordParameter);
+        }
+    
+        public virtual ObjectResult<GetIncentivesReceivedForDownload_Result> GetIncentivesReceivedForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil)
+        {
+            var prProductParameter = prProduct.HasValue ?
+                new ObjectParameter("prProduct", prProduct) :
+                new ObjectParameter("prProduct", typeof(int));
+    
+            var prProductCategoryParameter = prProductCategory.HasValue ?
+                new ObjectParameter("prProductCategory", prProductCategory) :
+                new ObjectParameter("prProductCategory", typeof(int));
+    
+            var prProductPackageParameter = prProductPackage.HasValue ?
+                new ObjectParameter("prProductPackage", prProductPackage) :
+                new ObjectParameter("prProductPackage", typeof(int));
+    
+            var prKeywordParameter = prKeyword != null ?
+                new ObjectParameter("prKeyword", prKeyword) :
+                new ObjectParameter("prKeyword", typeof(string));
+    
+            var prReceivedFromParameter = prReceivedFrom.HasValue ?
+                new ObjectParameter("prReceivedFrom", prReceivedFrom) :
+                new ObjectParameter("prReceivedFrom", typeof(System.DateTime));
+    
+            var prReceivedUntilParameter = prReceivedUntil.HasValue ?
+                new ObjectParameter("prReceivedUntil", prReceivedUntil) :
+                new ObjectParameter("prReceivedUntil", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceivedForDownload_Result>("GetIncentivesReceivedForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter);
+        }
+    
+        public virtual ObjectResult<GetAdminUsers_Result> GetAdminUsers(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAdminUsers_Result>("GetAdminUsers", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<GetWithdrawalSubmittedForDownload_Result> GetWithdrawalSubmittedForDownload(string prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo)
+        {
+            var prStatusParameter = prStatus != null ?
+                new ObjectParameter("prStatus", prStatus) :
+                new ObjectParameter("prStatus", typeof(string));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            var prCompletedFromParameter = prCompletedFrom.HasValue ?
+                new ObjectParameter("prCompletedFrom", prCompletedFrom) :
+                new ObjectParameter("prCompletedFrom", typeof(System.DateTime));
+    
+            var prCompletedToParameter = prCompletedTo.HasValue ?
+                new ObjectParameter("prCompletedTo", prCompletedTo) :
+                new ObjectParameter("prCompletedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmittedForDownload_Result>("GetWithdrawalSubmittedForDownload", prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter);
+        }
+    
+        public virtual ObjectResult<DboardMonthlyApplications_Result> DboardMonthlyApplications()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardMonthlyApplications_Result>("DboardMonthlyApplications");
+        }
+    
+        public virtual ObjectResult<DboardTopSalesPackage_Result> DboardTopSalesPackage(Nullable<int> prAgentId, string prAgentName)
+        {
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prAgentNameParameter = prAgentName != null ?
+                new ObjectParameter("prAgentName", prAgentName) :
+                new ObjectParameter("prAgentName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardTopSalesPackage_Result>("DboardTopSalesPackage", prAgentIdParameter, prAgentNameParameter);
+        }
+    
+        public virtual ObjectResult<DboardTotalSalesAndCommission_Result> DboardTotalSalesAndCommission(Nullable<int> prAgentId, string prAgentName)
+        {
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prAgentNameParameter = prAgentName != null ?
+                new ObjectParameter("prAgentName", prAgentName) :
+                new ObjectParameter("prAgentName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardTotalSalesAndCommission_Result>("DboardTotalSalesAndCommission", prAgentIdParameter, prAgentNameParameter);
+        }
+    
+        public virtual ObjectResult<GetLoginBanners_Result> GetLoginBanners(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLoginBanners_Result>("GetLoginBanners", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, oTotalRecord);
         }
     }
 }

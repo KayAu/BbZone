@@ -30,6 +30,16 @@
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
+                        <button class="btn btn-warning btn-sm mrg10T" *ngIf="currentUser.isAdmin" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                        <div class="float-right text-right incentives-amt">
+                            <h4>RM {{totalAmountPayout| number:'1.2-2'}}</h4>
+                            <small>Total Payout</small>
+                        </div>
+                        <div class="float-right text-right incentives-amt mrg25R">
+                            <h4>RM {{totalAmountClaimed| number:'1.2-2'}}</h4>
+                            <small>Total Claimed</small>
+                        </div>
+
                         <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                             <thead>
                                 <tr>
@@ -53,8 +63,8 @@
                                         </td>
                                     </ng-container>
                                     <td>
-                                        <a class="btn btn-success btn-sm" [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
-                                        <a class="btn btn-info btn-sm mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'">
+                                        <a class="btn btn-success btn-xs" [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                        <a class="btn btn-info btn-xs mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'">
                                             <i class="fa fa-print"></i>
                                         </a>
                                     </td>

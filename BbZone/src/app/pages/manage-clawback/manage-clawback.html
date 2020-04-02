@@ -8,8 +8,8 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-12 m-b-xs flexbox">
-                            <div class="mrg10L cell-width-20">
+                        <div class="m-b-xs flexbox">
+                            <div class="mrg15L cell-width-20">
                                 <input placeholder="Search by customer name, agent name or order no" type="text" class="form-control form-control-sm" [(ngModel)]="searchParams.keyword" (keydown.enter)="reloadData()">
                             </div>
                             <button class="btn btn-outline btn-default mrg10L" (click)="clearSearchParam()">Clear</button>
@@ -31,10 +31,10 @@
                                             <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
                                                           [field]="field.dataFieldControl" [formName]="'manageProductForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
                                             <customer-finder *ngIf="field.dataFieldControl.controlType == controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" name="{{field.dataFieldControl.controlName}}"
-                                                             (onItemSelected)="setNewCustomerDetails($event)"></customer-finder>
+                                                             (onItemSelected)="setNewCustomerDetails($event)" [searchType]="customerSearchType.commissionClaimed"></customer-finder>
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm" (click)="addRow()"><i class="fa fa-save"></i></button>
+                                            <button class="btn btn-primary btn-sm mrg5R" (click)="addRow()"><i class="fa fa-save"></i></button>
                                             <button type="button" class="btn btn-sm btn-warning" (click)="resetNewRecord()">
                                                 <i class="fa fa-times"></i>
                                             </button>
@@ -50,7 +50,7 @@
                                             <td *ngIf="record.onEdit" class="edit-row">
                                                 <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [formName]="'editCategoryForm'" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
                                                 <customer-finder *ngIf="field.dataFieldControl.controlType == controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" name="{{field.dataFieldControl.controlName}}"
-                                                                [displayText]="editedRecord[field.dataFieldControl.controlName]" [disabledEdit]="true"  (onItemSelected)="setEditCustomerDetails($event)"></customer-finder>
+                                                                [displayText]="editedRecord[field.dataFieldControl.controlName]"  [disabledEdit]="true"  (onItemSelected)="setEditCustomerDetails($event)"></customer-finder>
                                             </td>
                                         </ng-container>
                                         <td>

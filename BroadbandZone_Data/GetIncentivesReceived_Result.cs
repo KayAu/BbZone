@@ -11,12 +11,18 @@ namespace BroadbandZone_Data
 {
     using System;
     
-    public partial class FindCustomerApplication_Result
+    public partial class GetIncentivesReceived_Result
     {
+        public Nullable<int> IncPymntId { get; set; }
         public string CustomerName { get; set; }
-        public string CustomerId { get; set; }
-        public int ApplicationId { get; set; }
         public string OrderNo { get; set; }
-        public string Agent { get; set; }
+        public string PackageName { get; set; }
+        public string Category { get; set; }
+        public string ProductName { get; set; }
+        public Nullable<decimal> IncentiveAmt { get; set; }
+        public Nullable<bool> IsActive { get; set; }
+        public string CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
+        public Nullable<int> ApplicationId { get; set; }
     }
 }

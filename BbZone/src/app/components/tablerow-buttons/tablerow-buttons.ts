@@ -4,7 +4,7 @@ import { DataRowAction } from "../../interfaces/dataRowAction";
 @Component({
   selector: 'tablerow-buttons',
   template: `<div *ngIf="!editMode; else editActions">
-              <button type="button" class="btn btn-success mrg5R" (click)="editRow()" [ngClass]="{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }" [disabled]="disabledEdit">
+              <button type="button" class="btn btn-success mrg5R" (click)="editRow()" [ngClass]="{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }" [disabled]="disabledEdit" *ngIf="!hideEdit">
                 <i class="fa fa-edit"></i>
                  <span *ngIf="hideDelete">Edit</span>
               </button>
@@ -25,6 +25,7 @@ import { DataRowAction } from "../../interfaces/dataRowAction";
 export class TableRowButtons extends DataRowAction {
     @Input() editMode: boolean;
     @Input() hideDelete: boolean = false;
+    @Input() hideEdit: boolean = false;
     @Input() disabledEdit: boolean = false;
     @Input() disabledDelete: boolean = false;
     @Output() onEdit = new EventEmitter();

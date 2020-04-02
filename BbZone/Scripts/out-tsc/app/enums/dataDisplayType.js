@@ -20,4 +20,9 @@ var ControlType;
     ControlType[ControlType["number"] = 9] = "number";
     ControlType[ControlType["customerFinder"] = 10] = "customerFinder";
 })(ControlType = exports.ControlType || (exports.ControlType = {}));
+var CustomerSearchType;
+(function (CustomerSearchType) {
+    CustomerSearchType[CustomerSearchType["completed"] = 0] = "completed";
+    CustomerSearchType[CustomerSearchType["commissionClaimed"] = 1] = "commissionClaimed";
+})(CustomerSearchType = exports.CustomerSearchType || (exports.CustomerSearchType = {}));
 //# sourceMappingURL=dataDisplayType.js.map

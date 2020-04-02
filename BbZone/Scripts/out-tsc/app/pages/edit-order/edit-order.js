@@ -18,33 +18,35 @@ var data_field_control_1 = require("../../model/data.field.control");
 var broadcast_service_1 = require("../../services/broadcast.service");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
-var ngx_toastr_1 = require("ngx-toastr");
 var router_2 = require("@angular/router");
 var apiController_1 = require("../../enums/apiController");
 var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
-var cascade_service_1 = require("src/app/services/cascade.service");
+var authentication_1 = require("src/app/services/authentication");
 var EditOrder = /** @class */ (function () {
-    function EditOrder(loaderService, dataService, formEvent, cascadeService, router, route, toastr) {
+    function EditOrder(loaderService, dataService, formEvent, router, route, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
         this.formEvent = formEvent;
-        this.cascadeService = cascadeService;
         this.router = router;
         this.route = route;
-        this.toastr = toastr;
+        this.authenticationService = authenticationService;
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
     }
     EditOrder.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
         this.formFields = this.getFormFeldsMapping();
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+        if (!this.currentUser.isAdmin) {
+            columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
+        }
         return columnMappings;
     };
     EditOrder.prototype.update = function () {
@@ -82,8 +84,12 @@ var EditOrder = /** @class */ (function () {
             selector: 'edit-order',
             templateUrl: './edit-order.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService,
-            cascade_service_1.CascadeService, router_1.Router, router_2.ActivatedRoute, ngx_toastr_1.ToastrService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
+            broadcast_service_1.BroadcastService,
+            router_1.Router,
+            router_2.ActivatedRoute,
+            authentication_1.AuthenticationService])
     ], EditOrder);
     return EditOrder;
 }());

@@ -43,6 +43,7 @@ var ManageClawback = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
+        _this.customerSearchType = dataDisplayType_1.CustomerSearchType;
         return _this;
     }
     ManageClawback.prototype.ngOnInit = function () {

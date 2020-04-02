@@ -67,12 +67,17 @@ export class DataControl implements ControlValueAccessor {
     }
 
     writeValue(val: any): void {
-        if (!val) return;
 
-        this.data = this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown ? val.toString() : val;
-
-        if (this.field.cascadeTo) {
-            this.cascadeEvent.subject.next(new CascadeData(this.field.cascadeTo, this.data));
+        if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
+            if (val) {
+                this.data = val.toString();
+                if (this.field.cascadeTo) {
+                    this.cascadeEvent.subject.next(new CascadeData(this.field.cascadeTo, this.data));
+                }
+            }
+        }
+        else {
+            this.data = val;
         }
     }
 

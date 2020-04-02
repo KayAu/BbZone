@@ -11,5 +11,11 @@
     <Setting Name="PaymentVoucherCssFile" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/Content/payment-voucher.css</Value>
     </Setting>
+    <Setting Name="IncentiveFilesPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/App_Data/IncentiveFiles</Value>
+    </Setting>
+    <Setting Name="LoginBannerPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/App_Data/LoginBannerFiles</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

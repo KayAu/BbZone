@@ -60,6 +60,30 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-
+        [HttpGet]
+        [Route("api/Dashboard/GetMonthlyApplications")]
+        public IHttpActionResult GetMonthlyApplications()
+        {
+            try
+            {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                ChartHelper chartHelper = new ChartHelper();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var monthlyApplications = chartHelper.TranslateStackBarData(db.DboardMonthlyApplications().ToDataTable<DboardMonthlyApplications_Result>());
+                    var topSellers = db.DboardTopSalesPackage(currentUser.AgentId, currentUser.Username).ToList();
+                    var sales = db.DboardTotalSalesAndCommission(currentUser.AgentId, currentUser.Username).FirstOrDefault();
+                    return Ok(new { MonthlyApplications = monthlyApplications,
+                                    TopSellers = topSellers,
+                                    TotalApplications = sales.TotalApplications,
+                                    TotalCommission = sales.TotalCommission});
+                }                
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 }
