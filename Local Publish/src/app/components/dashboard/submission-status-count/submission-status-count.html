@@ -1,0 +1,103 @@
+﻿
+<div class="col-lg-12">
+    <div class="justify-content-md-center">
+        <h3>Submission Status</h3>
+        <div class="btn-group">
+            <button class="btn btn-default dropdown-toggle mrg10T" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{{selectedYear}}</span>
+            </button>
+            <ul class="dropdown-menu">
+                <ng-container *ngFor="let year of yearOptions">
+                    <li class="dropdown-item pad5A">
+                        <a (click)="onYearSelected(year)">
+                            {{year}}
+                        </a>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                </ng-container>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-header card-header-warning card-header-icon">
+            <div class="card-icon">
+                <i class="fa fa-inbox"></i>
+            </div>
+            <p class="card-category">Submissions</p>
+            <h3 class="card-title">
+                {{dashboardData.totalSubmitted}}
+            </h3>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                Total Submissions
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-header card-header-info card-header-icon">
+            <div class="card-icon">
+                <i class="fa fa-keyboard-o"></i>
+            </div>
+            <p class="card-category">In Progress</p>
+            <h3 class="card-title">
+                {{dashboardData.totalInProgress}}
+            </h3>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                Total In Progress
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-header card-header-success card-header-icon">
+            <div class="card-icon">
+                <i class="fa fa-thumbs-up"></i>
+            </div>
+            <p class="card-category">Completed</p>
+            <h3 class="card-title">
+                {{dashboardData.totalCompleted}}
+            </h3>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                Total Completed
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-header card-header-rose card-header-icon">
+            <div class="card-icon">
+                <i class="fa fa-stop"></i>
+            </div>
+            <p class="card-category">Rejected</p>
+            <h3 class="card-title">
+                {{dashboardData.totalCancelled}}
+            </h3>
+        </div>
+        <div class="card-footer">
+            <div class="stats">
+                <i class="fa fa-arrow-circle-o-right"></i>
+                Total Cancelled or KIV
+            </div>
+        </div>
+    </div>
+</div>
+
+

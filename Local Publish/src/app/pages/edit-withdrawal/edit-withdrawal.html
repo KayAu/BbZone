@@ -1,0 +1,131 @@
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    
+    <div class="row">
+        <div class="col-md-6 mrg10T mrg25B">
+            <div class="float-left">
+                <div alt="image" class="rounded-circle bg-info float-left rounded-circle-lg">
+                    <i class="fa fa-money font-size-24"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalSelectedAmount | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
+                        <small class="text-muted">Selected Amount</small>
+                    </div>
+                </div>
+            </div>
+            <div class="float-left mrg25L">
+                <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
+                    <i class="fa fa-minus-square-o font-size-24" style="padding-left: 3px"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalAmountToDeduct | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
+                        <small class="text-muted">Amount Deduct</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mrg10T mrg25B text-right">
+            <label class="text-uppercase font-normal">Claimable Amount</label>
+            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.amount | number:'1.2-2'}}</div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title pad10R">
+                    <h5>Withdrawal: ID-{{formRecord.withdrawalId}}</h5>
+                    <span class="mrg15L badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
+                              'badge-primary': formRecord.status == 'Completed',
+                              'badge-warning': formRecord.status == 'OnHold',
+                              'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
+                        {{formRecord.status}}
+                    </span>
+                    <div class="ibox-tools">
+                        <a class="font-size-18" href="/api/PaymentVoucher/Print/{{recordId}}" *ngIf="formRecord.status == 'Completed'">
+                            <i class="fa fa-print"></i>
+                        </a>
+                    </div>
+                </div>
+                <loading></loading>
+                <div class="ibox-content">
+                    <div class="table-responsive mrg10T">
+                        <label>Claimed Commission(s)</label>
+                        <table class="table table-bordered mrg10T dataTable">
+                            <thead>
+                                <tr>
+                                    <th class="cell-width-3">#</th>
+                                    <th *ngFor="let col of dataRowMapper" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let record of formRecord.withdrawalItems; let rowNo = index">
+                                    <td>{{rowNo+1}}</td>
+                                    <ng-container *ngFor="let field of dataRowMapper">
+                                        <td>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge"  [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <ng-template #displayBadge>
+                                                <span class="badge" *ngIf="record.transactionType"
+                                                      [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                                                  'badge-warning': record.transactionType == 'Purchase',
+                                                                  'badge-success': record.transactionType == 'Own Sales',
+                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                    {{record.transactionType}}
+                                                </span>
+                                                <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
+                                            </ng-template>
+                                        </td>
+                                    </ng-container>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+        
+                    <div class="hr-line-dashed"></div>
+                    <label>Admin Input</label>
+                    <div class="admin-box">
+                        <div class="form-group">
+                            <label class="font-normal">Reference. No</label>
+                            <input name="referenceNo" type="text" class="form-control" maxlength="25" [(ngModel)]="formRecord.referenceNo" [disabled]="!formRecord.allowEdit">
+                        </div>
+                        <div class="form-group">
+                            <label class="font-normal">Remarks</label>
+                            <textarea name="remarks" class="form-control" maxlength="250" rows="8" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit" ></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label class="font-normal">Withdrawal Status</label>
+                            <select name="status" class="form-control" *ngIf="currentUser.isAdmin" [(ngModel)]="formRecord.status" [disabled]="!formRecord.allowEdit">
+                                <option [ngValue]="null">Please select</option>
+                                <option *ngFor="let option of dropdownItems" [ngValue]="option.key.toString()">{{option.value}}</option>
+                            </select>
+                        </div>
+                    </div>
+                 
+                    <div class="hr-line-dashed"></div>
+                    <!--SAVE OR CANCEL-->
+                    <div class="form-group row">
+                        <div class="text-right pad20R">
+                            <button type="button" class="btn btn-primary" (click)="update()" [ngClass]="{'show-spinner':isUpdating}"
+                                    [disabled]="isUpdating" *ngIf="currentUser.isAdmin && formRecord.allowEdit">
+                                {{isUpdating ? 'Updating' : 'Update'}}
+                                <span class="loading"></span>
+                            </button>
+                            <button type="button" class="btn btn-primary" (click)="cancel()" [ngClass]="{'show-spinner':isUpdating}"
+                                    [disabled]="isUpdating" *ngIf="!currentUser.isAdmin && formRecord.allowTerminate">
+                                {{isUpdating ? 'Terminating' : 'Terminate Submission'}}
+                                <span class="loading"></span>
+                            </button>
+                            <back-button></back-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

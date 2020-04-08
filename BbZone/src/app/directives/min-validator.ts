@@ -1,34 +1,73 @@
-﻿import { Directive, forwardRef, Attribute, Input } from '@angular/core';
-import { Validator, AbstractControl, NG_VALIDATORS, Validators, ValidatorFn } from '@angular/forms';
+﻿import { Directive, ElementRef, Renderer2, Input, HostListener } from '@angular/core';
+import { NgModel, NgForm} from '@angular/forms';
+import { BroadcastService } from '../services/broadcast.service';
+import { Subscription } from 'rxjs/Subscription';
+import { FormSubmit } from '../model/form-submit';
+
+declare var $: any;
 
 @Directive({
     selector: "[min][formControlName],[min][formControl],[min][ngModel]",
-    providers: [
-        {
-            provide: NG_VALIDATORS,
-            useExisting: MinDirective,
-            multi: true
-        }
-    ]
+    providers: [NgModel]
 })
-export class MinDirective implements Validator {
-    private _validator: ValidatorFn;
-    //private minValue: number;
-    @Input() public set min(value: string) {
-        //this.minValue = parseInt(value, 10);
-        this._validator = Validators.min(parseInt(value, 10));
+export class MinDirective  {
+    private subscription: Subscription;
+    parentForm: NgForm;
+    isFormSubmitted: boolean;
+    minValue: number;
+
+    @Input() fieldId: string;
+    @Input() public set min(value: number) {
+        this.minValue = value;
     }
 
-    public validate(thisControl: AbstractControl): { [key: string]: any } {
-        //if (thisControl.value) {
-        //    if (thisControl.value < this.minValue) {
-        //        thisControl.setValue(this.minValue);
-        //        return { min: true };
-        //    }
-        //}
+    constructor(
+        private el: ElementRef,
+        private ngModel: NgModel,
+        private formEvent: BroadcastService
+    ) { }
 
-        //return null;
-
-        return this._validator(thisControl);
+    ngOnInit() {
+        this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
+            this.parentForm = form.template;
+            this.validate();
+        });
     }
+
+    private validate() {
+
+        let value = this.ngModel.model;
+        let thisElement = $(this.el.nativeElement);
+
+        thisElement.next('.text-danger').remove();
+
+        if (value === null || value === undefined) {
+            thisElement.after('<span class= "text-danger">This is required</span>');
+            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+        }
+        else if (value === 0) {
+            thisElement.after(`<span class= 'text-danger'>This field must have a min value above ${this.minValue} </span>`);
+            this.parentForm.controls[this.fieldId].setErrors({ 'min': true });
+        }
+    }
+    
+    //private _validator: ValidatorFn;
+    ////private minValue: number;
+    //@Input() public set min(value: string) {
+    //    //this.minValue = parseInt(value, 10);
+    //    this._validator = Validators.min(parseInt(value, 10));
+    //}
+
+    //public validate(thisControl: AbstractControl): { [key: string]: any } {
+    //    //if (thisControl.value) {
+    //    //    if (thisControl.value < this.minValue) {
+    //    //        thisControl.setValue(this.minValue);
+    //    //        return { min: true };
+    //    //    }
+    //    //}
+
+    //    //return null;
+
+    //    return this._validator(thisControl);
+    //}
 }

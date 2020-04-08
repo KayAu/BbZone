@@ -7,10 +7,13 @@
     [IsOverride]           BIT           NULL,
     [ClaimWithdrawalId]    INT           NULL,
     [DeductedWithdrawalId] INT           NULL,
-    [DeductedOn]    SMALLDATETIME NULL,
+    [DeductedOn]           SMALLDATETIME NULL,
     [CreatedOn]            SMALLDATETIME NOT NULL,
     [CreatedBy]            VARCHAR (50)  NOT NULL,
     CONSTRAINT [PK_ClaimableCommission] PRIMARY KEY CLUSTERED ([ClaimCommId] ASC),
-    CONSTRAINT [FK_ClaimableCommission_ClaimableCommission] FOREIGN KEY ([ApplicationId]) REFERENCES [dbo].[CustomerApplication] ([ApplicationId])
+    CONSTRAINT [FK_ClaimableCommission_ClaimedWithdrawal] FOREIGN KEY ([ClaimWithdrawalId]) REFERENCES [dbo].[Withdrawal] ([WithdrawalId]),
+    CONSTRAINT [FK_ClaimableCommission_DeductedWithdrawal] FOREIGN KEY ([DeductedWithdrawalId]) REFERENCES [dbo].[Withdrawal] ([WithdrawalId])
 );
+
+
 

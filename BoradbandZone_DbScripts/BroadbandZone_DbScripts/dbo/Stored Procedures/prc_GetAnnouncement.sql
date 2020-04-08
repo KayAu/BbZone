@@ -60,7 +60,7 @@ BEGIN
 			   ModifiedOn = FORMAT(ModifiedOn, 'MM/dd/yyyy')
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(AnncId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(AnncId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 	END TRY 

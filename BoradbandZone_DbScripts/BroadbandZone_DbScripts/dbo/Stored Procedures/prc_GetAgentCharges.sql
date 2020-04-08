@@ -65,7 +65,7 @@ BEGIN
 				,ModifiedBy
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(ChargeId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(ChargeId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

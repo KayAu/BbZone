@@ -1,0 +1,43 @@
+﻿<div class="user-comm">
+    <div class="user-comm-box" [ngClass]="{'show':showCommunicationPanel}">
+        <a class="spin-icon text-white" (click)="showCommunicationPanel = !showCommunicationPanel">
+            <i class="fa fa-comments-o"></i>
+        </a>
+        <div class="skin-settings">
+            <div class="title">
+                Communication Remarks <br>
+                <small style="text-transform: none;font-weight: 400">
+                    This panel is use for agent and administrator communication.
+                </small>
+            </div>
+            <div class="chat-discussion">
+                    <ng-container *ngFor="let item of communications">
+                        <div class="chat-message" [ngClass]="{'left': item.role=='AG','right': item.role=='AD'}">
+                            <div class="message-avatar message-avatar-text" [ngClass]="{'bg-info': item.role=='AG','bg-success': item.role=='AD'}">{{item.role}}</div>
+                            <div class="message">
+                                <a class="message-author" href="#"> {{item.createdBy }}</a>
+                                <span class="message-date"> {{item.createdOn | date : 'dd MMM yyyy hh:mm a'}}</span>
+                                <span class="message-content">
+                                    {{item.message}}
+                                </span>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+        
+                <div class="row mrg0A chat-message-form">
+                    <div class="form-group">
+                        <textarea class="form-control message-input" [(ngModel)]="textMessage" name="textMessage" placeholder="Enter message text"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary float-right mrg5T mrg5B" [ngClass]="{'show-spinner':isUpdating}"
+                                [disabled]="isUpdating" (click)="submit()">
+                            {{isUpdating ? 'Sending' : 'Send'}}
+                            <span class="loading"></span>
+                        </button>
+                    </div>
+                </div>
+        
+        </div>
+    </div>
+</div>

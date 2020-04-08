@@ -23,6 +23,7 @@ namespace BroadbandZone_App.WebApi
                 {
                     FormsAuthentication.SetAuthCookie(userLogin.Username, false);
                     UserIdentityHelper.SetLoginAccountToCookie(user);
+                    LogUserAccess(user);
                 }
  
                 return Ok(user);
@@ -30,6 +31,29 @@ namespace BroadbandZone_App.WebApi
             catch (Exception ex)
             {
                 return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+
+        private void LogUserAccess(AuthenticatedUser user)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    LoginTrail loginTrail = new LoginTrail();
+                    loginTrail.AgentId = !user.IsAdmin ? user.AgentId: null;
+                    loginTrail.LoginName = user.Username;
+                    loginTrail.LoginDate = DateTime.Now;
+
+                    db.LoginTrails.Add(loginTrail);
+                    db.SaveChanges();
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
     }

@@ -141,6 +141,9 @@
     <Compile Include="GetAgentCommissionSettings_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAgentCommissionSettings_Result1.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAgentProfile_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -169,6 +172,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetLoginBanners_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetMyEntireTeam_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetPaymentDetails_Result.cs">
@@ -204,13 +210,10 @@
     <Compile Include="LoginPageBanner.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoginTrail.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="PartialClass\PartialClass.cs" />
-    <Compile Include="prc_DboardTotalSalesAndCommission_Result.cs">
-      <DependentUpon>BbZoneModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="prc_GetLoginBanners_Result.cs">
-      <DependentUpon>BbZoneModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

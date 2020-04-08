@@ -27,8 +27,12 @@ namespace BroadbandZone_App.Helper
                     double filesize = File.ReadAllBytes(file.LocalFileName).Length;
                     string fileName = file.Headers.ContentDisposition.FileName;
                     fileName = fileName.Insert(fileName.IndexOf("."), $"_{fileId.ToString()}").Replace("\"", "");
-                    File.Move(file.LocalFileName, GetFileUploadLocation(fileName));
-
+                    string destLocation = GetFileUploadLocation(fileName);
+                    if (!File.Exists(destLocation))
+                    {
+                        File.Move(file.LocalFileName, destLocation);
+                    }
+                    
                     yield return new UploadedFile { Name = fileName, FilePath = $"{this._UploadFilePath}/{fileName}", Size = filesize };
                 }
             }

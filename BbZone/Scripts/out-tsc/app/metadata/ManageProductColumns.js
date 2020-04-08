@@ -19,7 +19,7 @@ var ManageProductColumns = /** @class */ (function () {
         },
         {
             "fieldName": "productName",
-            "headerText": "ProductName",
+            "headerText": "Product Name",
             "displayType": "text",
             "keyField": false,
             "colWidth": "",

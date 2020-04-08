@@ -5,9 +5,15 @@ CREATE PROCEDURE [dbo].[prc_GetAgentProfile]
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
-			@vSelectQuery NVARCHAR(MAX)
+			@vSelectQuery NVARCHAR(MAX),
+			@vLoginCount INT = 0
 	
 	BEGIN TRY
+		SELECT @vLoginCount = ISNULL(COUNT(Id) ,0)
+		FROM LoginTrail
+		WHERE AgentId = @prAgentId
+		AND YEAR(LoginDate) = YEAR(GETDATE())
+
 		SELECT  a1.AgentId
 			  ,a1.Fullname
 			  ,a1.Email
@@ -23,7 +29,7 @@ BEGIN
 			  ,a1.TelNo
 			  ,a1.BankName
 			  ,a1.BankAccNo
-			  ,UserLogin = NULL
+			  ,UserLogin = ''
 			  ,PasswordHash = NULL
 			  ,a1.SuperiorId
 			  ,a1.IsActive
@@ -32,6 +38,7 @@ BEGIN
 			  ,a1.ModifiedOn
 			  ,a1.ModifiedBy
 		      ,SuperiorName = CASE WHEN NOT a1.SuperiorId IS NULL THEN LTRIM(RTRIM(CAST(a1.SuperiorId AS CHAR(4)))) + ' - ' + a2.Fullname ELSE NULL END
+			  ,LoginCount = @vLoginCount
 		FROM Agent a1
 		LEFT JOIN Agent a2 ON a1.SuperiorId = a2.AgentId
 		WHERE 1 = CASE WHEN NOT @prUsername IS NULL AND a1.UserLogin = @prUsername THEN 1

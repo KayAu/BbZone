@@ -1,0 +1,43 @@
+<page-header [title]="'View Commissions'" [parentCategory]="''"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox ">
+        <div class="ibox-title">
+          <h5>View Agent Commissions</h5>
+        </div>
+        <div class="ibox-content">
+          <div class="text-center p-md">
+            <span class="block mrg10B">My Direct Agents: </span>
+            <p>
+              <button class="btn btn-outline btn-primary btn-sm mrg5R" *ngFor="let item of agents; let rowNo = index" (click)="showDirectAgents(1, item.agentName)">
+                <img _ngcontent-c1="" alt="image" class="rounded-circle mrg10R float-left" src="../assets/images/profile_small.jpg">
+                <div class="float-left">
+                  {{item.agentName}}
+                  <span class="block">{{item.commission}}</span>
+                </div>
+              </button>
+            </p>
+          </div>
+          <div class="text-center p-md agent-block" *ngFor="let subAgent of subAgents; let rowNo = index">
+            <span class="badge badge-info">Level {{rowNo+1}}</span>
+            <span class="block mrg5B">Direct Agents For: <strong>{{subAgent.selectedAgent}}</strong></span>
+            <p>
+              <button class="btn btn-primary btn-sm mrg5R mrg5T"  *ngFor="let item of subAgent.directAgents; let agentId = index"
+                      [ngClass]="{'btn-outline white-bg ': !item.selected}" (click)="showDirectAgents(rowNo+1, item.agentName, agentId)">
+                <img _ngcontent-c1="" alt="image" class="rounded-circle mrg10R float-left" src="../assets/images/profile_small.jpg">
+                
+                <div class="float-left">
+                  {{item.agentName}}
+                  <span class="block">{{item.commission}}</span>
+                </div>
+              </button>
+            </p>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

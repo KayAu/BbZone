@@ -77,7 +77,7 @@ BEGIN
 			  ,ModifiedBy
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(CategoryId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(CategoryId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

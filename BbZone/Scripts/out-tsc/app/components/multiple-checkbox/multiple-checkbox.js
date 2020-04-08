@@ -21,6 +21,8 @@ var MultipleCheckboxes = /** @class */ (function () {
         this.cascadeEvent = cascadeEvent;
         this.dataService = dataService;
         this.checkboxItems = [];
+        this.selectAllAgents = false;
+        this.disabled = false;
         this.propagateChange = function () { };
     }
     MultipleCheckboxes_1 = MultipleCheckboxes;
@@ -49,13 +51,25 @@ var MultipleCheckboxes = /** @class */ (function () {
     MultipleCheckboxes.prototype.setChanges = function () {
         //this.propagateChange(this.data);
     };
+    MultipleCheckboxes.prototype.selectAll = function () {
+        for (var _i = 0, _a = this.checkboxItems; _i < _a.length; _i++) {
+            var item = _a[_i];
+            item.selected = this.selectAllAgents;
+        }
+        this.selectedItemText = this.selectAllAgents ? 'All Agents' : 'Select';
+        this.selectedItems = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayValue; });
+        this.propagateChange(this.selectedItems);
+    };
     MultipleCheckboxes.prototype.itemSelected = function (event, itemNo) {
-        this.selectedItemText = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayText; }).join(',');
+        this.selectedItemText = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayText; }).join(', ');
         this.selectedItems = this.checkboxItems.filter(function (i) { return i.selected === true; }).map(function (i) { return i.displayValue; });
         this.propagateChange(this.selectedItems);
     };
     MultipleCheckboxes.prototype.removeSelection = function () {
+        if (!this.checkboxItems)
+            return;
         this.checkboxItems = this.checkboxItems.filter(function (a) { return a.selected === false; });
+        this.selectAllAgents = false;
         this.selectedItems = null;
         this.selectedItemText = "";
     };
@@ -79,6 +93,10 @@ var MultipleCheckboxes = /** @class */ (function () {
     MultipleCheckboxes.prototype.registerOnTouched = function () { };
     MultipleCheckboxes.prototype.setDisabledState = function () { };
     var MultipleCheckboxes_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], MultipleCheckboxes.prototype, "disabled", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Boolean)

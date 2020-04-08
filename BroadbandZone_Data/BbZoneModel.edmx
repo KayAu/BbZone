@@ -225,6 +225,15 @@
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoginTrail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AgentId" Type="int" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="16" Nullable="false" />
+          <Property Name="LoginDate" Type="smalldatetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="ProductId" />
@@ -287,6 +296,8 @@
           <Property Name="UserLogin" Type="nvarchar" MaxLength="16" Nullable="false" />
           <Property Name="PasswordHash" Type="varbinary" MaxLength="200" Nullable="false" />
           <Property Name="SuperiorId" Type="int" />
+          <Property Name="BankName" Type="varchar" MaxLength="30" />
+          <Property Name="BankAccNo" Type="varchar" MaxLength="20" />
           <Property Name="ActivationCode" Type="varchar" MaxLength="100" />
           <Property Name="ActivatedOn" Type="smalldatetime" />
           <Property Name="IsApproved" Type="bit" />
@@ -658,10 +669,13 @@
           <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
         </Function>
-        <Function Name="prc_GetMyAgents" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+        <Function Name="prc_GetMyAgentsForCommissionSetting" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prSuperiorId" Type="int" Mode="In" />
           <Parameter Name="prProductID" Type="int" Mode="In" />
           <Parameter Name="oAllowCommConfig" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="prc_GetMyEntireTeam" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prSuperiorId" Type="int" Mode="In" />
         </Function>
         <Function Name="prc_GetPaymentDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prWithdrawalId" Type="int" Mode="In" />
@@ -780,6 +794,7 @@
           <EntitySet Name="DropdownItems" EntityType="Self.DropdownItems" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="IncentiveReceived" EntityType="Self.IncentiveReceived" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="LoginPageBanner" EntityType="Self.LoginPageBanner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginTrail" EntityType="Self.LoginTrail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductPackage" EntityType="Self.ProductPackage" Schema="dbo" store:Type="Tables" />
@@ -936,11 +951,6 @@
             <Parameter Name="prRecordStatus" Mode="In" Type="Boolean" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetMyAgents" ReturnType="Collection(BroadbandZoneModel.SelectItem)">
-            <Parameter Name="prSuperiorId" Mode="In" Type="Int32" />
-            <Parameter Name="prProductID" Mode="In" Type="Int32" />
-            <Parameter Name="oAllowCommConfig" Mode="InOut" Type="Boolean" />
-          </FunctionImport>
           <FunctionImport Name="InsertCommissionSettings">
             <Parameter Name="prAgents" Mode="In" Type="String" />
             <Parameter Name="prCreatedBy" Mode="In" Type="String" />
@@ -949,7 +959,7 @@
             <Parameter Name="prProductId" Mode="In" Type="Int32" />
             <Parameter Name="prAgentAcc" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="GetAgentCommissionSettings" ReturnType="Collection(BroadbandZoneModel.CommissionSettings)">
+          <FunctionImport Name="GetAgentCommissionSettings" ReturnType="Collection(BroadbandZoneModel.GetAgentCommissionSettings_Result1)">
             <Parameter Name="prAgentId" Mode="In" Type="Int32" />
             <Parameter Name="prProductId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -975,7 +985,6 @@
           <EntitySet Name="Products" EntityType="BroadbandZoneModel.Product" />
           <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
           <EntitySet Name="ProductPackages" EntityType="BroadbandZoneModel.ProductPackage" />
-          <EntitySet Name="Registrations" EntityType="BroadbandZoneModel.Registration" />
           <AssociationSet Name="FK_AgentCommission_Agent" Association="BroadbandZoneModel.FK_AgentCommission_Agent">
             <End Role="Agent" EntitySet="Agents" />
             <End Role="AgentCommission" EntitySet="AgentCommissions" />
@@ -1168,6 +1177,16 @@
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="LoginPageBanners" EntityType="BroadbandZoneModel.LoginPageBanner" />
+          <FunctionImport Name="GetMyAgentsForCommissionSetting" ReturnType="Collection(BroadbandZoneModel.SelectItem)">
+            <Parameter Name="prSuperiorId" Mode="In" Type="Int32" />
+            <Parameter Name="prProductID" Mode="In" Type="Int32" />
+            <Parameter Name="oAllowCommConfig" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GetMyEntireTeam" ReturnType="Collection(BroadbandZoneModel.GetMyEntireTeam_Result)">
+          <Parameter Name="prSuperiorId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="LoginTrails" EntityType="BroadbandZoneModel.LoginTrail" />
+          <EntitySet Name="Registrations" EntityType="BroadbandZoneModel.Registration" />
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -1253,15 +1272,16 @@
           <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="UserLogin" Nullable="true" MaxLength="16" />
-          <Property Type="Binary" Name="PasswordHash" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="UserLogin" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="PasswordHash" Nullable="true" />
           <Property Type="Int32" Name="SuperiorId" Nullable="true" />
           <Property Type="Boolean" Name="IsActive" Nullable="true" />
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="57" />
+          <Property Type="Int32" Name="LoginCount" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetRegistrationDetails_Result">
           <Property Type="Int32" Name="RegId" Nullable="false" />
@@ -1287,6 +1307,8 @@
           <Property Type="String" Name="ApprovedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="BankName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
         </ComplexType>
         <ComplexType Name="GetAgents_Result">
           <Property Type="Int32" Name="AgentId" Nullable="true" />
@@ -1459,33 +1481,6 @@
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="ProductCategory" Relationship="BroadbandZoneModel.FK_Product_ProductCategory" FromRole="ProductPackage" ToRole="ProductCategory" />
           <NavigationProperty Name="CustomerApplications" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="ProductPackage" ToRole="CustomerApplication" />
-        </EntityType>
-        <EntityType Name="Registration">
-          <Key>
-            <PropertyRef Name="RegId" />
-          </Key>
-          <Property Name="RegId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Nric" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
-          <Property Name="Country" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
-          <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
-          <Property Name="SuperiorId" Type="Int32" />
-          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ActivatedOn" Type="DateTime" Precision="0" />
-          <Property Name="IsApproved" Type="Boolean" />
-          <Property Name="ApprovalDate" Type="DateTime" Precision="0" />
-          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_AgentCommission_Agent">
           <End Type="BroadbandZoneModel.Agent" Role="Agent" Multiplicity="1" />
@@ -1940,10 +1935,6 @@
           <Property Type="Decimal" Name="Commission" Nullable="false" Precision="19" />
           <Property Type="Int32" Name="TotalApplications" Nullable="true" />
         </ComplexType>
-        <ComplexType Name="prc_DboardTotalSalesAndCommission_Result">
-          <Property Type="Int32" Name="TotalApplications" Nullable="true" />
-          <Property Type="Decimal" Name="TotalCommission" Nullable="true" Precision="19" />
-        </ComplexType>
         <ComplexType Name="DboardTotalSalesAndCommission_Result">
           <Property Type="Int32" Name="TotalApplications" Nullable="true" />
           <Property Type="Decimal" Name="TotalCommission" Nullable="true" Precision="19" />
@@ -1975,12 +1966,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="prc_GetLoginBanners_Result">
-          <Property Type="Int32" Name="Id" Nullable="false" />
-          <Property Type="String" Name="FileName" Nullable="true" MaxLength="150" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <ComplexType Name="GetLoginBanners_Result">
           <Property Type="String" Name="FileName" Nullable="true" MaxLength="150" />
           <Property Type="String" Name="CreatedOn" Nullable="true" MaxLength="4000" />
@@ -1996,6 +1981,54 @@
           <Property Name="FileName" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <ComplexType Name="GetMyEntireTeam_Result">
+          <Property Type="String" Name="UserLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetAgentCommissionSettings_Result1">
+          <Property Type="Int32" Name="CategoryId" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="Decimal" Name="SupCommission" Nullable="true" Precision="19" />
+          <Property Type="Int16" Name="AgentCommissionPer" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="LoginTrail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AgentId" Type="Int32" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="LoginDate" Type="DateTime" Nullable="false" Precision="0" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="RegId" />
+          </Key>
+          <Property Name="RegId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fullname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Nric" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CompanyRegNo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="MobileNo" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="TelNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="UserLogin" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
+          <Property Name="SuperiorId" Type="Int32" />
+          <Property Name="BankName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="BankAccNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ActivationCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ActivatedOn" Type="DateTime" Precision="0" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ApprovalDate" Type="DateTime" Precision="0" />
+          <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Precision="0" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2129,6 +2162,7 @@
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2158,6 +2192,8 @@
                 <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2174,15 +2210,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetMyAgents" FunctionName="BroadbandZoneModel.Store.prc_GetMyAgents">
-          <ResultMapping>
-              <ComplexTypeMapping TypeName="BroadbandZoneModel.SelectItem">
-                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
-                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
-                <ScalarProperty Name="Selected" ColumnName="Selected" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="InsertCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_InsertCommissionSettings" />
           <FunctionImportMapping FunctionImportName="GetCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_GetCommissionSettings">
           <ResultMapping>
@@ -2196,7 +2223,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetAgentCommissionSettings" FunctionName="BroadbandZoneModel.Store.prc_GetAgentCommissionSettings">
           <ResultMapping>
-              <ComplexTypeMapping TypeName="BroadbandZoneModel.CommissionSettings">
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAgentCommissionSettings_Result1">
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="SupCommission" ColumnName="SupCommission" />
@@ -2354,34 +2381,6 @@
                 <ScalarProperty Name="PackageName" ColumnName="PackageName" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
                 <ScalarProperty Name="ProdPkgId" ColumnName="ProdPkgId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Registrations">
-            <EntityTypeMapping TypeName="BroadbandZoneModel.Registration">
-              <MappingFragment StoreEntitySet="Registration">
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
-                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
-                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
-                <ScalarProperty Name="ActivatedOn" ColumnName="ActivatedOn" />
-                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
-                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
-                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
-                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
-                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
-                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
-                <ScalarProperty Name="Country" ColumnName="Country" />
-                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
-                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
-                <ScalarProperty Name="Nric" ColumnName="Nric" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
-                <ScalarProperty Name="RegId" ColumnName="RegId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2755,6 +2754,63 @@
                 <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="FilePath" ColumnName="FilePath" />
                 <ScalarProperty Name="BannerId" ColumnName="BannerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetMyAgentsForCommissionSetting" FunctionName="BroadbandZoneModel.Store.prc_GetMyAgentsForCommissionSetting">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.SelectItem">
+                <ScalarProperty Name="DisplayValue" ColumnName="DisplayValue" />
+                <ScalarProperty Name="DisplayText" ColumnName="DisplayText" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetMyEntireTeam" FunctionName="BroadbandZoneModel.Store.prc_GetMyEntireTeam">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetMyEntireTeam_Result">
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="LoginTrails">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.LoginTrail">
+              <MappingFragment StoreEntitySet="LoginTrail">
+                <ScalarProperty Name="LoginDate" ColumnName="LoginDate" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="ActivatedOn" ColumnName="ActivatedOn" />
+                <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="MobileNo" ColumnName="MobileNo" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyRegNo" ColumnName="CompanyRegNo" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Nric" ColumnName="Nric" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+                <ScalarProperty Name="RegId" ColumnName="RegId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

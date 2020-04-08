@@ -1,0 +1,81 @@
+﻿.voucher-content {
+    font-family: Arial;
+    font-size: x-small;
+    padding: 20px;
+}
+
+.row {
+    display: flex;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-6 {
+    width: 50%;
+    float:left;
+}
+
+.flexbox-space-between
+{
+    line-height:1;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.float-right
+{
+    float:right;
+}
+
+.text-primary {
+    color: #5A8DEE !important;
+    
+}
+
+.bold-title {
+    font-size: x-small;
+    text-transform: uppercase;
+}
+
+span {
+    font-size: x-small;
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+}
+
+.table-bordered {
+    border: 1px solid #2F4050;
+}
+
+.table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 1rem;
+    background-color: transparent;
+    border-collapse: collapse;
+}
+
+    .table > thead > tr > th {
+        border-top: 0;
+        line-height: 1;
+        padding: 2px;
+        vertical-align: top;
+        border-bottom-width: 1px;
+    }
+
+    .table > tbody > tr > td {
+        border-top: 1px solid #2F4050;
+        line-height: 1;
+        padding: 2px;
+        vertical-align: top;
+    }
+
+.table-bordered td, .table-bordered th {
+    border: 1px solid #2F4050;
+    font-size: x-small;
+}

@@ -55,6 +55,7 @@ BEGIN
 		INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
 		LEFT JOIN Clawback c ON c.ApplicationId = ca.ApplicationId
 		WHERE a.UserLogin = @prAgent
+		AND ca.DocumentCompleted = 1
 		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN 1
 					 WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
 					 ELSE 0
@@ -107,7 +108,7 @@ BEGIN
 		) a 
 		ORDER BY [Date]
 
-		SELECT @oTotalRecord = COUNT(ClaimCommId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(ClaimCommId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

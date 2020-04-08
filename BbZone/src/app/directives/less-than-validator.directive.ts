@@ -22,7 +22,7 @@ export class LessThanValidator implements Validator {
 
         if (myValue) {
             // value not equal
-            if (this._valueToCompare && myValue > this._valueToCompare)
+            if (this._valueToCompare && myValue >= this._valueToCompare)
                 return { validateLessThan: true };
         }
 

@@ -248,6 +248,7 @@
     <Compile Include="Models\ChartData.cs" />
     <Compile Include="Models\NewAgentCommission.cs" />
     <Compile Include="Models\PaymentVoucher.cs" />
+    <Compile Include="Models\ProductOption.cs" />
     <Compile Include="Models\UploadedFile.cs" />
     <Compile Include="Models\FileExportResult.cs" />
     <Compile Include="Models\Gridview.cs" />
@@ -335,8 +336,8 @@
     <Content Include="Content\glyphicons\glyphicons-halflings-regular.woff" />
     <Content Include="Content\material-design-iconic-font\fonts\materialdesignicons-webfont.woff2" />
     <Content Include="Content\themify-icons\fonts\themify.woff" />
-    <None Include="Properties\PublishProfiles\NeuroCallLog - DEV.pubxml" />
-    <None Include="Properties\PublishProfiles\NeuroCallLog - QA.pubxml" />
+    <None Include="Properties\PublishProfiles\BbZone - DEV.pubxml" />
+    <None Include="Properties\PublishProfiles\Local Publish.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -399,6 +400,7 @@
     <Content Include="src\app\nav-menu\nav-menu.component.css" />
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
     <Content Include="src\app\pages\admin-access\admin-access.html" />
+    <Content Include="src\app\pages\agent-view\agent-view.html" />
     <Content Include="src\app\pages\manage-clawback\manage-clawback.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
     <Content Include="src\app\pages\agent-maintenance\agent-maintenance.html" />
@@ -422,9 +424,6 @@
     <Content Include="src\app\pages\view-incentives\view-incentives.html" />
     <Content Include="src\app\pages\view-withdrawal\view-withdrawal.html" />
     <Content Include="src\app\pages\manage-product\manage-product.html" />
-    <Content Include="src\app\pages\record-counts\record-counts.html" />
-    <Content Include="src\app\pages\report-chart\report-chart.html" />
-    <Content Include="src\app\pages\user-access\user-access.html" />
     <Content Include="src\app\pages\view-announcement\view-announcement.html" />
     <Content Include="src\app\pages\view-commission\view-commission.html" />
     <Content Include="src\app\pages\view-order\view-order.html" />
@@ -437,6 +436,7 @@
     </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -469,7 +469,6 @@
     <Folder Include="App_Data\IncentiveFiles\" />
     <Folder Include="App_Data\LoginBannerFiles\" />
     <Folder Include="App_Data\UploadFiles\" />
-    <Folder Include="node_modules\" />
     <Folder Include="src\assets\" />
     <Folder Include="Views\PaymentV\" />
     <Folder Include="Views\User\" />
@@ -518,6 +517,7 @@
     <TypeScriptCompile Include="src\app\components\user-communication\user-communication.ts" />
     <TypeScriptCompile Include="src\app\directives\less-than-validator.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\max-validator.ts" />
+    <TypeScriptCompile Include="src\app\directives\min-validator.ts" />
     <TypeScriptCompile Include="src\app\directives\no-empty-row.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\progress-bar.ts" />
     <TypeScriptCompile Include="src\app\directives\required.directive.ts" />
@@ -563,6 +563,7 @@
     <TypeScriptCompile Include="src\app\nav-menu\nav-menu.component.ts" />
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
     <TypeScriptCompile Include="src\app\pages\admin-access\admin-access.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-view\agent-view.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-clawback\manage-clawback.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-maintenance\agent-maintenance.ts" />
@@ -596,9 +597,6 @@
     <TypeScriptCompile Include="src\app\model\page.model.ts" />
     <TypeScriptCompile Include="src\app\model\sort.model.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-product\manage-product.ts" />
-    <TypeScriptCompile Include="src\app\pages\record-counts\record-counts.ts" />
-    <TypeScriptCompile Include="src\app\pages\report-chart\report-chart.ts" />
-    <TypeScriptCompile Include="src\app\pages\user-access\user-access.ts" />
     <TypeScriptCompile Include="src\app\pages\view-announcement\view-announcement.ts" />
     <TypeScriptCompile Include="src\app\pages\view-commission\view-commission.ts" />
     <TypeScriptCompile Include="src\app\pages\view-order\view-order.ts" />

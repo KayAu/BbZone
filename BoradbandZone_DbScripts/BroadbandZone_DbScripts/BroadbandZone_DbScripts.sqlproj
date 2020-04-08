@@ -102,7 +102,6 @@
     <Build Include="dbo\Tables\AgentCommission.sql" />
     <Build Include="dbo\Stored Procedures\prc_UpdateCommissionSettings.sql" />
     <Build Include="dbo\Stored Procedures\prc_InsertCommissionSettings.sql" />
-    <Build Include="dbo\Stored Procedures\prc_GetMyAgents.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetMyAgentCommission.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetCommissionSettings.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetAnnouncement.sql" />
@@ -127,8 +126,25 @@
     <Build Include="dbo\Stored Procedures\prc_GetPaymentDetails.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetClawback.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetAgentCharges.sql" />
-    <Build Include="dbo\Stored Procedures\prc_FindCustomerApplication.sql" />
     <Build Include="dbo\Stored Procedures\prc_UpdateClaimableCommission.sql" />
+    <Build Include="dbo\Tables\LoginPageBanner.sql" />
+    <Build Include="dbo\Tables\IncentiveReceived.sql" />
+    <Build Include="dbo\Stored Procedures\prc_InsertIncentives.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawalSubmittedForDownload.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetMyEntireTeam.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetMyAgentsForCommissionSetting.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetLoginBanners.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetIncentivesReceivedForDownload.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetIncentivesReceived.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetAdminUsers.sql" />
+    <Build Include="dbo\Stored Procedures\prc_FindCompletedApplication.sql" />
+    <Build Include="dbo\Stored Procedures\prc_FindClaimedApplication.sql" />
+    <Build Include="dbo\Stored Procedures\prc_DboardTotalSalesAndCommission.sql" />
+    <Build Include="dbo\Stored Procedures\prc_DboardTopSalesPackage.sql" />
+    <Build Include="dbo\Stored Procedures\prc_DboardMonthlyApplications.sql" />
+    <Build Include="dbo\User Defined Types\udt_IncentivePayment.sql" />
+    <Build Include="dbo\Tables\LoginTrail.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetMyCommission.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />

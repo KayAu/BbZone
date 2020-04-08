@@ -4,7 +4,9 @@ using BroadbandZone_App.Models;
 using BroadbandZone_Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using DropdownItem = BroadbandZone_App.Models.DropdownItem;
 
@@ -20,9 +22,15 @@ namespace BroadbandZone_App.WebApi
             {
                 using (var db = new BroadbandZoneEntities())
                 {
-                    List<DropdownItem> dropdownItems = db.Products.Where(pc => pc.IsActive == true)
-                                                                           .Select(r => new DropdownItem { Key = r.ProductId.ToString(), Value = r.ProductName }).ToList();
-
+                    var results = db.Products.Where(pc => pc.IsActive == true).ToList();
+                    List<ProductOption> dropdownItems = results.Select(r => new ProductOption
+                                                                                {
+                                                                                    ProductId = r.ProductId.ToString(),
+                                                                                    ProductName = r.ProductName,
+                                                                                    ProductImgPath = $"/images/{r.ProductName}.png",
+                                                                                    ImageExisted = File.Exists(HttpContext.Current.Server.MapPath($"/images/{r.ProductName}.png"))
+                                                                                }).ToList();
+                    
                     return Ok(dropdownItems);
                 }
             }
@@ -164,21 +172,12 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                List<DropdownItem> dropdownItems;
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 using (var db = new BroadbandZoneEntities())
                 {
-                    if (currentUser.IsAdmin)
-                    {
-                        dropdownItems = db.Agents.Where(pc => pc.IsActive == true)
-                                                 .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
-                    }
-                    else
-                    {
-                        dropdownItems = db.Agents.Where(pc => pc.IsActive == true && pc.SuperiorId == currentUser.AgentId)
-                                                 .Select(r => new DropdownItem { Key = r.UserLogin, Value = r.Fullname }).ToList();
-                    }
+                    var agentId = !currentUser.IsAdmin ? currentUser.AgentId : null;
+                    List <DropdownItem> dropdownItems = db.GetMyEntireTeam(agentId).Select(r => new DropdownItem { Key = r.UserLogin, Value = r.FullName }).ToList();
                     return Ok(dropdownItems);
                 }
             }

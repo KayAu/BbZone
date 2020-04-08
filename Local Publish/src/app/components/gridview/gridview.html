@@ -1,0 +1,34 @@
+﻿
+<table class="table wp-100" >
+    <tbody>
+        <tr *ngIf="dataSource.length">
+            <th *ngFor="let columnName of dataColumns; let colIndex = index" [ngClass]="{'pad15L':colIndex == 0}">{{columnName}}</th>
+            <th *ngIf="itemLink">View</th>
+        </tr>
+        <tr *ngFor="let row of dataSource; let rowNo = index" class="row-select">
+            <ng-container *ngFor="let value of getRowData(row); let colNo = index">
+                <td *ngIf="!hideColumns.includes(colNo)"  [ngClass]="{'pad15L':colNo == 0}" [innerHTML]="value">
+                </td>
+            </ng-container>
+        </tr>
+        <tr *ngIf="showTotal && dataColumns.length > 0">
+            <td></td>
+            <td class="font-weight-600">Total</td>
+            <td class="font-weight-600" *ngFor="let item of [].constructor(dataColumns.length-1); let colIndex = index">{{sumColumnTotal(colIndex+1)}}</td>
+        </tr>
+        <tr *ngIf="!dataSource.length">
+            <td class="pad0A">
+                <div class="center-div">
+                    <div class="callout callout-secondary text-center pad45A mrg0B">
+                        <i class="mdi mdi-package-variant font-size-65"></i>
+                        <h2 class="mrg0T">No records found</h2>
+                        <p>
+                            There are no incomplete calls
+                        </p>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<!--<pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" *ngIf="showPager"></pager>-->

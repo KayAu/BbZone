@@ -34,24 +34,25 @@ var AgentComission = /** @class */ (function () {
         this.agentCommissions = [];
         this.selectedTab = 1;
         this.allowCommConfig = true;
+        this.noAgentsReturned = false;
     }
     AgentComission.prototype.ngOnInit = function () { };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
-        rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct),
-            this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgents", this.selectedProduct)]).subscribe(function (results) {
-            _this.commissionSettings = results[0];
-            _this.loadAgents(results[1]);
+        this.multipleCheckboxes.removeSelection();
+        rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsForCommissionSetting", this.selectedProduct),
+            this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)]).subscribe(function (results) {
+            _this.loadAgents(results[0]);
+            _this.commissionSettings = results[1];
         });
     };
     AgentComission.prototype.loadAgents = function (data) {
-        // this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
         this.myAgents = data.displayData;
         this.allowCommConfig = data.allowCommConfig;
-        //});
+        this.noAgentsReturned = this.myAgents.length === 0;
     };
     AgentComission.prototype.loadAgentCommissions = function () {
-        this.agentCommissionTable.loadData(this.selectedProduct);
+        this.agentCommissionTable.loadMyAgentsCommission(this.selectedProduct);
     };
     AgentComission.prototype.create = function () {
         var _this = this;

@@ -11,10 +11,10 @@ export class StatusAndKeywordParams {
 
 export class SearchOrderParams {
     constructor(
-        public productId: number,
-        public productCategoryId: number,
-        public productPackageId: number,
-        public orderStatusId: number,
+        public productId: string,
+        public productCategoryId: string,
+        public productPackageId: string,
+        public appStatusId: string,
         public agent: string,
         public submittedDate: DateRange,
         public residentialType: string,

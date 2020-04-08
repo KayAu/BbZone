@@ -27,6 +27,7 @@ export class AgentComission {
     selectedTab: number = 1;
     allowCommConfig: boolean = true;
     myAgents: SelectItem[];
+    noAgentsReturned: boolean = false;
     @ViewChild(NgForm) form: NgForm;
     @ViewChild(MultipleCheckboxes) multipleCheckboxes: MultipleCheckboxes;
     @ViewChild(ProductOptions) productOptions: ProductOptions;
@@ -36,26 +37,23 @@ export class AgentComission {
 
     ngOnInit() {}
 
-
     loadCategories() {
-        forkJoin([this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct),
-                  this.dataService.get(`${ApiController.Commission}/GetMyAgents`, this.selectedProduct)]).subscribe(results => {
-            this.commissionSettings = results[0];
-            this.loadAgents(results[1]);
-       
+        this.multipleCheckboxes.removeSelection();
+        forkJoin([this.dataService.get(`${ApiController.Commission}/GetMyAgentsForCommissionSetting`, this.selectedProduct),
+            this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct)]).subscribe(results => {
+                this.loadAgents(results[0]);
+                this.commissionSettings = results[1];      
         });
-
     }
 
     loadAgents(data: any) {
-        // this.dataService.get(`${ApiController.Commission}/GetMyAgents`).subscribe(data => {
         this.myAgents = data.displayData;
         this.allowCommConfig = data.allowCommConfig;
-        //});
+        this.noAgentsReturned = this.myAgents.length === 0;
     }
 
     loadAgentCommissions() {
-        this.agentCommissionTable.loadData(this.selectedProduct);
+        this.agentCommissionTable.loadMyAgentsCommission(this.selectedProduct);
     }
 
     create() {

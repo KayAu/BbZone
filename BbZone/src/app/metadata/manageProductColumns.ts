@@ -20,7 +20,7 @@ public static fields = [
   },
   {
     "fieldName": "productName",
-    "headerText": "ProductName",
+    "headerText": "Product Name",
     "displayType": "text",
     "keyField": false,
     "colWidth": "",

@@ -1,0 +1,132 @@
+﻿<page-header [title]="'Submit Withdrawal'" [parentCategory]="'Manage Withdrawal'"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <loading></loading>
+    <div class="row">
+        <div class="col-md-6 mrg10T mrg25B">
+            <div class="float-left">
+                <div alt="image" class="rounded-circle bg-info float-left rounded-circle-lg">
+                    <i class="fa fa-money font-size-24"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-35 mrg10R line-height-8">RM {{totalSelectedAmount | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
+                        <small class="text-muted">Selected Amount</small>
+                    </div>
+                </div>
+            </div>
+            <div class="float-left mrg25L">
+                <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
+                    <i class="fa fa-minus-square-o font-size-24" style="padding-left: 3px"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-35 mrg10R line-height-8">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
+                        <small class="text-muted">Amount Deduct</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mrg10T mrg25B text-right">
+            <label class="text-uppercase font-normal">Claimable Amount</label>
+            <div class="mrg0T amt-claimable font-bold" [ngClass]="{'text-success': allowSubmit,'text-danger': !allowSubmit }">RM {{totalClaimableAmount | number:'1.2-2'}}</div>
+        </div>
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title pad10R">
+                    <h5>Submit Withdrawal</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="col-md-6 pad0L mrg20B flexbox">
+                        <div class="input-group mrg5R">
+                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                            <input type="text"
+                                   ngxDaterangepickerMd
+                                   class="form-control form-control-sm mrg10R "
+                                   [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
+                                   [(ngModel)]="searchParams.submittedDate"
+                                   (ngModelChange)="reloadData()"
+                                   placeholder="Submission date"
+                                   startKey="startDate"
+                                   endKey="endDate" />
+                        </div>
+                        <div class="input-group mrg5R">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input placeholder="Application Id or Customer Name" type="text" class="form-control form-control-sm"
+                                   (keydown.enter)="reloadData()" [(ngModel)]="searchParams.keyword">
+                        </div>
+                        <button type="button" class="btn btn-outline btn-default" (click)="clearSearchParam()">Reset</button>
+                    </div>
+                    <div class="table-responsive mrg10T">
+                        <div class="col-md-12 pad0L mrg25B mrg20T" *ngIf="selectedItems.length > 0">
+                            <div class="display-table">
+                                <div class="display-cell">
+                                    <span>Selected records count: {{selectedItems.length}}</span>
+                                </div>
+                                <div class="display-cell pad25L">
+                                    <button type="button" class="btn btn-default mrg10R" (click)="showSelectedItems()">
+                                        {{viewSelectedItems? 'Hide': 'View'}} Selection
+                                    </button>
+                                    <button type="button" class="btn btn-primary" [ngClass]="{'show-spinner disabled':isUpdating }"
+                                            [disabled]="!allowSubmit || isUpdating" (click)="submit()">
+                                        {{isUpdating ? 'Submitting' : 'Submit'}}
+                                        <span class="loading"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table table-striped mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let record of dataSource; let rowNo = index" >
+                                    <td>
+                                        <div class="checkbox checkbox-primary mrg0A" *ngIf="record.claimCommId!=null">
+                                            <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
+                                            <label for="checkbox{{rowNo}}" class="pad0L">
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <ng-container *ngFor="let field of dataRowMapper">
+                                        <td>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <ng-template #displayBadge>
+                                                <span class="badge" *ngIf="record.transactionType"
+                                                      [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                                                  'badge-warning': record.transactionType == 'Purchase',
+                                                                  'badge-success': record.transactionType == 'Own Sales',
+                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                    {{record.transactionType}}
+                                                </span>
+                                                <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
+                                            </ng-template>
+                                        </td>
+                                    </ng-container>
+                                </tr>
+                                <tr *ngIf="dataSource.length === 0">
+                                    <td [attr.colspan]="dataRowMapper.length+1">
+                                        <div class="mrg45A text-center opacity-40">
+                                            <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                            <h4>No Records Available</h4>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

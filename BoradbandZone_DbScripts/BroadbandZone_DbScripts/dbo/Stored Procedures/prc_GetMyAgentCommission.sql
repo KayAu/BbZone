@@ -1,17 +1,21 @@
 ﻿CREATE PROCEDURE [dbo].[prc_GetMyAgentCommission]
 	@prProductId INT,
-	@prSuperiorId INT
+	@prSuperiorId INT = NULL
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
+	        @vIsAdmin BIT = 0,
 			@vCols AS NVARCHAR(MAX),
 			@query AS NVARCHAR(MAX);
 
 	BEGIN TRY
 		IF OBJECT_ID('tempdb..##temp_AgentComm') IS NOT NULL DROP TABLE ##temp_AgentComm
 
+		IF @prSuperiorId IS NULL
+		SET @vIsAdmin = 1
+
 		SELECT 
-			ac.AgentId
+			 ac.AgentId
 			,a1.Fullname AS AgentName
 			,pc.Category
 			,ac.AgentCommission
@@ -19,9 +23,11 @@ BEGIN
 		FROM AgentCommission ac
 		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
 		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
-		--INNER JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
 		WHERE pc.ProductId = @prProductId
-		AND a1.SuperiorId = @prSuperiorId
+		AND 1 = CASE WHEN @vIsAdmin = 1 AND a1.SuperiorId IS NULL THEN 1
+		             WHEN a1.SuperiorId = @prSuperiorId THEN 1
+					 ELSE 0
+				END
 		ORDER BY pc.Category
 
 		SELECT @vCols = STUFF((SELECT DISTINCT ',' + QUOTENAME(c.category) 

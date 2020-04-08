@@ -16,7 +16,9 @@
                     <div role="tabpanel" id="addCommission" class="tab-pane active">
                         <div class="panel-body">
                             <form #dataForm="ngForm" (ngSubmit)="create()">
-
+                                <div class="alert alert-success" *ngIf="noAgentsReturned">
+                                    You have updated the commissions for all your agents on this product.
+                                </div>
                                 <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
                                     <i class="fa fa-warning"></i>
                                     Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
@@ -30,13 +32,13 @@
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
-                                <fieldset [disabled]="!allowCommConfig">
+                                <fieldset [disabled]="!allowCommConfig || noAgentsReturned">
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">
                                             Agents
                                         </label>
                                         <div class="col-sm-10">
-                                            <multiple-checkbox name="selectedAgents" [fieldId]="'selectedAgents'" [dataItems]="myAgents" [(ngModel)]="selectedAgents" [required]="true"></multiple-checkbox>
+                                            <multiple-checkbox name="selectedAgents" [fieldId]="'selectedAgents'" [dataItems]="myAgents" [(ngModel)]="selectedAgents" [required]="true" [disabled]="noAgentsReturned"></multiple-checkbox>
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
@@ -45,13 +47,14 @@
                                             Product Category
                                         </label>
                                         <div class="col-sm-10">
+
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Product Category</th>
                                                         <th>Commission (%)</th>
-                                                        <th>Allocation (%)</th>
+                                                        <th class="cell-width-35">Allocation (%)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -61,7 +64,7 @@
                                                         <td>{{item.supCommission}}</td>
                                                         <td>
                                                             <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" #name="ngModel"
-                                                                   validateLessThan [compare-value]="item.supCommission" class="form-control" />
+                                                                   validateLessThan [compare-value]="item.supCommission" [min]="0" fieldId="agentCommissionPer{{itemNo}}" class="form-control" />
                                                             <span *ngIf="name.errors?.validateLessThan" class="text-danger">
                                                                 Allocation percentage must be lesser than superior's commission
                                                             </span>
@@ -80,14 +83,17 @@
                                         </div>
                                     </div>
                                     <div class="hr-line-dashed"></div>
-                                    <div>
-                                        <back-button>Cancel</back-button>
-                                        <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
-                                                [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
-                                            {{isUpdating ? 'Updating' : 'Update'}}
-                                            <span class="loading"></span>
-                                        </button>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 text-right">
+                                            <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
+                                                    [disabled]="dataForm.form.invalid || isUpdating || commissionSettings.length == 0" style="width: 180px;">
+                                                {{isUpdating ? 'Updating' : 'Update'}}
+                                                <span class="loading"></span>
+                                            </button>
+                                            <back-button>Cancel</back-button>
+                                        </div>
                                     </div>
+
                                 </fieldset>
                             </form>
                         </div>

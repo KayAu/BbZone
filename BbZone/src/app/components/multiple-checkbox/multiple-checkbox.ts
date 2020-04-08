@@ -29,7 +29,9 @@ export class MultipleCheckboxes implements ControlValueAccessor {
     private selectedItemText: string;
     private selectedItems: any;
     private parentForm: NgForm;
+    selectAllAgents: boolean = false;
 
+    @Input() disabled: boolean = false;
     @Input() required: boolean;
     @Input() fieldId: string;
     @Input() displayText: string;
@@ -69,14 +71,26 @@ export class MultipleCheckboxes implements ControlValueAccessor {
         //this.propagateChange(this.data);
     }
 
+    selectAll() {
+        for (var item of this.checkboxItems) {
+            item.selected = this.selectAllAgents;
+        }
+
+        this.selectedItemText = this.selectAllAgents ? 'All Agents' : 'Select';
+        this.selectedItems =  this.checkboxItems.filter(i => i.selected === true).map(i => i.displayValue);
+        this.propagateChange(this.selectedItems);
+    }
+
     itemSelected(event, itemNo) {
-        this.selectedItemText = this.checkboxItems.filter(i => i.selected === true).map(i => i.displayText).join(',');
+        this.selectedItemText = this.checkboxItems.filter(i => i.selected === true).map(i => i.displayText).join(', ');
         this.selectedItems = this.checkboxItems.filter(i => i.selected === true).map(i => i.displayValue);
         this.propagateChange(this.selectedItems);
     }
 
     removeSelection() {
+        if (!this.checkboxItems) return;
         this.checkboxItems = this.checkboxItems.filter(a => a.selected === false);
+        this.selectAllAgents = false;
         this.selectedItems = null;
         this.selectedItemText = ""
     }

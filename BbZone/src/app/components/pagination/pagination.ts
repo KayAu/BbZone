@@ -19,7 +19,7 @@ export class Pagination {
     private _totalRecord: number;
 
     ngOnInit() {
-        this.page.pageSize = 30;
+        this.page.pageSize = 20;
         this.resetToFirstPage();
     }
 
@@ -49,7 +49,7 @@ export class Pagination {
     }
 
     goPrevious() {
-        if (this.page.currentPage === this.page.totalPages) return;
+        if (this.page.currentPage === 1) return;
 
         this.page.currentPage--;
         this.pageClick.emit(this.page);

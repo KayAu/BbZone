@@ -13,7 +13,7 @@ BEGIN
 				cc.ClaimCommId,
 				TransactionDetails = ca.CustomerName,
 				pp.PackageName,
-				[Date] = ca.CreatedOn,
+				[Date] =FORMAT(ca.CreatedOn, 'MM/dd/yyyy'),
 				cc.PackageCommOnDate,
 				cc.AgentCommOnDate,
 				ClaimAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,

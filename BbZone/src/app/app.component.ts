@@ -17,7 +17,7 @@ export class AppComponent {
     showScroll: boolean;
     showScrollHeight = 300;
     hideScrollHeight = 10;
-    @ViewChild('navMenu') navMenu: NavMenuComponent;
+    @ViewChild(NavMenuComponent) navMenu: NavMenuComponent;
 
     constructor(
         private router: Router,
@@ -27,6 +27,7 @@ export class AppComponent {
         this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
         });
+
     }
 
     @HostListener('window:unload', ['$event'])
@@ -35,7 +36,10 @@ export class AppComponent {
     }
 
     logout() {
-        localStorage.removeItem('currentUser');
+        //localStorage.removeItem('currentUser');
+        //this.currentUser = null;
+
+        this.authenticationService.logout();
         this.router.navigate(['/']);
     }
 }

@@ -96,7 +96,7 @@
                 "hidden": false,
                 "dataFieldControl": {
                     "controlName": "postcode",
-                    "controlType": "number",
+                    "controlType": "text",
                     "required": true,
                     "maxLength": 10
                 }
@@ -132,6 +132,28 @@
                     "controlType": "textbox",
                     "required": false,
                     "maxLength": 15
+                }
+            },
+            {
+                "fieldName": "bankName",
+                "displayText": "Bank Name",
+                "hidden": false,
+                "dataFieldControl": {
+                    "controlName": "bankName",
+                    "controlType": "textbox",
+                    "required": true,
+                    "maxLength": 30
+                }
+            },
+            {
+                "fieldName": "bankAccNo",
+                "displayText": "Bank Acc No",
+                "hidden": false,
+                "dataFieldControl": {
+                    "controlName": "bankAccNo",
+                    "controlType": "textbox",
+                    "required": true,
+                    "maxLength": 20
                 }
             },
             {
@@ -384,6 +406,28 @@ export class AgentRegistrationViewFields {
                 }
             },
             {
+                "fieldName": "bankName",
+                "displayText": "Bank Name",
+                "hidden": false,
+                "dataFieldControl": {
+                    "controlName": "bankName",
+                    "controlType": "textbox",
+                    "required": true,
+                    "maxLength": 30
+                }
+            },
+            {
+                "fieldName": "bankAccNo",
+                "displayText": "Bank Acc No",
+                "hidden": false,
+                "dataFieldControl": {
+                    "controlName": "bankAccNo",
+                    "controlType": "textbox",
+                    "required": true,
+                    "maxLength": 20
+                }
+            },
+            {
                 "fieldName": "superiorName",
                 "displayText": "Superior/Upline",
                 "hidden": false,
@@ -401,17 +445,6 @@ export class AgentProfileFields {
     public static keyField = "agentId";
     public static fields =
         [
-            {
-                "fieldName": "agentId",
-                "displayText": "Agent Id",
-                "hidden": false,
-                "dataFieldControl": {
-                    "controlName": "agentId",
-                    "controlType": "label",
-                    "required": true,
-                    "maxLength": 50
-                }
-            },
             {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
@@ -567,28 +600,6 @@ export class AgentProfileFields {
                     "maxLength": 20
                 }
             },
-            //{
-            //    "fieldName": "userLogin",
-            //    "displayText": "User Login",
-            //    "hidden": false,
-            //    "dataFieldControl": {
-            //        "controlName": "userLogin",
-            //        "controlType": "textbox",
-            //        "required": false,
-            //        "maxLength": 16
-            //    }
-            //},
-            //{
-            //    "fieldName": "password",
-            //    "displayText": "Password",
-            //    "hidden": false,
-            //    "dataFieldControl": {
-            //        "controlName": "password",
-            //        "controlType": "password",
-            //        "required": false,
-            //        "maxLength": 64
-            //    }
-            //}
         ]
 }
 

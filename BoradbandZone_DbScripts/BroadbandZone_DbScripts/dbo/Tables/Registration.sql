@@ -15,6 +15,8 @@
     [UserLogin]      NVARCHAR (16)   NOT NULL,
     [PasswordHash]   VARBINARY (200) NOT NULL,
     [SuperiorId]     INT             NULL,
+    [BankName]       VARCHAR (30)    NULL,
+    [BankAccNo]      VARCHAR (20)    NULL,
     [ActivationCode] VARCHAR (100)   NULL,
     [ActivatedOn]    SMALLDATETIME   NULL,
     [IsApproved]     BIT             NULL,
@@ -23,6 +25,8 @@
     [CreatedOn]      SMALLDATETIME   NULL,
     CONSTRAINT [PK__Registra__2C6822F899376830] PRIMARY KEY CLUSTERED ([RegId] ASC)
 );
+
+
 
 
 

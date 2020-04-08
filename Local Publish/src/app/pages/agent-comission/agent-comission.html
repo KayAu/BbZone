@@ -1,0 +1,127 @@
+<page-header [title]="'Agent Commissions'" [parentCategory]="''"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="tabs-container">
+                <loading></loading>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li>
+                        <a class="nav-link" [ngClass]="{'active':selectedTab == 1}" data-toggle="tab" href="#addCommission" (click)="selectedTab=1">Add Commission</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" [ngClass]="{'active':selectedTab == 2}" data-toggle="tab" href="#editCommission" (click)="selectedTab=2">Edit Commission</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" id="addCommission" class="tab-pane active">
+                        <div class="panel-body">
+                            <form #dataForm="ngForm" (ngSubmit)="create()">
+
+                                <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
+                                    <i class="fa fa-warning"></i>
+                                    Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">
+                                        Product
+                                    </label>
+                                    <div class="col-sm-10">
+                                        <product-options name="product" [fieldId]="'product'" [required]="true" [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                                <fieldset [disabled]="!allowCommConfig || noAgentsReturned">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Agents
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <multiple-checkbox name="selectedAgents" [fieldId]="'selectedAgents'" [dataItems]="myAgents" [(ngModel)]="selectedAgents" [required]="true" [disabled]="noAgentsReturned"></multiple-checkbox>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Product Category
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <div class="alert alert-success" *ngIf="noAgentsReturned">
+                                                You have updated the commissions for all your agents on this product.
+                                            </div>
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Product Category</th>
+                                                        <th>Commission (%)</th>
+                                                        <th>Allocation (%)</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let item of commissionSettings; let itemNo = index">
+                                                        <td>{{itemNo+1}}</td>
+                                                        <td>{{item.category}}</td>
+                                                        <td>{{item.supCommission}}</td>
+                                                        <td>
+                                                            <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" #name="ngModel"
+                                                                   validateLessThan [compare-value]="item.supCommission" class="form-control" />
+                                                            <span *ngIf="name.errors?.validateLessThan" class="text-danger">
+                                                                Allocation percentage must be lesser than superior's commission
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr *ngIf="commissionSettings.length == 0">
+                                                        <td colspan="4">
+                                                            <div class="mrg45A text-center opacity-40">
+                                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                                <h4>No Records Available</h4>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group row">
+                                        <div class="col-sm-12 text-right">
+                                            <back-button>Cancel</back-button>
+                                            <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
+                                                    [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
+                                                {{isUpdating ? 'Updating' : 'Update'}}
+                                                <span class="loading"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <div role="tabpanel" id="editCommission" class="tab-pane">
+                        <div class="panel-body">
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">
+                                    Product
+                                </label>
+                                <div class="col-sm-11">
+                                    <product-options name="product" [fieldId]="product" [(ngModel)]="selectedProduct" (onProductSelected)="loadAgentCommissions()"></product-options>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group row">
+                                <label class="col-sm-1 col-form-label">
+                                    Agents Commission
+                                </label>
+                                <div class="col-sm-11">
+                                    <agent-commission-table></agent-commission-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

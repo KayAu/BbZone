@@ -19,8 +19,13 @@
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
-			@vSelectQuery NVARCHAR(MAX),
-			@vAgentHierarchy udt_AgentHierarchy
+			@vSelectQuery NVARCHAR(MAX)
+
+	DECLARE @vTeamMembers TABLE 
+	(	
+		AgentUsername NVARCHAR(16),
+		FullName VARCHAR(50)
+	)
 
 	DECLARE @var_Table TABLE(
 		ApplicationId INT,
@@ -40,11 +45,10 @@ BEGIN
 
 		IF @prIsAdmin <> 1
 		BEGIN
-			INSERT INTO @vAgentHierarchy
-			SELECT * 
-			FROM  [dbo].[fnGetMyAgents](@prAgentId)
+			INSERT INTO @vTeamMembers
+			EXEC prc_GetMyEntireTeam @prAgentId
 		END
-
+	
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
@@ -63,7 +67,7 @@ BEGIN
 		INNER JOIN ProductCategory PC ON pc.CategoryId = pp.CategoryId
 		INNER JOIN Product p ON pc.ProductId = p.ProductId
 		INNER JOIN ApplicationStatus a ON ca.AppStatusId = a.AppStatusId
-		LEFT JOIN @vAgentHierarchy h ON ca.Agent = h.AgentUsername
+		LEFT JOIN @vTeamMembers tm ON ca.Agent = tm.AgentUsername
 		WHERE 1 = CASE WHEN ISNULL(@prProduct,0) = 0 THEN 1
 					   WHEN p.ProductId = @prProduct THEN 1
 					   ELSE 0
@@ -93,11 +97,11 @@ BEGIN
 					 ELSE 0
 				END	
 		AND 1 = CASE WHEN ISNULL(@prResidentialName,'') = '' THEN 1
-					 WHEN ca.ResidentialType LIKE '%' + @prResidentialName + '%' THEN 1
+					 WHEN ca.ResidentialName LIKE '%' + @prResidentialName + '%' THEN 1
 					 ELSE 0
 				END	
 		AND 1 = CASE WHEN @prIsAdmin  = 1 THEN 1
-		             WHEN @prIsAdmin  = 0 AND ca.Agent = h.AgentUsername THEN 1
+		             WHEN @prIsAdmin  = 0 AND ca.Agent = tm.AgentUsername THEN 1
 					 ELSE 0
 				END
 
@@ -115,7 +119,7 @@ BEGIN
 				[Status]
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(ApplicationId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

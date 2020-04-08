@@ -22,3 +22,8 @@ export enum CustomerSearchType {
     completed,
     commissionClaimed
 }
+
+export enum CommissionTableDisplay {
+    currentAgent,
+    allAgents
+}

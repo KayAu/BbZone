@@ -1,0 +1,27 @@
+﻿
+<div classs="btn btn-primary file-upload pos-rel ">
+    <label for="upload" class="file-upload__label">
+        <i class="fa fa-upload mrg5R"></i> Upload Files
+    </label>
+    <input #file class="file-upload__input" type="file" name="file-upload" (change)="uploadFile(file.files)" multiple>
+</div>
+
+<div class="dropzone mrg5B">
+    <ng-container *ngFor="let file of uploadedFiles; let fileNo = index">
+        <div class="file-preview" *ngIf="!file.deleted">
+            <button class="btn btn-warning btn-circle btn-xs btn-close" type="button" (click)="removeFile(fileNo)">×</button>
+            <a href="{{file.path}}" target="_blank" download="{{file.name}}">
+                <div class="file-details">
+                    <div class="file-size">
+                        <span><strong>{{getFileSize(file.size)}}</strong> KB</span>
+                    </div>
+                    <div class="file-filename">
+                        <span>{{file.name}}</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </ng-container></div>
+<span class="form-text m-b-none">
+    Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com
+</span>

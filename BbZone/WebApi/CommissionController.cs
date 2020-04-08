@@ -37,9 +37,9 @@ namespace BroadbandZone_App.WebApi
         }
 
         [HttpGet]
-        [Route("api/Commission/GetMyAgents/{productId}")]
+        [Route("api/Commission/GetMyAgentsForCommissionSetting/{productId}")]
         // GET api/<controller>
-        public IHttpActionResult GetMyAgents(int productId)
+        public IHttpActionResult GetMyAgentsForCommissionSetting(int productId)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter allowCommConfig = new ObjectParameter("oAllowCommConfig", typeof(bool));
-                    var results = (new BroadbandZoneEntities()).GetMyAgents(currentUser.AgentId, productId, allowCommConfig).ToList();
+                    var results = (new BroadbandZoneEntities()).GetMyAgentsForCommissionSetting(currentUser.AgentId, productId, allowCommConfig).ToList();
                     return Ok(new 
                     {
                         DisplayData = results,
@@ -88,9 +88,9 @@ namespace BroadbandZone_App.WebApi
         }
 
         [HttpGet]
-        [Route("api/Commission/GetMyAgentCommission/{productId}")]
+        [Route("api/Commission/GetMyAgentsCommission/{productId}")]
         // GET api/<controller>
-        public IHttpActionResult GetAgentCommissions(int productId)
+        public IHttpActionResult GetMyAgentsCommission(int productId)
         {
             try
             {
@@ -129,6 +129,49 @@ namespace BroadbandZone_App.WebApi
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
+
+        [HttpGet]
+        [Route("api/Commission/GetMyCommission/{agentId}/{productId}")]
+        // GET api/<controller>
+        public IHttpActionResult GetMyCommission(int agentId, int productId)
+        {
+            try
+            {
+                DataTable dt = new DataTable();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    db.Database.Connection.Open();
+                    using (var cmd = db.Database.Connection.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "prc_GetMyCommission";
+
+                        DbParameter prProductId = cmd.CreateParameter();
+                        prProductId.ParameterName = "@prProductId";
+                        prProductId.DbType = System.Data.DbType.Int32;
+                        prProductId.Value = productId;
+
+                        DbParameter prUsername = cmd.CreateParameter();
+                        prUsername.ParameterName = "@prAgentId";
+                        prUsername.DbType = System.Data.DbType.String;
+                        prUsername.Value = agentId;
+
+                        cmd.Parameters.Add(prProductId);
+                        cmd.Parameters.Add(prUsername);
+                        using (var reader = cmd.ExecuteReader())
+                        {
+                            dt.Load(reader);
+                            return Ok(dt);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
 
         // POST api/<controller>
         public IHttpActionResult Post([FromBody]NewAgentCommission newRecord)

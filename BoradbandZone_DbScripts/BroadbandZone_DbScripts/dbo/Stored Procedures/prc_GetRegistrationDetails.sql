@@ -19,6 +19,8 @@ BEGIN
 			  ,r.Country
 			  ,r.MobileNo
 			  ,r.TelNo
+			  ,r.BankName
+			  ,r.BankAccNo
 			  ,r.UserLogin
 			  ,r.PasswordHash
 			  ,r.SuperiorId

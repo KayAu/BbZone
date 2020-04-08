@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { LoginUser } from '../model/login-user';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication';
 
 @Component({
     selector: 'app-nav-menu',
@@ -12,7 +13,7 @@ export class NavMenuComponent {
     isExpanded = false;
     @Input() currentUser: LoginUser = new LoginUser();
     
-    constructor(private router: Router) { }
+    constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     collapse() {
         this.isExpanded = false;
@@ -23,7 +24,9 @@ export class NavMenuComponent {
     }
 
     logout() {
-        localStorage.removeItem('currentUser');
+        //localStorage.removeItem('currentUser');
+        //this.currentUser = null;
+        this.authenticationService.logout();
         this.router.navigate(['/']);
     }
 }

@@ -79,6 +79,7 @@ export abstract class ListDataCrud extends ListEvent  {
         this.resetSorting();
         this.listPage.currentPage = 1;
     }
+
   private setKeyField() {
     let field = this.fieldMapper.filter(f => f.keyField === true);
     if (field.length > 0)

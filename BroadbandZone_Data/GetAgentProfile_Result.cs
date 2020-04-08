@@ -29,7 +29,7 @@ namespace BroadbandZone_Data
         public string BankName { get; set; }
         public string BankAccNo { get; set; }
         public string UserLogin { get; set; }
-        public byte[] PasswordHash { get; set; }
+        public Nullable<int> PasswordHash { get; set; }
         public Nullable<int> SuperiorId { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
@@ -37,5 +37,6 @@ namespace BroadbandZone_Data
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
         public string SuperiorName { get; set; }
+        public Nullable<int> LoginCount { get; set; }
     }
 }

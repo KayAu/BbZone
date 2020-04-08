@@ -83,7 +83,7 @@ BEGIN
 				OrderStatus 
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(OrderId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(OrderId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

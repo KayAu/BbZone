@@ -138,6 +138,28 @@ var AgentRegistrationFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "bankName",
+            "displayText": "Bank Name",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankName",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 30
+            }
+        },
+        {
+            "fieldName": "bankAccNo",
+            "displayText": "Bank Acc No",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankAccNo",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 20
+            }
+        },
+        {
             "fieldName": "superiorId",
             "displayText": "Superior Id",
             "hidden": false,
@@ -392,6 +414,28 @@ var AgentRegistrationViewFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "bankName",
+            "displayText": "Bank Name",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankName",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 30
+            }
+        },
+        {
+            "fieldName": "bankAccNo",
+            "displayText": "Bank Acc No",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankAccNo",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 20
+            }
+        },
+        {
             "fieldName": "superiorName",
             "displayText": "Superior/Upline",
             "hidden": false,
@@ -411,17 +455,6 @@ var AgentProfileFields = /** @class */ (function () {
     }
     AgentProfileFields.keyField = "agentId";
     AgentProfileFields.fields = [
-        {
-            "fieldName": "agentId",
-            "displayText": "Agent Id",
-            "hidden": false,
-            "dataFieldControl": {
-                "controlName": "agentId",
-                "controlType": "label",
-                "required": true,
-                "maxLength": 50
-            }
-        },
         {
             "fieldName": "fullname",
             "displayText": "Full Name",

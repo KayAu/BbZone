@@ -69,12 +69,12 @@ export class DataControl implements ControlValueAccessor {
     writeValue(val: any): void {
 
         if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
-            if (val) {
-                this.data = val.toString();
+            //if (val) {
+                this.data = val ? val.toString() : null;
                 if (this.field.cascadeTo) {
                     this.cascadeEvent.subject.next(new CascadeData(this.field.cascadeTo, this.data));
                 }
-            }
+            //}
         }
         else {
             this.data = val;

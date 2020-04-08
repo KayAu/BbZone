@@ -36,5 +36,7 @@ namespace BroadbandZone_Data
         public string ApprovedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string SuperiorName { get; set; }
+        public string BankName { get; set; }
+        public string BankAccNo { get; set; }
     }
 }

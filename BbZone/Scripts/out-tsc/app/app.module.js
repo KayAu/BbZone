@@ -80,6 +80,8 @@ var view_incentives_1 = require("./pages/view-incentives/view-incentives");
 var admin_access_1 = require("./pages/admin-access/admin-access");
 var manage_login_banner_1 = require("./pages/manage-login-banner/manage-login-banner");
 var role_1 = require("./enums/role");
+var min_validator_1 = require("./directives/min-validator");
+var agent_view_1 = require("./pages/agent-view/agent-view");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -140,7 +142,9 @@ var AppModule = /** @class */ (function () {
                 view_incentives_1.ViewIncentives,
                 admin_access_1.AdminAccess,
                 monthly_applications_1.MonthlyApplicationDashboard,
-                manage_login_banner_1.ManageLoginBanner
+                manage_login_banner_1.ManageLoginBanner,
+                min_validator_1.MinDirective,
+                agent_view_1.AgentView
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -183,6 +187,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-view/:id', component: agent_view_1.AgentView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } }
                 ])
             ],
             providers: [

@@ -67,7 +67,7 @@ BEGIN
 				SuperiorName
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(AgentId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(AgentId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

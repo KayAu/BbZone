@@ -1,0 +1,157 @@
+
+<page-header [title]="'Agent View'" [parentCategory]="'Agent Maintenance'"></page-header>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox" *ngIf="!completed">
+                <div class="ibox-title">
+                    <h5>Agent Details <small>* is required field.</small></h5>
+                </div>
+                <div class="ibox-content pad0T">
+                    <loading></loading>
+                    <div class="row pad25T pad15B data-box">
+                        <div class="col-lg-5">
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-2 text-right">
+                                    <label>Agent Id:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-10 text-left">
+                                    {{formRecord.agentId}}
+                                </div>
+                            </div>
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-2 text-right">
+                                    <label>Status:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-10 text-left">
+                                    <span class="label" [ngClass]="{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}">
+                                        {{formRecord.isActive ? 'Active' : 'Inactive'}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-2 text-right">
+                                    <label>Login Counts:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-10 text-left">
+                                    {{formRecord.loginCount}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5" id="cluster_info">
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-2 text-right">
+                                    <label>Last Updated:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-10 text-left">
+                                    <div class="mb-1">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>
+                                </div>
+                            </div>
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-2 text-right">
+                                    <label>Last Updated By:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-10 text-left">
+                                    <div class="mb-1">{{formRecord.modifiedBy}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel blank-panel mrg15T">
+                        <div class="panel-heading">
+                            <div class="panel-options">
+                                <ul class="nav nav-tabs">
+                                    <li><a class="nav-link" href="#agentProfile" data-toggle="tab" [ngClass]="{'active':selectedTab == 1}" (click)="selectedTab=1">Agent Profile</a></li>
+                                    <li><a class="nav-link" href="#commission" data-toggle="tab" [ngClass]="{'active':selectedTab == 2}" (click)="selectedTab=2">Commission</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                <!-- AGENT PROFILE -->
+                                <div class="tab-pane active pad20A" id="agentProfile">
+                                    <form #dataForm="ngForm" (ngSubmit)="submit()">
+                                        <!--PRODUCT TYPES-->
+                                        <ng-container *ngFor="let field of formFields">
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">
+                                                    {{field.displayText }}
+                                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-sm-10">
+                                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                                  [field]="field.dataFieldControl" [formName]="'dataForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                </div>
+                                            </div>
+                                            <div class="hr-line-dashed"></div>
+                                        </ng-container>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">
+                                                Superior
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
+                                                                [displayText]="formRecord['superiorName']" name="superior"></superior-field>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">
+                                                Active
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <superior-field [(ngModel)]="formRecord['isActive']" [fieldId]="'isActive'" [parentForm]="form"
+                                                                [displayText]="formRecord['isActive']" name="isActive"></superior-field>
+                                            </div>
+                                        </div>
+                                        <div class="hr-line-dashed"></div>
+                                        <!--SAVE OR CANCEL-->
+                                        <div class="form-group row">
+                                            <div class="col-sm-12 ">
+                                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
+                                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                                        [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
+                                                    {{isUpdating ? 'Updating' : 'Update'}}
+                                                    <span class="loading"></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- COMMISSION -->
+                                <div class="tab-pane" id="commission">
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Product
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <product-options name="product" [fieldId]="product" [(ngModel)]="selectedProduct" (onProductSelected)="loadAgentCommissions()"></product-options>
+                                        </div>
+                                    </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-2 col-form-label">
+                                            Commissions
+                                        </label>
+                                        <div class="col-sm-10">
+                                            <agent-commission-table></agent-commission-table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="form-group row text-right">
+                <back-button>Cancel</back-button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

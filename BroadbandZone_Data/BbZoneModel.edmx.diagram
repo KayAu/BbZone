@@ -7,7 +7,7 @@
       <Diagram DiagramId="c90c396048414a4b8550dc1b0ae590b1" Name="Diagram1" ZoomLevel="98">
         <EntityTypeShape EntityType="BroadbandZoneModel.C__RefactorLog" Width="1.5" PointX="5.875" PointY="8.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.DropdownItem" Width="1.5" PointX="10.625" PointY="0.5" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.AdminUser" Width="1.5" PointX="12.375" PointY="6" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.AdminUser" Width="1.5" PointX="10.625" PointY="2.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Agent" Width="1.5" PointX="4.25" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCommission" Width="1.5" PointX="2.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="0.5" PointY="11.125" />
@@ -15,7 +15,6 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.Product" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.25" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ProductPackage" Width="1.5" PointX="0.5" PointY="7" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="12.5" PointY="0.5" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_Agent" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory" />
         <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
@@ -41,6 +40,8 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.Announcement" Width="1.5" PointX="6.375" PointY="0.875" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" />
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginPageBanner" Width="1.5" PointX="9.375" PointY="9.75" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.LoginTrail" Width="1.5" PointX="11.375" PointY="9.75" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="12.375" PointY="0.5" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

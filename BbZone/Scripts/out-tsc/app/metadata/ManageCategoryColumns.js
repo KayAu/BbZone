@@ -38,7 +38,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "colWidth": "",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
-                "controlType": "textbox",
+                "controlType": "number",
                 "required": true,
                 "maxLength": 10
             }

@@ -27,7 +27,7 @@ BEGIN
 			SELECT  UserLogin,
 					NULL,
 					Fullname,
-					CASE WHEN HasFullControl = 1 THEN ' Super Admin' ELSE 'Admin' END,
+					CASE WHEN HasFullControl = 1 THEN 'SuperAdmin' ELSE 'Admin' END,
 					CAST(1 AS BIT),
 					@prImpersonate,
 					CAST(1 AS BIT),
@@ -35,6 +35,7 @@ BEGIN
 			FROM AdminUser
 			WHERE @prLogin = UserLogin 
 			AND @prPassword = CONVERT(VARCHAR(100),DECRYPTBYPASSPHRASE('key', PasswordHash ))
+			AND IsActive = 1
 		END
 		ELSE
 		BEGIN
@@ -50,6 +51,7 @@ BEGIN
 			FROM Agent
 			WHERE @prLogin = UserLogin 
 			AND @prPassword = CONVERT(VARCHAR(100),DECRYPTBYPASSPHRASE('key', PasswordHash ))
+			AND IsActive = 1
 		END
 
 		SELECT * FROM @user

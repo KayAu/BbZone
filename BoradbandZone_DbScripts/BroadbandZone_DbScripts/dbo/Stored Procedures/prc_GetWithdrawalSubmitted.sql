@@ -76,7 +76,7 @@ BEGIN
 			ReferenceNo
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(*) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(*) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

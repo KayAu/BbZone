@@ -30,6 +30,8 @@ namespace BroadbandZone_Data
         public string UserLogin { get; set; }
         public byte[] PasswordHash { get; set; }
         public Nullable<int> SuperiorId { get; set; }
+        public string BankName { get; set; }
+        public string BankAccNo { get; set; }
         public string ActivationCode { get; set; }
         public Nullable<System.DateTime> ActivatedOn { get; set; }
         public Nullable<bool> IsApproved { get; set; }

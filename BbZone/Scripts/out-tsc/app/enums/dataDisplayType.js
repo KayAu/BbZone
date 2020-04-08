@@ -25,4 +25,9 @@ var CustomerSearchType;
     CustomerSearchType[CustomerSearchType["completed"] = 0] = "completed";
     CustomerSearchType[CustomerSearchType["commissionClaimed"] = 1] = "commissionClaimed";
 })(CustomerSearchType = exports.CustomerSearchType || (exports.CustomerSearchType = {}));
+var CommissionTableDisplay;
+(function (CommissionTableDisplay) {
+    CommissionTableDisplay[CommissionTableDisplay["currentAgent"] = 0] = "currentAgent";
+    CommissionTableDisplay[CommissionTableDisplay["allAgents"] = 1] = "allAgents";
+})(CommissionTableDisplay = exports.CommissionTableDisplay || (exports.CommissionTableDisplay = {}));
 //# sourceMappingURL=dataDisplayType.js.map

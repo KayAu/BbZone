@@ -57,7 +57,7 @@ BEGIN
 			  ,ModifiedBy
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(CreatedOn) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(CreatedOn) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

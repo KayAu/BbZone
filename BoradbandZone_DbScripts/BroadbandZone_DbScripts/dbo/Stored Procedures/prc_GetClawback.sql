@@ -61,7 +61,7 @@ BEGIN
 				Editable
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(ClawbackId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(ClawbackId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

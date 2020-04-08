@@ -1,0 +1,23 @@
+<section class="filter-wrapper">
+
+  
+
+  <div class="input-group">
+    <span class="input-group-addon"><i class="ti ti-search"></i></span>
+    <input [formControl]="queryField" id="keyword" type="search" class="form-control form-control-sm" placeholder="Search" maxlength="150" />
+    <span class="clear-wrapper" title="Clear all" *ngIf="queryField.value!=null" (click)="clearSearch()"><span class="clear">×</span></span>
+  </div>
+
+  <ul class="filter-select" *ngIf="results.length > 0">
+    <li class="pad0B" (click)="triggerSearch(queryField.value)">
+      <i class="ti ti-search mrg15R"></i>
+      {{queryField.value}}
+    </li>
+    <li><div class="dropdown-divider"></div></li>
+    <li *ngFor="let result of results " class="filter-select-results" (click)="triggerSearch(result)">
+      <i class="mdi mdi-account mrg15R"></i>
+     <span innerHTML="{{result| highlight : queryField.value}}"></span>  
+    </li>
+  </ul>
+</section>
+

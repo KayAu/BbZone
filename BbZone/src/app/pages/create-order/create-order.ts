@@ -12,6 +12,8 @@ import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
 import { CascadeData } from 'src/app/model/cascade-data';
 import { CascadeService } from 'src/app/services/cascade.service';
+import { AuthenticationService } from 'src/app/services/authentication';
+import { LoginUser } from 'src/app/model/login-user';
 
 @Component({
   selector: 'create-order',
@@ -25,13 +27,17 @@ export class CreateOrder {
     selectedProduct: number;
     newRecord: any  = {};
     isUpdating: boolean = false;
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router) {}
+    currentUser: LoginUser;
+
+    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router, private authenticationService: AuthenticationService) {}
 
     ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
+
         let columnMappings = NewOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
             o.displayText,
             o.hidden,
@@ -41,9 +47,14 @@ export class CreateOrder {
                     ControlType[o.dataFieldControl.controlType],
                     o.dataFieldControl.required,
                     o.dataFieldControl.maxLength,
-                    o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null,
-                    o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null
+                    o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null,
+                    o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null,
+                    o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false
                 )));
+
+        if (!this.currentUser.isAdmin) {
+            columnMappings = columnMappings.filter(c => c.dataFieldControl.adminField === false);
+        }
 
         return columnMappings;
     }

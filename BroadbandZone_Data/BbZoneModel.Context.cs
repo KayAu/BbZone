@@ -36,7 +36,6 @@ namespace BroadbandZone_Data
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
-        public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
         public virtual DbSet<AgentCharge> AgentCharges { get; set; }
@@ -47,6 +46,8 @@ namespace BroadbandZone_Data
         public virtual DbSet<IncentiveReceived> IncentiveReceiveds { get; set; }
         public virtual DbSet<Announcement> Announcements { get; set; }
         public virtual DbSet<LoginPageBanner> LoginPageBanners { get; set; }
+        public virtual DbSet<LoginTrail> LoginTrails { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -341,19 +342,6 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgents_Result>("GetAgents", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<SelectItem> GetMyAgents(Nullable<int> prSuperiorId, Nullable<int> prProductID, ObjectParameter oAllowCommConfig)
-        {
-            var prSuperiorIdParameter = prSuperiorId.HasValue ?
-                new ObjectParameter("prSuperiorId", prSuperiorId) :
-                new ObjectParameter("prSuperiorId", typeof(int));
-    
-            var prProductIDParameter = prProductID.HasValue ?
-                new ObjectParameter("prProductID", prProductID) :
-                new ObjectParameter("prProductID", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectItem>("GetMyAgents", prSuperiorIdParameter, prProductIDParameter, oAllowCommConfig);
-        }
-    
         public virtual int InsertCommissionSettings(string prAgents, string prCreatedBy)
         {
             var prAgentsParameter = prAgents != null ?
@@ -380,7 +368,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommissionSettings>("GetCommissionSettings", prProductIdParameter, prAgentAccParameter);
         }
     
-        public virtual ObjectResult<CommissionSettings> GetAgentCommissionSettings(Nullable<int> prAgentId, Nullable<int> prProductId)
+        public virtual ObjectResult<GetAgentCommissionSettings_Result1> GetAgentCommissionSettings(Nullable<int> prAgentId, Nullable<int> prProductId)
         {
             var prAgentIdParameter = prAgentId.HasValue ?
                 new ObjectParameter("prAgentId", prAgentId) :
@@ -390,7 +378,7 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prProductId", prProductId) :
                 new ObjectParameter("prProductId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<CommissionSettings>("GetAgentCommissionSettings", prAgentIdParameter, prProductIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentCommissionSettings_Result1>("GetAgentCommissionSettings", prAgentIdParameter, prProductIdParameter);
         }
     
         public virtual ObjectResult<DashboardMyTeamSubmissions_Result> DashboardMyTeamSubmissions(Nullable<int> prSuperiorId, ObjectParameter oTotalAllAgents)
@@ -833,6 +821,28 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prSortInAsc", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetLoginBanners_Result>("GetLoginBanners", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<SelectItem> GetMyAgentsForCommissionSetting(Nullable<int> prSuperiorId, Nullable<int> prProductID, ObjectParameter oAllowCommConfig)
+        {
+            var prSuperiorIdParameter = prSuperiorId.HasValue ?
+                new ObjectParameter("prSuperiorId", prSuperiorId) :
+                new ObjectParameter("prSuperiorId", typeof(int));
+    
+            var prProductIDParameter = prProductID.HasValue ?
+                new ObjectParameter("prProductID", prProductID) :
+                new ObjectParameter("prProductID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SelectItem>("GetMyAgentsForCommissionSetting", prSuperiorIdParameter, prProductIDParameter, oAllowCommConfig);
+        }
+    
+        public virtual ObjectResult<GetMyEntireTeam_Result> GetMyEntireTeam(Nullable<int> prSuperiorId)
+        {
+            var prSuperiorIdParameter = prSuperiorId.HasValue ?
+                new ObjectParameter("prSuperiorId", prSuperiorId) :
+                new ObjectParameter("prSuperiorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetMyEntireTeam_Result>("GetMyEntireTeam", prSuperiorIdParameter);
         }
     }
 }

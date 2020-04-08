@@ -194,7 +194,10 @@ public static fields = [
             "controlName": "orderNo",
             "controlType": "textbox",
             "required": false,
-            "maxLength": 25
+            "maxLength": 25,
+            "datasourceUrl": null,
+            "cascadeTo": null,
+            "adminField": true
         }
     },
     {
@@ -205,7 +208,10 @@ public static fields = [
             "controlName": "userId",
             "controlType": "textbox",
             "required": false,
-            "maxLength": 25
+            "maxLength": 25,
+            "datasourceUrl": null,
+            "cascadeTo": null,
+            "adminField": true
         }
     },
     {
@@ -216,7 +222,10 @@ public static fields = [
             "controlName": "telNo",
             "controlType": "textbox",
             "required": false,
-            "maxLength": 25
+            "maxLength": 25,
+            "datasourceUrl": null,
+            "cascadeTo": null,
+            "adminField": true
         }
     },
     {
@@ -227,7 +236,10 @@ public static fields = [
             "controlName": "submitByAgent",
             "controlType": "checkbox",
             "required": false,
-            "maxLength": 0
+            "maxLength": 0,
+            "datasourceUrl": null,
+            "cascadeTo": null,
+            "adminField": false
         }
     },
 ]

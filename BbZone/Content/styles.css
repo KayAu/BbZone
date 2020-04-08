@@ -264,8 +264,8 @@ ul.nav-second-level {
   background: #293846;
 }
 .nav > li.active {
-  border-left: 4px solid #19aa8d;
-  background: #293846;
+  /* border-left: 4px solid #19aa8d; */
+  /* background: #293846; */
 }
 .nav.nav-second-level > li.active {
   border: none;
@@ -477,8 +477,8 @@ body.mini-navbar .navbar-default .nav > li > .nav-second-level li a {
   cursor: default;
 }
 .nav.nav-tabs li {
-  background: none;
-  border: none;
+  /* background: none; */
+  /* border: none; */
 }
 body.fixed-nav #wrapper .navbar-static-side,
 body.fixed-nav #wrapper #page-wrapper {
@@ -10700,7 +10700,7 @@ input[type="radio"] .styled:checked + label::after {
     }
 
 .smaller {
-    font-size: 80%;
+    font-size: 90%;
     font-weight: 400;
 }
 
@@ -10727,4 +10727,44 @@ login {
 
 .text-center {
     text-align: center;
+}
+
+.nav > li {
+    width: auto;
+}
+
+.treeview
+{
+  width: 100% !important;
+}
+.treeview-menu li {
+    width: 100%;
+}
+
+.product-selection img{
+  width: 100px !important;
+}
+
+.capitalize 
+{
+  text-transform: capitalize;
+}
+
+.agent-comm-table tr th:last-child,
+.agent-comm-table tr td:last-child {
+    width : 6%;
+}
+
+.agent-comm-table th:first-child,
+.agent-comm-table td:first-child
+{
+    display:none;
+}
+
+
+.data-box {
+    background: #F3F6FB;
+    border-radius: 0.25em;
+    margin-right: -20px;
+    margin-left: -20px;
 }

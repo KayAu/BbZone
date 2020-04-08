@@ -1,0 +1,37 @@
+﻿<!--
+<div *ngIf="products" class="">
+    <ng-container *ngFor="let prod of products">
+        <button class="btn btn-info  dim btn-large-dim btn-outline" type="button" (click)="onClick(prod.key)">{{prod.value}}</button>
+    </ng-container>
+</div>
+-->
+<!--<div class="select animated zoomIn">
+    You can toggle select (disabled)
+    <input type="radio" name="option">
+    <i class="toggle icon icon-arrow-down"></i>
+    <i class="toggle icon icon-arrow-up"></i>
+    <span class="placeholder">Choose Product</span>
+    <ng-container *ngFor="let prod of products">
+        <label class="option">
+            <input type="radio" name="product" (click)="onClick(prod.key)">
+            <span class="title animated fadeIn"><img src="~/images/{{prod.value}}.png">{{prod.value}}</span>
+        </label>
+    </ng-container>
+
+</div>-->
+<div class="btn-group">
+    <button class="btn btn-default dropdown-toggle product-selection" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span *ngIf="!selectedProduct">Select</span>  
+        <img  src="/images/{{selectedProduct.value}}.png" *ngIf="selectedProduct"/>
+    </button>
+    <ul class="dropdown-menu">
+        <ng-container *ngFor="let prod of products; let itemNo = index">
+            <li class="dropdown-item pad5A">
+                <a (click)="onClick(prod.key, itemNo)">
+                    <img src="/images/{{prod.value}}.png">
+                </a>
+            </li>
+            <li class="dropdown-divider"></li>
+        </ng-container>
+    </ul>
+</div>

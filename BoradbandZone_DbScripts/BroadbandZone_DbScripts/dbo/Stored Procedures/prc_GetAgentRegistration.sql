@@ -70,7 +70,7 @@ BEGIN
 				ApprovedBy
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(RegId) FROM @var_Table
+		SELECT @oTotalRecord = COUNT(RegId) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

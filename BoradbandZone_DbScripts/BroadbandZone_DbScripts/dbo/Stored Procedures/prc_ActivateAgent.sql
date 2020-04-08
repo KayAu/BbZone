@@ -40,8 +40,8 @@ BEGIN
 				  ,Country
 				  ,MobileNo
 				  ,TelNo
-				  ,null
-				  ,null
+				  ,BankName
+				  ,BankAccNo
 				  ,UserLogin
 				  ,PasswordHash
 				  ,SuperiorId
