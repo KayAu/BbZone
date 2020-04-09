@@ -1,4 +1,4 @@
-import { DataFieldControl } from "./data.field.control";
+import { DataFieldControl, SearchFieldControl } from "./data.field.control";
 
 export class FormDataMapping {
 
@@ -9,4 +9,15 @@ export class FormDataMapping {
     public dataFieldControl?: DataFieldControl,
 
   ) { } 
+}
+
+export class SearchFieldMapping {
+
+    constructor(
+        public fieldName: string,
+        public displayText: string,
+        public width: string,
+        public dataFieldControl?: SearchFieldControl,
+
+    ) { }
 }

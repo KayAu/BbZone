@@ -19,11 +19,18 @@ var ViewOrderColumns = /** @class */ (function () {
             "colWidth": "cell-width-20"
         },
         {
+            "fieldName": "residentialName",
+            "headerText": "Residential Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
             "fieldName": "packageName",
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-25"
+            "colWidth": "cell-width-20"
         },
         {
             "fieldName": "category",
@@ -49,7 +56,7 @@ var ViewOrderColumns = /** @class */ (function () {
         {
             "fieldName": "status",
             "headerText": "Status",
-            "displayType": "text",
+            "displayType": "badge",
             "keyField": false,
             "colWidth": ""
         }

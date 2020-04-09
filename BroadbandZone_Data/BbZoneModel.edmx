@@ -148,6 +148,7 @@
           <Property Name="ApplicationId" Type="int" Nullable="false" />
           <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Role" Type="char" MaxLength="2" Nullable="false" />
+          <Property Name="MsgRead" Type="bit" Nullable="false" />
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
@@ -619,7 +620,8 @@
           <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
           <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
           <Parameter Name="prResidentialType" Type="varchar" Mode="In" />
-          <Parameter Name="prResidentialName" Type="varchar" Mode="In" />
+          <Parameter Name="prKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prDocumentCompleted" Type="bit" Mode="In" />
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
           <Parameter Name="prAgentId" Type="int" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
@@ -710,6 +712,10 @@
         <Function Name="prc_GetRegistrationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prRegId" Type="int" Mode="In" />
         </Function>
+        <Function Name="prc_GetUnreadMessagesCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAppId" Type="int" Mode="In" />
+          <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
+        </Function>
         <Function Name="prc_GetWithdrawalItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prWithdrawalId" Type="int" Mode="In" />
         </Function>
@@ -773,6 +779,10 @@
           <Parameter Name="prAppId" Type="int" Mode="In" />
           <Parameter Name="prAgentId" Type="int" Mode="In" />
           <Parameter Name="prCreatedBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prc_UpdateMessagesToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAppId" Type="int" Mode="In" />
+          <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
         </Function>
         <Function Name="Split_On_Upper_Case" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="Temp" Type="varchar" Mode="In" />
@@ -902,7 +912,8 @@
             <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
             <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
             <Parameter Name="prResidentialType" Mode="In" Type="String" />
-            <Parameter Name="prResidentialName" Mode="In" Type="String" />
+            <Parameter Name="prKeyword" Mode="In" Type="String" />
+            <Parameter Name="prDocumentCompleted" Mode="In" Type="Boolean" />
             <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
             <Parameter Name="prAgentId" Mode="In" Type="Int32" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
@@ -980,7 +991,6 @@
           <EntitySet Name="Agents" EntityType="BroadbandZoneModel.Agent" />
           <EntitySet Name="AgentCommissions" EntityType="BroadbandZoneModel.AgentCommission" />
           <EntitySet Name="ApplicationStatus" EntityType="BroadbandZoneModel.ApplicationStatu" />
-          <EntitySet Name="Communications" EntityType="BroadbandZoneModel.Communication" />
           <EntitySet Name="DropdownItems" EntityType="BroadbandZoneModel.DropdownItem" />
           <EntitySet Name="Products" EntityType="BroadbandZoneModel.Product" />
           <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
@@ -1091,10 +1101,6 @@
             <End Role="CustomerApplication" EntitySet="CustomerApplications" />
             <End Role="Clawback" EntitySet="Clawbacks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Communication_CustomerApplication" Association="BroadbandZoneModel.FK_Communication_CustomerApplication">
-            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
-            <End Role="Communication" EntitySet="Communications" />
-          </AssociationSet>
           <AssociationSet Name="FK_CustomerApplication_ProductPackage" Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage">
             <End Role="ProductPackage" EntitySet="ProductPackages" />
             <End Role="CustomerApplication" EntitySet="CustomerApplications" />
@@ -1187,6 +1193,19 @@
           </FunctionImport>
           <EntitySet Name="LoginTrails" EntityType="BroadbandZoneModel.LoginTrail" />
           <EntitySet Name="Registrations" EntityType="BroadbandZoneModel.Registration" />
+          <EntitySet Name="Communications" EntityType="BroadbandZoneModel.Communication" />
+          <AssociationSet Name="FK_Communication_CustomerApplication" Association="BroadbandZoneModel.FK_Communication_CustomerApplication">
+            <End Role="CustomerApplication" EntitySet="CustomerApplications" />
+            <End Role="Communication" EntitySet="Communications" />
+          </AssociationSet>
+          <FunctionImport Name="GetUnreadMessagesCount" ReturnType="Collection(Int32)">
+            <Parameter Name="prAppId" Mode="In" Type="Int32" />
+            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMessagesToRead">
+            <Parameter Name="prAppId" Mode="In" Type="Int32" />
+            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -1231,6 +1250,8 @@
           <Property Type="String" Name="Agent" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="Status" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ResidentialName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalUnreadMsg" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetDropdownItems_Result">
           <Property Type="String" Name="Item" Nullable="true" MaxLength="8000" />
@@ -1413,18 +1434,6 @@
           <Property Name="AppStatusId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Status" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerApplications" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="ApplicationStatu" ToRole="CustomerApplication" />
-        </EntityType>
-        <EntityType Name="Communication">
-          <Key>
-            <PropertyRef Name="CommId" />
-          </Key>
-          <Property Name="CommId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
-          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Role" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
-          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="Communication" ToRole="CustomerApplication" />
         </EntityType>
         <EntityType Name="DropdownItem">
           <Key>
@@ -1737,10 +1746,10 @@
           <NavigationProperty Name="ApplicationStatu" Relationship="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" FromRole="CustomerApplication" ToRole="ApplicationStatu" />
           <NavigationProperty Name="ClaimableCommissions" Relationship="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" FromRole="CustomerApplication" ToRole="ClaimableCommission" />
           <NavigationProperty Name="Clawbacks" Relationship="BroadbandZoneModel.FK_Clawback_CustomerApplication" FromRole="CustomerApplication" ToRole="Clawback" />
-          <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
           <NavigationProperty Name="ProductPackage" Relationship="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" FromRole="CustomerApplication" ToRole="ProductPackage" />
           <NavigationProperty Name="CustomerDocuments" Relationship="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" FromRole="CustomerApplication" ToRole="CustomerDocument" />
           <NavigationProperty Name="IncentiveReceiveds" Relationship="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" FromRole="CustomerApplication" ToRole="IncentiveReceived" />
+          <NavigationProperty Name="Communications" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="CustomerApplication" ToRole="Communication" />
         </EntityType>
         <Association Name="FK_CustomerApplication_ApplicationStatus">
           <End Type="BroadbandZoneModel.ApplicationStatu" Role="ApplicationStatu" Multiplicity="0..1" />
@@ -1774,18 +1783,6 @@
               <PropertyRef Name="ApplicationId" />
             </Principal>
             <Dependent Role="Clawback">
-              <PropertyRef Name="ApplicationId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Communication_CustomerApplication">
-          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
-          <End Type="BroadbandZoneModel.Communication" Role="Communication" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CustomerApplication">
-              <PropertyRef Name="ApplicationId" />
-            </Principal>
-            <Dependent Role="Communication">
               <PropertyRef Name="ApplicationId" />
             </Dependent>
           </ReferentialConstraint>
@@ -2030,6 +2027,31 @@
           <Property Name="ApprovedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="Communication">
+          <Key>
+            <PropertyRef Name="CommId" />
+          </Key>
+          <Property Name="CommId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApplicationId" Type="Int32" Nullable="false" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="2" FixedLength="true" Unicode="false" />
+          <Property Name="MsgRead" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_Communication_CustomerApplication" FromRole="Communication" ToRole="CustomerApplication" />
+        </EntityType>
+        <Association Name="FK_Communication_CustomerApplication">
+          <End Type="BroadbandZoneModel.CustomerApplication" Role="CustomerApplication" Multiplicity="1" />
+          <End Type="BroadbandZoneModel.Communication" Role="Communication" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerApplication">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Communication">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2093,6 +2115,8 @@
                 <ScalarProperty Name="Agent" ColumnName="Agent" />
                 <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ResidentialName" ColumnName="ResidentialName" />
+                <ScalarProperty Name="TotalUnreadMsg" ColumnName="TotalUnreadMsg" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2315,18 +2339,6 @@
               <MappingFragment StoreEntitySet="ApplicationStatus">
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="AppStatusId" ColumnName="AppStatusId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Communications">
-            <EntityTypeMapping TypeName="BroadbandZoneModel.Communication">
-              <MappingFragment StoreEntitySet="Communication">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="Role" ColumnName="Role" />
-                <ScalarProperty Name="Message" ColumnName="Message" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="CommId" ColumnName="CommId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2814,6 +2826,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Communications">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Communication">
+              <MappingFragment StoreEntitySet="Communication">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="MsgRead" ColumnName="MsgRead" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="CommId" ColumnName="CommId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUnreadMessagesCount" FunctionName="BroadbandZoneModel.Store.prc_GetUnreadMessagesCount" />
+          <FunctionImportMapping FunctionImportName="UpdateMessagesToRead" FunctionName="BroadbandZoneModel.Store.prc_UpdateMessagesToRead" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

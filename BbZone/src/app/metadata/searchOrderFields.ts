@@ -5,11 +5,10 @@ export class SearchOrderFields {
         {
             "fieldName": "productId",
             "displayText": "Product",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "productId",
                 "controlType": "select",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetProducts",
                 "cascadeTo":"productCategoryId"
@@ -18,11 +17,10 @@ export class SearchOrderFields {
         {
             "fieldName": "productCategoryId",
             "displayText": "Product Category",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "productCategoryId",
                 "controlType": "cascadeDropdown",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetCategoriesByProduct",
                 "cascadeTo": "productPackageId"
@@ -31,11 +29,10 @@ export class SearchOrderFields {
         {
             "fieldName": "productPackageId",
             "displayText": "Product Package",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "productPackageId",
                 "controlType": "cascadeDropdown",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetPackagesByCategory"
             }
@@ -43,46 +40,32 @@ export class SearchOrderFields {
         {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetResidentialType"
             }
         },
         {
-            "fieldName": "residentialName",
-            "displayText": "Residential Name",
-            "hidden": false,
-            "dataFieldControl": {
-                "controlName": "residentialName",
-                "controlType": "textbox",
-                "required": false,
-                "maxLength": 50
-            }
-        },
-        {
             "fieldName": "agent",
             "displayText": "Agent",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "agent",
                 "controlType": "select",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetAgents"
             }
         },
         {
-            "fieldName": "appStatusId",
+            "fieldName": "orderStatusId",
             "displayText": "Status",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
-                "controlName": "appStatusId",
+                "controlName": "orderStatusId",
                 "controlType": "select",
-                "required": false,
                 "maxLength": 0,
                 "datasourceUrl": "GetStatus"
             }
@@ -90,12 +73,33 @@ export class SearchOrderFields {
         {
             "fieldName": "submittedDate",
             "displayText": "Submitted Date",
-            "hidden": false,
+            "width": "col-sm-2",
             "dataFieldControl": {
                 "controlName": "submittedDate",
                 "controlType": "dateRange",
-                "required": false,
                 "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "keyword",
+            "displayText": "Keyword",
+            "width": "col-sm-4",
+            "dataFieldControl": {
+                "controlName": "keyword",
+                "controlType": "textbox",
+                "maxLength": 100,
+                "placeholder": "Customer name, residential name or order no"
+            }
+        },
+        {
+            "fieldName": "documentCompleted",
+            "displayText": "Doc. Completed",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "documentCompleted",
+                "controlType": "select",
+                "maxLength": 0,
+                "datasourceUrl": "GetDocStatus"
             }
         }
     ]

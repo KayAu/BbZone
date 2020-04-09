@@ -11,3 +11,16 @@ export class DataFieldControl {
   ) { }
 
 }
+
+
+export class SearchFieldControl {
+    constructor(public controlName: string,
+        public controlType: ControlType,
+        public maxLength?: number,
+        public datasourceUrl?: string,
+        public cascadeTo?: string,
+        public placeholder?: string
+
+    ) { }
+
+}

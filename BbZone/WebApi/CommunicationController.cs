@@ -17,10 +17,16 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     var communications = db.Communications.Where(c => c.ApplicationId == id).ToList();
-                    return Ok(communications);
+
+                    // get total messages unread
+                    var unreadMessages = db.GetUnreadMessagesCount(id, currentUser.IsAdmin).FirstOrDefault().Value;
+
+                    return Ok(new {Communications = communications, UnreadMessages = unreadMessages });
                 }
             }
             catch (Exception ex)
@@ -37,6 +43,7 @@ namespace BroadbandZone_App.WebApi
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
+                    newRecord.MsgRead = false;
                     newRecord.Role = currentUser.IsAdmin ? "AD" : "AG";
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn");
                     db.Communications.Add(newRecord);
@@ -50,6 +57,21 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-
+        public IHttpActionResult Put(int id)
+        {
+            try
+            {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    db.UpdateMessagesToRead(id, currentUser.IsAdmin);
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
     }
 }

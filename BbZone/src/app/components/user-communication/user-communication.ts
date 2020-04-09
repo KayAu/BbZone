@@ -14,6 +14,7 @@ export class UserCommunication  {
     currentUser: LoginUser;
     textMessage: string;
     isUpdating: boolean = false;
+    unreadMessages: number;
     communications: any[] = [];
     showCommunicationPanel: boolean = false;
     @Input() applicationId: number;
@@ -28,10 +29,20 @@ export class UserCommunication  {
 
     loadRecord() {
         this.dataService.get(`${ApiController.Communication}`, this.applicationId).subscribe(results => {
-            this.communications = results;
+            this.communications = results.communications;
+            this.unreadMessages = results.unreadMessages;
         });
     }
 
+    handleCommunication() {
+        this.showCommunicationPanel = !this.showCommunicationPanel;
+        if (this.unreadMessages > 0) {
+            this.dataService.update(`${ApiController.Communication}`, this.applicationId, null).subscribe(results => {
+                this.unreadMessages = 0;
+            });
+        }
+    }
+    
     submit() {
         if (this.textMessage) {
             let newMessage = { applicationId : this.applicationId, message : this.textMessage };

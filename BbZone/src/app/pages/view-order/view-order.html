@@ -2,7 +2,7 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="ibox-content m-b-sm border-bottom" *ngIf="this.searchParams">
         <div class="row">
-            <div class="col-sm-2" *ngFor="let field of searchFields">
+            <div *ngFor="let field of searchFields" class="{{field.width}}">
                 <div class="form-group">
                     <label class="col-form-label" for="product_name">{{field.displayText}}</label>
                     <data-control [(ngModel)]="searchParams[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
@@ -36,7 +36,14 @@
                                     <tr *ngFor="let record of dataSource; let rowNo = index">
                                         <ng-container *ngFor="let field of dataRowMapper">
                                             <td>
-                                                <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                                <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                                <ng-template #displayBadge>
+                                                    <span class="badge " [ngClass]="{'badge-info': record.status == 'Early Stage',
+                                                                                     'badge-primary': record.status == 'Post Complete'}">
+                                                        {{record.status}}
+                                                    </span>
+                                                </ng-template>
+                                                <i class="fa fa-envelope float-right text-warning" title="New incoming message" *ngIf="field.fieldName == 'customerName' && record.totalUnreadMsg > 0"></i>
                                             </td>
                                         </ng-container>
                                         <td>

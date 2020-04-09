@@ -35,7 +35,7 @@ var ProductOptions = /** @class */ (function () {
     };
     ProductOptions.prototype.loadOptions = function () {
         var _this = this;
-        this.dataService.getAll(apiController_1.ApiController.Dropdown + "/GetProducts").subscribe(function (results) {
+        this.dataService.getAll(apiController_1.ApiController.Dropdown + "/GetProductsWithImage").subscribe(function (results) {
             _this.products = results;
         });
     };

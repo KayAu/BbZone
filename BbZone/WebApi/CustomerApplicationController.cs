@@ -78,7 +78,8 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.submittedDate != null ? filterBy.submittedDate.StartDate : null,
                                                                                 filterBy.submittedDate != null ? filterBy.submittedDate.EndDate : null,
                                                                                 filterBy.ResidentialType,
-                                                                                filterBy.ResidentialName,
+                                                                                filterBy.Keyword,
+                                                                                filterBy.DocumentCompleted,
                                                                                 currentUser.IsAdmin,
                                                                                 currentUser.AgentId,
                                                                                 totalRecord).ToList();
@@ -107,7 +108,7 @@ namespace BroadbandZone_App.WebApi
                     CustomerApplication app = db.CustomerApplications.Include(ca => ca.ProductPackage)
                                                                      .Include(ca => ca.CustomerDocuments)
                                                                      .Where(ca => ca.ApplicationId == id).FirstOrDefault();
-                 
+
                     return Ok(app);
                 }
             }

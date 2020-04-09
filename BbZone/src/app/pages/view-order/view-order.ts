@@ -7,8 +7,8 @@ import { DataDisplayType, ControlType } from 'src/app/enums/dataDisplayType';
 import { ListEvent } from 'src/app/interfaces/listEvent';
 import { SearchOrderParams } from '../../model/search-params';
 import { ApiController } from 'src/app/enums/apiController';
-import { FormDataMapping } from 'src/app/model/form.data.mapping';
-import { DataFieldControl } from 'src/app/model/data.field.control';
+import { SearchFieldMapping } from 'src/app/model/form.data.mapping';
+import { SearchFieldControl } from 'src/app/model/data.field.control';
 import { ViewOrderColumns } from 'src/app/metadata/viewOrderColumns ';
 import { SearchOrderFields } from 'src/app/metadata/searchOrderFields';
 
@@ -21,10 +21,9 @@ export class ViewOrder extends ListEvent {
     packages: any[];
     agents: any[];
     dataRowMapper: TablerowDataMapping[] = [];
-    searchFields: FormDataMapping[] = [];
+    searchFields: SearchFieldMapping[] = [];
     displayType = DataDisplayType;
     searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
-
     keyField: string;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
@@ -32,11 +31,10 @@ export class ViewOrder extends ListEvent {
     }
 
     ngOnInit() {
+        this.controllerName = ApiController.CustomerApplication;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(d => d.keyField === true).fieldName;
-        this.controllerName = ApiController.CustomerApplication;
-        //this.loadDropdown();
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {
@@ -49,18 +47,18 @@ export class ViewOrder extends ListEvent {
         return columnMappings;
     }
 
-    getSearchFeldsMapping(): FormDataMapping[] {
-        let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
+    getSearchFeldsMapping(): SearchFieldMapping[] {
+        let columnMappings = SearchOrderFields.fields.map(o => new SearchFieldMapping(o.fieldName,
             o.displayText,
-            o.hidden,
+            o.width,
             !o.dataFieldControl ? null :
-                new DataFieldControl(
+                new SearchFieldControl(
                     o.dataFieldControl.controlName,
                     ControlType[o.dataFieldControl.controlType],
-                    o.dataFieldControl.required,
                     o.dataFieldControl.maxLength,
                     o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null,
-                    o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null
+                    o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null,
+                    o.dataFieldControl.placeholder !== undefined ? o.dataFieldControl.placeholder : null
                 )));
 
         return columnMappings;

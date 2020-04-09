@@ -19,9 +19,9 @@ namespace BroadbandZone_Data
         {
             this.ClaimableCommissions = new HashSet<ClaimableCommission>();
             this.Clawbacks = new HashSet<Clawback>();
-            this.Communications = new HashSet<Communication>();
             this.CustomerDocuments = new HashSet<CustomerDocument>();
             this.IncentiveReceiveds = new HashSet<IncentiveReceived>();
+            this.Communications = new HashSet<Communication>();
         }
     
         public int ApplicationId { get; set; }
@@ -58,12 +58,12 @@ namespace BroadbandZone_Data
         public virtual ICollection<ClaimableCommission> ClaimableCommissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clawback> Clawbacks { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Communication> Communications { get; set; }
         public virtual ProductPackage ProductPackage { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerDocument> CustomerDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncentiveReceived> IncentiveReceiveds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Communication> Communications { get; set; }
     }
 }

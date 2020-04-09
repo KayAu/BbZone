@@ -39,7 +39,8 @@ namespace BroadbandZone_App
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/datatables.min.css",
-                      "~/Content/styles.css"));
+                      "~/Content/styles.css",
+                      "~/Content/animate.css"));
         }
     }
 }

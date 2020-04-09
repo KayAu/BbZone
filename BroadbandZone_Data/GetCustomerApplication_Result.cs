@@ -20,5 +20,7 @@ namespace BroadbandZone_Data
         public string Agent { get; set; }
         public string SubmittedOn { get; set; }
         public string Status { get; set; }
+        public string ResidentialName { get; set; }
+        public Nullable<int> TotalUnreadMsg { get; set; }
     }
 }

@@ -14,9 +14,27 @@ namespace BroadbandZone_App.WebApi
 {
     public class DropdownController : ApiController
     {
-        [Route("api/Dropdown/GetProducts")]
+        
+        [Route("api/Dropdown/GetDocStatus")]
         // GET api/<controller>
-        public IHttpActionResult GetProducts()
+        public IHttpActionResult GetDocStatus()
+        {
+            try
+            {
+                List<DropdownItem> dropdownItems = new List<DropdownItem>();
+                dropdownItems.Add(new DropdownItem { Key = "true", Value = "Yes" });
+                dropdownItems.Add(new DropdownItem { Key = "false", Value = "No" });
+                return Ok(dropdownItems);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        [Route("api/Dropdown/GetProductsWithImage")]
+        // GET api/<controller>
+        public IHttpActionResult GetProductsWithImage()
         {
             try
             {
@@ -37,6 +55,26 @@ namespace BroadbandZone_App.WebApi
             catch (Exception ex)
             {
                                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        [Route("api/Dropdown/GetProducts")]
+        // GET api/<controller>
+        public IHttpActionResult GetProducts()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    List<DropdownItem> dropdownItems = db.Products.Where(pc => pc.IsActive == true)
+                                                                           .Select(r => new DropdownItem { Key = r.ProductId.ToString(), Value = r.ProductName }).ToList();
+
+                    return Ok(dropdownItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 

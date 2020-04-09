@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace BroadbandZone_Data
 {
+    public partial class Communication
+    {
+        public int UnreadMessages { get; set; }
+    }
     public partial class CustomerDocument
     {
         public bool? Deleted { get; set; }

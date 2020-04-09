@@ -18,6 +18,7 @@ namespace BroadbandZone_Data
         public int ApplicationId { get; set; }
         public string Message { get; set; }
         public string Role { get; set; }
+        public bool MsgRead { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
     

@@ -45,7 +45,7 @@ export class ProductOptions implements ControlValueAccessor {
     }
 
     loadOptions() {
-        this.dataService.getAll(`${ApiController.Dropdown}/GetProducts`).subscribe(results => {
+        this.dataService.getAll(`${ApiController.Dropdown}/GetProductsWithImage`).subscribe(results => {
             this.products = results;
         });
     }

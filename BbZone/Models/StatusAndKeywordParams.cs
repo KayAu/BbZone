@@ -32,7 +32,8 @@ namespace BroadbandZone_App.Models
         public string Agent { get; set; }
         public DateRange submittedDate { get; set; }
         public string ResidentialType { get; set; }
-        public string ResidentialName { get; set; }
+        public string Keyword { get; set; }
+        public bool? DocumentCompleted { get; set; }
     }
 
     public class SearchWithdrawalParams

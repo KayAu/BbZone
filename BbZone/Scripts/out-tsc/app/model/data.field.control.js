@@ -13,4 +13,16 @@ var DataFieldControl = /** @class */ (function () {
     return DataFieldControl;
 }());
 exports.DataFieldControl = DataFieldControl;
+var SearchFieldControl = /** @class */ (function () {
+    function SearchFieldControl(controlName, controlType, maxLength, datasourceUrl, cascadeTo, placeholder) {
+        this.controlName = controlName;
+        this.controlType = controlType;
+        this.maxLength = maxLength;
+        this.datasourceUrl = datasourceUrl;
+        this.cascadeTo = cascadeTo;
+        this.placeholder = placeholder;
+    }
+    return SearchFieldControl;
+}());
+exports.SearchFieldControl = SearchFieldControl;
 //# sourceMappingURL=data.field.control.js.map

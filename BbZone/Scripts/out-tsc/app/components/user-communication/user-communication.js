@@ -28,8 +28,18 @@ var UserCommunication = /** @class */ (function () {
     UserCommunication.prototype.loadRecord = function () {
         var _this = this;
         this.dataService.get("" + apiController_1.ApiController.Communication, this.applicationId).subscribe(function (results) {
-            _this.communications = results;
+            _this.communications = results.communications;
+            _this.unreadMessages = results.unreadMessages;
         });
+    };
+    UserCommunication.prototype.handleCommunication = function () {
+        var _this = this;
+        this.showCommunicationPanel = !this.showCommunicationPanel;
+        if (this.unreadMessages > 0) {
+            this.dataService.update("" + apiController_1.ApiController.Communication, this.applicationId, null).subscribe(function (results) {
+                _this.unreadMessages = 0;
+            });
+        }
     };
     UserCommunication.prototype.submit = function () {
         var _this = this;

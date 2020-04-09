@@ -11,7 +11,6 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.Agent" Width="1.5" PointX="4.25" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCommission" Width="1.5" PointX="2.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="0.5" PointY="11.125" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.Communication" Width="1.5" PointX="4.25" PointY="8.625" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Product" Width="1.5" PointX="0.5" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.25" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ProductPackage" Width="1.5" PointX="0.5" PointY="7" />
@@ -30,7 +29,6 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" />
         <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" />
         <AssociationConnector Association="BroadbandZoneModel.FK_Clawback_CustomerApplication" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_Communication_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimedWithdrawal" />
@@ -42,6 +40,8 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginPageBanner" Width="1.5" PointX="9.375" PointY="9.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginTrail" Width="1.5" PointX="11.375" PointY="9.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="12.375" PointY="0.5" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Communication" Width="1.5" PointX="4.25" PointY="8.625" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Communication_CustomerApplication" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
