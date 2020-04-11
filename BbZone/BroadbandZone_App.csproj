@@ -272,6 +272,7 @@
     <Compile Include="WebApi\CommunicationController.cs" />
     <Compile Include="WebApi\CustomerApplicationController.cs" />
     <Compile Include="WebApi\DashboardController.cs" />
+    <Compile Include="WebApi\DownloadController.cs" />
     <Compile Include="WebApi\DropdownController.cs" />
     <Compile Include="WebApi\IncentivesController.cs" />
     <Compile Include="WebApi\IncentivesUploadController.cs" />
@@ -471,6 +472,7 @@
     <Folder Include="App_Data\LoginBannerFiles\" />
     <Folder Include="App_Data\UploadFiles\" />
     <Folder Include="src\assets\" />
+    <Folder Include="UploadFiles\" />
     <Folder Include="Views\PaymentV\" />
     <Folder Include="Views\User\" />
   </ItemGroup>

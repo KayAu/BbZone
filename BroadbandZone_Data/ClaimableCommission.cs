@@ -26,7 +26,6 @@ namespace BroadbandZone_Data
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
     
-        public virtual CustomerApplication CustomerApplication { get; set; }
         public virtual Withdrawal Withdrawal { get; set; }
         public virtual Withdrawal Withdrawal1 { get; set; }
     }

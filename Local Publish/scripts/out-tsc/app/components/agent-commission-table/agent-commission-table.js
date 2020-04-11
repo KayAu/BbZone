@@ -13,13 +13,8 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var apiController_1 = require("src/app/enums/apiController");
+var dataDisplayType_1 = require("../../enums/dataDisplayType");
 var AgentCommissionTable = /** @class */ (function () {
-    //@Input()
-    //set dataItems(data: any[]) {
-    //    this.dataSource = data;
-    //    if (Array.isArray(this.dataColumns) && !this.dataColumns.length)
-    //        this.setColumnNames();
-    //}
     function AgentCommissionTable(loaderService, dataService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
@@ -27,15 +22,27 @@ var AgentCommissionTable = /** @class */ (function () {
         this.dataColumns = [];
         this.commissionSettings = [];
         this.editedRecord = {};
+        this.displayType = dataDisplayType_1.CommissionTableDisplay;
+        this.isUpdating = false;
         this.hideColumns = [];
         this.rowItemClicked = new core_1.EventEmitter();
     }
-    AgentCommissionTable.prototype.loadData = function (productId) {
+    AgentCommissionTable.prototype.loadMyAgentsCommission = function (productId) {
         var _this = this;
         this.productId = productId;
-        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentCommission", productId).subscribe(function (results) {
+        this.tableDisplay = dataDisplayType_1.CommissionTableDisplay.allAgents;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsCommission", productId).subscribe(function (results) {
             _this.dataSource = results;
             _this.setColumnNames();
+        });
+    };
+    AgentCommissionTable.prototype.loadCurrentAgentCommission = function (agentId, productId) {
+        var _this = this;
+        this.productId = productId;
+        this.agentId = agentId;
+        this.tableDisplay = dataDisplayType_1.CommissionTableDisplay.currentAgent;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetMyCommission/" + agentId + "/" + productId).subscribe(function (results) {
+            _this.commissionSettings = results;
         });
     };
     AgentCommissionTable.prototype.getRowData = function (row) {
@@ -43,7 +50,8 @@ var AgentCommissionTable = /** @class */ (function () {
     };
     AgentCommissionTable.prototype.editRow = function (rowIndex) {
         var _this = this;
-        this.dataService.getAll(apiController_1.ApiController.Commission + "/GetAgentCommissionSettings/" + this.dataSource[rowIndex].agentId + "/" + this.productId).subscribe(function (results) {
+        this.agentId = this.dataSource[rowIndex].agentId;
+        this.dataService.getAll(apiController_1.ApiController.Commission + "/GetAgentCommissionSettings/" + this.agentId + "/" + this.productId).subscribe(function (results) {
             _this.hideEditingRow();
             _this.dataSource[rowIndex].onEdit = true;
             _this.commissionSettings = results;
@@ -51,13 +59,20 @@ var AgentCommissionTable = /** @class */ (function () {
     };
     AgentCommissionTable.prototype.updateRow = function (rowIndex) {
         var _this = this;
-        this.dataService.update(apiController_1.ApiController.Commission, this.dataSource[rowIndex].agentId, this.commissionSettings).subscribe(function (data) {
+        this.dataService.update(apiController_1.ApiController.Commission, this.agentId, this.commissionSettings).subscribe(function (data) {
             var propertyNames = Object.keys(_this.dataSource[rowIndex]);
             for (var itemNo = 0; itemNo < _this.commissionSettings.length; itemNo++) {
                 var propertyName = propertyNames[itemNo + 2];
                 _this.dataSource[rowIndex][propertyName] = _this.commissionSettings[itemNo].agentCommissionPer;
             }
             _this.dataSource[rowIndex].onEdit = false;
+        });
+    };
+    AgentCommissionTable.prototype.updateTable = function () {
+        var _this = this;
+        this.isUpdating = true;
+        this.dataService.update(apiController_1.ApiController.Commission, this.agentId, this.commissionSettings).subscribe(function (data) {
+            _this.isUpdating = false;
         });
     };
     AgentCommissionTable.prototype.cancelEdit = function (rowIndex) {
@@ -76,7 +91,7 @@ var AgentCommissionTable = /** @class */ (function () {
         var dataKeys = Object.keys(this.dataSource[0]);
         // get columns which are not visible only
         dataKeys = dataKeys.filter(function (key, index) { return !_this.hideColumns.includes(index); });
-        this.dataColumns = dataKeys;
+        this.dataColumns = dataKeys.map(function (data) { return data.replace(/([a-z])([A-Z])/g, '$1 $2'); });
     };
     __decorate([
         core_1.Input(),

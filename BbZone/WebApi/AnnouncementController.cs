@@ -166,7 +166,7 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 if (multipartFiles is null || multipartFiles.Count() == 0) return;
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.AnnouncementFilePath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.AnnouncementFilePath);
                 
                 using (var db = new BroadbandZoneEntities())
                 {
@@ -187,7 +187,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.AnnouncementFilePath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.AnnouncementFilePath);
 
                 using (var db = new BroadbandZoneEntities())
                 {

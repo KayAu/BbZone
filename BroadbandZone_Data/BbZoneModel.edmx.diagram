@@ -12,12 +12,8 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCommission" Width="1.5" PointX="2.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ApplicationStatu" Width="1.5" PointX="0.5" PointY="11.125" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Product" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.25" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.ProductPackage" Width="1.5" PointX="0.5" PointY="7" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ProductPackage" Width="1.5" PointX="0.5" PointY="7.625" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_Agent" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_Product_ProductCategory" />
         <EntityTypeShape EntityType="BroadbandZoneModel.CustomerDocument" Width="1.5" PointX="4.25" PointY="6.25" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AnnouncementDocument" Width="1.5" PointX="8.25" PointY="0.875" />
         <EntityTypeShape EntityType="BroadbandZoneModel.AgentCharge" Width="1.5" PointX="8.625" PointY="5" />
@@ -25,23 +21,26 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_AgentCharges_Withdrawal" />
         <EntityTypeShape EntityType="BroadbandZoneModel.ClaimableCommission" Width="1.5" PointX="7.25" PointY="10.375" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Clawback" Width="1.5" PointX="2.5" PointY="12.25" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.CustomerApplication" Width="1.5" PointX="2.375" PointY="4" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimableCommission" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_Clawback_CustomerApplication" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_ClaimedWithdrawal" />
         <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_DeductedWithdrawal" />
         <EntityTypeShape EntityType="BroadbandZoneModel.IncentiveReceived" Width="1.5" PointX="4.5" PointY="11.75" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Announcement" Width="1.5" PointX="6.375" PointY="0.875" />
         <AssociationConnector Association="BroadbandZoneModel.FK_AnnouncementDocument_Announcement" />
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginPageBanner" Width="1.5" PointX="9.375" PointY="9.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginTrail" Width="1.5" PointX="11.375" PointY="9.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="12.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Communication" Width="1.5" PointX="4.25" PointY="8.625" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.5" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Product_ProductCategory" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.CustomerApplication" Width="1.5" PointX="2.375" PointY="3.875" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Clawback_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_Communication_CustomerApplication" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -164,7 +164,7 @@ import { AgentView } from './pages/agent-view/agent-view';
             { path: 'agent-registration-view/:id', component: AgentRegistrationView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'agent-registration-list', component: AgentRegistrationList, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'agent-profile/:id', component: AgentProfile },
-            { path: 'agent-maintenance', component: AgentMaintenance, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'agent-maintenance', component: AgentMaintenance, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
             { path: 'create-announcement', component: CreateAnnouncement, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'edit-announcement/:id', component: EditAnnouncement, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'view-announcement', component: ViewAnnouncement },

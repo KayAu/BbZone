@@ -13,47 +13,58 @@
                     <div class="row pad25T pad15B data-box">
                         <div class="col-lg-5">
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-2 text-right">
+                                <div class="col-sm-3 col-md-3 text-right">
                                     <label>Agent Id:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-10 text-left">
+                                <div class="col-sm-9 col-md-9 text-left">
                                     {{formRecord.agentId}}
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-2 text-right">
-                                    <label>Status:</label>
+                                <div class="col-sm-3 col-md-3 text-right">
+                                    <label>Agent Name:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-10 text-left">
-                                    <span class="label" [ngClass]="{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}">
-                                        {{formRecord.isActive ? 'Active' : 'Inactive'}}
-                                    </span>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <div class="mb-1">
+                                        {{formRecord.fullname}}</div>
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-2 text-right">
-                                    <label>Login Counts:</label>
+                                <div class="col-sm-3 col-md-3 text-right">
+                                    <label>Status:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-10 text-left">
-                                    {{formRecord.loginCount}}
-                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <span class="label" [ngClass]="{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}">
+                                        {{formRecord.isActive ? 'Active' : 'Inactive'
+                                        }}
+                                        </span>
+                                    </div>
                             </div>
+
                         </div>
                         <div class="col-lg-5" id="cluster_info">
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-2 text-right">
+                                <div class="col-sm-3 col-md-3 text-right">
                                     <label>Last Updated:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-10 text-left">
+                                <div class="col-sm-9 col-md-9 text-left">
                                     <div class="mb-1">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-2 text-right">
+                                <div class="col-sm-3 col-md-3 text-right">
                                     <label>Last Updated By:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-10 text-left">
+                                <div class="col-sm-9 col-md-9 text-left">
                                     <div class="mb-1">{{formRecord.modifiedBy}}</div>
+                                </div>
+                            </div>
+                            <div class="row mrg5B">
+                                <div class="col-sm-3 col-md-3 text-right">
+                                    <label>Login Counts:</label>
+                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    {{formRecord.loginCount}}
                                 </div>
                             </div>
                         </div>
@@ -101,8 +112,7 @@
                                                 Active
                                             </label>
                                             <div class="col-sm-10">
-                                                <superior-field [(ngModel)]="formRecord['isActive']" [fieldId]="'isActive'" [parentForm]="form"
-                                                                [displayText]="formRecord['isActive']" name="isActive"></superior-field>
+                                                <input type="checkbox" [(ngModel)]="formRecord['isActive']" name="isActive" />
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>

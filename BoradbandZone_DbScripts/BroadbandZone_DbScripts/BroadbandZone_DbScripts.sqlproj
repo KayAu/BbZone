@@ -147,6 +147,7 @@
     <Build Include="dbo\Stored Procedures\prc_GetMyCommission.sql" />
     <Build Include="dbo\Stored Procedures\prc_UpdateMessagesToRead.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetUnreadMessagesCount.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetApplicationDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />

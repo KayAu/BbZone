@@ -39,6 +39,7 @@ var AgentComission = /** @class */ (function () {
     AgentComission.prototype.ngOnInit = function () { };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
+        this.multipleCheckboxes.removeSelection();
         rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsForCommissionSetting", this.selectedProduct),
             this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)]).subscribe(function (results) {
             _this.loadAgents(results[0]);
@@ -51,7 +52,7 @@ var AgentComission = /** @class */ (function () {
         this.noAgentsReturned = this.myAgents.length === 0;
     };
     AgentComission.prototype.loadAgentCommissions = function () {
-        this.agentCommissionTable.loadData(this.selectedProduct);
+        this.agentCommissionTable.loadMyAgentsCommission(this.selectedProduct);
     };
     AgentComission.prototype.create = function () {
         var _this = this;

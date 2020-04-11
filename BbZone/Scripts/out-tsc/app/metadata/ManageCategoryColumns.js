@@ -22,7 +22,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-70",
+            "colWidth": "cell-width-40",
             "dataFieldControl": {
                 "controlName": "category",
                 "controlType": "textbox",
@@ -31,11 +31,25 @@ var ManageCategoryColumns = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "categoryType",
+            "headerText": "Category Type",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "categoryType",
+                "controlType": "select",
+                "required": true,
+                "maxLength": 0,
+                "datasourceUrl": "GetCategoryType"
+            }
+        },
+        {
             "fieldName": "defaultCommission",
             "headerText": "Default Commission (RM)",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "",
+            "colWidth": "cell-width-15",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
                 "controlType": "number",
@@ -48,7 +62,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Commission (%)",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "",
+            "colWidth": "cell-width-10",
             "dataFieldControl": {
                 "controlName": "commissionPercent",
                 "controlType": "number",
@@ -75,7 +89,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "colWidth": "cell-width-1",
+            "colWidth": "cell-width-5",
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",

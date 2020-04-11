@@ -83,6 +83,16 @@ var SearchOrderFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "activationDate",
+            "displayText": "Activated Date",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "activationDate",
+                "controlType": "dateRange",
+                "maxLength": 0
+            }
+        },
+        {
             "fieldName": "keyword",
             "displayText": "Keyword",
             "width": "col-sm-4",

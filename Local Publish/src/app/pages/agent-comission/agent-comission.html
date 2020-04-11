@@ -16,7 +16,9 @@
                     <div role="tabpanel" id="addCommission" class="tab-pane active">
                         <div class="panel-body">
                             <form #dataForm="ngForm" (ngSubmit)="create()">
-
+                                <div class="alert alert-success" *ngIf="noAgentsReturned">
+                                    You have updated the commissions for all your agents on this product.
+                                </div>
                                 <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">
                                     <i class="fa fa-warning"></i>
                                     Your superior has yet set up your sales commission. This must be done prior to setting up commisions for your subordinates.
@@ -45,16 +47,14 @@
                                             Product Category
                                         </label>
                                         <div class="col-sm-10">
-                                            <div class="alert alert-success" *ngIf="noAgentsReturned">
-                                                You have updated the commissions for all your agents on this product.
-                                            </div>
+
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>#</th>
                                                         <th>Product Category</th>
                                                         <th>Commission (%)</th>
-                                                        <th>Allocation (%)</th>
+                                                        <th class="cell-width-35">Allocation (%)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -64,7 +64,7 @@
                                                         <td>{{item.supCommission}}</td>
                                                         <td>
                                                             <input type="number" [(ngModel)]="item.agentCommissionPer" name="agentCommissionPer{{itemNo}}" #name="ngModel"
-                                                                   validateLessThan [compare-value]="item.supCommission" class="form-control" />
+                                                                   validateLessThan [compare-value]="item.supCommission" [min]="0" fieldId="agentCommissionPer{{itemNo}}" class="form-control" />
                                                             <span *ngIf="name.errors?.validateLessThan" class="text-danger">
                                                                 Allocation percentage must be lesser than superior's commission
                                                             </span>
@@ -85,15 +85,15 @@
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group row">
                                         <div class="col-sm-12 text-right">
-                                            <back-button>Cancel</back-button>
-                                            <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
-                                                    [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
+                                            <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating, 'disabled' : dataForm.form.invalid }"
+                                                    [disabled]="dataForm.form.invalid || isUpdating || commissionSettings.length == 0" style="width: 180px;">
                                                 {{isUpdating ? 'Updating' : 'Update'}}
                                                 <span class="loading"></span>
                                             </button>
+                                            <back-button>Cancel</back-button>
                                         </div>
                                     </div>
-                                    
+
                                 </fieldset>
                             </form>
                         </div>

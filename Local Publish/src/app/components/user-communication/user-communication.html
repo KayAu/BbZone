@@ -1,7 +1,9 @@
-﻿<div class="user-comm">
+﻿
+<span class="label label-warning new-message" *ngIf="unreadMessages > 0">{{this.unreadMessages}}</span>
+<div class="user-comm">
     <div class="user-comm-box" [ngClass]="{'show':showCommunicationPanel}">
-        <a class="spin-icon text-white" (click)="showCommunicationPanel = !showCommunicationPanel">
-            <i class="fa fa-comments-o"></i>
+        <a class="spin-icon text-white" (click)="handleCommunication()">
+            <i class="fa fa-comments-o " [ngClass]="{'bounce' : unreadMessages > 0}" ></i>
         </a>
         <div class="skin-settings">
             <div class="title">
@@ -15,7 +17,7 @@
                         <div class="chat-message" [ngClass]="{'left': item.role=='AG','right': item.role=='AD'}">
                             <div class="message-avatar message-avatar-text" [ngClass]="{'bg-info': item.role=='AG','bg-success': item.role=='AD'}">{{item.role}}</div>
                             <div class="message">
-                                <a class="message-author" href="#"> {{item.createdBy }}</a>
+                                <label class="message-author"> {{item.createdBy }}</label>
                                 <span class="message-date"> {{item.createdOn | date : 'dd MMM yyyy hh:mm a'}}</span>
                                 <span class="message-content">
                                     {{item.message}}

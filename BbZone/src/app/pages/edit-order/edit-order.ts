@@ -42,19 +42,21 @@ export class EditOrder {
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
-        let columnMappings = EditOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
-            o.displayText,
-            o.hidden,
-            !o.dataFieldControl ? null :
-                new DataFieldControl(
-                    o.dataFieldControl.controlName,
-                    ControlType[o.dataFieldControl.controlType],
-                    o.dataFieldControl.required,
-                    o.dataFieldControl.maxLength,
-                    o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null,
-                    o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null,
-                    o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false
-                )));
+        let columnMappings = EditOrderFields.fields.map(o =>
+            new FormDataMapping(o.fieldName,
+                                o.displayText,
+                                o.hidden,
+                                !o.dataFieldControl ? null : new DataFieldControl(
+                                                            o.dataFieldControl.controlName,
+                                                            ControlType[o.dataFieldControl.controlType],
+                                                            o.dataFieldControl.required,
+                                                            o.dataFieldControl.maxLength,
+                                                            o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null,
+                                                            o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null,
+                                                            o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false,
+                                                            o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null
+                                )
+        ));
 
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(c => c.dataFieldControl.adminField === false);
@@ -86,9 +88,26 @@ export class EditOrder {
         });
     }
 
+    showProcessedDetails(show) {
+        if (!show) show = false;
+        let updateFields = ["orderNo", "userId", "telNo"];
+        for (var field of  updateFields) {
+            let index = this.formFields.findIndex(i => i.fieldName == field);
+            this.formFields[index].hidden = !show;
+        }
+    }
+
+    showEForm(show) {
+        if (!show) show = false;
+        let index = this.formFields.findIndex(i => i.fieldName == "eForm");
+        this.formFields[index].hidden = !show;
+    }
+
     private loadRecord(recordId:number) {
         this.dataService.get(ApiController.CustomerApplication, recordId).subscribe(data => {
             this.formRecord = data;
+            this.showEForm(this.formRecord["showEForm"]);
+            this.showProcessedDetails(this.formRecord["isProcessed"]);
         });
     }
 }

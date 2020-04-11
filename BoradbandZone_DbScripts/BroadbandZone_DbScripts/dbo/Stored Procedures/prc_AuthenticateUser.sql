@@ -18,6 +18,7 @@ BEGIN
 			IsAuthenticated BIT,
 			IsImpersonated BIT,
 			IsAdmin BIT NOT NULL,
+			HasFullControl BIT NOT NULL,
 			AgentId INT 
 		)
 
@@ -31,6 +32,7 @@ BEGIN
 					CAST(1 AS BIT),
 					@prImpersonate,
 					CAST(1 AS BIT),
+					HasFullControl,
 					NULL
 			FROM AdminUser
 			WHERE @prLogin = UserLogin 
@@ -46,6 +48,7 @@ BEGIN
 					'Agent',
 					CAST(1 AS BIT),
 					@prImpersonate,
+					CAST(0 AS BIT),
 					CAST(0 AS BIT),
 					AgentId
 			FROM Agent

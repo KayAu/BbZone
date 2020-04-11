@@ -10,7 +10,8 @@
     <ng-container *ngFor="let file of uploadedFiles; let fileNo = index">
         <div class="file-preview" *ngIf="!file.deleted">
             <button class="btn btn-warning btn-circle btn-xs btn-close" type="button" (click)="removeFile(fileNo)">×</button>
-            <a href="{{file.path}}" target="_blank" download="{{file.name}}">
+            <!--<a href="/UploadFiles/{{file.name}}" download>-->
+            <a href="{{fileUrl}}/{{file.name}}">
                 <div class="file-details">
                     <div class="file-size">
                         <span><strong>{{getFileSize(file.size)}}</strong> KB</span>

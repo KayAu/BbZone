@@ -1,4 +1,4 @@
-﻿import { Directive, ElementRef, Renderer2, Input, HostListener } from '@angular/core';
+import { Directive, ElementRef, Renderer2, Input, HostListener } from '@angular/core';
 import { NgModel, NgForm} from '@angular/forms';
 import { BroadcastService } from '../services/broadcast.service';
 import { Subscription } from 'rxjs/Subscription';
@@ -35,12 +35,10 @@ export class MinDirective  {
     }
 
     private validate() {
-
-        let value = this.ngModel.model;
         let thisElement = $(this.el.nativeElement);
-
-        thisElement.next('.text-danger').remove();
-
+        $(this.el.nativeElement).next('.text-danger').remove();
+        
+        let value = this.parentForm.controls[this.fieldId].value;
         if (value === null || value === undefined) {
             thisElement.after('<span class= "text-danger">This is required</span>');
             this.parentForm.controls[this.fieldId].setErrors({ 'required': true });

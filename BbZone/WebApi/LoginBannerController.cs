@@ -81,7 +81,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.LoginBannerPath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.LoginBannerPath);
                 UploadedFile file = fileUploadHelper.UploadStreams(multipartFile, DateTime.Now.ToString("yyyyMMdd_HHss"));
                 return file;
             }

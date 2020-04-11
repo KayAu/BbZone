@@ -15,7 +15,6 @@ BEGIN
 			 ac.CategoryId
 			,pc.Category
 			,ac.AgentCommission  AS [AgentCommissionPer]
-		--INTO ##temp_AgentComm
 		FROM AgentCommission ac
 		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
 		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
@@ -23,27 +22,6 @@ BEGIN
 		AND  a1.AgentId = @prAgentId 
 		ORDER BY pc.Category
 
-		--SELECT @vCols = STUFF((SELECT DISTINCT ',' + QUOTENAME(c.category) 
-		--					  FROM ##temp_AgentComm c
-		--					  FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') 
-		--				,1,1,'')
-
-		--SET @query = 'SELECT AgentId,' + @vCols + ' FROM 
-		--			 (
-		--				SELECT AgentId, 
-		--					   Category,
-		--					   AgentCommission
-		--				FROM ##temp_AgentComm
-		--				) x
-		--				PIVOT 
-		--				(
-		--					MAX(AgentCommission)
-		--				    FOR Category in (' + @vCols + ')
-		--			 ) p '
-
-		--EXECUTE(@query)
-
-		--DROP TABLE  ##temp_AgentComm
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

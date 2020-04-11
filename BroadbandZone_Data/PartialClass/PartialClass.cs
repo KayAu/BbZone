@@ -15,6 +15,13 @@ namespace BroadbandZone_Data
         public bool? Deleted { get; set; }
     }
 
+    public partial class CustomerApplication
+    {
+        public string Category { get; set; }
+        public string PackageName { get; set; }
+        public bool ShowEForm { get; set; }
+    }
+
     public partial class AnnouncementDocument
     {
         public bool? Deleted { get; set; }

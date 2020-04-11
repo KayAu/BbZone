@@ -14,20 +14,46 @@ BEGIN
 		IF EXISTS (SELECT 1 FROM AdminUser WHERE UserLogin = @prAgentAcc)
 		SET @vIsAdmin = 1
 
-		INSERT INTO @vCommissionSetting
-		SELECT pc.CategoryId,
-		pc.Category,
-		ISNULL(ac.AgentCommission,0), --((ac.AgentCommission * 1.0) * pc.DefaultCommission)/100,
-		0 
-		FROM ProductCategory pc
-		LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  
-		LEFT JOIN Agent a ON ac.AgentId = a.AgentId
-		WHERE pc.ProductId = @prProductId
-		AND pc.IsActive = 1
-		AND 1 = CASE WHEN @vIsAdmin = 1 THEN 1
-		             WHEN a.UserLogin = @prAgentAcc THEN 1
-					 ELSE 0 
-				END
+		IF @vIsAdmin = 1
+		BEGIN
+			INSERT INTO @vCommissionSetting
+			SELECT pc.CategoryId,
+					pc.Category,
+					pc.CommissionPercent, 
+					0 
+			FROM ProductCategory pc
+			WHERE pc.ProductId = @prProductId
+			AND pc.IsActive = 1
+		END
+		ELSE
+		BEGIN
+			INSERT INTO @vCommissionSetting
+			SELECT pc.CategoryId,
+				   pc.Category,
+				   ISNULL(ac.AgentCommission, 0), 
+				   0 
+			FROM ProductCategory pc
+			LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  
+			LEFT JOIN Agent a ON ac.AgentId = a.AgentId
+			WHERE pc.ProductId = @prProductId
+			AND pc.IsActive = 1
+			AND a.UserLogin = @prAgentAcc 
+		END
+
+		--INSERT INTO @vCommissionSetting
+		--SELECT pc.CategoryId,
+		--	pc.Category,
+		--	ISNULL(ac.AgentCommission,pc.CommissionPercent), 
+		--	0 
+		--FROM ProductCategory pc
+		--LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  
+		--LEFT JOIN Agent a ON ac.AgentId = a.AgentId
+		--WHERE pc.ProductId = @prProductId
+		--AND pc.IsActive = 1
+		--AND 1 = CASE WHEN @vIsAdmin = 1 AND a.SuperiorId IS NULL THEN 1
+		--             WHEN a.UserLogin = @prAgentAcc THEN 1
+		--			 ELSE 0 
+		--		END
 
 		SELECT * FROM @vCommissionSetting
 	END TRY 

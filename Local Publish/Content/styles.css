@@ -3641,7 +3641,7 @@ samp {
 body {
   font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   background-color: #2f4050 !important;
-  font-size: 13px !important;
+  font-size: 12px !important;
   color: #676a6c !important;
   overflow-x: hidden !important;
 }
@@ -5594,7 +5594,8 @@ dd.project-people {
   color: #888888;
 }
 .message-content {
-  display: block;
+    font-size: 12px;
+    display: block;
 }
 .chat-discussion {
   background: #fbfbfb;
@@ -10743,4 +10744,70 @@ login {
 
 .product-selection img{
   width: 100px !important;
+}
+
+.capitalize 
+{
+  text-transform: capitalize;
+}
+
+.agent-comm-table tr th:last-child,
+.agent-comm-table tr td:last-child {
+    width : 6%;
+}
+
+.agent-comm-table th:first-child,
+.agent-comm-table td:first-child
+{
+    display:none;
+}
+
+
+.data-box {
+    background: #F3F6FB;
+    border-radius: 0.25em;
+    margin-right: -20px;
+    margin-left: -20px;
+}
+
+.bounce {
+	/* position: absolute; */
+	/* bottom: 30px; */
+	/* left: 50%; */
+	/* width: 60px; */
+	/* height: 60px; */
+	/* margin-left:-30px; */
+	/* border: 2px solid #990000; */
+	-webkit-border-radius:50%;
+	-moz-border-radius:50%;
+	-ms-border-radius:50%;
+	border-radius:50%;
+	animation: bounce 3s infinite;
+	-webkit-animation: bounce 3s infinite;
+	-moz-animation: bounce 3s infinite;
+	-o-animation: bounce 3s infinite;
+}
+ 
+@-webkit-keyframes bounce {
+    0% { transform: translateY(-1px)  }
+    50% { transform: translateY(2px) }
+    100% { transform: translateY(-1px) }
+}
+
+@keyframes bounce {
+    0% { transform: translateY(-1px)  }
+    50% { transform: translateY(5px) }
+    100% { transform: translateY(-1px) }
+}
+
+.new-message {
+    line-height: 15px;
+    padding: 3px;
+    position: absolute;
+    right: 28px;
+    top: 85px;
+    z-index: 9999;
+    border-radius: 50% !important;
+    height: 20px;
+    width: 20px;
 }

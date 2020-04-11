@@ -588,7 +588,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
-                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
@@ -632,7 +632,7 @@ exports.AppModule = AppModule;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--<loading></loading>-->\r\n<table class=\"table table-striped float-left wp-100 agent-comm-table\" *ngIf=\"tableDisplay==displayType.allAgent; else currentAgentCommision\">\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\">\r\n            <ng-container *ngFor=\"let column of dataColumns; let colNo = index\">\r\n                <th class=\"capitalize\">{{column}}</th>\r\n            </ng-container>\r\n            <th>Action</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td [innerHTML]=\"value\" *ngIf=\"(!row.onEdit && colNo < dataColumns.length) || colNo <= 1\"></td>\r\n            </ng-container>\r\n            <ng-container *ngIf=\"row.onEdit\">\r\n                <td *ngFor=\"let comm of commissionSettings\">\r\n                    <input type=\"number\" min=\"0\" class=\"form-control\" [(ngModel)]=\"comm.agentCommissionPer\" />\r\n                </td>\r\n            </ng-container>\r\n            <td>\r\n                <tablerow-buttons [editMode]=\"row.onEdit\" [hideDelete]=\"true\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\"></tablerow-buttons>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"dataSource == null || dataSource.length == 0\">\r\n            <td class=\"pad0A\" [attr.colspan]=\"dataColumns.length\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n\r\n<ng-template #currentAgentCommision>\r\n    <div class=\"w-p100 float-left\">\r\n        <table class=\"table table-striped float-left w-p50\">\r\n            <tbody>\r\n                <tr>\r\n                    <th class=\"cell-width-40\">Category</th>\r\n                    <th>Agent Commission</th>\r\n                </tr>\r\n                <tr *ngFor=\"let row of commissionSettings; let rowNo = index\" class=\"row-select\">\r\n                    <td>{{row.category}}</td>\r\n                    <td><input type=\"number\" min=\"0\" class=\"form-control\" [(ngModel)]=\"row.agentCommissionPer\" /></td>\r\n                </tr>\r\n                <tr *ngIf=\"commissionSettings == null || commissionSettings.length == 0\">\r\n                    <td class=\"pad0A\" [attr.colspan]=\"dataColumns.length\">\r\n                        <div class=\"center-div\">\r\n                            <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                                <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                                <h2 class=\"mrg0T\">No records found</h2>\r\n                                <p>\r\n                                    There are no incomplete calls\r\n                                </p>\r\n                            </div>\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n            [disabled]=\"commissionSettings.length == 0\" (click)=\"updateTable()\" style=\"width: 180px;\">\r\n        {{isUpdating ? 'Updating' : 'Update'}}\r\n        <span class=\"loading\"></span>\r\n    </button>\r\n</ng-template>"
+module.exports = "<!--<loading></loading>-->\r\n<table class=\"table table-striped float-left wp-100\" *ngIf=\"tableDisplay==displayType.allAgents; else currentAgentCommision\">\r\n    <tbody>\r\n        <tr *ngIf=\"dataSource.length\" class=\"agent-comm-row\">\r\n            <ng-container *ngFor=\"let column of dataColumns; let colNo = index\">\r\n                <th class=\"capitalize\">{{column}}</th>\r\n            </ng-container>\r\n            <th>Action</th>\r\n        </tr>\r\n        <tr *ngFor=\"let row of dataSource; let rowNo = index\" class=\"row-select agent-comm-row\">\r\n            <ng-container *ngFor=\"let value of getRowData(row); let colNo = index\">\r\n                <td [innerHTML]=\"value\" *ngIf=\"(!row.onEdit && colNo < dataColumns.length) || colNo <= 1\"></td>\r\n            </ng-container>\r\n            <ng-container *ngIf=\"row.onEdit\">\r\n                <td *ngFor=\"let comm of commissionSettings\">\r\n                    <input type=\"number\" min=\"0\" class=\"form-control\" [(ngModel)]=\"comm.agentCommissionPer\" />\r\n                </td>\r\n            </ng-container>\r\n            <td>\r\n                <tablerow-buttons [editMode]=\"row.onEdit\" [hideDelete]=\"true\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\"></tablerow-buttons>\r\n            </td>\r\n        </tr>\r\n        <tr *ngIf=\"dataSource == null || dataSource.length == 0\">\r\n            <td class=\"pad0A\" [attr.colspan]=\"dataColumns.length\">\r\n                <div class=\"center-div\">\r\n                    <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                        <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                        <h2 class=\"mrg0T\">No records found</h2>\r\n                        <p>\r\n                            There are no incomplete calls\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </td>\r\n        </tr>\r\n    </tbody>\r\n</table>\r\n\r\n<ng-template #currentAgentCommision>\r\n    <div class=\"w-p100 float-left\">\r\n        <table class=\"table table-striped float-left w-p50\">\r\n            <tbody>\r\n                <tr>\r\n                    <th class=\"cell-width-40\">Category</th>\r\n                    <th>Agent Commission</th>\r\n                </tr>\r\n                <tr *ngFor=\"let row of commissionSettings; let rowNo = index\" class=\"row-select\">\r\n                    <td>{{row.category}}</td>\r\n                    <td><input type=\"number\" min=\"0\" class=\"form-control\" [(ngModel)]=\"row.agentCommissionPer\" /></td>\r\n                </tr>\r\n                <tr *ngIf=\"commissionSettings == null || commissionSettings.length == 0\">\r\n                    <td class=\"pad0A\" colspan=\"2\">\r\n                        <div class=\"center-div\">\r\n                            <div class=\"callout callout-secondary text-center pad45A mrg0B\">\r\n                                <i class=\"mdi mdi-package-variant font-size-65\"></i>\r\n                                <h2 class=\"mrg0T\">No records found</h2>\r\n                                <p>\r\n                                    There are no incomplete calls\r\n                                </p>\r\n                            </div>\r\n                        </div>\r\n                    </td>\r\n                </tr>\r\n            </tbody>\r\n        </table>\r\n    </div>\r\n    <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n            [disabled]=\"commissionSettings.length == 0\" (click)=\"updateTable()\" style=\"width: 180px;\">\r\n        {{isUpdating ? 'Updating' : 'Update'}}\r\n        <span class=\"loading\"></span>\r\n    </button>\r\n</ng-template>"
 
 /***/ }),
 
@@ -1333,7 +1333,7 @@ exports.TeamSubmission = TeamSubmission;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\" class=\"font-normal\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\" placeholder=\"{{field.placeholder}}\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\" rows=\"5\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [disabled]=\"disabled\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\"\r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\" class=\"checkbox checkbox-primary\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               (ngModelChange)=\"setChanges()\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n</div>\r\n\r\n"
+module.exports = "<div [ngSwitch]=\"field.controlType\">\r\n    <!-- LABEL -->\r\n    <label *ngSwitchCase=\"controlType.label\" class=\"font-normal\">{{data}}</label>\r\n\r\n    <!-- TEXT -->\r\n    <input *ngSwitchCase=\"controlType.textbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"text\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\" placeholder=\"{{field.placeholder}}\">\r\n\r\n    <!-- NUMBER -->\r\n    <input *ngSwitchCase=\"controlType.number\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"number\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [readonly]=\"readonly\">\r\n\r\n    <!-- PASSWORD -->\r\n    <input *ngSwitchCase=\"controlType.password\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" type=\"password\" class=\"form-control\" maxlength=\"{{field.maxLength}}\"\r\n           [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n\r\n    <!-- TEXTAREA -->\r\n    <textarea *ngSwitchCase=\"controlType.textarea\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" maxlength=\"{{field.maxLength}}\" rows=\"5\"\r\n              [required]=\"field.required\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\" [disabled]=\"disabled\" autosize></textarea>\r\n\r\n    <!-- DROPDOWN  -->\r\n    <select *ngSwitchCase=\"field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1\"\r\n            id=\"{{fieldId}}\" name=\"{{fieldId}}\" class=\"form-control\" [required]=\"field.required\" [disabled]=\"disabled\"\r\n            [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <option [ngValue]=\"null\" *ngIf=\"!onEdit\">Please select</option>\r\n        <option *ngFor=\"let option of dropdownItems\" [ngValue]=\"option.key.toString()\">{{option.value}}</option>\r\n    </select>\r\n    <!-- CHECKBOX -->\r\n    <div *ngSwitchCase=\"controlType.checkbox\" class=\"checkbox checkbox-primary\">\r\n        <input type=\"checkbox\" id=\"{{fieldId}}\" name=\"{{fieldId}}\" [(ngModel)]=\"data\" (ngModelChange)=\"setChanges()\">\r\n        <label for=\"{{fieldId}}\"></label>\r\n    </div>\r\n\r\n    <!-- DATE RANGE -->\r\n    <div *ngSwitchCase=\"controlType.dateRange\">\r\n        <input type=\"text\"\r\n               ngxDaterangepickerMd\r\n               class=\"form-control\"\r\n               name=\"{{fieldId}}\"\r\n               [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n               [(ngModel)]=\"data\"\r\n               (ngModelChange)=\"setChanges()\"\r\n               startKey=\"startDate\"\r\n               endKey=\"endDate\" />\r\n    </div>\r\n\r\n\r\n\r\n</div>\r\n\r\n"
 
 /***/ }),
 
@@ -1383,7 +1383,6 @@ var DataControl = /** @class */ (function () {
         var _this = this;
         if (this.field.required) {
             this.subscription = this.formEvent.notification.subscribe(function (form) {
-                //   if (form.name !== this.formName) return;
                 _this.parentForm = form.template;
                 _this.validate();
             });
@@ -1396,12 +1395,10 @@ var DataControl = /** @class */ (function () {
     };
     DataControl.prototype.writeValue = function (val) {
         if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
-            //if (val) {
             this.data = val ? val.toString() : null;
             if (this.field.cascadeTo) {
                 this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
             }
-            //}
         }
         else {
             this.data = val;
@@ -1413,7 +1410,7 @@ var DataControl = /** @class */ (function () {
     DataControl.prototype.setChanges = function () {
         this.propagateChange(this.data);
         if (this.onModelChanged.observers.length > 0) {
-            this.onModelChanged.emit();
+            this.onModelChanged.emit(this.data);
         }
         if (this.field.cascadeTo) {
             this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
@@ -1909,7 +1906,7 @@ module.exports = "/*****************************************\r\n  upload button 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div classs=\"btn btn-primary file-upload pos-rel \">\r\n    <label for=\"upload\" class=\"file-upload__label\">\r\n        <i class=\"fa fa-upload mrg5R\"></i> Upload Files\r\n    </label>\r\n    <input #file class=\"file-upload__input\" type=\"file\" name=\"file-upload\" (change)=\"uploadFile(file.files)\" multiple>\r\n</div>\r\n\r\n<div class=\"dropzone mrg5B\">\r\n    <ng-container *ngFor=\"let file of uploadedFiles; let fileNo = index\">\r\n        <div class=\"file-preview\" *ngIf=\"!file.deleted\">\r\n            <button class=\"btn btn-warning btn-circle btn-xs btn-close\" type=\"button\" (click)=\"removeFile(fileNo)\">×</button>\r\n            <a href=\"{{file.path}}\" target=\"_blank\" download=\"{{file.name}}\">\r\n                <div class=\"file-details\">\r\n                    <div class=\"file-size\">\r\n                        <span><strong>{{getFileSize(file.size)}}</strong> KB</span>\r\n                    </div>\r\n                    <div class=\"file-filename\">\r\n                        <span>{{file.name}}</span>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </ng-container></div>\r\n<span class=\"form-text m-b-none\">\r\n    Allowed file types are \".gif\", \".jpg\", \".jpeg\", \".png\", \".pdf\". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com\r\n</span>"
+module.exports = "\r\n<div classs=\"btn btn-primary file-upload pos-rel \">\r\n    <label for=\"upload\" class=\"file-upload__label\">\r\n        <i class=\"fa fa-upload mrg5R\"></i> Upload Files\r\n    </label>\r\n    <input #file class=\"file-upload__input\" type=\"file\" name=\"file-upload\" (change)=\"uploadFile(file.files)\" multiple>\r\n</div>\r\n\r\n<div class=\"dropzone mrg5B\">\r\n    <ng-container *ngFor=\"let file of uploadedFiles; let fileNo = index\">\r\n        <div class=\"file-preview\" *ngIf=\"!file.deleted\">\r\n            <button class=\"btn btn-warning btn-circle btn-xs btn-close\" type=\"button\" (click)=\"removeFile(fileNo)\">×</button>\r\n            <!--<a href=\"/UploadFiles/{{file.name}}\" download>-->\r\n            <a href=\"{{fileUrl}}/{{file.name}}\">\r\n                <div class=\"file-details\">\r\n                    <div class=\"file-size\">\r\n                        <span><strong>{{getFileSize(file.size)}}</strong> KB</span>\r\n                    </div>\r\n                    <div class=\"file-filename\">\r\n                        <span>{{file.name}}</span>\r\n                    </div>\r\n                </div>\r\n            </a>\r\n        </div>\r\n    </ng-container></div>\r\n<span class=\"form-text m-b-none\">\r\n    Allowed file types are \".gif\", \".jpg\", \".jpeg\", \".png\", \".pdf\". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com\r\n</span>"
 
 /***/ }),
 
@@ -1934,7 +1931,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
-var file_download_1 = __webpack_require__(/*! src/app/services/file-download */ "./src/app/services/file-download.ts");
 var data_service_1 = __webpack_require__(/*! ../../services/data.service */ "./src/app/services/data.service.ts");
 var FileUploader = /** @class */ (function () {
     function FileUploader(el, dataService) {
@@ -1965,15 +1961,6 @@ var FileUploader = /** @class */ (function () {
         Array.prototype.push.apply(this.uploadedFiles, files);
         this.propagateChange(this.uploadedFiles);
     };
-    FileUploader.prototype.downloadFile = function (fileUrl, fileName) {
-        if (!fileUrl)
-            return;
-        // Process the file downloaded
-        this.dataService.download(fileUrl).subscribe(function (res) {
-            //let fileName = getFileNameFromResponseContentDisposition(res);
-            file_download_1.saveFile(res.blob, fileName);
-        });
-    };
     FileUploader.prototype.removeFile = function (fileNo) {
         this.uploadedFiles[fileNo].deleted = true;
         this.propagateChange(this.uploadedFiles);
@@ -1987,7 +1974,7 @@ var FileUploader = /** @class */ (function () {
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)
-    ], FileUploader.prototype, "filePath", void 0);
+    ], FileUploader.prototype, "fileUrl", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -3138,7 +3125,7 @@ var LessThanValidator = /** @class */ (function () {
         var myValue = thisControl.value;
         if (myValue) {
             // value not equal
-            if (this._valueToCompare && myValue >= this._valueToCompare)
+            if (this._valueToCompare && myValue > this._valueToCompare)
                 return { validateLessThan: true };
         }
         return null;
@@ -3207,9 +3194,9 @@ var MinDirective = /** @class */ (function () {
         });
     };
     MinDirective.prototype.validate = function () {
-        var value = this.ngModel.model;
         var thisElement = $(this.el.nativeElement);
-        thisElement.next('.text-danger').remove();
+        $(this.el.nativeElement).next('.text-danger').remove();
+        var value = this.parentForm.controls[this.fieldId].value;
         if (value === null || value === undefined) {
             thisElement.after('<span class= "text-danger">This is required</span>');
             this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
@@ -4013,7 +4000,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-70",
+            "colWidth": "cell-width-40",
             "dataFieldControl": {
                 "controlName": "category",
                 "controlType": "textbox",
@@ -4022,11 +4009,25 @@ var ManageCategoryColumns = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "categoryType",
+            "headerText": "Category Type",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "categoryType",
+                "controlType": "select",
+                "required": true,
+                "maxLength": 0,
+                "datasourceUrl": "GetCategoryType"
+            }
+        },
+        {
             "fieldName": "defaultCommission",
             "headerText": "Default Commission (RM)",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "",
+            "colWidth": "cell-width-15",
             "dataFieldControl": {
                 "controlName": "defaultCommission",
                 "controlType": "number",
@@ -4039,7 +4040,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Commission (%)",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "",
+            "colWidth": "cell-width-10",
             "dataFieldControl": {
                 "controlName": "commissionPercent",
                 "controlType": "number",
@@ -4066,7 +4067,7 @@ var ManageCategoryColumns = /** @class */ (function () {
             "headerText": "Active",
             "displayType": "tick",
             "keyField": false,
-            "colWidth": "cell-width-1",
+            "colWidth": "cell-width-5",
             "dataFieldControl": {
                 "controlName": "isActive",
                 "controlType": "checkbox",
@@ -5439,7 +5440,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "applicationId",
             "displayText": "Application Id",
-            "hidden": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "applicationId",
                 "controlType": "label",
@@ -5448,28 +5449,25 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "categoryId",
+            "fieldName": "category",
             "displayText": "Product Category",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "categoryId",
-                "controlType": "select",
-                "required": true,
+                "controlName": "category",
+                "controlType": "label",
+                "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetCategories",
-                "cascadeTo": "prodPkgId"
             }
         },
         {
-            "fieldName": "prodPkgId",
+            "fieldName": "packageName",
             "displayText": "Product Package",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "prodPkgId",
-                "controlType": "cascadeDropdown",
-                "required": true,
-                "maxLength": 0,
-                "datasourceUrl": "GetPackagesByCategory"
+                "controlName": "packageName",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
             }
         },
         {
@@ -5641,17 +5639,18 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "appStatusId",
-            "displayText": "Status",
+            "fieldName": "isProcessed",
+            "displayText": "Is Processed",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "appStatusId",
-                "controlType": "select",
+                "controlName": "isProcessed",
+                "controlType": "checkbox",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetStatus",
-                "cascadeTo": "",
-                "adminField": true
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true,
+                "dataChangedEvent": "showProcessedDetails"
             }
         },
         {
@@ -5687,10 +5686,24 @@ var EditOrderFields = /** @class */ (function () {
             "displayText": "Tel No",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "userId",
+                "controlName": "telNo",
                 "controlType": "textbox",
                 "required": false,
                 "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "eForm",
+            "displayText": "E-Form",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "eForm",
+                "controlType": "textbox",
+                "required": false,
+                "maxLength": 15,
                 "datasourceUrl": null,
                 "cascadeTo": null,
                 "adminField": true
@@ -5707,6 +5720,20 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "appStatusId",
+            "displayText": "Status",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "appStatusId",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetStatus",
+                "cascadeTo": "",
                 "adminField": true
             }
         },
@@ -6260,6 +6287,16 @@ var SearchOrderFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "activationDate",
+            "displayText": "Activated Date",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "activationDate",
+                "controlType": "dateRange",
+                "maxLength": 0
+            }
+        },
+        {
             "fieldName": "keyword",
             "displayText": "Keyword",
             "width": "col-sm-4",
@@ -6665,7 +6702,7 @@ exports.CascadeData = CascadeData;
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var DataFieldControl = /** @class */ (function () {
-    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo, adminField) {
+    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo, adminField, dataChangedEvent) {
         this.controlName = controlName;
         this.controlType = controlType;
         this.required = required;
@@ -6673,6 +6710,7 @@ var DataFieldControl = /** @class */ (function () {
         this.datasourceUrl = datasourceUrl;
         this.cascadeTo = cascadeTo;
         this.adminField = adminField;
+        this.dataChangedEvent = dataChangedEvent;
     }
     return DataFieldControl;
 }());
@@ -6948,7 +6986,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav tree\" id=\"side-menu\" data-widget=\"tree\">\r\n      <li class=\"nav-header w-p100\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\"[routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n              <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/upload-incentives\"]'><span class=\"nav-label\">Upload Incentives</span></a></li>\r\n              <li><a [routerLink]='[\"/view-incentives\"]'><span class=\"nav-label\">View Incentives</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/admin-access\"]'><span class=\"nav-label\">Admin Access</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n              <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">Manage Announcement</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-login-banner\"]'><span class=\"nav-label\">Manage Login Banner</span></a></li>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav tree\" id=\"side-menu\" data-widget=\"tree\">\r\n      <li class=\"nav-header w-p100\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\"[routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n              <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/upload-incentives\"]'><span class=\"nav-label\">Upload Incentives</span></a></li>\r\n              <li><a [routerLink]='[\"/view-incentives\"]'><span class=\"nav-label\">View Incentives</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/admin-access\"]'><span class=\"nav-label\">Admin Access</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n              <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">Manage Announcement</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-login-banner\"]'><span class=\"nav-label\">Manage Login Banner</span></a></li>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -7848,7 +7886,7 @@ exports.AgentRegistration = AgentRegistration;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<page-header [title]=\"'Agent View'\" [parentCategory]=\"'Agent Maintenance'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox\" *ngIf=\"!completed\">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Details <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content pad0T\">\r\n                    <loading></loading>\r\n                    <div class=\"row pad25T pad15B data-box\">\r\n                        <div class=\"col-lg-5\">\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-2 text-right\">\r\n                                    <label>Agent Id:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-10 text-left\">\r\n                                    {{formRecord.agentId}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-2 text-right\">\r\n                                    <label>Status:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-10 text-left\">\r\n                                    <span class=\"label\" [ngClass]=\"{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}\">\r\n                                        {{formRecord.isActive ? 'Active' : 'Inactive'}}\r\n                                    </span>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-2 text-right\">\r\n                                    <label>Login Counts:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-10 text-left\">\r\n                                    {{formRecord.loginCount}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"col-lg-5\" id=\"cluster_info\">\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-2 text-right\">\r\n                                    <label>Last Updated:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-10 text-left\">\r\n                                    <div class=\"mb-1\">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-2 text-right\">\r\n                                    <label>Last Updated By:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-10 text-left\">\r\n                                    <div class=\"mb-1\">{{formRecord.modifiedBy}}</div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"panel blank-panel mrg15T\">\r\n                        <div class=\"panel-heading\">\r\n                            <div class=\"panel-options\">\r\n                                <ul class=\"nav nav-tabs\">\r\n                                    <li><a class=\"nav-link\" href=\"#agentProfile\" data-toggle=\"tab\" [ngClass]=\"{'active':selectedTab == 1}\" (click)=\"selectedTab=1\">Agent Profile</a></li>\r\n                                    <li><a class=\"nav-link\" href=\"#commission\" data-toggle=\"tab\" [ngClass]=\"{'active':selectedTab == 2}\" (click)=\"selectedTab=2\">Commission</a></li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"panel-body\">\r\n                            <div class=\"tab-content\">\r\n                                <!-- AGENT PROFILE -->\r\n                                <div class=\"tab-pane active pad20A\" id=\"agentProfile\">\r\n                                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                                        <!--PRODUCT TYPES-->\r\n                                        <ng-container *ngFor=\"let field of formFields\">\r\n                                            <div class=\"form-group row\">\r\n                                                <label class=\"col-sm-2 col-form-label\">\r\n                                                    {{field.displayText }}\r\n                                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                                </label>\r\n                                                <div class=\"col-sm-10\">\r\n                                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                                  [field]=\"field.dataFieldControl\" [formName]=\"'dataForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                                </div>\r\n                                            </div>\r\n                                            <div class=\"hr-line-dashed\"></div>\r\n                                        </ng-container>\r\n                                        <div class=\"form-group row\">\r\n                                            <label class=\"col-sm-2 col-form-label\">\r\n                                                Superior\r\n                                            </label>\r\n                                            <div class=\"col-sm-10\">\r\n                                                <superior-field [(ngModel)]=\"formRecord['superiorId']\" [fieldId]=\"'superior'\" [parentForm]=\"form\"\r\n                                                                [displayText]=\"formRecord['superiorName']\" name=\"superior\"></superior-field>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"hr-line-dashed\"></div>\r\n                                        <div class=\"form-group row\">\r\n                                            <label class=\"col-sm-2 col-form-label\">\r\n                                                Active\r\n                                            </label>\r\n                                            <div class=\"col-sm-10\">\r\n                                                <superior-field [(ngModel)]=\"formRecord['isActive']\" [fieldId]=\"'isActive'\" [parentForm]=\"form\"\r\n                                                                [displayText]=\"formRecord['isActive']\" name=\"isActive\"></superior-field>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"hr-line-dashed\"></div>\r\n                                        <!--SAVE OR CANCEL-->\r\n                                        <div class=\"form-group row\">\r\n                                            <div class=\"col-sm-12 \">\r\n                                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                                        [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                                    <span class=\"loading\"></span>\r\n                                                </button>\r\n                                            </div>\r\n                                        </div>\r\n                                    </form>\r\n                                </div>\r\n\r\n                                <!-- COMMISSION -->\r\n                                <div class=\"tab-pane\" id=\"commission\">\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <product-options name=\"product\" [fieldId]=\"product\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadAgentCommissions()\"></product-options>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Commissions\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <agent-commission-table></agent-commission-table>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row text-right\">\r\n                <back-button>Cancel</back-button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n"
+module.exports = "\r\n<page-header [title]=\"'Agent View'\" [parentCategory]=\"'Agent Maintenance'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox\" *ngIf=\"!completed\">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Details <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content pad0T\">\r\n                    <loading></loading>\r\n                    <div class=\"row pad25T pad15B data-box\">\r\n                        <div class=\"col-lg-5\">\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Agent Id:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    {{formRecord.agentId}}\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Agent Name:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    <div class=\"mb-1\">\r\n                                        {{formRecord.fullname}}</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Status:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    <span class=\"label\" [ngClass]=\"{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}\">\r\n                                        {{formRecord.isActive ? 'Active' : 'Inactive'\r\n                                        }}\r\n                                        </span>\r\n                                    </div>\r\n                            </div>\r\n\r\n                        </div>\r\n                        <div class=\"col-lg-5\" id=\"cluster_info\">\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Last Updated:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    <div class=\"mb-1\">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Last Updated By:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    <div class=\"mb-1\">{{formRecord.modifiedBy}}</div>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"row mrg5B\">\r\n                                <div class=\"col-sm-3 col-md-3 text-right\">\r\n                                    <label>Login Counts:</label>\r\n                                </div>\r\n                                <div class=\"col-sm-9 col-md-9 text-left\">\r\n                                    {{formRecord.loginCount}}\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"panel blank-panel mrg15T\">\r\n                        <div class=\"panel-heading\">\r\n                            <div class=\"panel-options\">\r\n                                <ul class=\"nav nav-tabs\">\r\n                                    <li><a class=\"nav-link\" href=\"#agentProfile\" data-toggle=\"tab\" [ngClass]=\"{'active':selectedTab == 1}\" (click)=\"selectedTab=1\">Agent Profile</a></li>\r\n                                    <li><a class=\"nav-link\" href=\"#commission\" data-toggle=\"tab\" [ngClass]=\"{'active':selectedTab == 2}\" (click)=\"selectedTab=2\">Commission</a></li>\r\n                                </ul>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"panel-body\">\r\n                            <div class=\"tab-content\">\r\n                                <!-- AGENT PROFILE -->\r\n                                <div class=\"tab-pane active pad20A\" id=\"agentProfile\">\r\n                                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                                        <!--PRODUCT TYPES-->\r\n                                        <ng-container *ngFor=\"let field of formFields\">\r\n                                            <div class=\"form-group row\">\r\n                                                <label class=\"col-sm-2 col-form-label\">\r\n                                                    {{field.displayText }}\r\n                                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                                </label>\r\n                                                <div class=\"col-sm-10\">\r\n                                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                                  [field]=\"field.dataFieldControl\" [formName]=\"'dataForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                                </div>\r\n                                            </div>\r\n                                            <div class=\"hr-line-dashed\"></div>\r\n                                        </ng-container>\r\n                                        <div class=\"form-group row\">\r\n                                            <label class=\"col-sm-2 col-form-label\">\r\n                                                Superior\r\n                                            </label>\r\n                                            <div class=\"col-sm-10\">\r\n                                                <superior-field [(ngModel)]=\"formRecord['superiorId']\" [fieldId]=\"'superior'\" [parentForm]=\"form\"\r\n                                                                [displayText]=\"formRecord['superiorName']\" name=\"superior\"></superior-field>\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"hr-line-dashed\"></div>\r\n                                        <div class=\"form-group row\">\r\n                                            <label class=\"col-sm-2 col-form-label\">\r\n                                                Active\r\n                                            </label>\r\n                                            <div class=\"col-sm-10\">\r\n                                                <input type=\"checkbox\" [(ngModel)]=\"formRecord['isActive']\" name=\"isActive\" />\r\n                                            </div>\r\n                                        </div>\r\n                                        <div class=\"hr-line-dashed\"></div>\r\n                                        <!--SAVE OR CANCEL-->\r\n                                        <div class=\"form-group row\">\r\n                                            <div class=\"col-sm-12 \">\r\n                                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                                <button type=\"submit\" class=\"btn btn-primary float-right mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                                        [disabled]=\"dataForm.form.invalid || isUpdating\" style=\"width: 180px;\">\r\n                                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                                    <span class=\"loading\"></span>\r\n                                                </button>\r\n                                            </div>\r\n                                        </div>\r\n                                    </form>\r\n                                </div>\r\n\r\n                                <!-- COMMISSION -->\r\n                                <div class=\"tab-pane\" id=\"commission\">\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Product\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <product-options name=\"product\" [fieldId]=\"product\" [(ngModel)]=\"selectedProduct\" (onProductSelected)=\"loadAgentCommissions()\"></product-options>\r\n                                        </div>\r\n                                    </div>\r\n                                    <div class=\"hr-line-dashed\"></div>\r\n                                    <div class=\"form-group row\">\r\n                                        <label class=\"col-sm-2 col-form-label\">\r\n                                            Commissions\r\n                                        </label>\r\n                                        <div class=\"col-sm-10\">\r\n                                            <agent-commission-table></agent-commission-table>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n                    </div>\r\n\r\n\r\n                </div>\r\n            </div>\r\n            <div class=\"form-group row text-right\">\r\n                <back-button>Cancel</back-button>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -8347,7 +8385,7 @@ exports.CreateWithdrawal = CreateWithdrawal;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['announcementDocuments']\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['announcementDocuments']\" [fileUrl]=\"'/api/Download/Announcement'\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 \">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -8458,7 +8496,7 @@ exports.EditAnnouncement = EditAnnouncement;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [onEdit]=\"true\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['customerDocuments']\" [filePath]></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 text-right\">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<user-communication [applicationId]=\"recordId\"></user-communication>"
+module.exports = "<page-header [title]=\"'Edit Order'\" [parentCategory]=\"'View Orders'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Edit Order <small>* is required field.</small></h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\" *ngIf=\"!field.hidden\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl && !field.dataFieldControl.dataChangedEvent\" name=\"{{field.dataFieldControl.controlName}}\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" [onEdit]=\"true\"></data-control>\r\n\r\n                                    <data-control *ngIf=\"field.dataFieldControl && field.dataFieldControl.dataChangedEvent\" name=\"{{field.dataFieldControl.controlName}}\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" [onEdit]=\"true\" (onModelChanged)=\"showProcessedDetails($event)\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"  *ngIf=\"!field.hidden\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Attach required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"formRecord['customerDocuments']\" [fileUrl]=\"'/api/Download/CustomerApplication'\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 text-right\">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n<user-communication [applicationId]=\"recordId\"></user-communication>"
 
 /***/ }),
 
@@ -8514,8 +8552,9 @@ var EditOrder = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
-        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) {
+            return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null : new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null));
+        });
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
         }
@@ -8541,10 +8580,27 @@ var EditOrder = /** @class */ (function () {
             _this.router.navigate(['/view-order']);
         });
     };
+    EditOrder.prototype.showProcessedDetails = function (show) {
+        if (!show)
+            show = false;
+        var updateFields = ["orderNo", "userId", "telNo"];
+        for (var field of  updateFields) {
+            var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });
+            this.formFields[index].hidden = !show;
+        }
+    };
+    EditOrder.prototype.showEForm = function (show) {
+        if (!show)
+            show = false;
+        var index = this.formFields.findIndex(function (i) { return i.fieldName == "eForm"; });
+        this.formFields[index].hidden = !show;
+    };
     EditOrder.prototype.loadRecord = function (recordId) {
         var _this = this;
         this.dataService.get(apiController_1.ApiController.CustomerApplication, recordId).subscribe(function (data) {
             _this.formRecord = data;
+            _this.showEForm(_this.formRecord["showEForm"]);
+            _this.showProcessedDetails(_this.formRecord["isProcessed"]);
         });
     };
     __decorate([
@@ -10221,13 +10277,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
     }
-    DataService.prototype.download = function (fileUrl) {
-        return this.http.get(fileUrl, { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
-    };
     DataService.prototype.export = function (apiControllerName, filterParams) {
-        //let searchParams = typeof filterParams === 'object' ? JSON.stringify(filterParams) : filterParams;
-        //let params = new HttpParams();
-        //params = params.append('searchParams', searchParams);
         var headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
         return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' }).catch(this.errorHandler);
     };
@@ -10290,42 +10340,6 @@ var DataService = /** @class */ (function () {
     return DataService;
 }());
 exports.DataService = DataService;
-
-
-/***/ }),
-
-/***/ "./src/app/services/file-download.ts":
-/*!*******************************************!*\
-  !*** ./src/app/services/file-download.ts ***!
-  \*******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
-/**
- * Saves a file by opening file-save-as dialog in the browser
- * using file-save library.
- * @param blobContent file content as a Blob
- * @param fileName name file should be saved as
- */
-exports.saveFile = function (blobContent, fileName) {
-    var blob = new Blob([blobContent], { type: 'application/octet-stream' });
-    file_saver_1.saveAs(blob, fileName);
-};
-/**
- * Derives file name from the http response
- * by looking inside content-disposition
- * @param res http Response
- */
-exports.getFileNameFromResponseContentDisposition = function (res) {
-    var contentDisposition = res.headers.get('content-disposition') || '';
-    var matches = /filename=([^;]+)/ig.exec(contentDisposition);
-    var fileName = (matches[1] || 'untitled').trim();
-    return fileName;
-};
 
 
 /***/ }),

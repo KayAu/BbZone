@@ -33,7 +33,6 @@ namespace BroadbandZone_Data
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<DropdownItem> DropdownItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
         public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
@@ -41,13 +40,14 @@ namespace BroadbandZone_Data
         public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<ClaimableCommission> ClaimableCommissions { get; set; }
         public virtual DbSet<Clawback> Clawbacks { get; set; }
-        public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
         public virtual DbSet<IncentiveReceived> IncentiveReceiveds { get; set; }
         public virtual DbSet<Announcement> Announcements { get; set; }
         public virtual DbSet<LoginPageBanner> LoginPageBanners { get; set; }
         public virtual DbSet<LoginTrail> LoginTrails { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<Communication> Communications { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -136,7 +136,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, ObjectParameter oTotalRecord)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -182,6 +182,14 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prSubmittedTo", prSubmittedTo) :
                 new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
     
+            var prActivatedFromParameter = prActivatedFrom.HasValue ?
+                new ObjectParameter("prActivatedFrom", prActivatedFrom) :
+                new ObjectParameter("prActivatedFrom", typeof(System.DateTime));
+    
+            var prActivatedToParameter = prActivatedTo.HasValue ?
+                new ObjectParameter("prActivatedTo", prActivatedTo) :
+                new ObjectParameter("prActivatedTo", typeof(System.DateTime));
+    
             var prResidentialTypeParameter = prResidentialType != null ?
                 new ObjectParameter("prResidentialType", prResidentialType) :
                 new ObjectParameter("prResidentialType", typeof(string));
@@ -202,7 +210,7 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAgentId", prAgentId) :
                 new ObjectParameter("prAgentId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, oTotalRecord);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, oTotalRecord);
         }
     
         public virtual ObjectResult<GetDropdownItems_Result> GetDropdownItems(string prFieldName)
@@ -873,6 +881,15 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prIsAdmin", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMessagesToRead", prAppIdParameter, prIsAdminParameter);
+        }
+    
+        public virtual ObjectResult<GetApplicationDetails_Result> GetApplicationDetails(Nullable<int> prAppId)
+        {
+            var prAppIdParameter = prAppId.HasValue ?
+                new ObjectParameter("prAppId", prAppId) :
+                new ObjectParameter("prAppId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApplicationDetails_Result>("GetApplicationDetails", prAppIdParameter);
         }
     }
 }

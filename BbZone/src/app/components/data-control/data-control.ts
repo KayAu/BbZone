@@ -53,7 +53,6 @@ export class DataControl implements ControlValueAccessor {
     ngOnInit() {
         if (this.field.required) {
             this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-                //   if (form.name !== this.formName) return;
                 this.parentForm = form.template;
                 this.validate(); 
             });
@@ -69,12 +68,10 @@ export class DataControl implements ControlValueAccessor {
     writeValue(val: any): void {
 
         if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
-            //if (val) {
                 this.data = val ? val.toString() : null;
                 if (this.field.cascadeTo) {
                     this.cascadeEvent.subject.next(new CascadeData(this.field.cascadeTo, this.data));
                 }
-            //}
         }
         else {
             this.data = val;
@@ -89,7 +86,7 @@ export class DataControl implements ControlValueAccessor {
         this.propagateChange(this.data);
 
         if (this.onModelChanged.observers.length > 0) {
-            this.onModelChanged.emit();
+            this.onModelChanged.emit(this.data);
         }
 
         if (this.field.cascadeTo) {

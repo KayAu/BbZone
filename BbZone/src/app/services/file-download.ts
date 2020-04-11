@@ -1,4 +1,5 @@
-﻿import { saveAs } from 'file-saver';
+﻿
+import { saveAs } from 'file-saver';
 
 /**
  * Saves a file by opening file-save-as dialog in the browser

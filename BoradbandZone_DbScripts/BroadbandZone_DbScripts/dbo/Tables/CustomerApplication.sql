@@ -18,11 +18,14 @@
     [CustomerRemarks]   VARCHAR (500) NULL,
     [AdminRemarks]      VARCHAR (500) NULL,
     [AppStatusId]       INT           NULL,
+    [IsProcessed]       BIT           NULL,
     [OrderNo]           VARCHAR (25)  NULL,
     [UserId]            VARCHAR (25)  NULL,
     [TelNo]             VARCHAR (15)  NULL,
+    [EForm]             VARCHAR (15)  NULL,
     [SubmitByAgent]     BIT           NULL,
     [DocumentCompleted] BIT           NULL,
+    [ActivationDate]    SMALLDATETIME NULL,
     [CreatedOn]         SMALLDATETIME NOT NULL,
     [CreatedBy]         VARCHAR (50)  NOT NULL,
     [ModifiedOn]        SMALLDATETIME NOT NULL,
@@ -31,6 +34,10 @@
     CONSTRAINT [FK_CustomerApplication_ApplicationStatus] FOREIGN KEY ([AppStatusId]) REFERENCES [dbo].[ApplicationStatus] ([AppStatusId]),
     CONSTRAINT [FK_CustomerApplication_ProductPackage] FOREIGN KEY ([ProdPkgId]) REFERENCES [dbo].[ProductPackage] ([ProdPkgId])
 );
+
+
+
+
 
 
 

@@ -36,7 +36,7 @@
       <li class="treeview">
           <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Agents</span><span class="fa arrow"></span></a>
           <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li [ngClass]="{'hidden' : !currentUser.isAdmin}"><a [routerLink]='["/agent-registration-list"]'><span class="nav-label">Agent Registrations</span></a></li>
+              <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-registration-list"]'><span class="nav-label">Agent Registrations</span></a></li>
               <li [ngClass]="{'hidden' : !currentUser.isAdmin}"><a [routerLink]='["/agent-maintenance"]'><span class="nav-label">Agents Maintenance</span></a></li>
               <li><a [routerLink]='["/agent-comission"]'><span class="nav-label">Agent Commissions</span></a></li>
           </ul>

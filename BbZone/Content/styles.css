@@ -3708,7 +3708,7 @@ a:focus {
   color: #ffffff;
   background-color: #ffffff;
   height: 1px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 .hr-line-solid {
   border-bottom: 1px solid #e7eaec;
@@ -10509,7 +10509,6 @@ input[type="radio"] .styled:checked + label::after {
 .line-height-8 {
     line-height: 38px;
 }
-
 .display-table {
     display: table;
 }
@@ -10751,15 +10750,14 @@ login {
   text-transform: capitalize;
 }
 
-.agent-comm-table tr th:last-child,
-.agent-comm-table tr td:last-child {
-    width : 6%;
+tr.agent-comm-row th:last-child,
+tr.agent-comm-row td:last-child {
+    width: 6%;
 }
 
-.agent-comm-table th:first-child,
-.agent-comm-table td:first-child
-{
-    display:none;
+tr.agent-comm-row th:first-child,
+tr.agent-comm-row td:first-child {
+    display: none;
 }
 
 
@@ -10810,4 +10808,10 @@ login {
     border-radius: 50% !important;
     height: 20px;
     width: 20px;
+}
+
+
+.form-group div label {
+    margin-bottom: 0px !important;
+    
 }

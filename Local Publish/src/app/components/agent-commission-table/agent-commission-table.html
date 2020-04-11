@@ -1,9 +1,9 @@
 <!--<loading></loading>-->
-<table class="table table-striped float-left wp-100">
+<table class="table table-striped float-left wp-100 agent-comm-table" *ngIf="tableDisplay==displayType.allAgent; else currentAgentCommision">
     <tbody>
         <tr *ngIf="dataSource.length">
             <ng-container *ngFor="let column of dataColumns; let colNo = index">
-                <th>{{column}}</th>
+                <th class="capitalize">{{column}}</th>
             </ng-container>
             <th>Action</th>
         </tr>
@@ -17,16 +17,15 @@
                 </td>
             </ng-container>
             <td>
-                <!--<a (click)="editRow(row[itemKey])"><i class="fa fa-edit"></i></a>-->
                 <tablerow-buttons [editMode]="row.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)"></tablerow-buttons>
             </td>
         </tr>
-        <tr *ngIf="!dataSource.length">
+        <tr *ngIf="dataSource == null || dataSource.length == 0">
             <td class="pad0A" [attr.colspan]="dataColumns.length">
                 <div class="center-div">
                     <div class="callout callout-secondary text-center pad45A mrg0B">
                         <i class="mdi mdi-package-variant font-size-65"></i>
-                        <h2 class="mrg0T">No records found</h2> 
+                        <h2 class="mrg0T">No records found</h2>
                         <p>
                             There are no incomplete calls
                         </p>
@@ -36,4 +35,38 @@
         </tr>
     </tbody>
 </table>
-<!--<pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" *ngIf="showPager"></pager>-->
+
+<ng-template #currentAgentCommision>
+    <div class="w-p100 float-left">
+        <table class="table table-striped float-left w-p50">
+            <tbody>
+                <tr>
+                    <th class="cell-width-40">Category</th>
+                    <th>Agent Commission</th>
+                </tr>
+                <tr *ngFor="let row of commissionSettings; let rowNo = index" class="row-select">
+                    <td>{{row.category}}</td>
+                    <td><input type="number" min="0" class="form-control" [(ngModel)]="row.agentCommissionPer" /></td>
+                </tr>
+                <tr *ngIf="commissionSettings == null || commissionSettings.length == 0">
+                    <td class="pad0A" [attr.colspan]="dataColumns.length">
+                        <div class="center-div">
+                            <div class="callout callout-secondary text-center pad45A mrg0B">
+                                <i class="mdi mdi-package-variant font-size-65"></i>
+                                <h2 class="mrg0T">No records found</h2>
+                                <p>
+                                    There are no incomplete calls
+                                </p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
+            [disabled]="commissionSettings.length == 0" (click)="updateTable()" style="width: 180px;">
+        {{isUpdating ? 'Updating' : 'Update'}}
+        <span class="loading"></span>
+    </button>
+</ng-template>

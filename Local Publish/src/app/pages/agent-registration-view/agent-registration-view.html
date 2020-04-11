@@ -45,9 +45,9 @@
                         <div class="hr-line-dashed"></div>
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
-                            <div class="col-sm-12 ">
+                            <div class="col-sm-12 text-right">
                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                <button type="submit" class="btn btn-primary mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                         [disabled]="isUpdating" style="width: 150px;" *ngIf="!formRecord['approvalDate']">
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>

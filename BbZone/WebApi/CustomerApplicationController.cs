@@ -14,11 +14,15 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Net.Http.Headers;
 
 namespace BroadbandZone_App.WebApi
 {
     public class CustomerApplicationController : ApiController
     {
+
+
         [HttpGet]
         [Route("api/CustomerApplication/FindClaimedApplication/{keyword}")]
         public IHttpActionResult Find(string keyword)
@@ -75,8 +79,10 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.ProductPackageId,
                                                                                 filterBy.OrderStatusId,
                                                                                 filterBy.Agent,
-                                                                                filterBy.submittedDate != null ? filterBy.submittedDate.StartDate : null,
-                                                                                filterBy.submittedDate != null ? filterBy.submittedDate.EndDate : null,
+                                                                                filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
+                                                                                filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
+                                                                                filterBy.ActivationDate != null ? filterBy.ActivationDate.StartDate : null,
+                                                                                filterBy.ActivationDate != null ? filterBy.ActivationDate.EndDate : null,
                                                                                 filterBy.ResidentialType,
                                                                                 filterBy.Keyword,
                                                                                 filterBy.DocumentCompleted,
@@ -105,11 +111,15 @@ namespace BroadbandZone_App.WebApi
             {
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    CustomerApplication app = db.CustomerApplications.Include(ca => ca.ProductPackage)
-                                                                     .Include(ca => ca.CustomerDocuments)
-                                                                     .Where(ca => ca.ApplicationId == id).FirstOrDefault();
+                    GetApplicationDetails_Result results = db.GetApplicationDetails(id).FirstOrDefault();
+                    if (results != null)
+                    {
+                        ModelHelper.CopyPropertiesTo<GetApplicationDetails_Result, CustomerApplication>(results, out CustomerApplication appDetails);
+                        appDetails.CustomerDocuments = db.CustomerDocuments.Where(d => d.ApplicationId == id).ToList();
+                        return Ok(appDetails);
+                    }
 
-                    return Ok(app);
+                    return Ok();
                 }
             }
             catch (Exception ex)
@@ -150,8 +160,7 @@ namespace BroadbandZone_App.WebApi
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
-
-        // PUT api/<controller>/5
+        
         public async Task<IHttpActionResult> Put(int id)
         {
             try
@@ -169,17 +178,17 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     editedRecord.CustomerDocuments = null;
-                    editedRecord.SetDateAndAuthor(currentUser.Fullname,"ModifiedBy", "ModifiedOn");
+                    editedRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    // Update agent current commission if the application is completed
+                    // Update agent current commission if the application is completed as well as the activation date
                     db.UpdateCompletedAppCommission(id, currentUser.AgentId, currentUser.Fullname);
                 }
 
                 // save uploaded file details to database
                 SaveUploadedFilePath(result.FileData, id);
-             
+
                 return Ok();
             }
             catch (Exception ex)
@@ -194,7 +203,7 @@ namespace BroadbandZone_App.WebApi
             {
                 if (multipartFiles is null || multipartFiles.Count() == 0) return;
             
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.UploadFilePath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.UploadFilePath);
                 using (var db = new BroadbandZoneEntities())
                 {
                     foreach (UploadedFile file in fileUploadHelper.UploadStreams(multipartFiles.ToArray(), appId))
@@ -214,7 +223,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.UploadFilePath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.UploadFilePath);
 
                 using (var db = new BroadbandZoneEntities())
                 {
@@ -237,23 +246,5 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-        //private void SaveUploadedFilePath(List<UploadedFile> uploadedFiles, int appId)
-        //{
-        //    try
-        //    {
-        //        using (var db = new BroadbandZoneEntities())
-        //        {
-        //            foreach (UploadedFile file in uploadedFiles)
-        //            {
-        //                db.CustomerDocuments.Add(new CustomerDocument { Name = file.Name, Size = file.Size, ApplicationId = appId });
-        //                db.SaveChanges();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
-        //    }
-        //}
     }
 }

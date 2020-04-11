@@ -449,6 +449,7 @@ export class AgentProfileFields {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
                 "hidden": false,
+
                 "dataFieldControl": {
                     "controlName": "fullname",
                     "controlType": "textbox",

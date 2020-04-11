@@ -50,6 +50,10 @@ BEGIN
 			FROM  [dbo].[fnGetMySuperiors](@prAgentId) a
 			INNER JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
 			WHERE NOT a.SuperiorId IS NULL
+
+			UPDATE CustomerApplication
+			SET ActivationDate = GETDATE()
+			WHERE ApplicationId = @prAppId
 		END
 
 	END TRY 

@@ -18,6 +18,7 @@ namespace BroadbandZone_App.WebApi
     {
         [HttpGet]
         [Route("api/Commission/GetCommissionSettings/{productId}")]
+        // Get product categories given the product id
         public IHttpActionResult GetCommissionSettings(int productId)
         {
             try
@@ -70,7 +71,7 @@ namespace BroadbandZone_App.WebApi
 
         [HttpGet]
         [Route("api/Commission/GetAgentCommissionSettings/{agentId}/{productId}")]
-        // GET api/<controller>
+        // Get list of agents who haven't have theor commissions  set up yet
         public IHttpActionResult GetAgentCommissionSettings(int agentId, int productId)
         {
             try

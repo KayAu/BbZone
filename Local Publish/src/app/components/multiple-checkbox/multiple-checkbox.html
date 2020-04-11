@@ -3,6 +3,14 @@
         <span>{{selectedItemText? selectedItemText : 'Select'}}</span>
     </button>
     <ul class="dropdown-menu">
+        <li class="dropdown-item pad10L">
+            <div class="checkbox checkbox-primary">
+                <input id="checkbox_select" type="checkbox" [(ngModel)]="selectAllAgents" (change)="selectAll()">
+                <label for="checkbox_select">
+                    Select All
+                </label>
+            </div>
+        </li>
         <ng-container *ngFor="let item of checkboxItems; let itemNo = index">
             <li class="dropdown-item pad10L">
                 <div class="checkbox checkbox-primary">

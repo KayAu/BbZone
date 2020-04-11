@@ -10,6 +10,8 @@
 	@prAgent VARCHAR(50) = '',
 	@prSubmittedFrom SMALLDATETIME = NULL,
 	@prSubmittedTo SMALLDATETIME = NULL,
+	@prActivatedFrom SMALLDATETIME = NULL,
+	@prActivatedTo SMALLDATETIME = NULL,
 	@prResidentialType VARCHAR(30) = NULL,
 	@prKeyword VARCHAR(100) = NULL,
 	@prDocumentCompleted BIT = NULL,
@@ -100,7 +102,11 @@ BEGIN
 					 ELSE 0
 				END
 		AND 1 = CASE WHEN ISNULL(@prSubmittedFrom,'') = '' OR ISNULL(@prSubmittedTo,'') = '' THEN 1
-					 WHEN ca.CreatedOn BETWEEN @prSubmittedFrom AND @prSubmittedTo THEN 1
+					 WHEN CONVERT(DATE, ca.CreatedOn) BETWEEN @prSubmittedFrom AND @prSubmittedTo THEN 1
+					 ELSE 0
+				END	
+		AND 1 = CASE WHEN ISNULL(@prActivatedFrom,'') = '' OR ISNULL(@prActivatedTo,'') = '' THEN 1
+					 WHEN CONVERT(DATE, ca.ActivationDate)  BETWEEN @prActivatedFrom AND @prActivatedTo THEN 1
 					 ELSE 0
 				END	
 		AND 1 = CASE WHEN ISNULL(@prResidentialType,'') = '' THEN 1

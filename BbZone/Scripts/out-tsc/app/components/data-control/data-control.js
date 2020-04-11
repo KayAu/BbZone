@@ -36,7 +36,6 @@ var DataControl = /** @class */ (function () {
         var _this = this;
         if (this.field.required) {
             this.subscription = this.formEvent.notification.subscribe(function (form) {
-                //   if (form.name !== this.formName) return;
                 _this.parentForm = form.template;
                 _this.validate();
             });
@@ -49,12 +48,10 @@ var DataControl = /** @class */ (function () {
     };
     DataControl.prototype.writeValue = function (val) {
         if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {
-            //if (val) {
             this.data = val ? val.toString() : null;
             if (this.field.cascadeTo) {
                 this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));
             }
-            //}
         }
         else {
             this.data = val;
@@ -66,7 +63,7 @@ var DataControl = /** @class */ (function () {
     DataControl.prototype.setChanges = function () {
         this.propagateChange(this.data);
         if (this.onModelChanged.observers.length > 0) {
-            this.onModelChanged.emit();
+            this.onModelChanged.emit(this.data);
         }
         if (this.field.cascadeTo) {
             this.cascadeEvent.subject.next(new cascade_data_1.CascadeData(this.field.cascadeTo, this.data));

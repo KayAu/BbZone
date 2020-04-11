@@ -17,13 +17,7 @@ var DataService = /** @class */ (function () {
         this.http = http;
         this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
     }
-    DataService.prototype.download = function (fileUrl) {
-        return this.http.get(fileUrl, { headers: new http_1.HttpHeaders({ 'Content-Type': 'application/octet-stream' }), responseType: 'blob' });
-    };
     DataService.prototype.export = function (apiControllerName, filterParams) {
-        //let searchParams = typeof filterParams === 'object' ? JSON.stringify(filterParams) : filterParams;
-        //let params = new HttpParams();
-        //params = params.append('searchParams', searchParams);
         var headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
         return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' }).catch(this.errorHandler);
     };

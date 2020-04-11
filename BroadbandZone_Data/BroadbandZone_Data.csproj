@@ -156,6 +156,9 @@
     <Compile Include="GetAnnouncement_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetApplicationDetails_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetClawback_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -214,6 +217,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PartialClass\PartialClass.cs" />
+    <Compile Include="prc_GetApplicationDetails_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

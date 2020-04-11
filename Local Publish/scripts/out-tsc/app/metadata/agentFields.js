@@ -99,7 +99,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
-                "controlType": "number",
+                "controlType": "text",
                 "required": true,
                 "maxLength": 10
             }
@@ -135,6 +135,28 @@ var AgentRegistrationFields = /** @class */ (function () {
                 "controlType": "textbox",
                 "required": false,
                 "maxLength": 15
+            }
+        },
+        {
+            "fieldName": "bankName",
+            "displayText": "Bank Name",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankName",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 30
+            }
+        },
+        {
+            "fieldName": "bankAccNo",
+            "displayText": "Bank Acc No",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankAccNo",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 20
             }
         },
         {
@@ -392,6 +414,28 @@ var AgentRegistrationViewFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "bankName",
+            "displayText": "Bank Name",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankName",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 30
+            }
+        },
+        {
+            "fieldName": "bankAccNo",
+            "displayText": "Bank Acc No",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "bankAccNo",
+                "controlType": "textbox",
+                "required": true,
+                "maxLength": 20
+            }
+        },
+        {
             "fieldName": "superiorName",
             "displayText": "Superior/Upline",
             "hidden": false,
@@ -411,17 +455,6 @@ var AgentProfileFields = /** @class */ (function () {
     }
     AgentProfileFields.keyField = "agentId";
     AgentProfileFields.fields = [
-        {
-            "fieldName": "agentId",
-            "displayText": "Agent Id",
-            "hidden": false,
-            "dataFieldControl": {
-                "controlName": "agentId",
-                "controlType": "label",
-                "required": true,
-                "maxLength": 50
-            }
-        },
         {
             "fieldName": "fullname",
             "displayText": "Full Name",

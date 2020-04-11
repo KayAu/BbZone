@@ -175,7 +175,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-profile/:id', component: agent_profile_1.AgentProfile },
-                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'create-announcement', component: create_announcement_1.CreateAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },

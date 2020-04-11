@@ -49,19 +49,18 @@ var ViewOrder = /** @class */ (function (_super) {
         return _this;
     }
     ViewOrder.prototype.ngOnInit = function () {
+        this.controllerName = apiController_1.ApiController.CustomerApplication;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
-        this.controllerName = apiController_1.ApiController.CustomerApplication;
-        //this.loadDropdown();
     };
     ViewOrder.prototype.getTablerowDataMapping = function () {
         var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
     ViewOrder.prototype.getSearchFeldsMapping = function () {
-        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null)); });
+        var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.SearchFieldMapping(o.fieldName, o.displayText, o.width, !o.dataFieldControl ? null :
+            new data_field_control_1.SearchFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null, o.dataFieldControl.placeholder !== undefined ? o.dataFieldControl.placeholder : null)); });
         return columnMappings;
     };
     ViewOrder.prototype.clearSearchParam = function () {

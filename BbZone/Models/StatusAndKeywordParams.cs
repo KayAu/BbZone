@@ -30,7 +30,8 @@ namespace BroadbandZone_App.Models
         public int? ProductPackageId { get; set; }
         public int? OrderStatusId { get; set; }
         public string Agent { get; set; }
-        public DateRange submittedDate { get; set; }
+        public DateRange SubmittedDate { get; set; }
+        public DateRange ActivationDate { get; set; }
         public string ResidentialType { get; set; }
         public string Keyword { get; set; }
         public bool? DocumentCompleted { get; set; }

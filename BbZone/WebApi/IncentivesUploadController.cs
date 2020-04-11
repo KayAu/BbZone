@@ -50,7 +50,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                FileUploadHelper fileUploadHelper = new FileUploadHelper(Properties.Settings.Default.IncentiveFilesPath);
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.IncentiveFilesPath);
                 UploadedFile file = fileUploadHelper.UploadStreams(multipartFile, DateTime.Now.ToString("yyyyMMdd_HHss"));
                 return file != null ? file.FilePath : string.Empty;
             }

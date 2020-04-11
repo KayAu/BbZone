@@ -17,6 +17,7 @@ BEGIN
 		ProductId INT NOT NULL,
 		ProductName VARCHAR(50),
 		Category VARCHAR(50),
+		CategoryType VARCHAR(25),
 		DefaultCommission MONEY NOT NULL,
 		CommissionPercent SMALLINT NOT NULL,
 		IsActive BIT,
@@ -39,6 +40,7 @@ BEGIN
 		      ,p.ProductId
 			  ,ProductName
 			  ,Category
+			  ,CategoryType
 			  ,DefaultCommission
 			  ,CommissionPercent
 			  ,p.IsActive
@@ -68,6 +70,7 @@ BEGIN
 		      ,ProductId  = LTRIM(RTRIM(CAST(ProductId AS CHAR(5))))
 			  ,ProductName
 			  ,Category
+			  ,CategoryType
 			  ,DefaultCommission
 			  ,CommissionPercent
 			  ,IsActive

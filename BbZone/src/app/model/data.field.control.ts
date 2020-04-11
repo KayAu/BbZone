@@ -7,7 +7,8 @@ export class DataFieldControl {
               public maxLength?: number,
               public datasourceUrl?: string,
               public cascadeTo?: string,
-              public adminField?: boolean
+              public adminField?: boolean,
+              public dataChangedEvent? :string
   ) { }
 
 }
