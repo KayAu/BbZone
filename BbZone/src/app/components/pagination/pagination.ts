@@ -10,6 +10,7 @@ const pageDisplayLimit = 8;
 
 export class Pagination {
     @Output() pageClick = new EventEmitter();
+    @Output() pageSizeClick = new EventEmitter();
 
     pageButtons: any[] = [];
     page: Page = new Page();
@@ -19,7 +20,7 @@ export class Pagination {
     private _totalRecord: number;
 
     ngOnInit() {
-        this.page.pageSize = 20;
+        this.page.pageSize = 25;
         this.resetToFirstPage();
     }
 
@@ -82,6 +83,13 @@ export class Pagination {
         this.disabledNextAndLastBtn = true;
         this.loadPagerButtons();
         this.setPager();
+    }
+
+    pageSizeChanged(pageSize: number) {
+        this.page.pageSize = pageSize;
+        this.page.totalPages = Math.ceil(this._totalRecord / pageSize);
+        this.pageSizeClick.emit(pageSize);
+        this.updatePager();
     }
 
     @Input()

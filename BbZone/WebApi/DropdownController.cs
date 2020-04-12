@@ -258,6 +258,23 @@ namespace BroadbandZone_App.WebApi
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
+        
+       [Route("api/Dropdown/GetCommissionStatus")]
+        public IHttpActionResult GetCommissionStatus()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    List<DropdownItem> dropdownItems = db.GetDropdownItems(DropdownField.CommissionStatus.ToString()).Select(i => new DropdownItem { Key = i.Item, Value = i.Item }).ToList();
+                    return Ok(dropdownItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
 
         [Route("api/Dropdown/GetCategoryType")]
         public IHttpActionResult GetCategoryType()
@@ -294,7 +311,7 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-
+        
 
     }
 

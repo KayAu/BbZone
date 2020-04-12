@@ -86,7 +86,7 @@ export class ViewIncentives extends ListDataCrud {
     }
 
     exportRecords() {
-        this.dataService.export(`${ApiController.Incentives}/Download`, this.searchParams).subscribe(data => {         
+        this.dataService.export(`${ApiController.Download}/Incentives`, this.searchParams).subscribe(data => {         
             let filename = `Incentives_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
             const file: Blob = new Blob([data], { type: 'application/xlsx' });
             saveAs(file, filename);

@@ -3,9 +3,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
-                <div class="ibox-title">
+                <!--<div class="ibox-title">
                     <h5>Edit Order <small>* is required field.</small></h5>
-                </div>
+                </div>-->
                 <div class="ibox-content">
                     <loading></loading>
 
@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Attach required documents</label>
                             <div class="col-sm-10">
-                                <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplication'"></file-uploader>
+                                <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplicationDocument'"></file-uploader>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

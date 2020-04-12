@@ -48,7 +48,14 @@ var AgentRegistration = /** @class */ (function () {
         if (!this.form.valid)
             return;
         this.isUpdating = true;
-        this.dataService.add(apiController_1.ApiController.Registration, this.formRecord).subscribe(function (data) {
+        var formData = new FormData();
+        formData.append('data', JSON.stringify(this.formRecord));
+        if (this.formRecord.files) {
+            for (var i = 0; i < this.formRecord.files.length; i++) {
+                formData.append("file" + i, this.formRecord.files[i]);
+            }
+        }
+        this.dataService.postForm(apiController_1.ApiController.Registration, formData).subscribe(function (data) {
             _this.isUpdating = false;
             _this.completed = true;
         });

@@ -1,5 +1,5 @@
 ﻿
-<div classs="btn btn-primary file-upload pos-rel ">
+<div classs="btn btn-primary file-upload pos-rel" *ngIf="!readOnly">
     <label for="upload" class="file-upload__label">
         <i class="fa fa-upload mrg5R"></i> Upload Files
     </label>
@@ -9,7 +9,7 @@
 <div class="dropzone mrg5B">
     <ng-container *ngFor="let file of uploadedFiles; let fileNo = index">
         <div class="file-preview" *ngIf="!file.deleted">
-            <button class="btn btn-warning btn-circle btn-xs btn-close" type="button" (click)="removeFile(fileNo)">×</button>
+            <button class="btn btn-warning btn-circle btn-xs btn-close" type="button" (click)="removeFile(fileNo)" *ngIf="!readOnly">×</button>
             <!--<a href="/UploadFiles/{{file.name}}" download>-->
             <a href="{{fileUrl}}/{{file.name}}">
                 <div class="file-details">

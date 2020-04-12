@@ -18,6 +18,11 @@ var ListEvent = /** @class */ (function () {
         this.listPage = event;
         this.loadDataList();
     };
+    ListEvent.prototype.pageSizeChanged = function (pageSize) {
+        this.listPage.currentPage = 1;
+        this.listPage.pageSize = pageSize;
+        this.loadDataList();
+    };
     ListEvent.prototype.sortList = function (event) {
         this.sortBy = event;
         this.loadDataList();

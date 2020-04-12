@@ -12,9 +12,12 @@ export class DataService {
         this.headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }) };
     }
 
-    export(apiControllerName: string,  filterParams: any) {
-        let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
-        return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' } ).catch(this.errorHandler);
+    export(apiControllerName: string, filterParams: any) {
+
+        //let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'};
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'}).catch(this.errorHandler);
+
+
     }
 
     get(apiControllerName: string, recordId?: any): any {

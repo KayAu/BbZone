@@ -14,7 +14,8 @@ import { Validator, AbstractControl, NG_VALIDATORS, Validators, ValidatorFn } fr
 export class MaxDirective implements Validator {
     private _validator: ValidatorFn;
 
-    @Input() public set max(value: string) {
+    @Input()
+    public set max(value: string) {
        // this.maxValue = parseInt(value, 10);
         this._validator = Validators.max(parseInt(value, 10));
     }

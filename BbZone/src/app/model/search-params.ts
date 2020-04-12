@@ -20,7 +20,6 @@ export class SearchOrderParams {
         public residentialType: string,
         public residentialName: string
     ) { }
-
 }
 
 
@@ -58,5 +57,17 @@ export class SearchIncentivesParams {
         public productPackageId: number,
         public receivedDate: DateRange
     ) { }
+}
 
+export class SearchCompletedOrderParams {
+    constructor(
+        public productId: string,
+        public productCategoryId: string,
+        public productPackageId: string,
+        public agent: string,
+        public activatedDate: DateRange,
+        public paymentDate: DateRange,
+        public documentCompleted: boolean,
+        public commissionStatus: string,
+    ) { }
 }

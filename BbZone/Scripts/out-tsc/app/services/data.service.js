@@ -18,8 +18,8 @@ var DataService = /** @class */ (function () {
         this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
     }
     DataService.prototype.export = function (apiControllerName, filterParams) {
-        var headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/ms-excel" }) };
-        return this.http.get(this.getWebMethodUrl(apiControllerName, filterParams), { responseType: 'blob' }).catch(this.errorHandler);
+        //let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'};
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob' }).catch(this.errorHandler);
     };
     DataService.prototype.get = function (apiControllerName, recordId) {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);

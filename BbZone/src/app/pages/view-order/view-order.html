@@ -25,6 +25,10 @@
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="mrg20T">
+                                <strong>Customer Order List</strong>
+                                <button class="btn btn-warning btn-sm mrg10T float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                            </div>
                             <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
                                     <tr>
@@ -60,7 +64,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

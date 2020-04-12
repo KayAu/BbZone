@@ -1,8 +1,13 @@
 ﻿
+using ClosedXML.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Web;
 
 namespace BroadbandZone_App.Helper
@@ -50,6 +55,24 @@ namespace BroadbandZone_App.Helper
             catch (Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public static HttpResponseMessage ReadDataToExcel<T>(List<T> results, string filename) where T : class
+        {
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                DataTable dt = results.ToDataTable();
+                wb.Worksheets.Add(dt, filename);
+                MemoryStream stream = new MemoryStream();
+                wb.SaveAs(stream);
+
+                var result = new HttpResponseMessage(HttpStatusCode.OK);
+                result.Content = new ByteArrayContent(stream.ToArray());
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentDisposition.FileName = $"{filename}_{DateTime.Now.ToShortDateString()}.xlsx";
+                result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                return result;
             }
         }
     }

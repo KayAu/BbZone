@@ -19,6 +19,7 @@ import { saveAs } from 'file-saver';
 export class FileUploader implements ControlValueAccessor {
     uploadedFiles: any[] = [];
     onEdit: boolean;
+    @Input() readOnly: boolean = false;
     @Input() fileUrl: string;
     @Output() propagateChange: any = () => { };
 

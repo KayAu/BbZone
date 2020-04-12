@@ -270,6 +270,7 @@
     <Compile Include="WebApi\ClawbackController.cs" />
     <Compile Include="WebApi\CommissionController.cs" />
     <Compile Include="WebApi\CommunicationController.cs" />
+    <Compile Include="WebApi\CompletedApplicationController.cs" />
     <Compile Include="WebApi\CustomerApplicationController.cs" />
     <Compile Include="WebApi\DashboardController.cs" />
     <Compile Include="WebApi\DownloadController.cs" />
@@ -424,6 +425,7 @@
     <Content Include="src\app\pages\manage-login-banner\manage-login-banner.html" />
     <Content Include="src\app\pages\upload-incentives\upload-incentives.html" />
     <Content Include="src\app\pages\view-incentives\view-incentives.html" />
+    <Content Include="src\app\pages\view-complete-app\view-complete-app.html" />
     <Content Include="src\app\pages\view-withdrawal\view-withdrawal.html" />
     <Content Include="src\app\pages\manage-product\manage-product.html" />
     <Content Include="src\app\pages\view-announcement\view-announcement.html" />
@@ -470,6 +472,7 @@
     <Folder Include="App_Data\AnnouncementFiles\" />
     <Folder Include="App_Data\IncentiveFiles\" />
     <Folder Include="App_Data\LoginBannerFiles\" />
+    <Folder Include="App_Data\RegistrationFiles\" />
     <Folder Include="App_Data\UploadFiles\" />
     <Folder Include="src\assets\" />
     <Folder Include="UploadFiles\" />
@@ -511,6 +514,7 @@
     <TypeScriptCompile Include="src\app\components\editable-yesno\editable-yesno.ts" />
     <TypeScriptCompile Include="src\app\components\loader\loader.ts" />
     <TypeScriptCompile Include="src\app\components\multiple-checkbox\multiple-checkbox.ts" />
+    <TypeScriptCompile Include="src\app\components\page-sizer.ts" />
     <TypeScriptCompile Include="src\app\components\page-header.ts" />
     <TypeScriptCompile Include="src\app\components\pagination\pagination.ts" />
     <TypeScriptCompile Include="src\app\components\customer-finder\customer-finder.ts" />
@@ -542,8 +546,10 @@
     <TypeScriptCompile Include="src\app\metadata\agentChargesColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\manageLoginBannerColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchIncentiveFields.ts" />
+    <TypeScriptCompile Include="src\app\metadata\searchCompletedOrderFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchWithdrawalFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\viewIncentiveColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\viewCompletedOrderColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\viewWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\createWithdrawalColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\editOrderFields.ts" />
@@ -588,6 +594,7 @@
     <TypeScriptCompile Include="src\app\pages\manage-login-banner\manage-login-banner.ts" />
     <TypeScriptCompile Include="src\app\pages\upload-incentives\upload-incentives.ts" />
     <TypeScriptCompile Include="src\app\pages\view-incentives\view-incentives.ts" />
+    <TypeScriptCompile Include="src\app\pages\view-complete-app\view-complete-app.ts" />
     <TypeScriptCompile Include="src\app\pages\view-withdrawal\view-withdrawal.ts" />
     <TypeScriptCompile Include="src\app\directives\editmode-directive.ts" />
     <TypeScriptCompile Include="src\app\directives\sort-cell.directive.ts" />

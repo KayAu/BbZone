@@ -59,4 +59,18 @@ var SearchIncentivesParams = /** @class */ (function () {
     return SearchIncentivesParams;
 }());
 exports.SearchIncentivesParams = SearchIncentivesParams;
+var SearchCompletedOrderParams = /** @class */ (function () {
+    function SearchCompletedOrderParams(productId, productCategoryId, productPackageId, agent, activatedDate, paymentDate, documentCompleted, commissionStatus) {
+        this.productId = productId;
+        this.productCategoryId = productCategoryId;
+        this.productPackageId = productPackageId;
+        this.agent = agent;
+        this.activatedDate = activatedDate;
+        this.paymentDate = paymentDate;
+        this.documentCompleted = documentCompleted;
+        this.commissionStatus = commissionStatus;
+    }
+    return SearchCompletedOrderParams;
+}());
+exports.SearchCompletedOrderParams = SearchCompletedOrderParams;
 //# sourceMappingURL=search-params.js.map

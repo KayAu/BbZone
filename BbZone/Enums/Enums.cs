@@ -9,7 +9,8 @@ namespace BroadbandZone_App.Enums
     {
         ResidentialType,
         ApplicationStatus,
-        CategoryType
+        CategoryType,
+        CommissionStatus
     }
 
     public enum WithdrawalStatus

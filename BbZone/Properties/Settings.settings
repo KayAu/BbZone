@@ -17,5 +17,8 @@
     <Setting Name="LoginBannerPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/App_Data/LoginBannerFiles</Value>
     </Setting>
+    <Setting Name="RegistrationFilePath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">/App_Data/RegistrationFiles</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

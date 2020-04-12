@@ -74,6 +74,8 @@ import { ManageLoginBanner } from './pages/manage-login-banner/manage-login-bann
 import { Role } from './enums/role';
 import { MinDirective } from './directives/min-validator';
 import { AgentView } from './pages/agent-view/agent-view';
+import { ViewCompletedApp } from './pages/view-complete-app/view-complete-app';
+import { PageSizer } from './components/page-sizer';
 
 @NgModule({
   declarations: [
@@ -133,7 +135,9 @@ import { AgentView } from './pages/agent-view/agent-view';
         MonthlyApplicationDashboard,
         ManageLoginBanner,
         MinDirective,
-        AgentView
+        AgentView,
+        ViewCompletedApp,
+        PageSizer
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -176,7 +180,8 @@ import { AgentView } from './pages/agent-view/agent-view';
             { path: 'view-incentives', component: ViewIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'admin-access', component: AdminAccess, canActivate: [UserAuthGuard], data: { roles: [ Role.SuperAdmin] } },
             { path: 'manage-login-banner', component: ManageLoginBanner, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
-            { path: 'agent-view/:id', component: AgentView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } }
+            { path: 'agent-view/:id', component: AgentView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
+            { path: 'view-complete-app', component: ViewCompletedApp }
     ])
   ],
   providers: [

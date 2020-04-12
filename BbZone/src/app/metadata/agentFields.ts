@@ -96,7 +96,7 @@
                 "hidden": false,
                 "dataFieldControl": {
                     "controlName": "postcode",
-                    "controlType": "text",
+                    "controlType": "textbox",
                     "required": true,
                     "maxLength": 10
                 }

@@ -14,6 +14,12 @@ namespace BroadbandZone_Data
     
     public partial class Registration
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Registration()
+        {
+            this.RegistrationDocuments = new HashSet<RegistrationDocument>();
+        }
+    
         public int RegId { get; set; }
         public string Fullname { get; set; }
         public string Email { get; set; }
@@ -38,5 +44,8 @@ namespace BroadbandZone_Data
         public Nullable<System.DateTime> ApprovalDate { get; set; }
         public string ApprovedBy { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<RegistrationDocument> RegistrationDocuments { get; set; }
     }
 }

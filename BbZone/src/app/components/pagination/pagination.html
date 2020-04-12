@@ -1,8 +1,20 @@
 <div class="disp-block" *ngIf="pageButtons.length > 0">
-    <div class="col-sm-3 pad0L">
-        <div class="dataTables_info table">{{pageDesc}}</div>
+    <div class="col-sm-3 pad0L flexbox mrg5T">
+        <div class="dataTables_info">{{pageDesc}}</div>
+        <div class="dataTables_length float-left mrg15L">
+            <label>
+                Show
+                <select class="form-control form-control-sm mrg5L mrg5R" #pageSize (change)='pageSizeChanged(pageSize.value)'>
+                    <option value="10">10</option>
+                    <option value="25" selected>25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                </select>
+                entries
+            </label>
+        </div>
     </div>
-    <div class="col-sm-9 dataTables_paginate paging_simple_numbers pad0R">
+    <div class="col-sm-9 dataTables_paginate paging_simple_numbers pad0R mrg5T">
         <ul class="pagination">
             <li class="paginate_button page-item previous">
                 <a class="page-link" (click)="goFirstPage()" [ngClass]="{'disabled':disabledFirstAndPrevBtn}">First</a>
@@ -12,7 +24,7 @@
             </li>
             <li class="paginate_button page-item" *ngFor="let pageNo of pageButtons"
                 [ngClass]="{'active': isActivePage(pageNo)}">
-                <a class="page-link" (click)="goToPage(pageNo)" >
+                <a class="page-link" (click)="goToPage(pageNo)">
                     {{pageNo}}
                 </a>
             </li>

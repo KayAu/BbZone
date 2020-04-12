@@ -67,5 +67,14 @@ namespace BroadbandZone_App.Properties {
                 return ((string)(this["LoginBannerPath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("/App_Data/RegistrationFiles")]
+        public string RegistrationFilePath {
+            get {
+                return ((string)(this["RegistrationFilePath"]));
+            }
+        }
     }
 }

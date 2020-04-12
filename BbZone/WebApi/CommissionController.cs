@@ -56,12 +56,6 @@ namespace BroadbandZone_App.WebApi
                         AllowCommConfig = Convert.ToBoolean(allowCommConfig.Value)
                     });
                 }
-
-                //using (var db = new BroadbandZoneEntities())
-                //{
-                //    var agent = db.GetMyAgents(currentUser.Username).ToList();
-                //    return Ok(agent);
-                //}
             }
             catch (Exception ex)
             {

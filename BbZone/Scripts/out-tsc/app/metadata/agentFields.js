@@ -99,7 +99,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "postcode",
-                "controlType": "text",
+                "controlType": "textbox",
                 "required": true,
                 "maxLength": 10
             }

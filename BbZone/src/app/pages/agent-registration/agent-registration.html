@@ -23,6 +23,14 @@
                                 </div>
                                 <div class="hr-line-dashed"></div>
                             </ng-container>
+                            <!--ATTACH REQUIRED DOCUMENTS-->
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Attach required documents</label>
+                                <div class="col-sm-9">
+                                    <file-uploader name="relDoc" [(ngModel)]="formRecord['files']"></file-uploader>
+                                </div>
+                            </div>
+
                             <!--SAVE OR CANCEL-->
                             <div class="form-group row">
                                 <div class="col-sm-12 ">

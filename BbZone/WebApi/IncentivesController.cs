@@ -25,45 +25,6 @@ namespace BroadbandZone_App.WebApi
     public class IncentivesController : ApiController
     {
        
-        [HttpGet]
-        //[Route("api/Incentives/Download/{searchParams}")]
-        public HttpResponseMessage Download([FromUri] SearchIncentivesParams filterBy)
-        {
-            try
-            {
-                using (var db = new BroadbandZoneEntities(true))
-                {
-                    using (XLWorkbook wb = new XLWorkbook())
-                    {
-                        //SearchIncentivesParams filterBy = JsonConvert.DeserializeObject<SearchIncentivesParams>(searchParams);
-                        var results = db.GetIncentivesReceivedForDownload(filterBy.ProductId,
-                                                                        filterBy.ProductCategoryId,
-                                                                        filterBy.ProductPackageId,
-                                                                        filterBy.Keyword,
-                                                                        filterBy.ReceivedDate != null ? filterBy.ReceivedDate.StartDate : null,
-                                                                        filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null).ToList();
-                        DataTable dt = results.ToDataTable();
-                        wb.Worksheets.Add(dt, "Incentives Received");
-                        MemoryStream stream = new MemoryStream();
-                        wb.SaveAs(stream);
-
-                        var result = new HttpResponseMessage(HttpStatusCode.OK);
-                        result.Content = new ByteArrayContent(stream.ToArray());
-                        result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                        result.Content.Headers.ContentDisposition.FileName = $"IncentivesReceived_{DateTime.Now.ToShortDateString()}.xlsx";
-                        result.Content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                        return result;
-
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
-                return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
-            }
-        }
-
         // GET api/<controller>
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)

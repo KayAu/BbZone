@@ -11,12 +11,10 @@ namespace BroadbandZone_Data
 {
     using System;
     
-    public partial class prc_GetApplicationDetails_Result
+    public partial class GetCustomerApplicationForDownload_Result
     {
         public int ApplicationId { get; set; }
-        public Nullable<int> CategoryId { get; set; }
         public string Category { get; set; }
-        public int ProdPkgId { get; set; }
         public string PackageName { get; set; }
         public string Agent { get; set; }
         public string CompanyName { get; set; }
@@ -33,10 +31,12 @@ namespace BroadbandZone_Data
         public string Email { get; set; }
         public string CustomerRemarks { get; set; }
         public string AdminRemarks { get; set; }
-        public Nullable<int> AppStatusId { get; set; }
+        public string Status { get; set; }
+        public Nullable<bool> IsProcessed { get; set; }
         public string OrderNo { get; set; }
         public string UserId { get; set; }
         public string TelNo { get; set; }
+        public string EForm { get; set; }
         public Nullable<bool> SubmitByAgent { get; set; }
         public Nullable<bool> DocumentCompleted { get; set; }
         public Nullable<System.DateTime> ActivationDate { get; set; }

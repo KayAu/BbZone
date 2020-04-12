@@ -41,6 +41,9 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ProductPackage" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerDocument_CustomerApplication" />
         <AssociationConnector Association="BroadbandZoneModel.FK_IncentivePayment_CustomerApplication" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.RegistrationDocument" Width="1.5" PointX="14.625" PointY="2.375" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.SProcErrorLog" Width="1.5" PointX="9.375" PointY="12.75" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_RegistrationDocument_Registration" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

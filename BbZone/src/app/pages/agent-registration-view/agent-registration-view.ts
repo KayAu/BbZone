@@ -24,6 +24,7 @@ export class AgentRegistrationView {
     @ViewChild(NgForm) form: NgForm;
     formFields: FormDataMapping[] = [];
     formRecord: any = {};
+    registrationDocuments: any[] = [];
     isUpdating: boolean = false;
     applicationId: number;
 
@@ -64,9 +65,11 @@ export class AgentRegistrationView {
         });
     }
 
-    private loadRecord(recordId:number) {
+    private loadRecord(recordId: number) {
+        //  return Ok(new { RegistrationDetails = record, RegistrationDocuments = registrationDocuments });
         this.dataService.get(ApiController.Registration, recordId).subscribe(data => {
-            this.formRecord = data;
+            this.formRecord = data.registrationDetails;
+            this.registrationDocuments = data.registrationDocuments;
         });
     }
 }

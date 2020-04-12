@@ -35,6 +35,7 @@ var AgentRegistrationView = /** @class */ (function () {
         this.toastr = toastr;
         this.formFields = [];
         this.formRecord = {};
+        this.registrationDocuments = [];
         this.isUpdating = false;
     }
     AgentRegistrationView.prototype.ngOnInit = function () {
@@ -60,8 +61,10 @@ var AgentRegistrationView = /** @class */ (function () {
     };
     AgentRegistrationView.prototype.loadRecord = function (recordId) {
         var _this = this;
+        //  return Ok(new { RegistrationDetails = record, RegistrationDocuments = registrationDocuments });
         this.dataService.get(apiController_1.ApiController.Registration, recordId).subscribe(function (data) {
-            _this.formRecord = data;
+            _this.formRecord = data.registrationDetails;
+            _this.registrationDocuments = data.registrationDocuments;
         });
     };
     __decorate([

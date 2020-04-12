@@ -25,6 +25,12 @@ export abstract class ListEvent {
         this.loadDataList();
     }
 
+    pageSizeChanged(pageSize: number) {
+        this.listPage.currentPage = 1;
+        this.listPage.pageSize = pageSize;
+        this.loadDataList();
+    }
+
     sortList(event) {
         this.sortBy = event;
         this.loadDataList();

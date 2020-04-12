@@ -30,7 +30,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="table-responsive">
-                        <button class="btn btn-warning btn-sm mrg10T" *ngIf="currentUser.isAdmin" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                        <!--<button class="btn btn-warning btn-sm mrg10T" *ngIf="currentUser.isAdmin" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>-->
                         <div class="float-right text-right incentives-amt">
                             <h4>RM {{totalAmountPayout| number:'1.2-2'}}</h4>
                             <small>Total Payout</small>

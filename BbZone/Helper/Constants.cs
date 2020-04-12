@@ -7,6 +7,6 @@ namespace BroadbandZone_App.Helper
 {
     public static class Constants
     {
-        public const int DefaultPageSize = 20;
+        public const int DefaultPageSize = 25;
     }
 }

@@ -51,8 +51,16 @@ export class AgentRegistration {
         if (!this.form.valid) return;
 
         this.isUpdating = true;
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(this.formRecord));
 
-        this.dataService.add(ApiController.Registration, this.formRecord).subscribe(data => {
+        if (this.formRecord.files) {
+            for (var i = 0; i < this.formRecord.files.length; i++) {
+                formData.append("file" + i, this.formRecord.files[i]);
+            }
+        }
+
+        this.dataService.postForm(ApiController.Registration, formData).subscribe(data => {
             this.isUpdating = false;
             this.completed = true;
         });

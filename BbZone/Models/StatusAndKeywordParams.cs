@@ -37,6 +37,19 @@ namespace BroadbandZone_App.Models
         public bool? DocumentCompleted { get; set; }
     }
 
+    public class SearchCompletedOrderParams
+    {
+        public int? ProductId { get; set; }
+        public int? ProductCategoryId { get; set; }
+        public int? ProductPackageId { get; set; }
+        public string Agent { get; set; }
+        public DateRange ActivatedDate { get; set; }
+        public DateRange PaymentDate { get; set; }
+        public bool? DocumentCompleted { get; set; }
+        public string Keyword { get; set; }
+        public string CommissionStatus { get; set; }
+    }
+
     public class SearchWithdrawalParams
     {
         public string Keyword { get; set; }

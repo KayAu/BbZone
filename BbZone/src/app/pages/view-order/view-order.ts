@@ -11,6 +11,8 @@ import { SearchFieldMapping } from 'src/app/model/form.data.mapping';
 import { SearchFieldControl } from 'src/app/model/data.field.control';
 import { ViewOrderColumns } from 'src/app/metadata/viewOrderColumns ';
 import { SearchOrderFields } from 'src/app/metadata/searchOrderFields';
+import { formatDate } from '@angular/common';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'view-order',
@@ -28,6 +30,7 @@ export class ViewOrder extends ListEvent {
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
         super(loaderService, dataService, "applicationId", false);
+     
     }
 
     ngOnInit() {
@@ -43,7 +46,7 @@ export class ViewOrder extends ListEvent {
             DataDisplayType[o.displayType],
             o.keyField,
             o.colWidth));
-
+    
         return columnMappings;
     }
 
@@ -60,10 +63,18 @@ export class ViewOrder extends ListEvent {
                     o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null,
                     o.dataFieldControl.placeholder !== undefined ? o.dataFieldControl.placeholder : null
                 )));
-
+  
         return columnMappings;
     }
- 
+
+    exportRecords() {
+        this.dataService.export(`${ApiController.Download}/CustomerApplication`, this.searchParams).subscribe(data => {
+            let filename = `CustomerApplication_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
+            const file: Blob = new Blob([data], { type: 'application/xlsx' });
+            saveAs(file, filename);
+        });
+    }
+
     clearSearchParam() {
         this.searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
         this.reloadData();

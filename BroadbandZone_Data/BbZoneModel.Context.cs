@@ -48,6 +48,8 @@ namespace BroadbandZone_Data
         public virtual DbSet<Communication> Communications { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
+        public virtual DbSet<RegistrationDocument> RegistrationDocuments { get; set; }
+        public virtual DbSet<SProcErrorLog> SProcErrorLogs { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -890,6 +892,140 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAppId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApplicationDetails_Result>("GetApplicationDetails", prAppIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCustomerApplicationForDownload_Result> GetCustomerApplicationForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId)
+        {
+            var prProductParameter = prProduct.HasValue ?
+                new ObjectParameter("prProduct", prProduct) :
+                new ObjectParameter("prProduct", typeof(int));
+    
+            var prProductCategoryParameter = prProductCategory.HasValue ?
+                new ObjectParameter("prProductCategory", prProductCategory) :
+                new ObjectParameter("prProductCategory", typeof(int));
+    
+            var prProductPackageParameter = prProductPackage.HasValue ?
+                new ObjectParameter("prProductPackage", prProductPackage) :
+                new ObjectParameter("prProductPackage", typeof(int));
+    
+            var prStatusParameter = prStatus.HasValue ?
+                new ObjectParameter("prStatus", prStatus) :
+                new ObjectParameter("prStatus", typeof(int));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            var prActivatedFromParameter = prActivatedFrom.HasValue ?
+                new ObjectParameter("prActivatedFrom", prActivatedFrom) :
+                new ObjectParameter("prActivatedFrom", typeof(System.DateTime));
+    
+            var prActivatedToParameter = prActivatedTo.HasValue ?
+                new ObjectParameter("prActivatedTo", prActivatedTo) :
+                new ObjectParameter("prActivatedTo", typeof(System.DateTime));
+    
+            var prResidentialTypeParameter = prResidentialType != null ?
+                new ObjectParameter("prResidentialType", prResidentialType) :
+                new ObjectParameter("prResidentialType", typeof(string));
+    
+            var prKeywordParameter = prKeyword != null ?
+                new ObjectParameter("prKeyword", prKeyword) :
+                new ObjectParameter("prKeyword", typeof(string));
+    
+            var prDocumentCompletedParameter = prDocumentCompleted.HasValue ?
+                new ObjectParameter("prDocumentCompleted", prDocumentCompleted) :
+                new ObjectParameter("prDocumentCompleted", typeof(bool));
+    
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplicationForDownload_Result>("GetCustomerApplicationForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCompletedCustomerApplication_Result> GetCompletedCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prCommStatus, string prViewAgent, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, Nullable<System.DateTime> prPayDateFrom, Nullable<System.DateTime> prPayDateTo, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prProductParameter = prProduct.HasValue ?
+                new ObjectParameter("prProduct", prProduct) :
+                new ObjectParameter("prProduct", typeof(int));
+    
+            var prProductCategoryParameter = prProductCategory.HasValue ?
+                new ObjectParameter("prProductCategory", prProductCategory) :
+                new ObjectParameter("prProductCategory", typeof(int));
+    
+            var prProductPackageParameter = prProductPackage.HasValue ?
+                new ObjectParameter("prProductPackage", prProductPackage) :
+                new ObjectParameter("prProductPackage", typeof(int));
+    
+            var prCommStatusParameter = prCommStatus != null ?
+                new ObjectParameter("prCommStatus", prCommStatus) :
+                new ObjectParameter("prCommStatus", typeof(string));
+    
+            var prViewAgentParameter = prViewAgent != null ?
+                new ObjectParameter("prViewAgent", prViewAgent) :
+                new ObjectParameter("prViewAgent", typeof(string));
+    
+            var prActivatedFromParameter = prActivatedFrom.HasValue ?
+                new ObjectParameter("prActivatedFrom", prActivatedFrom) :
+                new ObjectParameter("prActivatedFrom", typeof(System.DateTime));
+    
+            var prActivatedToParameter = prActivatedTo.HasValue ?
+                new ObjectParameter("prActivatedTo", prActivatedTo) :
+                new ObjectParameter("prActivatedTo", typeof(System.DateTime));
+    
+            var prPayDateFromParameter = prPayDateFrom.HasValue ?
+                new ObjectParameter("prPayDateFrom", prPayDateFrom) :
+                new ObjectParameter("prPayDateFrom", typeof(System.DateTime));
+    
+            var prPayDateToParameter = prPayDateTo.HasValue ?
+                new ObjectParameter("prPayDateTo", prPayDateTo) :
+                new ObjectParameter("prPayDateTo", typeof(System.DateTime));
+    
+            var prKeywordParameter = prKeyword != null ?
+                new ObjectParameter("prKeyword", prKeyword) :
+                new ObjectParameter("prKeyword", typeof(string));
+    
+            var prDocumentCompletedParameter = prDocumentCompleted.HasValue ?
+                new ObjectParameter("prDocumentCompleted", prDocumentCompleted) :
+                new ObjectParameter("prDocumentCompleted", typeof(bool));
+    
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompletedCustomerApplication_Result>("GetCompletedCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prCommStatusParameter, prViewAgentParameter, prActivatedFromParameter, prActivatedToParameter, prPayDateFromParameter, prPayDateToParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, oTotalRecord);
         }
     }
 }
