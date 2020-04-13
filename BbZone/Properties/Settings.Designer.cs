@@ -76,5 +76,14 @@ namespace BroadbandZone_App.Properties {
                 return ((string)(this["RegistrationFilePath"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("broadbandzone@broadbandzone2u.com")]
+        public string SenderEmail {
+            get {
+                return ((string)(this["SenderEmail"]));
+            }
+        }
     }
 }

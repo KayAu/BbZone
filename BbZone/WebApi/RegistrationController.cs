@@ -23,7 +23,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 ApprovalAndKeywordParams filterBy = JsonConvert.DeserializeObject<ApprovalAndKeywordParams>(searchParams);
-
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
@@ -40,9 +39,11 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
         // GET api/<controller>/5
         public IHttpActionResult Get(int id)
         {
@@ -58,7 +59,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -91,7 +93,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -116,26 +119,6 @@ namespace BroadbandZone_App.WebApi
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
-        //// POST api/<controller>
-        //public IHttpActionResult Post([FromBody] Registration newRecord)
-        //{
-        //    try
-        //    {
-
-        //        using (var db = new BroadbandZoneEntities())
-        //        {
-        //            newRecord.PasswordHash = db.GenerateEncryptedPwd(newRecord.Password).FirstOrDefault();
-        //            newRecord.CreatedOn = DateTime.Now;
-        //            db.Registrations.Add(newRecord);
-        //            db.SaveChanges();
-        //            return Ok();
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
-        //    }
-        //}
 
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, [FromBody] Registration editedRecord)
@@ -151,8 +134,9 @@ namespace BroadbandZone_App.WebApi
 
                     if (editedRecord.IsApproved == true)
                     {
-                        // send activation code to agent
-                        db.SendActivationCode(id, editedRecord.Email);
+                        ObjectParameter activationCode = new ObjectParameter("oActivationCode", typeof(string));
+                        db.GenerateActivationCode(editedRecord.RegId, activationCode);
+                        MailHelper.SendActivationEmail(editedRecord.Email, editedRecord.Fullname, activationCode.Value);
                     }
 
                     return Ok(editedRecord);
@@ -160,13 +144,11 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
-        // DELETE api/<controller>/5
-        public void Delete(int id)
-        {
-        }
+   
     }
 }

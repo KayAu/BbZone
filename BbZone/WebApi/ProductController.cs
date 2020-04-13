@@ -4,6 +4,7 @@ using BroadbandZone_Data;
 using Newtonsoft.Json;
 using System;
 using System.Data.Entity;
+using System.Net;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
@@ -28,7 +29,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-               throw ex;
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -51,7 +53,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -73,7 +76,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 

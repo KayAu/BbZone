@@ -10,7 +10,7 @@ namespace BroadbandZone_App.Helper
     public static class ExceptionUtility
     {
         // set the solutionName variable to the appliation name
-        private static string solutionName = "CallLog";
+        private static string solutionName = "BbZone";
 
         public static void LogError(Exception ex, params string[] moreInfo)
         {

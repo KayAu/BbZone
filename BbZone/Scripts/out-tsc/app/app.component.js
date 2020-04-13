@@ -26,14 +26,40 @@ var AppComponent = /** @class */ (function () {
             _this.currentUser = user;
         });
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //Start watching for user inactivity.
+        this.userIdle.startWatching();
+        // Start watching when user idle is starting.
+        this.userIdle.onTimerStart().subscribe(function (count) { return console.log(count); });
+        // Start watch when time is up.
+        this.userIdle.onTimeout().subscribe(function () {
+            return _this.logout();
+        });
+    };
     AppComponent.prototype.unloadHandler = function (event) {
         localStorage.removeItem('currentUser');
     };
+    AppComponent.prototype.onWindowScroll = function () {
+        if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+            this.showScroll = true;
+        }
+        else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
+            this.showScroll = false;
+        }
+    };
     AppComponent.prototype.logout = function () {
-        //localStorage.removeItem('currentUser');
-        //this.currentUser = null;
         this.authenticationService.logout();
         this.router.navigate(['/']);
+    };
+    AppComponent.prototype.scrollToTop = function () {
+        (function smoothscroll() {
+            var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothscroll);
+                window.scrollTo(0, currentScroll - (currentScroll / 5));
+            }
+        })();
     };
     __decorate([
         core_1.ViewChild(nav_menu_component_1.NavMenuComponent),
@@ -45,6 +71,12 @@ var AppComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], AppComponent.prototype, "unloadHandler", null);
+    __decorate([
+        core_1.HostListener('window:scroll', []),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], AppComponent.prototype, "onWindowScroll", null);
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',

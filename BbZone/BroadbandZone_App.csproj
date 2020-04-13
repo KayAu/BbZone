@@ -242,10 +242,12 @@
     <Compile Include="Helper\ExcelHelper.cs" />
     <Compile Include="Helper\ExceptionUtility.cs" />
     <Compile Include="Helper\FileUploadHelper.cs" />
+    <Compile Include="Helper\MailHelper.cs" />
     <Compile Include="Helper\ModelHelper.cs" />
     <Compile Include="Helper\UserIdentityHelper.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ChartData.cs" />
+    <Compile Include="Models\MyPassword.cs" />
     <Compile Include="Models\NewAgentCommission.cs" />
     <Compile Include="Models\PaymentVoucher.cs" />
     <Compile Include="Models\ProductOption.cs" />
@@ -404,6 +406,7 @@
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
     <Content Include="src\app\pages\admin-access\admin-access.html" />
     <Content Include="src\app\pages\agent-view\agent-view.html" />
+    <Content Include="src\app\pages\edit-password\edit-password.html" />
     <Content Include="src\app\pages\manage-clawback\manage-clawback.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
     <Content Include="src\app\pages\agent-maintenance\agent-maintenance.html" />
@@ -522,12 +525,13 @@
     <TypeScriptCompile Include="src\app\components\superior-field\superior-field.ts" />
     <TypeScriptCompile Include="src\app\components\tablerow-buttons\tablerow-buttons.ts" />
     <TypeScriptCompile Include="src\app\components\user-communication\user-communication.ts" />
+    <TypeScriptCompile Include="src\app\directives\equal-validator.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\less-than-validator.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\max-validator.ts" />
     <TypeScriptCompile Include="src\app\directives\min-validator.ts" />
     <TypeScriptCompile Include="src\app\directives\no-empty-row.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\progress-bar.ts" />
-    <TypeScriptCompile Include="src\app\directives\required.directive.ts" />
+    <TypeScriptCompile Include="src\app\directives\mandatory.directive.ts" />
     <TypeScriptCompile Include="src\app\directives\scroll-to-view.ts" />
     <TypeScriptCompile Include="src\app\enums\dataDisplayType.ts" />
     <TypeScriptCompile Include="src\app\enums\recordMode.ts" />
@@ -573,6 +577,7 @@
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
     <TypeScriptCompile Include="src\app\pages\admin-access\admin-access.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-view\agent-view.ts" />
+    <TypeScriptCompile Include="src\app\pages\edit-password\edit-password.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-clawback\manage-clawback.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-maintenance\agent-maintenance.ts" />

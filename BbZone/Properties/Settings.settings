@@ -20,5 +20,8 @@
     <Setting Name="RegistrationFilePath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">/App_Data/RegistrationFiles</Value>
     </Setting>
+    <Setting Name="SenderEmail" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">broadbandzone@broadbandzone2u.com</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

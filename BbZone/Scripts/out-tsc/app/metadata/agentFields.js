@@ -189,7 +189,7 @@ var AgentRegistrationFields = /** @class */ (function () {
                 "controlName": "password",
                 "controlType": "password",
                 "required": false,
-                "maxLength": 64
+                "maxLength": 15
             }
         }
     ];

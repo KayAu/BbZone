@@ -4,6 +4,7 @@ using Microsoft.Practices.EnterpriseLibrary.Logging;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -30,11 +31,11 @@ namespace BroadbandZone_App
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.PreserveReferencesHandling = PreserveReferencesHandling.None;
             GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
 
-            ////Bootstrapping logging
-            //DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
-            //IConfigurationSource configurationSource = ConfigurationSourceFactory.Create();
-            //LogWriterFactory logWriterFactory = new LogWriterFactory(configurationSource);
-            //Logger.SetLogWriter(logWriterFactory.Create());
+            //Bootstrapping logging
+            DatabaseFactory.SetDatabaseProviderFactory(new DatabaseProviderFactory());
+            IConfigurationSource configurationSource = ConfigurationSourceFactory.Create();
+            LogWriterFactory logWriterFactory = new LogWriterFactory(configurationSource);
+            Logger.SetLogWriter(logWriterFactory.Create());
         }
 
         protected void Application_BeginRequest(Object sender, EventArgs e)
@@ -54,6 +55,12 @@ namespace BroadbandZone_App
             // Redirects to the RootUrl you specified above if the server can't find anything else
             if (!System.IO.File.Exists(Context.Server.MapPath(path)))
                 Context.RewritePath(RootUrl);
+        }
+
+        protected void Session_End(object sender, EventArgs e)
+        {
+            var ctx = HttpContext.Current;
+            ctx.Response.Redirect("~/Home/Index");      
         }
     }
 }

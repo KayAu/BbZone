@@ -33,7 +33,6 @@ namespace BroadbandZone_App.WebApi
                 {
                     using (XLWorkbook wb = new XLWorkbook())
                     {
-                        //SearchIncentivesParams filterBy = JsonConvert.DeserializeObject<SearchIncentivesParams>(searchParams);
                         var results = db.GetWithdrawalSubmittedForDownload(filterBy.Status,
                                                                         filterBy.Agent,
                                                                         filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
@@ -58,7 +57,7 @@ namespace BroadbandZone_App.WebApi
             catch (Exception ex)
             {
                 ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
-                return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
+                return null;
             }
         }
 
@@ -67,7 +66,6 @@ namespace BroadbandZone_App.WebApi
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
         {
             try
-
             {
                 SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
@@ -93,7 +91,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -118,7 +117,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -145,7 +145,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -173,7 +174,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -213,7 +215,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
     }

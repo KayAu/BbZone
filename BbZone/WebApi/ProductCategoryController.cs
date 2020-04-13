@@ -6,6 +6,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
+using System.Net;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
@@ -20,14 +21,13 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 StatusAndKeywordParams filterBy = JsonConvert.DeserializeObject<StatusAndKeywordParams>(searchParams);
-
                 var records = ModelHelper.GetListdata((new BroadbandZoneEntities()).GetProductCategory, currentPage, pageSize, sortColumn, sortInAsc, filterBy.Keyword, filterBy.IsActive);
                 return Ok(records);
-
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -50,7 +50,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -67,24 +68,31 @@ namespace BroadbandZone_App.WebApi
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-
                 return Ok(UpdateEditedRecord(id));
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
         private GetProductCategory_Result UpdateEditedRecord(int recordId )
         {
-            using (var db = new BroadbandZoneEntities())
+            try
             {
-                var record = db.ProductCategories.Find(recordId);
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var record = db.ProductCategories.Find(recordId);
 
-                ModelHelper.CopyPropertiesTo<ProductCategory, GetProductCategory_Result>(record, out GetProductCategory_Result returnRec);
-                returnRec.ProductName = record.Product.ProductName;
-                return returnRec;
+                    ModelHelper.CopyPropertiesTo<ProductCategory, GetProductCategory_Result>(record, out GetProductCategory_Result returnRec);
+                    returnRec.ProductName = record.Product.ProductName;
+                    return returnRec;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
        

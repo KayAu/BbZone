@@ -584,6 +584,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
         <Function Name="prc_FindCompletedApplication" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prc_GenerateActivationCode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prRegistrationId" Type="int" Mode="In" />
+          <Parameter Name="oActivationCode" Type="varchar" Mode="InOut" />
+        </Function>
         <Function Name="prc_GenerateEncryptedPwd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prUserLogin" Type="varchar" Mode="In" />
         </Function>
@@ -867,6 +871,18 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
         <Function Name="prc_UpdateMessagesToRead" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prAppId" Type="int" Mode="In" />
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="prc_UpdateMyPasswordAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAdminLogin" Type="varchar" Mode="In" />
+          <Parameter Name="prOldPassword" Type="varchar" Mode="In" />
+          <Parameter Name="prNewPassword" Type="varchar" Mode="In" />
+          <Parameter Name="oValidUpdate" Type="bit" Mode="InOut" />
+        </Function>
+        <Function Name="prc_UpdateMyPasswordAgent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prOldPassword" Type="varchar" Mode="In" />
+          <Parameter Name="prNewPassword" Type="varchar" Mode="In" />
+          <Parameter Name="oValidUpdate" Type="bit" Mode="InOut" />
         </Function>
         <Function Name="Split_On_Upper_Case" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
           <Parameter Name="Temp" Type="varchar" Mode="In" />
@@ -1265,10 +1281,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prAppId" Mode="In" Type="Int32" />
             <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
           </FunctionImport>
-          <FunctionImport Name="UpdateMessagesToRead">
-            <Parameter Name="prAppId" Mode="In" Type="Int32" />
-            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
-          </FunctionImport>
           <EntitySet Name="ProductCategories" EntityType="BroadbandZoneModel.ProductCategory" />
           <AssociationSet Name="FK_AgentCommission_ProductCategory" Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory">
             <End Role="ProductCategory" EntitySet="ProductCategories" />
@@ -1352,6 +1364,26 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <End Role="Registration" EntitySet="Registrations" />
             <End Role="RegistrationDocument" EntitySet="RegistrationDocuments" />
           </AssociationSet>
+          <FunctionImport Name="UpdateMyPasswordAdmin">
+            <Parameter Name="prAdminLogin" Mode="In" Type="String" />
+            <Parameter Name="prOldPassword" Mode="In" Type="String" />
+            <Parameter Name="prNewPassword" Mode="In" Type="String" />
+            <Parameter Name="oValidUpdate" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMyPasswordAgent">
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prOldPassword" Mode="In" Type="String" />
+            <Parameter Name="prNewPassword" Mode="In" Type="String" />
+            <Parameter Name="oValidUpdate" Mode="InOut" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateMessagesToRead">
+            <Parameter Name="prAppId" Mode="In" Type="Int32" />
+            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
+          </FunctionImport>
+          <FunctionImport Name="GenerateActivationCode">
+            <Parameter Name="prRegistrationId" Mode="In" Type="Int32" />
+            <Parameter Name="oActivationCode" Mode="InOut" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -3062,7 +3094,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="GetUnreadMessagesCount" FunctionName="BroadbandZoneModel.Store.prc_GetUnreadMessagesCount" />
-          <FunctionImportMapping FunctionImportName="UpdateMessagesToRead" FunctionName="BroadbandZoneModel.Store.prc_UpdateMessagesToRead" />
           <EntitySetMapping Name="ProductCategories">
             <EntityTypeMapping TypeName="BroadbandZoneModel.ProductCategory">
               <MappingFragment StoreEntitySet="ProductCategory">
@@ -3237,6 +3268,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateMyPasswordAdmin" FunctionName="BroadbandZoneModel.Store.prc_UpdateMyPasswordAdmin" />
+          <FunctionImportMapping FunctionImportName="UpdateMyPasswordAgent" FunctionName="BroadbandZoneModel.Store.prc_UpdateMyPasswordAgent" />
+          <FunctionImportMapping FunctionImportName="UpdateMessagesToRead" FunctionName="BroadbandZoneModel.Store.prc_UpdateMessagesToRead" />
+          <FunctionImportMapping FunctionImportName="GenerateActivationCode" FunctionName="BroadbandZoneModel.Store.prc_GenerateActivationCode" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -13,55 +13,31 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var broadcast_service_1 = require("../services/broadcast.service");
 var RequiredValidator = /** @class */ (function () {
-    //@Input('check-on')
-    //set checkon(formSubmitted: boolean) {
-    //    if (!formSubmitted)
-    //        return;
-    //    this.isFormSubmitted = formSubmitted;
-    //    this.handleError();
-    //}
-    function RequiredValidator(el, ngModel, formSubmitted) {
+    function RequiredValidator(el, ngModel, formEvent) {
         this.el = el;
         this.ngModel = ngModel;
-        this.formSubmitted = formSubmitted;
+        this.formEvent = formEvent;
     }
     RequiredValidator.prototype.ngOnInit = function () {
         var _this = this;
-        this.subscription = this.formSubmitted.notification.subscribe(function (res) {
-            _this.handleError();
+        this.subscription = this.formEvent.notification.subscribe(function (form) {
+            _this.parentForm = form.template;
+            _this.validate();
         });
     };
-    RequiredValidator.prototype.onBlur = function () {
-        if (!this.isFormSubmitted)
-            return;
-        this.handleError();
-    };
-    RequiredValidator.prototype.handleError = function () {
-        var thisElement = this.isInputGroupControl() ? $(this.el.nativeElement).parent() : $(this.el.nativeElement);
+    RequiredValidator.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
         if (!thisElement[0].required)
             return;
         var value = this.ngModel.model;
         if (value === null || value === undefined || value === "") {
-            thisElement.addClass('data-invalid');
-            thisElement.next('.text-danger').remove();
-            thisElement.after('<span class= "text-danger">This is required</span>');
+            thisElement.parent().find('.required-error').remove();
+            thisElement.after('<span class= "text-danger required-error">This is required</span>');
         }
         else {
-            if (this.ngModel.valid) {
-                thisElement.removeClass('data-invalid');
-                thisElement.next().remove();
-            }
+            thisElement.parent().find('.required-error').remove();
         }
     };
-    RequiredValidator.prototype.isInputGroupControl = function () {
-        return $(this.el.nativeElement).parent().hasClass('input-group') ? true : false;
-    };
-    __decorate([
-        core_1.HostListener('blur'),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", []),
-        __metadata("design:returntype", void 0)
-    ], RequiredValidator.prototype, "onBlur", null);
     RequiredValidator = __decorate([
         core_1.Directive({
             selector: '[required][ngModel]',

@@ -16,6 +16,7 @@ using System.Text;
 using System.Web;
 using System.Net;
 using System.Net.Http.Headers;
+using BroadbandZone_App.Helper;
 
 namespace BroadbandZone_App.WebApi
 {
@@ -41,39 +42,54 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return null;
             }
         }
 
         private GetPaymentDetails_Result GetDetails(int id)
         {
-            using (var db = new BroadbandZoneEntities())
+            try
             {
-                GetPaymentDetails_Result paymentVoucher = db.GetPaymentDetails(id).FirstOrDefault();
-                return paymentVoucher;
+                using (var db = new BroadbandZoneEntities())
+                {
+                    GetPaymentDetails_Result paymentVoucher = db.GetPaymentDetails(id).FirstOrDefault();
+                    return paymentVoucher;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
         private string PopulateBody(GetPaymentDetails_Result paymentVoucher)
         {
-            string body = string.Empty;
-            using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/paymentVoucher.html")))
+            try
             {
-                body = reader.ReadToEnd();
+                string body = string.Empty;
+                using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/paymentVoucher.html")))
+                {
+                    body = reader.ReadToEnd();
+                }
+
+                body = body.Replace("{SlipNo}", paymentVoucher.SlipNo);
+                body = body.Replace("{AgentId}", paymentVoucher.AgentId.ToString());
+                body = body.Replace("{Fullname}", paymentVoucher.Fullname);
+                body = body.Replace("{Nric}", paymentVoucher.Nric);
+                body = body.Replace("{BankName}", paymentVoucher.BankName);
+                body = body.Replace("{BankAccNo}", paymentVoucher.BankAccNo);
+                body = body.Replace("{ReferenceNo}", paymentVoucher.ReferenceNo);
+                body = body.Replace("{PaymentAmount}", paymentVoucher.PaymentAmount);
+                body = body.Replace("{PaymentDate}", paymentVoucher.PaymentDate);
+                body = body.Replace("{PaymentItemsStr}", paymentVoucher.PaymentItemsStr);
+
+                return body;
             }
-
-            body = body.Replace("{SlipNo}", paymentVoucher.SlipNo);
-            body = body.Replace("{AgentId}", paymentVoucher.AgentId.ToString());
-            body = body.Replace("{Fullname}", paymentVoucher.Fullname);
-            body = body.Replace("{Nric}", paymentVoucher.Nric);
-            body = body.Replace("{BankName}", paymentVoucher.BankName);
-            body = body.Replace("{BankAccNo}", paymentVoucher.BankAccNo);
-            body = body.Replace("{ReferenceNo}", paymentVoucher.ReferenceNo);
-            body = body.Replace("{PaymentAmount}", paymentVoucher.PaymentAmount);
-            body = body.Replace("{PaymentDate}", paymentVoucher.PaymentDate);
-            body = body.Replace("{PaymentItemsStr}", paymentVoucher.PaymentItemsStr);
-
-            return body;
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
         }
 
         private byte[] CreatePdf(string htmlContent)

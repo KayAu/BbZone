@@ -2,9 +2,9 @@
 using BroadbandZone_App.Models;
 using BroadbandZone_Data;
 using System;
+using System.Data.Entity.Core.Objects;
 using System.Net;
 using System.Web.Http;
-using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BroadbandZone_App.WebApi
@@ -18,7 +18,6 @@ namespace BroadbandZone_App.WebApi
             try
             {               
                 var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin ,false);
-
                 if (user.IsAuthenticated == true)
                 {
                     FormsAuthentication.SetAuthCookie(userLogin.Username, false);
@@ -30,10 +29,50 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
+        // PUT api/<controller>/5
+        [HttpPut]
+        public IHttpActionResult UpdateAgentPassword(int id, [FromBody]MyPassword editedRecord)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    ObjectParameter validUpdate = new ObjectParameter("oValidUpdate", typeof(bool));
+                    db.UpdateMyPasswordAgent(id, editedRecord.OldPassword, editedRecord.NewPassword, validUpdate);
+                    return Ok(validUpdate.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        //UpdateAdminPassword
+        [HttpPut]
+        public IHttpActionResult UpdateAdminPassword(string id, [FromBody]MyPassword editedRecord)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    ObjectParameter validUpdate = new ObjectParameter("oValidUpdate", typeof(bool));
+                    db.UpdateMyPasswordAdmin(id, editedRecord.OldPassword, editedRecord.NewPassword, validUpdate);
+                    return Ok(validUpdate.Value);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
 
         private void LogUserAccess(AuthenticatedUser user)
         {
@@ -45,10 +84,8 @@ namespace BroadbandZone_App.WebApi
                     loginTrail.AgentId = !user.IsAdmin ? user.AgentId: null;
                     loginTrail.LoginName = user.Username;
                     loginTrail.LoginDate = DateTime.Now;
-
                     db.LoginTrails.Add(loginTrail);
                     db.SaveChanges();
-
                 }
             }
             catch (Exception ex)

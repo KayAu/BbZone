@@ -75,7 +75,9 @@ import { Role } from './enums/role';
 import { MinDirective } from './directives/min-validator';
 import { AgentView } from './pages/agent-view/agent-view';
 import { ViewCompletedApp } from './pages/view-complete-app/view-complete-app';
-import { PageSizer } from './components/page-sizer';
+import { EqualValidator } from './directives/equal-validator.directive';
+import { MandatoryValidator } from './directives/mandatory.directive';
+import { EditPassword } from './pages/edit-password/edit-password';
 
 @NgModule({
   declarations: [
@@ -137,7 +139,9 @@ import { PageSizer } from './components/page-sizer';
         MinDirective,
         AgentView,
         ViewCompletedApp,
-        PageSizer
+        EditPassword,
+        EqualValidator,
+        MandatoryValidator
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -147,7 +151,7 @@ import { PageSizer } from './components/page-sizer';
         MaterialModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd.forRoot(),
-        UserIdleModule.forRoot({ idle: 1200, timeout: 60, ping: 60 }),
+        UserIdleModule.forRoot({ idle: 300, timeout: 60, ping: 60 }),
         ToastrModule.forRoot({
             maxOpened: 1,
             preventDuplicates: true,
@@ -181,7 +185,8 @@ import { PageSizer } from './components/page-sizer';
             { path: 'admin-access', component: AdminAccess, canActivate: [UserAuthGuard], data: { roles: [ Role.SuperAdmin] } },
             { path: 'manage-login-banner', component: ManageLoginBanner, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
             { path: 'agent-view/:id', component: AgentView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
-            { path: 'view-complete-app', component: ViewCompletedApp }
+            { path: 'view-complete-app', component: ViewCompletedApp },
+            { path: 'edit-password', component: EditPassword }
     ])
   ],
   providers: [

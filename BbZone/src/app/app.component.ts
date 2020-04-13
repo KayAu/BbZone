@@ -5,7 +5,6 @@ import { UserIdleService } from 'angular-user-idle'
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { LoginUser } from './model/login-user';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -30,18 +29,49 @@ export class AppComponent {
 
     }
 
+    ngOnInit() {
+        //Start watching for user inactivity.
+        this.userIdle.startWatching();
+
+        // Start watching when user idle is starting.
+        this.userIdle.onTimerStart().subscribe(count => console.log(count));
+
+        // Start watch when time is up.
+        this.userIdle.onTimeout().subscribe(() =>
+            this.logout()
+        );
+    }
+
     @HostListener('window:unload', ['$event'])
     unloadHandler(event) {
         localStorage.removeItem('currentUser');
     }
 
-    logout() {
-        //localStorage.removeItem('currentUser');
-        //this.currentUser = null;
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+        if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+            this.showScroll = true;
+        }
+        else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
+            this.showScroll = false;
+        }
+    }
 
+    logout() {
         this.authenticationService.logout();
         this.router.navigate(['/']);
     }
+
+    scrollToTop() {
+        (function smoothscroll() {
+            var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothscroll);
+                window.scrollTo(0, currentScroll - (currentScroll / 5));
+            }
+        })();
+    }
+
 }
 
 

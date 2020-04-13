@@ -52,10 +52,12 @@ BEGIN
 		FROM ClaimableCommission cc
 		INNER JOIN Agent a ON cc.AgentId = a.AgentId
 		INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
+		INNER JOIN ApplicationStatus s ON s.AppStatusId = ca.ApplicationId
 		INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
 		LEFT JOIN Clawback c ON c.ApplicationId = ca.ApplicationId
 		WHERE a.UserLogin = @prAgent
 		AND ca.DocumentCompleted = 1
+		AND s.Status = 'Post Complete'
 		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN 1
 					 WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
 					 ELSE 0

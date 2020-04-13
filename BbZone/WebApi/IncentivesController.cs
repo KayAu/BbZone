@@ -38,7 +38,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
@@ -59,29 +60,37 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 
         private IncentivesView<GetIncentivesReceived_Result> GetIncentivesReceived(int currentPage, int pageSize, string sortColumn, bool sortInAsc, SearchIncentivesParams filterBy)
         {
-            using (var db = new BroadbandZoneEntities())
+            try
             {
-                ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
-                var results = (new BroadbandZoneEntities()).GetIncentivesReceived(currentPage, pageSize, sortColumn, sortInAsc,
-                                                                            filterBy.ProductId,
-                                                                            filterBy.ProductCategoryId,
-                                                                            filterBy.ProductPackageId,
-                                                                            filterBy.Keyword,
-                                                                            filterBy.ReceivedDate != null ? filterBy.ReceivedDate.StartDate : null,
-                                                                            filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null,
-                                                                            totalRecord).ToList();
-                return new IncentivesView<GetIncentivesReceived_Result>()
+                using (var db = new BroadbandZoneEntities())
                 {
-                    DisplayData = results,
-                    TotalRecords = Convert.ToInt32(totalRecord.Value),
-                    TotalAmountReceived = results.Select(r => r.IncentiveAmt).Sum()
-                };
+                    ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    var results = (new BroadbandZoneEntities()).GetIncentivesReceived(currentPage, pageSize, sortColumn, sortInAsc,
+                                                                                filterBy.ProductId,
+                                                                                filterBy.ProductCategoryId,
+                                                                                filterBy.ProductPackageId,
+                                                                                filterBy.Keyword,
+                                                                                filterBy.ReceivedDate != null ? filterBy.ReceivedDate.StartDate : null,
+                                                                                filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null,
+                                                                                totalRecord).ToList();
+                    return new IncentivesView<GetIncentivesReceived_Result>()
+                    {
+                        DisplayData = results,
+                        TotalRecords = Convert.ToInt32(totalRecord.Value),
+                        TotalAmountReceived = results.Select(r => r.IncentiveAmt).Sum()
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
 
@@ -103,7 +112,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
 

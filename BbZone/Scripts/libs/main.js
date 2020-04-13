@@ -327,7 +327,7 @@ module.exports = "@media (max-width: 767px) {\r\n  /* On small screens, the nav 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n               \r\n                    </li>\r\n                    <li>\r\n                        <a (click)=\"logout()\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n    </div>\r\n\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
+module.exports = "\r\n<div id=\"wrapper\" *ngIf=\"currentUser; else loginscreen\">\r\n    <app-nav-menu [currentUser]=\"currentUser\"></app-nav-menu>\r\n    <div id=\"page-wrapper\" class=\"gray-bg\">\r\n        <div class=\"row border-bottom\">\r\n            <nav class=\"navbar navbar-static-top\" role=\"navigation\" style=\"margin-bottom: 0\">\r\n                <div class=\"navbar-header\">\r\n                    <a class=\"navbar-minimalize minimalize-styl-2 btn btn-primary btn-sm\" href=\"#\"><i class=\"fa fa-bars\"></i> </a>\r\n                    <h4 class=\"navbar-header-title mrg5T\">Admin Tool</h4>\r\n                </div>\r\n                <ul class=\"nav navbar-top-links navbar-right mrg20R\">\r\n                    <li class=\"dropdown\">\r\n\r\n                    </li>\r\n                    <li>\r\n                        <a (click)=\"logout()\">\r\n                            <i class=\"fa fa-sign-out\"></i> Log out\r\n                        </a>\r\n                    </li>\r\n                </ul>\r\n            </nav>\r\n        </div>\r\n        <router-outlet></router-outlet>\r\n        <!--Scroll to top-->\r\n        <a [ngClass]=\"{'show-scroll': showScroll}\" (click)=\"scrollToTop()\" class=\"scroll-to-top\">\r\n            <i class=\"glyphicon glyphicon-chevron-up\"></i>\r\n        </a>\r\n    </div>\r\n</div>\r\n\r\n\r\n\r\n<ng-template #loginscreen>\r\n    <router-outlet></router-outlet>\r\n</ng-template>"
 
 /***/ }),
 
@@ -367,14 +367,40 @@ var AppComponent = /** @class */ (function () {
             _this.currentUser = user;
         });
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        //Start watching for user inactivity.
+        this.userIdle.startWatching();
+        // Start watching when user idle is starting.
+        this.userIdle.onTimerStart().subscribe(function (count) { return console.log(count); });
+        // Start watch when time is up.
+        this.userIdle.onTimeout().subscribe(function () {
+            return _this.logout();
+        });
+    };
     AppComponent.prototype.unloadHandler = function (event) {
         localStorage.removeItem('currentUser');
     };
+    AppComponent.prototype.onWindowScroll = function () {
+        if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
+            this.showScroll = true;
+        }
+        else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
+            this.showScroll = false;
+        }
+    };
     AppComponent.prototype.logout = function () {
-        //localStorage.removeItem('currentUser');
-        //this.currentUser = null;
         this.authenticationService.logout();
         this.router.navigate(['/']);
+    };
+    AppComponent.prototype.scrollToTop = function () {
+        (function smoothscroll() {
+            var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+            if (currentScroll > 0) {
+                window.requestAnimationFrame(smoothscroll);
+                window.scrollTo(0, currentScroll - (currentScroll / 5));
+            }
+        })();
     };
     __decorate([
         core_1.ViewChild(nav_menu_component_1.NavMenuComponent),
@@ -386,6 +412,12 @@ var AppComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
     ], AppComponent.prototype, "unloadHandler", null);
+    __decorate([
+        core_1.HostListener('window:scroll', []),
+        __metadata("design:type", Function),
+        __metadata("design:paramtypes", []),
+        __metadata("design:returntype", void 0)
+    ], AppComponent.prototype, "onWindowScroll", null);
     AppComponent = __decorate([
         core_1.Component({
             selector: 'app-root',
@@ -496,7 +528,9 @@ var role_1 = __webpack_require__(/*! ./enums/role */ "./src/app/enums/role.ts");
 var min_validator_1 = __webpack_require__(/*! ./directives/min-validator */ "./src/app/directives/min-validator.ts");
 var agent_view_1 = __webpack_require__(/*! ./pages/agent-view/agent-view */ "./src/app/pages/agent-view/agent-view.ts");
 var view_complete_app_1 = __webpack_require__(/*! ./pages/view-complete-app/view-complete-app */ "./src/app/pages/view-complete-app/view-complete-app.ts");
-var page_sizer_1 = __webpack_require__(/*! ./components/page-sizer */ "./src/app/components/page-sizer.ts");
+var equal_validator_directive_1 = __webpack_require__(/*! ./directives/equal-validator.directive */ "./src/app/directives/equal-validator.directive.ts");
+var mandatory_directive_1 = __webpack_require__(/*! ./directives/mandatory.directive */ "./src/app/directives/mandatory.directive.ts");
+var edit_password_1 = __webpack_require__(/*! ./pages/edit-password/edit-password */ "./src/app/pages/edit-password/edit-password.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -561,7 +595,9 @@ var AppModule = /** @class */ (function () {
                 min_validator_1.MinDirective,
                 agent_view_1.AgentView,
                 view_complete_app_1.ViewCompletedApp,
-                page_sizer_1.PageSizer
+                edit_password_1.EditPassword,
+                equal_validator_directive_1.EqualValidator,
+                mandatory_directive_1.MandatoryValidator
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -571,7 +607,7 @@ var AppModule = /** @class */ (function () {
                 material_1.MaterialModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                angular_user_idle_1.UserIdleModule.forRoot({ idle: 1200, timeout: 60, ping: 60 }),
+                angular_user_idle_1.UserIdleModule.forRoot({ idle: 300, timeout: 60, ping: 60 }),
                 ngx_toastr_1.ToastrModule.forRoot({
                     maxOpened: 1,
                     preventDuplicates: true,
@@ -605,7 +641,8 @@ var AppModule = /** @class */ (function () {
                     { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-view/:id', component: agent_view_1.AgentView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
-                    { path: 'view-complete-app', component: view_complete_app_1.ViewCompletedApp }
+                    { path: 'view-complete-app', component: view_complete_app_1.ViewCompletedApp },
+                    { path: 'edit-password', component: edit_password_1.EditPassword }
                 ])
             ],
             providers: [
@@ -2387,62 +2424,6 @@ exports.PageHeader = PageHeader;
 
 /***/ }),
 
-/***/ "./src/app/components/page-sizer.ts":
-/*!******************************************!*\
-  !*** ./src/app/components/page-sizer.ts ***!
-  \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-Object.defineProperty(exports, "__esModule", { value: true });
-var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-var PageSizer = /** @class */ (function () {
-    function PageSizer() {
-        this.pageSizeChanged = new core_1.EventEmitter();
-    }
-    Object.defineProperty(PageSizer.prototype, "defaultOption", {
-        set: function (value) {
-            this.selectedPageSize = value;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    PageSizer.prototype.selectionChanged = function () {
-        this.pageSizeChanged.emit(this.selectedPageSize);
-    };
-    __decorate([
-        core_1.Output(),
-        __metadata("design:type", Object)
-    ], PageSizer.prototype, "pageSizeChanged", void 0);
-    __decorate([
-        core_1.Input(),
-        __metadata("design:type", Number),
-        __metadata("design:paramtypes", [Number])
-    ], PageSizer.prototype, "defaultOption", null);
-    PageSizer = __decorate([
-        core_1.Component({
-            selector: 'page-sizer',
-            template: "<div class=\"dataTables_length float-right\">\n                    <label>Show\n                    <select class=\"form-control form-control-sm mrg5L mrg5R\" [(ngModel)]=\"selectedPageSize\" (ngModelChanged)=\"selectionChanged()\">\n                        <option value=\"10\">10</option>\n                        <option value=\"25\">25</option>\n                        <option value=\"50\">50</option>\n                        <option value=\"100\">100</option>\n                     </select>\n                    entries\n                    </label>\n                </div>",
-        })
-    ], PageSizer);
-    return PageSizer;
-}());
-exports.PageSizer = PageSizer;
-
-
-/***/ }),
-
 /***/ "./src/app/components/pagination/pagination.css":
 /*!******************************************************!*\
   !*** ./src/app/components/pagination/pagination.css ***!
@@ -3166,6 +3147,85 @@ exports.EditModeDirective = EditModeDirective;
 
 /***/ }),
 
+/***/ "./src/app/directives/equal-validator.directive.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/directives/equal-validator.directive.ts ***!
+  \*********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var broadcast_service_1 = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var EqualValidator = /** @class */ (function () {
+    //set valueToCompare(val: number) {
+    //    this._valueToCompare = val;
+    //}
+    function EqualValidator(el, ngModel, formEvent) {
+        this.el = el;
+        this.ngModel = ngModel;
+        this.formEvent = formEvent;
+    }
+    EqualValidator.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.formEvent.notification.subscribe(function (form) {
+            _this.parentForm = form.template;
+            _this.validate();
+        });
+    };
+    EqualValidator.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
+        $(this.el.nativeElement).next('.text-danger').remove();
+        var value = this.parentForm.controls[this.fieldId].value;
+        if (this.valueToCompare && value && value !== this.valueToCompare) {
+            thisElement.parent().find('.equal-error').remove();
+            thisElement.after("<span class='text-danger equal-error'>" + this.errorMessage + "</span>");
+            this.parentForm.controls[this.fieldId].setErrors({ 'equalValidator': true });
+        }
+        else {
+            thisElement.parent().find('.equal-error').remove();
+        }
+    };
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], EqualValidator.prototype, "errorMessage", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], EqualValidator.prototype, "fieldId", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Object)
+    ], EqualValidator.prototype, "valueToCompare", void 0);
+    EqualValidator = __decorate([
+        core_1.Directive({
+            selector: '[validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
+            providers: [forms_1.NgModel]
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            forms_1.NgModel,
+            broadcast_service_1.BroadcastService])
+    ], EqualValidator);
+    return EqualValidator;
+}());
+exports.EqualValidator = EqualValidator;
+
+
+/***/ }),
+
 /***/ "./src/app/directives/less-than-validator.directive.ts":
 /*!*************************************************************!*\
   !*** ./src/app/directives/less-than-validator.directive.ts ***!
@@ -3224,6 +3284,70 @@ var LessThanValidator = /** @class */ (function () {
     return LessThanValidator;
 }());
 exports.LessThanValidator = LessThanValidator;
+
+
+/***/ }),
+
+/***/ "./src/app/directives/mandatory.directive.ts":
+/*!***************************************************!*\
+  !*** ./src/app/directives/mandatory.directive.ts ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var broadcast_service_1 = __webpack_require__(/*! ../services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var MandatoryValidator = /** @class */ (function () {
+    function MandatoryValidator(el, ngModel, formEvent) {
+        this.el = el;
+        this.ngModel = ngModel;
+        this.formEvent = formEvent;
+    }
+    MandatoryValidator.prototype.ngOnInit = function () {
+        var _this = this;
+        this.subscription = this.formEvent.notification.subscribe(function (form) {
+            _this.parentForm = form.template;
+            _this.validate();
+        });
+    };
+    MandatoryValidator.prototype.validate = function () {
+        var thisElement = $(this.el.nativeElement);
+        var value = this.ngModel.model;
+        if (value === null || value === undefined || value === "") {
+            thisElement.parent().find('.required-error').remove();
+            thisElement.after('<span class= "text-danger required-error">This is required</span>');
+            this.parentForm.controls[this.ngModel.name].setErrors({ 'mandatory': true });
+        }
+        else {
+            thisElement.parent().find('.required-error').remove();
+            this.parentForm.controls[this.ngModel.name].setErrors(null);
+        }
+    };
+    MandatoryValidator = __decorate([
+        core_1.Directive({
+            selector: '[mandatory][ngModel]',
+            providers: [forms_1.NgModel]
+        }),
+        __metadata("design:paramtypes", [core_1.ElementRef,
+            forms_1.NgModel,
+            broadcast_service_1.BroadcastService])
+    ], MandatoryValidator);
+    return MandatoryValidator;
+}());
+exports.MandatoryValidator = MandatoryValidator;
 
 
 /***/ }),
@@ -4799,7 +4923,7 @@ var AgentRegistrationFields = /** @class */ (function () {
                 "controlName": "password",
                 "controlType": "password",
                 "required": false,
-                "maxLength": 64
+                "maxLength": 15
             }
         }
     ];
@@ -7297,7 +7421,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav tree\" id=\"side-menu\" data-widget=\"tree\">\r\n      <li class=\"nav-header w-p100\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\"[routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" href=\"contacts.html\">Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n              <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n              <li><a [routerLink]='[\"/view-complete-app\"]'><span class=\"nav-label\">View Completed Orders</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/upload-incentives\"]'><span class=\"nav-label\">Upload Incentives</span></a></li>\r\n              <li><a [routerLink]='[\"/view-incentives\"]'><span class=\"nav-label\">View Incentives</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/admin-access\"]'><span class=\"nav-label\">Admin Access</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n              <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">Manage Announcement</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-login-banner\"]'><span class=\"nav-label\">Manage Login Banner</span></a></li>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n  <div class=\"sidebar-collapse\">\r\n    <ul class=\"nav tree\" id=\"side-menu\" data-widget=\"tree\">\r\n      <li class=\"nav-header w-p100\">\r\n        <div class=\"dropdown profile-element\">\r\n            <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n                height: 36px;\r\n                width: 36px;\r\n                padding: 8px 12px;\">\r\n                <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n            </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n            <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n            <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n          </a>\r\n          <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n              <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n              <li><a class=\"dropdown-item\" [routerLink]='[\"/edit-password/\"]'>Update Password</a></li>\r\n              <li class=\"dropdown-divider\"></li>\r\n              <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n          </ul>\r\n        </div>\r\n        <div class=\"logo-element\">\r\n          IN+\r\n        </div>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/create-order\"]'><span class=\"nav-label\">New Order</span></a></li>\r\n              <li><a [routerLink]='[\"/view-order\"]'><span class=\"nav-label\">View Orders</span></a></li>\r\n              <li><a [routerLink]='[\"/view-complete-app\"]'><span class=\"nav-label\">View Completed Orders</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-registration-list\"]'><span class=\"nav-label\">Agent Registrations</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-maintenance\"]'><span class=\"nav-label\">Agents Maintenance</span></a></li>\r\n              <li><a [routerLink]='[\"/agent-comission\"]'><span class=\"nav-label\">Agent Commissions</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/view-withdrawal\"]'><span class=\"nav-label\">View Withdrawal</span></a></li>\r\n              <li><a [routerLink]='[\"/create-withdrawal\"]'><span class=\"nav-label\">Submit Withdrawal</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-charges\"]'><span class=\"nav-label\">Agent Charges</span></a></li>\r\n              <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/manage-clawback\"]'><span class=\"nav-label\">Clawback</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/upload-incentives\"]'><span class=\"nav-label\">Upload Incentives</span></a></li>\r\n              <li><a [routerLink]='[\"/view-incentives\"]'><span class=\"nav-label\">View Incentives</span></a></li>\r\n          </ul>\r\n      </li>\r\n      <li class=\"treeview\" [ngClass]=\"{'hidden' : !currentUser.isAdmin}\">\r\n          <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n          <ul class=\"nav nav-second-level collapse treeview-menu\" aria-expanded=\"false\" style=\"height: 0px;\">\r\n              <li><a [routerLink]='[\"/admin-access\"]'><span class=\"nav-label\">Admin Access</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-product\"]'><span class=\"nav-label\">Manage Products</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-packages\"]'><span class=\"nav-label\">Manage Packages</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-category\"]'><span class=\"nav-label\">Manage Category</span></a></li>\r\n              <li><a [routerLink]='[\"/view-announcement\"]'><span class=\"nav-label\">Manage Announcement</span></a></li>\r\n              <li><a [routerLink]='[\"/manage-login-banner\"]'><span class=\"nav-label\">Manage Login Banner</span></a></li>\r\n          </ul>\r\n      </li>\r\n    </ul>\r\n\r\n  </div>\r\n</nav>\r\n"
 
 /***/ }),
 
@@ -8001,7 +8125,7 @@ exports.AgentRegistrationList = AgentRegistrationList;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Registration'\" [parentCategory]=\"'Agent Registrations'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Registration</h5>\r\n                    <small class=\"mrg10L text-muted\"  *ngIf=\"formRecord['approvalDate']\"><i class=\"fa fa-clock-o\"></i> {{formRecord['approvalDate'] | date: 'dd MMM yyyy'}}, completed by {{formRecord['approvedBy']}}</small>\r\n                </div>\r\n                <div class=\"ibox-tools mrg20R\">\r\n                    <span class=\"label\" [ngClass]=\"{'label-primary':formRecord['isApproved'] === true,'label-danger' : formRecord['isApproved'] === false}\">{{formRecord['isApproved'] === true ? 'Approved': formRecord['isApproved'] == false ? 'Rejected' : ''}}</span>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [readonly]=\"field.readonly\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"registrationDocuments\" [fileUrl]=\"'/api/Download/RegistrationDocument'\" [readOnly]=\"true\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <div class=\"form-group row\" *ngIf=\"!formRecord['isApproved']\">\r\n                            <label class=\"col-sm-2 col-form-label\">\r\n                                Registration Approval\r\n                            </label>\r\n                            <div class=\"col-sm-10\">\r\n                                <span class=\"display-block mrg10R\">\r\n                                    <input type=\"radio\" name=\"response\" [(ngModel)]=\"formRecord['isApproved']\" value=\"true\" />\r\n                                    Approve\r\n                                </span>\r\n                                <span>\r\n                                    <input type=\"radio\" name=\"response\" [(ngModel)]=\"formRecord['isApproved']\" value=\"false\" />\r\n                                    Reject\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 text-right\">\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 150px;\" *ngIf=\"!formRecord['approvalDate']\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
+module.exports = "<page-header [title]=\"'View Registration'\" [parentCategory]=\"'Agent Registrations'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>Agent Registration</h5>\r\n                    <small class=\"mrg10L text-muted\"  *ngIf=\"formRecord['approvalDate']\"><i class=\"fa fa-clock-o\"></i> {{formRecord['approvalDate'] | date: 'dd MMM yyyy'}}, completed by {{formRecord['approvedBy']}}</small>\r\n                </div>\r\n                <div class=\"ibox-tools mrg20R\">\r\n                    <span class=\"label\" [ngClass]=\"{'label-primary':formRecord['isApproved'] === true,'label-danger' : formRecord['isApproved'] === false}\">{{formRecord['isApproved'] === true ? 'Approved': formRecord['isApproved'] == false ? 'Rejected' : ''}}</span>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <loading></loading>\r\n                    <form #applicationForm=\"ngForm\" (ngSubmit)=\"update()\">\r\n                        <!--PRODUCT TYPES-->\r\n                        <ng-container *ngFor=\"let field of formFields\">\r\n                            <div class=\"form-group row\">\r\n                                <label class=\"col-sm-2 col-form-label\">\r\n                                    {{field.displayText}}\r\n                                    <span *ngIf=\"field.dataFieldControl.required\" class=\"text-danger\">*</span>\r\n                                </label>\r\n                                <div class=\"col-sm-10\">\r\n                                    <data-control *ngIf=\"field.dataFieldControl\" [(ngModel)]=\"formRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                  [field]=\"field.dataFieldControl\" [formName]=\"'applicationForm'\" name=\"{{field.dataFieldControl.controlName}}\" [readonly]=\"field.readonly\"></data-control>\r\n                                </div>\r\n                            </div>\r\n                            <div class=\"hr-line-dashed\"></div>\r\n                        </ng-container>\r\n                        <!--ATTACH REQUIRED DOCUMENTS-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Required documents</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <file-uploader name=\"relDoc\" [(ngModel)]=\"registrationDocuments\" [fileUrl]=\"'/api/Download/RegistrationDocument'\" [readOnly]=\"true\"></file-uploader>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <div class=\"form-group row\" *ngIf=\"!formRecord['approvalDate']\">\r\n                            <label class=\"col-sm-2 col-form-label\">\r\n                                Registration Approval\r\n                            </label>\r\n                            <div class=\"col-sm-10\">\r\n                                <span class=\"display-block mrg10R\">\r\n                                    <input type=\"radio\" name=\"response\" [(ngModel)]=\"formRecord['isApproved']\" value=\"true\" />\r\n                                    Approve\r\n                                </span>\r\n                                <span>\r\n                                    <input type=\"radio\" name=\"response\" [(ngModel)]=\"formRecord['isApproved']\" value=\"false\" />\r\n                                    Reject\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 text-right\">\r\n                                <!--<button class=\"btn btn-primary\" type=\"submit\">Save changes</button>-->\r\n                                <button type=\"submit\" class=\"btn btn-primary mrg10R\" [ngClass]=\"{'show-spinner':isUpdating}\"\r\n                                        [disabled]=\"isUpdating\" style=\"width: 150px;\" *ngIf=\"!formRecord['approvalDate']\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                                <back-button>Cancel</back-button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>"
 
 /***/ }),
 
@@ -8558,7 +8682,7 @@ exports.CreateOrder = CreateOrder;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'Submit Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount | number:'1.2-2'}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 pad0L mrg20B flexbox\">\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                            <input type=\"text\"\r\n                                   ngxDaterangepickerMd\r\n                                   class=\"form-control form-control-sm mrg10R \"\r\n                                   [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                   [(ngModel)]=\"searchParams.submittedDate\"\r\n                                   (ngModelChange)=\"reloadData()\"\r\n                                   placeholder=\"Submission date\"\r\n                                   startKey=\"startDate\"\r\n                                   endKey=\"endDate\" />\r\n                        </div>\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\r\n                            <input placeholder=\"Application Id or Customer Name\" type=\"text\" class=\"form-control form-control-sm\"\r\n                                   (keydown.enter)=\"reloadData()\" [(ngModel)]=\"searchParams.keyword\">\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-outline btn-default\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div class=\"col-md-12 pad0L mrg25B mrg20T\" *ngIf=\"selectedItems.length > 0\">\r\n                            <div class=\"display-table\">\r\n                                <div class=\"display-cell\">\r\n                                    <span>Selected records count: {{selectedItems.length}}</span>\r\n                                </div>\r\n                                <div class=\"display-cell pad25L\">\r\n                                    <button type=\"button\" class=\"btn btn-default mrg10R\" (click)=\"showSelectedItems()\">\r\n                                        {{viewSelectedItems? 'Hide': 'View'}} Selection\r\n                                    </button>\r\n                                    <button type=\"button\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner disabled':isUpdating }\"\r\n                                            [disabled]=\"!allowSubmit || isUpdating\" (click)=\"submit()\">\r\n                                        {{isUpdating ? 'Submitting' : 'Submit'}}\r\n                                        <span class=\"loading\"></span>\r\n                                    </button>\r\n                                </div>\r\n                            </div>\r\n                        </div>\r\n\r\n                        <table class=\"table table-striped mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                            <thead>\r\n                                <tr>\r\n                                    <th></th>\r\n                                    <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                </tr>\r\n                            </thead>\r\n                            <tbody>\r\n                                <tr *ngFor=\"let record of dataSource; let rowNo = index\" >\r\n                                    <td>\r\n                                        <div class=\"checkbox checkbox-primary mrg0A\" *ngIf=\"record.claimCommId!=null\">\r\n                                            <input id=\"checkbox{{rowNo}}\" type=\"checkbox\" [(ngModel)]=\"record.selected\" (ngModelChange)=\"itemSelected(record)\">\r\n                                            <label for=\"checkbox{{rowNo}}\" class=\"pad0L\">\r\n                                            </label>\r\n                                        </div>\r\n                                    </td>\r\n                                    <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                        <td>\r\n                                            <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                            <ng-template #displayBadge>\r\n                                                <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                      [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                  'badge-warning': record.transactionType == 'Purchase',\r\n                                                                  'badge-success': record.transactionType == 'Own Sales',\r\n                                                                  'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                    {{record.transactionType}}\r\n                                                </span>\r\n                                                <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                            </ng-template>\r\n                                        </td>\r\n                                    </ng-container>\r\n                                </tr>\r\n                                <tr *ngIf=\"dataSource.length === 0\">\r\n                                    <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                        <div class=\"mrg45A text-center opacity-40\">\r\n                                            <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                            <h4>No Records Available</h4>\r\n                                        </div>\r\n                                    </td>\r\n                                </tr>\r\n                            </tbody>\r\n                        </table>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'Submit Withdrawal'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-md-6 mrg10T mrg25B\">\r\n            <div class=\"float-left\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-info float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-money font-size-24\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalSelectedAmount | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-info font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Selected Amount</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"float-left mrg25L\">\r\n                <div alt=\"image\" class=\"rounded-circle bg-warning float-left rounded-circle-lg\">\r\n                    <i class=\"fa fa-minus-square-o font-size-24\" style=\"padding-left: 3px\"></i>\r\n                </div>\r\n                <div class=\"float-left mrg15L\">\r\n                    <div class=\"totalClaim\">\r\n                        <span class=\"font-size-35 mrg10R line-height-8\">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>\r\n                    </div>\r\n                    <div class=\"totalSelected\">\r\n                        <i class=\"fa fa-circle-o text-warning font-size-11 mrg5R\"></i>\r\n                        <small class=\"text-muted\">Amount Deduct</small>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div class=\"col-md-6 mrg10T mrg25B text-right\">\r\n            <label class=\"text-uppercase font-normal\">Claimable Amount</label>\r\n            <div class=\"mrg0T amt-claimable font-bold\" [ngClass]=\"{'text-success': allowSubmit,'text-danger': !allowSubmit }\">RM {{totalClaimableAmount | number:'1.2-2'}}</div>\r\n        </div>\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Submit Withdrawal</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 pad0L mrg20B flexbox\">\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                            <input type=\"text\"\r\n                                   ngxDaterangepickerMd\r\n                                   class=\"form-control form-control-sm mrg10R \"\r\n                                   [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                   [(ngModel)]=\"searchParams.submittedDate\"\r\n                                   (ngModelChange)=\"reloadData()\"\r\n                                   placeholder=\"Submission date\"\r\n                                   startKey=\"startDate\"\r\n                                   endKey=\"endDate\" />\r\n                        </div>\r\n                        <div class=\"input-group mrg5R\">\r\n                            <span class=\"input-group-addon\"><i class=\"fa fa-search\"></i></span>\r\n                            <input placeholder=\"Application Id or Customer Name\" type=\"text\" class=\"form-control form-control-sm\"\r\n                                   (keydown.enter)=\"reloadData()\" [(ngModel)]=\"searchParams.keyword\">\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-outline btn-default\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n                            <div class=\"col-md-12 pad0L mrg25B mrg20T\" *ngIf=\"selectedItems.length > 0\">\r\n                                <div class=\"display-table\">\r\n                                    <div class=\"display-cell\">\r\n                                        <span>Selected records count: {{selectedItems.length}}</span>\r\n                                    </div>\r\n                                    <div class=\"display-cell pad25L\">\r\n                                        <button type=\"button\" class=\"btn btn-default mrg10R\" (click)=\"showSelectedItems()\">\r\n                                            {{viewSelectedItems? 'Hide': 'View'}} Selection\r\n                                        </button>\r\n                                        <button type=\"button\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner disabled':isUpdating }\"\r\n                                                [disabled]=\"!allowSubmit || isUpdating\" (click)=\"submit()\">\r\n                                            {{isUpdating ? 'Submitting' : 'Submit'}}\r\n                                            <span class=\"loading\"></span>\r\n                                        </button>\r\n                                    </div>\r\n                                </div>\r\n                            </div>\r\n                            <table class=\"table table-striped mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th></th>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <td>\r\n                                            <div class=\"checkbox checkbox-primary mrg0A\" *ngIf=\"record.claimCommId!=null\">\r\n                                                <input id=\"checkbox{{rowNo}}\" type=\"checkbox\" [(ngModel)]=\"record.selected\" (ngModelChange)=\"itemSelected(record)\">\r\n                                                <label for=\"checkbox{{rowNo}}\" class=\"pad0L\">\r\n                                                </label>\r\n                                            </div>\r\n                                        </td>\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td>\r\n                                                <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                <ng-template #displayBadge>\r\n                                                    <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                          [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                  'badge-warning': record.transactionType == 'Purchase',\r\n                                                                  'badge-success': record.transactionType == 'Own Sales',\r\n                                                                  'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                        {{record.transactionType}}\r\n                                                    </span>\r\n                                                    <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                                </ng-template>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -8948,6 +9072,103 @@ exports.EditOrder = EditOrder;
 
 /***/ }),
 
+/***/ "./src/app/pages/edit-password/edit-password.html":
+/*!********************************************************!*\
+  !*** ./src/app/pages/edit-password/edit-password.html ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Update Password'\" [parentCategory]=\"'Manage Withdrawal'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Update Password</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <form #dataForm=\"ngForm\" (ngSubmit)=\"submit()\">\r\n                        <!--OLD PASSWORD-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Old Password</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <input type=\"password\" name=\"oldPassword\" [(ngModel)]=\"passwordFields.oldPassword\" class=\"form-control\" mandatory/>\r\n                                <span *ngIf=\"invalidOldPassword\" class=\"text-danger\">\r\n                                    The password is not valid\r\n                                </span>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--NEW PASSWORD-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">New Password</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <input type=\"password\" class=\"form-control\" name=\"newPassword\" [(ngModel)]=\"passwordFields.newPassword\" mandatory />\r\n                                {{passwordFields.newPassword}}\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--CONFIRM PASSWORD-->\r\n                        <div class=\"form-group row\">\r\n                            <label class=\"col-sm-2 col-form-label\">Confirm Password</label>\r\n                            <div class=\"col-sm-10\">\r\n                                <input type=\"password\" class=\"form-control\" name=\"confirmPassword\" [(ngModel)]=\"passwordFields.confirmPassword\" \r\n                                        mandatory validateEqual [valueToCompare]=\"passwordFields.newPassword\" [fieldId]=\"'confirmPassword'\" [errorMessage]=\"'The entry is not the same as the new password'\"/>\r\n                            </div>\r\n                        </div>\r\n                        <div class=\"hr-line-dashed\"></div>\r\n                        <!--SAVE OR CANCEL-->\r\n                        <div class=\"form-group row\">\r\n                            <div class=\"col-sm-12 text-right\">\r\n                                <button type=\"submit\" class=\"btn btn-primary\" [ngClass]=\"{'show-spinner': isUpdating}\"\r\n                                        [disabled]=\"isUpdating \" style=\"width: 180px;\">\r\n                                    {{isUpdating ? 'Updating' : 'Update'}}\r\n                                    <span class=\"loading\"></span>\r\n                                </button>\r\n                            </div>\r\n                        </div>\r\n                    </form>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/edit-password/edit-password.ts":
+/*!******************************************************!*\
+  !*** ./src/app/pages/edit-password/edit-password.ts ***!
+  \******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var forms_1 = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+var broadcast_service_1 = __webpack_require__(/*! src/app/services/broadcast.service */ "./src/app/services/broadcast.service.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var form_submit_1 = __webpack_require__(/*! src/app/model/form-submit */ "./src/app/model/form-submit.ts");
+var ngx_toastr_1 = __webpack_require__(/*! ngx-toastr */ "./node_modules/ngx-toastr/fesm5/ngx-toastr.js");
+var EditPassword = /** @class */ (function () {
+    function EditPassword(loaderService, dataService, formEvent, authenticationService, toastr) {
+        this.loaderService = loaderService;
+        this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.authenticationService = authenticationService;
+        this.toastr = toastr;
+        this.invalidOldPassword = false;
+        this.isUpdating = false;
+        this.passwordFields = { oldPassword: null, newPassword: null, confirmPassword: null };
+    }
+    EditPassword.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
+    };
+    EditPassword.prototype.submit = function () {
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid)
+            return;
+        if (!this.currentUser.isAdmin) {
+            this.updatePassword(apiController_1.ApiController.User + "/UpdateAgentPassword", this.currentUser.agentId);
+        }
+        else {
+            this.updatePassword(apiController_1.ApiController.User + "/UpdateAdminPassword", this.currentUser.username);
+        }
+    };
+    EditPassword.prototype.updatePassword = function (url, userId) {
+        var _this = this;
+        this.isUpdating = true;
+        this.dataService.update(url, userId, this.passwordFields).subscribe(function (isValid) {
+            if (isValid) {
+                _this.toastr.success('The new password is updated successfully', 'Password Updated', { positionClass: 'toast-bottom-full-width' });
+            }
+            _this.invalidOldPassword = !isValid;
+            _this.isUpdating = false;
+        });
+    };
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], EditPassword.prototype, "form", void 0);
+    EditPassword = __decorate([
+        core_1.Component({
+            selector: 'edit-password',
+            template: __webpack_require__(/*! ./edit-password.html */ "./src/app/pages/edit-password/edit-password.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService,
+            data_service_1.DataService,
+            broadcast_service_1.BroadcastService,
+            authentication_1.AuthenticationService,
+            ngx_toastr_1.ToastrService])
+    ], EditPassword);
+    return EditPassword;
+}());
+exports.EditPassword = EditPassword;
+
+
+/***/ }),
+
 /***/ "./src/app/pages/edit-withdrawal/edit-withdrawal.html":
 /*!************************************************************!*\
   !*** ./src/app/pages/edit-withdrawal/edit-withdrawal.html ***!
@@ -9063,7 +9284,7 @@ exports.EditWithdrawal = EditWithdrawal;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper wrapper-content\">\r\n  <div class=\"row\">\r\n    <submission-status-count></submission-status-count>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-lg-12\">\r\n      <div class=\"ibox \">\r\n        <div class=\"ibox-content\">\r\n            <div class=\"row\">\r\n                <monthly-applications></monthly-applications>\r\n            </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n\r\n  <div class=\"row\">\r\n      <loading></loading>\r\n      <div class=\"col-lg-6\">\r\n          <announcement></announcement>\r\n      </div>\r\n      <div class=\"col-lg-6\">\r\n          <team-submission></team-submission>\r\n      </div>\r\n  </div>\r\n</div>\r\n"
+module.exports = "<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <submission-status-count></submission-status-count>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <monthly-applications></monthly-applications>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"row\">\r\n        <loading></loading>\r\n        <div class=\"col-lg-6\">\r\n            <announcement></announcement>\r\n        </div>\r\n        <div class=\"col-lg-6\">\r\n            <team-submission></team-submission>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 

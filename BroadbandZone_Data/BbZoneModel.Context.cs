@@ -872,19 +872,6 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetUnreadMessagesCount", prAppIdParameter, prIsAdminParameter);
         }
     
-        public virtual int UpdateMessagesToRead(Nullable<int> prAppId, Nullable<bool> prIsAdmin)
-        {
-            var prAppIdParameter = prAppId.HasValue ?
-                new ObjectParameter("prAppId", prAppId) :
-                new ObjectParameter("prAppId", typeof(int));
-    
-            var prIsAdminParameter = prIsAdmin.HasValue ?
-                new ObjectParameter("prIsAdmin", prIsAdmin) :
-                new ObjectParameter("prIsAdmin", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMessagesToRead", prAppIdParameter, prIsAdminParameter);
-        }
-    
         public virtual ObjectResult<GetApplicationDetails_Result> GetApplicationDetails(Nullable<int> prAppId)
         {
             var prAppIdParameter = prAppId.HasValue ?
@@ -1026,6 +1013,62 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAgentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompletedCustomerApplication_Result>("GetCompletedCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prCommStatusParameter, prViewAgentParameter, prActivatedFromParameter, prActivatedToParameter, prPayDateFromParameter, prPayDateToParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, oTotalRecord);
+        }
+    
+        public virtual int UpdateMyPasswordAdmin(string prAdminLogin, string prOldPassword, string prNewPassword, ObjectParameter oValidUpdate)
+        {
+            var prAdminLoginParameter = prAdminLogin != null ?
+                new ObjectParameter("prAdminLogin", prAdminLogin) :
+                new ObjectParameter("prAdminLogin", typeof(string));
+    
+            var prOldPasswordParameter = prOldPassword != null ?
+                new ObjectParameter("prOldPassword", prOldPassword) :
+                new ObjectParameter("prOldPassword", typeof(string));
+    
+            var prNewPasswordParameter = prNewPassword != null ?
+                new ObjectParameter("prNewPassword", prNewPassword) :
+                new ObjectParameter("prNewPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMyPasswordAdmin", prAdminLoginParameter, prOldPasswordParameter, prNewPasswordParameter, oValidUpdate);
+        }
+    
+        public virtual int UpdateMyPasswordAgent(Nullable<int> prAgentId, string prOldPassword, string prNewPassword, ObjectParameter oValidUpdate)
+        {
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prOldPasswordParameter = prOldPassword != null ?
+                new ObjectParameter("prOldPassword", prOldPassword) :
+                new ObjectParameter("prOldPassword", typeof(string));
+    
+            var prNewPasswordParameter = prNewPassword != null ?
+                new ObjectParameter("prNewPassword", prNewPassword) :
+                new ObjectParameter("prNewPassword", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMyPasswordAgent", prAgentIdParameter, prOldPasswordParameter, prNewPasswordParameter, oValidUpdate);
+        }
+    
+        public virtual int UpdateMessagesToRead(Nullable<int> prAppId, Nullable<bool> prIsAdmin)
+        {
+            var prAppIdParameter = prAppId.HasValue ?
+                new ObjectParameter("prAppId", prAppId) :
+                new ObjectParameter("prAppId", typeof(int));
+    
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateMessagesToRead", prAppIdParameter, prIsAdminParameter);
+        }
+    
+        public virtual int GenerateActivationCode(Nullable<int> prRegistrationId, ObjectParameter oActivationCode)
+        {
+            var prRegistrationIdParameter = prRegistrationId.HasValue ?
+                new ObjectParameter("prRegistrationId", prRegistrationId) :
+                new ObjectParameter("prRegistrationId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateActivationCode", prRegistrationIdParameter, oActivationCode);
         }
     }
 }
