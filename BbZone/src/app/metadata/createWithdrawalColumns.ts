@@ -21,7 +21,7 @@ export class CreateWithdrawalColumns {
         "headerText": "Transaction Details",
         "displayType": "text",
         "keyField": false,
-        "colWidth": "cell-width-35"
+        "colWidth": "cell-width-30"
     },
     {
         "fieldName": "packageName",
@@ -42,7 +42,7 @@ export class CreateWithdrawalColumns {
         "headerText": "Transaction Type",
         "displayType": "badge",
         "keyField": false,
-        "colWidth": "cell-width-10"
+        "colWidth": "cell-width-15"
     },
     {
         "fieldName": "claimAmount",

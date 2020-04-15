@@ -23,7 +23,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 StatusAndKeywordParams filterBy = JsonConvert.DeserializeObject<StatusAndKeywordParams>(searchParams);
-
                 var records = ModelHelper.GetListdata((new BroadbandZoneEntities()).GetProducts, currentPage, pageSize, sortColumn, sortInAsc, filterBy.Keyword, filterBy.IsActive);
                 return Ok(records);
             }
@@ -70,7 +69,6 @@ namespace BroadbandZone_App.WebApi
                     editedRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
-                   // ModelHelper.CopyPropertiesTo<Product, GetProducts_Result>(editedRecord, out GetProducts_Result returnRec);
                     return Ok(editedRecord);
                 }
             }

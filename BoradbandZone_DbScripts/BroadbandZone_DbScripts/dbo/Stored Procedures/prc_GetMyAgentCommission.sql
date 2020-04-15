@@ -6,6 +6,7 @@ BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
 	        @vIsAdmin BIT = 0,
 			@vCols AS NVARCHAR(MAX),
+			@vOrderByCol VARCHAR(150),
 			@query AS NVARCHAR(MAX);
 
 	BEGIN TRY
@@ -15,26 +16,33 @@ BEGIN
 		SET @vIsAdmin = 1
 
 		SELECT 
-			 ac.AgentId
+			 a1.AgentId
 			,a1.Fullname AS AgentName
-			,pc.Category
+			,ap.Category
 			,ac.AgentCommission
 		INTO ##temp_AgentComm
-		FROM AgentCommission ac
-		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
-		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
-		WHERE pc.ProductId = @prProductId
-		AND 1 = CASE WHEN @vIsAdmin = 1 AND a1.SuperiorId IS NULL THEN 1
-		             WHEN a1.SuperiorId = @prSuperiorId THEN 1
-					 ELSE 0
-				END
-		ORDER BY pc.Category
-
-		SELECT @vCols = STUFF((SELECT DISTINCT ',' + QUOTENAME(c.category) 
+		FROM Agent a1
+		CROSS APPLY ( SELECT a1.AgentId, pc.CategoryId, pc.Category
+					  FROM ProductCategory pc 
+					  WHERE pc.ProductId = @prProductId
+					  AND pc.IsActive = 1
+					  ) ap
+		LEFT JOIN AgentCommission ac ON ac.AgentId = ap.AgentId AND ac.CategoryId = ap.CategoryId
+		WHERE 1 = CASE WHEN @vIsAdmin = 1 AND a1.SuperiorId IS NULL THEN 1
+					   WHEN a1.SuperiorId = @prSuperiorId THEN 1
+					   ELSE 0
+				  END
+		ORDER BY ap.Category
+		
+		SELECT @vCols = STUFF((SELECT  ',' + QUOTENAME(c.category) 
 							  FROM ##temp_AgentComm c
+							  GROUP BY Category
+							  ORDER BY Category
 							  FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') 
 						,1,1,'')
 
+	    SELECT @vOrderByCol =  CASE WHEN CHARINDEX(',', @vCols) > 0 THEN SUBSTRING(@vCols, 1, CHARINDEX(',', @vCols) - 1) ELSE @vCols END
+	
 		SET @query = 'SELECT AgentId, AgentName,' + @vCols + ' FROM 
 					 (
 						SELECT AgentId, 
@@ -47,7 +55,7 @@ BEGIN
 						(
 							MAX(AgentCommission)
 						    FOR Category in (' + @vCols + ')
-					 ) p '
+					 ) p  ORDER BY ' + @vOrderByCol + ' DESC' 
 
 		EXECUTE(@query)
 

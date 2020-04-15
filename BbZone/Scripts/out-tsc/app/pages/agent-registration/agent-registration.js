@@ -32,6 +32,7 @@ var AgentRegistration = /** @class */ (function () {
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
+        this.hasLoginExists = false;
         this.completed = false;
     }
     AgentRegistration.prototype.ngOnInit = function () {
@@ -48,6 +49,24 @@ var AgentRegistration = /** @class */ (function () {
         if (!this.form.valid)
             return;
         this.isUpdating = true;
+        this.dataService.get(apiController_1.ApiController.User + "/HasLoginExists", this.formRecord["userLogin"]).subscribe(function (hasExist) {
+            if (!hasExist) {
+                _this.postData();
+            }
+            else {
+                _this.isUpdating = false;
+            }
+            _this.hasLoginExists = hasExist;
+        });
+    };
+    AgentRegistration.prototype.postData = function () {
+        var _this = this;
+        this.dataService.postForm(apiController_1.ApiController.Registration, this.getFormData()).subscribe(function (data) {
+            _this.isUpdating = false;
+            _this.completed = true;
+        });
+    };
+    AgentRegistration.prototype.getFormData = function () {
         var formData = new FormData();
         formData.append('data', JSON.stringify(this.formRecord));
         if (this.formRecord.files) {
@@ -55,10 +74,7 @@ var AgentRegistration = /** @class */ (function () {
                 formData.append("file" + i, this.formRecord.files[i]);
             }
         }
-        this.dataService.postForm(apiController_1.ApiController.Registration, formData).subscribe(function (data) {
-            _this.isUpdating = false;
-            _this.completed = true;
-        });
+        return formData;
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

@@ -214,7 +214,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "companyName",
@@ -222,7 +222,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "mobileNo",
@@ -233,12 +233,12 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "colWidth": "cell-width-10"
         },
         {
-            "fieldName": "telNo",
-            "headerText": "Tel No",
+            "fieldName": "superiorName",
+            "headerText": "Superior Name",
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "createdOn",
@@ -246,7 +246,15 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "activationCode",
+            "headerText": "Activation Code",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": ""
         },
         {
             "fieldName": "isApproved",

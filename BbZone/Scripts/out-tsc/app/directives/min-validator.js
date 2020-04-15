@@ -33,6 +33,8 @@ var MinDirective = /** @class */ (function () {
         });
     };
     MinDirective.prototype.validate = function () {
+        if (!this.parentForm.controls[this.fieldId])
+            return;
         var thisElement = $(this.el.nativeElement);
         $(this.el.nativeElement).next('.text-danger').remove();
         var value = this.parentForm.controls[this.fieldId].value;

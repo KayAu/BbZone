@@ -19,6 +19,7 @@
                                     <div class="col-sm-9">
                                         <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
                                                       [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                        <span class="text-danger" *ngIf="field.fieldName=='userLogin' && hasLoginExists">The user login has already exists. Please choose another login.</span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -32,7 +33,7 @@
                             </div>
 
                             <!--SAVE OR CANCEL-->
-                            <div class="form-group row">
+                            <div class="form-group row mrg20T">
                                 <div class="col-sm-12 ">
                                     <a [routerLink]='["/"]' class="btn btn-white float-right">Cancel</a>
                                     <!--<button class="btn btn-primary" type="submit">Save changes</button>-->

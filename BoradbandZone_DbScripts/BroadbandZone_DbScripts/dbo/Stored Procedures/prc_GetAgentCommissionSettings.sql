@@ -6,15 +6,17 @@ BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID)
 
 	BEGIN TRY
-		SELECT ac.CategoryId,
+
+		SELECT pc.CategoryId,
 			   pc.Category,
-			   pc.DefaultCommission AS [SupCommission],
+			   ac.SuperiorCommission AS [SupCommission],
 			   ac.AgentCommission AS [AgentCommissionPer]
-		FROM AgentCommission ac
-		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
+		FROM ProductCategory pc 
+		LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId AND ac.AgentId = @prAgentId
 		WHERE pc.ProductId = @prProductId
-		AND ac.AgentId = @prAgentId
+		AND pc.IsActive = 1
 		ORDER BY pc.Category
+
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

@@ -46,10 +46,10 @@ namespace BroadbandZone_Data
         public virtual DbSet<LoginTrail> LoginTrails { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<Communication> Communications { get; set; }
-        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
         public virtual DbSet<RegistrationDocument> RegistrationDocuments { get; set; }
         public virtual DbSet<SProcErrorLog> SProcErrorLogs { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -588,21 +588,21 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPaymentDetails_Result>("GetPaymentDetails", prWithdrawalIdParameter);
         }
     
-        public virtual int UpdateCompletedAppCommission(Nullable<int> prAppId, Nullable<int> prAgentId, string prCreatedBy)
+        public virtual int UpdateCompletedAppCommission(Nullable<int> prAppId, string prAgentLogin, string prCreatedBy)
         {
             var prAppIdParameter = prAppId.HasValue ?
                 new ObjectParameter("prAppId", prAppId) :
                 new ObjectParameter("prAppId", typeof(int));
     
-            var prAgentIdParameter = prAgentId.HasValue ?
-                new ObjectParameter("prAgentId", prAgentId) :
-                new ObjectParameter("prAgentId", typeof(int));
+            var prAgentLoginParameter = prAgentLogin != null ?
+                new ObjectParameter("prAgentLogin", prAgentLogin) :
+                new ObjectParameter("prAgentLogin", typeof(string));
     
             var prCreatedByParameter = prCreatedBy != null ?
                 new ObjectParameter("prCreatedBy", prCreatedBy) :
                 new ObjectParameter("prCreatedBy", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompletedAppCommission", prAppIdParameter, prAgentIdParameter, prCreatedByParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateCompletedAppCommission", prAppIdParameter, prAgentLoginParameter, prCreatedByParameter);
         }
     
         public virtual ObjectResult<FindClaimedApplication_Result> FindClaimedApplication(string prSearchKeyword)
@@ -785,9 +785,13 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmittedForDownload_Result>("GetWithdrawalSubmittedForDownload", prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter);
         }
     
-        public virtual ObjectResult<DboardMonthlyApplications_Result> DboardMonthlyApplications()
+        public virtual ObjectResult<DboardMonthlyApplications_Result> DboardMonthlyApplications(Nullable<int> prSuperiorId)
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardMonthlyApplications_Result>("DboardMonthlyApplications");
+            var prSuperiorIdParameter = prSuperiorId.HasValue ?
+                new ObjectParameter("prSuperiorId", prSuperiorId) :
+                new ObjectParameter("prSuperiorId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardMonthlyApplications_Result>("DboardMonthlyApplications", prSuperiorIdParameter);
         }
     
         public virtual ObjectResult<DboardTopSalesPackage_Result> DboardTopSalesPackage(Nullable<int> prAgentId, string prAgentName)

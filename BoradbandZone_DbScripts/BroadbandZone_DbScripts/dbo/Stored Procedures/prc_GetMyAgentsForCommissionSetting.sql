@@ -22,17 +22,20 @@ BEGIN
 		END
 		ELSE
 			SET @oAllowCommConfig = 1
+
 		-- get the list of subordinates who do not have their commission set up yet for the selected product  
 		SELECT a1.AgentId AS [DisplayValue] 
 			  ,a1.Fullname AS [DisplayText]
 			  ,CAST(0 AS BIT) AS Selected
 		FROM Agent a1
-		WHERE NOT a1.AgentId IN 
+		WHERE a1.AgentId IN 
 		(
-			SELECT AgentId
-			FROM AgentCommission ac
-		    INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId 
-		    WHERE pc.ProductId = @prProductID
+			SELECT a1.AgentId
+			FROM ProductCategory pc
+			LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId AND ac.AgentId =  a1.AgentId
+			WHERE pc.ProductId =  @prProductID
+			AND ac.CommId IS NULL
+			AND pc.IsActive = 1
 		)
 		AND 1 = CASE WHEN @prSuperiorId IS NULL AND a1.SuperiorId IS NULL THEN 1  -- ADMIN
 					 WHEN a1.SuperiorId = @prSuperiorId THEN 1

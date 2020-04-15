@@ -31,8 +31,8 @@ namespace BroadbandZone_Data
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
     
-        public virtual ProductCategory ProductCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CustomerApplication> CustomerApplications { get; set; }
+        public virtual ProductCategory ProductCategory { get; set; }
     }
 }

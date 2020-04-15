@@ -34,6 +34,7 @@ var AgentCommissionTable = /** @class */ (function () {
         this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsCommission", productId).subscribe(function (results) {
             _this.dataSource = results;
             _this.setColumnNames();
+            _this.disableRowEdit();
         });
     };
     AgentCommissionTable.prototype.loadCurrentAgentCommission = function (agentId, productId) {
@@ -78,6 +79,12 @@ var AgentCommissionTable = /** @class */ (function () {
     AgentCommissionTable.prototype.cancelEdit = function (rowIndex) {
         this.dataSource[rowIndex].onEdit = false;
         this.commissionSettings = [];
+    };
+    AgentCommissionTable.prototype.disableRowEdit = function () {
+        this.dataSource.forEach(function (element, index, array) {
+            var nullComms = Object.values(array[index]).filter(function (o) { return o === null; }).length;
+            array[index].disabledEdit = nullComms === Object.keys(array[index]).length - 2 ? true : false;
+        });
     };
     AgentCommissionTable.prototype.hideEditingRow = function () {
         this.dataSource.forEach(function (element, index, array) {

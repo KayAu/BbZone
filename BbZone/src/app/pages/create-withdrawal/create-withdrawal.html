@@ -62,6 +62,7 @@
                         </div>
                         <button type="button" class="btn btn-outline btn-default" (click)="clearSearchParam()">Reset</button>
                     </div>
+                    <div class="col-md-6"></div>
                     <div class="table-responsive mrg10T">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="col-md-12 pad0L mrg25B mrg20T" *ngIf="selectedItems.length > 0">
@@ -81,7 +82,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <table class="table table-striped mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                            <div class="mrg5B display-block w-p100">Select one or more items to submit the claim</div>
+                            <table class="table table-striped mrg10T dataTable table-bordered" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
                                     <tr>
                                         <th></th>

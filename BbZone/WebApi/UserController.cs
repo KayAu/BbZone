@@ -3,6 +3,7 @@ using BroadbandZone_App.Models;
 using BroadbandZone_Data;
 using System;
 using System.Data.Entity.Core.Objects;
+using System.Linq;
 using System.Net;
 using System.Web.Http;
 using System.Web.Security;
@@ -26,6 +27,25 @@ namespace BroadbandZone_App.WebApi
                 }
  
                 return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/User/HasLoginExists/{userLogin}")]
+        public IHttpActionResult HasLoginExists(string userLogin)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var agentFound = db.Agents.Where(a => a.UserLogin == userLogin).Count();
+                    return Ok(agentFound > 0 ? true : false);
+                }
             }
             catch (Exception ex)
             {

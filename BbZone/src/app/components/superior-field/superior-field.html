@@ -1,6 +1,14 @@
 ﻿<div class="superior-result" *ngIf="displayText">
     {{displayText}}
-    <a class="superior-result-remove" *ngIf="editable" (click)="clearDisplayText()"></a>
+    <a class="superior-result-remove"  (click)="clearDisplayText()"></a>
 </div>
-<input name="{{fieldId}}" type="number" class="form-control" [(ngModel)]="data" 
-       (keyup)="onSearchInputChanged($event.target.value)" >
+<input name="{{fieldId}}" type="text" class="form-control" [(ngModel)]="data"
+       (keyup)="onSearchInputChanged($event.target.value)">
+
+<ul class="dropdown-menu dropdown-messages show mrg15L" *ngIf="agents.length > 0">
+    <li *ngFor="let agent of agents " class="filter-select-results" (click)="selectItem(agent)">
+        <i class="fa fa-user-circle mrg15R"></i>
+        <span>{{agent.fullname}}</span>
+    </li>
+  
+</ul>

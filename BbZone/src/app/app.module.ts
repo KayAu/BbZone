@@ -151,7 +151,7 @@ import { EditPassword } from './pages/edit-password/edit-password';
         MaterialModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd.forRoot(),
-        UserIdleModule.forRoot({ idle: 300, timeout: 60, ping: 60 }),
+        UserIdleModule.forRoot({ idle: 300, timeout: 1200, ping: 60 }),
         ToastrModule.forRoot({
             maxOpened: 1,
             preventDuplicates: true,

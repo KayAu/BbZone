@@ -162,7 +162,7 @@ var AppModule = /** @class */ (function () {
                 material_1.MaterialModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                angular_user_idle_1.UserIdleModule.forRoot({ idle: 300, timeout: 60, ping: 60 }),
+                angular_user_idle_1.UserIdleModule.forRoot({ idle: 300, timeout: 1200, ping: 60 }),
                 ngx_toastr_1.ToastrModule.forRoot({
                     maxOpened: 1,
                     preventDuplicates: true,

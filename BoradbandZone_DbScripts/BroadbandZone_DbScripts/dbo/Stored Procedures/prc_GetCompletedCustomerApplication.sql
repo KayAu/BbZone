@@ -39,7 +39,7 @@ BEGIN
 		Agent VARCHAR(50),
 		--IsOverride BIT,
 		DocumentCompleted BIT,
-		CommStatus VARCHAR (15),
+		CommStatus VARCHAR (50),
 		--ClaimSubmitted BIT,
 		--IsPaid  BIT,
 		PaidOn SMALLDATETIME,
@@ -68,22 +68,27 @@ BEGIN
 			  ,a.UserLogin
 			 -- ,cc.IsOverride
 			  ,ca.DocumentCompleted
-			  ,CommStatus = CASE WHEN ca.DocumentCompleted = 0 THEN 'Claim Disallowed'
+			  ,CommStatus = CASE WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'
-							     --WHEN ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN 'Not Claim'
-								 WHEN ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN 'Claimed'
-								 ELSE 'Not Claim'
+								 WHEN ac.CommId IS NULL THEN 'Not Created'
+							     WHEN ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN 'Not Claim'
+								 WHEN ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN 'Claimed'								
 							END
 			  ,w.CompletedOn 
 		INTO ##temp_Table
 		FROM CustomerApplication ca
+		INNER JOIN ApplicationStatus s ON ca.AppStatusId = s.AppStatusId
+		--INNER JOIN Agent a ON ca.Agent = a.UserLogin
 		INNER JOIN ProductPackage PP ON ca.ProdPkgId = pp.ProdPkgId
 		INNER JOIN ProductCategory PC ON pc.CategoryId = pp.CategoryId
 		INNER JOIN Product p ON pc.ProductId = p.ProductId
-		INNER JOIN ClaimableCommission cc ON cc.ApplicationId = ca.ApplicationId  --AND cc.AgentId = a.AgentId
-		INNER JOIN Agent a ON cc.AgentId = a.AgentId
+		LEFT JOIN ClaimableCommission cc ON cc.ApplicationId = ca.ApplicationId  
+		LEFT JOIN AgentCommission ac ON ac.AgentId = cc.AgentId AND ac.CategoryId = ca.CategoryId
+		LEFT JOIN Agent a ON ac.AgentId = a.AgentId
 		LEFT JOIN Withdrawal w ON w.WithdrawalId = cc.ClaimWithdrawalId
-		WHERE 1 = CASE WHEN @prAgentId IS NULL THEN 1
+		WHERE s.Status = 'Post Complete'
+		AND 1 = CASE WHEN @prAgentId IS NULL THEN 1
+		               WHEN cc.AgentId IS NULL AND a.AgentId = @prAgentId THEN 1
 		               WHEN cc.AgentId = @prAgentId AND ISNULL(cc.IsOverride, 0) = 0 THEN 1
 					   ELSE 0
 				  END
@@ -118,6 +123,7 @@ BEGIN
 		AND 1 = CASE wHEN @prCommStatus IS NULL THEN 1
 					 WHEN @prCommStatus = 'Paid' AND NOT w.CompletedOn IS NULL THEN  1
 					 WHEN @prCommStatus = 'Claim Disallowed' AND ca.DocumentCompleted = 0 THEN  1
+					 WHEN @prCommStatus = 'Not Created' AND ac.CommId IS NULL THEN  1
 					 WHEN @prCommStatus = 'Not Claim' AND ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN  1
 				     WHEN @prCommStatus = 'Claimed' AND ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN  1
 					 ELSE 0 
@@ -128,7 +134,7 @@ BEGIN
 					      OR ca.ResidentialName LIKE '%' + @prKeyword + '%' THEN 1
 					 ELSE 0
 				END	
-
+				SELECT @oTotalRecord = 1
 		PRINT @vSelectQuery
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table

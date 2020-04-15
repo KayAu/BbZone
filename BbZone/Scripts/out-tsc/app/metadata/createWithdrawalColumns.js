@@ -23,7 +23,7 @@ var CreateWithdrawalColumns = /** @class */ (function () {
             "headerText": "Transaction Details",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-35"
+            "colWidth": "cell-width-30"
         },
         {
             "fieldName": "packageName",
@@ -44,7 +44,7 @@ var CreateWithdrawalColumns = /** @class */ (function () {
             "headerText": "Transaction Type",
             "displayType": "badge",
             "keyField": false,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "claimAmount",

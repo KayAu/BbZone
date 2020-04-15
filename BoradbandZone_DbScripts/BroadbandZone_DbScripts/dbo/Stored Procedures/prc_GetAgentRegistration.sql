@@ -17,8 +17,9 @@ BEGIN
 		Fullname VARCHAR(50) NOT NULL,
 		CompanyName VARCHAR(50) NULL,
 		MobileNo VARCHAR(15) NOT NULL,
-		TelNo VARCHAR(15) NULL,
+		SuperiorName VARCHAR(50) NULL,
 		CreatedOn SMALLDATETIME NULL,
+		ActivationCode VARCHAR(100) NULL,
 		IsApproved BIT NULL,
 		ApprovalDate SMALLDATETIME NULL,
 		ApprovedBy VARCHAR(50),
@@ -31,17 +32,19 @@ BEGIN
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
-		SELECT RegId,
-		    Fullname,
-			CompanyName,
-			MobileNo,
-			TelNo,
-			CreatedOn,
-			IsApproved,
-			ApprovalDate,
-			ApprovedBy
+		SELECT r.RegId,
+		    r.Fullname,
+			r.CompanyName,
+			r.MobileNo,
+			SuperiorName = a.Fullname,
+			r.CreatedOn,
+			r.ActivationCode,
+			r.IsApproved,
+			r.ApprovalDate,
+			r.ApprovedBy
 		INTO ##temp_Table
 		FROM Registration r 
+		INNER JOIN Agent a ON a.AgentId = r.SuperiorId
 		WHERE 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
 					   WHEN r.Fullname LIKE '%' + @prSearchKeyword + '%' OR
 						    r.CompanyName LIKE '%' +@prSearchKeyword + '%' THEN 1
@@ -63,8 +66,9 @@ BEGIN
 				Fullname,
 				CompanyName,
 				MobileNo,
-				TelNo,
+				SuperiorName,
 				CreatedOn = FORMAT(CreatedOn, 'MM/dd/yyyy'),
+				ActivationCode,
 				IsApproved,
 				ApprovalDate  = FORMAT(ApprovalDate, 'MM/dd/yyyy'),
 				ApprovedBy

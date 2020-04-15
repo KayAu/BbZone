@@ -13,11 +13,13 @@
             </ng-container>
             <ng-container *ngIf="row.onEdit">
                 <td *ngFor="let comm of commissionSettings">
-                    <input type="number" min="0" class="form-control" [(ngModel)]="comm.agentCommissionPer" />
+                    <input type="number" min="0" class="form-control" [(ngModel)]="comm.agentCommissionPer" *ngIf="comm.agentCommissionPer" />
+                    <input type="number" class="form-control" [(ngModel)]="comm.agentCommissionPer" *ngIf="!comm.agentCommissionPer" disabled value="Not Set" />
+        
                 </td>
             </ng-container>
             <td>
-                <tablerow-buttons [editMode]="row.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)"></tablerow-buttons>
+                <tablerow-buttons [editMode]="row.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" [disabledEdit]="row.disabledEdit"></tablerow-buttons>
             </td>
         </tr>
         <tr *ngIf="dataSource == null || dataSource.length == 0">

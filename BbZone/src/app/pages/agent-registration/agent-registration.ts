@@ -12,6 +12,7 @@ import { ApiController } from '../../enums/apiController';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
 
+declare var $: any;
 
 @Component({
     selector: 'agent-registration',
@@ -23,6 +24,7 @@ export class AgentRegistration {
     formFields: FormDataMapping[] = [];
     formRecord: any = {};
     isUpdating: boolean = false;
+    hasLoginExists: boolean = false;
     completed: boolean = false;
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router, private route: ActivatedRoute) { }
 
@@ -51,6 +53,25 @@ export class AgentRegistration {
         if (!this.form.valid) return;
 
         this.isUpdating = true;
+        this.dataService.get(`${ApiController.User}/HasLoginExists`, this.formRecord["userLogin"]).subscribe(hasExist => {
+            if (!hasExist) {
+                this.postData();
+            }
+            else {
+                this.isUpdating = false;
+            }
+            this.hasLoginExists = hasExist;
+        });
+    }
+
+    private postData() {
+        this.dataService.postForm(ApiController.Registration, this.getFormData()).subscribe(data => {
+            this.isUpdating = false;
+            this.completed = true;
+        });
+    }
+
+    private getFormData(): FormData {
         const formData = new FormData();
         formData.append('data', JSON.stringify(this.formRecord));
 
@@ -59,11 +80,6 @@ export class AgentRegistration {
                 formData.append("file" + i, this.formRecord.files[i]);
             }
         }
-
-        this.dataService.postForm(ApiController.Registration, formData).subscribe(data => {
-            this.isUpdating = false;
-            this.completed = true;
-        });
+        return formData;
     }
-
 }

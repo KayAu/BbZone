@@ -35,6 +35,8 @@ export class MinDirective  {
     }
 
     private validate() {
+        if (!this.parentForm.controls[this.fieldId]) return;
+
         let thisElement = $(this.el.nativeElement);
         $(this.el.nativeElement).next('.text-danger').remove();
         
@@ -48,24 +50,5 @@ export class MinDirective  {
             this.parentForm.controls[this.fieldId].setErrors({ 'min': true });
         }
     }
-    
-    //private _validator: ValidatorFn;
-    ////private minValue: number;
-    //@Input() public set min(value: string) {
-    //    //this.minValue = parseInt(value, 10);
-    //    this._validator = Validators.min(parseInt(value, 10));
-    //}
-
-    //public validate(thisControl: AbstractControl): { [key: string]: any } {
-    //    //if (thisControl.value) {
-    //    //    if (thisControl.value < this.minValue) {
-    //    //        thisControl.setValue(this.minValue);
-    //    //        return { min: true };
-    //    //    }
-    //    //}
-
-    //    //return null;
-
-    //    return this._validator(thisControl);
-    //}
+   
 }

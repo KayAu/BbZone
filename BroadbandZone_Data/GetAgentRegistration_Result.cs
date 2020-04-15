@@ -17,10 +17,11 @@ namespace BroadbandZone_Data
         public string Fullname { get; set; }
         public string CompanyName { get; set; }
         public string MobileNo { get; set; }
-        public string TelNo { get; set; }
         public string CreatedOn { get; set; }
         public Nullable<bool> IsApproved { get; set; }
         public string ApprovedBy { get; set; }
         public string ApprovalDate { get; set; }
+        public string SuperiorName { get; set; }
+        public string ActivationCode { get; set; }
     }
 }

@@ -51,7 +51,7 @@ var ViewCompletedOrderColumns = /** @class */ (function () {
             "headerText": "Agent",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         },
         {
             "fieldName": "documentCompleted",

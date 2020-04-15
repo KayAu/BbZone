@@ -15,7 +15,7 @@ namespace BroadbandZone_Data
     {
         public int CategoryId { get; set; }
         public string Category { get; set; }
-        public Nullable<decimal> SupCommission { get; set; }
-        public short AgentCommissionPer { get; set; }
+        public Nullable<short> SupCommission { get; set; }
+        public Nullable<short> AgentCommissionPer { get; set; }
     }
 }

@@ -44,19 +44,19 @@ var ManageCategoryColumns = /** @class */ (function () {
                 "datasourceUrl": "GetCategoryType"
             }
         },
-        {
-            "fieldName": "defaultCommission",
-            "headerText": "Default Commission (RM)",
-            "displayType": "text",
-            "keyField": false,
-            "colWidth": "cell-width-15",
-            "dataFieldControl": {
-                "controlName": "defaultCommission",
-                "controlType": "number",
-                "required": true,
-                "maxLength": 10
-            }
-        },
+        //{
+        //    "fieldName": "defaultCommission",
+        //    "headerText": "Default Commission (RM)",
+        //    "displayType": "text",
+        //    "keyField": false,
+        //    "colWidth": "cell-width-15",
+        //    "dataFieldControl": {
+        //        "controlName": "defaultCommission",
+        //        "controlType": "number",
+        //        "required": true,
+        //        "maxLength": 10
+        //    }
+        //},
         {
             "fieldName": "commissionPercent",
             "headerText": "Commission (%)",

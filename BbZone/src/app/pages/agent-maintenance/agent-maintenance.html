@@ -28,35 +28,37 @@
                         </div>
                     </div>
                     <div class="table-responsive mrg10T">
-                        <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
-                            <thead>
-                                <tr>
-                                    <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                    <th class="cell-width-5">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let record of dataSource; let rowNo = index">
-                                    <ng-container *ngFor="let field of dataRowMapper">
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                        <th class="cell-width-5">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let record of dataSource; let rowNo = index">
+                                        <ng-container *ngFor="let field of dataRowMapper">
+                                            <td>
+                                                <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            </td>
+                                        </ng-container>
                                         <td>
-                                            <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <a class="btn btn-success btn-sm " [routerLink]='["/agent-view/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
                                         </td>
-                                    </ng-container>
-                                    <td>
-                                        <a class="btn btn-success btn-sm " [routerLink]='["/agent-view/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
-                                    </td>
-                                </tr>
-                                <tr *ngIf="dataSource.length === 0">
-                                    <td [attr.colspan]="dataRowMapper.length+1">
-                                        <div class="mrg45A text-center opacity-40">
-                                            <i class="fa fa-fw fa-file-text font-size-35"></i>
-                                            <h4>No Records Available</h4>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                                    </tr>
+                                    <tr *ngIf="dataSource.length === 0">
+                                        <td [attr.colspan]="dataRowMapper.length+1">
+                                            <div class="mrg45A text-center opacity-40">
+                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                <h4>No Records Available</h4>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                        </div>
                     </div>
                 </div>
             </div>

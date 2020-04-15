@@ -186,7 +186,7 @@ namespace BroadbandZone_App.WebApi
                     db.SaveChanges();
 
                     // Update agent current commission if the application is completed as well as the activation date
-                    db.UpdateCompletedAppCommission(id, currentUser.AgentId, currentUser.Fullname);
+                    db.UpdateCompletedAppCommission(id, editedRecord.Agent, currentUser.Fullname);
                 }
 
                 // save uploaded file details to database

@@ -31,7 +31,8 @@ export class AgentCommissionTable
         this.tableDisplay = CommissionTableDisplay.allAgents;
         this.dataService.get(`${ApiController.Commission}/GetMyAgentsCommission`, productId).subscribe(results => {
             this.dataSource = results;
-            this.setColumnNames();            
+            this.setColumnNames();  
+            this.disableRowEdit();
         });
     }
 
@@ -79,6 +80,13 @@ export class AgentCommissionTable
     cancelEdit(rowIndex: number) {
         this.dataSource[rowIndex].onEdit = false;
         this.commissionSettings = [];
+    }
+
+    private disableRowEdit() {
+        this.dataSource.forEach(function (element, index, array) {
+            let nullComms = Object.values(array[index]).filter(o => o === null).length;
+            array[index].disabledEdit = nullComms === Object.keys(array[index]).length - 2 ? true : false;
+        });
     }
 
     private hideEditingRow() {

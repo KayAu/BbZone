@@ -31,15 +31,16 @@ namespace BroadbandZone_App.WebApi
         }
 
         [HttpGet]
-        [Route("api/Agent/CheckValidity/{agentId}")]
-        public IHttpActionResult CheckValidity(int agentId)
+        [Route("api/Agent/GetAgents/{agentId}")]
+        public IHttpActionResult GetAgents(string agentId)
         {
             try
             {
                 using (var db = new BroadbandZoneEntities())
                 {
-                    var agentName = db.Agents.Where(a => a.AgentId == agentId).Select(a => a.Fullname).FirstOrDefault();
-                    return Ok(agentName);
+                    //var agentName = db.Agents.Where(a => a.AgentId == agentId).Select(a => a.Fullname).FirstOrDefault();
+                    var agents = db.Agents.Where(a => a.UserLogin.StartsWith(agentId)).Select(a => new { Fullname = a.UserLogin, AgentId = a.AgentId }).ToList();
+                    return Ok(agents);
                 }
             }
             catch (Exception ex)

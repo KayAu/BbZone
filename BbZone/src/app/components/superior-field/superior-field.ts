@@ -29,6 +29,7 @@ export class SuperiorField implements ControlValueAccessor {
     //@Input() isAdmin: boolean;
     @Output() propagateChange: any = () => { };
     searchFieldInput: Subject<string> = new Subject();
+    agents: any[] = [];
     private subscription: Subscription;
 
     constructor(
@@ -63,6 +64,13 @@ export class SuperiorField implements ControlValueAccessor {
         this.searchFieldInput.next(keyword);
     }
 
+    selectItem(agent: any) {
+        this.displayText = `${agent.agentId} - ${agent.fullname}`;
+        this.data = agent.agentId;
+        this.setChanges();
+        this.agents = [];
+    }
+
     clearDisplayText() {
         this.displayText = null;
         this.data = null;
@@ -75,18 +83,19 @@ export class SuperiorField implements ControlValueAccessor {
         if (!keyword)
             this.clearErrorMessages(thisElement);
 
-        this.dataService.get(`${ApiController.Agent}/CheckValidity/`, keyword).subscribe(results => {
+        this.dataService.get(`${ApiController.Agent}/GetAgents/`, keyword).subscribe(results => {
             if (results) {
-                this.displayText = `${keyword} - ${results}`;
-                this.clearErrorMessages(thisElement);
-                this.setChanges();
+                this.agents = results;
+               // this.displayText = `${results} - ${results}`;
+                //this.clearErrorMessages(thisElement);
+                //this.setChanges();
             }
-            else {
-                thisElement.next('.text-danger').remove();
-                thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
-                $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-                this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-            }
+            //else {
+            //    thisElement.next('.text-danger').remove();
+            //    thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
+            //    $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+            //    this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+            //}
         });    
     }
 

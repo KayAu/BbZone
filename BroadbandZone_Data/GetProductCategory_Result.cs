@@ -15,7 +15,6 @@ namespace BroadbandZone_Data
     {
         public int CategoryId { get; set; }
         public string Category { get; set; }
-        public decimal DefaultCommission { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }

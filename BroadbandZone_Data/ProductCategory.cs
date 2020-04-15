@@ -24,7 +24,6 @@ namespace BroadbandZone_Data
         public int CategoryId { get; set; }
         public Nullable<int> ProductId { get; set; }
         public string Category { get; set; }
-        public Nullable<decimal> DefaultCommission { get; set; }
         public Nullable<short> CommissionPercent { get; set; }
         public string CategoryType { get; set; }
         public Nullable<bool> IsActive { get; set; }

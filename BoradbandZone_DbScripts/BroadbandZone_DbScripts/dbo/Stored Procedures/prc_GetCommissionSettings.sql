@@ -6,7 +6,8 @@ CREATE  PROCEDURE [dbo].[prc_GetCommissionSettings]
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
-	        @vIsAdmin BIT
+	        @vIsAdmin BIT,
+			@vUserId INT
 
 	DECLARE @vCommissionSetting udt_CommissionSetting 
 
@@ -17,43 +18,44 @@ BEGIN
 		IF @vIsAdmin = 1
 		BEGIN
 			INSERT INTO @vCommissionSetting
-			SELECT pc.CategoryId,
-					pc.Category,
-					pc.CommissionPercent, 
+			SELECT  ap.CategoryId,
+					ap.Category,
+					ap.CommissionPercent, 
 					0 
-			FROM ProductCategory pc
-			WHERE pc.ProductId = @prProductId
-			AND pc.IsActive = 1
+			FROM Agent a
+			CROSS APPLY ( SELECT a.AgentId, pc.CategoryId, pc.Category, pc.CommissionPercent
+						  FROM ProductCategory pc 
+						  WHERE pc.ProductId = @prProductId
+						  AND pc.IsActive = 1
+						) ap
+			LEFT JOIN AgentCommission ac ON ac.AgentId = ap.AgentId AND ac.CategoryId = ap.CategoryId
+			WHERE a.SuperiorId IS NULL
+			AND ac.CommId IS NULL
+			GROUP BY ap.CategoryId,
+					 ap.Category,
+					 ap.CommissionPercent
 		END
 		ELSE
 		BEGIN
 			INSERT INTO @vCommissionSetting
-			SELECT pc.CategoryId,
-				   pc.Category,
-				   ISNULL(ac.AgentCommission, 0), 
-				   0 
-			FROM ProductCategory pc
-			LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  
-			LEFT JOIN Agent a ON ac.AgentId = a.AgentId
-			WHERE pc.ProductId = @prProductId
-			AND pc.IsActive = 1
-			AND a.UserLogin = @prAgentAcc 
+			SELECT  ap.CategoryId,
+					ap.Category,
+					ap.CommissionPercent, 
+					0 
+			FROM Agent a1
+			INNER JOIN Agent a2 ON a1.SuperiorId = a2.AgentId
+			CROSS APPLY ( SELECT a1.AgentId, pc.CategoryId, pc.Category, pc.CommissionPercent
+						  FROM ProductCategory pc 
+						  WHERE pc.ProductId = @prProductId
+						  AND pc.IsActive = 1
+						) ap
+			LEFT JOIN AgentCommission ac ON ac.AgentId = ap.AgentId AND ac.CategoryId = ap.CategoryId
+			WHERE  a2.UserLogin = @prAgentAcc 
+			AND ac.CommId IS NULL
+			GROUP BY ap.CategoryId,
+					 ap.Category,
+					 ap.CommissionPercent 
 		END
-
-		--INSERT INTO @vCommissionSetting
-		--SELECT pc.CategoryId,
-		--	pc.Category,
-		--	ISNULL(ac.AgentCommission,pc.CommissionPercent), 
-		--	0 
-		--FROM ProductCategory pc
-		--LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId  
-		--LEFT JOIN Agent a ON ac.AgentId = a.AgentId
-		--WHERE pc.ProductId = @prProductId
-		--AND pc.IsActive = 1
-		--AND 1 = CASE WHEN @vIsAdmin = 1 AND a.SuperiorId IS NULL THEN 1
-		--             WHEN a.UserLogin = @prAgentAcc THEN 1
-		--			 ELSE 0 
-		--		END
 
 		SELECT * FROM @vCommissionSetting
 	END TRY 

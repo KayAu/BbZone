@@ -52,7 +52,7 @@ BEGIN
 		FROM ClaimableCommission cc
 		INNER JOIN Agent a ON cc.AgentId = a.AgentId
 		INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
-		INNER JOIN ApplicationStatus s ON s.AppStatusId = ca.ApplicationId
+		INNER JOIN ApplicationStatus s ON s.AppStatusId = ca.AppStatusId
 		INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
 		LEFT JOIN Clawback c ON c.ApplicationId = ca.ApplicationId
 		WHERE a.UserLogin = @prAgent

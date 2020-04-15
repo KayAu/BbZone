@@ -30,10 +30,6 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.LoginTrail" Width="1.5" PointX="11.375" PointY="9.75" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Registration" Width="1.5" PointX="12.375" PointY="0.5" />
         <EntityTypeShape EntityType="BroadbandZoneModel.Communication" Width="1.5" PointX="4.25" PointY="8.625" />
-        <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.5" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
-        <AssociationConnector Association="BroadbandZoneModel.FK_Product_ProductCategory" />
         <EntityTypeShape EntityType="BroadbandZoneModel.CustomerApplication" Width="1.5" PointX="2.375" PointY="3.875" />
         <AssociationConnector Association="BroadbandZoneModel.FK_CustomerApplication_ApplicationStatus" />
         <AssociationConnector Association="BroadbandZoneModel.FK_Clawback_CustomerApplication" />
@@ -44,6 +40,10 @@
         <EntityTypeShape EntityType="BroadbandZoneModel.RegistrationDocument" Width="1.5" PointX="14.625" PointY="2.375" />
         <EntityTypeShape EntityType="BroadbandZoneModel.SProcErrorLog" Width="1.5" PointX="9.375" PointY="12.75" />
         <AssociationConnector Association="BroadbandZoneModel.FK_RegistrationDocument_Registration" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.ProductCategory" Width="1.5" PointX="0.5" PointY="3.75" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_AgentCommission_ProductCategory" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_ProductCategory_Product" />
+        <AssociationConnector Association="BroadbandZoneModel.FK_Product_ProductCategory" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

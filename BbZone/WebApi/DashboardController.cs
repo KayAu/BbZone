@@ -72,7 +72,7 @@ namespace BroadbandZone_App.WebApi
                 ChartHelper chartHelper = new ChartHelper();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    var monthlyApplications = chartHelper.TranslateStackBarData(db.DboardMonthlyApplications().ToDataTable<DboardMonthlyApplications_Result>());
+                    var monthlyApplications = chartHelper.TranslateStackBarData(db.DboardMonthlyApplications(currentUser.AgentId).ToDataTable<DboardMonthlyApplications_Result>());
                     var topSellers = db.DboardTopSalesPackage(currentUser.AgentId, currentUser.Username).ToList();
                     var sales = db.DboardTotalSalesAndCommission(currentUser.AgentId, currentUser.Username).FirstOrDefault();
                     return Ok(new { MonthlyApplications = monthlyApplications,
