@@ -160,6 +160,7 @@
     <Build Include="dbo\Stored Procedures\prc_InsertErrorCategoryLog.sql" />
     <Build Include="dbo\Stored Procedures\prc_GenerateActivationCode.sql" />
     <Build Include="dbo\Stored Procedures\prc_AddErrorCategory.sql" />
+    <Build Include="dbo\Stored Procedures\prc_HasCommissionSet.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />

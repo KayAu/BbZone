@@ -44,7 +44,7 @@ BEGIN
 			r.ApprovedBy
 		INTO ##temp_Table
 		FROM Registration r 
-		INNER JOIN Agent a ON a.AgentId = r.SuperiorId
+		LEFT JOIN Agent a ON a.AgentId = r.SuperiorId
 		WHERE 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
 					   WHEN r.Fullname LIKE '%' + @prSearchKeyword + '%' OR
 						    r.CompanyName LIKE '%' +@prSearchKeyword + '%' THEN 1

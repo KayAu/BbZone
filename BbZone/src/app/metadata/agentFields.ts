@@ -20,7 +20,7 @@
                     "controlName": "email",
                     "controlType": "textbox",
                     "required": true,
-                    "maxLength": 25
+                    "maxLength": 80
                 }
             },
             {
@@ -473,7 +473,7 @@ export class AgentProfileFields {
                     "controlName": "email",
                     "controlType": "textbox",
                     "required": true,
-                    "maxLength": 25
+                    "maxLength": 80
                 }
             },
             {

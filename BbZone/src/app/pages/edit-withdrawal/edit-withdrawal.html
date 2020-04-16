@@ -55,7 +55,7 @@
                 <loading></loading>
                 <div class="ibox-content">
                     <div class="table-responsive mrg10T">
-                        <label>Claimed Commission(s)</label>
+                        <label class="font-bold">Claimed Commission(s)</label>
                         <table class="table table-bordered mrg10T dataTable">
                             <thead>
                                 <tr>
@@ -87,16 +87,16 @@
                     </div>
 
         
-                    <div class="hr-line-dashed"></div>
-                    <label>Admin Input</label>
+                    <div class="hr-line-dashed mrg20B mrg20T"></div>
+                    <label class="font-bold">Admin Input</label>
                     <div class="admin-box">
-                        <div class="form-group">
+                        <div class="form-group mrg15B">
                             <label class="font-normal">Reference. No</label>
                             <input name="referenceNo" type="text" class="form-control" maxlength="25" [(ngModel)]="formRecord.referenceNo" [disabled]="!formRecord.allowEdit">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mrg15B">
                             <label class="font-normal">Remarks</label>
-                            <textarea name="remarks" class="form-control" maxlength="250" rows="8" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit" ></textarea>
+                            <textarea name="remarks" class="form-control" maxlength="250" rows="4" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit" ></textarea>
                         </div>
                         <div class="form-group">
                             <label class="font-normal">Withdrawal Status</label>

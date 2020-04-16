@@ -76,7 +76,7 @@ var ViewIncentives = /** @class */ (function (_super) {
         this.reloadData();
     };
     ViewIncentives.prototype.exportRecords = function () {
-        this.dataService.export(apiController_1.ApiController.Incentives + "/Download", this.searchParams).subscribe(function (data) {
+        this.dataService.export(apiController_1.ApiController.Download + "/Incentives", this.searchParams).subscribe(function (data) {
             var filename = "Incentives_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
             var file = new Blob([data], { type: 'application/xlsx' });
             file_saver_1.saveAs(file, filename);

@@ -47,5 +47,8 @@ namespace BroadbandZone_Data
         public Nullable<bool> IsProcessed { get; set; }
         public string EForm { get; set; }
         public Nullable<bool> ShowEForm { get; set; }
+        public Nullable<bool> AllowEdit { get; set; }
+        public string Status { get; set; }
+        public Nullable<bool> CommIsConfigured { get; set; }
     }
 }

@@ -27,7 +27,8 @@ BEGIN
 	DECLARE @vTeamMembers TABLE 
 	(	
 		AgentUsername NVARCHAR(16),
-		FullName VARCHAR(50)
+		FullName VARCHAR(50),
+		AgentId INT
 	)
 
 	DECLARE @var_Table TABLE(
@@ -41,17 +42,18 @@ BEGIN
 		SubmittedOn SMALLDATETIME,
 		Status  VARCHAR(50),
 		TotalUnreadMsg INT,
+		CommIsConfigured BIT,
 		RowNum INT
 	)
 
 	BEGIN TRY
 		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
 
-		IF @prIsAdmin <> 1
-		BEGIN
+		--IF @prIsAdmin <> 1
+		--BEGIN
 			INSERT INTO @vTeamMembers
 			EXEC prc_GetMyEntireTeam @prAgentId
-		END
+		--END
 	
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
@@ -65,14 +67,16 @@ BEGIN
 				ca.Agent,
 				ca.CreatedOn,
 				a.Status,
-				msg.TotalUnreadMsg
+				msg.TotalUnreadMsg,
+				CommIsConfigured = CAST(CASE WHEN NOT ac.CommId IS NULL THEN 1 ELSE 0 END AS BIT)
 		INTO ##temp_Table
 		FROM CustomerApplication ca
 		INNER JOIN ProductPackage PP ON ca.ProdPkgId = pp.ProdPkgId
 		INNER JOIN ProductCategory PC ON pc.CategoryId = pp.CategoryId
 		INNER JOIN Product p ON pc.ProductId = p.ProductId
 		INNER JOIN ApplicationStatus a ON ca.AppStatusId = a.AppStatusId
-		LEFT JOIN @vTeamMembers tm ON ca.Agent = tm.AgentUsername
+		INNER JOIN @vTeamMembers tm ON ca.Agent = tm.AgentUsername
+		LEFT JOIN AgentCommission ac ON ac.AgentId = tm.AgentId AND ac.CategoryId = ca.CategoryId
 		CROSS APPLY
 		(
 			SELECT TotalUnreadMsg = COUNT(CommId)
@@ -118,7 +122,8 @@ BEGIN
 					 ELSE 0
 				END
 		AND 1 = CASE wHEN @prDocumentCompleted IS NULL THEN 1
-		             wHEN @prDocumentCompleted  = ca.DocumentCompleted THEN 1
+		             wHEN @prDocumentCompleted = 0 AND ISNULL(ca.DocumentCompleted, 0) = 0 THEN 1
+		             wHEN @prDocumentCompleted = 1 AND ca.DocumentCompleted = 1 THEN 1
 					 ELSE 0 
 				END
 		AND 1 = CASE WHEN ISNULL(@prKeyword,'') = '' THEN 1
@@ -143,7 +148,8 @@ BEGIN
 				Agent,
 				SubmittedOn  = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
 				[Status],
-				TotalUnreadMsg
+				TotalUnreadMsg,
+				CommIsConfigured
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table

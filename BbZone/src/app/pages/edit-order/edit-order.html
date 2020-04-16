@@ -3,12 +3,20 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
-                <!--<div class="ibox-title">
-                    <h5>Edit Order <small>* is required field.</small></h5>
-                </div>-->
+                <div class="ibox-title">
+                    <h5>
+                        Order Details
+                        <span class="badge mrg10L" [ngClass]="{'badge-info': formRecord['status'] == 'Early Stage','badge-primary': formRecord['status'] == 'Post Complete'}">
+                            {{formRecord['status']}}
+                        </span>
+                    </h5>
+                </div>
                 <div class="ibox-content">
                     <loading></loading>
-
+                    <div class="alert alert-warning" *ngIf="!commIsConfigured">
+                        <i class="fa fa-exclamation-triangle font-size-18"></i>
+                        The commission for this agent has not been set yet. Please make sure the commission set otherwise this application will be unable to updated to <strong>Post Complete</strong>.
+                    </div>
                     <form #applicationForm="ngForm" (ngSubmit)="update()">
                         <!--PRODUCT TYPES-->
                         <ng-container *ngFor="let field of formFields">
@@ -22,10 +30,10 @@
                                                   [field]="field.dataFieldControl" [formName]="'applicationForm'" [onEdit]="true"></data-control>
 
                                     <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" [onEdit]="true" (onModelChanged)="showProcessedDetails($event)"></data-control>
+                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
                                 </div>
                             </div>
-                            <div class="hr-line-dashed"  *ngIf="!field.hidden"></div>
+                            <div class="hr-line-dashed" *ngIf="!field.hidden"></div>
                         </ng-container>
                         <!--ATTACH REQUIRED DOCUMENTS-->
                         <div class="form-group row">
@@ -39,7 +47,7 @@
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">
                                 <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
-                                        [disabled]="isUpdating" style="width: 180px;">
+                                        [disabled]="!formRecord['allowEdit'] || isUpdating" style="width: 180px;">
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>
                                 </button>

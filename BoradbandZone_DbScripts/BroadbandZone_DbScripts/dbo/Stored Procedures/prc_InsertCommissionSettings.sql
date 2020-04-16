@@ -6,6 +6,14 @@ CREATE  PROCEDURE [dbo].[prc_InsertCommissionSettings]
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID)
+	DECLARE @tNewAgentComm TABLE
+	(
+		AgentId int,
+		CategoryId int,
+		AgentCommission smallint,
+		SuperiorCommission smallint
+	)
+
 	DECLARE @vAgents TABLE
 	(
 		AgentId VARCHAR(10)
@@ -49,14 +57,14 @@ BEGIN
 
 		MERGE AgentCommission ac USING cteAgentSuperiorCommission s ON  (ac.CommId = s.CommId)
 		WHEN NOT MATCHED BY TARGET
-		THEN INSERT ([AgentId]
-				   ,[CategoryId]
-				   ,[AgentCommission]
-				   ,[SuperiorCommission]
-				   ,[CreatedOn]
-				   ,[CreatedBy]
-				   ,[ModifiedOn]
-				   ,[ModifiedBy])
+		THEN INSERT (AgentId
+				   ,CategoryId
+				   ,AgentCommission
+				   ,SuperiorCommission
+				   ,CreatedOn
+				   ,CreatedBy
+				   ,ModifiedOn
+				   ,ModifiedBy)
 		   VALUES (
 					AgentId
 					,CategoryId
@@ -65,7 +73,18 @@ BEGIN
 					,GETDATE()
 					,@prCreatedBy
 					,GETDATE()
-					,@prCreatedBy);
+					,@prCreatedBy)
+		   OUTPUT inserted.AgentId, inserted.CategoryId, inserted.AgentCommission, inserted.SuperiorCommission INTO @tNewAgentComm;
+		
+		   -- Update the newly added agent commission on ClaimableCommission, where claim was submitted before agent commissions were set by the superior
+		   UPDATE cc
+		   SET AgentCommOnDate = ac.SuperiorCommission
+		   FROM  @tNewAgentComm ac
+		   INNER JOIN Agent a ON ac.AgentId = a.AgentId
+		   INNER JOIN ClaimableCommission cc ON cc.AgentId = a.SuperiorId
+		   INNER JOIN CustomerApplication ca ON cc.ApplicationId = cc.ApplicationId  
+		   WHERE cc.AgentCommOnDate = 0
+		   AND ca.CategoryId = ac.CategoryId
 
 	END TRY 
 	BEGIN CATCH

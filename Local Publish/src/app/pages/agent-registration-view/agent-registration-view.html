@@ -27,22 +27,33 @@
                             </div>
                             <div class="hr-line-dashed"></div>
                         </ng-container>
-                        <div class="form-group row" *ngIf="!formRecord['isApproved']">
-                            <label class="col-sm-2 col-form-label">
-                                Registration Approval
-                            </label>
+                        <!--ATTACH REQUIRED DOCUMENTS-->
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Required documents</label>
                             <div class="col-sm-10">
-                                <span class="display-block mrg10R">
-                                    <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="true" />
-                                    Approve
-                                </span>
-                                <span>
-                                    <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="false" />
-                                    Reject
-                                </span>
+                                <file-uploader name="relDoc" [(ngModel)]="registrationDocuments" [fileUrl]="'/api/Download/RegistrationDocument'" [readOnly]="true"></file-uploader>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
+                        <ng-container *ngIf="!formRecord['approvalDate']">
+                            <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">
+                                    Registration Approval
+                                </label>
+                                <div class="col-sm-10">
+                                    <span class="display-block mrg10R">
+                                        <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="true" />
+                                        Approve
+                                    </span>
+                                    <span>
+                                        <input type="radio" name="response" [(ngModel)]="formRecord['isApproved']" value="false" />
+                                        Reject
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="hr-line-dashed"></div>
+                        </ng-container>
+
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
                             <div class="col-sm-12 text-right">

@@ -42,8 +42,9 @@ var EditOrder = /** @class */ (function () {
         this.loadRecord(this.route.snapshot.params.id);
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
-        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+        var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) {
+            return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null : new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null));
+        });
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
         }
@@ -69,10 +70,28 @@ var EditOrder = /** @class */ (function () {
             _this.router.navigate(['/view-order']);
         });
     };
+    EditOrder.prototype.showProcessedDetails = function (show) {
+        if (!show)
+            show = false;
+        var updateFields = ["orderNo", "userId", "telNo"];
+        for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
+            var field = updateFields_1[_i];
+            var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });
+            this.formFields[index].hidden = !show;
+        }
+    };
+    EditOrder.prototype.showEForm = function (show) {
+        if (!show)
+            show = false;
+        var index = this.formFields.findIndex(function (i) { return i.fieldName == "eForm"; });
+        this.formFields[index].hidden = !show;
+    };
     EditOrder.prototype.loadRecord = function (recordId) {
         var _this = this;
         this.dataService.get(apiController_1.ApiController.CustomerApplication, recordId).subscribe(function (data) {
             _this.formRecord = data;
+            _this.showEForm(_this.formRecord["showEForm"]);
+            _this.showProcessedDetails(_this.formRecord["isProcessed"]);
         });
     };
     __decorate([

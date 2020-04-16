@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DataFieldControl = /** @class */ (function () {
-    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo, adminField) {
+    function DataFieldControl(controlName, controlType, required, maxLength, datasourceUrl, cascadeTo, adminField, dataChangedEvent) {
         this.controlName = controlName;
         this.controlType = controlType;
         this.required = required;
@@ -9,6 +9,7 @@ var DataFieldControl = /** @class */ (function () {
         this.datasourceUrl = datasourceUrl;
         this.cascadeTo = cascadeTo;
         this.adminField = adminField;
+        this.dataChangedEvent = dataChangedEvent;
     }
     return DataFieldControl;
 }());

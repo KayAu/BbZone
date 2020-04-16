@@ -125,10 +125,15 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    editedRecord.ApprovalDate = DateTime.Now;
-                    editedRecord.ApprovedBy = this.User.Identity.Name;
+                    if (editedRecord.IsApproved != null)
+                    {
+                        editedRecord.ApprovalDate = DateTime.Now;
+                        editedRecord.ApprovedBy = currentUser.Username;
+                    }
+
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
 

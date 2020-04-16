@@ -3,32 +3,35 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="ibox ">
-                <div class="ibox-title">
+                <!--<div class="ibox-title">
                     <h5>Edit Order <small>* is required field.</small></h5>
-                </div>
+                </div>-->
                 <div class="ibox-content">
                     <loading></loading>
 
                     <form #applicationForm="ngForm" (ngSubmit)="update()">
                         <!--PRODUCT TYPES-->
                         <ng-container *ngFor="let field of formFields">
-                            <div class="form-group row">
+                            <div class="form-group row" *ngIf="!field.hidden">
                                 <label class="col-sm-2 col-form-label">
                                     {{field.displayText}}
                                     <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-10">
-                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}" [onEdit]="true"></data-control>
+                                    <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" [onEdit]="true"></data-control>
+
+                                    <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" [onEdit]="true" (onModelChanged)="showProcessedDetails($event)"></data-control>
                                 </div>
                             </div>
-                            <div class="hr-line-dashed"></div>
+                            <div class="hr-line-dashed"  *ngIf="!field.hidden"></div>
                         </ng-container>
                         <!--ATTACH REQUIRED DOCUMENTS-->
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Attach required documents</label>
                             <div class="col-sm-10">
-                                <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplication'"></file-uploader>
+                                <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplicationDocument'"></file-uploader>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

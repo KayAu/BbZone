@@ -14,7 +14,8 @@ public static fields = [
             "required": true,
             "maxLength": 0,
             "datasourceUrl": "GetCategoriesByProduct",
-            "cascadeTo": "prodPkgId"
+            "cascadeTo": "prodPkgId",
+            "dataChangedEvent": "checkCommissionSettings"
         }
     },
     {
@@ -38,7 +39,8 @@ public static fields = [
             "controlType": "select",
             "required": true,
             "maxLength": 0,
-            "datasourceUrl": "GetAgents"
+            "datasourceUrl": "GetAgents",
+            "dataChangedEvent": "checkCommissionSettings"
         }
     },
     {

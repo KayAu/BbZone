@@ -42,7 +42,7 @@ BEGIN
 			ca.CreatedOn,
 			cc.PackageCommOnDate,
 			cc.AgentCommOnDate,
-			ClaimAmount = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
+			ClaimAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
 			DeductAmount = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
 			TransactionType = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Clawback'
 								   WHEN cc.IsOverride = 1  THEN 'Override' 
@@ -55,10 +55,12 @@ BEGIN
 		INNER JOIN ApplicationStatus s ON s.AppStatusId = ca.AppStatusId
 		INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
 		LEFT JOIN Clawback c ON c.ApplicationId = ca.ApplicationId
+		LEFT JOIN Withdrawal w ON cc.ClaimWithdrawalId = w.WithdrawalId
 		WHERE a.UserLogin = @prAgent
 		AND ca.DocumentCompleted = 1
 		AND s.Status = 'Post Complete'
 		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN 1
+					 WHEN NOT cc.ClaimWithdrawalId IS NULL AND w.Status = 'Terminated' THEN 1
 					 WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
 					 ELSE 0
 				END

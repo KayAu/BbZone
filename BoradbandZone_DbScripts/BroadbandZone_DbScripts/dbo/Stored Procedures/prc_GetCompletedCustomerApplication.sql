@@ -23,37 +23,24 @@ BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
 			@vSelectQuery NVARCHAR(MAX)
 
-	DECLARE @vTeamMembers TABLE 
-	(	
-		AgentUsername NVARCHAR(16),
-		FullName VARCHAR(50)
-	)
-
 	DECLARE @var_Table TABLE(
 		ApplicationId INT,
 		CustomerName VARCHAR(100),
 		PackageName VARCHAR(50),
 		Category VARCHAR(50),
 		ActivatedOn SMALLDATETIME,
-		OrderNo VARCHAR(25),
+		UserId VARCHAR(25),
 		Agent VARCHAR(50),
-		--IsOverride BIT,
 		DocumentCompleted BIT,
+		CommAmount VARCHAR (20),
 		CommStatus VARCHAR (50),
-		--ClaimSubmitted BIT,
-		--IsPaid  BIT,
+		PaymentNo INT,
 		PaidOn SMALLDATETIME,
 		RowNum INT
 	)
 
 	BEGIN TRY
 		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
-
-		IF @prIsAdmin <> 1
-		BEGIN
-			INSERT INTO @vTeamMembers
-			EXEC prc_GetMyEntireTeam @prAgentId
-		END
 	
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
@@ -64,16 +51,19 @@ BEGIN
 			  ,pp.PackageName
 			  ,pc.Category
 			  ,ca.ActivationDate
-			  ,ca.OrderNo
+			  ,ca.UserId
 			  ,a.UserLogin
-			 -- ,cc.IsOverride
 			  ,ca.DocumentCompleted
+			  ,CommAmount = CASE WHEN @prIsAdmin <> 1 THEN 'RM0'
+			                     WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
+								 ELSE NULL END
 			  ,CommStatus = CASE WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'
-								 WHEN ac.CommId IS NULL THEN 'Not Created'
+								 WHEN cc.AgentCommOnDate = 0 THEN 'Not Created'
 							     WHEN ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN 'Not Claim'
 								 WHEN ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN 'Claimed'								
 							END
+			  ,w.WithdrawalId
 			  ,w.CompletedOn 
 		INTO ##temp_Table
 		FROM CustomerApplication ca
@@ -130,33 +120,32 @@ BEGIN
 				END				
 		AND 1 = CASE WHEN ISNULL(@prKeyword,'') = '' THEN 1
 					 WHEN ca.CustomerName LIKE '%' + @prKeyword + '%' 
-						  OR ca.OrderNo LIKE '%' + @prKeyword + '%'
+						  OR ca.UserId LIKE '%' + @prKeyword + '%'
 					      OR ca.ResidentialName LIKE '%' + @prKeyword + '%' THEN 1
 					 ELSE 0
 				END	
-				SELECT @oTotalRecord = 1
+
 		PRINT @vSelectQuery
+
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table
 		EXEC SP_ExecuteSQL @vSelectQuery
 
 		SELECT
-			ApplicationId,
 			CustomerName,
 			PackageName,
 			Category,
 			ActivatedOn = FORMAT(ActivatedOn, 'MM/dd/yyyy'),
-			OrderNo,
+			UserId,
 			Agent,
-			--IsOverride,
 			DocumentCompleted,
+			CommAmount,
 			CommStatus,
-			--ClaimSubmitted,
-			--IsPaid,
+			PaymentNo,
 			PaidOn = FORMAT(PaidOn, 'MM/dd/yyyy')
 		FROM  @var_Table
 
-		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table
+		SELECT @oTotalRecord = COUNT(CustomerName) FROM ##temp_Table
 
 		DROP TABLE  ##temp_Table
 

@@ -24,6 +24,25 @@ namespace BroadbandZone_App.WebApi
 
 
         [HttpGet]
+        [Route("api/CustomerApplication/CheckCommissionSettings/{categoryId}/{agent}")]
+        public IHttpActionResult CheckCommissionSettings(int categoryId, string agent)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    var results = db.HasCommissionSet(categoryId, agent).FirstOrDefault();
+                    return Ok(results != null ? results.IsConfigured : false);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.NotImplemented, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("api/CustomerApplication/FindClaimedApplication/{keyword}")]
         public IHttpActionResult Find(string keyword)
         {
@@ -110,9 +129,10 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    GetApplicationDetails_Result results = db.GetApplicationDetails(id).FirstOrDefault();
+                    GetApplicationDetails_Result results = db.GetApplicationDetails(id, currentUser.IsAdmin).FirstOrDefault();
                     if (results != null)
                     {
                         ModelHelper.CopyPropertiesTo<GetApplicationDetails_Result, CustomerApplication>(results, out CustomerApplication appDetails);

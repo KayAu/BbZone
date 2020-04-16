@@ -17,6 +17,7 @@ var FileUploader = /** @class */ (function () {
         this.el = el;
         this.dataService = dataService;
         this.uploadedFiles = [];
+        this.readOnly = false;
         this.propagateChange = function () { };
     }
     FileUploader_1 = FileUploader;
@@ -51,6 +52,10 @@ var FileUploader = /** @class */ (function () {
     FileUploader.prototype.registerOnTouched = function () { };
     FileUploader.prototype.setDisabledState = function () { };
     var FileUploader_1;
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], FileUploader.prototype, "readOnly", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", String)

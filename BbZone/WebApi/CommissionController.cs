@@ -45,7 +45,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter allowCommConfig = new ObjectParameter("oAllowCommConfig", typeof(bool));

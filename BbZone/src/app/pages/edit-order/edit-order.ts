@@ -26,6 +26,7 @@ export class EditOrder {
     isUpdating: boolean = false;
     recordId: number;
     currentUser: LoginUser;
+    commIsConfigured: boolean = true;
 
     constructor(public loaderService: LoaderService,
                 public dataService: DataService,
@@ -68,6 +69,7 @@ export class EditOrder {
     update() {
         this.formEvent.notify(new FormSubmit(this.form, this.form.name));
         if (!this.form.valid) return;
+        if (this.preventPosComplete()) return;
 
         this.isUpdating = true;
 
@@ -103,9 +105,26 @@ export class EditOrder {
         this.formFields[index].hidden = !show;
     }
 
+    checkCommissionSettings() {
+
+        this.dataService.get(`${ApiController.CustomerApplication}/CheckCommissionSettings/${this.formRecord['categoryId']}/${this.formRecord['agent']}`).subscribe(isConfigured => {
+            this.commIsConfigured = isConfigured;
+        });
+    }
+
+    private preventPosComplete() {
+        if (!this.commIsConfigured && this.formRecord['appStatusId'] == 4) {
+            window.scrollTo(0, 0);
+            return true;
+        }
+
+        return false;
+    }
+
     private loadRecord(recordId:number) {
         this.dataService.get(ApiController.CustomerApplication, recordId).subscribe(data => {
             this.formRecord = data;
+            this.commIsConfigured = this.formRecord['commIsConfigured'];
             this.showEForm(this.formRecord["showEForm"]);
             this.showProcessedDetails(this.formRecord["isProcessed"]);
         });

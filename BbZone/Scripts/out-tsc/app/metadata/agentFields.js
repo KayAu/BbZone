@@ -23,7 +23,7 @@ var AgentRegistrationFields = /** @class */ (function () {
                 "controlName": "email",
                 "controlType": "textbox",
                 "required": true,
-                "maxLength": 25
+                "maxLength": 80
             }
         },
         {
@@ -482,7 +482,7 @@ var AgentProfileFields = /** @class */ (function () {
                 "controlName": "email",
                 "controlType": "textbox",
                 "required": true,
-                "maxLength": 25
+                "maxLength": 80
             }
         },
         {

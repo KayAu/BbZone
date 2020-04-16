@@ -35,6 +35,7 @@ var CreateOrder = /** @class */ (function () {
         this.formFields = [];
         this.newRecord = {};
         this.isUpdating = false;
+        this.commIsConfigured = true;
     }
     CreateOrder.prototype.ngOnInit = function () {
         this.currentUser = this.authenticationService.currentUserValue;
@@ -42,7 +43,7 @@ var CreateOrder = /** @class */ (function () {
     };
     CreateOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null)); });
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
         }
@@ -68,6 +69,14 @@ var CreateOrder = /** @class */ (function () {
     };
     CreateOrder.prototype.loadCategories = function (productId) {
         this.cascadeService.subject.next(new cascade_data_1.CascadeData("categoryId", this.selectedProduct));
+    };
+    CreateOrder.prototype.checkCommissionSettings = function () {
+        var _this = this;
+        if (!this.newRecord['agent'])
+            return;
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/CheckCommissionSettings/" + this.newRecord['categoryId'] + "/" + this.newRecord['agent']).subscribe(function (isConfigured) {
+            _this.commIsConfigured = isConfigured;
+        });
     };
     CreateOrder.prototype.clearPackages = function () {
         this.selectedCategory = null;

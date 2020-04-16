@@ -9,12 +9,14 @@ BEGIN
 
 	    -- check if this agent has commission set for the product selected
 		SELECT UserLogin,
-			   FullName
+			   FullName,
+			   AgentId
 		FROM Agent
 		WHERE AgentId = @prSuperiorId
 		UNION ALL
 		SELECT AgentUsername AS UserLogin,
-			   FullName
+			   FullName,
+			   AgentId
 		FROM  [dbo].[fnGetMyAgents](@prSuperiorId)
 
 	END TRY 

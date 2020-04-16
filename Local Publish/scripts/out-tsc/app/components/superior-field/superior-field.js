@@ -23,6 +23,7 @@ var SuperiorField = /** @class */ (function () {
         //@Input() isAdmin: boolean;
         this.propagateChange = function () { };
         this.searchFieldInput = new rxjs_1.Subject();
+        this.agents = [];
     }
     SuperiorField_1 = SuperiorField;
     SuperiorField.prototype.ngOnInit = function () {
@@ -46,6 +47,12 @@ var SuperiorField = /** @class */ (function () {
     SuperiorField.prototype.onSearchInputChanged = function (keyword) {
         this.searchFieldInput.next(keyword);
     };
+    SuperiorField.prototype.selectItem = function (agent) {
+        this.displayText = agent.agentId + " - " + agent.fullname;
+        this.data = agent.agentId;
+        this.setChanges();
+        this.agents = [];
+    };
     SuperiorField.prototype.clearDisplayText = function () {
         this.displayText = null;
         this.data = null;
@@ -56,18 +63,19 @@ var SuperiorField = /** @class */ (function () {
         var thisElement = $(this.el.nativeElement);
         if (!keyword)
             this.clearErrorMessages(thisElement);
-        this.dataService.get(apiController_1.ApiController.Agent + "/CheckValidity/", keyword).subscribe(function (results) {
+        this.dataService.get(apiController_1.ApiController.Agent + "/GetAgents/", keyword).subscribe(function (results) {
             if (results) {
-                _this.displayText = keyword + " - " + results;
-                _this.clearErrorMessages(thisElement);
-                _this.setChanges();
+                _this.agents = results;
+                // this.displayText = `${results} - ${results}`;
+                //this.clearErrorMessages(thisElement);
+                //this.setChanges();
             }
-            else {
-                thisElement.next('.text-danger').remove();
-                thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
-                $(_this.parentForm.controls[_this.fieldId]).addClass('data-invalid');
-                _this.parentForm.controls[_this.fieldId].setErrors({ 'required': true });
-            }
+            //else {
+            //    thisElement.next('.text-danger').remove();
+            //    thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
+            //    $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+            //    this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+            //}
         });
     };
     SuperiorField.prototype.clearErrorMessages = function (thisElement) {

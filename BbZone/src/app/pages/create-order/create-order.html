@@ -2,6 +2,10 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-lg-12">
+            <div class="alert alert-warning" *ngIf="!commIsConfigured">
+                <i class="fa fa-exclamation-triangle font-size-18"></i>
+                The commission for the select agent has not been set yet. Please make sure the commission set otherwise this application will be unable to updated to <strong>Post Complete</strong>.
+            </div>
             <div class="ibox ">
                 <div class="ibox-title">
                     <h5>Create Order <small>* is required field.</small></h5>
@@ -10,7 +14,7 @@
                     <loading></loading>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">
-                            Product                        
+                            Product
                         </label>
                         <div class="col-sm-10">
                             <product-options [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
@@ -26,8 +30,11 @@
                                     <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
                                 </label>
                                 <div class="col-sm-10">
-                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                   [field]="field.dataFieldControl" [formName]="'createOrderForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                    <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'createOrderForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+
+                                    <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                  [field]="field.dataFieldControl" [formName]="'createOrderForm'" name="{{field.dataFieldControl.controlName}}" (onModelChanged)="checkCommissionSettings($event)"></data-control>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -36,10 +43,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Attach required documents</label>
                             <div class="col-sm-10">
-                                <file-uploader name="relDoc"  [(ngModel)]="newRecord['files']"></file-uploader>
-                                <!--<span class="form-text m-b-none">
-                                    Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf". File size must not be more than 1MB. For additional files, please send it to dms.iform@gmail.com
-                                </span>-->
+                                <file-uploader name="relDoc" [(ngModel)]="newRecord['files']"></file-uploader>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>

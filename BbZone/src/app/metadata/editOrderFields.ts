@@ -44,7 +44,8 @@ public static fields = [
             "controlType": "select",
             "required": true,
             "maxLength": 0,
-            "datasourceUrl": "GetAgents"
+            "datasourceUrl": "GetAgents",
+            "dataChangedEvent": "checkCommissionSettings"
         }
     },
     {

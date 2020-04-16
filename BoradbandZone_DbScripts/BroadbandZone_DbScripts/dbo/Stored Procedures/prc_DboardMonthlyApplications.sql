@@ -9,7 +9,8 @@ BEGIN
 	DECLARE @vTeamMembers TABLE 
 	(	
 		AgentUsername NVARCHAR(16),
-		FullName VARCHAR(50)
+		FullName VARCHAR(50),
+		AgentId INT
 	)
 
 	INSERT INTO @vTeamMembers

@@ -34,6 +34,7 @@ var EditOrder = /** @class */ (function () {
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
+        this.commIsConfigured = true;
     }
     EditOrder.prototype.ngOnInit = function () {
         this.currentUser = this.authenticationService.currentUserValue;
@@ -54,6 +55,8 @@ var EditOrder = /** @class */ (function () {
         var _this = this;
         this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
         if (!this.form.valid)
+            return;
+        if (this.preventPosComplete())
             return;
         this.isUpdating = true;
         var formData = new FormData();
@@ -86,10 +89,24 @@ var EditOrder = /** @class */ (function () {
         var index = this.formFields.findIndex(function (i) { return i.fieldName == "eForm"; });
         this.formFields[index].hidden = !show;
     };
+    EditOrder.prototype.checkCommissionSettings = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/CheckCommissionSettings/" + this.formRecord['categoryId'] + "/" + this.formRecord['agent']).subscribe(function (isConfigured) {
+            _this.commIsConfigured = isConfigured;
+        });
+    };
+    EditOrder.prototype.preventPosComplete = function () {
+        if (!this.commIsConfigured && this.formRecord['appStatusId'] == 4) {
+            window.scrollTo(0, 0);
+            return true;
+        }
+        return false;
+    };
     EditOrder.prototype.loadRecord = function (recordId) {
         var _this = this;
         this.dataService.get(apiController_1.ApiController.CustomerApplication, recordId).subscribe(function (data) {
             _this.formRecord = data;
+            _this.commIsConfigured = _this.formRecord['commIsConfigured'];
             _this.showEForm(_this.formRecord["showEForm"]);
             _this.showProcessedDetails(_this.formRecord["isProcessed"]);
         });

@@ -15,13 +15,14 @@ var pageDisplayLimit = 8;
 var Pagination = /** @class */ (function () {
     function Pagination() {
         this.pageClick = new core_1.EventEmitter();
+        this.pageSizeClick = new core_1.EventEmitter();
         this.pageButtons = [];
         this.page = new page_model_1.Page();
         this.disabledNextAndLastBtn = false;
         this.disabledFirstAndPrevBtn = false;
     }
     Pagination.prototype.ngOnInit = function () {
-        this.page.pageSize = 20;
+        this.page.pageSize = 25;
         this.resetToFirstPage();
     };
     Pagination.prototype.goToPage = function (pageNo) {
@@ -74,6 +75,12 @@ var Pagination = /** @class */ (function () {
         this.loadPagerButtons();
         this.setPager();
     };
+    Pagination.prototype.pageSizeChanged = function (pageSize) {
+        this.page.pageSize = pageSize;
+        this.page.totalPages = Math.ceil(this._totalRecord / pageSize);
+        this.pageSizeClick.emit(pageSize);
+        this.updatePager();
+    };
     Object.defineProperty(Pagination.prototype, "totalRecord", {
         set: function (totalNo) {
             if (!totalNo)
@@ -118,6 +125,10 @@ var Pagination = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], Pagination.prototype, "pageClick", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], Pagination.prototype, "pageSizeClick", void 0);
     __decorate([
         core_1.Input(),
         __metadata("design:type", Number),

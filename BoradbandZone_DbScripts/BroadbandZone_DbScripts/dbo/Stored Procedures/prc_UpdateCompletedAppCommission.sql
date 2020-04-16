@@ -12,6 +12,15 @@ BEGIN
 			@vHasClaimExists BIT,
 			@vAgentId INT
 
+	DECLARE @tSuperiorHierarchy TABLE 
+	(	
+		AgentId INT,
+		Agent NVARCHAR(16),
+		FullName VARCHAR(50),
+		SuperiorId INT,
+		AgentLevel INT
+	)			
+
 	BEGIN TRY
 	
 		SELECT @vCategoryId = ca.CategoryId,
@@ -29,38 +38,41 @@ BEGIN
 			WHERE ApplicationId = ca.ApplicationId 
 		) c
 		WHERE ca.ApplicationId = @prAppId	
-
+		
 		IF @vIsCompleted = 1 
 		BEGIN	
 			IF @vHasClaimExists = 0
 			BEGIN
+				INSERT INTO @tSuperiorHierarchy
+				SELECT * FROM [dbo].[fnGetMySuperiors](@vAgentId) 
+
 				INSERT INTO ClaimableCommission
 				SELECT @prAppId,
 					   @vAgentId,
 					   @vPackageComm,
-					   ac.AgentCommission,
+					   ISNULL(ac.AgentCommission, 0),
 					   0,
 					   NULL,
 					   NULL,
 					   NULL,
 					   GETDATE(),
 					   @prCreatedBy		    
-				FROM AgentCommission ac
-				WHERE ac.CategoryId = @vCategoryId
-				AND ac.AgentId = @vAgentId
+				FROM @tSuperiorHierarchy a
+				LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
+				WHERE a.AgentLevel = 1 -- the agent who submitted order
 				UNION ALL
 				SELECT @prAppId,
 					   a.SuperiorId,
 					   @vPackageComm,
-					   ac.SuperiorCommission,
+					   ISNULL(ac.SuperiorCommission, 0),
 					   1,
-						NULL,
+					   NULL,
 					   NULL,
 					   NULL,
 					   GETDATE(),
 					   @prCreatedBy		   
-				FROM  [dbo].[fnGetMySuperiors](@vAgentId) a
-				INNER JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
+				FROM @tSuperiorHierarchy a
+				LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
 				WHERE NOT a.SuperiorId IS NULL
 			END
 

@@ -55,7 +55,6 @@ namespace BroadbandZone_Data
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
     
-        public virtual ApplicationStatu ApplicationStatu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clawback> Clawbacks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -65,5 +64,6 @@ namespace BroadbandZone_Data
         public virtual ICollection<CustomerDocument> CustomerDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<IncentiveReceived> IncentiveReceiveds { get; set; }
+        public virtual ApplicationStatu ApplicationStatu { get; set; }
     }
 }

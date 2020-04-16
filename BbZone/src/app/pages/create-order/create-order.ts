@@ -28,6 +28,7 @@ export class CreateOrder {
     newRecord: any  = {};
     isUpdating: boolean = false;
     currentUser: LoginUser;
+    commIsConfigured: boolean = true;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router, private authenticationService: AuthenticationService) {}
 
@@ -49,7 +50,8 @@ export class CreateOrder {
                     o.dataFieldControl.maxLength,
                     o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null,
                     o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null,
-                    o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false
+                    o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false,
+                    o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null
                 )));
 
         if (!this.currentUser.isAdmin) {
@@ -82,6 +84,13 @@ export class CreateOrder {
 
     loadCategories(productId: number) {
         this.cascadeService.subject.next(new CascadeData("categoryId", this.selectedProduct));
+    }
+
+    checkCommissionSettings() {
+        if (!this.newRecord['agent']) return;
+        this.dataService.get(`${ApiController.CustomerApplication}/CheckCommissionSettings/${this.newRecord['categoryId']}/${this.newRecord['agent']}`).subscribe(isConfigured => {
+            this.commIsConfigured = isConfigured;
+        });
     }
 
     clearPackages() {

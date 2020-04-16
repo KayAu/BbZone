@@ -28,9 +28,7 @@ namespace BroadbandZone_Data
         }
     
         public virtual DbSet<AdminUser> AdminUsers { get; set; }
-        public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<AgentCommission> AgentCommissions { get; set; }
-        public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
         public virtual DbSet<DropdownItem> DropdownItems { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
@@ -44,12 +42,14 @@ namespace BroadbandZone_Data
         public virtual DbSet<Announcement> Announcements { get; set; }
         public virtual DbSet<LoginPageBanner> LoginPageBanners { get; set; }
         public virtual DbSet<LoginTrail> LoginTrails { get; set; }
-        public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<Communication> Communications { get; set; }
         public virtual DbSet<CustomerApplication> CustomerApplications { get; set; }
         public virtual DbSet<RegistrationDocument> RegistrationDocuments { get; set; }
         public virtual DbSet<SProcErrorLog> SProcErrorLogs { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
+        public virtual DbSet<Agent> Agents { get; set; }
+        public virtual DbSet<Registration> Registrations { get; set; }
+        public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -446,7 +446,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<DboardSubmissionStatusCount_Result>("DboardSubmissionStatusCount", prSuperiorIdParameter, prYearParameter);
         }
     
-        public virtual ObjectResult<GetWithdrawalSubmitted_Result> GetWithdrawalSubmitted(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetWithdrawalSubmitted_Result> GetWithdrawalSubmitted(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prCompletedFrom, Nullable<System.DateTime> prCompletedTo, ObjectParameter oTotalRecord, ObjectParameter oTotalAmountClaimed, ObjectParameter oTotalAmountPayout)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -488,7 +488,7 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prCompletedTo", prCompletedTo) :
                 new ObjectParameter("prCompletedTo", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmitted_Result>("GetWithdrawalSubmitted", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmitted_Result>("GetWithdrawalSubmitted", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord, oTotalAmountClaimed, oTotalAmountPayout);
         }
     
         public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord)
@@ -876,13 +876,17 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("GetUnreadMessagesCount", prAppIdParameter, prIsAdminParameter);
         }
     
-        public virtual ObjectResult<GetApplicationDetails_Result> GetApplicationDetails(Nullable<int> prAppId)
+        public virtual ObjectResult<GetApplicationDetails_Result> GetApplicationDetails(Nullable<int> prAppId, Nullable<bool> prIsAdmin)
         {
             var prAppIdParameter = prAppId.HasValue ?
                 new ObjectParameter("prAppId", prAppId) :
                 new ObjectParameter("prAppId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApplicationDetails_Result>("GetApplicationDetails", prAppIdParameter);
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetApplicationDetails_Result>("GetApplicationDetails", prAppIdParameter, prIsAdminParameter);
         }
     
         public virtual ObjectResult<GetCustomerApplicationForDownload_Result> GetCustomerApplicationForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId)
@@ -1073,6 +1077,19 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prRegistrationId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GenerateActivationCode", prRegistrationIdParameter, oActivationCode);
+        }
+    
+        public virtual ObjectResult<HasCommissionSet_Result> HasCommissionSet(Nullable<int> prCategoryId, string prAgent)
+        {
+            var prCategoryIdParameter = prCategoryId.HasValue ?
+                new ObjectParameter("prCategoryId", prCategoryId) :
+                new ObjectParameter("prCategoryId", typeof(int));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<HasCommissionSet_Result>("HasCommissionSet", prCategoryIdParameter, prAgentParameter);
         }
     }
 }

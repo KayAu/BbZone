@@ -82,6 +82,10 @@ var manage_login_banner_1 = require("./pages/manage-login-banner/manage-login-ba
 var role_1 = require("./enums/role");
 var min_validator_1 = require("./directives/min-validator");
 var agent_view_1 = require("./pages/agent-view/agent-view");
+var view_complete_app_1 = require("./pages/view-complete-app/view-complete-app");
+var equal_validator_directive_1 = require("./directives/equal-validator.directive");
+var mandatory_directive_1 = require("./directives/mandatory.directive");
+var edit_password_1 = require("./pages/edit-password/edit-password");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -144,7 +148,11 @@ var AppModule = /** @class */ (function () {
                 monthly_applications_1.MonthlyApplicationDashboard,
                 manage_login_banner_1.ManageLoginBanner,
                 min_validator_1.MinDirective,
-                agent_view_1.AgentView
+                agent_view_1.AgentView,
+                view_complete_app_1.ViewCompletedApp,
+                edit_password_1.EditPassword,
+                equal_validator_directive_1.EqualValidator,
+                mandatory_directive_1.MandatoryValidator
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -154,7 +162,7 @@ var AppModule = /** @class */ (function () {
                 material_1.MaterialModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                angular_user_idle_1.UserIdleModule.forRoot({ idle: 1200, timeout: 60, ping: 60 }),
+                angular_user_idle_1.UserIdleModule.forRoot({ idle: 300, timeout: 1200, ping: 60 }),
                 ngx_toastr_1.ToastrModule.forRoot({
                     maxOpened: 1,
                     preventDuplicates: true,
@@ -187,7 +195,9 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
-                    { path: 'agent-view/:id', component: agent_view_1.AgentView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } }
+                    { path: 'agent-view/:id', component: agent_view_1.AgentView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'view-complete-app', component: view_complete_app_1.ViewCompletedApp },
+                    { path: 'edit-password', component: edit_password_1.EditPassword }
                 ])
             ],
             providers: [

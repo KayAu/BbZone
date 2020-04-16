@@ -11,7 +11,9 @@ CREATE PROCEDURE [dbo].[prc_GetWithdrawalSubmitted]
 	@prSubmittedTo SMALLDATETIME = NULL,
 	@prCompletedFrom SMALLDATETIME = NULL,
 	@prCompletedTo SMALLDATETIME = NULL,
-	@oTotalRecord INT OUTPUT
+	@oTotalRecord INT OUTPUT,
+	@oTotalAmountClaimed MONEY OUTPUT,
+	@oTotalAmountPayout MONEY OUTPUT
 
 AS
 BEGIN
@@ -77,7 +79,8 @@ BEGIN
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(*) FROM ##temp_Table
-
+		SELECT @oTotalAmountClaimed = SUM(CASE WHEN Status <> 'Terminated' THEN Amount ELSE 0 END) FROM ##temp_Table
+		SELECT @oTotalAmountPayout = SUM(CASE WHEN Status = 'Completed' THEN Amount ELSE 0 END) FROM ##temp_Table
 		DROP TABLE  ##temp_Table
 
 	END TRY 

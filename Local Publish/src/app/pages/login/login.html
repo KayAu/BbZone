@@ -23,11 +23,11 @@
                                         </label>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mrg10T">
                                     <label>Email</label>
                                     <input type="text" class="form-control" placeholder="Login Name" [(ngModel)]="user.username" name="username" #username="ngModel" required>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group mrg10T">
                                     <label>Password</label>
                                     <input type="password" class="form-control" placeholder="Password" [(ngModel)]="user.password" name="password" #password="ngModel" required>
                                     <div *ngIf="error" class="text-danger mrg10T">{{error}}</div>
@@ -35,7 +35,7 @@
                                 <loading></loading>
                                 <div class="form-group">
                                     <!--<a  class="btn btn-info btn-block margin-top-10" (click)="login()">Sign In</a>-->
-                                    <button type="submit" class="btn btn-success btn-block mrg20B" (click)="login()">Sign In</button>
+                                    <button type="submit" class="btn btn-success btn-block mrg20T mrg20B" (click)="login()">Sign In</button>
                                 </div>
                                 <hr />
                                 <p class="text-center mrg30B">

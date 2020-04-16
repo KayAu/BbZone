@@ -1,7 +1,5 @@
 ﻿
 CREATE PROCEDURE [dbo].[prc_GetPaymentDetails]
-	--@prStrApplicationId varchar(800),
-	--@prAgent NVARCHAR(16)
 	@prWithdrawalId INT
 AS
 BEGIN
@@ -13,22 +11,6 @@ BEGIN
 		WITH cteTable
 		AS
 		(
-			--SELECT 
-			--	ca.ApplicationId,
-			--	ca.CustomerName ,				
-			--	pp.PackageName,
-			--	pc.Category,
-			--	ca.OrderNo,
-			--	[Date] = FORMAT(ca.CreatedOn, 'MM/dd/yyyy'),
-			--	CommRate = AgentCommission,
-			--	(pp.Commission * ac.AgentCommission) * 1.0 / 100 AS Amount
-			--FROM vwWithdrawalItems wi 
-			--INNER JOIN CustomerApplication ca ON wi.WithdrawalId  = ca.ApplicationId
-			--INNER JOIN Agent a ON ca.Agent = a.UserLogin
-			--INNER JOIN AgentCommission ac ON ac.CategoryId = ca.CategoryId AND ac.AgentId = a.AgentId
-			--INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
-			--INNER JOIN ProductCategory pc ON pp.CategoryId = pc.CategoryId
-			--WHERE wi.WithdrawalId = @prWithdrawalId 
 			SELECT 
 				ca.ApplicationId,
 				TransactionDetails = ca.CustomerName,
@@ -39,25 +21,23 @@ BEGIN
 										WHEN NOT cc.ClaimWithdrawalId IS NULL AND NOT cc.DeductedWithdrawalId IS NULL THEN 'Clawback' 
 										WHEN cc.IsOverride = 1 THEN 'Override' 
 									END,
-				ClaimAmount =  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY)
-				--DeductAmount = CASE WHEN NOT cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE '-' END
+				ClaimAmount = CASE WHEN NOT cc.DeductedWithdrawalId IS NULL THEN - CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) 
+				                   ELSE CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY)
+							  END
 			FROM ClaimableCommission cc 
 			INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
 			INNER JOIN ProductPackage pp ON ca.ProdPkgId = pp.ProdPkgId
 			WHERE cc.ClaimWithdrawalId = @prWithdrawalId
-			AND cc.DeductedWithdrawalId IS NULL
-			--OR cc.DeductedWithdrawalId = @prWithdrawalId
-			--UNION ALL
-			--SELECT ApplicationId = '', 
-			--	   TransactionDetails = ac.Description, 
-			--	   OrderNo = '', 
-			--	   PackageName = '', 
-			--	   [Date] = FORMAT(ac.CreatedOn, 'MM/dd/yyyy'), 
-			--	   TransactionType = 'Purchase',
-			--	   ClaimAmount = '-', 
-			--	   DeductAmount = CAST(ROUND(ac.Amount, 2) AS MONEY)
-			--FROM AgentCharge ac
-			--WHERE ac.WithdrawalId = @prWithdrawalId
+			UNION ALL
+			SELECT ApplicationId = '-',
+			      TransactionDetails = ac.Description,
+				  OrderNo = '-',
+				  PackageName = '-',
+				  [Date] = FORMAT(ac.CreatedOn, 'MM/dd/yyyy'),
+				  TransactionType = 'Charges',
+				  ClaimAmount = ac.Amount * -1
+			FROM AgentCharge ac
+			WHERE ac.WithdrawalId = @prWithdrawalId
 		)
 
 		SELECT @vPaymentItemsStr = (SELECT 

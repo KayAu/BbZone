@@ -224,7 +224,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     var agentId = !currentUser.IsAdmin ? currentUser.AgentId : null;
-                    List <DropdownItem> dropdownItems = db.GetMyEntireTeam(agentId).Select(r => new DropdownItem { Key = r.UserLogin, Value = r.FullName }).ToList();
+                    List <DropdownItem> dropdownItems = db.GetMyEntireTeam(agentId).Select(r => new DropdownItem { Key = r.UserLogin, Value = r.UserLogin }).ToList();
                     return Ok(dropdownItems);
                 }
             }

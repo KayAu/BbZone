@@ -69,9 +69,13 @@ namespace BroadbandZone_App.WebApi
             {
                 SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    ObjectParameter totalAmountClaimed = new ObjectParameter("oTotalAmountClaimed", typeof(decimal));
+                    ObjectParameter totalAmountPayout = new ObjectParameter("oTotalAmountPayout", typeof(decimal));
+
                     var results = (new BroadbandZoneEntities()).GetWithdrawalSubmitted(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.Status,
                                                                                 !currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
@@ -79,13 +83,16 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.StartDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.EndDate : null,
-                                                                                totalRecord).ToList();
+                                                                                totalRecord,
+                                                                                totalAmountClaimed,
+                                                                                totalAmountPayout).ToList();
+
                     return Ok(new WithdrawalView<GetWithdrawalSubmitted_Result>()
                     {
                         DisplayData = results,
                         TotalRecords = Convert.ToInt32(totalRecord.Value),
-                        TotalAmountClaimed = results.Select(r=>r.Amount).Sum(),
-                        TotalAmountPayout = results.Where(r=>r.Status== "Completed").Select(r => r.Amount).Sum()
+                        TotalAmountClaimed = Convert.ToDecimal(totalAmountClaimed.Value),
+                        TotalAmountPayout = Convert.ToDecimal(totalAmountPayout.Value)
                     });
                 }
             }

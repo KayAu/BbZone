@@ -3,13 +3,13 @@
 export class ViewCompletedOrderColumns {
 
   public static fields = [
-    {
-        "fieldName": "applicationId",
-        "headerText": "Id",
-        "displayType": "text",
-        "keyField": true,
-        "colWidth": "cell-width-1"
-    },
+    //{
+    //    "fieldName": "applicationId",
+    //    "headerText": "Id",
+    //    "displayType": "text",
+    //    "keyField": true,
+    //    "colWidth": "cell-width-1"
+    //},
     {
         "fieldName": "customerName",
         "headerText": "Customer Name",
@@ -29,7 +29,7 @@ export class ViewCompletedOrderColumns {
         "headerText": "Category",
         "displayType": "text",
         "keyField": false,
-        "colWidth": "cell-width-15"
+        "colWidth": "cell-width-10"
     },
     {
         "fieldName": "activatedOn",
@@ -39,11 +39,11 @@ export class ViewCompletedOrderColumns {
         "colWidth": "cell-width-5"
     },
     {
-        "fieldName": "orderNo",
-        "headerText": "Order No",
+        "fieldName": "userId",
+        "headerText": "User Id",
         "displayType": "text",
         "keyField": false,
-        "colWidth": "cell-width-10"
+        "colWidth": "cell-width-7"
     },
     {
         "fieldName": "agent",
@@ -60,11 +60,25 @@ export class ViewCompletedOrderColumns {
         "colWidth": "cell-width-5"
     },
     {
+        "fieldName": "paymentNo",
+        "headerText": "Payment Voucher No.",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": "cell-width-5"
+    },
+    {
         "fieldName": "commStatus",
         "headerText": "Comm. Status",
         "displayType": "text",
         "keyField": false,
         "colWidth": ""
+    },
+    {
+        "fieldName": "commAmount",
+        "headerText": "Comm. Amount (RM)",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": "cell-width-5"
     },
     {
         "fieldName": "paidOn",

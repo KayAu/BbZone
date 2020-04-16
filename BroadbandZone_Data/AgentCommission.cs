@@ -24,7 +24,7 @@ namespace BroadbandZone_Data
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
     
-        public virtual Agent Agent { get; set; }
         public virtual ProductCategory ProductCategory { get; set; }
+        public virtual Agent Agent { get; set; }
     }
 }

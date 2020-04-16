@@ -35,6 +35,8 @@ var form_data_mapping_1 = require("src/app/model/form.data.mapping");
 var data_field_control_1 = require("src/app/model/data.field.control");
 var viewOrderColumns_1 = require("src/app/metadata/viewOrderColumns ");
 var searchOrderFields_1 = require("src/app/metadata/searchOrderFields");
+var common_1 = require("@angular/common");
+var file_saver_1 = require("file-saver");
 var ViewOrder = /** @class */ (function (_super) {
     __extends(ViewOrder, _super);
     function ViewOrder(loaderService, dataService, formEvent) {
@@ -62,6 +64,13 @@ var ViewOrder = /** @class */ (function (_super) {
         var columnMappings = searchOrderFields_1.SearchOrderFields.fields.map(function (o) { return new form_data_mapping_1.SearchFieldMapping(o.fieldName, o.displayText, o.width, !o.dataFieldControl ? null :
             new data_field_control_1.SearchFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null, o.dataFieldControl.placeholder !== undefined ? o.dataFieldControl.placeholder : null)); });
         return columnMappings;
+    };
+    ViewOrder.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.Download + "/CustomerApplication", this.searchParams).subscribe(function (data) {
+            var filename = "CustomerApplication_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
     };
     ViewOrder.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);

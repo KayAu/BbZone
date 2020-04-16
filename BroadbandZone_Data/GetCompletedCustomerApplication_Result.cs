@@ -13,15 +13,16 @@ namespace BroadbandZone_Data
     
     public partial class GetCompletedCustomerApplication_Result
     {
-        public Nullable<int> ApplicationId { get; set; }
         public string CustomerName { get; set; }
         public string PackageName { get; set; }
         public string Category { get; set; }
         public string ActivatedOn { get; set; }
-        public string OrderNo { get; set; }
         public string Agent { get; set; }
         public Nullable<bool> DocumentCompleted { get; set; }
         public string PaidOn { get; set; }
         public string CommStatus { get; set; }
+        public string UserId { get; set; }
+        public string CommAmount { get; set; }
+        public Nullable<int> PaymentNo { get; set; }
     }
 }

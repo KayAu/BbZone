@@ -7,7 +7,7 @@ var EditOrderFields = /** @class */ (function () {
         {
             "fieldName": "applicationId",
             "displayText": "Application Id",
-            "hidden": true,
+            "hidden": false,
             "dataFieldControl": {
                 "controlName": "applicationId",
                 "controlType": "label",
@@ -16,28 +16,25 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "categoryId",
+            "fieldName": "category",
             "displayText": "Product Category",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "categoryId",
-                "controlType": "select",
-                "required": true,
+                "controlName": "category",
+                "controlType": "label",
+                "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetCategories",
-                "cascadeTo": "prodPkgId"
             }
         },
         {
-            "fieldName": "prodPkgId",
+            "fieldName": "packageName",
             "displayText": "Product Package",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "prodPkgId",
-                "controlType": "cascadeDropdown",
-                "required": true,
-                "maxLength": 0,
-                "datasourceUrl": "GetPackagesByCategory"
+                "controlName": "packageName",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0
             }
         },
         {
@@ -209,17 +206,18 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "appStatusId",
-            "displayText": "Status",
+            "fieldName": "isProcessed",
+            "displayText": "Is Processed",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "appStatusId",
-                "controlType": "select",
+                "controlName": "isProcessed",
+                "controlType": "checkbox",
                 "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetStatus",
-                "cascadeTo": "",
-                "adminField": true
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true,
+                "dataChangedEvent": "showProcessedDetails"
             }
         },
         {
@@ -255,10 +253,24 @@ var EditOrderFields = /** @class */ (function () {
             "displayText": "Tel No",
             "hidden": false,
             "dataFieldControl": {
-                "controlName": "userId",
+                "controlName": "telNo",
                 "controlType": "textbox",
                 "required": false,
                 "maxLength": 25,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "eForm",
+            "displayText": "E-Form",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "eForm",
+                "controlType": "textbox",
+                "required": false,
+                "maxLength": 15,
                 "datasourceUrl": null,
                 "cascadeTo": null,
                 "adminField": true
@@ -275,6 +287,20 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
+                "adminField": true
+            }
+        },
+        {
+            "fieldName": "appStatusId",
+            "displayText": "Status",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "appStatusId",
+                "controlType": "select",
+                "required": false,
+                "maxLength": 0,
+                "datasourceUrl": "GetStatus",
+                "cascadeTo": "",
                 "adminField": true
             }
         },

@@ -46,7 +46,8 @@ var EditOrderFields = /** @class */ (function () {
                 "controlType": "select",
                 "required": true,
                 "maxLength": 0,
-                "datasourceUrl": "GetAgents"
+                "datasourceUrl": "GetAgents",
+                "dataChangedEvent": "checkCommissionSettings"
             }
         },
         {

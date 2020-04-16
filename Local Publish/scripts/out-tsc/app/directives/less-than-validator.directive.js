@@ -26,7 +26,7 @@ var LessThanValidator = /** @class */ (function () {
         var myValue = thisControl.value;
         if (myValue) {
             // value not equal
-            if (this._valueToCompare && myValue >= this._valueToCompare)
+            if (this._valueToCompare && myValue > this._valueToCompare)
                 return { validateLessThan: true };
         }
         return null;

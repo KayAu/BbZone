@@ -62,68 +62,71 @@
                         </div>
                         <button type="button" class="btn btn-outline btn-default" (click)="clearSearchParam()">Reset</button>
                     </div>
+                    <div class="col-md-6"></div>
                     <div class="table-responsive mrg10T">
-                        <div class="col-md-12 pad0L mrg25B mrg20T" *ngIf="selectedItems.length > 0">
-                            <div class="display-table">
-                                <div class="display-cell">
-                                    <span>Selected records count: {{selectedItems.length}}</span>
-                                </div>
-                                <div class="display-cell pad25L">
-                                    <button type="button" class="btn btn-default mrg10R" (click)="showSelectedItems()">
-                                        {{viewSelectedItems? 'Hide': 'View'}} Selection
-                                    </button>
-                                    <button type="button" class="btn btn-primary" [ngClass]="{'show-spinner disabled':isUpdating }"
-                                            [disabled]="!allowSubmit || isUpdating" (click)="submit()">
-                                        {{isUpdating ? 'Submitting' : 'Submit'}}
-                                        <span class="loading"></span>
-                                    </button>
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                            <div class="col-md-12 pad0L mrg25B mrg20T" *ngIf="selectedItems.length > 0">
+                                <div class="display-table">
+                                    <div class="display-cell">
+                                        <span>Selected records count: {{selectedItems.length}}</span>
+                                    </div>
+                                    <div class="display-cell pad25L">
+                                        <button type="button" class="btn btn-default mrg10R" (click)="showSelectedItems()">
+                                            {{viewSelectedItems? 'Hide': 'View'}} Selection
+                                        </button>
+                                        <button type="button" class="btn btn-primary" [ngClass]="{'show-spinner disabled':isUpdating }"
+                                                [disabled]="!allowSubmit || isUpdating" (click)="submit()">
+                                            {{isUpdating ? 'Submitting' : 'Submit'}}
+                                            <span class="loading"></span>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <table class="table table-striped mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let record of dataSource; let rowNo = index" >
-                                    <td>
-                                        <div class="checkbox checkbox-primary mrg0A" *ngIf="record.claimCommId!=null">
-                                            <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
-                                            <label for="checkbox{{rowNo}}" class="pad0L">
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <ng-container *ngFor="let field of dataRowMapper">
+                            <div class="mrg5B display-block w-p100">Select one or more items to submit the claim</div>
+                            <table class="table table-striped mrg10T dataTable table-bordered" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let record of dataSource; let rowNo = index">
                                         <td>
-                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
-                                            <ng-template #displayBadge>
-                                                <span class="badge" *ngIf="record.transactionType"
-                                                      [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                            <div class="checkbox checkbox-primary mrg0A" *ngIf="record.claimCommId!=null">
+                                                <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
+                                                <label for="checkbox{{rowNo}}" class="pad0L">
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <ng-container *ngFor="let field of dataRowMapper">
+                                            <td>
+                                                <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                                <ng-template #displayBadge>
+                                                    <span class="badge" *ngIf="record.transactionType"
+                                                          [ngClass]="{'badge-info': record.transactionType == 'Override',
                                                                   'badge-warning': record.transactionType == 'Purchase',
                                                                   'badge-success': record.transactionType == 'Own Sales',
                                                                   'badge-danger': record.transactionType == 'Clawback'}">
-                                                    {{record.transactionType}}
-                                                </span>
-                                                <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
-                                            </ng-template>
+                                                        {{record.transactionType}}
+                                                    </span>
+                                                    <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
+                                                </ng-template>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                    <tr *ngIf="dataSource.length === 0">
+                                        <td [attr.colspan]="dataRowMapper.length+1">
+                                            <div class="mrg45A text-center opacity-40">
+                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                <h4>No Records Available</h4>
+                                            </div>
                                         </td>
-                                    </ng-container>
-                                </tr>
-                                <tr *ngIf="dataSource.length === 0">
-                                    <td [attr.colspan]="dataRowMapper.length+1">
-                                        <div class="mrg45A text-center opacity-40">
-                                            <i class="fa fa-fw fa-file-text font-size-35"></i>
-                                            <h4>No Records Available</h4>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                        </div>
                     </div>
                 </div>
             </div>

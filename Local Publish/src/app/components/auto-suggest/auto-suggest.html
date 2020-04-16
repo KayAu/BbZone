@@ -8,7 +8,7 @@
     <span class="clear-wrapper" title="Clear all" *ngIf="queryField.value!=null" (click)="clearSearch()"><span class="clear">×</span></span>
   </div>
 
-  <ul class="filter-select" *ngIf="results.length > 0">
+  <ul class="filter-select scale-up" *ngIf="results.length > 0">
     <li class="pad0B" (click)="triggerSearch(queryField.value)">
       <i class="ti ti-search mrg15R"></i>
       {{queryField.value}}

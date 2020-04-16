@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Agent] (
     [AgentId]      INT             IDENTITY (1000, 1) NOT NULL,
     [Fullname]     VARCHAR (50)    NOT NULL,
-    [Email]        VARCHAR (25)    NULL,
+    [Email]        VARCHAR (80)    NULL,
     [Nric]         VARCHAR (12)    NULL,
     [CompanyName]  VARCHAR (50)    NULL,
     [CompanyRegNo] VARCHAR (25)    NULL,
@@ -24,6 +24,8 @@
     [ModifiedBy]   VARCHAR (50)    NULL,
     CONSTRAINT [PK__tmp_ms_x__9AC3BFF1E7663EAE] PRIMARY KEY CLUSTERED ([AgentId] ASC)
 );
+
+
 
 
 

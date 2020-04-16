@@ -10,7 +10,7 @@
                 </div>
                 <ul class="nav navbar-top-links navbar-right mrg20R">
                     <li class="dropdown">
-               
+
                     </li>
                     <li>
                         <a (click)="logout()">
@@ -21,8 +21,11 @@
             </nav>
         </div>
         <router-outlet></router-outlet>
+        <!--Scroll to top-->
+        <a [ngClass]="{'show-scroll': showScroll}" (click)="scrollToTop()" class="scroll-to-top">
+            <i class="glyphicon glyphicon-chevron-up"></i>
+        </a>
     </div>
-
 </div>
 
 

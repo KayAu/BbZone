@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[Registration] (
     [RegId]          INT             IDENTITY (1, 1) NOT NULL,
     [Fullname]       VARCHAR (50)    NOT NULL,
-    [Email]          VARCHAR (25)    NOT NULL,
+    [Email]          VARCHAR (80)    NOT NULL,
     [Nric]           VARCHAR (12)    NOT NULL,
     [CompanyName]    VARCHAR (50)    NULL,
     [CompanyRegNo]   VARCHAR (25)    NULL,
@@ -25,6 +25,8 @@
     [CreatedOn]      SMALLDATETIME   NULL,
     CONSTRAINT [PK__Registra__2C6822F899376830] PRIMARY KEY CLUSTERED ([RegId] ASC)
 );
+
+
 
 
 

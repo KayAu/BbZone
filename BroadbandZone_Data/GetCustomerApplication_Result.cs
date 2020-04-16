@@ -22,5 +22,6 @@ namespace BroadbandZone_Data
         public string Status { get; set; }
         public string ResidentialName { get; set; }
         public Nullable<int> TotalUnreadMsg { get; set; }
+        public Nullable<bool> CommIsConfigured { get; set; }
     }
 }

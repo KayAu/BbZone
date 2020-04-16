@@ -20,6 +20,9 @@ namespace BroadbandZone_Data
         public string Category { get; set; }
         public string PackageName { get; set; }
         public bool ShowEForm { get; set; }
+        public bool AllowEdit { get; set; }
+        public string Status { get; set; }
+        public bool CommIsConfigured { get; set; }
     }
 
     public partial class AnnouncementDocument

@@ -14,7 +14,8 @@ var NewOrderFields = /** @class */ (function () {
                 "required": true,
                 "maxLength": 0,
                 "datasourceUrl": "GetCategoriesByProduct",
-                "cascadeTo": "prodPkgId"
+                "cascadeTo": "prodPkgId",
+                "dataChangedEvent": "checkCommissionSettings"
             }
         },
         {
@@ -38,7 +39,8 @@ var NewOrderFields = /** @class */ (function () {
                 "controlType": "select",
                 "required": true,
                 "maxLength": 0,
-                "datasourceUrl": "GetAgents"
+                "datasourceUrl": "GetAgents",
+                "dataChangedEvent": "checkCommissionSettings"
             }
         },
         {

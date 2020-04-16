@@ -33,9 +33,11 @@ var MinDirective = /** @class */ (function () {
         });
     };
     MinDirective.prototype.validate = function () {
-        var value = this.ngModel.model;
+        if (!this.parentForm.controls[this.fieldId])
+            return;
         var thisElement = $(this.el.nativeElement);
-        thisElement.next('.text-danger').remove();
+        $(this.el.nativeElement).next('.text-danger').remove();
+        var value = this.parentForm.controls[this.fieldId].value;
         if (value === null || value === undefined) {
             thisElement.after('<span class= "text-danger">This is required</span>');
             this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
