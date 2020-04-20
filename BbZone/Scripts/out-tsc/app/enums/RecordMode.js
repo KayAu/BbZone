@@ -13,4 +13,10 @@ var ApprovalMode;
     ApprovalMode[ApprovalMode["Approved"] = 2] = "Approved";
     ApprovalMode[ApprovalMode["Rejected"] = 3] = "Rejected";
 })(ApprovalMode = exports.ApprovalMode || (exports.ApprovalMode = {}));
+var OrderFilter;
+(function (OrderFilter) {
+    OrderFilter[OrderFilter["None"] = 0] = "None";
+    OrderFilter[OrderFilter["IncomingMessage"] = 1] = "IncomingMessage";
+    OrderFilter[OrderFilter["NoCommissionSetup"] = 2] = "NoCommissionSetup";
+})(OrderFilter = exports.OrderFilter || (exports.OrderFilter = {}));
 //# sourceMappingURL=RecordMode.js.map

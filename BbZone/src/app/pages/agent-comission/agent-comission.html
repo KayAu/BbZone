@@ -11,11 +11,12 @@
                     <li>
                         <a class="nav-link" [ngClass]="{'active':selectedTab == 2}" data-toggle="tab" href="#editCommission" (click)="selectedTab=2">Edit Commission</a>
                     </li>
+
                 </ul>
                 <div class="tab-content">
                     <div role="tabpanel" id="addCommission" class="tab-pane active">
                         <div class="panel-body">
-                            <form #dataForm="ngForm" (ngSubmit)="create()">
+                            <form #dataForm="ngForm" (ngSubmit)="create()" class="col-md-8">
                                 <div class="alert alert-success" *ngIf="noAgentsReturned">
                                     You have updated the commissions for all your agents on this product.
                                 </div>
@@ -47,7 +48,6 @@
                                             Product Category
                                         </label>
                                         <div class="col-sm-10">
-
                                             <table class="table table-striped">
                                                 <thead>
                                                     <tr>
@@ -95,6 +95,26 @@
                                     </div>
                                 </fieldset>
                             </form>
+                            <div class="col-md-4"  *ngIf="appsWithoutCommission.length != 0">
+                                <div class="shadow-box mrg20L">
+                                    <div class="shadow-box-header">
+                                        <i class="fa fa-exclamation-triangle mrg5R"> </i>
+                                        <strong>Submitted Application W/O Commission Set</strong>
+                                    </div>
+                                    <div class="shadow-box-body">
+                                        <p>The following agents have orders submitted wihout the commissions setup beforehand</p>
+                                        <ul class="list-group clear-list">
+                                            <li class="list-group-item font-bold"><span class="float-right">Product Category</span> Agent</li>
+                                            <ng-container *ngFor="let item of appsWithoutCommission">
+                                                <li class="list-group-item">
+                                                    <span class="float-right">{{item.category}}</span>
+                                                    {{item.agentName}}
+                                                </li>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div role="tabpanel" id="editCommission" class="tab-pane">
@@ -118,6 +138,7 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>

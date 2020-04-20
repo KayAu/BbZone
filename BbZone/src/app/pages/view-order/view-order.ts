@@ -13,6 +13,7 @@ import { ViewOrderColumns } from 'src/app/metadata/viewOrderColumns ';
 import { SearchOrderFields } from 'src/app/metadata/searchOrderFields';
 import { formatDate } from '@angular/common';
 import { saveAs } from 'file-saver';
+import { OrderFilter } from 'src/app/enums/RecordMode';
 
 @Component({
   selector: 'view-order',
@@ -25,12 +26,18 @@ export class ViewOrder extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     searchFields: SearchFieldMapping[] = [];
     displayType = DataDisplayType;
-    searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
+    orderFilter = OrderFilter;
+    searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null, 0);
     keyField: string;
+    totalUnreadMsg: number;
+    totalCommINotConfig: number;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
         super(loaderService, dataService, "applicationId", false);
-     
+        this.dataSourceSubject.asObservable().subscribe((data: any) => {
+            this.totalUnreadMsg = data.totalUnreadMsg;
+            this.totalCommINotConfig = data.totalCommINotConfig;
+        });
     }
 
     ngOnInit() {
@@ -75,8 +82,18 @@ export class ViewOrder extends ListEvent {
         });
     }
 
+    filterView(filterBy: OrderFilter) {
+        if (this.searchParams.filterByMode === filterBy) {
+            this.searchParams.filterByMode = OrderFilter.None;
+        }
+        else {
+            this.searchParams.filterByMode = filterBy;
+        }
+        this.reloadData();
+    }
+
     clearSearchParam() {
-        this.searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null);
+        this.searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null, 0);
         this.reloadData();
     }
 }

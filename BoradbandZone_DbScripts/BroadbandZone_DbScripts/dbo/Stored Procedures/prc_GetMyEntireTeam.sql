@@ -10,13 +10,17 @@ BEGIN
 	    -- check if this agent has commission set for the product selected
 		SELECT UserLogin,
 			   FullName,
-			   AgentId
+			   AgentId,
+			   SuperiorId,
+			   AgentLevel = 0
 		FROM Agent
 		WHERE AgentId = @prSuperiorId
 		UNION ALL
 		SELECT AgentUsername AS UserLogin,
 			   FullName,
-			   AgentId
+			   AgentId,
+			   SuperiorId,
+			   AgentLevel = CASE WHEN @prSuperiorId IS NULL THEN AgentLevel - 1 ELSE AgentLevel END
 		FROM  [dbo].[fnGetMyAgents](@prSuperiorId)
 
 	END TRY 

@@ -81,6 +81,7 @@ namespace BroadbandZone_App.WebApi
                 body = body.Replace("{BankAccNo}", paymentVoucher.BankAccNo);
                 body = body.Replace("{ReferenceNo}", paymentVoucher.ReferenceNo);
                 body = body.Replace("{PaymentAmount}", paymentVoucher.PaymentAmount);
+                body = body.Replace("{DeductAmount}", paymentVoucher.DeductAmount);
                 body = body.Replace("{PaymentDate}", paymentVoucher.PaymentDate);
                 body = body.Replace("{PaymentItemsStr}", paymentVoucher.PaymentItemsStr);
 

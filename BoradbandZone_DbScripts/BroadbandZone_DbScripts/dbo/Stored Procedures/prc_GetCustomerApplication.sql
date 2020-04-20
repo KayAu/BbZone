@@ -17,7 +17,10 @@
 	@prDocumentCompleted BIT = NULL,
 	@prIsAdmin BIT = NULL,
 	@prAgentId INT,
-	@oTotalRecord INT OUTPUT
+	@prFilterMode INT = NULL,
+	@oTotalRecord INT OUTPUT,
+	@oTotalUnreadMsg INT OUTPUT,
+	@oTotalCommINotConfig INT OUTPUT
 
 AS
 BEGIN
@@ -28,7 +31,9 @@ BEGIN
 	(	
 		AgentUsername NVARCHAR(16),
 		FullName VARCHAR(50),
-		AgentId INT
+		AgentId INT,
+		SuperiorId INT,
+		AgentLevel INT
 	)
 
 	DECLARE @var_Table TABLE(
@@ -49,12 +54,9 @@ BEGIN
 	BEGIN TRY
 		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
 
-		--IF @prIsAdmin <> 1
-		--BEGIN
-			INSERT INTO @vTeamMembers
-			EXEC prc_GetMyEntireTeam @prAgentId
-		--END
-	
+		INSERT INTO @vTeamMembers
+		EXEC prc_GetMyEntireTeam @prAgentId
+
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
@@ -128,12 +130,15 @@ BEGIN
 				END
 		AND 1 = CASE WHEN ISNULL(@prKeyword,'') = '' THEN 1
 					 WHEN ca.CustomerName LIKE '%' + @prKeyword + '%' 
-						  --OR ca.CompanyName LIKE '%' + @prKeyword + '%'
-						  --OR ca.CustomerAddr LIKE '%' + @prKeyword + '%'
 						  OR ca.OrderNo LIKE '%' + @prKeyword + '%'
 					      OR ca.ResidentialName LIKE '%' + @prKeyword + '%' THEN 1
 					 ELSE 0
 				END	
+		AND 1 = CASE WHEN ISNULL(@prFilterMode , 0) = 0 THEN 1
+					 WHEN @prFilterMode = 1 AND msg.TotalUnreadMsg > 0 THEN 1   -- IncomingMessage
+					 WHEN @prFilterMode = 2 AND ac.CommId IS NULL THEN 1   -- NoCommissionSetup
+					 ELSE 0
+		        END
 
 		PRINT @vSelectQuery
 		-- insert the dynamic query results into temp table
@@ -153,6 +158,8 @@ BEGIN
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table
+		SELECT @oTotalUnreadMsg = COUNT(ApplicationId) FROM ##temp_Table WHERE TotalUnreadMsg > 0
+	    SELECT @oTotalCommINotConfig = COUNT(ApplicationId) FROM ##temp_Table WHERE CommIsConfigured = 0
 
 		DROP TABLE  ##temp_Table
 

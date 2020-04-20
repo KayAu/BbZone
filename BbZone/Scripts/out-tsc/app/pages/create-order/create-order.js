@@ -78,6 +78,16 @@ var CreateOrder = /** @class */ (function () {
             _this.commIsConfigured = isConfigured;
         });
     };
+    CreateOrder.prototype.showProcessedDetails = function (show) {
+        if (!show)
+            show = false;
+        var updateFields = ["orderNo", "userId", "telNo"];
+        for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
+            var field = updateFields_1[_i];
+            var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });
+            this.formFields[index].hidden = !show;
+        }
+    };
     CreateOrder.prototype.clearPackages = function () {
         this.selectedCategory = null;
         this.cascadeService.subject.next(new cascade_data_1.CascadeData("prodPkgId", this.selectedCategory));

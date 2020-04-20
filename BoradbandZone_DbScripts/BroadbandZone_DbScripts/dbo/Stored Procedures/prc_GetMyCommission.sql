@@ -15,9 +15,11 @@ BEGIN
 			 ac.CategoryId
 			,pc.Category
 			,ac.AgentCommission  AS [AgentCommissionPer]
+			,ac2.AgentCommission AS [SupCommission]
 		FROM AgentCommission ac
 		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
 		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
+		INNER JOIN AgentCommission ac2 ON ac2.AgentId = a1.SuperiorId AND ac2.CategoryId = ac.CategoryId
 		WHERE pc.ProductId = @prProductId
 		AND  a1.AgentId = @prAgentId 
 		ORDER BY pc.Category

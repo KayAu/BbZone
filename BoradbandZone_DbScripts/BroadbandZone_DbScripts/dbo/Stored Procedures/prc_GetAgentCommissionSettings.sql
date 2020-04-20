@@ -9,10 +9,12 @@ BEGIN
 
 		SELECT pc.CategoryId,
 			   pc.Category,
-			   ac.SuperiorCommission AS [SupCommission],
-			   ac.AgentCommission AS [AgentCommissionPer]
+			   ac2.AgentCommission AS [SupCommission],
+			   ac1.AgentCommission AS [AgentCommissionPer]
 		FROM ProductCategory pc 
-		LEFT JOIN AgentCommission ac ON ac.CategoryId = pc.CategoryId AND ac.AgentId = @prAgentId
+		LEFT JOIN AgentCommission ac1 ON ac1.CategoryId = pc.CategoryId AND ac1.AgentId = @prAgentId
+		LEFT JOIN Agent a ON ac1.AgentId = a.agentId
+		LEFT JOIN AgentCommission ac2 ON ac2.CategoryId = ac1.CategoryId AND ac2.AgentId = a.SuperiorId
 		WHERE pc.ProductId = @prProductId
 		AND pc.IsActive = 1
 		ORDER BY pc.Category

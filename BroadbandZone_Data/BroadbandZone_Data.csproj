@@ -159,6 +159,9 @@
     <Compile Include="GetApplicationDetails_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAppWithoutCommAssigned_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetClawback_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -226,6 +229,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PartialClass\PartialClass.cs" />
+    <Compile Include="prc_GetAppWithoutCommAssigned_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="prc_GetCompletedCustomerApplication_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

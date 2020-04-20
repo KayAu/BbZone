@@ -44,6 +44,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         _this.isUpdating = false;
         _this.dataRowMapper = [];
         _this.selectedItems = [];
+        _this.deductionItems = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.totalAmountToDeduct = 0;
         _this.totalSelectedAmount = 0;
@@ -53,6 +54,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         _this.viewSelectedItems = false;
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountToDeduct = data.totalAmountToDeduct;
+            _this.setDeductionItems();
             _this.setSelectedItems();
         });
         return _this;
@@ -82,8 +84,9 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     };
     CreateWithdrawal.prototype.submit = function () {
         var _this = this;
+        var claimItems = this.selectedItems.concat(this.deductionItems);
         var newRecord = {
-            ClaimCommItemsId: this.selectedItems.map(function (d) { return d.claimCommId; }).join('|'),
+            ClaimCommItemsId: claimItems.map(function (d) { return d.claimCommId; }).join('|'),
             amount: this.totalClaimableAmount
         };
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
@@ -112,6 +115,15 @@ var CreateWithdrawal = /** @class */ (function (_super) {
     CreateWithdrawal.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
         this.reloadData();
+    };
+    CreateWithdrawal.prototype.setDeductionItems = function () {
+        var _this = this;
+        if (this.deductionItems.length === 0) {
+            var deductItems = this.dataSource.filter(function (i) { return i.selected === true; });
+            deductItems.forEach(function (item, i, self) {
+                _this.deductionItems.push(item);
+            });
+        }
     };
     CreateWithdrawal = __decorate([
         core_1.Component({

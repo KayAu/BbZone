@@ -37,6 +37,7 @@ var viewOrderColumns_1 = require("src/app/metadata/viewOrderColumns ");
 var searchOrderFields_1 = require("src/app/metadata/searchOrderFields");
 var common_1 = require("@angular/common");
 var file_saver_1 = require("file-saver");
+var RecordMode_1 = require("src/app/enums/RecordMode");
 var ViewOrder = /** @class */ (function (_super) {
     __extends(ViewOrder, _super);
     function ViewOrder(loaderService, dataService, formEvent) {
@@ -47,7 +48,12 @@ var ViewOrder = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
+        _this.orderFilter = RecordMode_1.OrderFilter;
+        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null, 0);
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalUnreadMsg = data.totalUnreadMsg;
+            _this.totalCommINotConfig = data.totalCommINotConfig;
+        });
         return _this;
     }
     ViewOrder.prototype.ngOnInit = function () {
@@ -72,8 +78,17 @@ var ViewOrder = /** @class */ (function (_super) {
             file_saver_1.saveAs(file, filename);
         });
     };
+    ViewOrder.prototype.filterView = function (filterBy) {
+        if (this.searchParams.filterByMode === filterBy) {
+            this.searchParams.filterByMode = RecordMode_1.OrderFilter.None;
+        }
+        else {
+            this.searchParams.filterByMode = filterBy;
+        }
+        this.reloadData();
+    };
     ViewOrder.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
+        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null, 0);
         this.reloadData();
     };
     ViewOrder = __decorate([

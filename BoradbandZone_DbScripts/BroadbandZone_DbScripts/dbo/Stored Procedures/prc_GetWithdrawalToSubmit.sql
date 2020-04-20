@@ -24,7 +24,7 @@ BEGIN
 		AgentComm SMALLINT,
 		ClaimAmount MONEY,
 		DeductAmount MONEY,
-		TransactionType VARCHAR(50),		
+		TransactionType VARCHAR(50),	
 		RowNum INT
 	)
 
@@ -42,7 +42,7 @@ BEGIN
 			ca.CreatedOn,
 			cc.PackageCommOnDate,
 			cc.AgentCommOnDate,
-			ClaimAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
+			ClaimAmount =  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ,
 			DeductAmount = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
 			TransactionType = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Clawback'
 								   WHEN cc.IsOverride = 1  THEN 'Override' 
@@ -92,7 +92,8 @@ BEGIN
 				   AgentComm,
 				   ClaimAmount,
 				   DeductAmount,
-				   TransactionType
+				   TransactionType,
+				   Selected = CAST(CASE WHEN TransactionType = 'Clawback' THEN 1 ELSE 0 END AS BIT) -- Make this record selected by default
 			FROM  @var_Table
 			UNION ALL
 			-- AGENT CHARGES
@@ -104,7 +105,8 @@ BEGIN
 				   AgentComm = NULL, 
 				   ClaimAmount = NULL, 
 				   DeductAmount = ac.Amount,
-				   TransactionType = 'Purchase'
+				   TransactionType = 'Purchase',
+				   Selected = CAST (1 AS BIT)
 			FROM AgentCharge ac
 			WHERE ac.Agent = @prAgent
 			AND ISNULL(Cancelled, 0) = 0

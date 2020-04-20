@@ -93,7 +93,7 @@
                                 <tbody>
                                     <tr *ngFor="let record of dataSource; let rowNo = index">
                                         <td>
-                                            <div class="checkbox checkbox-primary mrg0A" *ngIf="record.claimCommId!=null">
+                                            <div class="checkbox checkbox-primary mrg0A" *ngIf="record.transactionType!='Clawback' && record.transactionType!='Purchase'">
                                                 <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
                                                 <label for="checkbox{{rowNo}}" class="pad0L">
                                                 </label>

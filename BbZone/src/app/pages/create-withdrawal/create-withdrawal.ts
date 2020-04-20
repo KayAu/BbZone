@@ -19,6 +19,7 @@ export class CreateWithdrawal extends ListEvent {
     isUpdating: boolean = false;
     dataRowMapper: TablerowDataMapping[] = [];
     selectedItems: any[] = []; 
+    deductionItems: any[] = []; 
     displayType = DataDisplayType;
     totalAmountToDeduct: any = 0;
     totalSelectedAmount: any = 0;
@@ -31,6 +32,7 @@ export class CreateWithdrawal extends ListEvent {
         super(loaderService, dataService, '', false);
         this.dataSourceSubject.asObservable().subscribe((data: any)  => {
             this.totalAmountToDeduct = data.totalAmountToDeduct;
+            this.setDeductionItems();
             this.setSelectedItems();
         });
     }
@@ -68,8 +70,9 @@ export class CreateWithdrawal extends ListEvent {
     }
 
     submit() {
+        let claimItems = this.selectedItems.concat(this.deductionItems);
         let newRecord = {
-            ClaimCommItemsId : this.selectedItems.map(d => d.claimCommId).join('|'),
+            ClaimCommItemsId: claimItems.map(d => d.claimCommId).join('|'),
             amount: this.totalClaimableAmount
         }
 
@@ -103,6 +106,14 @@ export class CreateWithdrawal extends ListEvent {
         this.reloadData();
     }
 
+    setDeductionItems() {
+        if (this.deductionItems.length === 0) {
+            let deductItems = this.dataSource.filter(i => i.selected === true);
+            deductItems.forEach((item, i, self) => {
+                this.deductionItems.push(item);
+            });
+        }
+    }
 }
 
 

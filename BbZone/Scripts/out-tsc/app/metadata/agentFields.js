@@ -214,7 +214,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
         },
         {
             "fieldName": "companyName",
@@ -238,7 +238,15 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
+        },
+        {
+            "fieldName": "superiorLogin",
+            "headerText": "Superior Acc.",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": ""
         },
         {
             "fieldName": "createdOn",
@@ -270,7 +278,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         },
         {
             "fieldName": "approvedBy",
@@ -278,7 +286,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         }
     ];
     return AgentRegistrationColumns;

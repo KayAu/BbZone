@@ -22,5 +22,6 @@ namespace BroadbandZone_Data
         public Nullable<decimal> PackageComm { get; set; }
         public Nullable<short> AgentComm { get; set; }
         public string TransactionType { get; set; }
+        public Nullable<bool> Selected { get; set; }
     }
 }

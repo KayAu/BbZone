@@ -1,6 +1,6 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
-    
+
     <div class="row">
         <div class="col-md-6 mrg10T mrg25B">
             <div class="float-left">
@@ -39,13 +39,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title pad10R">
-                    <h5>Withdrawal: ID-{{formRecord.withdrawalId}}</h5>
-                    <span class="mrg15L badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
-                              'badge-primary': formRecord.status == 'Completed',
-                              'badge-warning': formRecord.status == 'OnHold',
-                              'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
-                        {{formRecord.status}}
-                    </span>
+                    <h5>Withdrawal</h5>
                     <div class="ibox-tools">
                         <a class="font-size-18" href="/api/PaymentVoucher/Print/{{recordId}}" *ngIf="formRecord.status == 'Completed'">
                             <i class="fa fa-print"></i>
@@ -53,14 +47,59 @@
                     </div>
                 </div>
                 <loading></loading>
-                <div class="ibox-content">
+                <div class="ibox-content pad0T">
+                    <div class="row pad25T pad15B mrg25B  data-box">
+                        <div class="col-lg-5">
+                            <div class="row mrg10B">
+                                <div class="cell-width-20 pad35L float-left ">
+                                    <strong>Withdrawal Id:</strong>
+                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <div class="mb-1">{{formRecord.withdrawalId}}</div>
+                                </div>
+                            </div>
+                            <div class="cell-width-20 pad35L float-left ">
+                                <div class="cell-width-20">
+                                    <strong>Agent Name:</strong>
+                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <div class="mb-1">{{formRecord.agent}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5" id="cluster_info">
+                            <div class="row mrg10B">
+                                <div class="cell-width-20 pad35L float-left">
+                                    <strong>Status:</strong>
+                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <span class="badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
+                                                                    'badge-primary': formRecord.status == 'Completed',
+                                                                    'badge-warning': formRecord.status == 'OnHold',
+                                                                    'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
+                                        {{formRecord.status}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mrg5B">
+                                <div class="cell-width-20 pad35L float-left ">
+                                    <strong>Last Updated:</strong>
+                                </div>
+                                <div class="col-sm-9 col-md-9 text-left">
+                                    <div class="mb-1">{{formRecord.modifiedOn | date : 'dd MMM yyyy hh:mm a'}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="table-responsive mrg10T">
                         <label class="font-bold">Claimed Commission(s)</label>
-                        <table class="table table-bordered mrg10T dataTable">
+                        <table class="table table-bordered dataTable">
                             <thead>
                                 <tr>
                                     <th class="cell-width-3">#</th>
-                                    <th *ngFor="let col of dataRowMapper" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                    <th *ngFor="let col of dataRowMapper" [ngClass]="col.colWidth">
+                                        {{col.headerText}}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,7 +107,7 @@
                                     <td>{{rowNo+1}}</td>
                                     <ng-container *ngFor="let field of dataRowMapper">
                                         <td>
-                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge"  [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
                                             <ng-template #displayBadge>
                                                 <span class="badge" *ngIf="record.transactionType"
                                                       [ngClass]="{'badge-info': record.transactionType == 'Override',
@@ -85,8 +124,6 @@
                             </tbody>
                         </table>
                     </div>
-
-        
                     <div class="hr-line-dashed mrg20B mrg20T"></div>
                     <label class="font-bold">Admin Input</label>
                     <div class="admin-box">
@@ -96,7 +133,7 @@
                         </div>
                         <div class="form-group mrg15B">
                             <label class="font-normal">Remarks</label>
-                            <textarea name="remarks" class="form-control" maxlength="250" rows="4" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit" ></textarea>
+                            <textarea name="remarks" class="form-control" maxlength="250" rows="4" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="font-normal">Withdrawal Status</label>
@@ -106,8 +143,7 @@
                             </select>
                         </div>
                     </div>
-                 
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed mrg20T mrg20B"></div>
                     <!--SAVE OR CANCEL-->
                     <div class="form-group row">
                         <div class="text-right pad20R">

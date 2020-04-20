@@ -31,12 +31,12 @@ BEGIN
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
 		SELECT a1.AgentId
-			  ,a1.Fullname
+			  ,a1.UserLogin
 			  ,a1.CompanyName
 			  ,a1.MobileNo
 			  ,a1.TelNo
 			  ,a1.IsActive
-			  ,SuperiorName = CASE WHEN NOT a1.SuperiorId IS NULL THEN a2.Fullname ELSE NULL END
+			  ,SuperiorName = CASE WHEN NOT a1.SuperiorId IS NULL THEN a2.UserLogin ELSE NULL END
 			  ,a1.CreatedOn
 		INTO ##temp_Table
 		FROM Agent a1

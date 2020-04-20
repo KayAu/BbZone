@@ -14,7 +14,7 @@ BEGIN
 		SELECT * 
 		FROM  [dbo].[fnGetMyAgents](@prSuperiorId)
 
-		SELECT FullName,
+		SELECT FullName = h.AgentUsername,
 			   TotalAgents = ISNULL(TotalAgents, 0) ,
 			   TotalCompleted = ISNULL(TotalCompleted, 0),
 			   TotalInProgress = ISNULL(TotalInProgress, 0)

@@ -44,7 +44,7 @@
                                 <thead>
                                     <tr>
                                         <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                        <th class="cell-width-6" *ngIf="currentUser.isAdmin">Action</th>
+                                        <th class="cell-width-6">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -62,9 +62,9 @@
                                                 </ng-template>
                                             </td>
                                         </ng-container>
-                                        <td *ngIf="currentUser.isAdmin">
-                                            <a class="btn btn-success btn-xs" [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
-                                            <a class="btn btn-info btn-xs mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'">
+                                        <td>
+                                            <a class="btn btn-success btn-xs" [routerLink]='["/edit-withdrawal/", record[keyField]]' ><i class="fa fa-file-text-o"></i></a>
+                                            <a class="btn btn-info btn-xs mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'" title="Print is only available once the submitted withdrawal is approved.">
                                                 <i class="fa fa-print"></i>
                                             </a>
                                         </td>

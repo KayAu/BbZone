@@ -189,6 +189,21 @@ public static fields = [
         }
     },
     {
+        "fieldName": "isProcessed",
+        "displayText": "Is Processed",
+        "hidden": false,
+        "dataFieldControl": {
+            "controlName": "isProcessed",
+            "controlType": "checkbox",
+            "required": false,
+            "maxLength": 0,
+            "datasourceUrl": null,
+            "cascadeTo": null,
+            "adminField": true,
+            "dataChangedEvent": "showProcessedDetails"
+        }
+    },
+    {
         "fieldName": "orderNo",
         "displayText": "Order No",
         "hidden": false,

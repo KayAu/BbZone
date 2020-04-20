@@ -10,3 +10,9 @@ export enum ApprovalMode {
     Approved = 2,
     Rejected = 3
 }
+
+export enum OrderFilter {
+    None = 0,
+    IncomingMessage = 1,
+    NoCommissionSetup = 2
+}

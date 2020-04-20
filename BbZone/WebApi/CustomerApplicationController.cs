@@ -92,6 +92,9 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    ObjectParameter totalUnreadMsg = new ObjectParameter("oTotalUnreadMsg", typeof(int));
+                    ObjectParameter totalCommINotConfig = new ObjectParameter("oTotalCommINotConfig", typeof(int));
+
                     var results = (new BroadbandZoneEntities()).GetCustomerApplication(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.ProductId,
                                                                                 filterBy.ProductCategoryId,
@@ -107,11 +110,16 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.DocumentCompleted,
                                                                                 currentUser.IsAdmin,
                                                                                 currentUser.AgentId,
-                                                                                totalRecord).ToList();
-                    return Ok(new Gridview<GetCustomerApplication_Result>()
+                                                                                filterBy.FilterByMode,
+                                                                                totalRecord,
+                                                                                totalUnreadMsg,
+                                                                                totalCommINotConfig).ToList();
+                    return Ok(new 
                     {
                         DisplayData = results,
-                        TotalRecords = Convert.ToInt32(totalRecord.Value)
+                        TotalRecords = Convert.ToInt32(totalRecord.Value),
+                        TotalUnreadMsg = Convert.ToInt32(totalUnreadMsg.Value),
+                        TotalCommINotConfig = Convert.ToInt32(totalCommINotConfig.Value),
                     });
                 }
 

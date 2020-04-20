@@ -32,16 +32,26 @@ var AgentComission = /** @class */ (function () {
         this.isUpdating = false;
         this.commissionSettings = [];
         this.agentCommissions = [];
+        this.appsWithoutCommission = [];
         this.selectedTab = 1;
         this.allowCommConfig = true;
         this.noAgentsReturned = false;
     }
-    AgentComission.prototype.ngOnInit = function () { };
+    AgentComission.prototype.ngOnInit = function () {
+        this.loadAppWithoutCommissionSet();
+    };
+    AgentComission.prototype.loadAppWithoutCommissionSet = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetAppWithoutCommissionSet").subscribe(function (results) {
+            _this.appsWithoutCommission = results;
+        });
+    };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
         this.multipleCheckboxes.removeSelection();
         rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsForCommissionSetting", this.selectedProduct),
-            this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)]).subscribe(function (results) {
+            this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)])
+            .subscribe(function (results) {
             _this.loadAgents(results[0]);
             _this.commissionSettings = results[1];
         });
@@ -62,9 +72,10 @@ var AgentComission = /** @class */ (function () {
         this.isUpdating = true;
         var newRecord = { agents: this.selectedAgents, commissionSettings: this.commissionSettings };
         this.dataService.add(apiController_1.ApiController.Commission, newRecord).subscribe(function (data) {
-            _this.isUpdating = false;
             _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+            _this.isUpdating = false;
             _this.resetForm();
+            _this.loadAppWithoutCommissionSet();
         });
     };
     AgentComission.prototype.resetForm = function () {

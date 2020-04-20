@@ -35,6 +35,7 @@ namespace BroadbandZone_App.Models
         public string ResidentialType { get; set; }
         public string Keyword { get; set; }
         public bool? DocumentCompleted { get; set; }
+        public int FilterByMode { get; set; }
     }
 
     public class SearchCompletedOrderParams

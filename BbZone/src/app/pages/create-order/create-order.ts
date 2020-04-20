@@ -93,6 +93,15 @@ export class CreateOrder {
         });
     }
 
+    showProcessedDetails(show) {
+        if (!show) show = false;
+        let updateFields = ["orderNo", "userId", "telNo"];
+        for (var field of updateFields) {
+            let index = this.formFields.findIndex(i => i.fieldName == field);
+            this.formFields[index].hidden = !show;
+        }
+    }
+
     clearPackages() {
         this.selectedCategory = null;
         this.cascadeService.subject.next(new CascadeData("prodPkgId", this.selectedCategory));

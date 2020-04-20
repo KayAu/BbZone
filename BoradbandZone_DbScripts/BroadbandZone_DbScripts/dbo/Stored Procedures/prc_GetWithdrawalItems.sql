@@ -18,9 +18,9 @@ BEGIN
 				cc.AgentCommOnDate,
 				ClaimAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
 				DeductAmount = CASE WHEN NOT cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
-				TransactionType = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Own Sales'
+				TransactionType = CASE WHEN cc.IsOverride = 1 THEN 'Override' 
+				                       WHEN NOT cc.ClaimWithdrawalId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Own Sales'
 									   WHEN NOT cc.ClaimWithdrawalId IS NULL AND NOT cc.DeductedWithdrawalId IS NULL THEN 'Clawback' 
-									   WHEN cc.IsOverride = 1 THEN 'Override' 
 								  END
 			FROM ClaimableCommission cc 
 			INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId

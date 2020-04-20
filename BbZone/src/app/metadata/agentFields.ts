@@ -208,7 +208,7 @@ export class AgentRegistrationColumns {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
         },
         {
             "fieldName": "companyName",
@@ -232,7 +232,15 @@ export class AgentRegistrationColumns {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
+        },
+        {
+            "fieldName": "superiorLogin",
+            "headerText": "Superior Acc.",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": ""
         },
         {
             "fieldName": "createdOn",
@@ -264,7 +272,7 @@ export class AgentRegistrationColumns {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         },
         {
             "fieldName": "approvedBy",
@@ -272,7 +280,7 @@ export class AgentRegistrationColumns {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         }
     ]
 }

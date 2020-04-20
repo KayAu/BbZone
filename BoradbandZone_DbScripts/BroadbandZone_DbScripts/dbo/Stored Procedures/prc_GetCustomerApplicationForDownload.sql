@@ -23,7 +23,9 @@ BEGIN
 	(	
 		AgentUsername NVARCHAR(16),
 		FullName VARCHAR(50),
-		AgentId INT
+		AgentId INT,
+		SuperiorId INT,
+		AgentLevel INT
 	)
 
 	BEGIN TRY

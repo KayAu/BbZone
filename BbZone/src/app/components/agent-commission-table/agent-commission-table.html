@@ -1,74 +1,93 @@
 <!--<loading></loading>-->
-<table class="table table-striped float-left wp-100" *ngIf="tableDisplay==displayType.allAgents; else currentAgentCommision">
-    <tbody>
-        <tr *ngIf="dataSource.length" class="agent-comm-row">
-            <ng-container *ngFor="let column of dataColumns; let colNo = index">
-                <th class="capitalize">{{column}}</th>
-            </ng-container>
-            <th>Action</th>
-        </tr>
-        <tr *ngFor="let row of dataSource; let rowNo = index" class="row-select agent-comm-row">
-            <ng-container *ngFor="let value of getRowData(row); let colNo = index">
-                <td [innerHTML]="value" *ngIf="(!row.onEdit && colNo < dataColumns.length) || colNo <= 1"></td>
-            </ng-container>
-            <ng-container *ngIf="row.onEdit">
-                <td *ngFor="let comm of commissionSettings">
-                    <input type="number" min="0" class="form-control" [(ngModel)]="comm.agentCommissionPer" *ngIf="comm.agentCommissionPer" />
-                    <input type="number" class="form-control" [(ngModel)]="comm.agentCommissionPer" *ngIf="!comm.agentCommissionPer" disabled value="Not Set" />
-        
-                </td>
-            </ng-container>
-            <td>
-                <tablerow-buttons [editMode]="row.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" [disabledEdit]="row.disabledEdit"></tablerow-buttons>
-            </td>
-        </tr>
-        <tr *ngIf="dataSource == null || dataSource.length == 0">
-            <td class="pad0A" [attr.colspan]="dataColumns.length">
-                <div class="center-div">
-                    <div class="callout callout-secondary text-center pad45A mrg0B">
-                        <i class="mdi mdi-package-variant font-size-65"></i>
-                        <h2 class="mrg0T">No records found</h2>
-                        <p>
-                            There are no incomplete calls
-                        </p>
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </tbody>
-</table>
-
-<ng-template #currentAgentCommision>
-    <div class="w-p100 float-left">
-        <table class="table table-striped float-left w-p50">
-            <tbody>
-                <tr>
-                    <th class="cell-width-40">Category</th>
-                    <th>Agent Commission</th>
-                </tr>
-                <tr *ngFor="let row of commissionSettings; let rowNo = index" class="row-select">
-                    <td>{{row.category}}</td>
-                    <td><input type="number" min="0" class="form-control" [(ngModel)]="row.agentCommissionPer" /></td>
-                </tr>
-                <tr *ngIf="commissionSettings == null || commissionSettings.length == 0">
-                    <td class="pad0A" colspan="2">
-                        <div class="center-div">
-                            <div class="callout callout-secondary text-center pad45A mrg0B">
-                                <i class="mdi mdi-package-variant font-size-65"></i>
-                                <h2 class="mrg0T">No records found</h2>
-                                <p>
-                                    There are no incomplete calls
-                                </p>
-                            </div>
-                        </div>
+<form #dataForm="ngForm">
+    <table class="table table-striped agent-comm float-left wp-100" *ngIf="tableDisplay==displayType.allAgents; else currentAgentCommision">
+        <tbody>
+            <tr *ngIf="dataSource.length" class="agent-comm-row">
+                <ng-container *ngFor="let column of dataColumns; let colNo = index">
+                    <th class="capitalize">{{column}}</th>
+                </ng-container>
+                <th>Action</th>
+            </tr>
+            <tr *ngFor="let row of dataSource; let rowNo = index" class="row-select agent-comm-row" [ngClass]="{'my-row': currentUser.isAdmin==false && rowNo==0}">
+                <ng-container *ngFor="let value of getRowData(row); let colNo = index">
+                    <td [innerHTML]="value" *ngIf="(!row.onEdit && colNo < dataColumns.length) || colNo <= 2"></td>
+                </ng-container>
+                <ng-container *ngIf="row.onEdit">
+                    <td *ngFor="let comm of commissionSettings; let col = index">
+                        <!--<input type="number" min="0" class="form-control" [(ngModel)]="comm.agentCommissionPer" />-->
+                        <ng-container *ngIf="comm.agentCommissionPer">
+                            <input type="number" [(ngModel)]="comm.agentCommissionPer" name="{{col}}"
+                                   validateLessThan [compare-value]="comm.supCommission" [min]="0" class="form-control form-control-sm" />
+                            <span *ngIf="dataForm.controls[col].errors?.validateLessThan" class="text-danger">
+                                Allocation percentage must be lesser than superior's commission
+                            </span>
+                        </ng-container>
+                        <input type="number" class="form-control form-control-sm" [(ngModel)]="comm.agentCommissionPer" name="row_{{rowNo}}_{{col}}" *ngIf="!comm.agentCommissionPer" disabled value="Not Set" />
                     </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
-            [disabled]="commissionSettings.length == 0" (click)="updateTable()" style="width: 180px;">
-        {{isUpdating ? 'Updating' : 'Update'}}
-        <span class="loading"></span>
-    </button>
-</ng-template>
+                </ng-container>
+                <td>
+                    <tablerow-buttons [editMode]="row.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" [disabledEdit]="row.disabledEdit"></tablerow-buttons>
+                </td>
+            </tr>
+            <tr *ngIf="dataSource == null || dataSource.length == 0">
+                <td class="pad0A" [attr.colspan]="dataColumns.length">
+                    <div class="center-div">
+                        <div class="callout callout-secondary text-center pad45A mrg0B">
+                            <i class="mdi mdi-package-variant font-size-65"></i>
+                            <h2 class="mrg0T">No records found</h2>
+                            <p>
+                                There are no incomplete calls
+                            </p>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <ng-template #currentAgentCommision>
+        <div class="w-p100 float-left">
+            <table class="table table-striped float-left w-p75">
+                <tbody>
+                    <tr>
+                        <th class="cell-width-40">Category</th>
+                        <th>Commission Alloted to Superior</th>
+                        <th>Agent Commission</th>
+                    </tr>
+                    <tr *ngFor="let row of commissionSettings; let rowNo = index" class="row-select">
+                        <td>{{row.category}}</td>
+                        <td>{{row.supCommission}}</td>
+                        <td>
+                            <!--<input type="number" min="0" class="form-control" [(ngModel)]="row.agentCommissionPer" />-->
+
+                            <input type="number" [(ngModel)]="row.agentCommissionPer" name="{{rowNo}}"
+                                   validateLessThan [compare-value]="row.supCommission" [min]="0" class="form-control form-control-sm" />
+                            <span *ngIf="dataForm.controls[rowNo].errors?.validateLessThan" class="text-danger">
+                                Allocation percentage must be lesser than superior's commission
+                            </span>
+                        </td>
+                    </tr>
+                    <tr *ngIf="commissionSettings == null || commissionSettings.length == 0">
+                        <td class="pad0A" colspan="2">
+                            <div class="center-div">
+                                <div class="callout callout-secondary text-center pad45A mrg0B">
+                                    <i class="mdi mdi-package-variant font-size-65"></i>
+                                    <h2 class="mrg0T">No records found</h2>
+                                    <p>
+                                        There are no incomplete calls
+                                    </p>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
+                [disabled]="commissionSettings.length == 0" (click)="updateTable()" style="width: 180px;">
+            {{isUpdating ? 'Updating' : 'Update'}}
+            <span class="loading"></span>
+        </button>
+    </ng-template>
+</form>
+
+    

@@ -11,18 +11,12 @@ namespace BroadbandZone_Data
 {
     using System;
     
-    public partial class GetAgentRegistration_Result
+    public partial class prc_GetAppWithoutCommAssigned_Result
     {
-        public int RegId { get; set; }
-        public string Fullname { get; set; }
-        public string CompanyName { get; set; }
-        public string MobileNo { get; set; }
-        public string CreatedOn { get; set; }
-        public Nullable<bool> IsApproved { get; set; }
-        public string ApprovedBy { get; set; }
-        public string ApprovalDate { get; set; }
+        public string AgentName { get; set; }
         public string SuperiorName { get; set; }
-        public string ActivationCode { get; set; }
-        public string SuperiorLogin { get; set; }
+        public string Category { get; set; }
+        public Nullable<int> CommId { get; set; }
+        public Nullable<bool> DirectAgent { get; set; }
     }
 }

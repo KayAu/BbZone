@@ -1,8 +1,13 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { LoaderService } from '../../loader/loader.service';
 import { ApiController } from 'src/app/enums/apiController';
 import { CommissionTableDisplay } from '../../enums/dataDisplayType';
+import { NgForm } from '@angular/forms';
+import { BroadcastService } from 'src/app/services/broadcast.service';
+import { FormSubmit } from 'src/app/model/form-submit';
+import { AuthenticationService } from 'src/app/services/authentication';
+import { LoginUser } from 'src/app/model/login-user';
 
 @Component({
     selector: 'agent-commission-table',
@@ -19,14 +24,20 @@ export class AgentCommissionTable
     agentId: number;
     displayType = CommissionTableDisplay;
     tableDisplay: CommissionTableDisplay;
+    currentUser: LoginUser;
     isUpdating: boolean = false;
     @Input() itemKey: string;
     @Input() hideColumns: number[] = [];
     @Output() rowItemClicked = new EventEmitter();
+    @ViewChild(NgForm) form: NgForm;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService) {}
+    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private authenticationService: AuthenticationService) { }
 
-    loadMyAgentsCommission(productId: number) {
+    ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
+    }
+
+    loadMyAgentsCommission(productId: number) {     
         this.productId = productId;
         this.tableDisplay = CommissionTableDisplay.allAgents;
         this.dataService.get(`${ApiController.Commission}/GetMyAgentsCommission`, productId).subscribe(results => {
@@ -60,6 +71,9 @@ export class AgentCommissionTable
 
     updateRow(rowIndex: number)
     {
+        this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid) return;
+
         this.dataService.update(ApiController.Commission, this.agentId, this.commissionSettings).subscribe(data => {
             let propertyNames = Object.keys(this.dataSource[rowIndex]);
             for (var itemNo = 0; itemNo < this.commissionSettings.length; itemNo++) {
@@ -71,6 +85,9 @@ export class AgentCommissionTable
     }
 
     updateTable() {
+        this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid) return;
+
         this.isUpdating = true;
         this.dataService.update(ApiController.Commission, this.agentId, this.commissionSettings).subscribe(data => {
             this.isUpdating = false;

@@ -16,6 +16,28 @@ namespace BroadbandZone_App.WebApi
 {
     public class CommissionController : ApiController
     {
+        //GetAppWithoutCommissionSet
+        [HttpGet]
+        [Route("api/Commission/GetAppWithoutCommissionSet")]
+        // Get product categories given the product id
+        public IHttpActionResult GetAppWithoutCommissionSet()
+        {
+            try
+            {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var commSettings = db.GetAppWithoutCommAssigned(currentUser.AgentId).ToList();
+                    return Ok(commSettings);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
         [HttpGet]
         [Route("api/Commission/GetCommissionSettings/{productId}")]
         // Get product categories given the product id

@@ -22,6 +22,7 @@ export class AgentComission {
     isUpdating: boolean = false;
     commissionSettings: any[] = [];
     agentCommissions: any[] = [];
+    appsWithoutCommission: any[] = [];
     selectedAgents: string[];
     selectedProduct: number;
     selectedTab: number = 1;
@@ -35,14 +36,24 @@ export class AgentComission {
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private toastr: ToastrService, private router: Router) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.loadAppWithoutCommissionSet();
+    }
+
+    loadAppWithoutCommissionSet() {
+        this.dataService.get(`${ApiController.Commission}/GetAppWithoutCommissionSet`).subscribe(results => {
+            this.appsWithoutCommission = results;
+        });
+    }
 
     loadCategories() {
         this.multipleCheckboxes.removeSelection();
         forkJoin([this.dataService.get(`${ApiController.Commission}/GetMyAgentsForCommissionSetting`, this.selectedProduct),
-            this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct)]).subscribe(results => {
+            this.dataService.get(`${ApiController.Commission}/GetCommissionSettings`, this.selectedProduct)])
+            .subscribe(results =>
+            {
                 this.loadAgents(results[0]);
-                this.commissionSettings = results[1];      
+                this.commissionSettings = results[1]; 
         });
     }
 
@@ -63,9 +74,10 @@ export class AgentComission {
         this.isUpdating = true;
         let newRecord = { agents : this.selectedAgents, commissionSettings : this.commissionSettings } 
         this.dataService.add(ApiController.Commission, newRecord).subscribe(data => {
-            this.isUpdating = false;
             this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+            this.isUpdating = false;
             this.resetForm();
+            this.loadAppWithoutCommissionSet();
         });
     }
 

@@ -25,15 +25,22 @@
                 <div class="ibox-content">
                     <div class="table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            <div class="mrg20T">
-                                <strong class="col-md-4 pad0L">Customer Order List</strong>
-                                <div class="col-md-4 text-center">
-                                    <div class="flecbox">
-                                        <i class="fa fa-envelope text-warning"></i> Incoming Message
-                                        <i class="fa fa-exclamation-circle text-danger mrg20L"></i> No Commission Setup
+                            <div class="float-left w-p100 mrg10T mrg5B">
+                                <div class="col-md-5 pad0L">
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-white count-info pad35R pad20L pos-rel" [ngClass]="{'active': searchParams.filterByMode == orderFilter.IncomingMessage, '': searchParams.filterByMode != orderFilter.IncomingMessage}" (click)="filterView(orderFilter.IncomingMessage)">
+                                            <input type="radio" name="filter">
+                                            <i class="fa fa-envelope text-warning mrg5R"></i> Incoming Message
+                                            <span class="label label-warning">{{totalUnreadMsg}}</span>
+                                        </label>
+                                        <label class="btn btn-white count-info pad35R pad20L pos-rel" [ngClass]="{'active': searchParams.filterByMode == orderFilter.NoCommissionSetup, '': searchParams.filterByMode != orderFilter.NoCommissionSetup}" (click)="filterView(orderFilter.NoCommissionSetup)">
+                                            <input type="radio" name="filter">
+                                            <i class="fa fa-exclamation-circle text-danger mrg5R"></i> No Commission Setup
+                                            <span class="label label-danger">{{totalCommINotConfig}}</span>
+                                        </label>
                                     </div>
                                 </div>
-                                <button class="btn btn-warning btn-sm mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                                <button class="btn btn-warning mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
                             </div>
                             <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
@@ -58,7 +65,7 @@
                                             </td>
                                         </ng-container>
                                         <td>
-                                            <a class="btn btn-success btn-sm " [routerLink]='["/edit-order/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                            <a class="btn btn-success " [routerLink]='["/edit-order/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
                                         </td>
                                     </tr>
                                     <tr *ngIf="dataSource.length === 0">

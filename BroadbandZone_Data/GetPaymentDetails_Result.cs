@@ -23,5 +23,6 @@ namespace BroadbandZone_Data
         public string PaymentDate { get; set; }
         public string PaymentItemsStr { get; set; }
         public string SlipNo { get; set; }
+        public string DeductAmount { get; set; }
     }
 }

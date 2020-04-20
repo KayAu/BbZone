@@ -138,7 +138,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, Nullable<int> prFilterMode, ObjectParameter oTotalRecord, ObjectParameter oTotalUnreadMsg, ObjectParameter oTotalCommINotConfig)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -212,7 +212,11 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAgentId", prAgentId) :
                 new ObjectParameter("prAgentId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, oTotalRecord);
+            var prFilterModeParameter = prFilterMode.HasValue ?
+                new ObjectParameter("prFilterMode", prFilterMode) :
+                new ObjectParameter("prFilterMode", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, prFilterModeParameter, oTotalRecord, oTotalUnreadMsg, oTotalCommINotConfig);
         }
     
         public virtual ObjectResult<GetDropdownItems_Result> GetDropdownItems(string prFieldName)
@@ -1090,6 +1094,15 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAgent", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<HasCommissionSet_Result>("HasCommissionSet", prCategoryIdParameter, prAgentParameter);
+        }
+    
+        public virtual ObjectResult<GetAppWithoutCommAssigned_Result> GetAppWithoutCommAssigned(Nullable<int> prAgentId)
+        {
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppWithoutCommAssigned_Result>("GetAppWithoutCommAssigned", prAgentIdParameter);
         }
     }
 }

@@ -25,7 +25,7 @@ BEGIN
 
 		-- get the list of subordinates who do not have their commission set up yet for the selected product  
 		SELECT a1.AgentId AS [DisplayValue] 
-			  ,a1.Fullname AS [DisplayText]
+			  ,a1.UserLogin AS [DisplayText]
 			  ,CAST(0 AS BIT) AS Selected
 		FROM Agent a1
 		WHERE a1.AgentId IN 

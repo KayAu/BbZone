@@ -1,5 +1,5 @@
 import { DateRange } from "./date.range";
-import { ApprovalMode } from "../enums/RecordMode";
+import { ApprovalMode, OrderFilter } from "../enums/RecordMode";
 
 export class StatusAndKeywordParams {
   constructor(
@@ -18,7 +18,8 @@ export class SearchOrderParams {
         public agent: string,
         public submittedDate: DateRange,
         public residentialType: string,
-        public residentialName: string
+        public residentialName: string,
+        public filterByMode: OrderFilter
     ) { }
 }
 

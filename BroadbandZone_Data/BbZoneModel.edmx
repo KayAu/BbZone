@@ -648,6 +648,9 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prAppId" Type="int" Mode="In" />
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
         </Function>
+        <Function Name="prc_GetAppWithoutCommAssigned" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+        </Function>
         <Function Name="prc_GetClawback" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
           <Parameter Name="prPageSize" Type="int" Mode="In" />
@@ -699,7 +702,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prDocumentCompleted" Type="bit" Mode="In" />
           <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
           <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prFilterMode" Type="int" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+          <Parameter Name="oTotalUnreadMsg" Type="int" Mode="InOut" />
+          <Parameter Name="oTotalCommINotConfig" Type="int" Mode="InOut" />
         </Function>
         <Function Name="prc_GetCustomerApplicationForDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prProduct" Type="int" Mode="In" />
@@ -1046,7 +1052,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prDocumentCompleted" Mode="In" Type="Boolean" />
             <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
             <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prFilterMode" Mode="In" Type="Int32" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+            <Parameter Name="oTotalUnreadMsg" Mode="InOut" Type="Int32" />
+            <Parameter Name="oTotalCommINotConfig" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetDropdownItems" ReturnType="Collection(BroadbandZoneModel.GetDropdownItems_Result)">
           <Parameter Name="prFieldName" Mode="In" Type="String" />
@@ -1402,6 +1411,9 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prCategoryId" Mode="In" Type="Int32" />
             <Parameter Name="prAgent" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="GetAppWithoutCommAssigned" ReturnType="Collection(BroadbandZoneModel.GetAppWithoutCommAssigned_Result)">
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -1475,6 +1487,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="ApprovalDate" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="SuperiorLogin" Nullable="true" MaxLength="25" />
         </ComplexType>
         <ComplexType Name="GetAgentProfile_Result">
           <Property Type="Int32" Name="AgentId" Nullable="false" />
@@ -1721,6 +1734,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="Decimal" Name="PackageComm" Nullable="true" Precision="19" />
           <Property Type="Int16" Name="AgentComm" Nullable="true" />
           <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
         <ComplexType Name="GetPaymentDetails_Result">
           <Property Type="Int32" Name="AgentId" Nullable="false" />
@@ -1733,6 +1747,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="PaymentDate" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="PaymentItemsStr" Nullable="true" />
           <Property Type="String" Name="SlipNo" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="DeductAmount" Nullable="true" MaxLength="4000" />
         </ComplexType>
         <EntityType Name="Withdrawal">
           <Key>
@@ -2380,6 +2395,20 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
         <ComplexType Name="HasCommissionSet_Result">
           <Property Type="Boolean" Name="IsConfigured" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="prc_GetAppWithoutCommAssigned_Result">
+          <Property Type="String" Name="AgentName" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CommId" Nullable="true" />
+          <Property Type="Boolean" Name="DirectAgent" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="GetAppWithoutCommAssigned_Result">
+          <Property Type="String" Name="AgentName" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CommId" Nullable="true" />
+          <Property Type="Boolean" Name="DirectAgent" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2485,6 +2514,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="ApprovalDate" ColumnName="ApprovalDate" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
                 <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
+                <ScalarProperty Name="SuperiorLogin" ColumnName="SuperiorLogin" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2731,6 +2761,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="PackageComm" ColumnName="PackageComm" />
                 <ScalarProperty Name="AgentComm" ColumnName="AgentComm" />
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -2795,6 +2826,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="PaymentItemsStr" ColumnName="PaymentItemsStr" />
                 <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3307,6 +3339,17 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.HasCommissionSet_Result">
                 <ScalarProperty Name="IsConfigured" ColumnName="IsConfigured" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetAppWithoutCommAssigned" FunctionName="BroadbandZoneModel.Store.prc_GetAppWithoutCommAssigned">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetAppWithoutCommAssigned_Result">
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CommId" ColumnName="CommId" />
+                <ScalarProperty Name="DirectAgent" ColumnName="DirectAgent" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
