@@ -30,6 +30,8 @@ var CustomerFinder = /** @class */ (function () {
         this.onItemSelected = new core_1.EventEmitter();
         this.disabledEdit = false;
         this.subscription = this.formEvent.notification.subscribe(function (form) {
+            if (!form)
+                return;
             _this.parentForm = form.template;
             _this.validate();
         });

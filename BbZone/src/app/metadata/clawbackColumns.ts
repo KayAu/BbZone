@@ -63,7 +63,7 @@ export class ClawbackColumns {
             "colWidth": "cell-width-45",
             "dataFieldControl": {
                 "controlName": "remarks",
-                "controlType": "textarea",
+                "controlType": "textbox",
                 "required": true,
                 "maxLength": 200
             }

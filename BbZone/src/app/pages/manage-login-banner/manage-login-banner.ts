@@ -23,8 +23,8 @@ export class ManageLoginBanner extends ListDataCrud {
     uploading: boolean;
     selectedFile: null;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
-        super(loaderService, dataService, 'BannerId', formEvent);
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
+        super(loaderService, dataService, 'BannerId');
     }
 
     ngOnInit() {

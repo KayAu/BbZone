@@ -31,7 +31,7 @@ export class ViewWithdrawal extends ListEvent {
     totalAmountPayout: any;
     totalAmountClaimed: any;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private authenticationService: AuthenticationService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService, private authenticationService: AuthenticationService) {
         super(loaderService, dataService, "", false);
         this.dataSourceSubject.asObservable().subscribe((data: any) => {
             this.totalAmountPayout = data.totalAmountPayout;

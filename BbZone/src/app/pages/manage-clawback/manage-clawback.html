@@ -20,7 +20,7 @@
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <loading></loading>
                             <button class="btn btn-primary btn-sm mrg10T" (click)="showNewRow = true"><i class="fa fa-plus mrg5R"></i>Add</button>
-                            <form #tableForm="ngForm">
+                            <form #tableForm="ngForm" novalidate>
                                 <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                     <thead>
                                         <tr>
@@ -30,9 +30,9 @@
                                         <tr *ngIf="showNewRow" class="new-row">
                                             <td *ngFor="let field of dataRowMapper">
                                                 <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                              [field]="field.dataFieldControl" [formName]="'manageProductForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                              [field]="field.dataFieldControl" [parentForm]="tableForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                                 <customer-finder *ngIf="field.dataFieldControl.controlType == controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" name="{{field.dataFieldControl.controlName}}"
-                                                                 (onItemSelected)="setNewCustomerDetails($event)" [searchType]="customerSearchType.commissionClaimed"></customer-finder>
+                                                                 (onItemSelected)="setNewCustomerDetails($event)" [searchType]="customerSearchType.commissionClaimed" [parentForm]="tableForm"></customer-finder>
                                             </td>
                                             <td>
                                                 <button class="btn btn-primary btn-sm mrg5R" (click)="addRow()"><i class="fa fa-save"></i></button>
@@ -49,7 +49,7 @@
                                                     <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
                                                 </td>
                                                 <td *ngIf="record.onEdit" class="edit-row">
-                                                    <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [formName]="'editCategoryForm'" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
+                                                    <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [parentForm]="tableForm" [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
                                                     <customer-finder *ngIf="field.dataFieldControl.controlType == controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" name="{{field.dataFieldControl.controlName}}"
                                                                      [displayText]="editedRecord[field.dataFieldControl.controlName]" [disabledEdit]="true" (onItemSelected)="setEditCustomerDetails($event)"></customer-finder>
                                                 </td>

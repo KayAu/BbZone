@@ -21,10 +21,8 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 StatusAndKeywordParams filterBy = JsonConvert.DeserializeObject<StatusAndKeywordParams>(searchParams);
-
                 var records = Helper.ModelHelper.GetListdata((new BroadbandZoneEntities()).GetClawback, currentPage, pageSize, sortColumn, sortInAsc, filterBy.Keyword);
                 return Ok(records);
-
             }
             catch (Exception ex)
             {
@@ -71,7 +69,7 @@ namespace BroadbandZone_App.WebApi
                     db.SaveChanges();
                 }
 
-                return Ok(editedRecord);
+                return Ok();
             }
             catch (Exception ex)
             {
@@ -93,7 +91,6 @@ namespace BroadbandZone_App.WebApi
                         db.Clawbacks.Remove(deleteRecord);
                         db.SaveChanges();
                     }
-
                     return Ok();
                 }
             }

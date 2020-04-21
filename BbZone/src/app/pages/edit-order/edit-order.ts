@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditOrderFields } from '../../metadata/editOrderFields';
 import { FormDataMapping } from '../../model/form.data.mapping';
@@ -19,7 +19,7 @@ import { AuthenticationService } from 'src/app/services/authentication';
   templateUrl: './edit-order.html'
 })
 
-export class EditOrder {
+export class EditOrder  {
     @ViewChild(NgForm) form: NgForm;
     formFields: FormDataMapping[] = [];
     formRecord: any = {};
@@ -30,7 +30,6 @@ export class EditOrder {
 
     constructor(public loaderService: LoaderService,
                 public dataService: DataService,
-                public formEvent: BroadcastService,
                 private router: Router,
                 private route: ActivatedRoute,
                 private authenticationService: AuthenticationService) { }
@@ -67,7 +66,7 @@ export class EditOrder {
     }
 
     update() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
         if (this.preventPosComplete()) return;
 
@@ -129,6 +128,13 @@ export class EditOrder {
             this.showProcessedDetails(this.formRecord["isProcessed"]);
         });
     }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    }
+
 }
 
 

@@ -5,7 +5,7 @@ import { Subject } from 'rxjs';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { Subscription } from 'rxjs';
 import { FormSubmit } from 'src/app/model/form-submit';
-import { NgForm, ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NgForm, ControlValueAccessor, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { CustomerSearchType } from 'src/app/enums/dataDisplayType';
 declare var $: any;
 
@@ -24,15 +24,16 @@ declare var $: any;
 
 export class CustomerFinder implements ControlValueAccessor  {
     private subscription: Subscription;
-    parentForm: NgForm;
     selectedCustomer: string = null;
     dropdownItems: any[] = [];
     loadData: boolean = false;
     startSearching: boolean = false;
     searchFieldInput: Subject<string> = new Subject();
+    controlLoaded: boolean = false;
 
     @ViewChild('searchInput') searchInput: ElementRef;
     @Output() onItemSelected = new EventEmitter();
+    @Input() parentForm: NgForm;
     @Input() disabledEdit: boolean = false;
     @Input() fieldId: string;
     @Input() searchType: CustomerSearchType;
@@ -43,20 +44,22 @@ export class CustomerFinder implements ControlValueAccessor  {
 
     constructor(
         private el: ElementRef,
-        private formEvent: BroadcastService,
         private dataService: DataService
 
-    ) {
-        this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-            this.parentForm = form.template;
-            this.validate();
-        });
-    }
+    ) {}
 
     ngOnInit() {
         this.searchFieldInput.asObservable().debounceTime(500).distinctUntilChanged().subscribe((data) => {
             this.search(data)
         });
+    }
+
+    ngAfterViewChecked() {
+        if (this.parentForm) {
+            this.parentForm.controls[this.fieldId].setValidators(Validators.required);
+            this.parentForm.controls[this.fieldId].updateValueAndValidity();
+            this.controlLoaded = true;
+        }
     }
 
     onItemClicked(selectedIndex: number) {
@@ -76,20 +79,20 @@ export class CustomerFinder implements ControlValueAccessor  {
         }
     }
 
-    private validate() {
-        let thisElement = $(this.el.nativeElement);
+    //private validate() {
+    //    let thisElement = $(this.el.nativeElement);
 
-        if (this.selectedCustomer === null) {
-            thisElement.next('.text-danger').remove();
-            thisElement.after('<span class= "text-danger">This is required</span>');
-            $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-        }
-        else {
-            this.clearErrorMessages();
-            this.parentForm.controls[this.fieldId].setErrors(null);
-        }
-    }
+    //    if (this.selectedCustomer === null) {
+    //        thisElement.next('.text-danger').remove();
+    //        thisElement.after('<span class= "text-danger">This is required</span>');
+    //        $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+    //        this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+    //    }
+    //    else {
+    //        this.clearErrorMessages();
+    //        this.parentForm.controls[this.fieldId].setErrors(null);
+    //    }
+    //}
 
     private clearErrorMessages() {
         let thisElement = $(this.el.nativeElement);

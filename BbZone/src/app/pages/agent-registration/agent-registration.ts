@@ -26,7 +26,7 @@ export class AgentRegistration {
     isUpdating: boolean = false;
     hasLoginExists: boolean = false;
     completed: boolean = false;
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router, private route: ActivatedRoute) { }
+    constructor(public loaderService: LoaderService, public dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.formFields = this.getFormFeldsMapping();
@@ -49,7 +49,7 @@ export class AgentRegistration {
     }
 
     submit() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -61,13 +61,14 @@ export class AgentRegistration {
                 this.isUpdating = false;
             }
             this.hasLoginExists = hasExist;
+            this.setControlsAsUnouched();
         });
     }
 
     private postData() {
         this.dataService.postForm(ApiController.Registration, this.getFormData()).subscribe(data => {
             this.isUpdating = false;
-            this.completed = true;
+            this.completed = true;           
         });
     }
 
@@ -81,5 +82,17 @@ export class AgentRegistration {
             }
         }
         return formData;
+    }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched()
+        }
+    }
+
+    private setControlsAsUnouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     }
 }

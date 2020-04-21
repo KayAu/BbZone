@@ -18,7 +18,7 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                      [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                      [field]="field.dataFieldControl" [parentForm]="applicationForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                         <span class="text-danger" *ngIf="field.fieldName=='userLogin' && hasLoginExists">The user login has already exists. Please choose another login.</span>
                                     </div>
                                 </div>

@@ -9,17 +9,16 @@ BEGIN
 			@query AS NVARCHAR(MAX);
 
 	BEGIN TRY
-		IF OBJECT_ID('tempdb..##temp_AgentComm') IS NOT NULL DROP TABLE ##temp_AgentComm
 
 		SELECT 
 			 ac.CategoryId
 			,pc.Category
 			,ac.AgentCommission  AS [AgentCommissionPer]
-			,ac2.AgentCommission AS [SupCommission]
+			,CASE WHEN ac2.AgentCommission IS NULL THEN pc.CommissionPercent ELSE ac2.AgentCommission  END  AS [SupCommission]
 		FROM AgentCommission ac
 		INNER JOIN ProductCategory pc ON ac.CategoryId = pc.CategoryId
 		INNER JOIN Agent a1 ON ac.AgentId = a1.AgentId
-		INNER JOIN AgentCommission ac2 ON ac2.AgentId = a1.SuperiorId AND ac2.CategoryId = ac.CategoryId
+		LEFT JOIN AgentCommission ac2 ON ac2.AgentId = a1.SuperiorId AND ac2.CategoryId = ac.CategoryId
 		WHERE pc.ProductId = @prProductId
 		AND  a1.AgentId = @prAgentId 
 		ORDER BY pc.Category

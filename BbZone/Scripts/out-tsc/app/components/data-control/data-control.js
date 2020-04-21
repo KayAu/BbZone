@@ -36,6 +36,8 @@ var DataControl = /** @class */ (function () {
         var _this = this;
         if (this.field.required) {
             this.subscription = this.formEvent.notification.subscribe(function (form) {
+                if (!form)
+                    return;
                 _this.parentForm = form.template;
                 _this.validate();
             });
@@ -45,6 +47,9 @@ var DataControl = /** @class */ (function () {
         else if (this.field.controlType === dataDisplayType_1.ControlType.cascadeDropdown) {
             this.subscribeToParentField();
         }
+    };
+    DataControl.prototype.ngOnDestroy = function () {
+        this.formEvent.destroy();
     };
     DataControl.prototype.writeValue = function (val) {
         if (this.field.controlType === this.controlType.select || this.field.controlType === this.controlType.cascadeDropdown) {

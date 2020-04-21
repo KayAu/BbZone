@@ -6,13 +6,6 @@ CREATE  PROCEDURE [dbo].[prc_InsertCommissionSettings]
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID)
-	DECLARE @tNewAgentComm TABLE
-	(
-		AgentId int,
-		CategoryId int,
-		AgentCommission smallint,
-		SuperiorCommission smallint
-	)
 
 	DECLARE @vAgents TABLE
 	(
@@ -73,18 +66,7 @@ BEGIN
 					,GETDATE()
 					,@prCreatedBy
 					,GETDATE()
-					,@prCreatedBy)
-		   OUTPUT inserted.AgentId, inserted.CategoryId, inserted.AgentCommission, inserted.SuperiorCommission INTO @tNewAgentComm;
-		
-		   -- Update the newly added agent commission on ClaimableCommission, where claim was submitted before agent commissions were set by the superior
-		   UPDATE cc
-		   SET AgentCommOnDate = ac.SuperiorCommission
-		   FROM  @tNewAgentComm ac
-		   INNER JOIN Agent a ON ac.AgentId = a.AgentId
-		   INNER JOIN ClaimableCommission cc ON cc.AgentId = a.SuperiorId
-		   INNER JOIN CustomerApplication ca ON cc.ApplicationId = cc.ApplicationId  
-		   WHERE cc.AgentCommOnDate = 0
-		   AND ca.CategoryId = ac.CategoryId
+					,@prCreatedBy);
 
 	END TRY 
 	BEGIN CATCH

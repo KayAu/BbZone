@@ -40,11 +40,6 @@ export class SuperiorField implements ControlValueAccessor {
     ) { }
 
     ngOnInit() {
-        //this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-        //    //   if (form.name !== this.formName) return;
-        //    this.parentForm = form.template;
-        //    this.validate();
-        //});
         this.searchFieldInput.asObservable().debounceTime(500).distinctUntilChanged().subscribe(data => this.search(data));
     }
 
@@ -86,16 +81,8 @@ export class SuperiorField implements ControlValueAccessor {
         this.dataService.get(`${ApiController.Agent}/GetAgents/`, keyword).subscribe(results => {
             if (results) {
                 this.agents = results;
-               // this.displayText = `${results} - ${results}`;
-                //this.clearErrorMessages(thisElement);
-                //this.setChanges();
             }
-            //else {
-            //    thisElement.next('.text-danger').remove();
-            //    thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
-            //    $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            //    this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-            //}
+
         });    
     }
 

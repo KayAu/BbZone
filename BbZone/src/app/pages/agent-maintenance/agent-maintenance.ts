@@ -20,7 +20,7 @@ export class AgentMaintenance extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     displayType = DataDisplayType;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService) {
         super(loaderService, dataService, '', false);
     }
 

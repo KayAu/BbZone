@@ -27,45 +27,47 @@
               </div>          
           </div>
           <div class="table-responsive">
-              <loading></loading>
-              <button class="btn btn-primary btn-sm mrg10T" (click)="showNewRow = true"><i class="fa fa-plus mrg5R"></i>Add</button>
-              <form #tableForm="ngForm">
-                  <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
-                      <thead>
-                          <tr>
-                              <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                              <th class="cell-width-5">Action</th>
-                          </tr>
-                      </thead>
-                      <tbody>
-                          <tr *ngIf="showNewRow">
-                              <td *ngFor="let field of dataRowMapper">
-                                  <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" [field]="field.dataFieldControl" [formName]="'manageProductForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
-                              </td>
-                              <td>
-                                  <button class="btn btn-primary btn-sm" (click)="addRow()"><i class="fa fa-save"></i></button>
-                                  <button type="button" class="btn btn-sm btn-warning" (click)="resetNewRecord()">
-                                      <i class="fa fa-times"></i>
-                                  </button>
-                              </td>
-                          </tr>
-                          <tr *ngFor="let record of dataSource; let rowNo = index">
-                              <ng-container *ngFor="let field of dataRowMapper">
-                                  <td *ngIf="!record.onEdit">
-                                      <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+              <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                  <loading></loading>
+                  <button class="btn btn-primary btn-sm mrg10T" (click)="showNewRow = true"><i class="fa fa-plus mrg5R"></i>Add</button>
+                  <form #tableForm="ngForm">
+                      <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                          <thead>
+                              <tr>
+                                  <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                  <th class="cell-width-5">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngIf="showNewRow">
+                                  <td *ngFor="let field of dataRowMapper">
+                                      <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" [field]="field.dataFieldControl" [parentForm]="tableForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                   </td>
-                                  <td *ngIf="record.onEdit">
-                                      <data-control [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [formName]="'editCategoryForm'" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
+                                  <td>
+                                      <button class="btn btn-primary btn-sm" (click)="addRow()"><i class="fa fa-save"></i></button>
+                                      <button type="button" class="btn btn-sm btn-warning" (click)="resetNewRecord()">
+                                          <i class="fa fa-times"></i>
+                                      </button>
                                   </td>
-                              </ng-container>
-                              <td>
-                                  <tablerow-buttons [editMode]="record.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" (onDelete)="deleteRow(rowNo)"></tablerow-buttons>
-                              </td>
-                          </tr>
-                      </tbody>
-                  </table>
-              </form>
-              <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                              </tr>
+                              <tr *ngFor="let record of dataSource; let rowNo = index">
+                                  <ng-container *ngFor="let field of dataRowMapper">
+                                      <td *ngIf="!record.onEdit">
+                                          <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                      </td>
+                                      <td *ngIf="record.onEdit">
+                                          <data-control [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [parentForm]="tableForm" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
+                                      </td>
+                                  </ng-container>
+                                  <td>
+                                      <tablerow-buttons [editMode]="record.onEdit" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" (onDelete)="deleteRow(rowNo)"></tablerow-buttons>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </form>
+                  <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+              </div>
           </div>
         </div>
       </div>

@@ -43,8 +43,7 @@
                startKey="startDate"
                endKey="endDate" />
     </div>
-
-
-
 </div>
-
+<ng-container *ngIf="controlLoaded">
+    <span class="text-danger" *ngIf="parentForm.controls[this.fieldId].hasError('required') && parentForm.controls[this.fieldId].touched">This is required</span>
+</ng-container>

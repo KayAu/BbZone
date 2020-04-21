@@ -38,7 +38,6 @@ export class AgentView {
 
     constructor(public loaderService: LoaderService,
         public dataService: DataService,
-        public formEvent: BroadcastService,
         private router: Router,
         private route: ActivatedRoute,
         private toastr: ToastrService,
@@ -68,7 +67,7 @@ export class AgentView {
     }
 
     submit() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -79,6 +78,7 @@ export class AgentView {
             this.formRecord.isActive = data.isActive;
             this.formRecord.modifiedOn = data.modifiedOn;
             this.formRecord.modifiedBy = data.modifiedBy;
+            this.setControlsAsUnouched();
             this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
         });
     }
@@ -94,5 +94,17 @@ export class AgentView {
 
     loadAgentCommissions() {
         this.agentCommissionTable.loadCurrentAgentCommission(this.agentId, this.selectedProduct);
+    }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    }
+
+    private setControlsAsUnouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsUntouched();
+        }
     }
 }

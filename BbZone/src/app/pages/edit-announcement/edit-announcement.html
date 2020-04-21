@@ -19,7 +19,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}" [onEdit]="true"></data-control>
+                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" name="{{field.dataFieldControl.controlName}}" [onEdit]="true"></data-control>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

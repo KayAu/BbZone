@@ -4416,7 +4416,7 @@ table.table-mail tr td {
   color: #ed5565 !important;
   position: fixed;
   position: relative;
-  float: left;
+  float: r;
 }
 .text-muted {
   color: #888888 !important;
@@ -11039,4 +11039,8 @@ input[type="number"]:disabled {
 
 .btn.disabled {
     pointer-events: auto !important;
+}
+
+.col-form-label .text-danger{
+  float:none !important;
 }

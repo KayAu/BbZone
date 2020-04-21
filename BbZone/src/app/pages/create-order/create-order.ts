@@ -62,7 +62,7 @@ export class CreateOrder {
     }
 
     create() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -106,6 +106,14 @@ export class CreateOrder {
         this.selectedCategory = null;
         this.cascadeService.subject.next(new CascadeData("prodPkgId", this.selectedCategory));
     }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    }
+
+
 }
 
 

@@ -34,7 +34,7 @@ export class AgentComission {
     @ViewChild(ProductOptions) productOptions: ProductOptions;
     @ViewChild(AgentCommissionTable) agentCommissionTable: AgentCommissionTable;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private toastr: ToastrService, private router: Router) { }
+    constructor(public loaderService: LoaderService, public dataService: DataService, private toastr: ToastrService, private router: Router) { }
 
     ngOnInit() {
         this.loadAppWithoutCommissionSet();
@@ -68,7 +68,8 @@ export class AgentComission {
     }
 
     create() {
-        this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+       // this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -85,9 +86,22 @@ export class AgentComission {
         this.commissionSettings = [];
         this.multipleCheckboxes.removeSelection();
         this.productOptions.clearSelection();
+        this.setControlsAsUnouched();
     }
 
     editAgentCommission(categoryId: number) {
         console.log(categoryId);
+    }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched()
+        }
+    }
+
+    private setControlsAsUnouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     }
 }

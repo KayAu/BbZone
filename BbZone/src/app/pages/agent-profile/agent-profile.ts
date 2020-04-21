@@ -63,7 +63,7 @@ export class AgentProfile {
     }
 
     submit() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -71,6 +71,7 @@ export class AgentProfile {
         this.dataService.update(ApiController.Agent, this.formRecord[AgentProfileFields.keyField], this.formRecord).subscribe(data => {
             this.isUpdating = false;
             this.superiorField.editable = false;
+            this.setControlsAsUnouched();
             this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
         });
     }
@@ -84,4 +85,15 @@ export class AgentProfile {
         });
     }
 
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched()
+        }
+    }
+
+    private setControlsAsUnouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsUntouched();
+        }
+    }
 }

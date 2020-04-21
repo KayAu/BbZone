@@ -1785,10 +1785,13 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
         <ComplexType Name="GetClawback_Result">
           <Property Type="Int32" Name="ClawbackId" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="OrderNo" Nullable="false" MaxLength="25" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
           <Property Type="String" Name="Remarks" Nullable="false" MaxLength="200" />
           <Property Type="Boolean" Name="Editable" Nullable="true" />
           <Property Type="String" Name="Agent" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="false" />
         </ComplexType>
         <EntityType Name="ClaimableCommission">
           <Key>
@@ -2860,6 +2863,9 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Editable" ColumnName="Editable" />
                 <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

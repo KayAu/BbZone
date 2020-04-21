@@ -28,7 +28,7 @@ export class AgentRegistrationView {
     isUpdating: boolean = false;
     applicationId: number;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService,
+    constructor(public loaderService: LoaderService, public dataService: DataService, 
         private cascadeService: CascadeService, private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
     ngOnInit() {
@@ -54,7 +54,7 @@ export class AgentRegistrationView {
     }
 
     update() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -72,6 +72,13 @@ export class AgentRegistrationView {
             this.registrationDocuments = data.registrationDocuments;
         });
     }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    }
+
 }
 
 

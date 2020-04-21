@@ -1,18 +1,20 @@
-﻿<section class="filter-wrapper">
+﻿
+<section class="filter-wrapper">
     <div class="input-group">
         <span *ngIf="disabledEdit">{{selectedCustomer}}</span>
         <input type="text" class="form-control" placeholder="Search" maxlength="150" [ngModel]="selectedCustomer"
-               (keyup)="onSearchInputChanged($event.target.value)" *ngIf="!disabledEdit" #searchInput/>
+               (keyup)="onSearchInputChanged($event.target.value)" *ngIf="!disabledEdit" #searchInput />
     </div>
-    <div class="dropdown-menu pos-init pad0A h-550 w-p100 scrollable-ver scrollable-hor-hidden"  [ngClass]="{'show': loadData}">
+    <div class="dropdown-menu pos-init pad0A h-550 w-p100 scrollable-ver scrollable-hor-hidden" [ngClass]="{'show': loadData}">
         <div class="pad0A" *ngIf="dropdownItems.length > 0; else noResults">
             <a class="dropdown-item pad15T pad10B mrg0A bb-1 flexbox" (click)="onItemClicked(rowNo)" *ngFor="let item of dropdownItems; let rowNo = index">
                 <div class="media-body mrg15L">
-                    <strong>{{item.customerName
-            }}</strong>
-            <div class="font-size-13 mrg0B mrg5T" style="line-height: 1.2;">Order No: {{item.orderNo}}</div>
-            <small class="">Applicatiom #: {{item.applicationId}}</small>
-</div>
+                    <strong>
+                        {{item.customerName}}
+                    </strong>
+                    <div class="font-size-13 mrg0B mrg5T" style="line-height: 1.2;">Order No: {{item.orderNo}}</div>
+                    <small class="">Applicatiom #: {{item.applicationId}}</small>
+                </div>
             </a>
         </div>
         <ng-template #noResults>
@@ -25,3 +27,6 @@
 </section>
 
 
+<ng-container *ngIf="controlLoaded">
+    <span class="text-danger" *ngIf="parentForm.controls[this.fieldId].hasError('required') && parentForm.controls[this.fieldId].touched">This is required</span>
+</ng-container>

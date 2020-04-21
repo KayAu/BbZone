@@ -24,7 +24,7 @@ export class ViewAnnouncement extends ListEvent {
     searchParams = new StatusAndKeywordParams(null, null);
     keyField: string;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
         super(loaderService, dataService, "", false);
     }
 

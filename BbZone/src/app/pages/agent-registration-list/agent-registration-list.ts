@@ -22,7 +22,7 @@ export class AgentRegistrationList extends ListEvent {
     displayType = DataDisplayType;
     approvalMode = ApprovalMode;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService) {
         super(loaderService, dataService, '', false);
     }
 

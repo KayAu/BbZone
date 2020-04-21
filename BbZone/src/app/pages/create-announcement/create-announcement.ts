@@ -49,7 +49,7 @@ export class CreateAnnouncement {
     }
 
     submit() {
-        this.formEvent.notify(new FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid) return;
 
         this.isUpdating = true;
@@ -75,6 +75,13 @@ export class CreateAnnouncement {
             this.newRecord = data;
         });
     }
+
+    private setControlsAsTouched() {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    }
+
 }
 
 

@@ -19,5 +19,8 @@ namespace BroadbandZone_Data
         public string Remarks { get; set; }
         public Nullable<bool> Editable { get; set; }
         public string Agent { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
+        public int ApplicationId { get; set; }
     }
 }

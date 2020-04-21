@@ -28,7 +28,7 @@ export class CreateWithdrawal extends ListEvent {
     oriDataSource: any[] = [];
     viewSelectedItems: boolean = false;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private router: Router) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService, private router: Router) {
         super(loaderService, dataService, '', false);
         this.dataSourceSubject.asObservable().subscribe((data: any)  => {
             this.totalAmountToDeduct = data.totalAmountToDeduct;

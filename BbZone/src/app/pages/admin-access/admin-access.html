@@ -22,7 +22,7 @@
                                 <tbody>
                                     <tr *ngIf="showNewRow">
                                         <td *ngFor="let field of dataRowMapper">
-                                            <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" [field]="field.dataFieldControl" [formName]="'manageProductForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                            <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" [field]="field.dataFieldControl" [parentForm]="tableForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                         </td>
                                         <td>
                                             <button class="btn btn-primary btn-sm" (click)="addRow()"><i class="fa fa-save"></i></button>
@@ -37,7 +37,7 @@
                                                 <data-field [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
                                             </td>
                                             <td *ngIf="record.onEdit">
-                                                <data-control [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [formName]="'editCategoryForm'" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
+                                                <data-control [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" [parentForm]="tableForm" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
                                             </td>
                                         </ng-container>
                                         <td>

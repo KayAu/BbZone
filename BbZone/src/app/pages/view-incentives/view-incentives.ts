@@ -32,7 +32,7 @@ export class ViewIncentives extends ListDataCrud {
     downloadUrl: string;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
-        super(loaderService, dataService, 'incPymntId', formEvent);
+        super(loaderService, dataService, 'incPymntId');
         this.dataSourceSubject.asObservable().subscribe((data: any) => {
             this.totalAmountReceived = data.totalAmountReceived;
         });

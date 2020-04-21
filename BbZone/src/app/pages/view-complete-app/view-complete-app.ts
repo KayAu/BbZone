@@ -27,7 +27,7 @@ export class ViewCompletedApp extends ListEvent {
     searchParams = new SearchCompletedOrderParams(null, null, null, null, null, null, null, null);
     keyField: string;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService) {
         super(loaderService, dataService, "applicationId", false);
     }
 

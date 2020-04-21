@@ -1,5 +1,5 @@
-import { Component, Input, Output, ElementRef, forwardRef, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, NG_VALIDATORS, NgForm  } from '@angular/forms';
+import { Component, Input, Output, ElementRef, forwardRef, EventEmitter, OnDestroy } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validator, AbstractControl, NG_VALIDATORS, NgForm, Validators  } from '@angular/forms';
 import { BroadcastService } from '../../services/broadcast.service';
 import { Subscription } from 'rxjs';
 import { FormSubmit } from '../../model/form-submit';
@@ -28,15 +28,16 @@ declare var $: any;
 
 export class DataControl implements ControlValueAccessor {
     data: any;
-    parentForm: NgForm;
+    controlLoaded: boolean = false;
     controlType = ControlType;
-    dropdownItems : any[];
+    dropdownItems: any[];
+    @Input() parentForm: NgForm;
+    @Input() formName: string;
     @Input() field: DataFieldControl;
     @Input() fieldId: string;
     @Input() onEdit: boolean = false;
     @Input() disabled: boolean = false;
     @Input() readonly: boolean = false;
-    @Input() formName: string;
     @Output() propagateChange: any = () => { };
     @Output() onModelChanged = new EventEmitter();
 
@@ -51,12 +52,14 @@ export class DataControl implements ControlValueAccessor {
     ) {  }
 
     ngOnInit() {
-        if (this.field.required) {
-            this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-                this.parentForm = form.template;
-                this.validate(); 
-            });
-        }
+        //if (this.field.required) {
+        //    this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
+        //        if (!form) return;
+        //        this.parentForm = form.template;
+        //        this.validate(); 
+        //    });
+        //}
+
 
         if (this.field.controlType === ControlType.select)
             this.loadOptions();
@@ -64,6 +67,17 @@ export class DataControl implements ControlValueAccessor {
             this.subscribeToParentField();
         }
     }
+
+    ngAfterViewChecked() {
+        if (this.field.required) {
+            this.parentForm.controls[this.fieldId].setValidators(Validators.required);
+            this.parentForm.controls[this.fieldId].updateValueAndValidity();
+            this.controlLoaded = true;
+        }
+    }
+    //ngOnDestroy() {
+    //    this.subscription.unsubscribe();
+    //}
 
     writeValue(val: any): void {
 
@@ -102,26 +116,26 @@ export class DataControl implements ControlValueAccessor {
         });
     }
 
-    private validate() {
-        let thisElement =  $(this.el.nativeElement);
+    //private validate() {
+    //    let thisElement =  $(this.el.nativeElement);
         
-        if (this.data === null || this.data === undefined || this.data === "") {           
-            thisElement.next('.text-danger').remove();
-            thisElement.after('<span class= "text-danger">This is required</span>');
-            $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-        }
-        else {
-            this.clearErrorMessages(thisElement);
-            this.parentForm.controls[this.fieldId].setErrors(null);
-        }
-    }
+    //    if (this.data === null || this.data === undefined || this.data === "") {           
+    //        thisElement.next('.text-danger').remove();
+    //        thisElement.after('<span class= "text-danger">This is required</span>');
+    //        $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+    //        this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+    //    }
+    //    else {
+    //        this.clearErrorMessages(thisElement);
+    //        this.parentForm.controls[this.fieldId].setErrors(null);
+    //    }
+    //}
 
-    private clearErrorMessages(thisElement: any)
-    {
-        $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
-        thisElement.next().remove();
-    }
+    //private clearErrorMessages(thisElement: any)
+    //{
+    //    $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
+    //    thisElement.next().remove();
+    //}
 
     private subscribeToParentField() {
         this.cascadeEvent.subject.subscribe((cascade: CascadeData) => {

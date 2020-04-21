@@ -21,8 +21,8 @@ export class AgentChanges extends ListDataCrud {
     displayType = DataDisplayType;
     controlType = ControlType;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
-        super(loaderService, dataService, "chargeId", formEvent);
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
+        super(loaderService, dataService, "chargeId");
     }
 
     ngOnInit() {

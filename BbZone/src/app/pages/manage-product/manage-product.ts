@@ -21,8 +21,8 @@ export class ManageProduct extends ListDataCrud {
     displayType = DataDisplayType;
     controlType = ControlType;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
-        super(loaderService, dataService, 'ProductId', formEvent);
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
+        super(loaderService, dataService, 'ProductId');
     }
 
     ngOnInit() {

@@ -17,7 +17,7 @@
                     <div role="tabpanel" id="addCommission" class="tab-pane active">
                         <div class="panel-body">
                             <form #dataForm="ngForm" (ngSubmit)="create()" class="col-md-8">
-                                <div class="alert alert-success" *ngIf="noAgentsReturned">
+                                <div class="alert alert-success" *ngIf="allowCommConfig && noAgentsReturned">
                                     You have updated the commissions for all your agents on this product.
                                 </div>
                                 <div class="alert alert-warning mrg25B" *ngIf="!allowCommConfig">

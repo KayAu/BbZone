@@ -22,8 +22,8 @@ export class ManageClawback extends ListDataCrud {
     controlType = ControlType;
     customerSearchType = CustomerSearchType;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
-        super(loaderService, dataService, 'clawbackId', formEvent);
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
+        super(loaderService, dataService, 'clawbackId');
     }
 
     ngOnInit() {
