@@ -21,7 +21,6 @@ var loader_service_1 = require("../../loader/loader.service");
 var ngx_toastr_1 = require("ngx-toastr");
 var router_2 = require("@angular/router");
 var apiController_1 = require("../../enums/apiController");
-var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var CreateAnnouncement = /** @class */ (function () {
     function CreateAnnouncement(loaderService, dataService, formEvent, router, route, toastr) {
@@ -46,7 +45,7 @@ var CreateAnnouncement = /** @class */ (function () {
     };
     CreateAnnouncement.prototype.submit = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
@@ -67,6 +66,11 @@ var CreateAnnouncement = /** @class */ (function () {
         this.dataService.get(apiController_1.ApiController.CustomerApplication, applicationId).subscribe(function (data) {
             _this.newRecord = data;
         });
+    };
+    CreateAnnouncement.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

@@ -20,7 +20,8 @@
 	@prFilterMode INT = NULL,
 	@oTotalRecord INT OUTPUT,
 	@oTotalUnreadMsg INT OUTPUT,
-	@oTotalCommINotConfig INT OUTPUT
+	@oTotalCommINotConfig INT OUTPUT,
+	@oTotalOddClaimed INT OUTPUT
 
 AS
 BEGIN
@@ -48,6 +49,7 @@ BEGIN
 		Status  VARCHAR(50),
 		TotalUnreadMsg INT,
 		CommIsConfigured BIT,
+		OddClaimed BIT,
 		RowNum INT
 	)
 
@@ -70,7 +72,8 @@ BEGIN
 				ca.CreatedOn,
 				a.Status,
 				msg.TotalUnreadMsg,
-				CommIsConfigured = CAST(CASE WHEN NOT ac.CommId IS NULL THEN 1 ELSE 0 END AS BIT)
+				CommIsConfigured = CAST(CASE WHEN NOT ac.CommId IS NULL THEN 1 ELSE 0 END AS BIT),
+				cl.OddClaimed
 		INTO ##temp_Table
 		FROM CustomerApplication ca
 		INNER JOIN ProductPackage PP ON ca.ProdPkgId = pp.ProdPkgId
@@ -87,6 +90,13 @@ BEGIN
 			AND [Role] = CASE WHEN @prIsAdmin = 1 THEN 'AG' ELSE 'AD' END
 			AND MsgRead = 0
 		) msg
+		CROSS APPLY
+		(
+			SELECT OddClaimed = CASE WHEN COUNT(ClaimCommId) > 0 AND a.Status<>'Post Complete' THEN 1 ELSE 0 END
+			FROM ClaimableCommission
+			WHERE ApplicationId = ca.ApplicationId
+			AND NOT ClaimWithdrawalId IS NULL
+		) cl
 		WHERE 1 = CASE WHEN ISNULL(@prProduct,0) = 0 THEN 1
 					   WHEN p.ProductId = @prProduct THEN 1
 					   ELSE 0
@@ -137,6 +147,7 @@ BEGIN
 		AND 1 = CASE WHEN ISNULL(@prFilterMode , 0) = 0 THEN 1
 					 WHEN @prFilterMode = 1 AND msg.TotalUnreadMsg > 0 THEN 1   -- IncomingMessage
 					 WHEN @prFilterMode = 2 AND ac.CommId IS NULL THEN 1   -- NoCommissionSetup
+					 WHEN @prFilterMode = 3 AND cl.OddClaimed = 1 THEN 1 -- OddCLaim
 					 ELSE 0
 		        END
 
@@ -154,12 +165,14 @@ BEGIN
 				SubmittedOn  = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
 				[Status],
 				TotalUnreadMsg,
-				CommIsConfigured
+				CommIsConfigured,
+				OddClaimed
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table
 		SELECT @oTotalUnreadMsg = COUNT(ApplicationId) FROM ##temp_Table WHERE TotalUnreadMsg > 0
 	    SELECT @oTotalCommINotConfig = COUNT(ApplicationId) FROM ##temp_Table WHERE CommIsConfigured = 0
+		SELECT @oTotalOddClaimed = COUNT(ApplicationId) FROM ##temp_Table WHERE OddClaimed = 1
 
 		DROP TABLE  ##temp_Table
 

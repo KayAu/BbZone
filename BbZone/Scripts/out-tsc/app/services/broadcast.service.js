@@ -24,11 +24,6 @@ var BroadcastService = /** @class */ (function () {
             this.notifySubject.next();
         }
     };
-    BroadcastService.prototype.destroy = function () {
-        this.notifySubject.next();
-        this.notifySubject.complete();
-        //this.notifySubject.unsubscribe();
-    };
     BroadcastService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [])

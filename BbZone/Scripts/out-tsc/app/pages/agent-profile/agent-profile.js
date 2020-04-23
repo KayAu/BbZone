@@ -20,7 +20,6 @@ var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var router_2 = require("@angular/router");
 var apiController_1 = require("../../enums/apiController");
-var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var ngx_toastr_1 = require("ngx-toastr");
 var superior_field_1 = require("src/app/components/superior-field/superior-field");
@@ -52,13 +51,14 @@ var AgentProfile = /** @class */ (function () {
     };
     AgentProfile.prototype.submit = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
         this.dataService.update(apiController_1.ApiController.Agent, this.formRecord[agentFields_1.AgentProfileFields.keyField], this.formRecord).subscribe(function (data) {
             _this.isUpdating = false;
             _this.superiorField.editable = false;
+            _this.setControlsAsUnouched();
             _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
         });
     };
@@ -69,6 +69,16 @@ var AgentProfile = /** @class */ (function () {
             _this.formRecord = results;
             _this.superiorField.editable = !_this.formRecord.superiorId || _this.currentUser.isAdmin ? true : false;
         });
+    };
+    AgentProfile.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    AgentProfile.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsUntouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

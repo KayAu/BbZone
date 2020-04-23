@@ -40,7 +40,7 @@ var common_1 = require("@angular/common");
 var ViewIncentives = /** @class */ (function (_super) {
     __extends(ViewIncentives, _super);
     function ViewIncentives(loaderService, dataService, formEvent) {
-        var _this = _super.call(this, loaderService, dataService, 'incPymntId', formEvent) || this;
+        var _this = _super.call(this, loaderService, dataService, 'incPymntId') || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
         _this.formEvent = formEvent;

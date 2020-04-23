@@ -13,28 +13,20 @@ var core_1 = require("@angular/core");
 var data_service_1 = require("../../services/data.service");
 var apiController_1 = require("../../enums/apiController");
 var rxjs_1 = require("rxjs");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
 var forms_1 = require("@angular/forms");
 var dataDisplayType_1 = require("src/app/enums/dataDisplayType");
 var CustomerFinder = /** @class */ (function () {
-    function CustomerFinder(el, formEvent, dataService) {
-        var _this = this;
+    function CustomerFinder(el, dataService) {
         this.el = el;
-        this.formEvent = formEvent;
         this.dataService = dataService;
         this.selectedCustomer = null;
         this.dropdownItems = [];
         this.loadData = false;
         this.startSearching = false;
         this.searchFieldInput = new rxjs_1.Subject();
+        this.controlLoaded = false;
         this.onItemSelected = new core_1.EventEmitter();
         this.disabledEdit = false;
-        this.subscription = this.formEvent.notification.subscribe(function (form) {
-            if (!form)
-                return;
-            _this.parentForm = form.template;
-            _this.validate();
-        });
     }
     CustomerFinder_1 = CustomerFinder;
     Object.defineProperty(CustomerFinder.prototype, "displayText", {
@@ -50,6 +42,13 @@ var CustomerFinder = /** @class */ (function () {
             _this.search(data);
         });
     };
+    CustomerFinder.prototype.ngAfterViewChecked = function () {
+        if (this.parentForm) {
+            this.parentForm.controls[this.fieldId].setValidators(forms_1.Validators.required);
+            this.parentForm.controls[this.fieldId].updateValueAndValidity();
+            this.controlLoaded = true;
+        }
+    };
     CustomerFinder.prototype.onItemClicked = function (selectedIndex) {
         this.selectedCustomer = this.dropdownItems[selectedIndex].customerName;
         this.onItemSelected.emit(this.dropdownItems[selectedIndex]);
@@ -64,19 +63,19 @@ var CustomerFinder = /** @class */ (function () {
             this.onItemSelected.emit(null);
         }
     };
-    CustomerFinder.prototype.validate = function () {
-        var thisElement = $(this.el.nativeElement);
-        if (this.selectedCustomer === null) {
-            thisElement.next('.text-danger').remove();
-            thisElement.after('<span class= "text-danger">This is required</span>');
-            $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-        }
-        else {
-            this.clearErrorMessages();
-            this.parentForm.controls[this.fieldId].setErrors(null);
-        }
-    };
+    //private validate() {
+    //    let thisElement = $(this.el.nativeElement);
+    //    if (this.selectedCustomer === null) {
+    //        thisElement.next('.text-danger').remove();
+    //        thisElement.after('<span class= "text-danger">This is required</span>');
+    //        $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
+    //        this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
+    //    }
+    //    else {
+    //        this.clearErrorMessages();
+    //        this.parentForm.controls[this.fieldId].setErrors(null);
+    //    }
+    //}
     CustomerFinder.prototype.clearErrorMessages = function () {
         var thisElement = $(this.el.nativeElement);
         $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
@@ -113,6 +112,10 @@ var CustomerFinder = /** @class */ (function () {
     ], CustomerFinder.prototype, "onItemSelected", void 0);
     __decorate([
         core_1.Input(),
+        __metadata("design:type", forms_1.NgForm)
+    ], CustomerFinder.prototype, "parentForm", void 0);
+    __decorate([
+        core_1.Input(),
         __metadata("design:type", Boolean)
     ], CustomerFinder.prototype, "disabledEdit", void 0);
     __decorate([
@@ -142,7 +145,6 @@ var CustomerFinder = /** @class */ (function () {
             ]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef,
-            broadcast_service_1.BroadcastService,
             data_service_1.DataService])
     ], CustomerFinder);
     return CustomerFinder;

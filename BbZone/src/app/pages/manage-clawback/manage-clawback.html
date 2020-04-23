@@ -69,7 +69,7 @@
                                     </tbody>
                                 </table>
                             </form>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

@@ -10,7 +10,7 @@ export enum ApiController {
     AdminUser = "AdminUser",
     Agent = "Agent",
     User = "User",
-    AgentCharges = "AgentCharges",
+    AgentPocket = "AgentPocket",
     Commission = "Commission",
     Dashboard = "Dashboard",
     Download = "Download",
@@ -22,4 +22,5 @@ export enum ApiController {
     Incentives = "Incentives",
     IncentivesUpload = "IncentivesUpload",
     LoginBanner = "LoginBanner",
+    Password = "Password"
 }

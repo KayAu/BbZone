@@ -15,10 +15,10 @@ namespace BroadbandZone_Data
     {
         public int WithdrawalId { get; set; }
         public string Agent { get; set; }
-        public Nullable<decimal> Amount { get; set; }
         public string ReferenceNo { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string Status { get; set; }
         public Nullable<System.DateTime> CompletedOn { get; set; }
+        public Nullable<decimal> WithdrawAmount { get; set; }
     }
 }

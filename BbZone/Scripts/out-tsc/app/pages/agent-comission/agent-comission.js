@@ -18,15 +18,12 @@ var ngx_toastr_1 = require("ngx-toastr");
 var forms_1 = require("@angular/forms");
 var multiple_checkbox_1 = require("src/app/components/multiple-checkbox/multiple-checkbox");
 var product_options_1 = require("src/app/components/product-options/product-options");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
-var form_submit_1 = require("src/app/model/form-submit");
 var agent_commission_table_1 = require("src/app/components/agent-commission-table/agent-commission-table");
 var rxjs_1 = require("rxjs");
 var AgentComission = /** @class */ (function () {
-    function AgentComission(loaderService, dataService, formEvent, toastr, router) {
+    function AgentComission(loaderService, dataService, toastr, router) {
         this.loaderService = loaderService;
         this.dataService = dataService;
-        this.formEvent = formEvent;
         this.toastr = toastr;
         this.router = router;
         this.isUpdating = false;
@@ -66,7 +63,8 @@ var AgentComission = /** @class */ (function () {
     };
     AgentComission.prototype.create = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        // this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
@@ -82,9 +80,20 @@ var AgentComission = /** @class */ (function () {
         this.commissionSettings = [];
         this.multipleCheckboxes.removeSelection();
         this.productOptions.clearSelection();
+        this.setControlsAsUnouched();
     };
     AgentComission.prototype.editAgentCommission = function (categoryId) {
         console.log(categoryId);
+    };
+    AgentComission.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    AgentComission.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
@@ -107,7 +116,7 @@ var AgentComission = /** @class */ (function () {
             selector: 'agent-comission',
             templateUrl: './agent-comission.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, ngx_toastr_1.ToastrService, router_1.Router])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, ngx_toastr_1.ToastrService, router_1.Router])
     ], AgentComission);
     return AgentComission;
 }());

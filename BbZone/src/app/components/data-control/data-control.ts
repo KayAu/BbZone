@@ -52,15 +52,6 @@ export class DataControl implements ControlValueAccessor {
     ) {  }
 
     ngOnInit() {
-        //if (this.field.required) {
-        //    this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-        //        if (!form) return;
-        //        this.parentForm = form.template;
-        //        this.validate(); 
-        //    });
-        //}
-
-
         if (this.field.controlType === ControlType.select)
             this.loadOptions();
         else if (this.field.controlType === ControlType.cascadeDropdown) {
@@ -75,9 +66,6 @@ export class DataControl implements ControlValueAccessor {
             this.controlLoaded = true;
         }
     }
-    //ngOnDestroy() {
-    //    this.subscription.unsubscribe();
-    //}
 
     writeValue(val: any): void {
 
@@ -115,27 +103,6 @@ export class DataControl implements ControlValueAccessor {
             this.dropdownItems = results;
         });
     }
-
-    //private validate() {
-    //    let thisElement =  $(this.el.nativeElement);
-        
-    //    if (this.data === null || this.data === undefined || this.data === "") {           
-    //        thisElement.next('.text-danger').remove();
-    //        thisElement.after('<span class= "text-danger">This is required</span>');
-    //        $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-    //        this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-    //    }
-    //    else {
-    //        this.clearErrorMessages(thisElement);
-    //        this.parentForm.controls[this.fieldId].setErrors(null);
-    //    }
-    //}
-
-    //private clearErrorMessages(thisElement: any)
-    //{
-    //    $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
-    //    thisElement.next().remove();
-    //}
 
     private subscribeToParentField() {
         this.cascadeEvent.subject.subscribe((cascade: CascadeData) => {

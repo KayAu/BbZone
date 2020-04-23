@@ -28,18 +28,16 @@ var tablerow_data_mapping_1 = require("../../model/tablerow.data.mapping");
 var dataDisplayType_1 = require("../../enums/dataDisplayType");
 var ListDataCrud_1 = require("../../interfaces/ListDataCrud");
 var data_field_control_1 = require("../../model/data.field.control");
-var broadcast_service_1 = require("../../services/broadcast.service");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var apiController_1 = require("../../enums/apiController");
 var search_params_1 = require("../../model/search-params");
 var ManageClawback = /** @class */ (function (_super) {
     __extends(ManageClawback, _super);
-    function ManageClawback(loaderService, dataService, formEvent) {
-        var _this = _super.call(this, loaderService, dataService, 'clawbackId', formEvent) || this;
+    function ManageClawback(loaderService, dataService) {
+        var _this = _super.call(this, loaderService, dataService, 'clawbackId') || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
-        _this.formEvent = formEvent;
         _this.dataRowMapper = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
@@ -87,7 +85,7 @@ var ManageClawback = /** @class */ (function (_super) {
             selector: 'manage-clawback',
             templateUrl: './manage-clawback.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
     ], ManageClawback);
     return ManageClawback;
 }(ListDataCrud_1.ListDataCrud));

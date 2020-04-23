@@ -18,5 +18,6 @@ var OrderFilter;
     OrderFilter[OrderFilter["None"] = 0] = "None";
     OrderFilter[OrderFilter["IncomingMessage"] = 1] = "IncomingMessage";
     OrderFilter[OrderFilter["NoCommissionSetup"] = 2] = "NoCommissionSetup";
+    OrderFilter[OrderFilter["OddClaim"] = 3] = "OddClaim";
 })(OrderFilter = exports.OrderFilter || (exports.OrderFilter = {}));
 //# sourceMappingURL=RecordMode.js.map

@@ -38,6 +38,11 @@
                                             <i class="fa fa-exclamation-circle text-danger mrg5R"></i> No Commission Setup
                                             <span class="label label-danger">{{totalCommINotConfig}}</span>
                                         </label>
+                                        <label class="btn btn-white count-info pad35R pad20L pos-rel" [ngClass]="{'active': searchParams.filterByMode == orderFilter.OddClaim, '': searchParams.filterByMode != orderFilter.OddClaim}" (click)="filterView(orderFilter.OddClaim)">
+                                            <input type="radio" name="filter">
+                                            <i class="fa fa-ban font-azure mrg5R"></i> Odd Claim 
+                                            <span class="label label-azure">{{totalOddClaimed}}</span>
+                                        </label>
                                     </div>
                                 </div>
                                 <button class="btn btn-warning mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
@@ -61,7 +66,8 @@
                                                     </span>
                                                 </ng-template>
                                                 <i class="fa fa-envelope float-right text-warning" title="New incoming message" *ngIf="field.fieldName == 'customerName' && record.totalUnreadMsg > 0"></i>
-                                                <i class="fa fa-exclamation-circle float-right text-danger" title="Commission is not been set for this cateory" *ngIf="field.fieldName == 'agent' && !record.commIsConfigured"></i>
+                                                <i class="fa fa-exclamation-circle float-right text-danger" title="Commission is not been set for this category" *ngIf="field.fieldName == 'agent' && !record.commIsConfigured"></i>
+                                                <i class="fa fa-ban float-right font-azure" title="Commission claimed for non completed order" *ngIf="field.fieldName == 'status' && record.oddClaimed"></i>
                                             </td>
                                         </ng-container>
                                         <td>

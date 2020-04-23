@@ -31,12 +31,14 @@ export class ViewOrder extends ListEvent {
     keyField: string;
     totalUnreadMsg: number;
     totalCommINotConfig: number;
+    totalOddClaimed: number;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
         super(loaderService, dataService, "applicationId", false);
         this.dataSourceSubject.asObservable().subscribe((data: any) => {
             this.totalUnreadMsg = data.totalUnreadMsg;
             this.totalCommINotConfig = data.totalCommINotConfig;
+            this.totalOddClaimed = data.totalOddClaimed;
         });
     }
 

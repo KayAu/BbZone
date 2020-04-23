@@ -247,7 +247,7 @@
     <Compile Include="Helper\UserIdentityHelper.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\ChartData.cs" />
-    <Compile Include="Models\MyPassword.cs" />
+    <Compile Include="Models\PasswordModel.cs" />
     <Compile Include="Models\NewAgentCommission.cs" />
     <Compile Include="Models\PaymentVoucher.cs" />
     <Compile Include="Models\ProductOption.cs" />
@@ -266,7 +266,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="WebApi\AdminUserController.cs" />
-    <Compile Include="WebApi\AgentChargesController.cs" />
+    <Compile Include="WebApi\AgentPocketController.cs" />
     <Compile Include="WebApi\AgentController.cs" />
     <Compile Include="WebApi\AnnouncementController.cs" />
     <Compile Include="WebApi\ClawbackController.cs" />
@@ -284,6 +284,7 @@
     <Compile Include="WebApi\ProductCategoryController.cs" />
     <Compile Include="WebApi\ProductPackageController.cs" />
     <Compile Include="WebApi\ProductController.cs" />
+    <Compile Include="WebApi\PasswordController.cs" />
     <Compile Include="WebApi\RegistrationController.cs" />
     <Compile Include="WebApi\UserController.cs" />
     <Compile Include="WebApi\WithdrawalSubmitController.cs" />
@@ -406,6 +407,7 @@
     <Content Include="src\app\nav-menu\nav-menu.component.html" />
     <Content Include="src\app\pages\admin-access\admin-access.html" />
     <Content Include="src\app\pages\agent-view\agent-view.html" />
+    <Content Include="src\app\pages\reset-agent-password\reset-agent-password.html" />
     <Content Include="src\app\pages\edit-password\edit-password.html" />
     <Content Include="src\app\pages\manage-clawback\manage-clawback.html" />
     <Content Include="src\app\pages\agent-comission\agent-comission.html" />
@@ -422,7 +424,7 @@
     <Content Include="src\app\pages\edit-order\edit-order.html" />
     <Content Include="src\app\pages\home\home.html" />
     <Content Include="src\app\pages\login\login.html" />
-    <Content Include="src\app\pages\agent-charges\agent-charges.html" />
+    <Content Include="src\app\pages\agent-pocket\agent-pocket.html" />
     <Content Include="src\app\pages\manage-category\manage-category.html" />
     <Content Include="src\app\pages\manage-packages\manage-packages.html" />
     <Content Include="src\app\pages\manage-login-banner\manage-login-banner.html" />
@@ -547,7 +549,7 @@
     <TypeScriptCompile Include="src\app\metadata\clawbackColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\agentFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\announcementFields.ts" />
-    <TypeScriptCompile Include="src\app\metadata\agentChargesColumns.ts" />
+    <TypeScriptCompile Include="src\app\metadata\agentPocketColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\manageLoginBannerColumns.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchIncentiveFields.ts" />
     <TypeScriptCompile Include="src\app\metadata\searchCompletedOrderFields.ts" />
@@ -577,6 +579,7 @@
     <TypeScriptCompile Include="src\app\pages\activation.ts" />
     <TypeScriptCompile Include="src\app\pages\admin-access\admin-access.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-view\agent-view.ts" />
+    <TypeScriptCompile Include="src\app\pages\reset-agent-password\reset-agent-password.ts" />
     <TypeScriptCompile Include="src\app\pages\edit-password\edit-password.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-clawback\manage-clawback.ts" />
     <TypeScriptCompile Include="src\app\pages\agent-comission\agent-comission.ts" />
@@ -593,7 +596,7 @@
     <TypeScriptCompile Include="src\app\pages\edit-order\edit-order.ts" />
     <TypeScriptCompile Include="src\app\pages\home\home.ts" />
     <TypeScriptCompile Include="src\app\pages\login\login.ts" />
-    <TypeScriptCompile Include="src\app\pages\agent-charges\agent-charges.ts" />
+    <TypeScriptCompile Include="src\app\pages\agent-pocket\agent-pocket.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-category\manage-category.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-packages\manage-packages.ts" />
     <TypeScriptCompile Include="src\app\pages\manage-login-banner\manage-login-banner.ts" />

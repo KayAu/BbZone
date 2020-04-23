@@ -56,10 +56,10 @@
     <Compile Include="Agent.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AgentCharge.cs">
+    <Compile Include="AgentCommission.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="AgentCommission.cs">
+    <Compile Include="AgentPocket.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Announcement.cs">
@@ -135,19 +135,22 @@
     <Compile Include="GetAdminUsers_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="GetAgentCharges_Result.cs">
-      <DependentUpon>BbZoneModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="GetAgentCommissionSettings_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAgentCommissionSettings_Result1.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetAgentPocket_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetAgentProfile_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAgentRegistration_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetAgentsForDownload_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetAgents_Result.cs">
@@ -163,6 +166,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetClawback_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GetCompletedCustAppForDownload_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="GetCompletedCustomerApplication_Result.cs">
@@ -235,6 +241,9 @@
     <Compile Include="prc_GetCompletedCustomerApplication_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="prc_TerminateWithdrawal_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -251,6 +260,9 @@
     <Compile Include="RegistrationDocument.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ResetAgentPassword_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SelectItem.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -258,6 +270,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Withdrawal.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="WithdrawalItem.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

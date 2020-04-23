@@ -1,29 +1,43 @@
-
+<page-header [title]="'Withdrawal Details'" [parentCategory]="'Manage Withdrawal'"></page-header>
 <div class="wrapper wrapper-content animated fadeInRight">
-
+    <loading></loading>
     <div class="row">
-        <div class="col-md-6 mrg10T mrg25B">
+        <div class="col-md-8 mrg10T mrg25B">
             <div class="float-left">
                 <div alt="image" class="rounded-circle bg-info float-left rounded-circle-lg">
-                    <i class="fa fa-money font-size-24"></i>
+                    <i class="fa fa-money font-size-18"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalSelectedAmount | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.claimed | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
-                        <small class="text-muted">Selected Amount</small>
+                        <small class="text-muted">Claimed Amount</small>
+                    </div>
+                </div>
+            </div>
+            <div class="float-left mrg25L">
+                <div alt="image" class="rounded-circle bg-success float-left rounded-circle-lg">
+                    <i class="fa fa-minus-square-o font-size-18" style="padding-left: 3px"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.incentives | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-success font-size-11 mrg5R"></i>
+                        <small class="text-muted">Incentives</small>
                     </div>
                 </div>
             </div>
             <div class="float-left mrg25L">
                 <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
-                    <i class="fa fa-minus-square-o font-size-24" style="padding-left: 3px"></i>
+                    <i class="fa fa-minus-square-o font-size-18" style="padding-left: 3px"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalAmountToDeduct | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.deduction | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
@@ -32,9 +46,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mrg10T mrg25B text-right">
+        <div class="col-md-4 mrg10T mrg25B text-right">
             <label class="text-uppercase font-normal">Claimable Amount</label>
-            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.amount | number:'1.2-2'}}</div>
+            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.withdrawAmount | number:'1.2-2'}}</div>
         </div>
         <div class="col-lg-12">
             <div class="ibox ">
@@ -74,9 +88,9 @@
                                 </div>
                                 <div class="col-sm-9 col-md-9 text-left">
                                     <span class="badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
-                                                                    'badge-primary': formRecord.status == 'Completed',
-                                                                    'badge-warning': formRecord.status == 'OnHold',
-                                                                    'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
+                                                                'badge-primary': formRecord.status == 'Completed',
+                                                                'badge-warning': formRecord.status == 'OnHold',
+                                                                'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
                                         {{formRecord.status}}
                                     </span>
                                 </div>
@@ -111,9 +125,10 @@
                                             <ng-template #displayBadge>
                                                 <span class="badge" *ngIf="record.transactionType"
                                                       [ngClass]="{'badge-info': record.transactionType == 'Override',
-                                                                  'badge-warning': record.transactionType == 'Purchase',
-                                                                  'badge-success': record.transactionType == 'Own Sales',
-                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                                'badge-warning': record.transactionType == 'Charges',
+                                                                'badge-blue-alt': record.transactionType == 'Incentives',
+                                                                'badge-success': record.transactionType == 'Own Sales',
+                                                                'badge-danger': record.transactionType == 'Clawback'}">
                                                     {{record.transactionType}}
                                                 </span>
                                                 <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>

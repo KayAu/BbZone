@@ -17,7 +17,7 @@ namespace BroadbandZone_Data
         public string Agent { get; set; }
         public string CompletedOn { get; set; }
         public string ReferenceNo { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public string Amount { get; set; }
         public string Status { get; set; }
         public string SubmittedOn { get; set; }
     }

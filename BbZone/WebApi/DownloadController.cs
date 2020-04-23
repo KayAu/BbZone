@@ -129,5 +129,59 @@ namespace BroadbandZone_App.WebApi
                 return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
             }
         }
+
+        [HttpPost]
+        [Route("api/Download/Agent")]
+        public HttpResponseMessage Agent()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        var results = db.GetAgentsForDownload().ToList();
+                        return ExcelHelper.ReadDataToExcel<GetAgentsForDownload_Result>(results, "Agents");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
+            }
+        }
+
+        [HttpPost]
+        [Route("api/Download/CompletedOrders")]
+        public HttpResponseMessage CompletedOrders([FromBody] SearchCompletedOrderParams filterBy)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities(true))
+                {
+                    using (XLWorkbook wb = new XLWorkbook())
+                    {
+                        var results = db.GetCompletedCustAppForDownload(filterBy.ProductId,
+                                                                        filterBy.ProductCategoryId,
+                                                                        filterBy.ProductPackageId,
+                                                                        filterBy.CommissionStatus,
+                                                                        filterBy.Agent,
+                                                                        filterBy.ActivatedDate != null ? filterBy.ActivatedDate.StartDate : null,
+                                                                        filterBy.ActivatedDate != null ? filterBy.ActivatedDate.EndDate : null,
+                                                                        filterBy.PaymentDate != null ? filterBy.PaymentDate.StartDate : null,
+                                                                        filterBy.PaymentDate != null ? filterBy.PaymentDate.EndDate : null,
+                                                                        filterBy.Keyword,
+                                                                        filterBy.DocumentCompleted).ToList();
+                        return ExcelHelper.ReadDataToExcel<GetCompletedCustAppForDownload_Result>(results, "CompletedOrders");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return new HttpResponseMessage(System.Net.HttpStatusCode.ExpectationFailed);
+            }
+        }
     }
 }

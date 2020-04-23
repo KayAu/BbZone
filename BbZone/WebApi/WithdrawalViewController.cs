@@ -111,14 +111,13 @@ namespace BroadbandZone_App.WebApi
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    var withdrawal = db.Withdrawals.Find(id);
+                    var withdrawal = db.Withdrawals.Include(w => w.WithdrawalItems).Where(w=>w.WithdrawalId == id).FirstOrDefault();
                     withdrawal.AllowEdit = !currentUser.IsAdmin ||
                                             withdrawal.Status == WithdrawalStatus.Completed.ToString() ||
+                                            withdrawal.Status == WithdrawalStatus.Rejected.ToString() ||
                                             withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
                     withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
-                    withdrawal.WithdrawalItems = db.GetWithdrawalItems(withdrawal.WithdrawalId).ToList();
-                    withdrawal.TotalAmountToDeduct = withdrawal.WithdrawalItems.Select(w => w.DeductAmount).Sum();
-                    withdrawal.TotalSelectedAmount = withdrawal.Amount + withdrawal.TotalAmountToDeduct;
+   
                     return Ok(withdrawal);
                 }
             }
@@ -135,18 +134,24 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     if (editRecord.Status == WithdrawalStatus.Completed.ToString())
                     {
-                        editRecord.SetDateAndAuthor("Kaye", "CompletedOn", "CompletedBy", "ModifiedBy", "ModifiedOn");
+                        editRecord.CompletedBy = currentUser.Fullname;
+                        editRecord.CompletedOn = DateTime.Now;
                     }
-                    else
-                    {
-                        editRecord.SetDateAndAuthor("Kaye", "ModifiedBy", "ModifiedOn");
-                    }
+
+                    editRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                     db.Entry(editRecord).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    if (editRecord.Status == WithdrawalStatus.Rejected.ToString())
+                    {
+                        db.TerminateWithdrawal(id, currentUser.Fullname);
+                    }
+
                     return Ok(editRecord);
                 }
             }
@@ -165,17 +170,10 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
-                    Withdrawal editRecord = db.Withdrawals.Find(id);
-
-                    if (editRecord is null)
-                        return Content(HttpStatusCode.BadRequest, "Invalid ID");
-
-                    editRecord.Status = WithdrawalStatus.Terminated.ToString();
-                    editRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
-                    db.Entry(editRecord).State = EntityState.Modified;
-                    db.SaveChanges();
+                    db.TerminateWithdrawal(id, currentUser.Fullname);
                     return Ok();
                 }
             }
@@ -202,7 +200,7 @@ namespace BroadbandZone_App.WebApi
 
                     PaymentVoucher paymentVoucher = new PaymentVoucher();
                     paymentVoucher.RefNumber = withdrawal.ReferenceNo;
-                    paymentVoucher.PaymentAmount = $"RM {string.Format("{0:C2}", withdrawal.Amount)}";
+                    paymentVoucher.PaymentAmount = $"RM {string.Format("{0:C2}", withdrawal.WithdrawAmount)}";
                     paymentVoucher.PaymentDate = withdrawal.CreatedOn.ToString("yyyy-MM-dd");
                     paymentVoucher.PaymentItems = db.GetPaymentDetails(id).ToList();
 

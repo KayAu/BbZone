@@ -18,9 +18,9 @@ BEGIN
 				cc.AgentCommOnDate,
 				ClaimAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
 				DeductAmount = CASE WHEN NOT cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
-				TransactionType = CASE WHEN cc.IsOverride = 1 THEN 'Override' 
-				                       WHEN NOT cc.ClaimWithdrawalId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Own Sales'
+				TransactionType = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND cc.DeductedWithdrawalId IS NULL AND cc.IsOverride = 0 THEN 'Own Sales'
 									   WHEN NOT cc.ClaimWithdrawalId IS NULL AND NOT cc.DeductedWithdrawalId IS NULL THEN 'Clawback' 
+									   WHEN cc.IsOverride = 1 THEN 'Override' 
 								  END
 			FROM ClaimableCommission cc 
 			INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
@@ -29,16 +29,16 @@ BEGIN
 			OR cc.DeductedWithdrawalId = @prWithdrawalId
 			UNION ALL
 			SELECT NULL, 
-				   TransactionDetails = ac.Description, 
+				   TransactionDetails = ap.Description, 
 				   NULL, 
-				   [Date] = FORMAT(ac.CreatedOn, 'MM/dd/yyyy'), 
+				   [Date] = FORMAT(ap.CreatedOn, 'MM/dd/yyyy'), 
 				   NULL, 
 				   NULL, 
-				   NULL, 
-				   DeductAmount = ac.Amount,
-				   'Purchase'
-			FROM AgentCharge ac
-			WHERE ac.WithdrawalId = @prWithdrawalId
+				   ClaimAmount = CASE WHEN ap.Flow = 'In' THEN ap.Amount ELSE NULL END, 
+				   DeductAmount = CASE WHEN ap.Flow = 'Out' THEN ap.Amount ELSE NULL END,
+				   CASE WHEN ap.Flow = 'Out' Then 'Charges' ELSE 'Incentives' END
+			FROM AgentPocket ap
+			WHERE ap.WithdrawalId = @prWithdrawalId
 		) a 
 		ORDER BY [Date]
 

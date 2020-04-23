@@ -46,7 +46,6 @@ namespace BroadbandZone_Data
         public bool AllowTerminate { get; set; }
         public decimal? TotalAmountToDeduct { get; set; }
         public decimal? TotalSelectedAmount { get; set; }
-        public List<GetWithdrawalItems_Result> WithdrawalItems { get; set; }
     }
 
 }

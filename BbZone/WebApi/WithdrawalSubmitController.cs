@@ -27,20 +27,27 @@ namespace BroadbandZone_App.WebApi
                 {
                     SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
                     AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-                   
+
+                    
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+                    ObjectParameter totalIncentives = new ObjectParameter("oTotalIncentives", typeof(decimal));
+                    ObjectParameter totalDeduction = new ObjectParameter("oTotalDeduction", typeof(decimal));
+                    totalDeduction.Value = 100000.00m;
+                    totalIncentives.Value = 100000.00m;
                     var results = (new BroadbandZoneEntities()).GetWithdrawalToSubmit(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                     currentUser.Username ,
                                                                                     filterBy.Keyword,
                                                                                     filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
                                                                                     filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
-                                                                                    totalRecord).ToList();
-
-                    return Ok(new WithdrawalSubmit<GetWithdrawalToSubmit_Result>()
+                                                                                    totalRecord,
+                                                                                    totalIncentives,
+                                                                                    totalDeduction).ToList();
+                    return Ok(new 
                     {
                         DisplayData = results,
                         TotalRecords = Convert.ToInt32(totalRecord.Value),
-                        TotalAmountToDeduct = results.Select(r => r.DeductAmount).Sum()
+                        TotalAmountToDeduct = Convert.ToDecimal(totalDeduction.Value),
+                        TotalIncentives = Convert.ToDecimal(totalIncentives.Value)
                     });
                 }
             }
@@ -67,10 +74,10 @@ namespace BroadbandZone_App.WebApi
                     db.SaveChanges();
 
                     // Update claim able commission with the new Withdrawal transaction id
-                    db.UpdateClaimableCommission(newRecord.WithdrawalId, newRecord.ClaimCommItemsId);
+                    db.UpdateClaimableCommission(newRecord.WithdrawalId);
 
                     // update agent charges with the newly submitted withdrawal Id
-                    db.UpdateAgentCharges(currentUser.Username, newRecord.WithdrawalId);
+                    db.UpdateAgentPocket(currentUser.Username, newRecord.WithdrawalId);
                 }
 
                 return Ok();

@@ -57,11 +57,12 @@ BEGIN
 			  ,CommAmount = CASE WHEN @prIsAdmin <> 1 THEN 'RM0'
 			                     WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
 								 ELSE NULL END
-			  ,CommStatus = CASE WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
+			  ,CommStatus = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 'Odd Claim'
+								 WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'
 								 WHEN cc.AgentCommOnDate = 0 THEN 'Not Created'
 							     WHEN ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN 'Not Claim'
-								 WHEN ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN 'Claimed'								
+								 WHEN ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN 'Claimed'	
 							END
 			  ,w.WithdrawalId
 			  ,w.CompletedOn 
@@ -76,7 +77,11 @@ BEGIN
 		LEFT JOIN AgentCommission ac ON ac.AgentId = cc.AgentId AND ac.CategoryId = ca.CategoryId
 		LEFT JOIN Agent a ON ac.AgentId = a.AgentId
 		LEFT JOIN Withdrawal w ON w.WithdrawalId = cc.ClaimWithdrawalId
-		WHERE s.Status = 'Post Complete'
+		WHERE 
+		1 = CASE WHEN s.Status = 'Post Complete' THEN 1
+		         WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 1
+				 ELSE 0
+			END
 		AND 1 = CASE WHEN @prAgentId IS NULL THEN 1
 		               WHEN cc.AgentId IS NULL AND a.AgentId = @prAgentId THEN 1
 		               WHEN cc.AgentId = @prAgentId AND ISNULL(cc.IsOverride, 0) = 0 THEN 1
@@ -113,7 +118,7 @@ BEGIN
 		AND 1 = CASE wHEN @prCommStatus IS NULL THEN 1
 					 WHEN @prCommStatus = 'Paid' AND NOT w.CompletedOn IS NULL THEN  1
 					 WHEN @prCommStatus = 'Claim Disallowed' AND ca.DocumentCompleted = 0 THEN  1
-					 WHEN @prCommStatus = 'Not Created' AND ac.CommId IS NULL THEN  1
+					 WHEN @prCommStatus = 'Odd Claim' AND NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN  1
 					 WHEN @prCommStatus = 'Not Claim' AND ca.DocumentCompleted = 1 AND cc.ClaimWithdrawalId IS NULL THEN  1
 				     WHEN @prCommStatus = 'Claimed' AND ca.DocumentCompleted = 1 AND NOT cc.ClaimWithdrawalId IS NULL THEN  1
 					 ELSE 0 

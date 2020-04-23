@@ -13,11 +13,13 @@ BEGIN
 
 	DECLARE @var_Table TABLE(
 		ClawbackId INT NOT NULL,
+		ApplicationId INT NOT NULL,
 		CustomerName NVARCHAR(50) NOT NULL,
-		OrderNo VARCHAR(25) NOT NULL,
+		OrderNo VARCHAR(25)  NULL,
 		Agent NVARCHAR(50) NOT NULL,
 		Remarks VARCHAR(200) NOT NULL,
 		CreatedOn SMALLDATETIME NOT NULL,
+		CreatedBy VARCHAR(50) NOT NULL,
 		Editable BIT NULL,
 		RowNum INT
 	)
@@ -31,11 +33,13 @@ BEGIN
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
 		SELECT DISTINCT c.ClawbackId,
+					   ca.ApplicationId,
 					   ca.CustomerName,
 					   ca.OrderNo,
 					   ca.Agent,
 					   c.Remarks,
 					   c.CreatedOn,
+					   c.CreatedBy,
 					   Editable = 1 -- CASE WHEN NOT wi.WithdrawalId IS NULL THEN 1 ELSE 0 END
 		INTO ##temp_Table
 		FROM Clawback c
@@ -54,10 +58,13 @@ BEGIN
 		PRINT @vSelectQuery
 
 		SELECT ClawbackId ,
+				ApplicationId,
 			    CustomerName,
 				OrderNo,
 				Agent,
 				Remarks,
+				CreatedOn,
+				CreatedBy,
 				Editable
 		FROM  @var_Table
 

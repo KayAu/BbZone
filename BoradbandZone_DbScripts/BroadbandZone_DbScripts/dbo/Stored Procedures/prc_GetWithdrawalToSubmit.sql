@@ -8,11 +8,29 @@ CREATE PROCEDURE [dbo].[prc_GetWithdrawalToSubmit]
 	@prSearchKeyword VARCHAR(150),
 	@prSubmittedFrom SMALLDATETIME = NULL,
 	@prSubmittedTo SMALLDATETIME = NULL,
-	@oTotalRecord INT OUTPUT
+	@oTotalRecord INT OUTPUT,
+	@oTotalIncentives DECIMAL(12,2) OUTPUT,
+	@oTotalDeduction DECIMAL(12,2) OUTPUT
 AS
 BEGIN
+	IF OBJECT_ID('tempdb..#temp_Table') IS NOT NULL DROP TABLE ##temp_Table
+
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
 			@vSelectQuery NVARCHAR(MAX)
+
+	CREATE TABLE ##temp_Table (
+	    ApplicationId INT,
+		ClaimCommId INT,
+		TransactionDetails VARCHAR(250),
+		PackageName VARCHAR(150),
+		CreatedOn SMALLDATETIME,
+		PackageComm MONEY,
+		AgentComm SMALLINT,
+		ClaimAmount MONEY,
+		DeductAmount MONEY,
+		TransactionType VARCHAR(50),	
+		Selected BIT
+	)
 
 	DECLARE @var_Table TABLE(
 	    ApplicationId INT,
@@ -25,30 +43,48 @@ BEGIN
 		ClaimAmount MONEY,
 		DeductAmount MONEY,
 		TransactionType VARCHAR(50),	
+		Selected BIT,
 		RowNum INT
 	)
 
 	BEGIN TRY
-		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
+		SET @prSortColumn = CASE WHEN @prSortColumn IS NULL THEN 'Selected DESC, CreatedOn' ELSE @prSortColumn END
 
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery = dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
+		INSERT INTO ##temp_Table
+		SELECT ApplicationId = NULL,
+				ClaimCommId = NULL,        
+				TransactionDetails = ap.Description, 
+				PackageName = NULL, 
+				ap.CreatedOn, 
+				PackageComm = NULL,
+				AgentComm = NULL, 
+				ClaimAmount = CASE WHEN ap.Flow = 'In' THEN ISNULL(ap.Amount,0) ELSE 0 END, 
+				DeductAmount = CASE WHEN ap.Flow = 'Out' THEN ISNULL(ap.Amount,0) ELSE 0 END,
+				TransactionType = CASE WHEN ap.Flow = 'Out' Then 'Charges' ELSE 'Incentives' END,
+				Selected = CAST (1 AS BIT)
+		FROM AgentPocket ap
+		WHERE ap.Agent = @prAgent
+		AND ISNULL(Cancelled, 0) = 0
+		AND ap.WithdrawalId IS NULL
+		UNION ALL
 		SELECT 
 			ca.ApplicationId,
 			cc.ClaimCommId,
-			ca.CustomerName AS [TransactionDetails],
+			TransactionDetails = ca.CustomerName,
 			pp.PackageName,
-			ca.CreatedOn,
-			cc.PackageCommOnDate,
-			cc.AgentCommOnDate,
+			ca.CreatedOn ,
+			PackageComm = cc.PackageCommOnDate,
+			AgentComm = cc.AgentCommOnDate,
 			ClaimAmount =  CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ,
-			DeductAmount = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE NULL END,
+			DeductAmount = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY) ELSE 0 END,
 			TransactionType = CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 'Clawback'
 								   WHEN cc.IsOverride = 1  THEN 'Override' 
 								   ELSE 'Own Sales' 
-						      END
-		INTO ##temp_Table
+						      END,
+			Selected = CAST(CASE WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1 ELSE 0 END AS BIT) -- Make this record selected by default
 		FROM ClaimableCommission cc
 		INNER JOIN Agent a ON cc.AgentId = a.AgentId
 		INNER JOIN CustomerApplication ca ON ca.ApplicationId = cc.ApplicationId
@@ -74,50 +110,33 @@ BEGIN
 					 ELSE 0
 				END
 
-		PRINT @vSelectQuery
+		print @vSelectQuery
 
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table
 		EXEC SP_ExecuteSQL @vSelectQuery
 
-		SELECT *
-		FROM
-		(
-		    -- SALES COMMISSION INCLUDING OVERRIDING
-			SELECT ClaimCommId,
-				   TransactionDetails,
-				   PackageName,
-				   [Date] = FORMAT(CreatedOn, 'MM/dd/yyyy'),
-				   PackageComm,
-				   AgentComm,
-				   ClaimAmount,
-				   DeductAmount,
-				   TransactionType,
-				   Selected = CAST(CASE WHEN TransactionType = 'Clawback' THEN 1 ELSE 0 END AS BIT) -- Make this record selected by default
-			FROM  @var_Table
-			UNION ALL
-			-- AGENT CHARGES
-			SELECT ClaimCommId = NULL,        
-				   TransactionDetails = ac.Description, 
-				   PackageName = NULL, 
-				   [Date] = FORMAT(ac.CreatedOn, 'MM/dd/yyyy'), 
-				   PackageComm = NULL,
-				   AgentComm = NULL, 
-				   ClaimAmount = NULL, 
-				   DeductAmount = ac.Amount,
-				   TransactionType = 'Purchase',
-				   Selected = CAST (1 AS BIT)
-			FROM AgentCharge ac
-			WHERE ac.Agent = @prAgent
-			AND ISNULL(Cancelled, 0) = 0
-			AND ac.WithdrawalId IS NULL
-		) a 
-		ORDER BY [Date]
+		SELECT ClaimCommId,
+				ApplicationId,
+				TransactionDetails,
+				PackageName,
+				TransactionDate = FORMAT(CreatedOn, 'MM/dd/yyyy'),
+				PackageComm,
+				AgentComm,
+				ClaimAmount = ISNULL(ClaimAmount,0),
+				DeductAmount = ISNULL(DeductAmount,0),
+				TransactionType,
+				Selected
+		FROM @var_Table
 
 		SELECT @oTotalRecord = COUNT(ClaimCommId) FROM ##temp_Table
+		SELECT @oTotalDeduction = SUM(ROUND(DeductAmount, 2, 1)) FROM ##temp_Table 
+	    SELECT @oTotalIncentives = SUM(ROUND(ClaimAmount, 2, 1)) FROM ##temp_Table WHERE TransactionType = 'Incentives'
+
+		IF  @oTotalIncentives IS NULL 
+			SET @oTotalIncentives = 0
 
 		DROP TABLE  ##temp_Table
-
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

@@ -47,15 +47,15 @@
                         </form>
                     </div>
                 </div>
-                <div class="text-center" *ngIf="completed">
-                    <div class="widget-head-color-box navy-bg p-lg">
+                <div class="text-center widget-head-color-box navy-bg p-lg" *ngIf="completed">
+                    <div class="">
                         <i class="fa fa-thumbs-up big-icon"></i>
                         <h1>Registration Completed</h1>
                         <p class="mrg20T">
                             Thank you for registering to be one of our agents. We will review your submission. An activation code will be send to your email once your submission is verified.
                         </p>
                     </div>
-                    <a [routerLink]='["/"]' class="btn btn-w-m btn-link text-white ">
+                    <a [routerLink]='["/"]' class="btn btn-w-m text-white ">
                         Back To Login
                     </a>
                 </div>

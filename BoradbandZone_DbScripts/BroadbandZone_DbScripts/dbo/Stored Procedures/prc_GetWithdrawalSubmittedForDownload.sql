@@ -15,7 +15,7 @@ BEGIN
 
 		SELECT w.WithdrawalId,			
 				w.Agent,
-				w.Amount,
+				w.WithdrawAmount,
 				w.ReferenceNo,
 				w.CreatedOn,
 				w.Status,

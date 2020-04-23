@@ -314,8 +314,9 @@ namespace BroadbandZone_App.WebApi
             {
                 using (var db = new BroadbandZoneEntities())
                 {
-                    var withdrawalStatuses = Enum.GetValues(typeof(WithdrawalStatus)).Cast<WithdrawalStatus>();   
-                    List<DropdownItem> dropdownItems = withdrawalStatuses.Select(i => new DropdownItem { Key = i.ToString(), Value = i.ToString()}).ToList();
+                    var withdrawalStatuses = Enum.GetValues(typeof(WithdrawalStatus)).Cast<WithdrawalStatus>();
+                    List<DropdownItem> dropdownItems = withdrawalStatuses.Where(s=> s != WithdrawalStatus.Pending && s != WithdrawalStatus.Terminated)
+                                                                         .Select(i => new DropdownItem { Key = i.ToString(), Value = i.ToString()}).ToList();
                     return Ok(dropdownItems);
                 }
             }
@@ -327,7 +328,26 @@ namespace BroadbandZone_App.WebApi
         }
 
         
+        [Route("api/Dropdown/GetAgentPocketFlow")]
+        public IHttpActionResult GetAgentPocketFlow()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
 
+                    List<DropdownItem> dropdownItems = new List<DropdownItem>();
+                    dropdownItems.Add(new DropdownItem { Key = "In", Value = "In (Incentives)" });
+                    dropdownItems.Add(new DropdownItem { Key = "Out", Value = "Out (Charges)" });
+                    return Ok(dropdownItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
     }
 
 

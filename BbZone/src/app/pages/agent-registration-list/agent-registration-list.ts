@@ -10,7 +10,6 @@ import { ApiController } from 'src/app/enums/apiController';
 import { AgentRegistrationColumns } from 'src/app/metadata/agentFields';
 import { ApprovalMode } from "src/app/enums/RecordMode";
 
-
 @Component({
     selector: 'agent-registration-list',
     templateUrl: './agent-registration-list.html'
@@ -43,24 +42,6 @@ export class AgentRegistrationList extends ListEvent {
 
         return columnMappings;
     }
- 
-    //getSearchFeldsMapping(): FormDataMapping[] {
-    //    let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
-    //        o.displayText,
-    //        o.hidden,
-    //        !o.dataFieldControl ? null :
-    //            new DataFieldControl(
-    //                o.dataFieldControl.controlName,
-    //                ControlType[o.dataFieldControl.controlType],
-    //                o.dataFieldControl.required,
-    //                o.dataFieldControl.maxLength,
-    //                o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null,
-    //                o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null
-    //            )));
-
-    //    return columnMappings;
-    //}
-
 
     clearSearchParam() {
         this.searchParams = new ApprovalParams(ApprovalMode.All, null);

@@ -64,7 +64,7 @@ import { SubmissionStatusCount } from './components/dashboard/submission-status-
 import { MonthlyApplicationDashboard } from './components/dashboard/monthly-applications/monthly-applications';
 import { CreateWithdrawal } from './pages/create-withdrawal/create-withdrawal';
 import { EditWithdrawal } from './pages/edit-withdrawal/edit-withdrawal';
-import { AgentChanges } from './pages/agent-charges/agent-charges';
+import { AgentPocket } from './pages/agent-pocket/agent-pocket';
 import { CustomerFinder } from './components/customer-finder/customer-finder';
 import { ManageClawback } from './pages/manage-clawback/manage-clawback';
 import { UploadIncentives } from './pages/upload-incentives/upload-incentives';
@@ -78,6 +78,7 @@ import { ViewCompletedApp } from './pages/view-complete-app/view-complete-app';
 import { EqualValidator } from './directives/equal-validator.directive';
 import { MandatoryValidator } from './directives/mandatory.directive';
 import { EditPassword } from './pages/edit-password/edit-password';
+import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-password';
 
 @NgModule({
   declarations: [
@@ -128,7 +129,7 @@ import { EditPassword } from './pages/edit-password/edit-password';
         SubmissionStatusCount,
         CreateWithdrawal,
         EditWithdrawal,
-        AgentChanges,
+        AgentPocket,
         CustomerFinder,
         ManageClawback,
         UploadIncentives,
@@ -141,7 +142,8 @@ import { EditPassword } from './pages/edit-password/edit-password';
         ViewCompletedApp,
         EditPassword,
         EqualValidator,
-        MandatoryValidator
+        MandatoryValidator,
+        ResetAgentPassword
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -178,7 +180,7 @@ import { EditPassword } from './pages/edit-password/edit-password';
             { path: 'view-announcement', component: ViewAnnouncement },
             { path: 'create-withdrawal', component: CreateWithdrawal },
             { path: 'edit-withdrawal/:id', component: EditWithdrawal },
-            { path: 'agent-charges', component: AgentChanges, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'agent-pocket', component: AgentPocket, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'manage-clawback', component: ManageClawback, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'upload-incentives', component: UploadIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'view-incentives', component: ViewIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
@@ -186,7 +188,8 @@ import { EditPassword } from './pages/edit-password/edit-password';
             { path: 'manage-login-banner', component: ManageLoginBanner, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
             { path: 'agent-view/:id', component: AgentView, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] } },
             { path: 'view-complete-app', component: ViewCompletedApp },
-            { path: 'edit-password', component: EditPassword }
+            { path: 'edit-password', component: EditPassword },
+            { path: 'reset-agent-password', component: ResetAgentPassword }
     ])
   ],
   providers: [

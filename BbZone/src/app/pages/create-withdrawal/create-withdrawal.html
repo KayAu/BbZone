@@ -2,14 +2,14 @@
 <div class="wrapper wrapper-content animated fadeInRight">
     <loading></loading>
     <div class="row">
-        <div class="col-md-6 mrg10T mrg25B">
+        <div class="col-md-8 mrg10T mrg25B">
             <div class="float-left">
                 <div alt="image" class="rounded-circle bg-info float-left rounded-circle-lg">
-                    <i class="fa fa-money font-size-24"></i>
+                    <i class="fa fa-money font-size-18"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{totalSelectedAmount | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R line-height-24">RM {{totalSelectedAmount | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
@@ -18,12 +18,26 @@
                 </div>
             </div>
             <div class="float-left mrg25L">
-                <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
-                    <i class="fa fa-minus-square-o font-size-24" style="padding-left: 3px"></i>
+                <div alt="image" class="rounded-circle bg-success float-left rounded-circle-lg">
+                    <i class="fa fa-thumbs-up font-size-18" style="padding-left: 3px"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R line-height-24 ">RM {{totalIncentives | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-success font-size-11 mrg5R"></i>
+                        <small class="text-muted">Incentives</small>
+                    </div>
+                </div>
+            </div>
+            <div class="float-left mrg25L">
+                <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
+                    <i class="fa fa-minus-square-o font-size-18" style="padding-left: 3px"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-24 mrg10R line-height-24 ">RM {{totalAmountToDeduct | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
@@ -32,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mrg10T mrg25B text-right">
+        <div class="col-md-4 mrg10T mrg25B text-right">
             <label class="text-uppercase font-normal">Claimable Amount</label>
             <div class="mrg0T amt-claimable font-bold" [ngClass]="{'text-success': allowSubmit,'text-danger': !allowSubmit }">RM {{totalClaimableAmount | number:'1.2-2'}}</div>
         </div>
@@ -50,7 +64,7 @@
                                    class="form-control form-control-sm mrg10R "
                                    [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
                                    [(ngModel)]="searchParams.submittedDate"
-                                   (ngModelChange)="reloadData()"
+                                   (ngModelChange)="filterDataByDate();"
                                    placeholder="Submission date"
                                    startKey="startDate"
                                    endKey="endDate" />
@@ -93,7 +107,7 @@
                                 <tbody>
                                     <tr *ngFor="let record of dataSource; let rowNo = index">
                                         <td>
-                                            <div class="checkbox checkbox-primary mrg0A" *ngIf="record.transactionType!='Clawback' && record.transactionType!='Purchase'">
+                                            <div class="checkbox checkbox-primary mrg0A" *ngIf="record.transactionType=='Own Sales' || record.transactionType=='Override'">
                                                 <input id="checkbox{{rowNo}}" type="checkbox" [(ngModel)]="record.selected" (ngModelChange)="itemSelected(record)">
                                                 <label for="checkbox{{rowNo}}" class="pad0L">
                                                 </label>
@@ -105,7 +119,8 @@
                                                 <ng-template #displayBadge>
                                                     <span class="badge" *ngIf="record.transactionType"
                                                           [ngClass]="{'badge-info': record.transactionType == 'Override',
-                                                                  'badge-warning': record.transactionType == 'Purchase',
+                                                                  'badge-warning': record.transactionType == 'Charges',
+                                                                  'badge-blue-alt': record.transactionType == 'Incentives',
                                                                   'badge-success': record.transactionType == 'Own Sales',
                                                                   'badge-danger': record.transactionType == 'Clawback'}">
                                                         {{record.transactionType}}
@@ -125,7 +140,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

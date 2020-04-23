@@ -22,5 +22,6 @@ namespace BroadbandZone_Data
         public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public byte[] PasswordHash { get; set; }
+        public string Email { get; set; }
     }
 }

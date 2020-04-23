@@ -15,18 +15,15 @@ var agentFields_1 = require("../../metadata/agentFields");
 var form_data_mapping_1 = require("../../model/form.data.mapping");
 var dataDisplayType_1 = require("../../enums/dataDisplayType");
 var data_field_control_1 = require("../../model/data.field.control");
-var broadcast_service_1 = require("../../services/broadcast.service");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var router_2 = require("@angular/router");
 var apiController_1 = require("../../enums/apiController");
-var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var AgentRegistration = /** @class */ (function () {
-    function AgentRegistration(loaderService, dataService, formEvent, router, route) {
+    function AgentRegistration(loaderService, dataService, router, route) {
         this.loaderService = loaderService;
         this.dataService = dataService;
-        this.formEvent = formEvent;
         this.router = router;
         this.route = route;
         this.formFields = [];
@@ -45,7 +42,7 @@ var AgentRegistration = /** @class */ (function () {
     };
     AgentRegistration.prototype.submit = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
@@ -57,6 +54,7 @@ var AgentRegistration = /** @class */ (function () {
                 _this.isUpdating = false;
             }
             _this.hasLoginExists = hasExist;
+            _this.setControlsAsUnouched();
         });
     };
     AgentRegistration.prototype.postData = function () {
@@ -76,6 +74,16 @@ var AgentRegistration = /** @class */ (function () {
         }
         return formData;
     };
+    AgentRegistration.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    AgentRegistration.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
         __metadata("design:type", forms_1.NgForm)
@@ -85,7 +93,7 @@ var AgentRegistration = /** @class */ (function () {
             selector: 'agent-registration',
             templateUrl: './agent-registration.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router, router_2.ActivatedRoute])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, router_1.Router, router_2.ActivatedRoute])
     ], AgentRegistration);
     return AgentRegistration;
 }());

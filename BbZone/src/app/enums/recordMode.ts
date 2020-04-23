@@ -14,5 +14,6 @@ export enum ApprovalMode {
 export enum OrderFilter {
     None = 0,
     IncomingMessage = 1,
-    NoCommissionSetup = 2
+    NoCommissionSetup = 2,
+    OddClaim = 3
 }

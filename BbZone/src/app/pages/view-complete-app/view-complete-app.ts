@@ -11,7 +11,8 @@ import { SearchFieldMapping } from 'src/app/model/form.data.mapping';
 import { SearchFieldControl } from 'src/app/model/data.field.control';
 import { ViewCompletedOrderColumns } from 'src/app/metadata/viewCompletedOrderColumns';
 import { SearchCompletedOrderFields } from 'src/app/metadata/SearchCompletedOrderFields';
-
+import { formatDate } from '@angular/common';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'view-complete-app',
@@ -68,6 +69,14 @@ export class ViewCompletedApp extends ListEvent {
     clearSearchParam() {
         this.searchParams = new SearchCompletedOrderParams(null, null, null, null, null, null, null, null);
         this.reloadData();
+    }
+
+    exportRecords() {
+        this.dataService.export(`${ApiController.Download}/CompletedOrders`, this.searchParams).subscribe(data => {
+            let filename = `CompletedOrders_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
+            const file: Blob = new Blob([data], { type: 'application/xlsx' });
+            saveAs(file, filename);
+        });
     }
 }
 

@@ -39,7 +39,7 @@ BEGIN
 
 		SELECT w.WithdrawalId,			
 				w.Agent,
-				w.Amount,
+				w.WithdrawAmount,
 				w.CreatedOn,
 				w.Status,
 				w.CompletedOn,
@@ -71,7 +71,7 @@ BEGIN
 		SELECT 
 			WithdrawalId,			
 			Agent,
-			Amount,
+			Amount = FORMAT(Amount, 'C', 'zh-MY'),
 			SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
 			Status,
 			CompletedOn = FORMAT(CompletedOn, 'MM/dd/yyyy'),
@@ -79,8 +79,8 @@ BEGIN
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(*) FROM ##temp_Table
-		SELECT @oTotalAmountClaimed = SUM(CASE WHEN Status <> 'Terminated' THEN Amount ELSE 0 END) FROM ##temp_Table
-		SELECT @oTotalAmountPayout = SUM(CASE WHEN Status = 'Completed' THEN Amount ELSE 0 END) FROM ##temp_Table
+		SELECT @oTotalAmountClaimed = SUM(CASE WHEN Status <> 'Terminated' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table
+		SELECT @oTotalAmountPayout = SUM(CASE WHEN Status = 'Completed' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table
 		DROP TABLE  ##temp_Table
 
 	END TRY 

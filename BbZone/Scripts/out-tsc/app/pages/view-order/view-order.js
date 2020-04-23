@@ -53,6 +53,7 @@ var ViewOrder = /** @class */ (function (_super) {
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalUnreadMsg = data.totalUnreadMsg;
             _this.totalCommINotConfig = data.totalCommINotConfig;
+            _this.totalOddClaimed = data.totalOddClaimed;
         });
         return _this;
     }

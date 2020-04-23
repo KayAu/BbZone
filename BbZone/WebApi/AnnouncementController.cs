@@ -20,6 +20,34 @@ namespace BroadbandZone_App.WebApi
     public class AnnouncementController : ApiController
     {
         [HttpGet]
+        [Route("api/Announcement/EmailAgents/{id}")]
+        public IHttpActionResult EmailAgents(int id)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var annc = db.Announcements.Where(a => a.AnncId == id).FirstOrDefault();
+
+                    if (annc != null)
+                    {
+                        var agents = db.Agents.Where(a => a.IsActive == true && !string.IsNullOrEmpty(a.Email)).ToList();
+                        foreach (var agent in agents)
+                        {
+                            MailHelper.SendAnnouncementEmail(agent.Email, agent.Fullname, annc);
+                        }
+                    }
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("api/Announcement/GetAnnouncements")]
         public IHttpActionResult GetAnnouncements()
         {

@@ -34,8 +34,6 @@ namespace BroadbandZone_Data
         public virtual DbSet<ProductPackage> ProductPackages { get; set; }
         public virtual DbSet<CustomerDocument> CustomerDocuments { get; set; }
         public virtual DbSet<AnnouncementDocument> AnnouncementDocuments { get; set; }
-        public virtual DbSet<AgentCharge> AgentCharges { get; set; }
-        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<ClaimableCommission> ClaimableCommissions { get; set; }
         public virtual DbSet<Clawback> Clawbacks { get; set; }
         public virtual DbSet<IncentiveReceived> IncentiveReceiveds { get; set; }
@@ -50,6 +48,9 @@ namespace BroadbandZone_Data
         public virtual DbSet<Agent> Agents { get; set; }
         public virtual DbSet<Registration> Registrations { get; set; }
         public virtual DbSet<ApplicationStatu> ApplicationStatus { get; set; }
+        public virtual DbSet<AgentPocket> AgentPockets { get; set; }
+        public virtual DbSet<Withdrawal> Withdrawals { get; set; }
+        public virtual DbSet<WithdrawalItem> WithdrawalItems { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {
@@ -138,7 +139,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetProducts_Result>("GetProducts", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
         }
     
-        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, Nullable<int> prFilterMode, ObjectParameter oTotalRecord, ObjectParameter oTotalUnreadMsg, ObjectParameter oTotalCommINotConfig)
+        public virtual ObjectResult<GetCustomerApplication_Result> GetCustomerApplication(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, Nullable<int> prStatus, string prAgent, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, string prResidentialType, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId, Nullable<int> prFilterMode, ObjectParameter oTotalRecord, ObjectParameter oTotalUnreadMsg, ObjectParameter oTotalCommINotConfig, ObjectParameter oTotalOddClaimed)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -216,7 +217,7 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prFilterMode", prFilterMode) :
                 new ObjectParameter("prFilterMode", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, prFilterModeParameter, oTotalRecord, oTotalUnreadMsg, oTotalCommINotConfig);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCustomerApplication_Result>("GetCustomerApplication", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prActivatedFromParameter, prActivatedToParameter, prResidentialTypeParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter, prFilterModeParameter, oTotalRecord, oTotalUnreadMsg, oTotalCommINotConfig, oTotalOddClaimed);
         }
     
         public virtual ObjectResult<GetDropdownItems_Result> GetDropdownItems(string prFieldName)
@@ -495,7 +496,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmitted_Result>("GetWithdrawalSubmitted", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord, oTotalAmountClaimed, oTotalAmountPayout);
         }
     
-        public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord, ObjectParameter oTotalIncentives, ObjectParameter oTotalDeduction)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -529,7 +530,7 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prSubmittedTo", prSubmittedTo) :
                 new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord, oTotalIncentives, oTotalDeduction);
         }
     
         public virtual ObjectResult<GetWithdrawalItems_Result> GetWithdrawalItems(Nullable<int> prWithdrawalId)
@@ -539,48 +540,6 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prWithdrawalId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalItems_Result>("GetWithdrawalItems", prWithdrawalIdParameter);
-        }
-    
-        public virtual ObjectResult<GetAgentCharges_Result> GetAgentCharges(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
-        {
-            var prCurrentPageParameter = prCurrentPage.HasValue ?
-                new ObjectParameter("prCurrentPage", prCurrentPage) :
-                new ObjectParameter("prCurrentPage", typeof(int));
-    
-            var prPageSizeParameter = prPageSize.HasValue ?
-                new ObjectParameter("prPageSize", prPageSize) :
-                new ObjectParameter("prPageSize", typeof(int));
-    
-            var prSortColumnParameter = prSortColumn != null ?
-                new ObjectParameter("prSortColumn", prSortColumn) :
-                new ObjectParameter("prSortColumn", typeof(string));
-    
-            var prSortInAscParameter = prSortInAsc.HasValue ?
-                new ObjectParameter("prSortInAsc", prSortInAsc) :
-                new ObjectParameter("prSortInAsc", typeof(bool));
-    
-            var prSearchKeywordParameter = prSearchKeyword != null ?
-                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
-                new ObjectParameter("prSearchKeyword", typeof(string));
-    
-            var prRecordStatusParameter = prRecordStatus.HasValue ?
-                new ObjectParameter("prRecordStatus", prRecordStatus) :
-                new ObjectParameter("prRecordStatus", typeof(bool));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentCharges_Result>("GetAgentCharges", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prRecordStatusParameter, oTotalRecord);
-        }
-    
-        public virtual int UpdateAgentCharges(string prAgent, Nullable<int> prWithdrawalId)
-        {
-            var prAgentParameter = prAgent != null ?
-                new ObjectParameter("prAgent", prAgent) :
-                new ObjectParameter("prAgent", typeof(string));
-    
-            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
-                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
-                new ObjectParameter("prWithdrawalId", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAgentCharges", prAgentParameter, prWithdrawalIdParameter);
         }
     
         public virtual ObjectResult<GetPaymentDetails_Result> GetPaymentDetails(Nullable<int> prWithdrawalId)
@@ -643,17 +602,13 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClawback_Result>("GetClawback", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, oTotalRecord);
         }
     
-        public virtual int UpdateClaimableCommission(Nullable<int> prWithdrawalId, string prClaimableItemsId)
+        public virtual int UpdateClaimableCommission(Nullable<int> prWithdrawalId)
         {
             var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
                 new ObjectParameter("prWithdrawalId", prWithdrawalId) :
                 new ObjectParameter("prWithdrawalId", typeof(int));
     
-            var prClaimableItemsIdParameter = prClaimableItemsId != null ?
-                new ObjectParameter("prClaimableItemsId", prClaimableItemsId) :
-                new ObjectParameter("prClaimableItemsId", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClaimableCommission", prWithdrawalIdParameter, prClaimableItemsIdParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClaimableCommission", prWithdrawalIdParameter);
         }
     
         public virtual ObjectResult<GetIncentivesReceived_Result> GetIncentivesReceived(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil, ObjectParameter oTotalRecord)
@@ -1103,6 +1058,141 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prAgentId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAppWithoutCommAssigned_Result>("GetAppWithoutCommAssigned", prAgentIdParameter);
+        }
+    
+        public virtual ObjectResult<GetAgentsForDownload_Result> GetAgentsForDownload()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentsForDownload_Result>("GetAgentsForDownload");
+        }
+    
+        public virtual ObjectResult<GetCompletedCustAppForDownload_Result> GetCompletedCustAppForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prCommStatus, string prViewAgent, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, Nullable<System.DateTime> prPayDateFrom, Nullable<System.DateTime> prPayDateTo, string prKeyword, Nullable<bool> prDocumentCompleted)
+        {
+            var prProductParameter = prProduct.HasValue ?
+                new ObjectParameter("prProduct", prProduct) :
+                new ObjectParameter("prProduct", typeof(int));
+    
+            var prProductCategoryParameter = prProductCategory.HasValue ?
+                new ObjectParameter("prProductCategory", prProductCategory) :
+                new ObjectParameter("prProductCategory", typeof(int));
+    
+            var prProductPackageParameter = prProductPackage.HasValue ?
+                new ObjectParameter("prProductPackage", prProductPackage) :
+                new ObjectParameter("prProductPackage", typeof(int));
+    
+            var prCommStatusParameter = prCommStatus != null ?
+                new ObjectParameter("prCommStatus", prCommStatus) :
+                new ObjectParameter("prCommStatus", typeof(string));
+    
+            var prViewAgentParameter = prViewAgent != null ?
+                new ObjectParameter("prViewAgent", prViewAgent) :
+                new ObjectParameter("prViewAgent", typeof(string));
+    
+            var prActivatedFromParameter = prActivatedFrom.HasValue ?
+                new ObjectParameter("prActivatedFrom", prActivatedFrom) :
+                new ObjectParameter("prActivatedFrom", typeof(System.DateTime));
+    
+            var prActivatedToParameter = prActivatedTo.HasValue ?
+                new ObjectParameter("prActivatedTo", prActivatedTo) :
+                new ObjectParameter("prActivatedTo", typeof(System.DateTime));
+    
+            var prPayDateFromParameter = prPayDateFrom.HasValue ?
+                new ObjectParameter("prPayDateFrom", prPayDateFrom) :
+                new ObjectParameter("prPayDateFrom", typeof(System.DateTime));
+    
+            var prPayDateToParameter = prPayDateTo.HasValue ?
+                new ObjectParameter("prPayDateTo", prPayDateTo) :
+                new ObjectParameter("prPayDateTo", typeof(System.DateTime));
+    
+            var prKeywordParameter = prKeyword != null ?
+                new ObjectParameter("prKeyword", prKeyword) :
+                new ObjectParameter("prKeyword", typeof(string));
+    
+            var prDocumentCompletedParameter = prDocumentCompleted.HasValue ?
+                new ObjectParameter("prDocumentCompleted", prDocumentCompleted) :
+                new ObjectParameter("prDocumentCompleted", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompletedCustAppForDownload_Result>("GetCompletedCustAppForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prCommStatusParameter, prViewAgentParameter, prActivatedFromParameter, prActivatedToParameter, prPayDateFromParameter, prPayDateToParameter, prKeywordParameter, prDocumentCompletedParameter);
+        }
+    
+        public virtual ObjectResult<ResetAgentPassword_Result> ResetAgentPassword(string prAgentId, string prNewPassword, string prUpdatedBy)
+        {
+            var prAgentIdParameter = prAgentId != null ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(string));
+    
+            var prNewPasswordParameter = prNewPassword != null ?
+                new ObjectParameter("prNewPassword", prNewPassword) :
+                new ObjectParameter("prNewPassword", typeof(string));
+    
+            var prUpdatedByParameter = prUpdatedBy != null ?
+                new ObjectParameter("prUpdatedBy", prUpdatedBy) :
+                new ObjectParameter("prUpdatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ResetAgentPassword_Result>("ResetAgentPassword", prAgentIdParameter, prNewPasswordParameter, prUpdatedByParameter);
+        }
+    
+        public virtual int GetAdminEmail(ObjectParameter oEmails)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("GetAdminEmail", oEmails);
+        }
+    
+        public virtual ObjectResult<GetAgentPocket_Result> GetAgentPocket(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, string prFlowType, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            var prFlowTypeParameter = prFlowType != null ?
+                new ObjectParameter("prFlowType", prFlowType) :
+                new ObjectParameter("prFlowType", typeof(string));
+    
+            var prRecordStatusParameter = prRecordStatus.HasValue ?
+                new ObjectParameter("prRecordStatus", prRecordStatus) :
+                new ObjectParameter("prRecordStatus", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentPocket_Result>("GetAgentPocket", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prFlowTypeParameter, prRecordStatusParameter, oTotalRecord);
+        }
+    
+        public virtual int UpdateAgentPocket(string prAgent, Nullable<int> prWithdrawalId)
+        {
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateAgentPocket", prAgentParameter, prWithdrawalIdParameter);
+        }
+    
+        public virtual int TerminateWithdrawal(Nullable<int> prWithdrawalId, string prModifiedBy)
+        {
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            var prModifiedByParameter = prModifiedBy != null ?
+                new ObjectParameter("prModifiedBy", prModifiedBy) :
+                new ObjectParameter("prModifiedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TerminateWithdrawal", prWithdrawalIdParameter, prModifiedByParameter);
         }
     }
 }

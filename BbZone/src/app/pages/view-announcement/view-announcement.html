@@ -34,7 +34,7 @@
                                 <thead>
                                     <tr>
                                         <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                        <th class="cell-width-5">Action</th>
+                                        <th class="cell-width-7">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,7 +45,8 @@
                                             </td>
                                         </ng-container>
                                         <td>
-                                            <a class="btn btn-success btn-sm " [routerLink]='["/edit-announcement/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                            <a class="btn btn-success btn-sm" [routerLink]='["/edit-announcement/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                            <button class="btn btn-info btn-sm mrg5L" (click)="sendEmail(record.anncId)" [disabled]="!record.isActive"><i class="fa fa-envelope-o"></i></button>
                                         </td>
                                     </tr>
                                     <tr *ngIf="dataSource.length === 0">
@@ -58,7 +59,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

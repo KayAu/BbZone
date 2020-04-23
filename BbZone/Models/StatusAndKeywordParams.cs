@@ -17,6 +17,7 @@ namespace BroadbandZone_App.Models
         public string Keyword { get; set; }
     }
 
+
     public class ApprovalAndKeywordParams
     {
         public int ApprovalMode { get; set; }
@@ -73,5 +74,12 @@ namespace BroadbandZone_App.Models
         public int? ProductCategoryId { get; set; }
         public int? ProductPackageId { get; set; }
         public DateRange ReceivedDate { get; set; }
+    }
+
+    public class SearchAgentPocketdParams
+    {
+        public bool? IsActive { get; set; }
+        public string Keyword { get; set; }
+        public string FlowType { get; set; }
     }
 }

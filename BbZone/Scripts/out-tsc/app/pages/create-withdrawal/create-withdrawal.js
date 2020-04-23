@@ -44,17 +44,20 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         _this.isUpdating = false;
         _this.dataRowMapper = [];
         _this.selectedItems = [];
-        _this.deductionItems = [];
+        _this.defaultSelectedItems = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.totalAmountToDeduct = 0;
         _this.totalSelectedAmount = 0;
+        _this.totalIncentives = 0;
         _this.totalClaimableAmount = 0;
         _this.allowSubmit = true;
         _this.oriDataSource = [];
         _this.viewSelectedItems = false;
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountToDeduct = data.totalAmountToDeduct;
-            _this.setDeductionItems();
+            _this.totalIncentives = data.totalIncentives;
+            _this.totalClaimableAmount = (_this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
+            _this.setDefaultSelectedItems();
             _this.setSelectedItems();
         });
         return _this;
@@ -79,15 +82,18 @@ var CreateWithdrawal = /** @class */ (function (_super) {
                 this.selectedItems.splice(index, 1);
         }
         this.totalSelectedAmount = this.selectedItems.map(function (d) { return d.claimAmount; }).reduce(function (a, b) { return a + b; }, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : this.totalSelectedAmount - this.totalAmountToDeduct;
+        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
         this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
     };
     CreateWithdrawal.prototype.submit = function () {
         var _this = this;
-        var claimItems = this.selectedItems.concat(this.deductionItems);
+        var claimItems = this.selectedItems.concat(this.defaultSelectedItems);
         var newRecord = {
-            ClaimCommItemsId: claimItems.map(function (d) { return d.claimCommId; }).join('|'),
-            amount: this.totalClaimableAmount
+            withdrawalItems: claimItems,
+            withdrawAmount: this.totalClaimableAmount,
+            claimed: this.totalSelectedAmount,
+            incentives: this.totalIncentives,
+            deduction: this.totalAmountToDeduct
         };
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
             _this.isUpdating = false;
@@ -112,16 +118,21 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             this.dataSource = this.oriDataSource;
         }
     };
+    CreateWithdrawal.prototype.filterDataByDate = function () {
+        if (!this.searchParams.submittedDate.startDate || !this.searchParams.submittedDate.endDate)
+            return;
+        this.reloadData();
+    };
     CreateWithdrawal.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
         this.reloadData();
     };
-    CreateWithdrawal.prototype.setDeductionItems = function () {
+    CreateWithdrawal.prototype.setDefaultSelectedItems = function () {
         var _this = this;
-        if (this.deductionItems.length === 0) {
-            var deductItems = this.dataSource.filter(function (i) { return i.selected === true; });
-            deductItems.forEach(function (item, i, self) {
-                _this.deductionItems.push(item);
+        if (this.defaultSelectedItems.length === 0) {
+            var defaultItems = this.dataSource.filter(function (i) { return i.selected === true; });
+            defaultItems.forEach(function (item, i, self) {
+                _this.defaultSelectedItems.push(item);
             });
         }
     };

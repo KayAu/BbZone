@@ -90,12 +90,6 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-        [HttpPost]
-        // POST api/<controller>
-        public void Post([FromBody]Agent value)
-        {
-        }
-
         // PUT api/<controller>/5
         [HttpPut]
         public IHttpActionResult Put(int id, [FromBody]Agent editedRecord)
@@ -120,5 +114,7 @@ namespace BroadbandZone_App.WebApi
                 return Content(HttpStatusCode.BadRequest, ex.Message);
             }
         }
+
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿
-CREATE PROCEDURE [dbo].[prc_UpdateAgentCharges]
+CREATE PROCEDURE [dbo].[prc_UpdateAgentPocket]
 	@prAgent VARCHAR(25),
 	@prWithdrawalId INT
 AS
@@ -8,12 +8,12 @@ BEGIN
 
 	BEGIN TRY
 
-		UPDATE ac
-		SET ac.WithdrawalId = @prWithdrawalId
-		FROM AgentCharge ac
-		WHERE ac.Agent = @prAgent
+		UPDATE AgentPocket
+		SET WithdrawalId = @prWithdrawalId
+		FROM AgentPocket
+		WHERE Agent = @prAgent
 		AND ISNULL(Cancelled, 0) = 0
-		AND ac.WithdrawalId IS NULL
+		AND WithdrawalId IS NULL
 
 	END TRY 
 	BEGIN CATCH

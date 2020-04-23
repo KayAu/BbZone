@@ -43,11 +43,9 @@ var EditOrderFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
-                "controlType": "select",
-                "required": true,
+                "controlType": "label",
+                "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetAgents",
-                "dataChangedEvent": "checkCommissionSettings"
             }
         },
         {

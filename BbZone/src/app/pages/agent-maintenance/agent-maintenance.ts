@@ -8,7 +8,8 @@ import { ListEvent } from 'src/app/interfaces/listEvent';
 import { StatusAndKeywordParams, ApprovalParams } from '../../model/search-params';
 import { ApiController } from 'src/app/enums/apiController';
 import { AgentMaintenanceColumns } from 'src/app/metadata/agentFields';
-
+import { formatDate } from '@angular/common';
+import { saveAs } from 'file-saver';
 
 @Component({
     selector: 'agent-maintenance',
@@ -20,7 +21,7 @@ export class AgentMaintenance extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     displayType = DataDisplayType;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService) {
         super(loaderService, dataService, '', false);
     }
 
@@ -29,7 +30,6 @@ export class AgentMaintenance extends ListEvent {
         this.searchParams = new StatusAndKeywordParams(null, null);
         this.keyField = this.dataRowMapper.find(d => d.keyField === true).fieldName;
         this.controllerName = ApiController.Agent;
-        //this.loadDropdown();
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {
@@ -45,6 +45,14 @@ export class AgentMaintenance extends ListEvent {
     clearSearchParam() {
         this.searchParams = new StatusAndKeywordParams(null, null);
         this.reloadData();
+    }
+
+    exportRecords() {
+        this.dataService.export(`${ApiController.Download}/Agent`, this.searchParams).subscribe(data => {
+            let filename = `Agents_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
+            const file: Blob = new Blob([data], { type: 'application/xlsx' });
+            saveAs(file, filename);
+        });
     }
 }
 

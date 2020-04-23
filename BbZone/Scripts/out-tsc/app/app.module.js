@@ -72,7 +72,7 @@ var submission_status_count_1 = require("./components/dashboard/submission-statu
 var monthly_applications_1 = require("./components/dashboard/monthly-applications/monthly-applications");
 var create_withdrawal_1 = require("./pages/create-withdrawal/create-withdrawal");
 var edit_withdrawal_1 = require("./pages/edit-withdrawal/edit-withdrawal");
-var agent_charges_1 = require("./pages/agent-charges/agent-charges");
+var agent_pocket_1 = require("./pages/agent-pocket/agent-pocket");
 var customer_finder_1 = require("./components/customer-finder/customer-finder");
 var manage_clawback_1 = require("./pages/manage-clawback/manage-clawback");
 var upload_incentives_1 = require("./pages/upload-incentives/upload-incentives");
@@ -86,6 +86,7 @@ var view_complete_app_1 = require("./pages/view-complete-app/view-complete-app")
 var equal_validator_directive_1 = require("./directives/equal-validator.directive");
 var mandatory_directive_1 = require("./directives/mandatory.directive");
 var edit_password_1 = require("./pages/edit-password/edit-password");
+var reset_agent_password_1 = require("./pages/reset-agent-password/reset-agent-password");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -139,7 +140,7 @@ var AppModule = /** @class */ (function () {
                 submission_status_count_1.SubmissionStatusCount,
                 create_withdrawal_1.CreateWithdrawal,
                 edit_withdrawal_1.EditWithdrawal,
-                agent_charges_1.AgentChanges,
+                agent_pocket_1.AgentPocket,
                 customer_finder_1.CustomerFinder,
                 manage_clawback_1.ManageClawback,
                 upload_incentives_1.UploadIncentives,
@@ -152,7 +153,8 @@ var AppModule = /** @class */ (function () {
                 view_complete_app_1.ViewCompletedApp,
                 edit_password_1.EditPassword,
                 equal_validator_directive_1.EqualValidator,
-                mandatory_directive_1.MandatoryValidator
+                mandatory_directive_1.MandatoryValidator,
+                reset_agent_password_1.ResetAgentPassword
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -189,7 +191,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
-                    { path: 'agent-charges', component: agent_charges_1.AgentChanges, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'agent-pocket', component: agent_pocket_1.AgentPocket, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'manage-clawback', component: manage_clawback_1.ManageClawback, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'upload-incentives', component: upload_incentives_1.UploadIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
@@ -197,7 +199,8 @@ var AppModule = /** @class */ (function () {
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'agent-view/:id', component: agent_view_1.AgentView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-complete-app', component: view_complete_app_1.ViewCompletedApp },
-                    { path: 'edit-password', component: edit_password_1.EditPassword }
+                    { path: 'edit-password', component: edit_password_1.EditPassword },
+                    { path: 'reset-agent-password', component: reset_agent_password_1.ResetAgentPassword }
                 ])
             ],
             providers: [

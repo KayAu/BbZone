@@ -94,6 +94,7 @@ namespace BroadbandZone_App.WebApi
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
                     ObjectParameter totalUnreadMsg = new ObjectParameter("oTotalUnreadMsg", typeof(int));
                     ObjectParameter totalCommINotConfig = new ObjectParameter("oTotalCommINotConfig", typeof(int));
+                    ObjectParameter totalOddClaimed = new ObjectParameter("oTotalOddClaimed", typeof(int));
 
                     var results = (new BroadbandZoneEntities()).GetCustomerApplication(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.ProductId,
@@ -113,13 +114,15 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.FilterByMode,
                                                                                 totalRecord,
                                                                                 totalUnreadMsg,
-                                                                                totalCommINotConfig).ToList();
+                                                                                totalCommINotConfig,
+                                                                                totalOddClaimed).ToList();
                     return Ok(new 
                     {
                         DisplayData = results,
                         TotalRecords = Convert.ToInt32(totalRecord.Value),
                         TotalUnreadMsg = Convert.ToInt32(totalUnreadMsg.Value),
                         TotalCommINotConfig = Convert.ToInt32(totalCommINotConfig.Value),
+                        TotalOddClaimed = Convert.ToInt32(totalOddClaimed.Value)
                     });
                 }
 
@@ -179,9 +182,12 @@ namespace BroadbandZone_App.WebApi
                     db.CustomerApplications.Add(newRecord);
                     db.SaveChanges();
                 }
-
+                
                 // save uploaded file details to database
                 SaveUploadedFilePath(result.FileData, newRecord.ApplicationId);
+
+                // send email notification to admin
+                MailHelper.SendNewApplicationEmail(newRecord);
 
                 return Ok();
             }

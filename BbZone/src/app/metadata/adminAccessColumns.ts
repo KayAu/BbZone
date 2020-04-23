@@ -27,6 +27,19 @@ public static fields = [
         }
     },
     {
+        "fieldName": "email",
+        "headerText": "Email",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": "",
+        "dataFieldControl": {
+            "controlName": "email",
+            "controlType": "textbox",
+            "required": true,
+            "maxLength": 150
+        }
+    },
+    {
         "fieldName": "userLogin",
         "headerText": "User Login",
         "displayType": "text",

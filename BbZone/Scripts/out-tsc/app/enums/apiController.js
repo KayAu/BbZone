@@ -13,7 +13,7 @@ var ApiController;
     ApiController["AdminUser"] = "AdminUser";
     ApiController["Agent"] = "Agent";
     ApiController["User"] = "User";
-    ApiController["AgentCharges"] = "AgentCharges";
+    ApiController["AgentPocket"] = "AgentPocket";
     ApiController["Commission"] = "Commission";
     ApiController["Dashboard"] = "Dashboard";
     ApiController["Download"] = "Download";
@@ -25,5 +25,6 @@ var ApiController;
     ApiController["Incentives"] = "Incentives";
     ApiController["IncentivesUpload"] = "IncentivesUpload";
     ApiController["LoginBanner"] = "LoginBanner";
+    ApiController["Password"] = "Password";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map

@@ -19,10 +19,11 @@ export class CreateWithdrawal extends ListEvent {
     isUpdating: boolean = false;
     dataRowMapper: TablerowDataMapping[] = [];
     selectedItems: any[] = []; 
-    deductionItems: any[] = []; 
+    defaultSelectedItems: any[] = []; 
     displayType = DataDisplayType;
     totalAmountToDeduct: any = 0;
     totalSelectedAmount: any = 0;
+    totalIncentives: any = 0;
     totalClaimableAmount: any = 0;
     allowSubmit: boolean = true;
     oriDataSource: any[] = [];
@@ -32,7 +33,9 @@ export class CreateWithdrawal extends ListEvent {
         super(loaderService, dataService, '', false);
         this.dataSourceSubject.asObservable().subscribe((data: any)  => {
             this.totalAmountToDeduct = data.totalAmountToDeduct;
-            this.setDeductionItems();
+            this.totalIncentives = data.totalIncentives;
+            this.totalClaimableAmount = (this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
+            this.setDefaultSelectedItems();
             this.setSelectedItems();
         });
     }
@@ -65,15 +68,18 @@ export class CreateWithdrawal extends ListEvent {
         }
 
         this.totalSelectedAmount = this.selectedItems.map(d => d.claimAmount).reduce((a, b) => a + b, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : this.totalSelectedAmount - this.totalAmountToDeduct;
+        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
         this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
     }
 
     submit() {
-        let claimItems = this.selectedItems.concat(this.deductionItems);
+        let claimItems = this.selectedItems.concat(this.defaultSelectedItems);
         let newRecord = {
-            ClaimCommItemsId: claimItems.map(d => d.claimCommId).join('|'),
-            amount: this.totalClaimableAmount
+            withdrawalItems: claimItems,
+            withdrawAmount: this.totalClaimableAmount,
+            claimed: this.totalSelectedAmount,
+            incentives: this.totalIncentives,
+            deduction: this.totalAmountToDeduct
         }
 
         this.dataService.postForm(ApiController.WithdrawalSubmit, newRecord).subscribe(data => {
@@ -101,16 +107,21 @@ export class CreateWithdrawal extends ListEvent {
         }
     }
 
+    filterDataByDate() {
+        if (!this.searchParams.submittedDate.startDate || !this.searchParams.submittedDate.endDate ) return;
+        this.reloadData();
+    }
+
     clearSearchParam() {
         this.searchParams = new SearchWithdrawalToSubmitParams(null, null);
         this.reloadData();
     }
 
-    setDeductionItems() {
-        if (this.deductionItems.length === 0) {
-            let deductItems = this.dataSource.filter(i => i.selected === true);
-            deductItems.forEach((item, i, self) => {
-                this.deductionItems.push(item);
+    setDefaultSelectedItems() {
+        if (this.defaultSelectedItems.length === 0) {
+            let defaultItems = this.dataSource.filter(i => i.selected === true);
+            defaultItems.forEach((item, i, self) => {
+                this.defaultSelectedItems.push(item);
             });
         }
     }

@@ -17,15 +17,18 @@ namespace BroadbandZone_Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Withdrawal()
         {
-            this.AgentCharges = new HashSet<AgentCharge>();
+            this.AgentPockets = new HashSet<AgentPocket>();
             this.ClaimableCommissions = new HashSet<ClaimableCommission>();
             this.ClaimableCommissions1 = new HashSet<ClaimableCommission>();
+            this.WithdrawalItems = new HashSet<WithdrawalItem>();
         }
     
         public int WithdrawalId { get; set; }
-        public string ClaimCommItemsId { get; set; }
         public string Agent { get; set; }
-        public Nullable<decimal> Amount { get; set; }
+        public Nullable<decimal> WithdrawAmount { get; set; }
+        public Nullable<decimal> Claimed { get; set; }
+        public Nullable<decimal> Incentives { get; set; }
+        public Nullable<decimal> Deduction { get; set; }
         public string ReferenceNo { get; set; }
         public string Status { get; set; }
         public string Remarks { get; set; }
@@ -37,10 +40,12 @@ namespace BroadbandZone_Data
         public string ModifiedBy { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AgentCharge> AgentCharges { get; set; }
+        public virtual ICollection<AgentPocket> AgentPockets { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClaimableCommission> ClaimableCommissions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ClaimableCommission> ClaimableCommissions1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WithdrawalItem> WithdrawalItems { get; set; }
     }
 }

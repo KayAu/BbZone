@@ -56,21 +56,6 @@ var AgentRegistrationList = /** @class */ (function (_super) {
         var columnMappings = agentFields_1.AgentRegistrationColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
         return columnMappings;
     };
-    //getSearchFeldsMapping(): FormDataMapping[] {
-    //    let columnMappings = SearchOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
-    //        o.displayText,
-    //        o.hidden,
-    //        !o.dataFieldControl ? null :
-    //            new DataFieldControl(
-    //                o.dataFieldControl.controlName,
-    //                ControlType[o.dataFieldControl.controlType],
-    //                o.dataFieldControl.required,
-    //                o.dataFieldControl.maxLength,
-    //                o.dataFieldControl["datasourceUrl"] !== undefined ? o.dataFieldControl["datasourceUrl"] : null,
-    //                o.dataFieldControl.cascadeTo !== undefined ? o.dataFieldControl.cascadeTo : null
-    //            )));
-    //    return columnMappings;
-    //}
     AgentRegistrationList.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.ApprovalParams(RecordMode_1.ApprovalMode.All, null);
         this.reloadData();

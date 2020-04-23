@@ -5,12 +5,11 @@ import { DataService } from 'src/app/services/data.service';
 import { BroadcastService } from 'src/app/services/broadcast.service';
 import { DataDisplayType, ControlType } from 'src/app/enums/dataDisplayType';
 import { ListEvent } from 'src/app/interfaces/listEvent';
-import { SearchOrderParams } from '../../model/search-params';
 import { ApiController } from 'src/app/enums/apiController';
 import { FormDataMapping } from 'src/app/model/form.data.mapping';
-import { DataFieldControl } from 'src/app/model/data.field.control';
 import { ViewAnnouncementColumns } from 'src/app/metadata/announcementFields';
 import { StatusAndKeywordParams } from 'src/app/model/search-params';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'view-announcement',
@@ -24,7 +23,7 @@ export class ViewAnnouncement extends ListEvent {
     searchParams = new StatusAndKeywordParams(null, null);
     keyField: string;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private toastr: ToastrService) {
         super(loaderService, dataService, "", false);
     }
 
@@ -47,6 +46,12 @@ export class ViewAnnouncement extends ListEvent {
     clearFilter() {
         this.searchParams = new StatusAndKeywordParams(null, null);
         this.reloadData();
+    }
+
+    sendEmail(anncId: number) {
+        this.dataService.get(`${ApiController.Announcement}/EmailAgents/${anncId}`).subscribe(data => {
+            this.toastr.success('The emails is broadcasted successfully', 'Annoucement email sent', { positionClass: 'toast-bottom-full-width' });
+        });
     }
 }
 

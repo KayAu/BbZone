@@ -26,10 +26,13 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
-                    var results = (new BroadbandZoneEntities()).GetAgentRegistration(currentPage, pageSize, sortColumn, sortInAsc,
-                                                                                filterBy.Keyword, 
-                                                                                filterBy.ApprovalMode,
-                                                                                totalRecord).ToList();
+                    var results = (new BroadbandZoneEntities()).GetAgentRegistration(currentPage, 
+                                                                                    pageSize, 
+                                                                                    sortColumn, 
+                                                                                    sortInAsc,
+                                                                                    filterBy.Keyword, 
+                                                                                    filterBy.ApprovalMode,
+                                                                                    totalRecord).ToList();
                     return Ok(new Gridview<GetAgentRegistration_Result>()
                     {
                         DisplayData = results,
@@ -88,6 +91,9 @@ namespace BroadbandZone_App.WebApi
 
                 // save uploaded file details to database
                 SaveUploadedFilePath(result.FileData, newRecord.RegId);
+
+                // send email notification to admin
+                MailHelper.SendNewRegistrationEmail(newRecord);
 
                 return Ok();
             }

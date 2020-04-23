@@ -35,6 +35,8 @@ var form_data_mapping_1 = require("src/app/model/form.data.mapping");
 var data_field_control_1 = require("src/app/model/data.field.control");
 var viewCompletedOrderColumns_1 = require("src/app/metadata/viewCompletedOrderColumns");
 var SearchCompletedOrderFields_1 = require("src/app/metadata/SearchCompletedOrderFields");
+var common_1 = require("@angular/common");
+var file_saver_1 = require("file-saver");
 var ViewCompletedApp = /** @class */ (function (_super) {
     __extends(ViewCompletedApp, _super);
     function ViewCompletedApp(loaderService, dataService, formEvent) {
@@ -66,6 +68,13 @@ var ViewCompletedApp = /** @class */ (function (_super) {
     ViewCompletedApp.prototype.clearSearchParam = function () {
         this.searchParams = new search_params_1.SearchCompletedOrderParams(null, null, null, null, null, null, null, null);
         this.reloadData();
+    };
+    ViewCompletedApp.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.Download + "/CompletedOrders", this.searchParams).subscribe(function (data) {
+            var filename = "CompletedOrders_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
     };
     ViewCompletedApp = __decorate([
         core_1.Component({
