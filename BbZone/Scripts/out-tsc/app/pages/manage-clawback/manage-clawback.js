@@ -32,12 +32,14 @@ var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var apiController_1 = require("../../enums/apiController");
 var search_params_1 = require("../../model/search-params");
+var authentication_1 = require("src/app/services/authentication");
 var ManageClawback = /** @class */ (function (_super) {
     __extends(ManageClawback, _super);
-    function ManageClawback(loaderService, dataService) {
+    function ManageClawback(loaderService, dataService, authenticationService) {
         var _this = _super.call(this, loaderService, dataService, 'clawbackId') || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
+        _this.authenticationService = authenticationService;
         _this.dataRowMapper = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
@@ -48,7 +50,8 @@ var ManageClawback = /** @class */ (function (_super) {
         this.formName = "tableForm";
         this.controllerName = apiController_1.ApiController.Clawback;
         this.dataRowMapper = this.getTablerowDataMapping();
-        this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
+        this.searchParams = new search_params_1.SearchClawbackParams(null, null);
+        this.currentUser = this.authenticationService.currentUserValue;
         this.initDataRecord(this.dataRowMapper);
     };
     ManageClawback.prototype.getTablerowDataMapping = function () {
@@ -85,7 +88,7 @@ var ManageClawback = /** @class */ (function (_super) {
             selector: 'manage-clawback',
             templateUrl: './manage-clawback.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, authentication_1.AuthenticationService])
     ], ManageClawback);
     return ManageClawback;
 }(ListDataCrud_1.ListDataCrud));

@@ -23,6 +23,7 @@ namespace BroadbandZone_Data
         public bool AllowEdit { get; set; }
         public string Status { get; set; }
         public bool CommIsConfigured { get; set; }
+        public string AgentEmail { get; set; }
     }
 
     public partial class AnnouncementDocument

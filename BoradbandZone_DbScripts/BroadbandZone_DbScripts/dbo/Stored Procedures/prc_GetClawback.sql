@@ -4,6 +4,9 @@
 	@prSortColumn VARCHAR(50),
 	@prSortInAsc BIT,
 	@prSearchKeyword VARCHAR(150) = '',
+	@prIsDeducted BIT,
+	@prAgentId INT,
+	@prIsAdmin BIT,
 	@oTotalRecord INT OUTPUT
 
 AS
@@ -17,7 +20,11 @@ BEGIN
 		CustomerName NVARCHAR(50) NOT NULL,
 		OrderNo VARCHAR(25)  NULL,
 		Agent NVARCHAR(50) NOT NULL,
+		TransactionType  NVARCHAR(25) NOT NULL,
 		Remarks VARCHAR(200) NOT NULL,
+		DeductAmount MONEY,
+		IsDeducted BIT,
+		DeductedOn SMALLDATETIME NULL,
 		CreatedOn SMALLDATETIME NOT NULL,
 		CreatedBy VARCHAR(50) NOT NULL,
 		Editable BIT NULL,
@@ -36,21 +43,36 @@ BEGIN
 					   ca.ApplicationId,
 					   ca.CustomerName,
 					   ca.OrderNo,
-					   ca.Agent,
+					   a.UserLogin,
+					   TransactionType = CASE WHEN cc.IsOverride = 1  THEN 'Override' ELSE 'Own Sales' END,
 					   c.Remarks,
+					   wi.DeductAmount,
+					   IsDeducted = CASE WHEN NOT wi.WithdrawalItemId IS NULL THEN 1 ELSE 0 END,
+					   DeductedOn = wi.TransactionDate,
 					   c.CreatedOn,
 					   c.CreatedBy,
 					   Editable = 1 -- CASE WHEN NOT wi.WithdrawalId IS NULL THEN 1 ELSE 0 END
 		INTO ##temp_Table
 		FROM Clawback c
 		INNER JOIN ClaimableCommission cc ON cc.ApplicationId = c.ApplicationId
+		INNER JOIN Agent a ON cc.AgentId = a.AgentId
 		INNER JOIN CustomerApplication ca ON c.ApplicationId = ca.ApplicationId
-		WHERE 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
-					   WHEN ca.Agent LIKE '%' + @prSearchKeyword + '%' OR ca.CustomerName LIKE '%' + @prSearchKeyword + '%' THEN 1
-					   WHEN ca.OrderNo LIKE '%' + @prSearchKeyword + '%' THEN 1
+		LEFT JOIN WithdrawalItems wi ON cc.ClaimCommId = wi.ClaimCommId AND wi.TransactionType = 'Clawback'
+		WHERE 1 = CASE WHEN @prIsAdmin = 1 THEN 1
+					   WHEN @prIsAdmin = 0 AND cc.AgentId = @prAgentId THEN 1
 					   ELSE 0
 				  END
-
+		AND 1 = CASE WHEN @prIsDeducted IS NULL THEN 1
+					 WHEN @prIsDeducted = 1 AND NOT wi.WithdrawalItemId IS NULL  AND wi.TransactionType = 'Clawback' THEN 1
+					 WHEN @prIsDeducted = 0 AND wi.WithdrawalItemId IS NULL THEN 1
+					 ELSE 0
+				END
+		AND 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
+					WHEN ca.Agent LIKE '%' + @prSearchKeyword + '%' OR ca.CustomerName LIKE '%' + @prSearchKeyword + '%' THEN 1
+					WHEN ca.OrderNo LIKE '%' + @prSearchKeyword + '%' THEN 1
+					ELSE 0
+				END
+         
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table
 		EXEC SP_ExecuteSQL @vSelectQuery
@@ -62,7 +84,11 @@ BEGIN
 			    CustomerName,
 				OrderNo,
 				Agent,
+				TransactionType,
 				Remarks,
+				DeductAmount = FORMAT(DeductAmount, 'C', 'zh-MY'),
+				IsDeducted,
+				DeductedOn = FORMAT(DeductedOn, 'MM/dd/yyyy') ,
 				CreatedOn,
 				CreatedBy,
 				Editable

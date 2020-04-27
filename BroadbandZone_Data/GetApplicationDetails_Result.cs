@@ -50,5 +50,6 @@ namespace BroadbandZone_Data
         public Nullable<bool> AllowEdit { get; set; }
         public string Status { get; set; }
         public Nullable<bool> CommIsConfigured { get; set; }
+        public string AgentEmail { get; set; }
     }
 }

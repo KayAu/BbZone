@@ -22,5 +22,9 @@ namespace BroadbandZone_Data
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }
         public int ApplicationId { get; set; }
+        public string DeductAmount { get; set; }
+        public Nullable<bool> IsDeducted { get; set; }
+        public string DeductedOn { get; set; }
+        public string TransactionType { get; set; }
     }
 }

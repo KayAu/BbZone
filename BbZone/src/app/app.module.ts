@@ -181,7 +181,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
             { path: 'create-withdrawal', component: CreateWithdrawal },
             { path: 'edit-withdrawal/:id', component: EditWithdrawal },
             { path: 'agent-pocket', component: AgentPocket, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
-            { path: 'manage-clawback', component: ManageClawback, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
+            { path: 'manage-clawback', component: ManageClawback, canActivate: [UserAuthGuard] },
             { path: 'upload-incentives', component: UploadIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'view-incentives', component: ViewIncentives, canActivate: [UserAuthGuard], data: { roles: [Role.Admin, Role.SuperAdmin] }},
             { path: 'admin-access', component: AdminAccess, canActivate: [UserAuthGuard], data: { roles: [ Role.SuperAdmin] } },

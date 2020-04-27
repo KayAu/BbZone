@@ -21,7 +21,10 @@ BEGIN
 		UPDATE ClaimableCommission
 		SET DeductedWithdrawalId = NULL
 		WHERE DeductedWithdrawalId = @prWithdrawalId
-
+		
+		UPDATE ClaimableCommission
+		SET ClaimWithdrawalId = NULL
+		WHERE ClaimWithdrawalId = @prWithdrawalId
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

@@ -29,15 +29,20 @@ var EditOrder = /** @class */ (function () {
         this.route = route;
         this.authenticationService = authenticationService;
         this.formFields = [];
+        this.displayFields = [];
         this.formRecord = {};
         this.isUpdating = false;
         this.commIsConfigured = true;
+        this.controlType = dataDisplayType_1.ControlType;
     }
     EditOrder.prototype.ngOnInit = function () {
+        var _this = this;
         this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
-        this.formFields = this.getFormFeldsMapping();
         this.loadRecord(this.route.snapshot.params.id);
+        var dataFields = this.getFormFeldsMapping();
+        this.formFields = dataFields.filter(function (c) { return c.dataFieldControl.controlType !== _this.controlType.label; });
+        this.displayFields = dataFields.filter(function (c) { return c.dataFieldControl.controlType === _this.controlType.label; });
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) {
@@ -73,11 +78,12 @@ var EditOrder = /** @class */ (function () {
     EditOrder.prototype.showProcessedDetails = function (show) {
         if (!show)
             show = false;
-        var updateFields = ["orderNo", "userId", "telNo"];
+        var updateFields = ["orderNo", "userId", "telNo", "eForm"];
         for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
             var field = updateFields_1[_i];
             var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });
-            this.formFields[index].hidden = !show;
+            if (this.formFields[index])
+                this.formFields[index].hidden = !show;
         }
     };
     EditOrder.prototype.showEForm = function (show) {

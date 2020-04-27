@@ -60,7 +60,7 @@ export class DataControl implements ControlValueAccessor {
     }
 
     ngAfterViewChecked() {
-        if (this.field.required) {
+        if (this.field.required && this.parentForm.controls[this.fieldId]) {
             this.parentForm.controls[this.fieldId].setValidators(Validators.required);
             this.parentForm.controls[this.fieldId].updateValueAndValidity();
             this.controlLoaded = true;

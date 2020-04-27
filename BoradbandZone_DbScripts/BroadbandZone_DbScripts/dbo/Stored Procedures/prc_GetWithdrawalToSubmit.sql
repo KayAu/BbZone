@@ -95,9 +95,9 @@ BEGIN
 		WHERE a.UserLogin = @prAgent
 		AND ca.DocumentCompleted = 1
 		AND s.Status = 'Post Complete'
-		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL THEN 1
+		AND 1 = CASE WHEN cc.ClaimWithdrawalId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
 					 WHEN NOT cc.ClaimWithdrawalId IS NULL AND w.Status = 'Terminated' THEN 1
-					 WHEN NOT c.ClawbackId IS NULL AND cc.DeductedWithdrawalId IS NULL THEN 1
+					 WHEN NOT c.ClawbackId IS NULL AND (cc.DeductedWithdrawalId IS NULL OR w.Status = 'Terminated') THEN 1
 					 ELSE 0
 				END
 	    AND 1 = CASE WHEN ISNULL(@prSubmittedFrom,'') = '' AND ISNULL(@prSubmittedTo,'') = '' THEN 1

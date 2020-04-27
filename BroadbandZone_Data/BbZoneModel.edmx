@@ -704,6 +704,9 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
           <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
           <Parameter Name="prSearchKeyword" Type="varchar" Mode="In" />
+          <Parameter Name="prIsDeducted" Type="bit" Mode="In" />
+          <Parameter Name="prAgentId" Type="int" Mode="In" />
+          <Parameter Name="prIsAdmin" Type="bit" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
         </Function>
         <Function Name="prc_GetCommissionSettings" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -1266,6 +1269,9 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prSortColumn" Mode="In" Type="String" />
             <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
             <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prIsDeducted" Mode="In" Type="Boolean" />
+            <Parameter Name="prAgentId" Mode="In" Type="Int32" />
+            <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="UpdateClaimableCommission">
@@ -1848,6 +1854,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
           <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="DeductAmount" Nullable="true" MaxLength="4000" />
+          <Property Type="Boolean" Name="IsDeducted" Nullable="true" />
+          <Property Type="String" Name="DeductedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="TransactionType" Nullable="false" MaxLength="25" />
         </ComplexType>
         <EntityType Name="ClaimableCommission">
           <Key>
@@ -1945,7 +1955,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="Binary" Name="PasswordHash" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Email" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="80" />
         </ComplexType>
         <ComplexType Name="GetWithdrawalSubmittedForDownload_Result">
           <Property Type="Int32" Name="WithdrawalId" Nullable="false" />
@@ -2077,6 +2087,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="Boolean" Name="AllowEdit" Nullable="true" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="35" />
           <Property Type="Boolean" Name="CommIsConfigured" Nullable="true" />
+          <Property Type="String" Name="AgentEmail" Nullable="true" MaxLength="80" />
         </ComplexType>
         <EntityType Name="CustomerApplication">
           <Key>
@@ -3024,6 +3035,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="IsDeducted" ColumnName="IsDeducted" />
+                <ScalarProperty Name="DeductedOn" ColumnName="DeductedOn" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3291,6 +3306,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="AllowEdit" ColumnName="AllowEdit" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="CommIsConfigured" ColumnName="CommIsConfigured" />
+                <ScalarProperty Name="AgentEmail" ColumnName="AgentEmail" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

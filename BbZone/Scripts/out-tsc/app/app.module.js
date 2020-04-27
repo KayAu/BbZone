@@ -192,7 +192,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'create-withdrawal', component: create_withdrawal_1.CreateWithdrawal },
                     { path: 'edit-withdrawal/:id', component: edit_withdrawal_1.EditWithdrawal },
                     { path: 'agent-pocket', component: agent_pocket_1.AgentPocket, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
-                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
+                    { path: 'manage-clawback', component: manage_clawback_1.ManageClawback, canActivate: [user_auth_guard_1.UserAuthGuard] },
                     { path: 'upload-incentives', component: upload_incentives_1.UploadIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'view-incentives', component: view_incentives_1.ViewIncentives, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.Admin, role_1.Role.SuperAdmin] } },
                     { path: 'admin-access', component: admin_access_1.AdminAccess, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },

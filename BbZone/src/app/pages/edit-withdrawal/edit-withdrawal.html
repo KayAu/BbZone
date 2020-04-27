@@ -1,6 +1,5 @@
 <page-header [title]="'Withdrawal Details'" [parentCategory]="'Manage Withdrawal'"></page-header>
 <div class="wrapper wrapper-content animated fadeInRight">
-    <loading></loading>
     <div class="row">
         <div class="col-md-8 mrg10T mrg25B">
             <div class="float-left">
@@ -65,28 +64,28 @@
                     <div class="row pad25T pad15B mrg25B  data-box">
                         <div class="col-lg-5">
                             <div class="row mrg10B">
-                                <div class="cell-width-20 pad35L float-left ">
+                                <div class="cell-width-30 pad35L float-left">
                                     <strong>Withdrawal Id:</strong>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">{{formRecord.withdrawalId}}</div>
                                 </div>
                             </div>
                             <div class="row mrg10B">
-                                <div class="cell-width-20 pad35L float-left ">
+                                <div class="cell-width-30 pad35L float-left ">
                                     <strong>Agent Name:</strong>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">{{formRecord.agent}}</div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-5" id="cluster_info">
                             <div class="row mrg10B">
-                                <div class="cell-width-20 pad35L float-left">
+                                <div class="cell-width-30 pad35L float-left">
                                     <strong>Status:</strong>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <span class="badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
                                                                 'badge-primary': formRecord.status == 'Completed',
                                                                 'badge-warning': formRecord.status == 'OnHold',
@@ -96,10 +95,10 @@
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="cell-width-20 pad35L float-left ">
+                                <div class="cell-width-30 pad35L float-left ">
                                     <strong>Last Updated:</strong>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">{{formRecord.modifiedOn | date : 'dd MMM yyyy hh:mm a'}}</div>
                                 </div>
                             </div>

@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -20,9 +21,9 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                StatusAndKeywordParams filterBy = JsonConvert.DeserializeObject<StatusAndKeywordParams>(searchParams);
-                var records = Helper.ModelHelper.GetListdata((new BroadbandZoneEntities()).GetClawback, currentPage, pageSize, sortColumn, sortInAsc, filterBy.Keyword);
-                return Ok(records);
+                SearchClawbackParams filterBy = JsonConvert.DeserializeObject<SearchClawbackParams>(searchParams);
+                var results = LoadClawback(currentPage, pageSize, sortColumn, sortInAsc, filterBy);
+                return Ok(results);
             }
             catch (Exception ex)
             {
@@ -44,8 +45,8 @@ namespace BroadbandZone_App.WebApi
                     db.Clawbacks.Add(newRecord);
                     db.SaveChanges();
 
-                    var records = ModelHelper.GetListdata(db.GetClawback, 1, Constants.DefaultPageSize, string.Empty, false, string.Empty);
-                    return Ok(records);
+                    var results = LoadClawback(1, Constants.DefaultPageSize, string.Empty, false, new SearchClawbackParams());
+                    return Ok(results);
                 }
             }
             catch (Exception ex)
@@ -99,6 +100,26 @@ namespace BroadbandZone_App.WebApi
                 ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
                 return Content(HttpStatusCode.NotImplemented, ex.Message);
             }
+        }
+
+        private Gridview<GetClawback_Result> LoadClawback(int currentPage, int pageSize, string sortColumn, bool sortInAsc, SearchClawbackParams filterBy)
+        {
+            AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+            ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
+            var results = (new BroadbandZoneEntities()).GetClawback(currentPage,
+                                                                    pageSize,
+                                                                    sortColumn,
+                                                                    sortInAsc,
+                                                                    filterBy.Keyword,
+                                                                    filterBy.IsDeducted,
+                                                                    currentUser.AgentId,
+                                                                    currentUser.IsAdmin,
+                                                                    totalRecord).ToList();
+            return (new Gridview<GetClawback_Result>()
+            {
+                DisplayData = results,
+                TotalRecords = Convert.ToInt32(totalRecord.Value)
+            });
         }
     }
 }

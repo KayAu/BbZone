@@ -17,6 +17,11 @@ namespace BroadbandZone_App.Models
         public string Keyword { get; set; }
     }
 
+    public class SearchClawbackParams
+    {
+        public bool? IsDeducted { get; set; }
+        public string Keyword { get; set; }
+    }
 
     public class ApprovalAndKeywordParams
     {

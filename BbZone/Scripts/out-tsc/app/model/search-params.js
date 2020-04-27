@@ -39,6 +39,14 @@ var SearchWithdrawalToSubmitParams = /** @class */ (function () {
     return SearchWithdrawalToSubmitParams;
 }());
 exports.SearchWithdrawalToSubmitParams = SearchWithdrawalToSubmitParams;
+var SearchClawbackParams = /** @class */ (function () {
+    function SearchClawbackParams(isDeducted, keyword) {
+        this.isDeducted = isDeducted;
+        this.keyword = keyword;
+    }
+    return SearchClawbackParams;
+}());
+exports.SearchClawbackParams = SearchClawbackParams;
 var SearchWithdrawalViewParams = /** @class */ (function () {
     function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
         this.agent = agent;

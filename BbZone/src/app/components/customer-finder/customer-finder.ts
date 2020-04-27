@@ -32,6 +32,7 @@ export class CustomerFinder implements ControlValueAccessor  {
     controlLoaded: boolean = false;
 
     @ViewChild('searchInput') searchInput: ElementRef;
+    @Output() propagateChange: any = () => { };
     @Output() onItemSelected = new EventEmitter();
     @Input() parentForm: NgForm;
     @Input() disabledEdit: boolean = false;
@@ -64,6 +65,7 @@ export class CustomerFinder implements ControlValueAccessor  {
 
     onItemClicked(selectedIndex: number) {
         this.selectedCustomer = this.dropdownItems[selectedIndex].customerName;
+        this.propagateChange(this.selectedCustomer);
         this.onItemSelected.emit(this.dropdownItems[selectedIndex]);
         this.hideDropwdown();
         this.clearErrorMessages();
@@ -75,6 +77,7 @@ export class CustomerFinder implements ControlValueAccessor  {
         if (!keyword) {
             this.selectedCustomer = null;
             this.hideDropwdown();
+            this.propagateChange(this.selectedCustomer);
             this.onItemSelected.emit(null);
         }
     }
@@ -117,8 +120,11 @@ export class CustomerFinder implements ControlValueAccessor  {
         this.dropdownItems = [];
     }
 
-    writeValue(val: any): void {}
-    registerOnChange(fn: any): void {}
+    registerOnChange(fn: any): void {
+        this.propagateChange = fn;
+    }
+
+    writeValue(val: any): void { }
     registerOnTouched() { }
     setDisabledState?() { }
 }

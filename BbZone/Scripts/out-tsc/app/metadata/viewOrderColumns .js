@@ -40,6 +40,13 @@ var ViewOrderColumns = /** @class */ (function () {
             "colWidth": "cell-width-15"
         },
         {
+            "fieldName": "orderNo",
+            "headerText": "Order No",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+        {
             "fieldName": "agent",
             "headerText": "Agent",
             "displayType": "text",

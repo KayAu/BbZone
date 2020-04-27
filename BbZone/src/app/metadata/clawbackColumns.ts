@@ -56,11 +56,24 @@ export class ClawbackColumns {
             }
         },
         {
+            "fieldName": "transactionType",
+            "headerText": "Transaction Type",
+            "displayType": "badge",
+            "keyField": false,
+            "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "transactionType",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 25
+            }
+        },
+        {
             "fieldName": "remarks",
             "headerText": "Remarks",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-45",
+            "colWidth": "cell-width-20",
             "dataFieldControl": {
                 "controlName": "remarks",
                 "controlType": "textbox",
@@ -69,11 +82,37 @@ export class ClawbackColumns {
             }
         },
         {
-            "fieldName": "deductedOn",
-            "headerText": "DeductedOn",
+            "fieldName": "deductAmount",
+            "headerText": "Deduction Amount",
             "displayType": "text",
             "keyField": false,
             "colWidth": "cell-width-10",
+            "dataFieldControl": {
+                "controlName": "deductedOn",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 20
+            }
+        },
+        {
+            "fieldName": "isDeducted",
+            "headerText": "Deducted",
+            "displayType": "tick",
+            "keyField": false,
+            "colWidth": "cell-width-5",
+            "dataFieldControl": {
+                "controlName": "isDeducted",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 20
+            }
+        },
+        {
+            "fieldName": "deductedOn",
+            "headerText": "Deducted On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-7",
             "dataFieldControl": {
                 "controlName": "deductedOn",
                 "controlType": "label",

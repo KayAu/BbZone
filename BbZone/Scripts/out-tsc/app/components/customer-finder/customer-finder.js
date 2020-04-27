@@ -25,6 +25,7 @@ var CustomerFinder = /** @class */ (function () {
         this.startSearching = false;
         this.searchFieldInput = new rxjs_1.Subject();
         this.controlLoaded = false;
+        this.propagateChange = function () { };
         this.onItemSelected = new core_1.EventEmitter();
         this.disabledEdit = false;
     }
@@ -51,6 +52,7 @@ var CustomerFinder = /** @class */ (function () {
     };
     CustomerFinder.prototype.onItemClicked = function (selectedIndex) {
         this.selectedCustomer = this.dropdownItems[selectedIndex].customerName;
+        this.propagateChange(this.selectedCustomer);
         this.onItemSelected.emit(this.dropdownItems[selectedIndex]);
         this.hideDropwdown();
         this.clearErrorMessages();
@@ -60,6 +62,7 @@ var CustomerFinder = /** @class */ (function () {
         if (!keyword) {
             this.selectedCustomer = null;
             this.hideDropwdown();
+            this.propagateChange(this.selectedCustomer);
             this.onItemSelected.emit(null);
         }
     };
@@ -97,8 +100,10 @@ var CustomerFinder = /** @class */ (function () {
         this.loadData = false;
         this.dropdownItems = [];
     };
+    CustomerFinder.prototype.registerOnChange = function (fn) {
+        this.propagateChange = fn;
+    };
     CustomerFinder.prototype.writeValue = function (val) { };
-    CustomerFinder.prototype.registerOnChange = function (fn) { };
     CustomerFinder.prototype.registerOnTouched = function () { };
     CustomerFinder.prototype.setDisabledState = function () { };
     var CustomerFinder_1;
@@ -106,6 +111,10 @@ var CustomerFinder = /** @class */ (function () {
         core_1.ViewChild('searchInput'),
         __metadata("design:type", core_1.ElementRef)
     ], CustomerFinder.prototype, "searchInput", void 0);
+    __decorate([
+        core_1.Output(),
+        __metadata("design:type", Object)
+    ], CustomerFinder.prototype, "propagateChange", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)

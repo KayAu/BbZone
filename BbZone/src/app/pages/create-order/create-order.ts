@@ -35,6 +35,7 @@ export class CreateOrder {
     ngOnInit() {
         this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
+        this.showProcessedDetails(false);
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
@@ -95,7 +96,7 @@ export class CreateOrder {
 
     showProcessedDetails(show) {
         if (!show) show = false;
-        let updateFields = ["orderNo", "userId", "telNo"];
+        let updateFields = ["orderNo", "userId", "telNo","eForm"];
         for (var field of updateFields) {
             let index = this.formFields.findIndex(i => i.fieldName == field);
             this.formFields[index].hidden = !show;

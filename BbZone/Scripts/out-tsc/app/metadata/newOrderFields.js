@@ -199,7 +199,7 @@ var NewOrderFields = /** @class */ (function () {
                 "maxLength": 0,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true,
+                "adminField": false,
                 "dataChangedEvent": "showProcessedDetails"
             }
         },
@@ -214,7 +214,7 @@ var NewOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
@@ -228,7 +228,7 @@ var NewOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
@@ -242,7 +242,21 @@ var NewOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
+            }
+        },
+        {
+            "fieldName": "eForm",
+            "displayText": "E-Form (For TM Only)",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "eForm",
+                "controlType": "textbox",
+                "required": false,
+                "maxLength": 15,
+                "datasourceUrl": null,
+                "cascadeTo": null,
+                "adminField": false
             }
         },
         {

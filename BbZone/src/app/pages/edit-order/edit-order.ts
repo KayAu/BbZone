@@ -4,12 +4,10 @@ import { EditOrderFields } from '../../metadata/editOrderFields';
 import { FormDataMapping } from '../../model/form.data.mapping';
 import { ControlType } from '../../enums/dataDisplayType';
 import { DataFieldControl } from '../../model/data.field.control';
-import { BroadcastService } from '../../services/broadcast.service';
 import { DataService } from '../../services/data.service';
 import { LoaderService } from '../../loader/loader.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiController } from '../../enums/apiController';
-import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
 import { LoginUser } from 'src/app/model/login-user';
 import { AuthenticationService } from 'src/app/services/authentication';
@@ -22,11 +20,13 @@ import { AuthenticationService } from 'src/app/services/authentication';
 export class EditOrder  {
     @ViewChild(NgForm) form: NgForm;
     formFields: FormDataMapping[] = [];
+    displayFields: FormDataMapping[] = [];
     formRecord: any = {};
     isUpdating: boolean = false;
     recordId: number;
     currentUser: LoginUser;
     commIsConfigured: boolean = true;
+    controlType = ControlType;
 
     constructor(public loaderService: LoaderService,
                 public dataService: DataService,
@@ -37,8 +37,10 @@ export class EditOrder  {
     ngOnInit() {
         this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
-        this.formFields = this.getFormFeldsMapping();
         this.loadRecord(this.route.snapshot.params.id);
+        let dataFields = this.getFormFeldsMapping();
+        this.formFields = dataFields.filter(c => c.dataFieldControl.controlType !== this.controlType.label);
+        this.displayFields = dataFields.filter(c => c.dataFieldControl.controlType === this.controlType.label);
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
@@ -91,10 +93,11 @@ export class EditOrder  {
 
     showProcessedDetails(show) {
         if (!show) show = false;
-        let updateFields = ["orderNo", "userId", "telNo"];
+        let updateFields = ["orderNo", "userId", "telNo","eForm"];
         for (var field of  updateFields) {
             let index = this.formFields.findIndex(i => i.fieldName == field);
-            this.formFields[index].hidden = !show;
+            if (this.formFields[index])
+                this.formFields[index].hidden = !show;
         }
     }
 

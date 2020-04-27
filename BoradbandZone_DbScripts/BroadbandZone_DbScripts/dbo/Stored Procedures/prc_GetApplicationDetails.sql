@@ -14,6 +14,7 @@ BEGIN
 			  ,s.Status
 			  ,AllowEdit = CAST( CASE WHEN @prIsAdmin = 1 THEN 1 ELSE s.AllowEdit END AS BIT)   --s.AllowEdit
 			  ,CommIsConfigured = CAST(CASE WHEN NOT ac.CommId IS NULL THEN 1 ELSE 0 END AS BIT)
+			  ,a.Email AS AgentEmail
 	  FROM CustomerApplication ca
 	  INNER JOIN ApplicationStatus s ON ca.AppStatusId = s.AppStatusId
 	  INNER JOIN ProductCategory pc ON pc.CategoryId = ca.CategoryId

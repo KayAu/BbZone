@@ -6,7 +6,6 @@ export class StatusAndKeywordParams {
     public isActive: boolean,
     public keyword: string
   ) { }
-
 }
 
 export class SearchOrderParams {
@@ -39,6 +38,12 @@ export class SearchWithdrawalToSubmitParams {
 
 }
 
+export class SearchClawbackParams {
+    constructor(
+        public isDeducted: boolean,
+        public keyword: string
+    ) { }
+}
 
 export class SearchWithdrawalViewParams {
     constructor(

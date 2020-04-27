@@ -39,6 +39,7 @@ var CreateOrder = /** @class */ (function () {
     CreateOrder.prototype.ngOnInit = function () {
         this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
+        this.showProcessedDetails(false);
     };
     CreateOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
@@ -80,7 +81,7 @@ var CreateOrder = /** @class */ (function () {
     CreateOrder.prototype.showProcessedDetails = function (show) {
         if (!show)
             show = false;
-        var updateFields = ["orderNo", "userId", "telNo"];
+        var updateFields = ["orderNo", "userId", "telNo", "eForm"];
         for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
             var field = updateFields_1[_i];
             var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });

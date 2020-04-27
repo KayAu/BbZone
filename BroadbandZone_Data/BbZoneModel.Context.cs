@@ -577,7 +577,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindClaimedApplication_Result>("FindClaimedApplication", prSearchKeywordParameter);
         }
     
-        public virtual ObjectResult<GetClawback_Result> GetClawback(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetClawback_Result> GetClawback(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prIsDeducted, Nullable<int> prAgentId, Nullable<bool> prIsAdmin, ObjectParameter oTotalRecord)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -599,7 +599,19 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prSearchKeyword", prSearchKeyword) :
                 new ObjectParameter("prSearchKeyword", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClawback_Result>("GetClawback", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, oTotalRecord);
+            var prIsDeductedParameter = prIsDeducted.HasValue ?
+                new ObjectParameter("prIsDeducted", prIsDeducted) :
+                new ObjectParameter("prIsDeducted", typeof(bool));
+    
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetClawback_Result>("GetClawback", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSearchKeywordParameter, prIsDeductedParameter, prAgentIdParameter, prIsAdminParameter, oTotalRecord);
         }
     
         public virtual int UpdateClaimableCommission(Nullable<int> prWithdrawalId)

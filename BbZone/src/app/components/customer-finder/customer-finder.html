@@ -2,8 +2,8 @@
 <section class="filter-wrapper">
     <div class="input-group">
         <span *ngIf="disabledEdit">{{selectedCustomer}}</span>
-        <input type="text" class="form-control" placeholder="Search" maxlength="150" [ngModel]="selectedCustomer"
-               (keyup)="onSearchInputChanged($event.target.value)" *ngIf="!disabledEdit" #searchInput />
+        <input type="text" class="form-control" placeholder="Search" maxlength="150" [(ngModel)]="selectedCustomer"
+               (keyup)="onSearchInputChanged($event.target.value)" name="{{fieldId}}" *ngIf="!disabledEdit" #searchInput />
     </div>
     <div class="dropdown-menu pos-init pad0A h-550 w-p100 scrollable-ver scrollable-hor-hidden" [ngClass]="{'show': loadData}">
         <div class="pad0A" *ngIf="dropdownItems.length > 0; else noResults">
@@ -28,5 +28,5 @@
 
 
 <ng-container *ngIf="controlLoaded">
-    <span class="text-danger" *ngIf="parentForm.controls[this.fieldId].hasError('required') && parentForm.controls[this.fieldId].touched">This is required</span>
+    <span class="text-danger" *ngIf="parentForm.controls[fieldId].hasError('required') && parentForm.controls[fieldId].touched">This is required</span>
 </ng-container>

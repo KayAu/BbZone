@@ -14,6 +14,17 @@ public static fields = [
         }
     },
     {
+        "fieldName": "status",
+        "displayText": "Status",
+        "hidden": false,
+        "dataFieldControl": {
+            "controlName": "status",
+            "controlType": "label",
+            "required": false,
+            "maxLength": 0,
+        }
+    },
+    {
         "fieldName": "category",
         "displayText": "Product Category",
         "hidden": false,
@@ -44,8 +55,17 @@ public static fields = [
             "controlType": "label",
             "required": false,
             "maxLength": 0,
-            //"datasourceUrl": "GetAgents",
-            //"dataChangedEvent": "checkCommissionSettings"
+        }
+    },
+    {
+        "fieldName": "agentEmail",
+        "displayText": "Agent Email",
+        "hidden": false,
+        "dataFieldControl": {
+            "controlName": "agentEmail",
+            "controlType": "label",
+            "required": false,
+            "maxLength": 0,
         }
     },
     {
@@ -215,7 +235,7 @@ public static fields = [
             "maxLength": 0,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true,
+            "adminField": false,
             "dataChangedEvent": "showProcessedDetails"
         }
     },
@@ -230,7 +250,7 @@ public static fields = [
             "maxLength": 25,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true
+            "adminField": false
         }
     },
     {
@@ -272,7 +292,7 @@ public static fields = [
             "maxLength": 15,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true
+            "adminField": false
         }
     },
     {
@@ -286,7 +306,7 @@ public static fields = [
             "maxLength": 25,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true
+            "adminField": false
         }
     },
     {

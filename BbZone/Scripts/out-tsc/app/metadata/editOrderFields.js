@@ -16,6 +16,17 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "status",
+            "displayText": "Status",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "status",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0,
+            }
+        },
+        {
             "fieldName": "category",
             "displayText": "Product Category",
             "hidden": false,
@@ -43,6 +54,17 @@ var EditOrderFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "agent",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0,
+            }
+        },
+        {
+            "fieldName": "agentEmail",
+            "displayText": "Agent Email",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "agentEmail",
                 "controlType": "label",
                 "required": false,
                 "maxLength": 0,
@@ -215,7 +237,7 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 0,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true,
+                "adminField": false,
                 "dataChangedEvent": "showProcessedDetails"
             }
         },
@@ -230,7 +252,7 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
@@ -272,7 +294,7 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 15,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
@@ -286,7 +308,7 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {

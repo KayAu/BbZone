@@ -37,7 +37,14 @@ export class ViewOrderColumns {
         "displayType": "text",
         "keyField": false,
         "colWidth": "cell-width-15"
-    },
+    }, 
+    {
+        "fieldName": "orderNo",
+        "headerText": "Order No",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": ""
+    }, 
     {
         "fieldName": "agent",
         "headerText": "Agent",

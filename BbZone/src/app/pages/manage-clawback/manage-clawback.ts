@@ -8,7 +8,9 @@ import { BroadcastService } from '../../services/broadcast.service';
 import { DataService } from '../../services/data.service';
 import { LoaderService } from '../../loader/loader.service';
 import { ApiController } from '../../enums/apiController';
-import { StatusAndKeywordParams } from '../../model/search-params';
+import { SearchClawbackParams } from '../../model/search-params';
+import { LoginUser } from 'src/app/model/login-user';
+import { AuthenticationService } from 'src/app/services/authentication';
 
 @Component({
     selector: 'manage-clawback',
@@ -21,8 +23,9 @@ export class ManageClawback extends ListDataCrud {
     displayType = DataDisplayType;
     controlType = ControlType;
     customerSearchType = CustomerSearchType;
+    currentUser: LoginUser;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private authenticationService: AuthenticationService) {
         super(loaderService, dataService, 'clawbackId');
     }
 
@@ -30,8 +33,10 @@ export class ManageClawback extends ListDataCrud {
         this.formName = "tableForm";
         this.controllerName = ApiController.Clawback;
         this.dataRowMapper = this.getTablerowDataMapping();
-        this.searchParams = new StatusAndKeywordParams(null, null);
+        this.searchParams = new SearchClawbackParams(null, null);
+        this.currentUser = this.authenticationService.currentUserValue;
         this.initDataRecord(this.dataRowMapper);
+      
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {

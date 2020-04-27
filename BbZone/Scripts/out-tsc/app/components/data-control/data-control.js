@@ -41,7 +41,7 @@ var DataControl = /** @class */ (function () {
         }
     };
     DataControl.prototype.ngAfterViewChecked = function () {
-        if (this.field.required) {
+        if (this.field.required && this.parentForm.controls[this.fieldId]) {
             this.parentForm.controls[this.fieldId].setValidators(forms_1.Validators.required);
             this.parentForm.controls[this.fieldId].updateValueAndValidity();
             this.controlLoaded = true;

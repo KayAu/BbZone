@@ -22,6 +22,7 @@ BEGIN
 		CustomerName VARCHAR(100),
 		PackageName VARCHAR(50),
 		Category VARCHAR(50),
+		OrderNo VARCHAR(25),
 		Agent  VARCHAR(50),
 		SubmittedOn SMALLDATETIME,
 		OrderStatus  VARCHAR(50),
@@ -39,6 +40,7 @@ BEGIN
 			pp.PackageName,
 			pc.Category,
 			co.Agent,
+			co.OrderNo,
 			co.CreatedOn ,
 			o.OrderStatus
 		INTO ##temp_Table
@@ -78,6 +80,7 @@ BEGIN
 			   CustomerName,
 				PackageName,
 				Category,
+				OrderNo,
 				Agent,
 				SubmittedOn  = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
 				OrderStatus 

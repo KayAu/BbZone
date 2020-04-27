@@ -6,21 +6,34 @@
                 <div class="ibox-title">
                     <h5>
                         Order Details
-                        <span class="badge mrg10L" [ngClass]="{'badge-info': formRecord['status'] == 'Early Stage','badge-primary': formRecord['status'] == 'Post Complete'}">
-                            {{formRecord['status']}}
-                        </span>
+
                     </h5>
                 </div>
-                <div class="ibox-content">
+                <div class="ibox-content pad0T">
                     <loading></loading>
                     <div class="alert alert-warning" *ngIf="!commIsConfigured">
                         <i class="fa fa-exclamation-triangle font-size-18"></i>
                         The commission for this agent has not been set yet. Please make sure the commission set otherwise this application will be unable to updated to <strong>Post Complete</strong>.
                     </div>
                     <form #applicationForm="ngForm" (ngSubmit)="update()">
+                        <div class="row  pad15B">
+                            <div class="col-lg-6" *ngFor="let field of displayFields">
+                                <div class="row mrg10B">
+                                    <div class="cell-width-30 pad35L float-left">
+                                        <strong>{{field.displayText}}:</strong>
+                                    </div>
+                                    <div class="cell-width-70 float-left">
+                                        <span class="badge" *ngIf="field.fieldName == 'status'" [ngClass]="{'badge-info': formRecord['status'] == 'Early Stage','badge-primary': formRecord['status'] == 'Post Complete'}">
+                                            {{formRecord['status']}}
+                                        </span>
+                                        <span *ngIf="field.fieldName != 'status'">{{formRecord[field.dataFieldControl.controlName]}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <!--PRODUCT TYPES-->
                         <ng-container *ngFor="let field of formFields">
-                            <div class="form-group row" *ngIf="!field.hidden">
+                            <div class="form-group row" *ngIf="!field.hidden;">
                                 <label class="col-sm-2 col-form-label">
                                     {{field.displayText}}
                                     <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
@@ -33,8 +46,9 @@
                                                   [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
                                 </div>
                             </div>
-                            <div class="hr-line-dashed" *ngIf="!field.hidden"></div>
+                            <div class="hr-line-dashed"></div>
                         </ng-container>
+
                         <!--ATTACH REQUIRED DOCUMENTS-->
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Attach required documents</label>
