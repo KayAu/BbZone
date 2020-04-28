@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { EditOrderFields } from '../../metadata/editOrderFields';
-import { FormDataMapping } from '../../model/form.data.mapping';
+import { FormDataGroupMapping } from '../../model/form.data.mapping';
 import { ControlType } from '../../enums/dataDisplayType';
 import { DataFieldControl } from '../../model/data.field.control';
 import { DataService } from '../../services/data.service';
@@ -19,8 +19,9 @@ import { AuthenticationService } from 'src/app/services/authentication';
 
 export class EditOrder  {
     @ViewChild(NgForm) form: NgForm;
-    formFields: FormDataMapping[] = [];
-    displayFields: FormDataMapping[] = [];
+    applicationFields: FormDataGroupMapping[] = [];
+    orderFields: FormDataGroupMapping[] = [];
+    displayFields: FormDataGroupMapping[] = [];
     formRecord: any = {};
     isUpdating: boolean = false;
     recordId: number;
@@ -39,15 +40,17 @@ export class EditOrder  {
         this.recordId = this.route.snapshot.params.id;
         this.loadRecord(this.route.snapshot.params.id);
         let dataFields = this.getFormFeldsMapping();
-        this.formFields = dataFields.filter(c => c.dataFieldControl.controlType !== this.controlType.label);
         this.displayFields = dataFields.filter(c => c.dataFieldControl.controlType === this.controlType.label);
+        this.applicationFields = dataFields.filter(c => c.groupName === 'application' && c.dataFieldControl.controlType !== this.controlType.label);
+        this.orderFields = dataFields.filter(c => c.groupName === 'orderInfo');
     }
 
-    getFormFeldsMapping(): FormDataMapping[] {
+    getFormFeldsMapping(): FormDataGroupMapping[] {
         let columnMappings = EditOrderFields.fields.map(o =>
-            new FormDataMapping(o.fieldName,
+            new FormDataGroupMapping(o.fieldName,
                                 o.displayText,
                                 o.hidden,
+                                o.groupName,
                                 !o.dataFieldControl ? null : new DataFieldControl(
                                                             o.dataFieldControl.controlName,
                                                             ControlType[o.dataFieldControl.controlType],
@@ -95,16 +98,16 @@ export class EditOrder  {
         if (!show) show = false;
         let updateFields = ["orderNo", "userId", "telNo","eForm"];
         for (var field of  updateFields) {
-            let index = this.formFields.findIndex(i => i.fieldName == field);
-            if (this.formFields[index])
-                this.formFields[index].hidden = !show;
+            let index = this.orderFields.findIndex(i => i.fieldName == field);
+            if (this.orderFields[index])
+                this.orderFields[index].hidden = !show;
         }
     }
 
     showEForm(show) {
         if (!show) show = false;
-        let index = this.formFields.findIndex(i => i.fieldName == "eForm");
-        this.formFields[index].hidden = !show;
+        let index = this.orderFields.findIndex(i => i.fieldName == "eForm");
+        this.orderFields[index].hidden = !show;
     }
 
     checkCommissionSettings() {

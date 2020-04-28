@@ -24,7 +24,8 @@ var LoaderComponent = /** @class */ (function () {
         });
     };
     LoaderComponent.prototype.ngOnDestroy = function () {
-        this.subscription.unsubscribe();
+        if (this.subscription)
+            this.subscription.unsubscribe();
     };
     LoaderComponent = __decorate([
         core_1.Component({

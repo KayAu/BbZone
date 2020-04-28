@@ -1,4 +1,4 @@
-import { Component, HostListener, ViewChild } from '@angular/core';
+import { Component, HostListener, ViewChild, Renderer2  } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication';
 import { UserIdleService } from 'angular-user-idle'
@@ -14,11 +14,14 @@ import { LoginUser } from './model/login-user';
 export class AppComponent {
     currentUser: LoginUser;
     showScroll: boolean;
+    showNavBar: boolean = true;
     showScrollHeight = 300;
     hideScrollHeight = 10;
+    
     @ViewChild(NavMenuComponent) navMenu: NavMenuComponent;
 
     constructor(
+        private renderer: Renderer2,
         private router: Router,
         private authenticationService: AuthenticationService,
         private userIdle: UserIdleService
@@ -26,7 +29,7 @@ export class AppComponent {
         this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
         });
-
+      
     }
 
     ngOnInit() {
@@ -54,6 +57,15 @@ export class AppComponent {
         }
         else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
             this.showScroll = false;
+        }
+    }
+
+    hideNavBar() {
+        this.showNavBar = !this.showNavBar;
+        if (!this.showNavBar)
+            this.renderer.addClass(document.body, 'mini-navbar');
+        else {
+            this.renderer.removeClass(document.body, 'mini-navbar');
         }
     }
 

@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { NewOrderFields } from '../../metadata/newOrderFields';
-import { FormDataMapping } from '../../model/form.data.mapping';
-import { ControlType } from '../../enums/dataDisplayType';
+import { FormDataGroupMapping } from '../../model/form.data.mapping';
+import { ControlType, CustomerOrderDataGroup } from '../../enums/dataDisplayType';
 import { DataFieldControl } from '../../model/data.field.control';
 import { BroadcastService } from '../../services/broadcast.service';
 import { DataService } from '../../services/data.service';
@@ -22,27 +22,32 @@ import { LoginUser } from 'src/app/model/login-user';
 export class CreateOrder {
 
     @ViewChild(NgForm) form: NgForm;
-    formFields: FormDataMapping[] = [];
+    applicationFields: FormDataGroupMapping[] = [];
+    orderFields: FormDataGroupMapping[] = [];
     selectedCategory: number;
     selectedProduct: number;
     newRecord: any  = {};
     isUpdating: boolean = false;
     currentUser: LoginUser;
     commIsConfigured: boolean = true;
+    //dataGroup = CustomerOrderDataGroup;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router, private authenticationService: AuthenticationService) {}
 
     ngOnInit() {
         this.currentUser = this.authenticationService.currentUserValue;
-        this.formFields = this.getFormFeldsMapping();
+        let dataFields = this.getFormFeldsMapping();
+        this.applicationFields = dataFields.filter(c => c.groupName === 'application');
+        this.orderFields = dataFields.filter(c => c.groupName === 'orderInfo');
         this.showProcessedDetails(false);
     }
 
-    getFormFeldsMapping(): FormDataMapping[] {
+    getFormFeldsMapping(): FormDataGroupMapping[] {
 
-        let columnMappings = NewOrderFields.fields.map(o => new FormDataMapping(o.fieldName,
+        let columnMappings = NewOrderFields.fields.map(o => new FormDataGroupMapping(o.fieldName,
             o.displayText,
             o.hidden,
+            o.groupName,
             !o.dataFieldControl ? null :
                 new DataFieldControl(
                     o.dataFieldControl.controlName,
@@ -98,8 +103,8 @@ export class CreateOrder {
         if (!show) show = false;
         let updateFields = ["orderNo", "userId", "telNo","eForm"];
         for (var field of updateFields) {
-            let index = this.formFields.findIndex(i => i.fieldName == field);
-            this.formFields[index].hidden = !show;
+            let index = this.orderFields.findIndex(i => i.fieldName == field);
+            this.orderFields[index].hidden = !show;
         }
     }
 

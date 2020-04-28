@@ -1,76 +1,77 @@
 <nav class="navbar-default navbar-static-side" #navMenu role="navigation" *ngIf="currentUser">
-  <div class="sidebar-collapse">
-    <ul class="nav tree" id="side-menu" data-widget="tree">
-      <li class="nav-header w-p100">
-        <div class="dropdown profile-element">
-            <div _ngcontent-ng-cli-universal-c1="" alt="image" class="rounded-circle bg-success" style="
-                height: 36px;
-                width: 36px;
-                padding: 8px 12px;">
-                <i _ngcontent-ng-cli-universal-c1="" alt="image" class="fa fa-user-o"></i>
-            </div>          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-            <span class="block m-t-xs font-bold">{{currentUser.fullname}}</span>
-            <span class="text-muted text-xs block">{{currentUser.role}}<b class="caret"></b></span>
-          </a>
-          <ul class="dropdown-menu animated fadeInRight m-t-xs">
-              <li *ngIf="!currentUser.isAdmin"><a class="dropdown-item" [routerLink]='["/agent-profile/", currentUser.agentId]'>Profile</a></li>
-              <li><a class="dropdown-item" [routerLink]='["/edit-password/"]'>Update Password</a></li>
-              <li class="dropdown-divider"></li>
-              <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
-          </ul>
-        </div>
-        <div class="logo-element">
-          IN+
-        </div>
-      </li>
-      <li class="treeview">
-          <a [routerLink]='["/home"]'><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
-      </li>
-      <li class="treeview">
-          <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Orders</span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li><a [routerLink]='["/create-order"]'><span class="nav-label">New Order</span></a></li>
-              <li><a [routerLink]='["/view-order"]'><span class="nav-label">View Orders</span></a></li>
-              <li><a [routerLink]='["/view-complete-app"]'><span class="nav-label">View Completed Orders</span></a></li>
-          </ul>
-      </li>
-      <li class="treeview">
-          <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Agents</span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-registration-list"]'><span class="nav-label">Agent Registrations</span></a></li>
-              <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-maintenance"]'><span class="nav-label">Agents Maintenance</span></a></li>
-              <li><a [routerLink]='["/agent-comission"]'><span class="nav-label">Agent Commissions</span></a></li>
-              <li><a [routerLink]='["/reset-agent-password"]' [ngClass]="{'hidden' : !currentUser.hasFullControl}"><span class="nav-label">Reset Agent Password</span></a></li>
-          </ul>
-      </li>
-      <li class="treeview">
-          <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li><a [routerLink]='["/view-withdrawal"]'><span class="nav-label">View Withdrawal</span></a></li>
-              <li><a [routerLink]='["/create-withdrawal"]'><span class="nav-label">Submit Withdrawal</span></a></li>
-              <li [ngClass]="{'hidden' : !currentUser.isAdmin}"><a [routerLink]='["/agent-pocket"]'><span class="nav-label">Agent Pocket Flow</span></a></li>
-              <li><a [routerLink]='["/manage-clawback"]'><span class="nav-label">Debit Note</span></a></li>
-          </ul>
-      </li>
-      <li class="treeview" [ngClass]="{'hidden' : !currentUser.isAdmin}">
-          <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-edit"></i> <span class="nav-label">Manage Incentives</span></a>
-          <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li><a [routerLink]='["/upload-incentives"]'><span class="nav-label">Upload Incentives</span></a></li>
-              <li><a [routerLink]='["/view-incentives"]'><span class="nav-label">View Incentives</span></a></li>
-          </ul>
-      </li>
-      <li class="treeview" [ngClass]="{'hidden' : !currentUser.isAdmin}">
-          <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
-          <ul class="nav nav-second-level collapse treeview-menu" aria-expanded="false" style="height: 0px;">
-              <li><a [routerLink]='["/admin-access"]'><span class="nav-label">Admin Access</span></a></li>
-              <li><a [routerLink]='["/manage-product"]'><span class="nav-label">Manage Products</span></a></li>
-              <li><a [routerLink]='["/manage-packages"]'><span class="nav-label">Manage Packages</span></a></li>
-              <li><a [routerLink]='["/manage-category"]'><span class="nav-label">Manage Category</span></a></li>
-              <li><a [routerLink]='["/view-announcement"]'><span class="nav-label">Manage Announcement</span></a></li>
-              <li><a [routerLink]='["/manage-login-banner"]'><span class="nav-label">Manage Login Banner</span></a></li>
-          </ul>
-      </li>
-    </ul>
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu" data-widget="tree">
+            <li class="nav-header w-p100">
+                <div class="dropdown profile-element">
+                    <div _ngcontent-ng-cli-universal-c1="" alt="image" class="rounded-circle bg-success" style="
+            height: 36px;
+            width: 36px;
+            padding: 8px 12px;">
+                        <i _ngcontent-ng-cli-universal-c1="" alt="image" class="fa fa-user-o"></i>
+                    </div>          <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold">{{currentUser.fullname}}</span>
+                        <span class="text-muted text-xs block">{{currentUser.role}}<b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                        <li *ngIf="!currentUser.isAdmin"><a class="dropdown-item" [routerLink]='["/agent-profile/", currentUser.agentId]'>Profile</a></li>
+                        <li><a class="dropdown-item" [routerLink]='["/edit-password/"]'>Update Password</a></li>
+                        <li class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" (click)="logout()">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    BZ+
+                </div>
+            </li>
+            <li [ngClass]="{'active': menuClickedIndex == 1}" (click)="menuClickedIndex = 1">
+                <a [routerLink]='["/home"]'><i class="fa fa-home"></i> <span class="nav-label">Home</span></a>
+            </li>
+            <li [ngClass]="{'active': menuClickedIndex == 2}" (click)="menuClickedIndex = 2">
+                <a href="#"><i class="fa fa-desktop"></i> <span class="nav-label">Manage Orders</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 2}">
+                    <li><a [routerLink]='["/create-order"]'>New Order</a></li>
+                    <li><a [routerLink]='["/view-order"]'>View Orders</a></li>
+                    <li><a [routerLink]='["/view-complete-app"]'>View Completed Orders</a></li>
+                </ul>
+            </li>
+            <li  [ngClass]="{'active': menuClickedIndex == 3}" (click)="menuClickedIndex = 3">
+                <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Agents</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 3}">
+                    <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-registration-list"]'>Agent Registrations</a></li>
+                    <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-maintenance"]'>Agents Maintenance</a></li>
+                    <li><a [routerLink]='["/agent-comission"]'>Agent Commissions</a></li>
+                    <li><a [routerLink]='["/reset-agent-password"]' [ngClass]="{'hidden' : !currentUser.hasFullControl}">Reset Agent Password</a></li>
+                </ul>
+            </li>
+            <li  [ngClass]="{'active': menuClickedIndex == 4}" (click)="menuClickedIndex = 4">
+                <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 4}">
+                    <li><a [routerLink]='["/view-withdrawal"]'>View Withdrawal</a></li>
+                    <li><a [routerLink]='["/create-withdrawal"]'>Submit Withdrawal</a></li>
+                    <li [ngClass]="{'hidden' : !currentUser.isAdmin}"><a [routerLink]='["/agent-pocket"]'>Agent Pocket Flow</a></li>
+                    <li><a [routerLink]='["/manage-clawback"]'>Debit Note</a></li>
+                </ul>
+            </li>
+            <li [ngClass]="{'hidden' : !currentUser.isAdmin, 'active': menuClickedIndex == 5}" (click)="menuClickedIndex = 5">
+                <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-money"></i> <span class="nav-label">Manage Incentives</span></a>
+                <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 5}">
+                    <li><a [routerLink]='["/upload-incentives"]'>Upload Incentives</a></li>
+                    <li><a [routerLink]='["/view-incentives"]'>View Incentives</a></li>
+                </ul>
+            </li>
+            <li [ngClass]="{'hidden' : !currentUser.isAdmin, 'active': menuClickedIndex == 6}" (click)="menuClickedIndex = 6">
+                <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 6}">
+                    <li><a [routerLink]='["/admin-access"]'>Admin Access</a></li>
+                    <li><a [routerLink]='["/manage-product"]'>Manage Products</a></li>
+                    <li><a [routerLink]='["/manage-packages"]'>Manage Packages</a></li>
+                    <li><a [routerLink]='["/manage-category"]'>Manage Category</a></li>
+                    <li><a [routerLink]='["/view-announcement"]'>Manage Announcement</a></li>
+                    <li><a [routerLink]='["/manage-login-banner"]'>Manage Login Banner</a></li>
+                </ul>
+            </li>
+        </ul>
 
-  </div>
+    </div>
 </nav>
+

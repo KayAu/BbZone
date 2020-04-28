@@ -1582,6 +1582,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="Int32" Name="TotalUnreadMsg" Nullable="true" />
           <Property Type="Boolean" Name="CommIsConfigured" Nullable="true" />
           <Property Type="Boolean" Name="OddClaimed" Nullable="true" />
+          <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="UserId" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="CustomerRemarks" Nullable="true" MaxLength="500" />
         </ComplexType>
         <ComplexType Name="GetDropdownItems_Result">
           <Property Type="String" Name="Item" Nullable="true" MaxLength="8000" />
@@ -2209,7 +2213,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="ContactNo" Nullable="false" MaxLength="25" />
           <Property Type="String" Name="Email" Nullable="false" MaxLength="35" />
           <Property Type="String" Name="CustomerRemarks" Nullable="true" MaxLength="500" />
-          <Property Type="String" Name="AdminRemarks" Nullable="true" MaxLength="500" />
           <Property Type="String" Name="Status" Nullable="false" MaxLength="35" />
           <Property Type="Boolean" Name="IsProcessed" Nullable="true" />
           <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
@@ -2697,6 +2700,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="TotalUnreadMsg" ColumnName="TotalUnreadMsg" />
                 <ScalarProperty Name="CommIsConfigured" ColumnName="CommIsConfigured" />
                 <ScalarProperty Name="OddClaimed" ColumnName="OddClaimed" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="TelNo" ColumnName="TelNo" />
+                <ScalarProperty Name="CustomerRemarks" ColumnName="CustomerRemarks" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3367,7 +3374,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="CustomerRemarks" ColumnName="CustomerRemarks" />
-                <ScalarProperty Name="AdminRemarks" ColumnName="AdminRemarks" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IsProcessed" ColumnName="IsProcessed" />
                 <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />

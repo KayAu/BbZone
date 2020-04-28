@@ -20,3 +20,14 @@ export class SearchFieldMapping {
 
     ) { }
 }
+
+export class FormDataGroupMapping {
+
+    constructor(
+        public fieldName: string,
+        public displayText: string,
+        public hidden: boolean,
+        public groupName: string,
+        public dataFieldControl?: DataFieldControl
+    ) { }
+}

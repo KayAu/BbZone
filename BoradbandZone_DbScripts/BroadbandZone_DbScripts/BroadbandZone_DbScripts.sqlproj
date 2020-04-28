@@ -85,7 +85,6 @@
     <Build Include="dbo\Tables\DropdownItems.sql" />
     <Build Include="dbo\Functions\fnSplit.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetDropdownItems.sql" />
-    <Build Include="dbo\Stored Procedures\prc_GetCustomerOrder.sql" />
     <Build Include="dbo\Functions\Split_On_Upper_Case.sql" />
     <Build Include="dbo\Tables\Registration.sql" />
     <Build Include="dbo\Stored Procedures\prc_GenerateEncryptedPwd.sql" />

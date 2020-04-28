@@ -11,6 +11,7 @@ import { AuthenticationService } from '../services/authentication';
 
 export class NavMenuComponent {
     isExpanded = false;
+    menuClickedIndex: number;
     @Input() currentUser: LoginUser = new LoginUser();
     
     constructor(private router: Router, private authenticationService: AuthenticationService) { }

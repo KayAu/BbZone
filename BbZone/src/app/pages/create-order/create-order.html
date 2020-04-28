@@ -12,52 +12,71 @@
                 </div>
                 <div class="ibox-content">
                     <loading></loading>
-                    <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">
-                            Product
-                        </label>
-                        <div class="col-sm-10">
-                            <product-options [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
-                        </div>
-                    </div>
-                    <div class="hr-line-dashed"></div>
                     <form #createOrderForm="ngForm" (ngSubmit)="create()">
-                        <!--PRODUCT TYPES-->
-                        <ng-container *ngFor="let field of formFields">
-                            <div class="form-group row" *ngIf="!field.hidden">
-                                <label class="col-sm-2 col-form-label">
-                                    {{field.displayText}}
-                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
-                                </label>
-                                <div class="col-sm-10">
-                                    <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}"></data-control>
-
-                                    <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                        <div class="row order-form">
+                            <!--APPLICATION DETAILS-->
+                            <div class="col-sm-6 b-r">
+                                <div class="form-group row mrg5B">
+                                    <label class="col-sm-4 col-form-label">
+                                        Product
+                                    </label>
+                                    <div class="col-sm-8">
+                                        <product-options [(ngModel)]="selectedProduct" (onProductSelected)="loadCategories()"></product-options>
+                                    </div>
+                                </div>
+                                <!--CUSTOMER INFO-->
+                                <ng-container *ngFor="let field of applicationFields">
+                                    <div class="form-group row mrg5B">
+                                        <label class="col-sm-4 col-form-label">
+                                            {{field.displayText}}
+                                            <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                          [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                            <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                          [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <!--ATTACH REQUIRED DOCUMENTS-->
+                                <div class="form-group row mrg5B">
+                                    <label class="col-sm-4 col-form-label">Attach required documents</label>
+                                    <div class="col-sm-8">
+                                        <file-uploader name="relDoc" [(ngModel)]="newRecord['files']"></file-uploader>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="hr-line-dashed" *ngIf="!field.hidden"></div>
-                        </ng-container>
-                        <!--ATTACH REQUIRED DOCUMENTS-->
-                        <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">Attach required documents</label>
-                            <div class="col-sm-10">
-                                <file-uploader name="relDoc" [(ngModel)]="newRecord['files']"></file-uploader>
+                            <!--ORDER DETAILS-->
+                            <div class="col-sm-6">
+                                <ng-container *ngFor="let field of orderFields">
+                                    <div class="form-group row mrg5B" *ngIf="!field.hidden">
+                                        <label class="col-sm-4 col-form-label">
+                                            {{field.displayText}}
+                                            <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                        </label>
+                                        <div class="col-sm-8">
+                                            <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                          [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                            <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                          [field]="field.dataFieldControl" [parentForm]="createOrderForm" name="{{field.dataFieldControl.controlName}}" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                                <!--SAVE OR CANCEL-->
+                                <div class="form-group row mrg20T">
+                                    <div class="col-sm-12 text-right">
+                                        <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
+                                                [disabled]="isUpdating" style="width: 180px;">
+                                            {{isUpdating ? 'Saving' : 'Save'}}
+                                            <span class="loading"></span>
+                                        </button>
+                                        <back-button>Cancel</back-button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <!--SAVE OR CANCEL-->
-                        <div class="form-group row">
-                            <div class="col-sm-12 text-right">
-                                <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
-                                        [disabled]="isUpdating" style="width: 180px;">
-                                    {{isUpdating ? 'Saving' : 'Save'}}
-                                    <span class="loading"></span>
-                                </button>
-                                <back-button>Cancel</back-button>
-                            </div>
-                        </div>
+
                     </form>
                 </div>
             </div>

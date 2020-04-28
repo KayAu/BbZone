@@ -28,7 +28,8 @@ var EditOrder = /** @class */ (function () {
         this.router = router;
         this.route = route;
         this.authenticationService = authenticationService;
-        this.formFields = [];
+        this.applicationFields = [];
+        this.orderFields = [];
         this.displayFields = [];
         this.formRecord = {};
         this.isUpdating = false;
@@ -41,12 +42,13 @@ var EditOrder = /** @class */ (function () {
         this.recordId = this.route.snapshot.params.id;
         this.loadRecord(this.route.snapshot.params.id);
         var dataFields = this.getFormFeldsMapping();
-        this.formFields = dataFields.filter(function (c) { return c.dataFieldControl.controlType !== _this.controlType.label; });
         this.displayFields = dataFields.filter(function (c) { return c.dataFieldControl.controlType === _this.controlType.label; });
+        this.applicationFields = dataFields.filter(function (c) { return c.groupName === 'application' && c.dataFieldControl.controlType !== _this.controlType.label; });
+        this.orderFields = dataFields.filter(function (c) { return c.groupName === 'orderInfo'; });
     };
     EditOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = editOrderFields_1.EditOrderFields.fields.map(function (o) {
-            return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null : new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null));
+            return new form_data_mapping_1.FormDataGroupMapping(o.fieldName, o.displayText, o.hidden, o.groupName, !o.dataFieldControl ? null : new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null));
         });
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
@@ -81,16 +83,16 @@ var EditOrder = /** @class */ (function () {
         var updateFields = ["orderNo", "userId", "telNo", "eForm"];
         for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
             var field = updateFields_1[_i];
-            var index = this.formFields.findIndex(function (i) { return i.fieldName == field; });
-            if (this.formFields[index])
-                this.formFields[index].hidden = !show;
+            var index = this.orderFields.findIndex(function (i) { return i.fieldName == field; });
+            if (this.orderFields[index])
+                this.orderFields[index].hidden = !show;
         }
     };
     EditOrder.prototype.showEForm = function (show) {
         if (!show)
             show = false;
-        var index = this.formFields.findIndex(function (i) { return i.fieldName == "eForm"; });
-        this.formFields[index].hidden = !show;
+        var index = this.orderFields.findIndex(function (i) { return i.fieldName == "eForm"; });
+        this.orderFields[index].hidden = !show;
     };
     EditOrder.prototype.checkCommissionSettings = function () {
         var _this = this;

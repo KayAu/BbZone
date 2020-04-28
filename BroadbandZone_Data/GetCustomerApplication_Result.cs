@@ -24,5 +24,9 @@ namespace BroadbandZone_Data
         public Nullable<int> TotalUnreadMsg { get; set; }
         public Nullable<bool> CommIsConfigured { get; set; }
         public Nullable<bool> OddClaimed { get; set; }
+        public string OrderNo { get; set; }
+        public string UserId { get; set; }
+        public string TelNo { get; set; }
+        public string CustomerRemarks { get; set; }
     }
 }

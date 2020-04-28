@@ -54,7 +54,6 @@ BEGIN
 			  ,ca.ContactNo
 			  ,ca.Email
 			  ,ca.CustomerRemarks
-			  ,ca.AdminRemarks
 			  ,a.Status
 			  ,ca.IsProcessed
 			  ,ca.OrderNo

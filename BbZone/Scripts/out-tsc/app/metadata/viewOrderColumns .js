@@ -16,7 +16,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Customer Name",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "residentialName",
@@ -30,7 +30,7 @@ var ViewOrderColumns = /** @class */ (function () {
             "headerText": "Product Package",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "category",
@@ -40,6 +40,13 @@ var ViewOrderColumns = /** @class */ (function () {
             "colWidth": "cell-width-15"
         },
         {
+            "fieldName": "agent",
+            "headerText": "Agent",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
             "fieldName": "orderNo",
             "headerText": "Order No",
             "displayType": "text",
@@ -47,8 +54,22 @@ var ViewOrderColumns = /** @class */ (function () {
             "colWidth": ""
         },
         {
-            "fieldName": "agent",
-            "headerText": "Agent",
+            "fieldName": "userId",
+            "headerText": "User Id",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+        {
+            "fieldName": "telNo",
+            "headerText": "Tel No",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": ""
+        },
+        {
+            "fieldName": "customerRemarks",
+            "headerText": "Remarks",
             "displayType": "text",
             "keyField": false,
             "colWidth": "cell-width-10"

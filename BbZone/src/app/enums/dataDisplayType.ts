@@ -27,3 +27,8 @@ export enum CommissionTableDisplay {
     currentAgent,
     allAgents
 }
+
+export enum CustomerOrderDataGroup {
+    application,
+    orderInfo
+}

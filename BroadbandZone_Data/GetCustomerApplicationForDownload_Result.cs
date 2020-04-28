@@ -30,7 +30,6 @@ namespace BroadbandZone_Data
         public string ContactNo { get; set; }
         public string Email { get; set; }
         public string CustomerRemarks { get; set; }
-        public string AdminRemarks { get; set; }
         public string Status { get; set; }
         public Nullable<bool> IsProcessed { get; set; }
         public string OrderNo { get; set; }

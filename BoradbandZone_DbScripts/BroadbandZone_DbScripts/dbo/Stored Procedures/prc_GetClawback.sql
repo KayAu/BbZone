@@ -68,7 +68,7 @@ BEGIN
 					 ELSE 0
 				END
 		AND 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
-					WHEN ca.Agent LIKE '%' + @prSearchKeyword + '%' OR ca.CustomerName LIKE '%' + @prSearchKeyword + '%' THEN 1
+					WHEN a.UserLogin LIKE '%' + @prSearchKeyword + '%' OR ca.CustomerName LIKE '%' + @prSearchKeyword + '%' THEN 1
 					WHEN ca.OrderNo LIKE '%' + @prSearchKeyword + '%' THEN 1
 					ELSE 0
 				END
