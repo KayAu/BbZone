@@ -31,10 +31,10 @@
                 <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 2}">
                     <li><a [routerLink]='["/create-order"]'>New Order</a></li>
                     <li><a [routerLink]='["/view-order"]'>View Orders</a></li>
-                    <li><a [routerLink]='["/view-complete-app"]'>View Completed Orders</a></li>
+                    <li><a [routerLink]='["/view-complete-app"]' *ngIf="currentUser.role != 'Admin'">View Completed Orders</a></li>
                 </ul>
             </li>
-            <li  [ngClass]="{'active': menuClickedIndex == 3}" (click)="menuClickedIndex = 3">
+            <li  [ngClass]="{'active': menuClickedIndex == 3}" (click)="menuClickedIndex = 3" *ngIf="currentUser.role != 'Admin'">
                 <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Manage Agents</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 3}">
                     <li [ngClass]="{'hidden' : !currentUser.hasFullControl}"><a [routerLink]='["/agent-registration-list"]'>Agent Registrations</a></li>
@@ -43,7 +43,7 @@
                     <li><a [routerLink]='["/reset-agent-password"]' [ngClass]="{'hidden' : !currentUser.hasFullControl}">Reset Agent Password</a></li>
                 </ul>
             </li>
-            <li  [ngClass]="{'active': menuClickedIndex == 4}" (click)="menuClickedIndex = 4">
+            <li  [ngClass]="{'active': menuClickedIndex == 4}" (click)="menuClickedIndex = 4" *ngIf="currentUser.role != 'Admin'">
                 <a href="#"><i class="fa fa-edit"></i> <span class="nav-label">Manage Withdrawal</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 4}">
                     <li><a [routerLink]='["/view-withdrawal"]'>View Withdrawal</a></li>
@@ -52,14 +52,14 @@
                     <li><a [routerLink]='["/manage-clawback"]'>Debit Note</a></li>
                 </ul>
             </li>
-            <li [ngClass]="{'hidden' : !currentUser.isAdmin, 'active': menuClickedIndex == 5}" (click)="menuClickedIndex = 5">
+            <li [ngClass]="{'active': menuClickedIndex == 5}" (click)="menuClickedIndex = 5" *ngIf="currentUser.role == 'SuperAdmin'">
                 <a [routerLink]='["/manage-withdrawal"]'><i class="fa fa-money"></i> <span class="nav-label">Manage Incentives</span></a>
                 <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 5}">
                     <li><a [routerLink]='["/upload-incentives"]'>Upload Incentives</a></li>
                     <li><a [routerLink]='["/view-incentives"]'>View Incentives</a></li>
                 </ul>
             </li>
-            <li [ngClass]="{'hidden' : !currentUser.isAdmin, 'active': menuClickedIndex == 6}" (click)="menuClickedIndex = 6">
+            <li (click)="menuClickedIndex = 6" *ngIf="currentUser.role == 'SuperAdmin'">
                 <a href="#"><i class="fa fa-cog"></i> <span class="nav-label">Administration</span><span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level collapse" [ngClass]="{'in': menuClickedIndex == 6}">
                     <li><a [routerLink]='["/admin-access"]'>Admin Access</a></li>

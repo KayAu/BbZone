@@ -76,7 +76,7 @@ namespace BroadbandZone_App.WebApi
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 // get the form data contents
-                var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
+                var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.RegistrationFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
 
                 // save new customer order 
@@ -126,12 +126,22 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-        // PUT api/<controller>/5
-        public IHttpActionResult Put(int id, [FromBody] Registration editedRecord)
+        public async Task<IHttpActionResult> Put(int id)
         {
             try
             {
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+
+                // get the form data contents
+                var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.RegistrationFilePath));
+                var result = await Request.Content.ReadAsMultipartAsync(provider);
+
+                Registration editedRecord = JsonConvert.DeserializeObject<Registration>(result.FormData["data"]);
+                RemoveUnwantedFiles(editedRecord.RegistrationDocuments);
+
+                // save uploaded file details to database
+                SaveUploadedFilePath(result.FileData, id);
+
                 using (var db = new BroadbandZoneEntities())
                 {
                     if (editedRecord.IsApproved != null)
@@ -139,7 +149,7 @@ namespace BroadbandZone_App.WebApi
                         editedRecord.ApprovalDate = DateTime.Now;
                         editedRecord.ApprovedBy = currentUser.Username;
                     }
-
+                    editedRecord.RegistrationDocuments = null;
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
 
@@ -151,7 +161,7 @@ namespace BroadbandZone_App.WebApi
                     }
 
                     return Ok(editedRecord);
-                }
+                }    
             }
             catch (Exception ex)
             {
@@ -160,6 +170,67 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
-   
+        private void RemoveUnwantedFiles(ICollection<RegistrationDocument> agentDocs)
+        {
+            try
+            {
+                FileHelper fileUploadHelper = new FileHelper(Properties.Settings.Default.RegistrationFilePath);
+
+                using (var db = new BroadbandZoneEntities())
+                {
+                    foreach (RegistrationDocument doc in agentDocs)
+                    {
+                        if (doc.Deleted.HasValue && doc.Deleted == true)
+                        {
+                            db.RegistrationDocuments.Remove(db.RegistrationDocuments.Find(doc.RegId));
+                            db.SaveChanges();
+
+                            // remove file from disk
+                            fileUploadHelper.RemoveFile(doc.Name);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
+
+        //// PUT api/<controller>/5
+        //public IHttpActionResult Put(int id, [FromBody] Registration editedRecord)
+        //{
+        //    try
+        //    {
+        //        AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+        //        using (var db = new BroadbandZoneEntities())
+        //        {
+        //            if (editedRecord.IsApproved != null)
+        //            {
+        //                editedRecord.ApprovalDate = DateTime.Now;
+        //                editedRecord.ApprovedBy = currentUser.Username;
+        //            }
+
+        //            db.Entry(editedRecord).State = EntityState.Modified;
+        //            db.SaveChanges();
+
+        //            if (editedRecord.IsApproved == true)
+        //            {
+        //                ObjectParameter activationCode = new ObjectParameter("oActivationCode", typeof(string));
+        //                db.GenerateActivationCode(editedRecord.RegId, activationCode);
+        //                MailHelper.SendActivationEmail(editedRecord.Email, editedRecord.Fullname, activationCode.Value);
+        //            }
+
+        //            return Ok(editedRecord);
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+        //        return Content(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //}
+
+
     }
 }

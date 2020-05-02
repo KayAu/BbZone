@@ -13,6 +13,7 @@ BEGIN
 			ModifiedBy = @prModifiedBy,
 			ModifiedOn = GETDATE()
 		WHERE WithdrawalId = @prWithdrawalId
+		AND Status <> 'Rejected'
 
 		UPDATE AgentPocket
 		SET WithdrawalId = NULL

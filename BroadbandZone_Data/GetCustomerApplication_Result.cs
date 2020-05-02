@@ -26,7 +26,7 @@ namespace BroadbandZone_Data
         public Nullable<bool> OddClaimed { get; set; }
         public string OrderNo { get; set; }
         public string UserId { get; set; }
-        public string TelNo { get; set; }
         public string CustomerRemarks { get; set; }
+        public string CompanyName { get; set; }
     }
 }

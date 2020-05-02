@@ -58,18 +58,28 @@ export class AgentRegistrationView {
         if (!this.form.valid) return;
 
         this.isUpdating = true;
-
-        this.dataService.update(ApiController.Registration, this.applicationId, this.formRecord).subscribe(data => {
+        this.dataService.updateForm(ApiController.Registration, this.applicationId, this.getFormData()).subscribe(data => {
             this.isUpdating = false;
             this.router.navigate(['/agent-registration-list']);
         });
     }
 
+    private getFormData(): FormData {
+        const formData = new FormData();
+        formData.append('data', JSON.stringify(this.formRecord));
+
+        if (this.formRecord.registrationDocuments) {
+            for (var i = 0; i < this.formRecord.registrationDocuments.length; i++) {
+                formData.append("file" + i, this.formRecord.registrationDocuments[i]);
+            }
+        }
+        return formData;
+    }
+
     private loadRecord(recordId: number) {
-        //  return Ok(new { RegistrationDetails = record, RegistrationDocuments = registrationDocuments });
         this.dataService.get(ApiController.Registration, recordId).subscribe(data => {
             this.formRecord = data.registrationDetails;
-            this.registrationDocuments = data.registrationDocuments;
+            this.formRecord.registrationDocuments = data.registrationDocuments;
         });
     }
 

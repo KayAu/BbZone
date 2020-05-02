@@ -210,6 +210,9 @@
     <Compile Include="GetRegistrationDetails_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="GetWithdrawalById_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="GetWithdrawalItems_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
@@ -239,6 +242,9 @@
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="prc_GetCompletedCustomerApplication_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prc_GetWithdrawalById_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
     <Compile Include="prc_TerminateWithdrawal_Result.cs">

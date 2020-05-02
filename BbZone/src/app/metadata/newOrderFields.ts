@@ -146,6 +146,7 @@ public static fields = [
         "fieldName": "postcode",
         "displayText": "Postcode",
         "hidden": false,
+        "groupName": "application",
         "dataFieldControl": {
             "controlName": "postcode",
             "controlType": "textbox",
@@ -214,6 +215,21 @@ public static fields = [
             "maxLength": 0,
             "datasourceUrl": null,
             "cascadeTo": null,
+            "adminField": false
+        }
+    },
+    {
+        "fieldName": "submitByAgent",
+        "displayText": "Submitted By Agent",
+        "hidden": false,
+        "groupName": "orderInfo",
+        "dataFieldControl": {
+            "controlName": "submitByAgent",
+            "controlType": "checkbox",
+            "required": false,
+            "maxLength": 0,
+            "datasourceUrl": null,
+            "cascadeTo": null,
             "adminField": false,
             "dataChangedEvent": "showProcessedDetails"
         }
@@ -277,22 +293,7 @@ public static fields = [
             "cascadeTo": null,
             "adminField": false
         }
-    },
-    {
-        "fieldName": "submitByAgent",
-        "displayText": "Submitted By Agent",
-        "hidden": false,
-        "groupName": "orderInfo",
-        "dataFieldControl": {
-            "controlName": "submitByAgent",
-            "controlType": "checkbox",
-            "required": false,
-            "maxLength": 0,
-            "datasourceUrl": null,
-            "cascadeTo": null,
-            "adminField": false
-        }
-    },
+    }
 ]
 
 }

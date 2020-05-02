@@ -37,6 +37,6 @@ namespace BroadbandZone_Data
         public Nullable<System.DateTime> ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
         public string SuperiorName { get; set; }
-        public Nullable<int> LoginCount { get; set; }
+        public string LastLoginOn { get; set; }
     }
 }

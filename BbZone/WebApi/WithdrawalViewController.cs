@@ -111,13 +111,13 @@ namespace BroadbandZone_App.WebApi
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    var withdrawal = db.Withdrawals.Include(w => w.WithdrawalItems).Where(w=>w.WithdrawalId == id).FirstOrDefault();
-                    withdrawal.AllowEdit = !currentUser.IsAdmin ||
-                                            withdrawal.Status == WithdrawalStatus.Completed.ToString() ||
-                                            withdrawal.Status == WithdrawalStatus.Rejected.ToString() ||
-                                            withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
-                    withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
-   
+                    //var withdrawal = db.Withdrawals.Include(w => w.WithdrawalItems).Where(w=>w.WithdrawalId == id).FirstOrDefault();
+                    //withdrawal.AllowEdit = !currentUser.IsAdmin ||
+                    //                        withdrawal.Status == WithdrawalStatus.Completed.ToString() ||
+                    //                        withdrawal.Status == WithdrawalStatus.Rejected.ToString() ||
+                    //                        withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
+                    //withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
+                    var withdrawal = db.GetWithdrawalById(id, currentUser.IsAdmin).FirstOrDefault();
                     return Ok(withdrawal);
                 }
             }

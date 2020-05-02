@@ -32,7 +32,9 @@ BEGIN
 		UserId VARCHAR(25),
 		Agent VARCHAR(50),
 		DocumentCompleted BIT,
-		CommAmount VARCHAR (20),
+		PackageComm VARCHAR(20),
+		AgentCommPer VARCHAR(20),
+		AgentCommAmount VARCHAR(20),
 		CommStatus VARCHAR (50),
 		PaymentNo INT,
 		PaidOn SMALLDATETIME,
@@ -54,9 +56,10 @@ BEGIN
 			  ,ca.UserId
 			  ,a.UserLogin
 			  ,ca.DocumentCompleted
-			  ,CommAmount = CASE WHEN @prIsAdmin <> 1 THEN 'RM0'
-			                     WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
-								 ELSE NULL END
+			  ,PackageComm = FORMAT(cc.PackageCommOnDate,'c','ms-MY')
+			  ,AgentCommPer = cc.AgentCommOnDate
+			 -- ,AgentCommAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY') ELSE 'RM0' END
+			  ,AgentCommAmount = FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
 			  ,CommStatus = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 'Odd Claim'
 								 WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'
@@ -144,7 +147,9 @@ BEGIN
 			UserId,
 			Agent,
 			DocumentCompleted,
-			CommAmount,
+			PackageComm,
+			AgentCommPer,
+			AgentCommAmount,
 			CommStatus,
 			PaymentNo,
 			PaidOn = FORMAT(PaidOn, 'MM/dd/yyyy')

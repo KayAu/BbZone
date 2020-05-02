@@ -22,7 +22,8 @@
     <select *ngSwitchCase="field.controlType === controlType.select || field.controlType === controlType.cascadeDropdown ? field.controlType  : -1"
             id="{{fieldId}}" name="{{fieldId}}" class="form-control form-control-sm" [required]="field.required" [disabled]="disabled"
             [(ngModel)]="data" (ngModelChange)="setChanges()">
-        <option [ngValue]="null" *ngIf="!onEdit">Please select</option>
+        <option [ngValue]="null" *ngIf="!onEdit && !forDataFilter">Please select</option>
+        <option [ngValue]="null" *ngIf="!onEdit && forDataFilter">All</option>
         <option *ngFor="let option of dropdownItems" [ngValue]="option.key.toString()">{{option.value}}</option>
     </select>
     <!-- CHECKBOX -->

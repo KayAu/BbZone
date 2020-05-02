@@ -15,8 +15,10 @@
     [ModifiedOn]     SMALLDATETIME NOT NULL,
     [ModifiedBy]     VARCHAR (50)  NOT NULL,
     CONSTRAINT [PK__Withdraw__7C842C6EE2C59B26] PRIMARY KEY CLUSTERED ([WithdrawalId] ASC),
-    CONSTRAINT [CK_WithdrawalStatus] CHECK ([Status]='Pending' OR [Status]='Processing' OR [Status]='Terminated' OR [Status]='Completed' OR [Status]='OnHold')
+    CONSTRAINT [CK_WithdrawalStatus] CHECK ([Status]='Pending' OR [Status]='Processing' OR [Status]='Terminated' OR [Status]='Completed' OR [Status]='Rejected')
 );
+
+
 
 
 

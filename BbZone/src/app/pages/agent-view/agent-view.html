@@ -43,7 +43,7 @@
                         <div class="col-lg-5" id="cluster_info">
                             <div class="row mrg5B">
                                 <div class="col-sm-3 col-md-3 text-right">
-                                    <label>Last Updated:</label>
+                                    <label>Last Updated On:</label>
                                 </div>
                                 <div class="col-sm-9 col-md-9 text-left">
                                     <div class="mb-1">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>
@@ -59,10 +59,10 @@
                             </div>
                             <div class="row mrg5B">
                                 <div class="col-sm-3 col-md-3 text-right">
-                                    <label>Login Counts:</label>
+                                    <label>Last Login Date:</label>
                                 </div>
                                 <div class="col-sm-9 col-md-9 text-left">
-                                    {{formRecord.loginCount}}
+                                    {{formRecord.lastLoginOn}}
                                 </div>
                             </div>
                         </div>

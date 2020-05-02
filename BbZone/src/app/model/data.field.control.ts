@@ -8,7 +8,8 @@ export class DataFieldControl {
               public datasourceUrl?: string,
               public cascadeTo?: string,
               public adminField?: boolean,
-              public dataChangedEvent? :string
+              public dataChangedEvent?: string,
+              public readonly?: boolean
   ) { }
 
 }

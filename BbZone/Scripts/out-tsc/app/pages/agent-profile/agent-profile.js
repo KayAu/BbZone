@@ -42,6 +42,8 @@ var AgentProfile = /** @class */ (function () {
         this.agentId = this.route.snapshot.params.id;
         this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
+        if (!this.currentUser.isAdmin)
+            this.setReadonlyFields();
         this.loadRecord();
     };
     AgentProfile.prototype.getFormFeldsMapping = function () {
@@ -69,6 +71,12 @@ var AgentProfile = /** @class */ (function () {
             _this.formRecord = results;
             _this.superiorField.editable = !_this.formRecord.superiorId || _this.currentUser.isAdmin ? true : false;
         });
+    };
+    AgentProfile.prototype.setReadonlyFields = function () {
+        var bankNameFldIdx = this.formFields.findIndex(function (f) { return f.fieldName == 'bankName'; });
+        var bankAccNoFldIdx = this.formFields.findIndex(function (f) { return f.fieldName == 'bankAccNo'; });
+        this.formFields[bankNameFldIdx].dataFieldControl.readonly = true;
+        this.formFields[bankAccNoFldIdx].dataFieldControl.readonly = true;
     };
     AgentProfile.prototype.setControlsAsTouched = function () {
         for (var i in this.form.controls) {

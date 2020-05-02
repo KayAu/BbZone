@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label class="col-form-label" for="product_name">{{field.displayText}}</label>
                         <data-control [(ngModel)]="searchParams[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                      [field]="field.dataFieldControl" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                      [field]="field.dataFieldControl" [forDataFilter]="true" name="{{field.dataFieldControl.controlName}}"></data-control>
                     </div>
                 </div>
             </ng-container>
@@ -62,10 +62,18 @@
                                             </td>
                                         </ng-container>
                                         <td>
-                                            <a class="btn btn-success btn-xs" [routerLink]='["/edit-withdrawal/", record[keyField]]' ><i class="fa fa-file-text-o"></i></a>
+                                            <a class="btn btn-success btn-xs" [routerLink]='["/edit-withdrawal/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
                                             <a class="btn btn-info btn-xs mrg5L" href="/api/PaymentVoucher/Print/{{record[keyField]}}" [class.disabled]="record.status != 'Completed'" title="Print is only available once the submitted withdrawal is approved.">
                                                 <i class="fa fa-print"></i>
                                             </a>
+                                        </td>
+                                    </tr>
+                                    <tr *ngIf="dataSource.length === 0">
+                                        <td [attr.colspan]="dataRowMapper.length+1">
+                                            <div class="mrg45A text-center opacity-40">
+                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                <h4>No Records Available</h4>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>

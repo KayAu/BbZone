@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label class="col-form-label" for="product_name">{{field.displayText}}</label>
                     <data-control [(ngModel)]="searchParams[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                  [field]="field.dataFieldControl" name="{{field.dataFieldControl.controlName}}" ></data-control>
+                                  [field]="field.dataFieldControl" [forDataFilter]="true" name="{{field.dataFieldControl.controlName}}" ></data-control>
                 </div>
             </div>
             <div class="col-sm-2">

@@ -16,6 +16,7 @@ namespace BroadbandZone_Data
         public int ApplicationId { get; set; }
         public string Category { get; set; }
         public string PackageName { get; set; }
+        public string Commission { get; set; }
         public string Agent { get; set; }
         public string CompanyName { get; set; }
         public string CompanyRegNo { get; set; }

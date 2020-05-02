@@ -20,7 +20,7 @@
                                 </label>
                                 <div class="col-sm-9">
                                     <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" [readonly]="field.dataFieldControl.readonly" name="{{field.dataFieldControl.controlName}}"></data-control>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>

@@ -51,17 +51,26 @@ var AgentRegistrationView = /** @class */ (function () {
         if (!this.form.valid)
             return;
         this.isUpdating = true;
-        this.dataService.update(apiController_1.ApiController.Registration, this.applicationId, this.formRecord).subscribe(function (data) {
+        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.applicationId, this.getFormData()).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/agent-registration-list']);
         });
     };
+    AgentRegistrationView.prototype.getFormData = function () {
+        var formData = new FormData();
+        formData.append('data', JSON.stringify(this.formRecord));
+        if (this.formRecord.registrationDocuments) {
+            for (var i = 0; i < this.formRecord.registrationDocuments.length; i++) {
+                formData.append("file" + i, this.formRecord.registrationDocuments[i]);
+            }
+        }
+        return formData;
+    };
     AgentRegistrationView.prototype.loadRecord = function (recordId) {
         var _this = this;
-        //  return Ok(new { RegistrationDetails = record, RegistrationDocuments = registrationDocuments });
         this.dataService.get(apiController_1.ApiController.Registration, recordId).subscribe(function (data) {
             _this.formRecord = data.registrationDetails;
-            _this.registrationDocuments = data.registrationDocuments;
+            _this.formRecord.registrationDocuments = data.registrationDocuments;
         });
     };
     AgentRegistrationView.prototype.setControlsAsTouched = function () {

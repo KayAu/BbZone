@@ -74,8 +74,22 @@ export class ViewCompletedOrderColumns {
         "colWidth": ""
     },
     {
-        "fieldName": "commAmount",
-        "headerText": "Comm. Amount (RM)",
+        "fieldName": "packageComm",
+        "headerText": "Comm. Value (RM)",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": "cell-width-5"
+    },
+    {
+        "fieldName": "agentCommPer",
+        "headerText": "Agent Comm. (%)",
+        "displayType": "text",
+        "keyField": false,
+        "colWidth": "cell-width-5"
+    },
+    {
+        "fieldName": "agentCommAmount",
+        "headerText": "Agent Comm. (RM)",
         "displayType": "text",
         "keyField": false,
         "colWidth": "cell-width-5"

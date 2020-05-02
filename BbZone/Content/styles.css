@@ -263,7 +263,7 @@ h5 {
 ul.nav-second-level {
   background: #293846;
 }
-.nav > li.active {
+.navbar-default li.active {
   border-left: 4px solid #19aa8d;
   background: #293846;
 }
@@ -11098,4 +11098,8 @@ div.dataTables_length select {
 .order-form .radio, .order-form .checkbox {
     margin-top: 5px !important;
     margin-bottom: 0px !important;
+}
+.dataTables_info
+{
+      padding-top: 0.75em !important;
 }

@@ -19,9 +19,12 @@ namespace BroadbandZone_Data
         public string Category { get; set; }
         public Nullable<System.DateTime> ActivationDate { get; set; }
         public string UserId { get; set; }
+        public string OrderNo { get; set; }
         public string UserLogin { get; set; }
         public Nullable<bool> DocumentCompleted { get; set; }
-        public string CommAmount { get; set; }
+        public string PackageComm { get; set; }
+        public Nullable<short> AgentCommPer { get; set; }
+        public string AgentCommAmount { get; set; }
         public string CommStatus { get; set; }
         public Nullable<int> WithdrawalId { get; set; }
         public Nullable<System.DateTime> CompletedOn { get; set; }

@@ -43,6 +43,8 @@ export class AgentProfile {
         this.agentId = this.route.snapshot.params.id;
         this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
+        if (!this.currentUser.isAdmin)
+            this.setReadonlyFields();
         this.loadRecord();
     }
 
@@ -83,6 +85,13 @@ export class AgentProfile {
             this.formRecord = results;
             this.superiorField.editable = !this.formRecord.superiorId || this.currentUser.isAdmin ? true : false;
         });
+    }
+
+    private setReadonlyFields() {
+        let bankNameFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankName');
+        let bankAccNoFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankAccNo');
+        this.formFields[bankNameFldIdx].dataFieldControl.readonly = true;
+        this.formFields[bankAccNoFldIdx].dataFieldControl.readonly = true;
     }
 
     private setControlsAsTouched() {

@@ -38,6 +38,7 @@ export class DataControl implements ControlValueAccessor {
     @Input() onEdit: boolean = false;
     @Input() disabled: boolean = false;
     @Input() readonly: boolean = false;
+    @Input() forDataFilter: boolean = false;
     @Output() propagateChange: any = () => { };
     @Output() onModelChanged = new EventEmitter();
 

@@ -30,6 +30,10 @@ namespace BroadbandZone_Data
     {
         public bool? Deleted { get; set; }
     }
+    public partial class RegistrationDocument
+    {
+        public bool? Deleted { get; set; }
+    }
 
     public partial class Registration
     {

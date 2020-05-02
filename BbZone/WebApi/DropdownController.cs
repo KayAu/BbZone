@@ -165,7 +165,7 @@ namespace BroadbandZone_App.WebApi
                                                                          .Select(r => new DropdownItem
                                                                          {
                                                                              Key = r.ProdPkgId.ToString(),
-                                                                             Value = r.PackageName,
+                                                                             Value = r.Description,
                                                                              ParentId = r.ProductCategory.CategoryId.ToString()
                                                                          }).ToList();
 

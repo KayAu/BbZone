@@ -79,8 +79,11 @@ BEGIN
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(*) FROM ##temp_Table
-		SELECT @oTotalAmountClaimed = SUM(CASE WHEN Status <> 'Terminated' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table
-		SELECT @oTotalAmountPayout = SUM(CASE WHEN Status = 'Completed' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table
+		SELECT @oTotalAmountClaimed = CASE WHEN @oTotalRecord = 0 THEN 0 
+										   ELSE (SELECT SUM(CASE WHEN Status <> 'Terminated' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table) END
+		SELECT @oTotalAmountPayout = CASE WHEN @oTotalRecord = 0 THEN 0  
+										  ELSE (SELECT SUM(CASE WHEN Status = 'Completed' THEN WithdrawAmount ELSE 0 END) FROM ##temp_Table) END
+
 		DROP TABLE  ##temp_Table
 
 	END TRY 

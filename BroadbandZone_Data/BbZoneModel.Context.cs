@@ -1077,7 +1077,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetAgentsForDownload_Result>("GetAgentsForDownload");
         }
     
-        public virtual ObjectResult<GetCompletedCustAppForDownload_Result> GetCompletedCustAppForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prCommStatus, string prViewAgent, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, Nullable<System.DateTime> prPayDateFrom, Nullable<System.DateTime> prPayDateTo, string prKeyword, Nullable<bool> prDocumentCompleted)
+        public virtual ObjectResult<GetCompletedCustAppForDownload_Result> GetCompletedCustAppForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prCommStatus, string prViewAgent, Nullable<System.DateTime> prActivatedFrom, Nullable<System.DateTime> prActivatedTo, Nullable<System.DateTime> prPayDateFrom, Nullable<System.DateTime> prPayDateTo, string prKeyword, Nullable<bool> prDocumentCompleted, Nullable<bool> prIsAdmin, Nullable<int> prAgentId)
         {
             var prProductParameter = prProduct.HasValue ?
                 new ObjectParameter("prProduct", prProduct) :
@@ -1123,7 +1123,15 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prDocumentCompleted", prDocumentCompleted) :
                 new ObjectParameter("prDocumentCompleted", typeof(bool));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompletedCustAppForDownload_Result>("GetCompletedCustAppForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prCommStatusParameter, prViewAgentParameter, prActivatedFromParameter, prActivatedToParameter, prPayDateFromParameter, prPayDateToParameter, prKeywordParameter, prDocumentCompletedParameter);
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            var prAgentIdParameter = prAgentId.HasValue ?
+                new ObjectParameter("prAgentId", prAgentId) :
+                new ObjectParameter("prAgentId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompletedCustAppForDownload_Result>("GetCompletedCustAppForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prCommStatusParameter, prViewAgentParameter, prActivatedFromParameter, prActivatedToParameter, prPayDateFromParameter, prPayDateToParameter, prKeywordParameter, prDocumentCompletedParameter, prIsAdminParameter, prAgentIdParameter);
         }
     
         public virtual ObjectResult<ResetAgentPassword_Result> ResetAgentPassword(string prAgentId, string prNewPassword, string prUpdatedBy)
@@ -1205,6 +1213,19 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prModifiedBy", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("TerminateWithdrawal", prWithdrawalIdParameter, prModifiedByParameter);
+        }
+    
+        public virtual ObjectResult<GetWithdrawalById_Result> GetWithdrawalById(Nullable<int> prWithdrawalId, Nullable<bool> prIsAdmin)
+        {
+            var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
+                new ObjectParameter("prWithdrawalId", prWithdrawalId) :
+                new ObjectParameter("prWithdrawalId", typeof(int));
+    
+            var prIsAdminParameter = prIsAdmin.HasValue ?
+                new ObjectParameter("prIsAdmin", prIsAdmin) :
+                new ObjectParameter("prIsAdmin", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalById_Result>("GetWithdrawalById", prWithdrawalIdParameter, prIsAdminParameter);
         }
     }
 }

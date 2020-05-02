@@ -9,14 +9,16 @@
 	@prPayDateFrom SMALLDATETIME = NULL,
 	@prPayDateTo SMALLDATETIME = NULL,
 	@prKeyword VARCHAR(100) = NULL,
-	@prDocumentCompleted BIT = NULL
-	--@prIsAdmin BIT = NULL
+	@prDocumentCompleted BIT = NULL,
+	@prIsAdmin BIT = NULL,
+	@prAgentId INT
 AS
 BEGIN
 	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID)
 
 	BEGIN TRY
-	
+
+		
 		SELECT 
 			   ca.ApplicationId
 			  ,ca.CustomerName
@@ -24,10 +26,13 @@ BEGIN
 			  ,pc.Category
 			  ,ca.ActivationDate
 			  ,ca.UserId
+			  ,ca.OrderNo
 			  ,a.UserLogin
 			  ,ca.DocumentCompleted
-			  ,CommAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
-								 ELSE 'RM0' END
+			  ,PackageComm = FORMAT(cc.PackageCommOnDate,'c','ms-MY')
+			  ,AgentCommPer = cc.AgentCommOnDate
+--			  ,AgentCommAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY') ELSE 'RM0' END
+			  ,AgentCommAmount = FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
 			  ,CommStatus = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 'Odd Claim'
 								 WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'
@@ -39,7 +44,6 @@ BEGIN
 			  ,w.CompletedOn 
 		FROM CustomerApplication ca
 		INNER JOIN ApplicationStatus s ON ca.AppStatusId = s.AppStatusId
-		--INNER JOIN Agent a ON ca.Agent = a.UserLogin
 		INNER JOIN ProductPackage PP ON ca.ProdPkgId = pp.ProdPkgId
 		INNER JOIN ProductCategory PC ON pc.CategoryId = pp.CategoryId
 		INNER JOIN Product p ON pc.ProductId = p.ProductId
@@ -52,11 +56,11 @@ BEGIN
 		         WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 1
 				 ELSE 0
 			END
-		--AND 1 = CASE WHEN @prAgentId IS NULL THEN 1
-		--               WHEN cc.AgentId IS NULL AND a.AgentId = @prAgentId THEN 1
-		--               WHEN cc.AgentId = @prAgentId AND ISNULL(cc.IsOverride, 0) = 0 THEN 1
-		--			   ELSE 0
-		--		  END
+		AND 1 = CASE WHEN @prAgentId IS NULL THEN 1
+		             WHEN cc.AgentId IS NULL AND a.AgentId = @prAgentId THEN 1
+		             WHEN cc.AgentId = @prAgentId AND ISNULL(cc.IsOverride, 0) = 0 THEN 1
+					 ELSE 0
+				END
 		AND 1 = CASE WHEN ISNULL(@prProduct,0) = 0 THEN 1
 					   WHEN p.ProductId = @prProduct THEN 1
 					   ELSE 0

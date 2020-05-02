@@ -73,7 +73,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     var results = (new BroadbandZoneEntities()).GetCustomerApplicationForDownload(
@@ -158,6 +157,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     using (XLWorkbook wb = new XLWorkbook())
@@ -172,7 +172,9 @@ namespace BroadbandZone_App.WebApi
                                                                         filterBy.PaymentDate != null ? filterBy.PaymentDate.StartDate : null,
                                                                         filterBy.PaymentDate != null ? filterBy.PaymentDate.EndDate : null,
                                                                         filterBy.Keyword,
-                                                                        filterBy.DocumentCompleted).ToList();
+                                                                        filterBy.DocumentCompleted,
+                                                                        currentUser.IsAdmin,
+                                                                        currentUser.AgentId).ToList();
                         return ExcelHelper.ReadDataToExcel<GetCompletedCustAppForDownload_Result>(results, "CompletedOrders");
                     }
                 }

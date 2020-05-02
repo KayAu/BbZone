@@ -29,6 +29,7 @@ var DataControl = /** @class */ (function () {
         this.onEdit = false;
         this.disabled = false;
         this.readonly = false;
+        this.forDataFilter = false;
         this.propagateChange = function () { };
         this.onModelChanged = new core_1.EventEmitter();
     }
@@ -127,6 +128,10 @@ var DataControl = /** @class */ (function () {
         core_1.Input(),
         __metadata("design:type", Boolean)
     ], DataControl.prototype, "readonly", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], DataControl.prototype, "forDataFilter", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)

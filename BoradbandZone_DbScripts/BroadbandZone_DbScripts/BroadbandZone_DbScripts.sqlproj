@@ -169,6 +169,7 @@
     <Build Include="dbo\Stored Procedures\prc_UpdateAgentCharges_1.sql" />
     <Build Include="dbo\Stored Procedures\prc_TerminateWithdrawal.sql" />
     <Build Include="dbo\Stored Procedures\prc_GetAgentCharges.sql" />
+    <Build Include="dbo\Stored Procedures\prc_GetWithdrawalById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="BroadbandZone_DbScripts.refactorlog" />
