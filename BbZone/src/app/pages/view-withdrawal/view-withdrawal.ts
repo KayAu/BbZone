@@ -78,13 +78,6 @@ export class ViewWithdrawal extends ListEvent {
         this.reloadData();
     }
 
-    //exportRecords() {
-    //    this.dataService.export(`${ApiController.WithdrawalView}/Download`, this.searchParams).subscribe(data => {
-    //        let filename = `Withdrawal_${formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US')}.xlsx`;
-    //        const file: Blob = new Blob([data], { type: 'application/xlsx' });
-    //        saveAs(file, filename);
-    //    });
-    //}
 }
 
 

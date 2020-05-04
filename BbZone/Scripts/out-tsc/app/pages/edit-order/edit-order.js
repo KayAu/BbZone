@@ -77,17 +77,6 @@ var EditOrder = /** @class */ (function () {
             _this.router.navigate(['/view-order']);
         });
     };
-    EditOrder.prototype.showProcessedDetails = function (show) {
-        if (!show)
-            show = false;
-        var updateFields = ["orderNo", "userId", "telNo", "eForm"];
-        for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
-            var field = updateFields_1[_i];
-            var index = this.orderFields.findIndex(function (i) { return i.fieldName == field; });
-            if (this.orderFields[index])
-                this.orderFields[index].hidden = !show;
-        }
-    };
     EditOrder.prototype.showEForm = function (show) {
         if (!show)
             show = false;
@@ -113,7 +102,6 @@ var EditOrder = /** @class */ (function () {
             _this.formRecord = data;
             _this.commIsConfigured = _this.formRecord['commIsConfigured'];
             _this.showEForm(_this.formRecord["showEForm"]);
-            _this.showProcessedDetails(_this.formRecord["isProcessed"]);
         });
     };
     EditOrder.prototype.setControlsAsTouched = function () {

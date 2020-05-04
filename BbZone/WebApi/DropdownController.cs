@@ -315,7 +315,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     var withdrawalStatuses = Enum.GetValues(typeof(WithdrawalStatus)).Cast<WithdrawalStatus>();
-                    List<DropdownItem> dropdownItems = withdrawalStatuses.Where(s=> s != WithdrawalStatus.Pending && s != WithdrawalStatus.Terminated)
+                    List<DropdownItem> dropdownItems = withdrawalStatuses.Where(s=> s != WithdrawalStatus.Terminated)
                                                                          .Select(i => new DropdownItem { Key = i.ToString(), Value = i.ToString()}).ToList();
                     return Ok(dropdownItems);
                 }
@@ -339,6 +339,51 @@ namespace BroadbandZone_App.WebApi
                     List<DropdownItem> dropdownItems = new List<DropdownItem>();
                     dropdownItems.Add(new DropdownItem { Key = "In", Value = "In (Incentives)" });
                     dropdownItems.Add(new DropdownItem { Key = "Out", Value = "Out (Charges)" });
+                    return Ok(dropdownItems);
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+        [Route("api/Dropdown/GetBanks")]
+        public IHttpActionResult GetBanks()
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    //string[] banks = {  "Affin Bank Berhad",
+                    //                    "Alliance Bank Malaysia Berhad",
+                    //                    "AmBank (M) Berhad",
+                    //                    "BNP Paribas Malaysia Berhad",
+                    //                    "Bangkok Bank Berhad",
+                    //                    "Bank of America Malaysia Berhad",
+                    //                    "Bank of China (Malaysia) Berhad",
+                    //                    "CIMB Bank Berhad",
+                    //                    "China Construction Bank (Malaysia) Berhad",
+                    //                    "Citibank Berhad",
+                    //                    "Deutsche Bank (Malaysia) Berhad",
+                    //                    "HSBC Bank Malaysia Berhad",
+                    //                    "Hong Leong Bank Berhad",
+                    //                    "India International Bank (Malaysia) Berhad",
+                    //                    "Industrial and Commercial Bank of China (Malaysia) Berhad",
+                    //                    "J.P. Morgan Chase Bank Berhad",
+                    //                    "MUFG Bank (Malaysia) Berhad",
+                    //                    "Malayan Banking Berhad",
+                    //                    "Mizuho Bank (Malaysia) Berhad",
+                    //                    "OCBC Bank (Malaysia) Berhad",
+                    //                    "Public Bank Berhad",
+                    //                    "RHB Bank Berhad",
+                    //                    "Standard Chartered Bank Malaysia Berhad",
+                    //                    "Sumitomo Mitsui Banking Corporation Malaysia Berhad",
+                    //                    "The Bank of Nova Scotia Berhad",
+                    //                    "United Overseas Bank (Malaysia) Bhd."
+                    //                    };
+                    List<DropdownItem> dropdownItems = db.Banks.Select(b => new DropdownItem { Key = b.BankName, Value = b.BankName }).ToList();
                     return Ok(dropdownItems);
                 }
             }

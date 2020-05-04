@@ -4310,7 +4310,7 @@ table.table-mail tr td {
 }
 .yellow-bg,
 .bg-warning {
-  background-color: #f8ac59 !important;
+  background-color: #f8ac59f2 !important;
   color: #ffffff;
 }
 .red-bg,
@@ -9058,8 +9058,12 @@ body.md-skin {
   margin: 30px !important;
 }
 
+.mrg28T {
+    margin-top: 28px !important;
+}
+
 .mrg30T {
-  margin-top: 30px !important;
+  margin-top: 28px !important;
 }
 
 .mrg30R {

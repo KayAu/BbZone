@@ -46,6 +46,7 @@
         <AssociationConnector Association="BroadbandZoneModel.FK_ClaimableCommission_DeductedWithdrawal" />
         <EntityTypeShape EntityType="BroadbandZoneModel.WithdrawalItem" Width="1.5" PointX="8.25" PointY="3.875" />
         <AssociationConnector Association="BroadbandZoneModel.FK_WithdrawalItems_Withdrawal" />
+        <EntityTypeShape EntityType="BroadbandZoneModel.Bank" Width="1.5" PointX="11.375" PointY="10.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

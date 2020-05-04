@@ -130,11 +130,17 @@ BEGIN
 		FROM @var_Table
 
 		SELECT @oTotalRecord = COUNT(ClaimCommId) FROM ##temp_Table
-		SELECT @oTotalDeduction = SUM(ROUND(DeductAmount, 2, 1)) FROM ##temp_Table 
-	    SELECT @oTotalIncentives = SUM(ROUND(ClaimAmount, 2, 1)) FROM ##temp_Table WHERE TransactionType = 'Incentives'
 
-		IF  @oTotalIncentives IS NULL 
+		IF @oTotalRecord > 0
+		BEGIN
+			SELECT @oTotalDeduction = SUM(ROUND(DeductAmount, 2, 1)) FROM ##temp_Table 
+			SELECT @oTotalIncentives = SUM(ROUND(ClaimAmount, 2, 1)) FROM ##temp_Table WHERE TransactionType = 'Incentives'
+		END
+		ELSE 
+		BEGIN
+			SELECT @oTotalDeduction = 0
 			SET @oTotalIncentives = 0
+		END
 
 		DROP TABLE  ##temp_Table
 	END TRY 

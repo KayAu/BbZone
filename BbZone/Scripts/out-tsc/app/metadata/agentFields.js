@@ -143,9 +143,10 @@ var AgentRegistrationFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankName",
-                "controlType": "textbox",
+                "controlType": "select",
                 "required": true,
-                "maxLength": 30
+                "maxLength": 30,
+                "datasourceUrl": "GetBanks"
             }
         },
         {
@@ -177,7 +178,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "dataFieldControl": {
                 "controlName": "userLogin",
                 "controlType": "textbox",
-                "required": false,
+                "required": true,
                 "maxLength": 16
             }
         },
@@ -188,7 +189,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "dataFieldControl": {
                 "controlName": "password",
                 "controlType": "password",
-                "required": false,
+                "required": true,
                 "maxLength": 15
             }
         }

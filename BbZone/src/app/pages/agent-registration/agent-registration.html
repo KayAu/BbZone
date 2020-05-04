@@ -20,6 +20,7 @@
                                         <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
                                                       [field]="field.dataFieldControl" [parentForm]="applicationForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                         <span class="text-danger" *ngIf="field.fieldName=='userLogin' && hasLoginExists">The user login has already exists. Please choose another login.</span>
+                                        <span *ngIf="field.fieldName=='superiorId'">Please enter superior <u>id number</u></span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -28,7 +29,21 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Attach required documents</label>
                                 <div class="col-sm-9">
+                                    <div class="alert alert-warning mrg10T pad15A ">
+                                        <div>Please upload the following documents</div>
+                                        <ol>
+                                            <li>Front & Back IC</li>
+                                            <li>Bank Statement (Front page)</li>
+                                            <li>Bank Statement (Front page)</li>
+                                            <li>For Business Sign Up (SSM) - Business Name</li>
+                                            <li>For Business Sign Up (SSM) - Ownership</li>
+                                        </ol>
+                                    </div>
+
                                     <file-uploader name="relDoc" [(ngModel)]="formRecord['files']"></file-uploader>
+                                    <span class="form-text m-b-none">
+                                        Upload agent application related documents. Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf".
+                                    </span>
                                 </div>
                             </div>
 

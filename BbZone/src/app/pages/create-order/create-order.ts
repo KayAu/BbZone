@@ -30,7 +30,6 @@ export class CreateOrder {
     isUpdating: boolean = false;
     currentUser: LoginUser;
     commIsConfigured: boolean = true;
-    //dataGroup = CustomerOrderDataGroup;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService, private cascadeService: CascadeService, private router: Router, private authenticationService: AuthenticationService) {}
 
@@ -39,7 +38,6 @@ export class CreateOrder {
         let dataFields = this.getFormFeldsMapping();
         this.applicationFields = dataFields.filter(c => c.groupName === 'application');
         this.orderFields = dataFields.filter(c => c.groupName === 'orderInfo');
-        this.showProcessedDetails(false);
     }
 
     getFormFeldsMapping(): FormDataGroupMapping[] {
@@ -99,15 +97,6 @@ export class CreateOrder {
         });
     }
 
-    showProcessedDetails(show) {
-        if (!show) show = false;
-        let updateFields = ["orderNo", "userId", "telNo","eForm"];
-        for (var field of updateFields) {
-            let index = this.orderFields.findIndex(i => i.fieldName == field);
-            this.orderFields[index].hidden = !show;
-        }
-    }
-
     clearPackages() {
         this.selectedCategory = null;
         this.cascadeService.subject.next(new CascadeData("prodPkgId", this.selectedCategory));
@@ -118,8 +107,6 @@ export class CreateOrder {
             this.form.controls[i].markAsTouched();
         }
     }
-
-
 }
 
 

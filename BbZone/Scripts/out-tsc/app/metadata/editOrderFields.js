@@ -246,22 +246,21 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 0
             }
         },
-        {
-            "fieldName": "isProcessed",
-            "displayText": "Is Processed",
-            "hidden": false,
-            "groupName": "orderInfo",
-            "dataFieldControl": {
-                "controlName": "isProcessed",
-                "controlType": "checkbox",
-                "required": false,
-                "maxLength": 0,
-                "datasourceUrl": null,
-                "cascadeTo": null,
-                "adminField": false,
-                "dataChangedEvent": "showProcessedDetails"
-            }
-        },
+        //{
+        //    "fieldName": "isProcessed",
+        //    "displayText": "Is Processed",
+        //    "hidden": false,
+        //    "groupName": "orderInfo",
+        //    "dataFieldControl": {
+        //        "controlName": "isProcessed",
+        //        "controlType": "checkbox",
+        //        "required": false,
+        //        "maxLength": 0,
+        //        "datasourceUrl": null,
+        //        "cascadeTo": null,
+        //        "adminField": false
+        //    }
+        //},
         {
             "fieldName": "orderNo",
             "displayText": "Order No",

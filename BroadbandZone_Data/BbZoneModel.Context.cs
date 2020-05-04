@@ -51,6 +51,7 @@ namespace BroadbandZone_Data
         public virtual DbSet<AgentPocket> AgentPockets { get; set; }
         public virtual DbSet<Withdrawal> Withdrawals { get; set; }
         public virtual DbSet<WithdrawalItem> WithdrawalItems { get; set; }
+        public virtual DbSet<Bank> Banks { get; set; }
     
         public virtual ObjectResult<GetProductCategory_Result> GetProductCategory(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prSearchKeyword, Nullable<bool> prRecordStatus, ObjectParameter oTotalRecord)
         {

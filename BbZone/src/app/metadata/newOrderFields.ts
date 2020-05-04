@@ -203,21 +203,21 @@ public static fields = [
             "maxLength": 500
         }
     },
-    {
-        "fieldName": "isProcessed",
-        "displayText": "Is Processed",
-        "hidden": false,
-        "groupName": "orderInfo",
-        "dataFieldControl": {
-            "controlName": "isProcessed",
-            "controlType": "checkbox",
-            "required": false,
-            "maxLength": 0,
-            "datasourceUrl": null,
-            "cascadeTo": null,
-            "adminField": false
-        }
-    },
+    //{
+    //    "fieldName": "isProcessed",
+    //    "displayText": "Is Processed",
+    //    "hidden": false,
+    //    "groupName": "orderInfo",
+    //    "dataFieldControl": {
+    //        "controlName": "isProcessed",
+    //        "controlType": "checkbox",
+    //        "required": false,
+    //        "maxLength": 0,
+    //        "datasourceUrl": null,
+    //        "cascadeTo": null,
+    //        "adminField": false
+    //    }
+    //},
     {
         "fieldName": "submitByAgent",
         "displayText": "Submitted By Agent",
@@ -230,8 +230,7 @@ public static fields = [
             "maxLength": 0,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": false,
-            "dataChangedEvent": "showProcessedDetails"
+            "adminField": false
         }
     },
     {

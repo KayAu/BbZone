@@ -52,5 +52,8 @@ namespace BroadbandZone_Data
         public decimal? TotalAmountToDeduct { get; set; }
         public decimal? TotalSelectedAmount { get; set; }
     }
-
+    public partial class GetWithdrawalById_Result
+    {
+        public List<WithdrawalItem> WithdrawalItems { get; set; }
+    }
 }

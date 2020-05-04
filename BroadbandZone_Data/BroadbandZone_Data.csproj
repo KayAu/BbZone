@@ -74,6 +74,9 @@
     <Compile Include="AuthenticatedUser.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Bank.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="BbZoneModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

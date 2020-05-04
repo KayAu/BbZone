@@ -168,7 +168,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
             { path: 'edit-order/:id', component: EditOrder },
             { path: 'view-complete-app', component: ViewCompletedApp, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin, Role.Agent] }},
 
-            { path: 'agent-registration', component: AgentRegistration, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
+            { path: 'agent-registration', component: AgentRegistration},
             { path: 'agent-registration-list', component: AgentRegistrationList, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
             { path: 'agent-registration-view/:id', component: AgentRegistrationView, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
             { path: 'agent-maintenance', component: AgentMaintenance, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},

@@ -94,16 +94,6 @@ export class EditOrder  {
         });
     }
 
-    showProcessedDetails(show) {
-        if (!show) show = false;
-        let updateFields = ["orderNo", "userId", "telNo","eForm"];
-        for (var field of  updateFields) {
-            let index = this.orderFields.findIndex(i => i.fieldName == field);
-            if (this.orderFields[index])
-                this.orderFields[index].hidden = !show;
-        }
-    }
-
     showEForm(show) {
         if (!show) show = false;
         let index = this.orderFields.findIndex(i => i.fieldName == "eForm");
@@ -131,7 +121,6 @@ export class EditOrder  {
             this.formRecord = data;
             this.commIsConfigured = this.formRecord['commIsConfigured'];
             this.showEForm(this.formRecord["showEForm"]);
-            this.showProcessedDetails(this.formRecord["isProcessed"]);
         });
     }
 

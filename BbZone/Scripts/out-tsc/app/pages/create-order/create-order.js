@@ -24,7 +24,6 @@ var cascade_data_1 = require("src/app/model/cascade-data");
 var cascade_service_1 = require("src/app/services/cascade.service");
 var authentication_1 = require("src/app/services/authentication");
 var CreateOrder = /** @class */ (function () {
-    //dataGroup = CustomerOrderDataGroup;
     function CreateOrder(loaderService, dataService, formEvent, cascadeService, router, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
@@ -43,7 +42,6 @@ var CreateOrder = /** @class */ (function () {
         var dataFields = this.getFormFeldsMapping();
         this.applicationFields = dataFields.filter(function (c) { return c.groupName === 'application'; });
         this.orderFields = dataFields.filter(function (c) { return c.groupName === 'orderInfo'; });
-        this.showProcessedDetails(false);
     };
     CreateOrder.prototype.getFormFeldsMapping = function () {
         var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataGroupMapping(o.fieldName, o.displayText, o.hidden, o.groupName, !o.dataFieldControl ? null :
@@ -81,16 +79,6 @@ var CreateOrder = /** @class */ (function () {
         this.dataService.get(apiController_1.ApiController.CustomerApplication + "/CheckCommissionSettings/" + this.newRecord['categoryId'] + "/" + this.newRecord['agent']).subscribe(function (isConfigured) {
             _this.commIsConfigured = isConfigured;
         });
-    };
-    CreateOrder.prototype.showProcessedDetails = function (show) {
-        if (!show)
-            show = false;
-        var updateFields = ["orderNo", "userId", "telNo", "eForm"];
-        for (var _i = 0, updateFields_1 = updateFields; _i < updateFields_1.length; _i++) {
-            var field = updateFields_1[_i];
-            var index = this.orderFields.findIndex(function (i) { return i.fieldName == field; });
-            this.orderFields[index].hidden = !show;
-        }
     };
     CreateOrder.prototype.clearPackages = function () {
         this.selectedCategory = null;

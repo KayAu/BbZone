@@ -178,7 +178,7 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-order', component: view_order_1.ViewOrder },
                     { path: 'edit-order/:id', component: edit_order_1.EditOrder },
                     { path: 'view-complete-app', component: view_complete_app_1.ViewCompletedApp, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin, role_1.Role.Agent] } },
-                    { path: 'agent-registration', component: agent_registration_1.AgentRegistration, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'agent-registration', component: agent_registration_1.AgentRegistration },
                     { path: 'agent-registration-list', component: agent_registration_list_1.AgentRegistrationList, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'agent-registration-view/:id', component: agent_registration_view_1.AgentRegistrationView, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'agent-maintenance', component: agent_maintenance_1.AgentMaintenance, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },

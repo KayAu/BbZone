@@ -118,6 +118,7 @@ namespace BroadbandZone_App.WebApi
                     //                        withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
                     //withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
                     var withdrawal = db.GetWithdrawalById(id, currentUser.IsAdmin).FirstOrDefault();
+                    withdrawal.WithdrawalItems = db.WithdrawalItems.Where(w => w.WithdrawalId == id).ToList();
                     return Ok(withdrawal);
                 }
             }

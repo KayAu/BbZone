@@ -51,7 +51,7 @@ var AgentRegistrationView = /** @class */ (function () {
         if (!this.form.valid)
             return;
         this.isUpdating = true;
-        this.dataService.updateForm(apiController_1.ApiController.CustomerApplication, this.applicationId, this.getFormData()).subscribe(function (data) {
+        this.dataService.updateForm(apiController_1.ApiController.Registration, this.applicationId, this.getFormData()).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/agent-registration-list']);
         });

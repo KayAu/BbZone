@@ -1422,6 +1422,7 @@ ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
+  padding-top: 10px;
 }
 ul ul,
 ol ul,

@@ -140,9 +140,10 @@
                 "hidden": false,
                 "dataFieldControl": {
                     "controlName": "bankName",
-                    "controlType": "textbox",
+                    "controlType": "select",
                     "required": true,
-                    "maxLength": 30
+                    "maxLength": 30,
+                    "datasourceUrl": "GetBanks" 
                 }
             },
             {
@@ -174,7 +175,7 @@
                 "dataFieldControl": {
                     "controlName": "userLogin",
                     "controlType": "textbox",
-                    "required": false,
+                    "required": true,
                     "maxLength": 16
                 }
             },
@@ -185,7 +186,7 @@
                 "dataFieldControl": {
                     "controlName": "password",
                     "controlType": "password",
-                    "required": false,
+                    "required": true,
                     "maxLength": 15
                 }
             }

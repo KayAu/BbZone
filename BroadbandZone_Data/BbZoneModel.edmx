@@ -115,6 +115,13 @@
           <Property Name="Status" Type="varchar" MaxLength="35" Nullable="false" />
           <Property Name="AllowEdit" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BankName" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <EntityType Name="ClaimableCommission">
           <Key>
             <PropertyRef Name="ClaimCommId" />
@@ -981,6 +988,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <EntitySet Name="Announcement" EntityType="Self.Announcement" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AnnouncementDocument" EntityType="Self.AnnouncementDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ApplicationStatus" EntityType="Self.ApplicationStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bank" EntityType="Self.Bank" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ClaimableCommission" EntityType="Self.ClaimableCommission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clawback" EntityType="Self.Clawback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Communication" EntityType="Self.Communication" Schema="dbo" store:Type="Tables" />
@@ -1529,9 +1537,10 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <End Role="WithdrawalItem" EntitySet="WithdrawalItems" />
           </AssociationSet>
           <FunctionImport Name="GetWithdrawalById" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalById_Result)">
-          <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
+            <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
             <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
           </FunctionImport>
+          <EntitySet Name="Banks" EntityType="BroadbandZoneModel.Bank" />
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -2679,6 +2688,13 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="Boolean" Name="AllowEdit" Nullable="true" />
           <Property Type="Boolean" Name="AllowTerminate" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Bank">
+          <Key>
+            <PropertyRef Name="BankId" />
+          </Key>
+          <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BankName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3746,6 +3762,14 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Banks">
+            <EntityTypeMapping TypeName="BroadbandZoneModel.Bank">
+              <MappingFragment StoreEntitySet="Bank">
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="BankId" ColumnName="BankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
