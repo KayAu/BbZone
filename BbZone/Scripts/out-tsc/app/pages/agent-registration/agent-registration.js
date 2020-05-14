@@ -31,6 +31,7 @@ var AgentRegistration = /** @class */ (function () {
         this.isUpdating = false;
         this.hasLoginExists = false;
         this.completed = false;
+        this.agree = false;
     }
     AgentRegistration.prototype.ngOnInit = function () {
         this.formFields = this.getFormFeldsMapping();

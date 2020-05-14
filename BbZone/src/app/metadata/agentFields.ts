@@ -463,6 +463,18 @@ export class AgentProfileFields {
     public static fields =
         [
             {
+                "fieldName": "agentId",
+                "displayText": "Agent Id",
+                "hidden": false,
+
+                "dataFieldControl": {
+                    "controlName": "agentId",
+                    "controlType": "label",
+                    "required": false,
+                    "maxLength": 50
+                }
+            },
+            {
                 "fieldName": "fullname",
                 "displayText": "Full Name",
                 "hidden": false,

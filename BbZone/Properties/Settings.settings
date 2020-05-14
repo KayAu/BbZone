@@ -21,7 +21,19 @@
       <Value Profile="(Default)">/App_Data/RegistrationFiles</Value>
     </Setting>
     <Setting Name="SenderEmail" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">broadbandzone@broadbandzone2u.com</Value>
+      <Value Profile="(Default)">admin@broadbandzone2u.com</Value>
+    </Setting>
+    <Setting Name="SmtpServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">pansy.mschosting.com</Value>
+    </Setting>
+    <Setting Name="PortNo" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="LoginName" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">admin@broadbandzone2u.com</Value>
+    </Setting>
+    <Setting Name="Password" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">mybroadbandzone123!</Value>
     </Setting>
   </Settings>
 </SettingsFile>

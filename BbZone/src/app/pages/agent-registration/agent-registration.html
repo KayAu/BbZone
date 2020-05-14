@@ -46,17 +46,23 @@
                                     </span>
                                 </div>
                             </div>
-
-                            <!--SAVE OR CANCEL-->
+                            <div class="hr-line-dashed"></div>
                             <div class="form-group row mrg20T">
-                                <div class="col-sm-12 ">
-                                    <a [routerLink]='["/"]' class="btn btn-white float-right">Cancel</a>
-                                    <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                    <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
-                                            [disabled]="isUpdating" style="width: 180px;">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="agree" [(ngModel)]="agree" class="pos-rel mrg5R" style="top: 3px;" /> I hereby acknowledged that I have read and understood the Privacy Statement and agreed to unifi 
+                                    <a href="../../../../DMTerms.pdf" target="_blank">Term Of Use</a>
+                                </div>
+                            </div>
+                            <!--SAVE OR CANCEL-->
+                            <div class="form-group row mrg25T">
+                                <div class="col-sm-12 text-center ">
+                                    <button type="submit" class="btn btn-primary mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                            [disabled]="!agree || isUpdating" style="width: 180px;">
                                         {{isUpdating ? 'Registering' : 'Register'}}
                                         <span class="loading"></span>
                                     </button>
+                                    <a [routerLink]='["/"]' class="btn btn-white">Cancel</a>
                                 </div>
                             </div>
                         </form>

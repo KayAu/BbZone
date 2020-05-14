@@ -22,7 +22,6 @@ declare var $: any;
             useExisting: forwardRef(() => DataControl),
             multi: true
         }
-        //,{ provide: NG_VALIDATORS, useExisting: forwardRef(() => FieldBuilder), multi: true }
     ]
 })
 

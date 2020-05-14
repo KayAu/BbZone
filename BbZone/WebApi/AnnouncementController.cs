@@ -65,7 +65,7 @@ namespace BroadbandZone_App.WebApi
                                                     CreatedOn = a.CreatedOn,
                                                     AnnouncementDocuments = a.AnnouncementDocuments.Select(d=>d.Name).ToList()
                                                 })
-                                                .OrderBy(a => a.CreatedOn).ToList();
+                                                .OrderByDescending(a => a.CreatedOn).ToList();
                     return Ok(annc);
                 }
             }

@@ -1,5 +1,6 @@
 ﻿using BroadbandZone_Data;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
@@ -116,11 +117,14 @@ namespace BroadbandZone_App.Helper
                 sb.Append("</table>");
                 sb.Append("</html></body>");
 
-                string receipientEmail = GetAdminEmails();
+                //string receipientEmail = "kayeau80@gmail.com";// GetAdminEmails();
                 SmtpClient SmtpClient = new SmtpClient();
                 MailMessage mail = new MailMessage();
+                foreach (string adminEmail in GetAdminEmails())
+                {
+                    mail.To.Add(adminEmail);
+                }
                 mail.From = new MailAddress(Properties.Settings.Default.SenderEmail);
-                mail.To.Add(receipientEmail);
                 mail.Subject = "New Application Submitted";
                 mail.IsBodyHtml = true;
                 mail.Body = sb.ToString();
@@ -137,7 +141,7 @@ namespace BroadbandZone_App.Helper
         {
             try
             {
-                string receipientEmail = GetAdminEmails();
+                //string receipientEmail = GetAdminEmails();
                 StringBuilder sb = new StringBuilder();
                 sb.Append("<html><body>");
                 sb.Append("<p>Dear all,</p>");
@@ -151,8 +155,11 @@ namespace BroadbandZone_App.Helper
 
                 SmtpClient SmtpClient = new SmtpClient();
                 MailMessage mail = new MailMessage();
+                foreach (string adminEmail in GetAdminEmails())
+                {
+                    mail.To.Add(adminEmail);
+                }
                 mail.From = new MailAddress(Properties.Settings.Default.SenderEmail);
-                mail.To.Add(receipientEmail);
                 mail.Subject = "New Agent Registration";
                 mail.IsBodyHtml = true;
                 mail.Body = sb.ToString();
@@ -165,11 +172,17 @@ namespace BroadbandZone_App.Helper
             }
         }
 
-        private static string GetAdminEmails()
+        private static IEnumerable<string> GetAdminEmails()
         {
-            ObjectParameter adminEmails = new ObjectParameter("oEmails", typeof(string));
-            var results = (new BroadbandZoneEntities()).GetAdminEmail(adminEmails);
-            return Convert.ToString(adminEmails.Value);
+            ObjectParameter strAdminEmails = new ObjectParameter("oEmails", typeof(string));
+            var results = (new BroadbandZoneEntities()).GetAdminEmail(strAdminEmails);
+
+            string[] emails = strAdminEmails.Value.ToString().Split(';');
+            foreach(string eml in emails)
+            {
+                yield return eml;
+            }
+         //   return Convert.ToString(adminEmails.Value);
         }
 
         private static void GetPackageName(int packageId, out string packageName, out string category)

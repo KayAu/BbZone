@@ -150,7 +150,6 @@ var DataControl = /** @class */ (function () {
                     useExisting: core_1.forwardRef(function () { return DataControl_1; }),
                     multi: true
                 }
-                //,{ provide: NG_VALIDATORS, useExisting: forwardRef(() => FieldBuilder), multi: true }
             ]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef,

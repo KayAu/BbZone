@@ -78,7 +78,7 @@ namespace BroadbandZone_App.Helper
             return httpResponseMessage;
         }
 
-        private string GetFileUploadDetails(string uploadedFileName, int fileId, out string destLocation)
+        private string GetFileUploadDetails(string uploadedFileName, dynamic fileId, out string destLocation)
         {
             uploadedFileName = uploadedFileName.Insert(uploadedFileName.IndexOf("."), $"_{fileId.ToString()}").Replace("\"", "");
             destLocation = Path.Combine(HttpContext.Current.Server.MapPath(this._UploadFilePath), uploadedFileName);

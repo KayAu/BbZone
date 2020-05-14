@@ -222,14 +222,15 @@ public static fields = [
     },
     {
         "fieldName": "customerRemarks",
-        "displayText": "Remarks",
+        "displayText": "Admin Remarks",
         "hidden": false,
         "groupName": "orderInfo",
         "dataFieldControl": {
             "controlName": "customerRemarks",
             "controlType": "textarea",
             "required": false,
-            "maxLength": 500
+            "maxLength": 500,
+            "adminField": true
         }
     },
     {
@@ -244,21 +245,6 @@ public static fields = [
             "maxLength": 0
         }
     },
-    //{
-    //    "fieldName": "isProcessed",
-    //    "displayText": "Is Processed",
-    //    "hidden": false,
-    //    "groupName": "orderInfo",
-    //    "dataFieldControl": {
-    //        "controlName": "isProcessed",
-    //        "controlType": "checkbox",
-    //        "required": false,
-    //        "maxLength": 0,
-    //        "datasourceUrl": null,
-    //        "cascadeTo": null,
-    //        "adminField": false
-    //    }
-    //},
     {
         "fieldName": "orderNo",
         "displayText": "Order No",
@@ -286,7 +272,7 @@ public static fields = [
             "maxLength": 25,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true
+            "adminField": false
         }
     },
     {
@@ -301,7 +287,7 @@ public static fields = [
             "maxLength": 25,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": true
+            "adminField": false
         }
     },
     {

@@ -111,6 +111,7 @@ public static fields = [
         "fieldName": "residentialName",
         "displayText": "Residential Name",
         "hidden": false,
+        "groupName": "application",
         "dataFieldControl": {
             "controlName": "residentialName",
             "controlType": "textbox",

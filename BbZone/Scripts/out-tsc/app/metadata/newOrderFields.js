@@ -111,6 +111,7 @@ var NewOrderFields = /** @class */ (function () {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",

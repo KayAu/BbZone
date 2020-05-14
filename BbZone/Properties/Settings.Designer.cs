@@ -79,10 +79,46 @@ namespace BroadbandZone_App.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("broadbandzone@broadbandzone2u.com")]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin@broadbandzone2u.com")]
         public string SenderEmail {
             get {
                 return ((string)(this["SenderEmail"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("pansy.mschosting.com")]
+        public string SmtpServer {
+            get {
+                return ((string)(this["SmtpServer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public string PortNo {
+            get {
+                return ((string)(this["PortNo"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("admin@broadbandzone2u.com")]
+        public string LoginName {
+            get {
+                return ((string)(this["LoginName"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("mybroadbandzone123!")]
+        public string Password {
+            get {
+                return ((string)(this["Password"]));
             }
         }
     }

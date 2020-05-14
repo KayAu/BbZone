@@ -26,6 +26,7 @@ export class AgentRegistration {
     isUpdating: boolean = false;
     hasLoginExists: boolean = false;
     completed: boolean = false;
+    agree: boolean = false;
     constructor(public loaderService: LoaderService, public dataService: DataService, private router: Router, private route: ActivatedRoute) { }
 
     ngOnInit() {
