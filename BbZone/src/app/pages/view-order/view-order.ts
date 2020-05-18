@@ -14,6 +14,9 @@ import { SearchOrderFields } from 'src/app/metadata/searchOrderFields';
 import { formatDate } from '@angular/common';
 import { saveAs } from 'file-saver';
 import { OrderFilter } from 'src/app/enums/RecordMode';
+import { AuthenticationService } from 'src/app/services/authentication';
+import { LoginUser } from 'src/app/model/login-user';
+import { RouterService } from 'src/app/services/router.service';
 
 @Component({
   selector: 'view-order',
@@ -23,6 +26,7 @@ export class ViewOrder extends ListEvent {
     categories: any[];
     packages: any[];
     agents: any[];
+    currentUser: LoginUser;
     dataRowMapper: TablerowDataMapping[] = [];
     searchFields: SearchFieldMapping[] = [];
     displayType = DataDisplayType;
@@ -32,21 +36,24 @@ export class ViewOrder extends ListEvent {
     totalUnreadMsg: number;
     totalCommINotConfig: number;
     totalOddClaimed: number;
-
-    constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService) {
+    previousUrl: string;
+    constructor(public loaderService: LoaderService, public dataService: DataService, private authenticationService: AuthenticationService, private routerExtService: RouterService) {
         super(loaderService, dataService, "applicationId", false);
         this.dataSourceSubject.asObservable().subscribe((data: any) => {
             this.totalUnreadMsg = data.totalUnreadMsg;
             this.totalCommINotConfig = data.totalCommINotConfig;
             this.totalOddClaimed = data.totalOddClaimed;
         });
+
     }
 
     ngOnInit() {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.controllerName = ApiController.CustomerApplication;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(d => d.keyField === true).fieldName;
+        this.setSearchParams();
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {
@@ -94,7 +101,24 @@ export class ViewOrder extends ListEvent {
         this.reloadData();
     }
 
+    filterRecords() {
+        localStorage.setItem('viewOrderParams', JSON.stringify(this.searchParams));
+        this.reloadData();
+    }
+
+    setSearchParams() {
+        let previous = this.routerExtService.getPreviousUrl();
+        if (previous.indexOf('edit-order') === -1) {
+            localStorage.removeItem('viewOrderParams');
+            return;
+        }
+        if (localStorage.getItem('viewOrderParams') !== null) {
+            this.searchParams = JSON.parse(localStorage.getItem('viewOrderParams'));
+        }
+    }
+
     clearSearchParam() {
+        localStorage.removeItem('viewOrderParams');
         this.searchParams = new SearchOrderParams(null, null, null, null, null, null, null, null, 0);
         this.reloadData();
     }

@@ -26,6 +26,7 @@ export class AgentRegistrationView {
     formRecord: any = {};
     registrationDocuments: any[] = [];
     isUpdating: boolean = false;
+    isResending: boolean = false;
     applicationId: number;
 
     constructor(public loaderService: LoaderService, public dataService: DataService, 
@@ -61,6 +62,13 @@ export class AgentRegistrationView {
         this.dataService.updateForm(ApiController.Registration, this.applicationId, this.getFormData()).subscribe(data => {
             this.isUpdating = false;
             this.router.navigate(['/agent-registration-list']);
+        });
+    }
+
+    resendActivation() {
+        this.isResending = true;
+        this.dataService.getAll(`${ApiController.Registration}/ResendActivationCode/${this.applicationId}`).subscribe(data => {
+            this.isResending = false;           
         });
     }
 

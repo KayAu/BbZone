@@ -26,6 +26,9 @@ var AppComponent = /** @class */ (function () {
         this.hideScrollHeight = 10;
         this.authenticationService.currentUser.subscribe(function (user) {
             _this.currentUser = user;
+            //if (!this.currentUser) {
+            //    //this.logout();
+            //}
         });
     }
     AppComponent.prototype.ngOnInit = function () {

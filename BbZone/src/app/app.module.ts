@@ -14,6 +14,7 @@ import { DataService } from './services/data.service';
 import { LoaderService } from './loader/loader.service';
 import { BroadcastService } from './services/broadcast.service';
 import { CascadeService } from './services/cascade.service';
+import { RouterService } from './services/router.service';
 import { Pagination } from './components/pagination/pagination';
 import { SortCellDirective } from './directives/sort-cell.directive';
 import { SortableDirective } from './directives/sortable.directive';
@@ -153,7 +154,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
         MaterialModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd.forRoot(),
-        UserIdleModule.forRoot({ idle: 300, timeout: 1200, ping: 60 }),
+        UserIdleModule.forRoot({ idle: 600, timeout: 1800, ping: 60 }),
         ToastrModule.forRoot({
             maxOpened: 1,
             preventDuplicates: true,
@@ -201,6 +202,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
     DataService,
     BroadcastService,
     CascadeService,
+    RouterService,
     LoaderService,
     {
         provide: HTTP_INTERCEPTORS,

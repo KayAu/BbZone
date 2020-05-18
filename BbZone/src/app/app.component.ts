@@ -28,9 +28,9 @@ export class AppComponent {
     ) {
         this.authenticationService.currentUser.subscribe(user => {
             this.currentUser = user;
-            if (!this.currentUser) {
-                this.logout();
-            }
+            //if (!this.currentUser) {
+            //    //this.logout();
+            //}
         });
       
     }

@@ -11,7 +11,7 @@
             </div>
             <div class="col-sm-2">
                 <div class="form-group mrg30T">
-                    <button class="btn btn-success mrg10R" (click)="reloadData()">Search</button>
+                    <button class="btn btn-success mrg10R" (click)="filterRecords()">Search</button>
                     <button class="btn btn-clear" (click)="clearSearchParam()">Clear</button>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                                 </label>
                             </div>
                         </div>
-                        <button class="btn btn-warning mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                        <button class="btn btn-warning mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0" *ngIf="currentUser.role == 'SuperAdmin'"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
                     </div>
                     <div class="table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">

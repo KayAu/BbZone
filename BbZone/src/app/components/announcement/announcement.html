@@ -24,7 +24,7 @@
                     <div class="flexbox mrg10T">
                         <ng-container *ngFor="let file of data.announcementDocuments; let fileNo = index">
                             View &nbsp;
-                            <a href="/App_Data/AnnouncementFiles/{{file}}" download>
+                            <a href="/api/Download/Announcement/{{file}}" download>
                                 File {{fileNo + 1}}
                             </a>
                         </ng-container>

@@ -18,6 +18,31 @@ namespace BroadbandZone_App.WebApi
 {
     public class RegistrationController : ApiController
     {
+
+        [HttpGet]
+        [Route("api/Registration/ResendActivationCode/{regId}")]
+        public IHttpActionResult ResendActivationCode(int regId)
+        {
+            try
+            {
+                using (var db = new BroadbandZoneEntities())
+                {
+                    var registration = db.Registrations.Find(regId);
+                    if (registration != null)
+                    {
+                        MailHelper.SendActivationEmail(registration.Email, registration.Fullname, registration.ActivationCode);
+                    }
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+                return Content(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
         {
             try

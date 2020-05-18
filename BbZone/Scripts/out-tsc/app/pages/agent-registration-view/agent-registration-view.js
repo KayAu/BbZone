@@ -34,6 +34,7 @@ var AgentRegistrationView = /** @class */ (function () {
         this.formRecord = {};
         this.registrationDocuments = [];
         this.isUpdating = false;
+        this.isResending = false;
     }
     AgentRegistrationView.prototype.ngOnInit = function () {
         this.applicationId = this.route.snapshot.params.id;
@@ -54,6 +55,13 @@ var AgentRegistrationView = /** @class */ (function () {
         this.dataService.updateForm(apiController_1.ApiController.Registration, this.applicationId, this.getFormData()).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/agent-registration-list']);
+        });
+    };
+    AgentRegistrationView.prototype.resendActivation = function () {
+        var _this = this;
+        this.isResending = true;
+        this.dataService.get(apiController_1.ApiController.Registration, this.applicationId).subscribe(function (data) {
+            _this.isResending = false;
         });
     };
     AgentRegistrationView.prototype.getFormData = function () {

@@ -21,6 +21,10 @@ namespace BroadbandZone_App.Helper
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(Properties.Settings.Default.SenderEmail);
                 mail.To.Add(receipientEmail);
+                foreach (string adminEmail in GetSuperAdminEmails())
+                {
+                    mail.Bcc.Add(adminEmail);
+                }
                 mail.Subject = "Confirm your email to activate your account";
                 mail.IsBodyHtml = true;
                 mail.Body = GenerateContent(receipientName, activationCode.ToString());
@@ -182,7 +186,18 @@ namespace BroadbandZone_App.Helper
             {
                 yield return eml;
             }
-         //   return Convert.ToString(adminEmails.Value);
+        }
+
+        private static IEnumerable<string> GetSuperAdminEmails()
+        {
+            using (var db = new BroadbandZoneEntities())
+            {
+                var sAdmins = db.AdminUsers.Where(u => u.HasFullControl == true);
+                foreach (AdminUser admin in sAdmins)
+                {
+                    yield return admin.Email;
+                }
+            }
         }
 
         private static void GetPackageName(int packageId, out string packageName, out string category)

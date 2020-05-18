@@ -22,6 +22,7 @@ var data_service_1 = require("./services/data.service");
 var loader_service_1 = require("./loader/loader.service");
 var broadcast_service_1 = require("./services/broadcast.service");
 var cascade_service_1 = require("./services/cascade.service");
+var router_service_1 = require("./services/router.service");
 var pagination_1 = require("./components/pagination/pagination");
 var sort_cell_directive_1 = require("./directives/sort-cell.directive");
 var sortable_directive_1 = require("./directives/sortable.directive");
@@ -164,7 +165,7 @@ var AppModule = /** @class */ (function () {
                 material_1.MaterialModule,
                 animations_1.BrowserAnimationsModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
-                angular_user_idle_1.UserIdleModule.forRoot({ idle: 300, timeout: 1200, ping: 60 }),
+                angular_user_idle_1.UserIdleModule.forRoot({ idle: 600, timeout: 1800, ping: 60 }),
                 ngx_toastr_1.ToastrModule.forRoot({
                     maxOpened: 1,
                     preventDuplicates: true,
@@ -207,6 +208,7 @@ var AppModule = /** @class */ (function () {
                 data_service_1.DataService,
                 broadcast_service_1.BroadcastService,
                 cascade_service_1.CascadeService,
+                router_service_1.RouterService,
                 loader_service_1.LoaderService,
                 {
                     provide: http_2.HTTP_INTERCEPTORS,

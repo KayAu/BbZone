@@ -323,6 +323,7 @@
     <Content Include="images\header_one.jpg" />
     <Content Include="images\header_two.jpg" />
     <Content Include="images\login.png" />
+    <Content Include="images\logo.PNG" />
     <Content Include="images\maxis.png" />
     <Content Include="images\nex.life.png" />
     <Content Include="images\profile_small.jpg" />
@@ -629,6 +630,7 @@
     <TypeScriptCompile Include="src\app\services\data.service.ts" />
     <TypeScriptCompile Include="src\app\services\broadcast.service.ts" />
     <TypeScriptCompile Include="src\app\services\file-download.ts" />
+    <TypeScriptCompile Include="src\app\services\router.service.ts" />
     <TypeScriptCompile Include="src\environments\environment.prod.ts" />
     <TypeScriptCompile Include="src\environments\environment.ts" />
     <TypeScriptCompile Include="src\main.ts" />
@@ -661,7 +663,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>22217</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:4210/</IISUrl>
+          <IISUrl>http://localhost:3210/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
