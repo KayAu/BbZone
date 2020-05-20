@@ -1620,6 +1620,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="ActivationCode" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="SuperiorLogin" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="UserLogin" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetAgentProfile_Result">
           <Property Type="Int32" Name="AgentId" Nullable="false" />
@@ -1844,7 +1845,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
         </ComplexType>
         <ComplexType Name="GetPaymentDetails_Result">
           <Property Type="Int32" Name="AgentId" Nullable="false" />
-          <Property Type="String" Name="Fullname" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="Nric" Nullable="true" MaxLength="12" />
           <Property Type="String" Name="BankName" Nullable="true" MaxLength="30" />
           <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
@@ -1854,6 +1854,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="PaymentItemsStr" Nullable="true" />
           <Property Type="String" Name="SlipNo" Nullable="true" MaxLength="6" />
           <Property Type="String" Name="DeductAmount" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="PayTo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetClawback_Result">
           <Property Type="Int32" Name="ClawbackId" Nullable="false" />
@@ -2687,6 +2688,8 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
           <Property Type="Boolean" Name="AllowEdit" Nullable="true" />
           <Property Type="Boolean" Name="AllowTerminate" Nullable="true" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="PayTo" Nullable="true" MaxLength="50" />
         </ComplexType>
         <EntityType Name="Bank">
           <Key>
@@ -2806,6 +2809,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
                 <ScalarProperty Name="ActivationCode" ColumnName="ActivationCode" />
                 <ScalarProperty Name="SuperiorLogin" ColumnName="SuperiorLogin" />
+                <ScalarProperty Name="UserLogin" ColumnName="UserLogin" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3077,7 +3081,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetPaymentDetails_Result">
                 <ScalarProperty Name="AgentId" ColumnName="AgentId" />
-                <ScalarProperty Name="Fullname" ColumnName="Fullname" />
                 <ScalarProperty Name="Nric" ColumnName="Nric" />
                 <ScalarProperty Name="BankName" ColumnName="BankName" />
                 <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
@@ -3087,6 +3090,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="PaymentItemsStr" ColumnName="PaymentItemsStr" />
                 <ScalarProperty Name="SlipNo" ColumnName="SlipNo" />
                 <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="PayTo" ColumnName="PayTo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3759,6 +3763,8 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="BankAccNo" ColumnName="BankAccNo" />
                 <ScalarProperty Name="AllowEdit" ColumnName="AllowEdit" />
                 <ScalarProperty Name="AllowTerminate" ColumnName="AllowTerminate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PayTo" ColumnName="PayTo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

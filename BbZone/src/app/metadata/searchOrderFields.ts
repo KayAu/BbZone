@@ -98,7 +98,7 @@ export class SearchOrderFields {
                 "controlName": "keyword",
                 "controlType": "textbox",
                 "maxLength": 100,
-                "placeholder": "Customer name, residential name or order no"
+                "placeholder": "Customer, company, residential name or order no"
             }
         },
         {

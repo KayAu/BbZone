@@ -15,6 +15,7 @@ BEGIN
 	DECLARE @var_Table TABLE(
 		RegId INT NOT NULL,
 		Fullname VARCHAR(50) NOT NULL,
+		UserLogin VARCHAR(50) NOT NULL, 
 		CompanyName VARCHAR(50) NULL,
 		MobileNo VARCHAR(15) NOT NULL,
 		SuperiorName VARCHAR(50) NULL,
@@ -35,6 +36,7 @@ BEGIN
 
 		SELECT r.RegId,
 		    r.Fullname,
+			r.UserLogin,
 			r.CompanyName,
 			r.MobileNo,
 			SuperiorName = a.Fullname,
@@ -66,6 +68,7 @@ BEGIN
 
 		SELECT  RegId,
 				Fullname,
+				UserLogin,
 				CompanyName,
 				MobileNo,
 				SuperiorName,

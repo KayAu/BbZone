@@ -60,7 +60,7 @@ var AgentRegistrationView = /** @class */ (function () {
     AgentRegistrationView.prototype.resendActivation = function () {
         var _this = this;
         this.isResending = true;
-        this.dataService.get(apiController_1.ApiController.Registration, this.applicationId).subscribe(function (data) {
+        this.dataService.getAll(apiController_1.ApiController.Registration + "/ResendActivationCode/" + this.applicationId).subscribe(function (data) {
             _this.isResending = false;
         });
     };

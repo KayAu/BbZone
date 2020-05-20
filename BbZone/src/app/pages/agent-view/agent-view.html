@@ -79,7 +79,7 @@
                         <div class="panel-body">
                             <div class="tab-content">
                                 <!-- AGENT PROFILE -->
-                                <div class="tab-pane active pad20A" id="agentProfile">
+                                <div class="tab-pane active pad20A pad0B" id="agentProfile">
                                     <form #dataForm="ngForm" (ngSubmit)="submit()">
                                         <!--PRODUCT TYPES-->
                                         <ng-container *ngFor="let field of formFields">
@@ -100,8 +100,9 @@
                                                 Superior
                                             </label>
                                             <div class="col-sm-10">
-                                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
-                                                                [displayText]="formRecord['superiorName']" [editable]="false" name="superior"></superior-field>
+                                                <label class="font-normal">{{formRecord['superiorName']}}</label>
+                                                <!--<superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
+                                                                [displayText]="formRecord['superiorName']" [editable]="false" name="superior"></superior-field>-->
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
@@ -118,12 +119,13 @@
                                         <div class="form-group row">
                                             <div class="col-sm-12 ">
                                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                                <button type="submit" class="btn btn-primary float-right mrg15T mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                                         [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
-                                                    {{isUpdating ? 'Updating' : 'Update'}}
+                                                    {{isUpdating ? 'Updating' : 'Update'
+                                                    }}
                                                     <span class="loading"></span>
-                                                </button>
-                                            </div>
+                                                    </button>
+</div>
                                         </div>
                                     </form>
                                 </div>
@@ -152,7 +154,7 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row text-right">
+            <div class="form-group row mrg5L">
                 <back-button>Cancel</back-button>
             </div>
         </div>

@@ -52,7 +52,7 @@
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title pad10R">
-                    <h5>Withdrawal</h5>
+                    <h5>Withdrawal - {{formRecord.withdrawalId}}</h5>
                     <div class="ibox-tools">
                         <a class="font-size-18" href="/api/PaymentVoucher/Print/{{recordId}}" *ngIf="formRecord.status == 'Completed'">
                             <i class="fa fa-print"></i>
@@ -65,18 +65,18 @@
                         <div class="col-lg-5">
                             <div class="row mrg10B">
                                 <div class="cell-width-30 pad35L float-left">
-                                    <strong>Withdrawal Id:</strong>
+                                    <strong>Agent Name:</strong>
                                 </div>
-                                <div class="cell-width-35 float-left">
-                                    <div class="mb-1">{{formRecord.withdrawalId}}</div>
+                                <div class="cell-width-45 float-left">
+                                    <div class="mb-1">{{formRecord.payTo}}</div>
                                 </div>
                             </div>
                             <div class="row mrg10B">
                                 <div class="cell-width-30 pad35L float-left ">
-                                    <strong>Agent Name:</strong>
+                                    <strong>Agent Email:</strong>
                                 </div>
                                 <div class="cell-width-35 float-left">
-                                    <div class="mb-1">{{formRecord.agent}}</div>
+                                    <div class="mb-1">{{formRecord.email}}</div>
                                 </div>
                             </div>
                             <div class="row mrg10B">
@@ -84,7 +84,7 @@
                                     <strong>Bank Account:</strong>
                                 </div>
                                 <div class="cell-width-35 float-left">
-                                    <div class="mb-1">{{formRecord.cankAccNo}}</div>
+                                    <div class="mb-1">{{formRecord.bankAccNo}}</div>
                                 </div>
                             </div>
                         </div>

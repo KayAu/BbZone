@@ -48,7 +48,7 @@ BEGIN
 
 		SELECT  SlipNo = RIGHT('0000' + CAST(w.WithdrawalId AS VARCHAR),6),
 				a.AgentId,
-				a.Fullname,
+				PayTo = CASE WHEN NOT  a.CompanyName IS NULL THEN  a.CompanyName ELSE a.Fullname END,
 				a.Nric,
 				a.BankName,
 				a.BankAccNo,

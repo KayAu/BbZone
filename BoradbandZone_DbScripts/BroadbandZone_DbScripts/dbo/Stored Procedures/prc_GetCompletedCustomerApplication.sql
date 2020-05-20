@@ -58,8 +58,8 @@ BEGIN
 			  ,ca.DocumentCompleted
 			  ,PackageComm = FORMAT(cc.PackageCommOnDate,'c','ms-MY')
 			  ,AgentCommPer = cc.AgentCommOnDate
-			 -- ,AgentCommAmount = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL THEN FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY') ELSE 'RM0' END
-			  ,AgentCommAmount = FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
+			  ,AgentCommAmount = FORMAT(CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY),'c','ms-MY') 
+			  --,AgentCommAmount = FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
 			  ,CommStatus = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 'Odd Claim'
 								 WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
 			                     WHEN NOT w.CompletedOn IS NULL THEN 'Paid'

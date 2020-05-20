@@ -24,5 +24,6 @@ namespace BroadbandZone_Data
         public string SuperiorName { get; set; }
         public string ActivationCode { get; set; }
         public string SuperiorLogin { get; set; }
+        public string UserLogin { get; set; }
     }
 }

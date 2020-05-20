@@ -75,7 +75,7 @@ namespace BroadbandZone_App.WebApi
 
                 body = body.Replace("{SlipNo}", paymentVoucher.SlipNo);
                 body = body.Replace("{AgentId}", paymentVoucher.AgentId.ToString());
-                body = body.Replace("{Fullname}", paymentVoucher.Fullname);
+                body = body.Replace("{Fullname}", paymentVoucher.PayTo);
                 body = body.Replace("{Nric}", paymentVoucher.Nric);
                 body = body.Replace("{BankName}", paymentVoucher.BankName);
                 body = body.Replace("{BankAccNo}", paymentVoucher.BankAccNo);

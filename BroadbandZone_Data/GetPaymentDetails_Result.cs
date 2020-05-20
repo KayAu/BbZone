@@ -14,7 +14,6 @@ namespace BroadbandZone_Data
     public partial class GetPaymentDetails_Result
     {
         public int AgentId { get; set; }
-        public string Fullname { get; set; }
         public string Nric { get; set; }
         public string BankName { get; set; }
         public string BankAccNo { get; set; }
@@ -24,5 +23,6 @@ namespace BroadbandZone_Data
         public string PaymentItemsStr { get; set; }
         public string SlipNo { get; set; }
         public string DeductAmount { get; set; }
+        public string PayTo { get; set; }
     }
 }

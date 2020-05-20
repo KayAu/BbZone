@@ -212,6 +212,14 @@ export class AgentRegistrationColumns {
             "colWidth": "cell-width-12"
         },
         {
+            "fieldName": "userLogin",
+            "headerText": "Login Name",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
+        },
+        {
             "fieldName": "companyName",
             "headerText": "Company Name",
             "displayType": "text",

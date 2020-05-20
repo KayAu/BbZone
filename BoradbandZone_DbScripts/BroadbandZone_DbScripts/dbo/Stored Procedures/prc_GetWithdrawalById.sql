@@ -8,7 +8,9 @@ BEGIN
 
 	BEGIN TRY
 		SELECT w.* ,
+			   PayTo = CASE WHEN NOT  a.CompanyName IS NULL THEN  a.CompanyName ELSE a.Fullname END,
 			   a.Nric,
+			   a.Email,
 		       a.BankName,
 			   a.BankAccNo,
 			   AllowEdit = CAST(CASE WHEN @prIsAdmin = 0 OR w.Status IN ('Completed','Rejected','Terminated') THEN 0 ELSE 1 END AS BIT),

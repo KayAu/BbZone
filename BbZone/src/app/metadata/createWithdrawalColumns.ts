@@ -31,7 +31,7 @@ export class CreateWithdrawalColumns {
         "colWidth": "cell-width-25"
     },
     {
-        "fieldName": "date",
+        "fieldName": "transactionDate",
         "headerText": "Date",
         "displayType": "text",
         "keyField": false,

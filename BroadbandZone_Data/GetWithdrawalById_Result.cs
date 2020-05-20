@@ -33,5 +33,7 @@ namespace BroadbandZone_Data
         public string BankAccNo { get; set; }
         public Nullable<bool> AllowEdit { get; set; }
         public Nullable<bool> AllowTerminate { get; set; }
+        public string Email { get; set; }
+        public string PayTo { get; set; }
     }
 }
