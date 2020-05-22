@@ -71,7 +71,7 @@ BEGIN
 		SELECT 
 			WithdrawalId,			
 			Agent,
-			Amount = FORMAT(Amount, 'C', 'zh-MY'),
+			Amount = FORMAT(Amount, 'C2', 'ms-MY'),
 			SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
 			Status,
 			CompletedOn = FORMAT(CompletedOn, 'MM/dd/yyyy'),

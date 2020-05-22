@@ -86,7 +86,7 @@ BEGIN
 				Agent,
 				TransactionType,
 				Remarks,
-				DeductAmount = FORMAT(DeductAmount, 'C', 'zh-MY'),
+				DeductAmount = FORMAT(DeductAmount, 'C', 'ms-MY'),
 				IsDeducted,
 				DeductedOn = FORMAT(DeductedOn, 'MM/dd/yyyy') ,
 				CreatedOn,

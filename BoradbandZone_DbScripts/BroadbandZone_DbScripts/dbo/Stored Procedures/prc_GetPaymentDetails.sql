@@ -53,8 +53,8 @@ BEGIN
 				a.BankName,
 				a.BankAccNo,
 				w.ReferenceNo,
-				PaymentAmount = FORMAT(w.WithdrawAmount, 'C', 'zh-MY') ,
-				DeductAmount = FORMAT(w.Deduction, 'C', 'zh-MY') ,
+				PaymentAmount = FORMAT(w.WithdrawAmount, 'C2', 'ms-MY') ,
+				DeductAmount = FORMAT(w.Deduction, 'C2', 'ms-MY') ,
 				PaymentDate = FORMAT(w.CreatedOn, 'dd/MM/yyyy'),
 				PaymentItemsStr = @vPaymentItemsStr
 		FROM Withdrawal w

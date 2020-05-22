@@ -40,7 +40,7 @@ BEGIN
 			   ca.ApplicationId
 			  ,pc.Category
 			  ,pp.PackageName
-			  ,Commission = FORMAT(pp.Commission, 'C', 'zh-MY')
+			  ,Commission = FORMAT(pp.Commission, 'C', 'ms-MY')
 			  ,ca.Agent
 			  ,ca.CompanyName
 			  ,ca.CompanyRegNo
