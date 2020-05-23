@@ -67,7 +67,7 @@
                                 <div class="cell-width-30 pad35L float-left">
                                     <strong>Agent Name:</strong>
                                 </div>
-                                <div class="cell-width-45 float-left">
+                                <div class="cell-width-50 float-left">
                                     <div class="mb-1">{{formRecord.payTo}}</div>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive mrg10T">
+                    <div class="table-responsive mrg10T pad0B">
                         <label class="font-bold">Claimed Commission(s)</label>
                         <table class="table table-bordered dataTable">
                             <thead>
@@ -153,6 +153,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="pad10A subtotal">
+                            <strong style="padding-left: 69%;">Total Claimed Amount:</strong>
+                            <strong class="text-success" style="padding-left: 3%;">RM {{formRecord.withdrawAmount | number:'1.2-2'}}</strong>
+                        </div>
                     </div>
                     <div class="hr-line-dashed mrg20B mrg20T"></div>
                     <label class="font-bold">Admin Input</label>
