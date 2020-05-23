@@ -39,7 +39,7 @@ export class EditOrder  {
         this.currentUser = this.authenticationService.currentUserValue;
         this.recordId = this.route.snapshot.params.id;
         this.loadRecord(this.route.snapshot.params.id);
-        let dataFields = this.getFormFeldsMapping();
+        const dataFields = this.getFormFeldsMapping();
         this.displayFields = dataFields.filter(c => c.dataFieldControl.controlType === this.controlType.label);
         this.applicationFields = dataFields.filter(c => c.groupName === 'application' && c.dataFieldControl.controlType !== this.controlType.label);
         this.orderFields = dataFields.filter(c => c.groupName === 'orderInfo');
@@ -81,7 +81,7 @@ export class EditOrder  {
         formData.append('data', JSON.stringify(this.formRecord));
 
         if (this.formRecord.customerDocuments) {
-            for (var i = 0; i < this.formRecord.customerDocuments.length; i++) {
+            for (let i = 0; i < this.formRecord.customerDocuments.length; i++) {
                 if (!this.formRecord.customerDocuments[i].deleted) {
                     formData.append("file" + i, this.formRecord.customerDocuments[i]);
                 }
@@ -96,7 +96,7 @@ export class EditOrder  {
 
     showEForm(show) {
         if (!show) show = false;
-        let index = this.orderFields.findIndex(i => i.fieldName == "eForm");
+        const index = this.orderFields.findIndex(i => i.fieldName === "eForm");
         this.orderFields[index].hidden = !show;
     }
 
@@ -108,7 +108,7 @@ export class EditOrder  {
     }
 
     private preventPosComplete() {
-        if (!this.commIsConfigured && this.formRecord['appStatusId'] == 4) {
+        if (!this.commIsConfigured && this.formRecord['appStatusId'] === 4) {
             window.scrollTo(0, 0);
             return true;
         }
@@ -125,7 +125,7 @@ export class EditOrder  {
     }
 
     private setControlsAsTouched() {
-        for (var i in this.form.controls) {
+        for (let i in this.form.controls) {
             this.form.controls[i].markAsTouched();
         }
     }

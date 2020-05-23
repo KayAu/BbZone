@@ -80,7 +80,7 @@ var EditOrder = /** @class */ (function () {
     EditOrder.prototype.showEForm = function (show) {
         if (!show)
             show = false;
-        var index = this.orderFields.findIndex(function (i) { return i.fieldName == "eForm"; });
+        var index = this.orderFields.findIndex(function (i) { return i.fieldName === "eForm"; });
         this.orderFields[index].hidden = !show;
     };
     EditOrder.prototype.checkCommissionSettings = function () {
@@ -90,7 +90,7 @@ var EditOrder = /** @class */ (function () {
         });
     };
     EditOrder.prototype.preventPosComplete = function () {
-        if (!this.commIsConfigured && this.formRecord['appStatusId'] == 4) {
+        if (!this.commIsConfigured && this.formRecord['appStatusId'] === 4) {
             window.scrollTo(0, 0);
             return true;
         }

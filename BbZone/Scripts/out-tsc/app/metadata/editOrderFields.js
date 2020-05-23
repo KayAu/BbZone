@@ -319,7 +319,7 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": false
+                "adminField": true
             }
         },
         {

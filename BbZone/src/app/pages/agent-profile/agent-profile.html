@@ -11,36 +11,37 @@
                 <div class="ibox-content">
                     <loading></loading>
                     <form #dataForm="ngForm" (ngSubmit)="submit()">
-                        <!--PRODUCT TYPES-->
-                        <ng-container *ngFor="let field of formFields">
+                        <fieldset [disabled]="!currentUser.isAdmin">
+                            <!--PRODUCT TYPES-->
+                            <ng-container *ngFor="let field of formFields">
+                                <div class="form-group row">
+                                    <label class="col-sm-3 col-form-label">
+                                        {{field.displayText}}
+                                        <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-sm-9">
+                                        <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                      [field]="field.dataFieldControl" [parentForm]="dataForm" [readonly]="field.dataFieldControl.readonly" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                    </div>
+                                </div>
+                                <div class="hr-line-dashed"></div>
+                            </ng-container>
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">
-                                    {{field.displayText}}
-                                    <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                    Superior
                                 </label>
                                 <div class="col-sm-9">
-                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" [readonly]="field.dataFieldControl.readonly" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                    <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
+                                                    [displayText]="formRecord['superiorName']" name="superior"></superior-field>
                                 </div>
                             </div>
-                            <div class="hr-line-dashed"></div>
-                        </ng-container>
-                        <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">
-                                Superior
-                            </label>
-                            <div class="col-sm-9">
-                                <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
-                                                [displayText]="formRecord['superiorName']" name="superior"></superior-field>
-                            </div>
-                        </div>
+                        </fieldset>
                         <div class="hr-line-dashed"></div>
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
-                            <div class="col-sm-12 ">
-                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
-                                        [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
+                            <div class="col-sm-12 text-right mrg10T">
+                                <button type="submit" class="btn btn-primary float-right" [ngClass]="{'show-spinner':isUpdating}"
+                                        [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;" *ngIf="">
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>
                                 </button>
@@ -50,7 +51,6 @@
                     </form>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

@@ -9,7 +9,6 @@ import { DataService } from '../../services/data.service';
 import { LoaderService } from '../../loader/loader.service';
 import { ActivatedRoute } from '@angular/router';
 import { ApiController } from '../../enums/apiController';
-import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SuperiorField } from 'src/app/components/superior-field/superior-field';
@@ -43,8 +42,8 @@ export class AgentProfile {
         this.agentId = this.route.snapshot.params.id;
         this.currentUser = this.authenticationService.currentUserValue;
         this.formFields = this.getFormFeldsMapping();
-        if (!this.currentUser.isAdmin)
-            this.setReadonlyFields();
+        //if (!this.currentUser.isAdmin)
+        //    this.setReadonlyFields();
         this.loadRecord();
     }
 
@@ -87,12 +86,12 @@ export class AgentProfile {
         });
     }
 
-    private setReadonlyFields() {
-        let bankNameFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankName');
-        let bankAccNoFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankAccNo');
-        this.formFields[bankNameFldIdx].dataFieldControl.readonly = true;
-        this.formFields[bankAccNoFldIdx].dataFieldControl.readonly = true;
-    }
+    //private setReadonlyFields() {
+    //    let bankNameFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankName');
+    //    let bankAccNoFldIdx = this.formFields.findIndex(f => f.fieldName == 'bankAccNo');
+    //    this.formFields[bankNameFldIdx].dataFieldControl.readonly = true;
+    //    this.formFields[bankAccNoFldIdx].dataFieldControl.readonly = true;
+    //}
 
     private setControlsAsTouched() {
         for (var i in this.form.controls) {

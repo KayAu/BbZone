@@ -30,64 +30,67 @@
                         The commission for this agent has not been set yet. Please make sure the commission set otherwise this application will be unable to updated to <strong>Post Complete</strong>.
                     </div>
                     <form #applicationForm="ngForm" (ngSubmit)="update()">
-                        <div class="row order-form">
-                            <!--APPLICATION DETAILS-->
-                            <div class="col-sm-6 b-r">
-                                <!--CUSTOMER INFO-->
-                                <ng-container *ngFor="let field of applicationFields">
-                                    <div class="form-group row mrg5B">
-                                        <label class="col-sm-4 col-form-label">
-                                            {{field.displayText}}
-                                            <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
-                                        </label>
+                        <fieldset [disabled]="!currentUser.isAdmin">
+                            <div class="row order-form">
+                                <!--APPLICATION DETAILS-->
+                                <div class="col-sm-6 b-r">
+                                    <!--CUSTOMER INFO-->
+                                    <ng-container *ngFor="let field of applicationFields">
+                                        <div class="form-group row mrg5B">
+                                            <label class="col-sm-4 col-form-label">
+                                                {{field.displayText}}
+                                                <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                              [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true"></data-control>
+                                                <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                              [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!--ATTACH REQUIRED DOCUMENTS-->
+                                    <div class="form-group row">
+                                        <label class="col-sm-4 col-form-label">Attach required documents</label>
                                         <div class="col-sm-8">
-                                            <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                          [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true"></data-control>
-                                            <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                          [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                                            <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplicationDocument'"></file-uploader>
+                                            <span class="form-text m-b-none">
+                                                Upload customer related documents. Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf".
+                                            </span>
                                         </div>
                                     </div>
-                                </ng-container>
-                                <!--ATTACH REQUIRED DOCUMENTS-->
-                                <div class="form-group row">
-                                    <label class="col-sm-4 col-form-label">Attach required documents</label>
-                                    <div class="col-sm-8">
-                                        <file-uploader name="relDoc" [(ngModel)]="formRecord['customerDocuments']" [fileUrl]="'/api/Download/CustomerApplicationDocument'"></file-uploader>
-                                        <span class="form-text m-b-none">
-                                            Upload customer related documents. Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf".
-                                        </span>
+                                </div>
+                                <!--ORDER DETAILS-->
+                                <div class="col-sm-6">
+                                    <ng-container *ngFor="let field of orderFields">
+                                        <div class="form-group row mrg5B" *ngIf="!field.hidden">
+                                            <label class="col-sm-4 col-form-label">
+                                                {{field.displayText}}
+                                                <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                              [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true"></data-control>
+                                                <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                              [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
+                                            </div>
+                                        </div>
+                                    </ng-container>
+                                    <!--SAVE OR CANCEL-->
+                                    <div class="form-group row mrg20T">
+                                        <div class="col-sm-12 text-right">
+                                            <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
+                                                    [disabled]="!formRecord['allowEdit'] || isUpdating" style="width: 180px;">
+                                                {{isUpdating ? 'Updating' : 'Update'}}
+                                                <span class="loading"></span>
+                                            </button>
+                                            <back-button>Cancel</back-button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <!--ORDER DETAILS-->
-                            <div class="col-sm-6">
-                                <ng-container *ngFor="let field of orderFields">
-                                    <div class="form-group row mrg5B" *ngIf="!field.hidden">
-                                        <label class="col-sm-4 col-form-label">
-                                            {{field.displayText}}
-                                            <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
-                                        </label>
-                                        <div class="col-sm-8">
-                                            <data-control *ngIf="field.dataFieldControl && !field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                          [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true"></data-control>
-                                            <data-control *ngIf="field.dataFieldControl && field.dataFieldControl.dataChangedEvent" name="{{field.dataFieldControl.controlName}}" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                          [field]="field.dataFieldControl" [parentForm]="applicationForm" [onEdit]="true" (onModelChanged)="this[field.dataFieldControl.dataChangedEvent]($event)"></data-control>
-                                        </div>
-                                    </div>
-                                </ng-container>
-                                <!--SAVE OR CANCEL-->
-                                <div class="form-group row mrg20T">
-                                    <div class="col-sm-12 text-right">
-                                        <button type="submit" class="btn btn-primary" [ngClass]="{'show-spinner':isUpdating}"
-                                                [disabled]="!formRecord['allowEdit'] || isUpdating" style="width: 180px;">
-                                            {{isUpdating ? 'Updating' : 'Update'}}
-                                            <span class="loading"></span>
-                                        </button>
-                                        <back-button>Cancel</back-button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        </fieldset>
+                        
                     </form>
                 </div>
             </div>

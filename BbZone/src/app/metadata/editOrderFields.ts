@@ -317,7 +317,7 @@ public static fields = [
             "maxLength": 25,
             "datasourceUrl": null,
             "cascadeTo": null,
-            "adminField": false
+            "adminField": true
         }
     },
     {
