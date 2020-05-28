@@ -26,19 +26,19 @@ var core_1 = require("@angular/core");
 var tablerow_data_mapping_1 = require("src/app/model/tablerow.data.mapping");
 var loader_service_1 = require("src/app/loader/loader.service");
 var data_service_1 = require("src/app/services/data.service");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
 var dataDisplayType_1 = require("src/app/enums/dataDisplayType");
 var listEvent_1 = require("src/app/interfaces/listEvent");
 var apiController_1 = require("src/app/enums/apiController");
 var announcementFields_1 = require("src/app/metadata/announcementFields");
 var search_params_1 = require("src/app/model/search-params");
+var ngx_toastr_1 = require("ngx-toastr");
 var ViewAnnouncement = /** @class */ (function (_super) {
     __extends(ViewAnnouncement, _super);
-    function ViewAnnouncement(loaderService, dataService, formEvent) {
+    function ViewAnnouncement(loaderService, dataService, toastr) {
         var _this = _super.call(this, loaderService, dataService, "", false) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
-        _this.formEvent = formEvent;
+        _this.toastr = toastr;
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
@@ -58,12 +58,18 @@ var ViewAnnouncement = /** @class */ (function (_super) {
         this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
         this.reloadData();
     };
+    ViewAnnouncement.prototype.sendEmail = function (anncId) {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Announcement + "/EmailAgents/" + anncId).subscribe(function (data) {
+            _this.toastr.success('The emails is broadcasted successfully', 'Annoucement email sent', { positionClass: 'toast-bottom-full-width' });
+        });
+    };
     ViewAnnouncement = __decorate([
         core_1.Component({
             selector: 'view-announcement',
             templateUrl: './view-announcement.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, ngx_toastr_1.ToastrService])
     ], ViewAnnouncement);
     return ViewAnnouncement;
 }(listEvent_1.ListEvent));

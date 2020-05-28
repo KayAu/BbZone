@@ -73,7 +73,7 @@ BEGIN
 					   @prCreatedBy		   
 				FROM @tSuperiorHierarchy a
 				LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
-				WHERE NOT a.SuperiorId IS NULL
+				WHERE ISNULL(a1.SuperiorId,0) <> 0
 			END
 
 			UPDATE CustomerApplication

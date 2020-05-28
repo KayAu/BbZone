@@ -29,7 +29,7 @@ BEGIN
 						  AND pc.IsActive = 1
 						) ap
 			LEFT JOIN AgentCommission ac ON ac.AgentId = ap.AgentId AND ac.CategoryId = ap.CategoryId
-			WHERE a.SuperiorId IS NULL
+			WHERE ISNULL(a.SuperiorId, 0 ) = 0
 			AND ac.CommId IS NULL
 			GROUP BY ap.CategoryId,
 					 ap.Category,

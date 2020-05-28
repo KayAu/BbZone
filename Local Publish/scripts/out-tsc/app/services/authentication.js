@@ -48,6 +48,7 @@ var AuthenticationService = /** @class */ (function () {
     AuthenticationService.prototype.logout = function () {
         // remove user from local storage to log user out
         localStorage.removeItem('currentUser');
+        localStorage.removeItem('viewOrderParams');
         this.currentUserSubject.next(null);
     };
     AuthenticationService = __decorate([

@@ -4,13 +4,13 @@ var ViewCompletedOrderColumns = /** @class */ (function () {
     function ViewCompletedOrderColumns() {
     }
     ViewCompletedOrderColumns.fields = [
-        {
-            "fieldName": "applicationId",
-            "headerText": "Id",
-            "displayType": "text",
-            "keyField": true,
-            "colWidth": "cell-width-1"
-        },
+        //{
+        //    "fieldName": "applicationId",
+        //    "headerText": "Id",
+        //    "displayType": "text",
+        //    "keyField": true,
+        //    "colWidth": "cell-width-1"
+        //},
         {
             "fieldName": "customerName",
             "headerText": "Customer Name",
@@ -30,7 +30,7 @@ var ViewCompletedOrderColumns = /** @class */ (function () {
             "headerText": "Category",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "activatedOn",
@@ -40,11 +40,11 @@ var ViewCompletedOrderColumns = /** @class */ (function () {
             "colWidth": "cell-width-5"
         },
         {
-            "fieldName": "orderNo",
-            "headerText": "Order No",
+            "fieldName": "userId",
+            "headerText": "User Id",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         },
         {
             "fieldName": "agent",
@@ -61,11 +61,39 @@ var ViewCompletedOrderColumns = /** @class */ (function () {
             "colWidth": "cell-width-5"
         },
         {
+            "fieldName": "paymentNo",
+            "headerText": "Payment Voucher No.",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
             "fieldName": "commStatus",
             "headerText": "Comm. Status",
             "displayType": "text",
             "keyField": false,
             "colWidth": ""
+        },
+        {
+            "fieldName": "packageComm",
+            "headerText": "Comm. Value (RM)",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "agentCommPer",
+            "headerText": "Agent Comm. (%)",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "agentCommAmount",
+            "headerText": "Agent Comm. (RM)",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
         },
         {
             "fieldName": "paidOn",

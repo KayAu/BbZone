@@ -8,6 +8,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "applicationId",
             "displayText": "Application Id",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "applicationId",
                 "controlType": "label",
@@ -16,9 +17,22 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
+            "fieldName": "status",
+            "displayText": "Status",
+            "hidden": false,
+            "groupName": "application",
+            "dataFieldControl": {
+                "controlName": "status",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0,
+            }
+        },
+        {
             "fieldName": "category",
             "displayText": "Product Category",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "category",
                 "controlType": "label",
@@ -30,6 +44,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "packageName",
             "displayText": "Product Package",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "packageName",
                 "controlType": "label",
@@ -41,18 +56,31 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "agent",
             "displayText": "Agent Name",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "agent",
-                "controlType": "select",
-                "required": true,
+                "controlType": "label",
+                "required": false,
                 "maxLength": 0,
-                "datasourceUrl": "GetAgents"
+            }
+        },
+        {
+            "fieldName": "agentEmail",
+            "displayText": "Agent Email",
+            "hidden": false,
+            "groupName": "application",
+            "dataFieldControl": {
+                "controlName": "agentEmail",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 0,
             }
         },
         {
             "fieldName": "companyName",
             "displayText": "Company Name",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "companyName",
                 "controlType": "textbox",
@@ -62,8 +90,9 @@ var EditOrderFields = /** @class */ (function () {
         },
         {
             "fieldName": "companyRegNo",
-            "displayText": "Company Registration No.",
+            "displayText": "Company Reg. No",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "companyRegNo",
                 "controlType": "textbox",
@@ -75,6 +104,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "customerName",
             "displayText": "Customer Name",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "customerName",
                 "controlType": "textbox",
@@ -84,8 +114,9 @@ var EditOrderFields = /** @class */ (function () {
         },
         {
             "fieldName": "customerId",
-            "displayText": "Customer IC / Passport No.",
+            "displayText": "IC / Passport No.",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "customerId",
                 "controlType": "textbox",
@@ -97,6 +128,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "residentialType",
             "displayText": "Residential Type",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "residentialType",
                 "controlType": "select",
@@ -109,6 +141,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "residentialName",
             "displayText": "Residential Name",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "residentialName",
                 "controlType": "textbox",
@@ -120,9 +153,10 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "customerAddr",
             "displayText": "Customer Address",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "customerAddr",
-                "controlType": "textbox",
+                "controlType": "textarea",
                 "required": true,
                 "maxLength": 150
             }
@@ -131,6 +165,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "city",
             "displayText": "City",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "city",
                 "controlType": "textbox",
@@ -142,6 +177,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "postcode",
             "displayText": "Postcode",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "postcode",
                 "controlType": "textbox",
@@ -153,6 +189,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "state",
             "displayText": "State",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "state",
                 "controlType": "select",
@@ -165,6 +202,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "contactNo",
             "displayText": "Contact No",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "contactNo",
                 "controlType": "textbox",
@@ -176,6 +214,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "email",
             "displayText": "Email",
             "hidden": false,
+            "groupName": "application",
             "dataFieldControl": {
                 "controlName": "email",
                 "controlType": "textbox",
@@ -185,19 +224,22 @@ var EditOrderFields = /** @class */ (function () {
         },
         {
             "fieldName": "customerRemarks",
-            "displayText": "Remarks",
+            "displayText": "Admin Remarks",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "customerRemarks",
                 "controlType": "textarea",
                 "required": false,
-                "maxLength": 500
+                "maxLength": 500,
+                "adminField": true
             }
         },
         {
             "fieldName": "submitByAgent",
             "displayText": "Submitted By Agent",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "submitByAgent",
                 "controlType": "checkbox",
@@ -206,24 +248,10 @@ var EditOrderFields = /** @class */ (function () {
             }
         },
         {
-            "fieldName": "isProcessed",
-            "displayText": "Is Processed",
-            "hidden": false,
-            "dataFieldControl": {
-                "controlName": "isProcessed",
-                "controlType": "checkbox",
-                "required": false,
-                "maxLength": 0,
-                "datasourceUrl": null,
-                "cascadeTo": null,
-                "adminField": true,
-                "dataChangedEvent": "showProcessedDetails"
-            }
-        },
-        {
             "fieldName": "orderNo",
             "displayText": "Order No",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "orderNo",
                 "controlType": "textbox",
@@ -231,13 +259,14 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
             "fieldName": "userId",
             "displayText": "User Id",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "userId",
                 "controlType": "textbox",
@@ -245,13 +274,14 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
             "fieldName": "telNo",
             "displayText": "Tel No",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "telNo",
                 "controlType": "textbox",
@@ -259,13 +289,14 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 25,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
             "fieldName": "eForm",
             "displayText": "E-Form",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "eForm",
                 "controlType": "textbox",
@@ -273,13 +304,14 @@ var EditOrderFields = /** @class */ (function () {
                 "maxLength": 15,
                 "datasourceUrl": null,
                 "cascadeTo": null,
-                "adminField": true
+                "adminField": false
             }
         },
         {
             "fieldName": "documentCompleted",
             "displayText": "Document Completed",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "documentCompleted",
                 "controlType": "checkbox",
@@ -294,6 +326,7 @@ var EditOrderFields = /** @class */ (function () {
             "fieldName": "appStatusId",
             "displayText": "Status",
             "hidden": false,
+            "groupName": "orderInfo",
             "dataFieldControl": {
                 "controlName": "appStatusId",
                 "controlType": "select",

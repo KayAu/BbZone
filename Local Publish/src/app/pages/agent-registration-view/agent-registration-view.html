@@ -22,7 +22,7 @@
                                 </label>
                                 <div class="col-sm-10">
                                     <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}" [readonly]="field.readonly"></data-control>
+                                                  [field]="field.dataFieldControl" [parentForm]="applicationForm" name="{{field.dataFieldControl.controlName}}" [readonly]="field.readonly"></data-control>
                                 </div>
                             </div>
                             <div class="hr-line-dashed"></div>
@@ -31,7 +31,7 @@
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label">Required documents</label>
                             <div class="col-sm-10">
-                                <file-uploader name="relDoc" [(ngModel)]="registrationDocuments" [fileUrl]="'/api/Download/RegistrationDocument'" [readOnly]="true"></file-uploader>
+                                <file-uploader name="relDoc" [(ngModel)]="formRecord['registrationDocuments']" [fileUrl]="'/api/Download/RegistrationDocument'" ></file-uploader>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -56,10 +56,13 @@
 
                         <!--SAVE OR CANCEL-->
                         <div class="form-group row">
-                            <div class="col-sm-12 text-right">
-                                <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
+                            <div class="col-sm-12 text-right mrg15T">
+                                <button class="btn btn-info mrg10R" *ngIf="formRecord['approvalDate']" (click)="resendActivation()" [ngClass]="{'show-spinner':isResending}" [disabled]="isResending || isUpdating">
+                                    {{isResending ? 'Resending' : 'Resend Activation'}}
+                                    <span class="loading"></span>
+                                </button>
                                 <button type="submit" class="btn btn-primary mrg10R" [ngClass]="{'show-spinner':isUpdating}"
-                                        [disabled]="isUpdating" style="width: 150px;" *ngIf="!formRecord['approvalDate']">
+                                        [disabled]="isResending || isUpdating" style="width: 150px;" >
                                     {{isUpdating ? 'Updating' : 'Update'}}
                                     <span class="loading"></span>
                                 </button>

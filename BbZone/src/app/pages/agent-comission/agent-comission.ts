@@ -53,6 +53,7 @@ export class AgentComission {
             .subscribe(results =>
             {
                 this.loadAgents(results[0]);
+
                 this.commissionSettings = results[1]; 
         });
     }

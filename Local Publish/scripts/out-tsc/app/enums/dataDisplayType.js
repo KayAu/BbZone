@@ -30,4 +30,9 @@ var CommissionTableDisplay;
     CommissionTableDisplay[CommissionTableDisplay["currentAgent"] = 0] = "currentAgent";
     CommissionTableDisplay[CommissionTableDisplay["allAgents"] = 1] = "allAgents";
 })(CommissionTableDisplay = exports.CommissionTableDisplay || (exports.CommissionTableDisplay = {}));
+var CustomerOrderDataGroup;
+(function (CustomerOrderDataGroup) {
+    CustomerOrderDataGroup[CustomerOrderDataGroup["application"] = 0] = "application";
+    CustomerOrderDataGroup[CustomerOrderDataGroup["orderInfo"] = 1] = "orderInfo";
+})(CustomerOrderDataGroup = exports.CustomerOrderDataGroup || (exports.CustomerOrderDataGroup = {}));
 //# sourceMappingURL=dataDisplayType.js.map

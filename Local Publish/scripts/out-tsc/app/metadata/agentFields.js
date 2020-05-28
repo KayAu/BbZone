@@ -143,9 +143,10 @@ var AgentRegistrationFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "bankName",
-                "controlType": "textbox",
+                "controlType": "select",
                 "required": true,
-                "maxLength": 30
+                "maxLength": 30,
+                "datasourceUrl": "GetBanks"
             }
         },
         {
@@ -177,7 +178,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "dataFieldControl": {
                 "controlName": "userLogin",
                 "controlType": "textbox",
-                "required": false,
+                "required": true,
                 "maxLength": 16
             }
         },
@@ -188,7 +189,7 @@ var AgentRegistrationFields = /** @class */ (function () {
             "dataFieldControl": {
                 "controlName": "password",
                 "controlType": "password",
-                "required": false,
+                "required": true,
                 "maxLength": 15
             }
         }
@@ -214,7 +215,15 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
+        },
+        {
+            "fieldName": "userLogin",
+            "headerText": "Login Name",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-10"
         },
         {
             "fieldName": "companyName",
@@ -238,7 +247,15 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-15"
+            "colWidth": "cell-width-12"
+        },
+        {
+            "fieldName": "superiorLogin",
+            "headerText": "Superior Acc.",
+            "displayType": "text",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": ""
         },
         {
             "fieldName": "createdOn",
@@ -270,7 +287,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         },
         {
             "fieldName": "approvedBy",
@@ -278,7 +295,7 @@ var AgentRegistrationColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-10"
+            "colWidth": "cell-width-7"
         }
     ];
     return AgentRegistrationColumns;
@@ -463,6 +480,17 @@ var AgentProfileFields = /** @class */ (function () {
     }
     AgentProfileFields.keyField = "agentId";
     AgentProfileFields.fields = [
+        {
+            "fieldName": "agentId",
+            "displayText": "Agent Id",
+            "hidden": false,
+            "dataFieldControl": {
+                "controlName": "agentId",
+                "controlType": "label",
+                "required": false,
+                "maxLength": 50
+            }
+        },
         {
             "fieldName": "fullname",
             "displayText": "Full Name",

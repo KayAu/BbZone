@@ -28,11 +28,6 @@ var SuperiorField = /** @class */ (function () {
     SuperiorField_1 = SuperiorField;
     SuperiorField.prototype.ngOnInit = function () {
         var _this = this;
-        //this.subscription = this.formEvent.notification.subscribe((form: FormSubmit) => {
-        //    //   if (form.name !== this.formName) return;
-        //    this.parentForm = form.template;
-        //    this.validate();
-        //});
         this.searchFieldInput.asObservable().debounceTime(500).distinctUntilChanged().subscribe(function (data) { return _this.search(data); });
     };
     SuperiorField.prototype.writeValue = function (val) {
@@ -66,16 +61,7 @@ var SuperiorField = /** @class */ (function () {
         this.dataService.get(apiController_1.ApiController.Agent + "/GetAgents/", keyword).subscribe(function (results) {
             if (results) {
                 _this.agents = results;
-                // this.displayText = `${results} - ${results}`;
-                //this.clearErrorMessages(thisElement);
-                //this.setChanges();
             }
-            //else {
-            //    thisElement.next('.text-danger').remove();
-            //    thisElement.after('<span class= "text-danger">Invalid Superior Id</span>');
-            //    $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            //    this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-            //}
         });
     };
     SuperiorField.prototype.clearErrorMessages = function (thisElement) {

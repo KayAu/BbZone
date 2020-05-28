@@ -9,7 +9,7 @@ var StatusAndKeywordParams = /** @class */ (function () {
 }());
 exports.StatusAndKeywordParams = StatusAndKeywordParams;
 var SearchOrderParams = /** @class */ (function () {
-    function SearchOrderParams(productId, productCategoryId, productPackageId, appStatusId, agent, submittedDate, residentialType, residentialName) {
+    function SearchOrderParams(productId, productCategoryId, productPackageId, appStatusId, agent, submittedDate, residentialType, residentialName, filterByMode) {
         this.productId = productId;
         this.productCategoryId = productCategoryId;
         this.productPackageId = productPackageId;
@@ -18,6 +18,7 @@ var SearchOrderParams = /** @class */ (function () {
         this.submittedDate = submittedDate;
         this.residentialType = residentialType;
         this.residentialName = residentialName;
+        this.filterByMode = filterByMode;
     }
     return SearchOrderParams;
 }());
@@ -38,6 +39,14 @@ var SearchWithdrawalToSubmitParams = /** @class */ (function () {
     return SearchWithdrawalToSubmitParams;
 }());
 exports.SearchWithdrawalToSubmitParams = SearchWithdrawalToSubmitParams;
+var SearchClawbackParams = /** @class */ (function () {
+    function SearchClawbackParams(isDeducted, keyword) {
+        this.isDeducted = isDeducted;
+        this.keyword = keyword;
+    }
+    return SearchClawbackParams;
+}());
+exports.SearchClawbackParams = SearchClawbackParams;
 var SearchWithdrawalViewParams = /** @class */ (function () {
     function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
         this.agent = agent;

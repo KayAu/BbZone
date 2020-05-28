@@ -6,8 +6,7 @@
                 <div class="ibox-title">
                     <h5>Manage Login Banner</h5>
                 </div>
-                <div class="ibox-content">
-                    
+                <div class="ibox-content">                  
                     <div class="table-responsive">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <loading></loading>
@@ -61,7 +60,7 @@
                                     </tbody>
                                 </table>
                             </form>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

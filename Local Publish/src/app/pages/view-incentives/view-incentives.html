@@ -8,7 +8,7 @@
                     <div class="form-group">
                         <label class="col-form-label" for="product_name">{{field.displayText}}</label>
                         <data-control [(ngModel)]="searchParams[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                      [field]="field.dataFieldControl" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                      [field]="field.dataFieldControl" [forDataFilter]="true" name="{{field.dataFieldControl.controlName}}"></data-control>
                     </div>
                 </div>
             </ng-container>
@@ -87,7 +87,7 @@
                                     </tbody>
                                 </table>
                             </form>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

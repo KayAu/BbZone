@@ -1422,6 +1422,7 @@ ul,
 ol {
   margin-top: 0;
   margin-bottom: 10px;
+  padding-top: 10px;
 }
 ul ul,
 ol ul,
@@ -1970,7 +1971,7 @@ pre code {
     width: 33.33333333%;
   }
   .col-md-3 {
-    width: 25%;
+    width: 20%;
   }
   .col-md-2 {
     width: 16.66666667%;
@@ -2644,7 +2645,7 @@ input[type="search"] {
   position: relative;
   display: block;
   margin-top: 10px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
 }
 .radio label,
 .checkbox label {
@@ -3985,14 +3986,15 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   list-style: none;
 }
 .nav > li {
-  position: relative;
-  display: block;
-  width: 100%;
+  /* position: relative; */
+  /* display: block; */
+  /* width: 100%; */
+  /* z-index: 11000; */
 }
 .nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+  /* position: relative; */
+  /* display: block; */
+  /* padding: 10px 15px; */
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -6764,4 +6766,6 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+ap */
+ap */
 ap */

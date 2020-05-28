@@ -14,10 +14,16 @@ var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var apiController_1 = require("src/app/enums/apiController");
 var dataDisplayType_1 = require("../../enums/dataDisplayType");
+var forms_1 = require("@angular/forms");
+var broadcast_service_1 = require("src/app/services/broadcast.service");
+var form_submit_1 = require("src/app/model/form-submit");
+var authentication_1 = require("src/app/services/authentication");
 var AgentCommissionTable = /** @class */ (function () {
-    function AgentCommissionTable(loaderService, dataService) {
+    function AgentCommissionTable(loaderService, dataService, formEvent, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
+        this.formEvent = formEvent;
+        this.authenticationService = authenticationService;
         this.dataSource = [];
         this.dataColumns = [];
         this.commissionSettings = [];
@@ -27,6 +33,9 @@ var AgentCommissionTable = /** @class */ (function () {
         this.hideColumns = [];
         this.rowItemClicked = new core_1.EventEmitter();
     }
+    AgentCommissionTable.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
+    };
     AgentCommissionTable.prototype.loadMyAgentsCommission = function (productId) {
         var _this = this;
         this.productId = productId;
@@ -60,10 +69,13 @@ var AgentCommissionTable = /** @class */ (function () {
     };
     AgentCommissionTable.prototype.updateRow = function (rowIndex) {
         var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid)
+            return;
         this.dataService.update(apiController_1.ApiController.Commission, this.agentId, this.commissionSettings).subscribe(function (data) {
             var propertyNames = Object.keys(_this.dataSource[rowIndex]);
             for (var itemNo = 0; itemNo < _this.commissionSettings.length; itemNo++) {
-                var propertyName = propertyNames[itemNo + 2];
+                var propertyName = propertyNames[itemNo + 3];
                 _this.dataSource[rowIndex][propertyName] = _this.commissionSettings[itemNo].agentCommissionPer;
             }
             _this.dataSource[rowIndex].onEdit = false;
@@ -71,6 +83,9 @@ var AgentCommissionTable = /** @class */ (function () {
     };
     AgentCommissionTable.prototype.updateTable = function () {
         var _this = this;
+        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        if (!this.form.valid)
+            return;
         this.isUpdating = true;
         this.dataService.update(apiController_1.ApiController.Commission, this.agentId, this.commissionSettings).subscribe(function (data) {
             _this.isUpdating = false;
@@ -112,12 +127,16 @@ var AgentCommissionTable = /** @class */ (function () {
         core_1.Output(),
         __metadata("design:type", Object)
     ], AgentCommissionTable.prototype, "rowItemClicked", void 0);
+    __decorate([
+        core_1.ViewChild(forms_1.NgForm),
+        __metadata("design:type", forms_1.NgForm)
+    ], AgentCommissionTable.prototype, "form", void 0);
     AgentCommissionTable = __decorate([
         core_1.Component({
             selector: 'agent-commission-table',
             templateUrl: './agent-commission-table.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, authentication_1.AuthenticationService])
     ], AgentCommissionTable);
     return AgentCommissionTable;
 }());

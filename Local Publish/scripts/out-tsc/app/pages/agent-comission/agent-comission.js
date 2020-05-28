@@ -18,30 +18,37 @@ var ngx_toastr_1 = require("ngx-toastr");
 var forms_1 = require("@angular/forms");
 var multiple_checkbox_1 = require("src/app/components/multiple-checkbox/multiple-checkbox");
 var product_options_1 = require("src/app/components/product-options/product-options");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
-var form_submit_1 = require("src/app/model/form-submit");
 var agent_commission_table_1 = require("src/app/components/agent-commission-table/agent-commission-table");
 var rxjs_1 = require("rxjs");
 var AgentComission = /** @class */ (function () {
-    function AgentComission(loaderService, dataService, formEvent, toastr, router) {
+    function AgentComission(loaderService, dataService, toastr, router) {
         this.loaderService = loaderService;
         this.dataService = dataService;
-        this.formEvent = formEvent;
         this.toastr = toastr;
         this.router = router;
         this.isUpdating = false;
         this.commissionSettings = [];
         this.agentCommissions = [];
+        this.appsWithoutCommission = [];
         this.selectedTab = 1;
         this.allowCommConfig = true;
         this.noAgentsReturned = false;
     }
-    AgentComission.prototype.ngOnInit = function () { };
+    AgentComission.prototype.ngOnInit = function () {
+        this.loadAppWithoutCommissionSet();
+    };
+    AgentComission.prototype.loadAppWithoutCommissionSet = function () {
+        var _this = this;
+        this.dataService.get(apiController_1.ApiController.Commission + "/GetAppWithoutCommissionSet").subscribe(function (results) {
+            _this.appsWithoutCommission = results;
+        });
+    };
     AgentComission.prototype.loadCategories = function () {
         var _this = this;
         this.multipleCheckboxes.removeSelection();
         rxjs_1.forkJoin([this.dataService.get(apiController_1.ApiController.Commission + "/GetMyAgentsForCommissionSetting", this.selectedProduct),
-            this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)]).subscribe(function (results) {
+            this.dataService.get(apiController_1.ApiController.Commission + "/GetCommissionSettings", this.selectedProduct)])
+            .subscribe(function (results) {
             _this.loadAgents(results[0]);
             _this.commissionSettings = results[1];
         });
@@ -56,24 +63,37 @@ var AgentComission = /** @class */ (function () {
     };
     AgentComission.prototype.create = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, 'dataForm'));
+        // this.formEvent.notify(new FormSubmit(this.form, 'dataForm'));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
         var newRecord = { agents: this.selectedAgents, commissionSettings: this.commissionSettings };
         this.dataService.add(apiController_1.ApiController.Commission, newRecord).subscribe(function (data) {
-            _this.isUpdating = false;
             _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
+            _this.isUpdating = false;
             _this.resetForm();
+            _this.loadAppWithoutCommissionSet();
         });
     };
     AgentComission.prototype.resetForm = function () {
         this.commissionSettings = [];
         this.multipleCheckboxes.removeSelection();
         this.productOptions.clearSelection();
+        this.setControlsAsUnouched();
     };
     AgentComission.prototype.editAgentCommission = function (categoryId) {
         console.log(categoryId);
+    };
+    AgentComission.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    AgentComission.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
@@ -96,7 +116,7 @@ var AgentComission = /** @class */ (function () {
             selector: 'agent-comission',
             templateUrl: './agent-comission.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, ngx_toastr_1.ToastrService, router_1.Router])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, ngx_toastr_1.ToastrService, router_1.Router])
     ], AgentComission);
     return AgentComission;
 }());

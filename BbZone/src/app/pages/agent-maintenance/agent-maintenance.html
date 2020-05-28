@@ -9,7 +9,7 @@
                 </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-sm-6 m-b-xs flexbox">
+                        <div class="col-sm-8 m-b-xs flexbox">
                             <div class="btn-group btn-group-toggle">
                                 <label class="btn btn-white" for="all" [ngClass]="{'active': searchParams.isActive == '' || searchParams.isActive == null }">
                                     <input type="radio" id="all" name="status" [value]="" [(ngModel)]="searchParams.isActive" (ngModelChange)="reloadData()" class="hidden"> All
@@ -21,12 +21,12 @@
                                     <input type="radio" id="inactive" name="status" [value]="false" [(ngModel)]="searchParams.isActive" (ngModelChange)="reloadData()" class="hidden"> Inactive
                                 </label>
                             </div>
-                            <div class="mrg10L cell-width-30">
-                                <input placeholder="Search" type="text" class="form-control form-control-sm" [(ngModel)]="searchParams.keyword" (keydown.enter)="reloadData()">
+                            <div class="mrg10L cell-width-50">
+                                <input placeholder="Search by agent or superior login name" type="text" class="form-control form-control-sm" [(ngModel)]="searchParams.keyword" (keydown.enter)="reloadData()">
                             </div>
                             <button class="btn btn-outline btn-default mrg10L" (click)="clearSearchParam()">Clear</button>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <button class="btn btn-warning mrg10B float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
                         </div>
                     </div>

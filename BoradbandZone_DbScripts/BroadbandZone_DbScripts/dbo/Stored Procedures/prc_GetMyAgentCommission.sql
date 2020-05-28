@@ -38,7 +38,7 @@ BEGIN
 					  AND pc.IsActive = 1
 					 ) ap
 		LEFT JOIN AgentCommission ac ON ac.AgentId = ap.AgentId AND ac.CategoryId = ap.CategoryId
-		WHERE 1 = CASE WHEN a1.SuperiorId IS NULL AND @prSuperiorId IS NULL THEN 1 
+		WHERE 1 = CASE WHEN ISNULL(a1.SuperiorId,0) = 0 AND @prSuperiorId IS NULL THEN 1 
 					   WHEN a1.SuperiorId = @prSuperiorId OR a1.AgentLevel = 0 THEN 1
 					   ELSE 0
 				  END

@@ -83,8 +83,10 @@ var Pagination = /** @class */ (function () {
     };
     Object.defineProperty(Pagination.prototype, "totalRecord", {
         set: function (totalNo) {
-            if (!totalNo)
+            if (!totalNo) {
+                this.pageButtons = [];
                 return;
+            }
             this._totalRecord = totalNo;
             this.page.totalPages = Math.ceil(totalNo / this.page.pageSize);
             this.updatePager();

@@ -23,6 +23,7 @@
                         </div>
                     </div>
                     <div class="table-responsive mrg10T">
+
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
@@ -52,7 +53,7 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)"></pager>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
                         </div>
                     </div>
                 </div>

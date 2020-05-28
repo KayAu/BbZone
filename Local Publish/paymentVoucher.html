@@ -1,20 +1,29 @@
-﻿<div class="voucher-content">
-    <div class="card-body">
-        <div class="row">
-            <div class="col-6">
-                <span>Slip#:</span>
-                <span>{SlipNo}</span>
-            </div>
-            <div class="float-right">
-                <span>Date:</span>
-                <span>{PaymentDate}</span>
-            </div>
+﻿<div class="voucher-content" style="width:100%">
+    <div class="card-body" style="width:100%">
+        <div class="row" style="width:100%">
+            <table cellspacing="0" cellpadding="0" style="width:100%">
+                <tr>
+                    <td>
+                        <span>201902030858 (1340188-A)</span>
+                        <p style="font-size:13px; font-weight:bold">DM Solution Venture Sdn. Bhd. </p>
+                        <span>
+                            12E, Jalan Arratoon, 10500 Georgetoen, Penang, Malaysia
+                        </span>
+                    </td>
+                    <td style="text-align:right">
+                        <span>Date: {PaymentDate}</span>
+                    </td>
+                </tr>
+            </table>
         </div>
+        <br />
         <div class="row">
-            <div class="col-6">
-                <h4 class="text-primary">Payment Voucher</h4>
-            </div>
-            <div class="float-right text-right">Broadband Zone Sdn Bhd</div>
+            <table  cellspacing="0" cellpadding="0" style="width:100%">
+                <tr>
+                    <td><h4>Payment Voucher</h4></td>
+                    <td style="text-align:right"><span>Slip#: {SlipNo}</span></td>
+                </tr>
+            </table>
         </div>
         <hr />
         <div class="row">
@@ -43,6 +52,10 @@
                 <div class="flexbox-space-between">
                     <span>Payment Amount:</span>
                     <span>{PaymentAmount}</span>
+                </div>
+                <div class="flexbox-space-between">
+                    <span>Deduct Amount:</span>
+                    <span>{DeductAmount}</span>
                 </div>
                 <div class="flexbox-space-between">
                     <span>Payment Date:</span>

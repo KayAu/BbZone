@@ -15,87 +15,6 @@ namespace BroadbandZone_App.Helper
 {
     public static class UserIdentityHelper
     {
-        //    public static ApplicationUser GetUserDetails(string username)
-        //    {
-        //        try
-        //        {
-        //            ApplicationUser currentUser = new ApplicationUser();
-
-        //            using(var context = new PrincipalContext(ContextType.Domain, Properties.Settings.Default.ADDomain))
-        //            {
-        //                UserPrincipal user = UserPrincipal.FindByIdentity(context, username.StripADDomain());
-        //                if (user != null)
-        //                {
-        //                    currentUser.Fullname = user.DisplayName;
-        //                    currentUser.Email = user.EmailAddress;
-        //                    currentUser.JobTitle = user.GetProperty("title");
-        //                }
-        //            }
-
-        //            return currentUser;
-        //        }
-        //        catch(Exception ex)
-        //        {
-        //            throw new Exception($"UserIdentityHelper.{(new StackTrace()).GetFrame(0).GetMethod().Name} : {ex.Message}");
-        //        }
-        //    }
-
-        //    /// <summary>
-        //    /// Get property value from DirectoryEntry   
-        //    /// </summary>
-        //    /// <param name="principal">UserPrincipal object</param>
-        //    /// <param name="property">Property name</param>
-        //    /// <returns></returns>
-        //    public static String GetProperty(this Principal principal, String property)
-        //    {
-
-        //        DirectoryEntry directoryEntry = principal.GetUnderlyingObject() as DirectoryEntry;
-        //        if (directoryEntry.Properties.Contains(property))
-        //            return directoryEntry.Properties[property].Value.ToString();
-        //        else
-        //            return String.Empty;
-
-        //    }
-
-        //    /// <summary>
-        //    /// Find user by search keyword
-        //    /// </summary>
-        //    /// <param name="dataValue">Search value</param>
-        //    /// <returns></returns>
-        //    public static List<EmployeeAccountModel> FindUserInAD(string dataValue)
-        //    {
-        //        try
-        //        {
-        //            PrincipalContext ctx = new PrincipalContext(ContextType.Domain, Properties.Settings.Default.ADDomain);
-
-        //            UserPrincipal qbeUser = new UserPrincipal(ctx);
-        //            qbeUser.DisplayName = $"{dataValue}*";
-
-        //            // create your principal searcher passing in the QBE principal
-        //            PrincipalSearcher srch = new PrincipalSearcher(qbeUser);
-        //            var results = srch.FindAll();
-
-        //            if (results != null)
-        //            {
-        //                var lstEmployee = results.Select(r => new EmployeeAccountModel
-        //                {
-        //                    Account = r.SamAccountName,
-        //                    FullName = r.DisplayName,
-        //                    JobTitle = ((UserPrincipal)r).GetProperty("Title"),
-        //                    Email = ((UserPrincipal)r).EmailAddress
-        //                }).Take(20);
-
-        //                return lstEmployee.ToList();
-        //            }
-
-        //            return null;
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception($"UserIdentityHelper.{(new StackTrace()).GetFrame(0).GetMethod().Name} : {ex.Message}");
-        //        }
-        //    }
-
         public static AuthenticatedUser AuthenticateUser(string username, string password, bool isAdmin = false, bool impersonating = false)
         {
             try
@@ -141,6 +60,8 @@ namespace BroadbandZone_App.Helper
                 {
                     HttpContext.Current.Response.Cookies.Set(authCookie);
                 }
+                
+                userIdCookie.Expires = authTicket.Expiration;
             }
             catch (Exception ex)
             {
@@ -196,11 +117,6 @@ namespace BroadbandZone_App.Helper
             catch (Exception ex)
             {
                 throw new Exception($"UserIdentityHelper.{(new StackTrace()).GetFrame(0).GetMethod().Name} : {ex.Message}");
-            }
-            finally
-            {
-                // Ensure impersonation is reverted
-                //ctx.Undo();
             }
         }
 

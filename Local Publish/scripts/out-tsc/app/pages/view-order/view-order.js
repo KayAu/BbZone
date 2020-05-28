@@ -26,7 +26,6 @@ var core_1 = require("@angular/core");
 var tablerow_data_mapping_1 = require("src/app/model/tablerow.data.mapping");
 var loader_service_1 = require("src/app/loader/loader.service");
 var data_service_1 = require("src/app/services/data.service");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
 var dataDisplayType_1 = require("src/app/enums/dataDisplayType");
 var listEvent_1 = require("src/app/interfaces/listEvent");
 var search_params_1 = require("../../model/search-params");
@@ -37,24 +36,36 @@ var viewOrderColumns_1 = require("src/app/metadata/viewOrderColumns ");
 var searchOrderFields_1 = require("src/app/metadata/searchOrderFields");
 var common_1 = require("@angular/common");
 var file_saver_1 = require("file-saver");
+var RecordMode_1 = require("src/app/enums/RecordMode");
+var authentication_1 = require("src/app/services/authentication");
+var router_service_1 = require("src/app/services/router.service");
 var ViewOrder = /** @class */ (function (_super) {
     __extends(ViewOrder, _super);
-    function ViewOrder(loaderService, dataService, formEvent) {
+    function ViewOrder(loaderService, dataService, authenticationService, routerExtService) {
         var _this = _super.call(this, loaderService, dataService, "applicationId", false) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
-        _this.formEvent = formEvent;
+        _this.authenticationService = authenticationService;
+        _this.routerExtService = routerExtService;
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
+        _this.orderFilter = RecordMode_1.OrderFilter;
+        _this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null, 0);
+        _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            _this.totalUnreadMsg = data.totalUnreadMsg;
+            _this.totalCommINotConfig = data.totalCommINotConfig;
+            _this.totalOddClaimed = data.totalOddClaimed;
+        });
         return _this;
     }
     ViewOrder.prototype.ngOnInit = function () {
+        this.currentUser = this.authenticationService.currentUserValue;
         this.controllerName = apiController_1.ApiController.CustomerApplication;
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.setSearchParams();
     };
     ViewOrder.prototype.getTablerowDataMapping = function () {
         var columnMappings = viewOrderColumns_1.ViewOrderColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
@@ -72,8 +83,32 @@ var ViewOrder = /** @class */ (function (_super) {
             file_saver_1.saveAs(file, filename);
         });
     };
+    ViewOrder.prototype.filterView = function (filterBy) {
+        if (this.searchParams.filterByMode === filterBy) {
+            this.searchParams.filterByMode = RecordMode_1.OrderFilter.None;
+        }
+        else {
+            this.searchParams.filterByMode = filterBy;
+        }
+        this.reloadData();
+    };
+    ViewOrder.prototype.filterRecords = function () {
+        localStorage.setItem('viewOrderParams', JSON.stringify(this.searchParams));
+        this.reloadData();
+    };
+    ViewOrder.prototype.setSearchParams = function () {
+        var previous = this.routerExtService.getPreviousUrl();
+        if (previous.indexOf('edit-order') === -1) {
+            localStorage.removeItem('viewOrderParams');
+            return;
+        }
+        if (localStorage.getItem('viewOrderParams') !== null) {
+            this.searchParams = JSON.parse(localStorage.getItem('viewOrderParams'));
+        }
+    };
     ViewOrder.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null);
+        localStorage.removeItem('viewOrderParams');
+        this.searchParams = new search_params_1.SearchOrderParams(null, null, null, null, null, null, null, null, 0);
         this.reloadData();
     };
     ViewOrder = __decorate([
@@ -81,7 +116,7 @@ var ViewOrder = /** @class */ (function (_super) {
             selector: 'view-order',
             templateUrl: './view-order.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, authentication_1.AuthenticationService, router_service_1.RouterService])
     ], ViewOrder);
     return ViewOrder;
 }(listEvent_1.ListEvent));

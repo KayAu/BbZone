@@ -24,26 +24,28 @@ var DataControl = /** @class */ (function () {
         this.formEvent = formEvent;
         this.cascadeEvent = cascadeEvent;
         this.dataService = dataService;
+        this.controlLoaded = false;
         this.controlType = dataDisplayType_1.ControlType;
         this.onEdit = false;
         this.disabled = false;
         this.readonly = false;
+        this.forDataFilter = false;
         this.propagateChange = function () { };
         this.onModelChanged = new core_1.EventEmitter();
     }
     DataControl_1 = DataControl;
     DataControl.prototype.ngOnInit = function () {
-        var _this = this;
-        if (this.field.required) {
-            this.subscription = this.formEvent.notification.subscribe(function (form) {
-                _this.parentForm = form.template;
-                _this.validate();
-            });
-        }
         if (this.field.controlType === dataDisplayType_1.ControlType.select)
             this.loadOptions();
         else if (this.field.controlType === dataDisplayType_1.ControlType.cascadeDropdown) {
             this.subscribeToParentField();
+        }
+    };
+    DataControl.prototype.ngAfterViewChecked = function () {
+        if (this.field.required && this.parentForm.controls[this.fieldId]) {
+            this.parentForm.controls[this.fieldId].setValidators(forms_1.Validators.required);
+            this.parentForm.controls[this.fieldId].updateValueAndValidity();
+            this.controlLoaded = true;
         }
     };
     DataControl.prototype.writeValue = function (val) {
@@ -77,23 +79,6 @@ var DataControl = /** @class */ (function () {
             _this.dropdownItems = results;
         });
     };
-    DataControl.prototype.validate = function () {
-        var thisElement = $(this.el.nativeElement);
-        if (this.data === null || this.data === undefined || this.data === "") {
-            thisElement.next('.text-danger').remove();
-            thisElement.after('<span class= "text-danger">This is required</span>');
-            $(this.parentForm.controls[this.fieldId]).addClass('data-invalid');
-            this.parentForm.controls[this.fieldId].setErrors({ 'required': true });
-        }
-        else {
-            this.clearErrorMessages(thisElement);
-            this.parentForm.controls[this.fieldId].setErrors(null);
-        }
-    };
-    DataControl.prototype.clearErrorMessages = function (thisElement) {
-        $(this.parentForm.controls[this.fieldId]).removeClass('data-invalid');
-        thisElement.next().remove();
-    };
     DataControl.prototype.subscribeToParentField = function () {
         var _this = this;
         this.cascadeEvent.subject.subscribe(function (cascade) {
@@ -117,6 +102,14 @@ var DataControl = /** @class */ (function () {
     var DataControl_1;
     __decorate([
         core_1.Input(),
+        __metadata("design:type", forms_1.NgForm)
+    ], DataControl.prototype, "parentForm", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", String)
+    ], DataControl.prototype, "formName", void 0);
+    __decorate([
+        core_1.Input(),
         __metadata("design:type", data_field_control_1.DataFieldControl)
     ], DataControl.prototype, "field", void 0);
     __decorate([
@@ -137,8 +130,8 @@ var DataControl = /** @class */ (function () {
     ], DataControl.prototype, "readonly", void 0);
     __decorate([
         core_1.Input(),
-        __metadata("design:type", String)
-    ], DataControl.prototype, "formName", void 0);
+        __metadata("design:type", Boolean)
+    ], DataControl.prototype, "forDataFilter", void 0);
     __decorate([
         core_1.Output(),
         __metadata("design:type", Object)
@@ -157,7 +150,6 @@ var DataControl = /** @class */ (function () {
                     useExisting: core_1.forwardRef(function () { return DataControl_1; }),
                     multi: true
                 }
-                //,{ provide: NG_VALIDATORS, useExisting: forwardRef(() => FieldBuilder), multi: true }
             ]
         }),
         __metadata("design:paramtypes", [core_1.ElementRef,

@@ -18,8 +18,9 @@
                                     </label>
                                     <div class="col-sm-9">
                                         <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                      [field]="field.dataFieldControl" [formName]="'applicationForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                      [field]="field.dataFieldControl" [parentForm]="applicationForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                         <span class="text-danger" *ngIf="field.fieldName=='userLogin' && hasLoginExists">The user login has already exists. Please choose another login.</span>
+                                        <span *ngIf="field.fieldName=='superiorId'">Please enter superior <u>id number</u></span>
                                     </div>
                                 </div>
                                 <div class="hr-line-dashed"></div>
@@ -28,34 +29,54 @@
                             <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Attach required documents</label>
                                 <div class="col-sm-9">
+                                    <div class="alert alert-warning mrg10T pad15A ">
+                                        <div>Please upload the following documents</div>
+                                        <ol>
+                                            <li>Front & Back IC</li>
+                                            <li>Bank Statement (Front page)</li>
+                                            <li>Bank Statement (Front page)</li>
+                                            <li>For Business Sign Up (SSM) - Business Name</li>
+                                            <li>For Business Sign Up (SSM) - Ownership</li>
+                                        </ol>
+                                    </div>
+
                                     <file-uploader name="relDoc" [(ngModel)]="formRecord['files']"></file-uploader>
+                                    <span class="form-text m-b-none">
+                                        Upload agent application related documents. Allowed file types are ".gif", ".jpg", ".jpeg", ".png", ".pdf".
+                                    </span>
                                 </div>
                             </div>
-
-                            <!--SAVE OR CANCEL-->
+                            <div class="hr-line-dashed"></div>
                             <div class="form-group row mrg20T">
-                                <div class="col-sm-12 ">
-                                    <a [routerLink]='["/"]' class="btn btn-white float-right">Cancel</a>
-                                    <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                    <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
-                                            [disabled]="isUpdating" style="width: 180px;">
+                                <label class="col-sm-3 col-form-label"></label>
+                                <div class="col-sm-9">
+                                    <input type="checkbox" name="agree" [(ngModel)]="agree" class="pos-rel mrg5R" style="top: 3px;" /> I hereby acknowledged that I have read and understood the Privacy Statement and agreed to unifi 
+                                    <a href="../../../../DMTerms.pdf" target="_blank">Term Of Use</a>
+                                </div>
+                            </div>
+                            <!--SAVE OR CANCEL-->
+                            <div class="form-group row mrg25T">
+                                <div class="col-sm-12 text-center ">
+                                    <button type="submit" class="btn btn-primary mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                            [disabled]="!agree || isUpdating" style="width: 180px;">
                                         {{isUpdating ? 'Registering' : 'Register'}}
                                         <span class="loading"></span>
                                     </button>
+                                    <a [routerLink]='["/"]' class="btn btn-white">Cancel</a>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-                <div class="text-center" *ngIf="completed">
-                    <div class="widget-head-color-box navy-bg p-lg">
+                <div class="text-center widget-head-color-box navy-bg p-lg" *ngIf="completed">
+                    <div class="">
                         <i class="fa fa-thumbs-up big-icon"></i>
                         <h1>Registration Completed</h1>
                         <p class="mrg20T">
                             Thank you for registering to be one of our agents. We will review your submission. An activation code will be send to your email once your submission is verified.
                         </p>
                     </div>
-                    <a [routerLink]='["/"]' class="btn btn-w-m btn-link text-white ">
+                    <a [routerLink]='["/"]' class="btn btn-w-m text-white ">
                         Back To Login
                     </a>
                 </div>

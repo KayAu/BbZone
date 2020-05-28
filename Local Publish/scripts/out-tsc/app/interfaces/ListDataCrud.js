@@ -24,16 +24,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var listEvent_1 = require("./listEvent");
-var form_submit_1 = require("../model/form-submit");
 var forms_1 = require("@angular/forms");
 var ListDataCrud = /** @class */ (function (_super) {
     __extends(ListDataCrud, _super);
-    function ListDataCrud(loaderService, dataService, defaultSortedColumn, formEvent) {
+    function ListDataCrud(loaderService, dataService, defaultSortedColumn) {
         var _this = _super.call(this, loaderService, dataService, defaultSortedColumn) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
         _this.defaultSortedColumn = defaultSortedColumn;
-        _this.formEvent = formEvent;
         _this.newRecord = {};
         _this.editedRecord = {};
         _this.fieldMapper = [];
@@ -51,29 +49,30 @@ var ListDataCrud = /** @class */ (function (_super) {
     };
     ListDataCrud.prototype.addRow = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.formName));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.dataService.add(this.controllerName, this.newRecord).subscribe(function (data) {
             _this.setListDisplay(data);
             _this.resetNewRecord();
             _this.resetPageAndColSort();
+            _this.setControlsAsUnouched();
         });
     };
     ListDataCrud.prototype.editRow = function (rowIndex) {
         this.hideEditingRow();
         this.dataSource[rowIndex].onEdit = true;
-        this.editedRecord = Object.assign(this.editedRecord, this.dataSource[rowIndex]);
+        this.editedRecord = Object.assign({}, this.dataSource[rowIndex]); // (<any>Object).assign(this.editedRecord, this.dataSource[rowIndex])
     };
     ListDataCrud.prototype.updateRow = function (rowIndex) {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.formName));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
-        this.dataSource[rowIndex] = this.editedRecord;
         this.dataService.update(this.controllerName, this.editedRecord[this.keyField], this.editedRecord).subscribe(function (data) {
             _this.dataSource[rowIndex] = data ? data : _this.editedRecord;
             _this.dataSource[rowIndex].onEdit = false;
+            _this.setControlsAsUnouched();
         });
     };
     ListDataCrud.prototype.deleteRow = function (rowIndex) {
@@ -113,6 +112,16 @@ var ListDataCrud = /** @class */ (function (_super) {
             this.newRecord[field.dataFieldControl.controlName] = '';
         }
         this.showNewRow = false;
+    };
+    ListDataCrud.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    ListDataCrud.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsUntouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

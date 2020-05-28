@@ -15,15 +15,20 @@ var authentication_1 = require("./services/authentication");
 var angular_user_idle_1 = require("angular-user-idle");
 var nav_menu_component_1 = require("./nav-menu/nav-menu.component");
 var AppComponent = /** @class */ (function () {
-    function AppComponent(router, authenticationService, userIdle) {
+    function AppComponent(renderer, router, authenticationService, userIdle) {
         var _this = this;
+        this.renderer = renderer;
         this.router = router;
         this.authenticationService = authenticationService;
         this.userIdle = userIdle;
+        this.showNavBar = true;
         this.showScrollHeight = 300;
         this.hideScrollHeight = 10;
         this.authenticationService.currentUser.subscribe(function (user) {
             _this.currentUser = user;
+            //if (!this.currentUser) {
+            //    //this.logout();
+            //}
         });
     }
     AppComponent.prototype.ngOnInit = function () {
@@ -46,6 +51,14 @@ var AppComponent = /** @class */ (function () {
         }
         else if (this.showScroll && (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) < this.hideScrollHeight) {
             this.showScroll = false;
+        }
+    };
+    AppComponent.prototype.hideNavBar = function () {
+        this.showNavBar = !this.showNavBar;
+        if (!this.showNavBar)
+            this.renderer.addClass(document.body, 'mini-navbar');
+        else {
+            this.renderer.removeClass(document.body, 'mini-navbar');
         }
     };
     AppComponent.prototype.logout = function () {
@@ -83,7 +96,8 @@ var AppComponent = /** @class */ (function () {
             templateUrl: './app.component.html',
             styleUrls: ['./app.component.css']
         }),
-        __metadata("design:paramtypes", [router_1.Router,
+        __metadata("design:paramtypes", [core_1.Renderer2,
+            router_1.Router,
             authentication_1.AuthenticationService,
             angular_user_idle_1.UserIdleService])
     ], AppComponent);

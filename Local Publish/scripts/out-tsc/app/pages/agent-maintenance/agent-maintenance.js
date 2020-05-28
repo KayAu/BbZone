@@ -26,19 +26,19 @@ var core_1 = require("@angular/core");
 var tablerow_data_mapping_1 = require("src/app/model/tablerow.data.mapping");
 var loader_service_1 = require("src/app/loader/loader.service");
 var data_service_1 = require("src/app/services/data.service");
-var broadcast_service_1 = require("src/app/services/broadcast.service");
 var dataDisplayType_1 = require("src/app/enums/dataDisplayType");
 var listEvent_1 = require("src/app/interfaces/listEvent");
 var search_params_1 = require("../../model/search-params");
 var apiController_1 = require("src/app/enums/apiController");
 var agentFields_1 = require("src/app/metadata/agentFields");
+var common_1 = require("@angular/common");
+var file_saver_1 = require("file-saver");
 var AgentMaintenance = /** @class */ (function (_super) {
     __extends(AgentMaintenance, _super);
-    function AgentMaintenance(loaderService, dataService, formEvent) {
+    function AgentMaintenance(loaderService, dataService) {
         var _this = _super.call(this, loaderService, dataService, '', false) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
-        _this.formEvent = formEvent;
         _this.dataRowMapper = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
         return _this;
@@ -48,7 +48,6 @@ var AgentMaintenance = /** @class */ (function (_super) {
         this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
         this.controllerName = apiController_1.ApiController.Agent;
-        //this.loadDropdown();
     };
     AgentMaintenance.prototype.getTablerowDataMapping = function () {
         var columnMappings = agentFields_1.AgentMaintenanceColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
@@ -58,12 +57,19 @@ var AgentMaintenance = /** @class */ (function (_super) {
         this.searchParams = new search_params_1.StatusAndKeywordParams(null, null);
         this.reloadData();
     };
+    AgentMaintenance.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.Download + "/Agent", this.searchParams).subscribe(function (data) {
+            var filename = "Agents_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
+    };
     AgentMaintenance = __decorate([
         core_1.Component({
             selector: 'agent-maintenance',
             templateUrl: './agent-maintenance.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService])
     ], AgentMaintenance);
     return AgentMaintenance;
 }(listEvent_1.ListEvent));

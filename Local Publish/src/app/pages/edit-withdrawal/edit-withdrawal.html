@@ -1,29 +1,42 @@
-
+<page-header [title]="'Withdrawal Details'" [parentCategory]="'Manage Withdrawal'"></page-header>
 <div class="wrapper wrapper-content animated fadeInRight">
-    
     <div class="row">
-        <div class="col-md-6 mrg10T mrg25B">
+        <div class="col-md-8 mrg10T mrg25B">
             <div class="float-left">
                 <div alt="image" class="rounded-circle bg-info float-left rounded-circle-lg">
-                    <i class="fa fa-money font-size-24"></i>
+                    <i class="fa fa-money font-size-18"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalSelectedAmount | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.claimed | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-info font-size-11 mrg5R"></i>
-                        <small class="text-muted">Selected Amount</small>
+                        <small class="text-muted">Claimed Amount</small>
+                    </div>
+                </div>
+            </div>
+            <div class="float-left mrg25L">
+                <div alt="image" class="rounded-circle bg-success float-left rounded-circle-lg">
+                    <i class="fa fa-minus-square-o font-size-18" style="padding-left: 3px"></i>
+                </div>
+                <div class="float-left mrg15L">
+                    <div class="totalClaim">
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.incentives | number:'1.2-2'}}</span>
+                    </div>
+                    <div class="totalSelected">
+                        <i class="fa fa-circle-o text-success font-size-11 mrg5R"></i>
+                        <small class="text-muted">Incentives</small>
                     </div>
                 </div>
             </div>
             <div class="float-left mrg25L">
                 <div alt="image" class="rounded-circle bg-warning float-left rounded-circle-lg">
-                    <i class="fa fa-minus-square-o font-size-24" style="padding-left: 3px"></i>
+                    <i class="fa fa-minus-square-o font-size-18" style="padding-left: 3px"></i>
                 </div>
                 <div class="float-left mrg15L">
                     <div class="totalClaim">
-                        <span class="font-size-35 mrg10R line-height-8">RM {{formRecord.totalAmountToDeduct | number:'1.2-2'}}</span>
+                        <span class="font-size-24 mrg10R  line-height-24">RM {{formRecord.deduction | number:'1.2-2'}}</span>
                     </div>
                     <div class="totalSelected">
                         <i class="fa fa-circle-o text-warning font-size-11 mrg5R"></i>
@@ -32,20 +45,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-6 mrg10T mrg25B text-right">
+        <div class="col-md-4 mrg10T mrg25B text-right">
             <label class="text-uppercase font-normal">Claimable Amount</label>
-            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.amount | number:'1.2-2'}}</div>
+            <div class="mrg0T amt-claimable font-bold text-success">RM {{formRecord.withdrawAmount | number:'1.2-2'}}</div>
         </div>
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-title pad10R">
-                    <h5>Withdrawal: ID-{{formRecord.withdrawalId}}</h5>
-                    <span class="mrg15L badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
-                              'badge-primary': formRecord.status == 'Completed',
-                              'badge-warning': formRecord.status == 'OnHold',
-                              'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
-                        {{formRecord.status}}
-                    </span>
+                    <h5>Withdrawal - {{formRecord.withdrawalId}}</h5>
                     <div class="ibox-tools">
                         <a class="font-size-18" href="/api/PaymentVoucher/Print/{{recordId}}" *ngIf="formRecord.status == 'Completed'">
                             <i class="fa fa-print"></i>
@@ -53,14 +60,75 @@
                     </div>
                 </div>
                 <loading></loading>
-                <div class="ibox-content">
-                    <div class="table-responsive mrg10T">
-                        <label>Claimed Commission(s)</label>
-                        <table class="table table-bordered mrg10T dataTable">
+                <div class="ibox-content pad0T">
+                    <div class="row pad25T pad15B mrg25B  data-box">
+                        <div class="col-lg-5">
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left">
+                                    <strong>Agent Name:</strong>
+                                </div>
+                                <div class="cell-width-50 float-left">
+                                    <div class="mb-1">{{formRecord.payTo}}</div>
+                                </div>
+                            </div>
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left ">
+                                    <strong>Agent Email:</strong>
+                                </div>
+                                <div class="cell-width-35 float-left">
+                                    <div class="mb-1">{{formRecord.email}}</div>
+                                </div>
+                            </div>
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left ">
+                                    <strong>Bank Account:</strong>
+                                </div>
+                                <div class="cell-width-35 float-left">
+                                    <div class="mb-1">{{formRecord.bankAccNo}}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5" id="cluster_info">
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left">
+                                    <strong>Status:</strong>
+                                </div>
+                                <div class="cell-width-35 float-left">
+                                    <span class="badge" [ngClass]="{'badge-danger': formRecord.status == 'Terminated',
+                                                                    'badge-primary': formRecord.status == 'Completed',
+                                                                    'badge-warning': formRecord.status == 'Rejected',
+                                                                    'badge-info': (formRecord.status == 'Pending' || formRecord.status == 'Processing')}">
+                                        {{formRecord.status}}
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left ">
+                                    <strong>IC/Passport No:</strong>
+                                </div>
+                                <div class="cell-width-35 float-left">
+                                    <div class="mb-1">{{formRecord.nric}}</div>
+                                </div>
+                            </div>
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left ">
+                                    <strong>Bank Name:</strong>
+                                </div>
+                                <div class="cell-width-35 float-left">
+                                    <div class="mb-1">{{formRecord.bankName}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-responsive mrg10T pad0B">
+                        <label class="font-bold">Claimed Commission(s)</label>
+                        <table class="table table-bordered dataTable">
                             <thead>
                                 <tr>
                                     <th class="cell-width-3">#</th>
-                                    <th *ngFor="let col of dataRowMapper" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                    <th *ngFor="let col of dataRowMapper" [ngClass]="col.colWidth">
+                                        {{col.headerText}}
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -68,13 +136,14 @@
                                     <td>{{rowNo+1}}</td>
                                     <ng-container *ngFor="let field of dataRowMapper">
                                         <td>
-                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge"  [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                            <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
                                             <ng-template #displayBadge>
                                                 <span class="badge" *ngIf="record.transactionType"
                                                       [ngClass]="{'badge-info': record.transactionType == 'Override',
-                                                                  'badge-warning': record.transactionType == 'Purchase',
-                                                                  'badge-success': record.transactionType == 'Own Sales',
-                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                                'badge-warning': record.transactionType == 'Charges',
+                                                                'badge-blue-alt': record.transactionType == 'Incentives',
+                                                                'badge-success': record.transactionType == 'Own Sales',
+                                                                'badge-danger': record.transactionType == 'Clawback'}">
                                                     {{record.transactionType}}
                                                 </span>
                                                 <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
@@ -84,19 +153,21 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="pad10A subtotal">
+                            <strong style="padding-left: 69%;">Total Claimed Amount:</strong>
+                            <strong class="text-success" style="padding-left: 3%;">RM {{formRecord.withdrawAmount | number:'1.2-2'}}</strong>
+                        </div>
                     </div>
-
-        
-                    <div class="hr-line-dashed"></div>
-                    <label>Admin Input</label>
+                    <div class="hr-line-dashed mrg20B mrg20T"></div>
+                    <label class="font-bold">Admin Input</label>
                     <div class="admin-box">
-                        <div class="form-group">
+                        <div class="form-group mrg15B">
                             <label class="font-normal">Reference. No</label>
                             <input name="referenceNo" type="text" class="form-control" maxlength="25" [(ngModel)]="formRecord.referenceNo" [disabled]="!formRecord.allowEdit">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group mrg15B">
                             <label class="font-normal">Remarks</label>
-                            <textarea name="remarks" class="form-control" maxlength="250" rows="8" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit" ></textarea>
+                            <textarea name="remarks" class="form-control" maxlength="250" rows="4" [(ngModel)]="formRecord.remarks" [disabled]="!formRecord.allowEdit"></textarea>
                         </div>
                         <div class="form-group">
                             <label class="font-normal">Withdrawal Status</label>
@@ -106,8 +177,7 @@
                             </select>
                         </div>
                     </div>
-                 
-                    <div class="hr-line-dashed"></div>
+                    <div class="hr-line-dashed mrg20T mrg20B"></div>
                     <!--SAVE OR CANCEL-->
                     <div class="form-group row">
                         <div class="text-right pad20R">

@@ -75,7 +75,7 @@ var AgentCommissionTable = /** @class */ (function () {
         this.dataService.update(apiController_1.ApiController.Commission, this.agentId, this.commissionSettings).subscribe(function (data) {
             var propertyNames = Object.keys(_this.dataSource[rowIndex]);
             for (var itemNo = 0; itemNo < _this.commissionSettings.length; itemNo++) {
-                var propertyName = propertyNames[itemNo + 2];
+                var propertyName = propertyNames[itemNo + 3];
                 _this.dataSource[rowIndex][propertyName] = _this.commissionSettings[itemNo].agentCommissionPer;
             }
             _this.dataSource[rowIndex].onEdit = false;

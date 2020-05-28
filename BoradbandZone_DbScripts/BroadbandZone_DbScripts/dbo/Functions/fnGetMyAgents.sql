@@ -24,7 +24,7 @@ BEGIN
 				SuperiorId, 
 				AgentLevel = 1  
 		FROM Agent
-		WHERE 1 = CASE WHEN @prSuperiorId IS NULL AND SuperiorId IS NULL THEN 1
+		WHERE 1 = CASE WHEN @prSuperiorId IS NULL AND ISNULL(SuperiorId, 0) = 0  THEN 1
 					   WHEN SuperiorId = @prSuperiorId THEN 1
 					   ELSE 0
 				  END

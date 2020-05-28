@@ -19,7 +19,6 @@ var broadcast_service_1 = require("../../services/broadcast.service");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var apiController_1 = require("../../enums/apiController");
-var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var cascade_data_1 = require("src/app/model/cascade-data");
 var cascade_service_1 = require("src/app/services/cascade.service");
@@ -32,17 +31,21 @@ var CreateOrder = /** @class */ (function () {
         this.cascadeService = cascadeService;
         this.router = router;
         this.authenticationService = authenticationService;
-        this.formFields = [];
+        this.applicationFields = [];
+        this.orderFields = [];
         this.newRecord = {};
         this.isUpdating = false;
+        this.commIsConfigured = true;
     }
     CreateOrder.prototype.ngOnInit = function () {
         this.currentUser = this.authenticationService.currentUserValue;
-        this.formFields = this.getFormFeldsMapping();
+        var dataFields = this.getFormFeldsMapping();
+        this.applicationFields = dataFields.filter(function (c) { return c.groupName === 'application'; });
+        this.orderFields = dataFields.filter(function (c) { return c.groupName === 'orderInfo'; });
     };
     CreateOrder.prototype.getFormFeldsMapping = function () {
-        var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataMapping(o.fieldName, o.displayText, o.hidden, !o.dataFieldControl ? null :
-            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false)); });
+        var columnMappings = newOrderFields_1.NewOrderFields.fields.map(function (o) { return new form_data_mapping_1.FormDataGroupMapping(o.fieldName, o.displayText, o.hidden, o.groupName, !o.dataFieldControl ? null :
+            new data_field_control_1.DataFieldControl(o.dataFieldControl.controlName, dataDisplayType_1.ControlType[o.dataFieldControl.controlType], o.dataFieldControl.required, o.dataFieldControl.maxLength, o.dataFieldControl["datasourceUrl"] ? o.dataFieldControl["datasourceUrl"] : null, o.dataFieldControl["cascadeTo"] ? o.dataFieldControl["cascadeTo"] : null, o.dataFieldControl["adminField"] ? o.dataFieldControl["adminField"] : false, o.dataFieldControl["dataChangedEvent"] ? o.dataFieldControl["dataChangedEvent"] : null)); });
         if (!this.currentUser.isAdmin) {
             columnMappings = columnMappings.filter(function (c) { return c.dataFieldControl.adminField === false; });
         }
@@ -50,7 +53,7 @@ var CreateOrder = /** @class */ (function () {
     };
     CreateOrder.prototype.create = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
@@ -69,9 +72,22 @@ var CreateOrder = /** @class */ (function () {
     CreateOrder.prototype.loadCategories = function (productId) {
         this.cascadeService.subject.next(new cascade_data_1.CascadeData("categoryId", this.selectedProduct));
     };
+    CreateOrder.prototype.checkCommissionSettings = function () {
+        var _this = this;
+        if (!this.newRecord['agent'])
+            return;
+        this.dataService.get(apiController_1.ApiController.CustomerApplication + "/CheckCommissionSettings/" + this.newRecord['categoryId'] + "/" + this.newRecord['agent']).subscribe(function (isConfigured) {
+            _this.commIsConfigured = isConfigured;
+        });
+    };
     CreateOrder.prototype.clearPackages = function () {
         this.selectedCategory = null;
         this.cascadeService.subject.next(new cascade_data_1.CascadeData("prodPkgId", this.selectedCategory));
+    };
+    CreateOrder.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),

@@ -15,22 +15,19 @@ var agentFields_1 = require("../../metadata/agentFields");
 var form_data_mapping_1 = require("../../model/form.data.mapping");
 var dataDisplayType_1 = require("../../enums/dataDisplayType");
 var data_field_control_1 = require("../../model/data.field.control");
-var broadcast_service_1 = require("../../services/broadcast.service");
 var data_service_1 = require("../../services/data.service");
 var loader_service_1 = require("../../loader/loader.service");
 var router_2 = require("@angular/router");
 var apiController_1 = require("../../enums/apiController");
-var form_submit_1 = require("src/app/model/form-submit");
 var forms_1 = require("@angular/forms");
 var ngx_toastr_1 = require("ngx-toastr");
 var superior_field_1 = require("src/app/components/superior-field/superior-field");
 var authentication_1 = require("src/app/services/authentication");
 var agent_commission_table_1 = require("src/app/components/agent-commission-table/agent-commission-table");
 var AgentView = /** @class */ (function () {
-    function AgentView(loaderService, dataService, formEvent, router, route, toastr, authenticationService) {
+    function AgentView(loaderService, dataService, router, route, toastr, authenticationService) {
         this.loaderService = loaderService;
         this.dataService = dataService;
-        this.formEvent = formEvent;
         this.router = router;
         this.route = route;
         this.toastr = toastr;
@@ -54,7 +51,7 @@ var AgentView = /** @class */ (function () {
     };
     AgentView.prototype.submit = function () {
         var _this = this;
-        this.formEvent.notify(new form_submit_1.FormSubmit(this.form, this.form.name));
+        this.setControlsAsTouched();
         if (!this.form.valid)
             return;
         this.isUpdating = true;
@@ -64,6 +61,7 @@ var AgentView = /** @class */ (function () {
             _this.formRecord.isActive = data.isActive;
             _this.formRecord.modifiedOn = data.modifiedOn;
             _this.formRecord.modifiedBy = data.modifiedBy;
+            _this.setControlsAsUnouched();
             _this.toastr.success('The record is updated into the system successfully', 'Record Updated', { positionClass: 'toast-bottom-full-width' });
         });
     };
@@ -77,6 +75,16 @@ var AgentView = /** @class */ (function () {
     };
     AgentView.prototype.loadAgentCommissions = function () {
         this.agentCommissionTable.loadCurrentAgentCommission(this.agentId, this.selectedProduct);
+    };
+    AgentView.prototype.setControlsAsTouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsTouched();
+        }
+    };
+    AgentView.prototype.setControlsAsUnouched = function () {
+        for (var i in this.form.controls) {
+            this.form.controls[i].markAsUntouched();
+        }
     };
     __decorate([
         core_1.ViewChild(forms_1.NgForm),
@@ -97,7 +105,6 @@ var AgentView = /** @class */ (function () {
         }),
         __metadata("design:paramtypes", [loader_service_1.LoaderService,
             data_service_1.DataService,
-            broadcast_service_1.BroadcastService,
             router_1.Router,
             router_2.ActivatedRoute,
             ngx_toastr_1.ToastrService,

@@ -12,59 +12,57 @@
                     <loading></loading>
                     <div class="row pad25T pad15B data-box">
                         <div class="col-lg-5">
-                            <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
+                            <div class="row mrg10B">
+                                <div class="cell-width-30 pad35L float-left">
                                     <label>Agent Id:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     {{formRecord.agentId}}
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
+                                <div class="cell-width-30 pad35L float-left">
                                     <label>Agent Name:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">
                                         {{formRecord.fullname}}</div>
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
+                                <div class="cell-width-30 pad35L float-left">
                                     <label>Status:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <span class="label" [ngClass]="{'label-primary': formRecord.isActive, 'label-warning': !formRecord.isActive}">
-                                        {{formRecord.isActive ? 'Active' : 'Inactive'
-                                        }}
-                                        </span>
-                                    </div>
+                                        {{formRecord.isActive ? 'Active' : 'Inactive'}}
+                                    </span>
+                                </div>
                             </div>
-
                         </div>
                         <div class="col-lg-5" id="cluster_info">
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
-                                    <label>Last Updated:</label>
+                                <div class="cell-width-30 pad35L float-left">
+                                    <label>Last Updated On:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">{{formRecord.modifiedOn | date:'dd-MMM-yyy HH:mm'}}</div>
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
+                                <div class="cell-width-30 pad35L float-left">
                                     <label>Last Updated By:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
+                                <div class="cell-width-35 float-left">
                                     <div class="mb-1">{{formRecord.modifiedBy}}</div>
                                 </div>
                             </div>
                             <div class="row mrg5B">
-                                <div class="col-sm-3 col-md-3 text-right">
-                                    <label>Login Counts:</label>
+                                <div class="cell-width-30 pad35L float-left">
+                                    <label>Last Login Date:</label>
                                 </div>
-                                <div class="col-sm-9 col-md-9 text-left">
-                                    {{formRecord.loginCount}}
+                                <div class="cell-width-35 float-left">
+                                    {{formRecord.lastLoginOn}}
                                 </div>
                             </div>
                         </div>
@@ -81,7 +79,7 @@
                         <div class="panel-body">
                             <div class="tab-content">
                                 <!-- AGENT PROFILE -->
-                                <div class="tab-pane active pad20A" id="agentProfile">
+                                <div class="tab-pane active pad20A pad0B" id="agentProfile">
                                     <form #dataForm="ngForm" (ngSubmit)="submit()">
                                         <!--PRODUCT TYPES-->
                                         <ng-container *ngFor="let field of formFields">
@@ -92,7 +90,7 @@
                                                 </label>
                                                 <div class="col-sm-10">
                                                     <data-control *ngIf="field.dataFieldControl" [(ngModel)]="formRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                                  [field]="field.dataFieldControl" [formName]="'dataForm'" name="{{field.dataFieldControl.controlName}}"></data-control>
+                                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" name="{{field.dataFieldControl.controlName}}"></data-control>
                                                 </div>
                                             </div>
                                             <div class="hr-line-dashed"></div>
@@ -102,8 +100,9 @@
                                                 Superior
                                             </label>
                                             <div class="col-sm-10">
+                                                <!--<label class="font-normal">{{formRecord['superiorName']}}</label>-->
                                                 <superior-field [(ngModel)]="formRecord['superiorId']" [fieldId]="'superior'" [parentForm]="form"
-                                                                [displayText]="formRecord['superiorName']" name="superior"></superior-field>
+                                                                [displayText]="formRecord['superiorName']"  name="superior" [editable]="true"></superior-field>
                                             </div>
                                         </div>
                                         <div class="hr-line-dashed"></div>
@@ -120,16 +119,16 @@
                                         <div class="form-group row">
                                             <div class="col-sm-12 ">
                                                 <!--<button class="btn btn-primary" type="submit">Save changes</button>-->
-                                                <button type="submit" class="btn btn-primary float-right mrg10R" [ngClass]="{'show-spinner':isUpdating}"
+                                                <button type="submit" class="btn btn-primary float-right mrg15T mrg10R" [ngClass]="{'show-spinner':isUpdating}"
                                                         [disabled]="dataForm.form.invalid || isUpdating" style="width: 180px;">
-                                                    {{isUpdating ? 'Updating' : 'Update'}}
+                                                    {{isUpdating ? 'Updating' : 'Update'
+                                                    }}
                                                     <span class="loading"></span>
-                                                </button>
-                                            </div>
+                                                    </button>
+</div>
                                         </div>
                                     </form>
                                 </div>
-
                                 <!-- COMMISSION -->
                                 <div class="tab-pane" id="commission">
                                     <div class="form-group row">
@@ -153,11 +152,9 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-            <div class="form-group row text-right">
+            <div class="form-group row mrg5L">
                 <back-button>Cancel</back-button>
             </div>
         </div>
