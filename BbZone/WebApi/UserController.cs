@@ -21,7 +21,7 @@ namespace BroadbandZone_App.WebApi
                 var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin ,false);
                 if (user.IsAuthenticated == true)
                 {
-                    FormsAuthentication.SetAuthCookie(userLogin.Username, false);
+                    FormsAuthentication.SetAuthCookie(userLogin.Username, true);
                     UserIdentityHelper.SetLoginAccountToCookie(user);
                     LogUserAccess(user);
                 }

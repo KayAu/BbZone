@@ -50,9 +50,10 @@ namespace BroadbandZone_App.Helper
                                                                                     Newtonsoft.Json.JsonConvert.SerializeObject(user));
                 var encrypt = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
                 var authCookie = new HttpCookie(cookieName, encrypt) { HttpOnly = true, Expires = expiredOn };
-                HttpCookie userIdCookie = HttpContext.Current.Response.Cookies.Get(cookieName);
+                //HttpCookie userIdCookie = HttpContext.Current.Response.Cookies.Get(cookieName);
 
-                if (userIdCookie == null)
+               // authCookie.Expires = authTicket.Expiration;
+                if (HttpContext.Current.Response.Cookies.Get(cookieName) == null)
                 {
                     HttpContext.Current.Response.Cookies.Add(authCookie);
                 }
@@ -61,7 +62,7 @@ namespace BroadbandZone_App.Helper
                     HttpContext.Current.Response.Cookies.Set(authCookie);
                 }
                 
-                userIdCookie.Expires = authTicket.Expiration;
+    
             }
             catch (Exception ex)
             {

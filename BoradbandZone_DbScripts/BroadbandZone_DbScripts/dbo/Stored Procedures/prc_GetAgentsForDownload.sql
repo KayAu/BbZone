@@ -25,7 +25,7 @@ BEGIN
 			  ,a2.Fullname AS SuperiorName
 			  ,a2.UserLogin AS SuperiorLogin
 		FROM Agent a1
-		INNER JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
+		LEFT JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
 
 	END TRY 
 	BEGIN CATCH

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Page } from '../../model/page.model';
-import { Observable } from 'rxjs';
 const pageDisplayLimit = 8;
 @Component({
   selector: 'pager',
@@ -20,7 +19,7 @@ export class Pagination {
     private _totalRecord: number;
 
     ngOnInit() {
-        this.page.pageSize = 25;
+        this.page.pageSize = 100;
         this.resetToFirstPage();
     }
 
