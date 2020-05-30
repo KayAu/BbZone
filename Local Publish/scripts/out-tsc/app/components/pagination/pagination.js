@@ -22,7 +22,7 @@ var Pagination = /** @class */ (function () {
         this.disabledFirstAndPrevBtn = false;
     }
     Pagination.prototype.ngOnInit = function () {
-        this.page.pageSize = 25;
+        this.page.pageSize = 100;
         this.resetToFirstPage();
     };
     Pagination.prototype.goToPage = function (pageNo) {

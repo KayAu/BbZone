@@ -1,6 +1,7 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams  } from '@angular/common/http';  
 import { Observable } from 'rxjs/Rx';  
+import { LoginUser } from '../model/login-user';
 
 
 @Injectable()
@@ -13,12 +14,20 @@ export class DataService {
     }
 
     export(apiControllerName: string, filterParams: any) {
-
-        //let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'};
         return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'}).catch(this.errorHandler);
-
-
     }
+
+    //login(loginuser: LoginUser): any {
+    //    const body = new HttpParams()
+    //        .set('grant_type', loginuser.isAdmin.toString())
+    //        .set('username', loginuser.username)
+    //        .set('password', loginuser.password)
+        
+    //    return this.http.post('/token', body.toString(), {
+    //        observe: 'response',
+    //        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //    }).catch(this.errorHandler); 
+    //}
 
     get(apiControllerName: string, recordId?: any): any {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);

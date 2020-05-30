@@ -56,7 +56,7 @@ namespace BroadbandZone_App.Helper
         {
             try
             {
-                var fileOnDisk = HttpContext.Current.Server.MapPath(fileName);
+                var fileOnDisk = Path.Combine(HttpContext.Current.Server.MapPath(this._UploadFilePath), fileName);
                 File.Delete(fileOnDisk);
             }
             catch (Exception ex)

@@ -80,6 +80,7 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+      
         // GET: api/<controller>
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)

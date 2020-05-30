@@ -18,9 +18,18 @@ var DataService = /** @class */ (function () {
         this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
     }
     DataService.prototype.export = function (apiControllerName, filterParams) {
-        //let headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob'};
         return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob' }).catch(this.errorHandler);
     };
+    //login(loginuser: LoginUser): any {
+    //    const body = new HttpParams()
+    //        .set('grant_type', loginuser.isAdmin.toString())
+    //        .set('username', loginuser.username)
+    //        .set('password', loginuser.password)
+    //    return this.http.post('/token', body.toString(), {
+    //        observe: 'response',
+    //        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    //    }).catch(this.errorHandler); 
+    //}
     DataService.prototype.get = function (apiControllerName, recordId) {
         return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
     };

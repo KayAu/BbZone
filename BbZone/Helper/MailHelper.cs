@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -85,6 +86,7 @@ namespace BroadbandZone_App.Helper
                 sb.Append("<html><body>");
                 sb.Append($"<p>Dear {receipientName},</p>");
                 sb.Append($"<p>{announcement.Descriptions}</p>");
+                sb.Append(GetSignature());
                 sb.Append("</html></body>");
 
                 SmtpClient SmtpClient = new SmtpClient();
@@ -176,6 +178,23 @@ namespace BroadbandZone_App.Helper
             }
         }
 
+        private static string GetSignature()
+        {
+            try
+            {
+                string body = string.Empty;
+                using (StreamReader reader = new StreamReader(HttpContext.Current.Server.MapPath("~/signature.html")))
+                {
+                    body = reader.ReadToEnd();
+                }
+
+                return body;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"GetSignature.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+            }
+        }
         private static IEnumerable<string> GetAdminEmails()
         {
             ObjectParameter strAdminEmails = new ObjectParameter("oEmails", typeof(string));

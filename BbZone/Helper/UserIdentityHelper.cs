@@ -39,30 +39,26 @@ namespace BroadbandZone_App.Helper
         {
             try
             {
-
-                var cookieName = GetCookieName();
-                var expiredOn = DateTime.Now.AddDays(1); // persistInCookie ? DateTime.Now.AddDays(1) : DateTime.Now + System.Web.Security.FormsAuthentication.Timeout;
-                var authTicket = new System.Web.Security.FormsAuthenticationTicket(1,
-                                                                                    cookieName,
-                                                                                    DateTime.Now,
-                                                                                    expiredOn,
-                                                                                    persistInCookie,
-                                                                                    Newtonsoft.Json.JsonConvert.SerializeObject(user));
-                var encrypt = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
-                var authCookie = new HttpCookie(cookieName, encrypt) { HttpOnly = true, Expires = expiredOn };
-                //HttpCookie userIdCookie = HttpContext.Current.Response.Cookies.Get(cookieName);
-
-               // authCookie.Expires = authTicket.Expiration;
-                if (HttpContext.Current.Response.Cookies.Get(cookieName) == null)
+                //var authTicket = new System.Web.Security.FormsAuthenticationTicket(1,
+                //                                                                    FormsAuthentication.FormsCookieName,
+                //                                                                    DateTime.Now,
+                //                                                                    DateTime.Now.AddDays(1),
+                //                                                                    false,
+                //                                                                    Newtonsoft.Json.JsonConvert.SerializeObject(user),
+                //                                                                     FormsAuthentication.FormsCookiePath);
+                //var encrypt = System.Web.Security.FormsAuthentication.Encrypt(authTicket);
+                //var cookie = new HttpCookie(FormsAuthentication.FormsCookieName, encrypt)
+                //{
+                //    HttpOnly = true,
+                //    Secure = true,
+                //    Path = FormsAuthentication.FormsCookiePath
+                //};
+                //HttpContext.Current.Response.Cookies.Add(cookie);
+                var session = HttpContext.Current.Session;
+                if (session != null)
                 {
-                    HttpContext.Current.Response.Cookies.Add(authCookie);
+                    session["user"] = user;
                 }
-                else
-                {
-                    HttpContext.Current.Response.Cookies.Set(authCookie);
-                }
-                
-    
             }
             catch (Exception ex)
             {
@@ -80,18 +76,19 @@ namespace BroadbandZone_App.Helper
 
             try
             {
-                var cookieName = GetCookieName();
-                var authCookie = HttpContext.Current.Request.Cookies[cookieName];
-                if (authCookie != null && authCookie.Value != null)
-                {
-                    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
+                var session = HttpContext.Current.Session;
+                user = session["user"] as AuthenticatedUser;
+                //var authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+                //if (authCookie != null && authCookie.Value != null)
+                //{
+                //    FormsAuthenticationTicket authTicket = FormsAuthentication.Decrypt(authCookie.Value);
 
-                    if (authTicket != null && authTicket.UserData != null)
-                    {
-                        user = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticatedUser>(authTicket.UserData);
-                        //user.PersistInCookie = authTicket.IsPersistent;
-                    }
-                }
+                //    if (authTicket != null && authTicket.UserData != null)
+                //    {
+                //        user = Newtonsoft.Json.JsonConvert.DeserializeObject<AuthenticatedUser>(authTicket.UserData);
+                //        //user.PersistInCookie = authTicket.IsPersistent;
+                //    }
+                //}
             }
             catch (Exception ex)
             {

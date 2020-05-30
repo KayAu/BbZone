@@ -27,7 +27,13 @@ namespace BroadbandZone_App
               name: "API Default",
               routeTemplate: "api/{controller}/{action}/{id}",
               defaults: new { id = RouteParameter.Optional }
-            );
+            ); 
+           
+            // route.RouteHandler = new MyHttpControllerRouteHandler();
         }
+
+        public static string UrlPrefix { get { return "api"; } }
+        public static string UrlPrefixRelative { get { return "~/api"; } }
+    
     }
 }
