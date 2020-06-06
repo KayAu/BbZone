@@ -178,7 +178,7 @@ namespace BroadbandZone_App.WebApi
                     db.Entry(editedRecord).State = EntityState.Modified;
                     db.SaveChanges();
 
-                    if (editedRecord.IsApproved == true)
+                    if (editedRecord.IsApproved == true && editedRecord.ActivatedOn == null)
                     {
                         ObjectParameter activationCode = new ObjectParameter("oActivationCode", typeof(string));
                         db.GenerateActivationCode(editedRecord.RegId, activationCode);
