@@ -2,7 +2,7 @@
     <div class="row">
         <submission-status-count></submission-status-count>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="currentUser.hasFullControl || currentUser.agentId!=null">
         <div class="col-lg-12">
             <div class="ibox ">
                 <div class="ibox-content">
@@ -14,13 +14,12 @@
         </div>
     </div>
 
-
     <div class="row">
         <loading></loading>
         <div class="col-lg-6">
             <announcement></announcement>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6" *ngIf="currentUser.hasFullControl || currentUser.agentId!=null">
             <team-submission></team-submission>
         </div>
     </div>

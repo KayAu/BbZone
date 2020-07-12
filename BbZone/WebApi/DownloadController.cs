@@ -116,7 +116,8 @@ namespace BroadbandZone_App.WebApi
                                                                         filterBy.ProductPackageId,
                                                                         filterBy.Keyword,
                                                                         filterBy.ReceivedDate != null ? filterBy.ReceivedDate.StartDate : null,
-                                                                        filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null).ToList();
+                                                                        filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null,
+                                                                        filterBy.PaymentReceived).ToList();
 
                         return ExcelHelper.ReadDataToExcel<GetIncentivesReceivedForDownload_Result>(results, "IncentivesReceived");
                     }

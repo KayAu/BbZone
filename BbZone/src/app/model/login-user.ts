@@ -5,6 +5,7 @@
     role: string;
     isAuthenticated?: boolean;
     isImpersonated: boolean;
+    hasFullControl: boolean;
     isAdmin: boolean;
     agentId: number;
 }

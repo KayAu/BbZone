@@ -13,16 +13,15 @@ namespace BroadbandZone_Data
     
     public partial class GetIncentivesReceivedForDownload_Result
     {
-        public int IncPymntId { get; set; }
+        public Nullable<int> IncPymntId { get; set; }
         public int ApplicationId { get; set; }
         public string CustomerName { get; set; }
         public string OrderNo { get; set; }
         public string PackageName { get; set; }
         public string Category { get; set; }
         public string ProductName { get; set; }
-        public decimal IncentiveAmt { get; set; }
-        public Nullable<bool> IsActive { get; set; }
-        public System.DateTime CreatedOn { get; set; }
+        public Nullable<decimal> IncentiveAmt { get; set; }
+        public Nullable<System.DateTime> CreatedOn { get; set; }
         public string CreatedBy { get; set; }
     }
 }

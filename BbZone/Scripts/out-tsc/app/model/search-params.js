@@ -58,12 +58,13 @@ var SearchWithdrawalViewParams = /** @class */ (function () {
 }());
 exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
 var SearchIncentivesParams = /** @class */ (function () {
-    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate) {
+    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate, paymentReceived) {
         this.keyword = keyword;
         this.productId = productId;
         this.productCategoryId = productCategoryId;
         this.productPackageId = productPackageId;
         this.receivedDate = receivedDate;
+        this.paymentReceived = paymentReceived;
     }
     return SearchIncentivesParams;
 }());

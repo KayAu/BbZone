@@ -63,6 +63,17 @@ var SearchIncentiveFields = /** @class */ (function () {
                 "required": false,
                 "maxLength": 0
             }
+        },
+        {
+            "fieldName": "paymentReceived",
+            "displayText": "Payment Received",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "paymentReceived",
+                "controlType": "select",
+                "maxLength": 0,
+                "datasourceUrl": "GetDocStatus"
+            }
         }
     ];
     return SearchIncentiveFields;

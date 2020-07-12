@@ -26,7 +26,7 @@ export class ViewIncentives extends ListDataCrud {
     displayType = DataDisplayType;
     controlType = ControlType;
     customerSearchType = CustomerSearchType;
-    searchParams = new SearchIncentivesParams(null, null, null, null, null);
+    searchParams = new SearchIncentivesParams(null, null, null, null, null, null);
     keyField: string;   
     totalAmountReceived: any;
     downloadUrl: string;
@@ -81,7 +81,7 @@ export class ViewIncentives extends ListDataCrud {
     }
 
     clearSearchParam() {
-        this.searchParams = new SearchIncentivesParams(null, null, null, null, null);
+        this.searchParams = new SearchIncentivesParams(null, null, null, null, null,null);
         this.reloadData();
     }
 

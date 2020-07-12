@@ -19,38 +19,34 @@ namespace BroadbandZone_App.Helper
 
         public static DataTable ExtractToDatatable(string filePath)
         {
-            DataTable dataTable = new DataTable();
+            DataTable dt = new DataTable();
    
             try
             {
-                // Get Application object.
-                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
-                // Creation a new Workbook
-                Microsoft.Office.Interop.Excel.Workbook excelworkBook = excel.Workbooks.Open(HttpContext.Current.Server.MapPath(filePath));
-                // Work sheet
-                Microsoft.Office.Interop.Excel.Worksheet excelSheet = (Microsoft.Office.Interop.Excel.Worksheet)excelworkBook.Worksheets.Item[WorksheetName];
-                Microsoft.Office.Interop.Excel.Range range = excelSheet.UsedRange;
-
-                //create the header of table
-                for (int col = 1; col <= range.Columns.Count; col++)
+                using (XLWorkbook workBook = new XLWorkbook(HttpContext.Current.Server.MapPath(filePath)))
                 {
-                    dataTable.Columns.Add(Convert.ToString(range.Cells[HeaderRow, col].Value2), typeof(string));
-                }
+                    //Read the first Sheet from Excel file.
+                    IXLWorksheet workSheet = workBook.Worksheet(1);
 
-                //filling the table from  excel file                
-                for (int wsRowNo = HeaderRow + 1; wsRowNo <= range.Rows.Count; wsRowNo++)
-                {
-                    DataRow dr = dataTable.NewRow();
-                    for (int wsColNo = 1; wsColNo <= range.Columns.Count; wsColNo++)
+                    foreach (IXLCell cell in workSheet.Row(HeaderRow).Cells())
                     {
-                        dr[wsColNo - 1] = Convert.ToString(range.Cells[wsRowNo, wsColNo].Value2);
+                        dt.Columns.Add(cell.Value.ToString());
                     }
-                    dataTable.Rows.InsertAt(dr, dataTable.Rows.Count + 1);
+
+                    //Loop through the Worksheet rows.
+                    foreach (IXLRow row in workSheet.Rows())
+                    {
+                        DataRow dr = dt.NewRow();
+                        for (int wsColNo = 1; wsColNo <= row.CellsUsed().Count() - 1; wsColNo++)
+                        {
+                            dr[wsColNo-1] = Convert.ToString(row.Cell(wsColNo).Value);
+                        }
+                        dt.Rows.InsertAt(dr, dt.Rows.Count + 1);
+                    }
                 }
-                
-                excelworkBook.Close();
-                excel.Quit();
-                return dataTable;
+      
+                dt.Rows.RemoveAt(0);
+                return dt;
             }
             catch (Exception ex)
             {

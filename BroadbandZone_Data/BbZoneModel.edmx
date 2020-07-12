@@ -5,12 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="BroadbandZoneModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="__RefactorLog">
-          <Key>
-            <PropertyRef Name="OperationKey" />
-          </Key>
-          <Property Name="OperationKey" Type="uniqueidentifier" Nullable="false" />
-        </EntityType>
         <EntityType Name="AdminUser">
           <Key>
             <PropertyRef Name="Id" />
@@ -330,7 +324,7 @@
           <Property Name="Size" Type="float" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SProcErrorLog">
           <Key>
             <PropertyRef Name="Id" />
@@ -810,6 +804,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prKeyword" Type="varchar" Mode="In" />
           <Parameter Name="prReceivedFrom" Type="smalldatetime" Mode="In" />
           <Parameter Name="prReceivedUntil" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prPaymentReceived" Type="bit" Mode="In" />
           <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
         </Function>
         <Function Name="prc_GetIncentivesReceivedForDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -819,6 +814,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prKeyword" Type="varchar" Mode="In" />
           <Parameter Name="prReceivedFrom" Type="smalldatetime" Mode="In" />
           <Parameter Name="prReceivedUntil" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prPaymentReceived" Type="bit" Mode="In" />
         </Function>
         <Function Name="prc_GetLoginBanners" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prCurrentPage" Type="int" Mode="In" />
@@ -980,7 +976,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="Temp" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="BroadbandZoneModelStoreContainer">
-          <EntitySet Name="__RefactorLog" EntityType="Self.__RefactorLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AdminUser" EntityType="Self.AdminUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Agent" EntityType="Self.Agent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AgentCommission" EntityType="Self.AgentCommission" Schema="dbo" store:Type="Tables" />
@@ -1291,6 +1286,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prKeyword" Mode="In" Type="String" />
             <Parameter Name="prReceivedFrom" Mode="In" Type="DateTime" />
             <Parameter Name="prReceivedUntil" Mode="In" Type="DateTime" />
+            <Parameter Name="prPaymentReceived" Mode="In" Type="Boolean" />
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="FindCompletedApplication" ReturnType="Collection(BroadbandZoneModel.FindCompletedApplication_Result)">
@@ -1303,6 +1299,7 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prKeyword" Mode="In" Type="String" />
             <Parameter Name="prReceivedFrom" Mode="In" Type="DateTime" />
             <Parameter Name="prReceivedUntil" Mode="In" Type="DateTime" />
+            <Parameter Name="prPaymentReceived" Mode="In" Type="Boolean" />
           </FunctionImport>
           <FunctionImport Name="GetAdminUsers" ReturnType="Collection(BroadbandZoneModel.GetAdminUsers_Result)">
             <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
@@ -1945,17 +1942,16 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="ProductName" Nullable="false" MaxLength="150" />
         </ComplexType>
         <ComplexType Name="GetIncentivesReceivedForDownload_Result">
-          <Property Type="Int32" Name="IncPymntId" Nullable="false" />
+          <Property Type="Int32" Name="IncPymntId" Nullable="true" />
           <Property Type="Int32" Name="ApplicationId" Nullable="false" />
           <Property Type="String" Name="CustomerName" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="OrderNo" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="PackageName" Nullable="false" MaxLength="150" />
-          <Property Type="String" Name="Category" Nullable="false" MaxLength="50" />
-          <Property Type="String" Name="ProductName" Nullable="false" MaxLength="150" />
-          <Property Type="Decimal" Name="IncentiveAmt" Nullable="false" Precision="19" />
-          <Property Type="Boolean" Name="IsActive" Nullable="true" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Category" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ProductName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="IncentiveAmt" Nullable="true" Precision="19" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="true" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="GetAdminUsers_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -3201,7 +3197,6 @@ warning 6002: The table/view 'BbZone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="Category" ColumnName="Category" />
                 <ScalarProperty Name="ProductName" ColumnName="ProductName" />
                 <ScalarProperty Name="IncentiveAmt" ColumnName="IncentiveAmt" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>

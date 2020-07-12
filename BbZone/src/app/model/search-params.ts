@@ -61,7 +61,8 @@ export class SearchIncentivesParams {
         public productId: number,
         public productCategoryId: number,
         public productPackageId: number,
-        public receivedDate: DateRange
+        public receivedDate: DateRange,
+        public paymentReceived: boolean,
     ) { }
 }
 

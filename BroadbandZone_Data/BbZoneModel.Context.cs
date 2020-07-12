@@ -624,7 +624,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateClaimableCommission", prWithdrawalIdParameter);
         }
     
-        public virtual ObjectResult<GetIncentivesReceived_Result> GetIncentivesReceived(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil, ObjectParameter oTotalRecord)
+        public virtual ObjectResult<GetIncentivesReceived_Result> GetIncentivesReceived(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil, Nullable<bool> prPaymentReceived, ObjectParameter oTotalRecord)
         {
             var prCurrentPageParameter = prCurrentPage.HasValue ?
                 new ObjectParameter("prCurrentPage", prCurrentPage) :
@@ -666,7 +666,11 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prReceivedUntil", prReceivedUntil) :
                 new ObjectParameter("prReceivedUntil", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceived_Result>("GetIncentivesReceived", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter, oTotalRecord);
+            var prPaymentReceivedParameter = prPaymentReceived.HasValue ?
+                new ObjectParameter("prPaymentReceived", prPaymentReceived) :
+                new ObjectParameter("prPaymentReceived", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceived_Result>("GetIncentivesReceived", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter, prPaymentReceivedParameter, oTotalRecord);
         }
     
         public virtual ObjectResult<FindCompletedApplication_Result> FindCompletedApplication(string prSearchKeyword)
@@ -678,7 +682,7 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<FindCompletedApplication_Result>("FindCompletedApplication", prSearchKeywordParameter);
         }
     
-        public virtual ObjectResult<GetIncentivesReceivedForDownload_Result> GetIncentivesReceivedForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil)
+        public virtual ObjectResult<GetIncentivesReceivedForDownload_Result> GetIncentivesReceivedForDownload(Nullable<int> prProduct, Nullable<int> prProductCategory, Nullable<int> prProductPackage, string prKeyword, Nullable<System.DateTime> prReceivedFrom, Nullable<System.DateTime> prReceivedUntil, Nullable<bool> prPaymentReceived)
         {
             var prProductParameter = prProduct.HasValue ?
                 new ObjectParameter("prProduct", prProduct) :
@@ -704,7 +708,11 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prReceivedUntil", prReceivedUntil) :
                 new ObjectParameter("prReceivedUntil", typeof(System.DateTime));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceivedForDownload_Result>("GetIncentivesReceivedForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter);
+            var prPaymentReceivedParameter = prPaymentReceived.HasValue ?
+                new ObjectParameter("prPaymentReceived", prPaymentReceived) :
+                new ObjectParameter("prPaymentReceived", typeof(bool));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetIncentivesReceivedForDownload_Result>("GetIncentivesReceivedForDownload", prProductParameter, prProductCategoryParameter, prProductPackageParameter, prKeywordParameter, prReceivedFromParameter, prReceivedUntilParameter, prPaymentReceivedParameter);
         }
     
         public virtual ObjectResult<GetAdminUsers_Result> GetAdminUsers(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, ObjectParameter oTotalRecord)

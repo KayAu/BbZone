@@ -79,6 +79,7 @@ namespace BroadbandZone_App.WebApi
                                                                                 filterBy.Keyword,
                                                                                 filterBy.ReceivedDate != null ? filterBy.ReceivedDate.StartDate : null,
                                                                                 filterBy.ReceivedDate != null ? filterBy.ReceivedDate.EndDate : null,
+                                                                                filterBy.PaymentReceived,
                                                                                 totalRecord).ToList();
                     return new IncentivesView<GetIncentivesReceived_Result>()
                     {

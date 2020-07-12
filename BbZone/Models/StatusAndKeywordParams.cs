@@ -79,6 +79,7 @@ namespace BroadbandZone_App.Models
         public int? ProductCategoryId { get; set; }
         public int? ProductPackageId { get; set; }
         public DateRange ReceivedDate { get; set; }
+        public bool? PaymentReceived { get; set; }
     }
 
     public class SearchAgentPocketdParams
