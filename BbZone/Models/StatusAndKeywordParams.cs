@@ -62,7 +62,7 @@ namespace BroadbandZone_App.Models
         public string Keyword { get; set; }
         public string Agent { get; set; }
         public string Status { get; set; }
-        
+        public bool IsAdmin { get; set; }
         public DateRange SubmittedDate { get; set; }
         public DateRange CompletedDate { get; set; }
     }

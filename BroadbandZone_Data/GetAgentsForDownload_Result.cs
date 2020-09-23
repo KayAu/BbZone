@@ -32,5 +32,6 @@ namespace BroadbandZone_Data
         public Nullable<int> SuperiorId { get; set; }
         public string SuperiorName { get; set; }
         public string SuperiorLogin { get; set; }
+        public string LastLoginOn { get; set; }
     }
 }

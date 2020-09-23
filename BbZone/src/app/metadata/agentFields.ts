@@ -665,7 +665,7 @@ export class AgentMaintenanceColumns {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "companyName",
@@ -695,6 +695,14 @@ export class AgentMaintenanceColumns {
             "fieldName": "isActive",
             "headerText": "Is Active",
             "displayType": "tick",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "lastLoginOn",
+            "headerText": "Last Login",
+            "displayType": "text",
             "keyField": false,
             "readonly": true,
             "colWidth": "cell-width-10"

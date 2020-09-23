@@ -2493,7 +2493,7 @@ module.exports = "div.dataTables_paginate {\r\n  margin: 0;\r\n  white-space: no
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"disp-block\" *ngIf=\"pageButtons.length > 0\">\r\n    <div class=\"col-sm-4 pad0L mrg5T\">\r\n        <div class=\"dataTables_length float-left mrg15L\">\r\n            <label>\r\n                Show\r\n                <select class=\"form-control form-control-sm mrg5L mrg5R\" #pageSize (change)='pageSizeChanged(pageSize.value)'>\r\n                    <option value=\"10\">10</option>\r\n                    <option value=\"25\">25</option>\r\n                    <option value=\"50\">50</option>\r\n                    <option value=\"100\" selected>100</option>\r\n                </select>\r\n                entries\r\n            </label>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-sm-4 pad0L mrg5T text-center\">\r\n        <div class=\"dataTables_info\">{{pageDesc}}</div>\r\n    </div>\r\n    <div class=\"col-sm-4 dataTables_paginate paging_simple_numbers pad0R mrg5T\">\r\n        <ul class=\"pagination\">\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goFirstPage()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\">First</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goPrevious()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\"><<</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item\" *ngFor=\"let pageNo of pageButtons\"\r\n                [ngClass]=\"{'active': isActivePage(pageNo)}\">\r\n                <a class=\"page-link\" (click)=\"goToPage(pageNo)\">\r\n                    {{pageNo}}\r\n                </a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goNext()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">>></a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goLastPage()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">Last</a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"disp-block\" *ngIf=\"pageButtons.length > 0\">\r\n    <div class=\"col-sm-3 pad0L mrg5T\">\r\n        <div class=\"dataTables_length float-left\">\r\n            <label>\r\n                Show\r\n                <select class=\"form-control form-control-sm mrg5L mrg5R\" #pageSize (change)='pageSizeChanged(pageSize.value)'>\r\n                    <option value=\"10\">10</option>\r\n                    <option value=\"25\">25</option>\r\n                    <option value=\"50\">50</option>\r\n                    <option value=\"100\" selected>100</option>\r\n                </select>\r\n                entries\r\n            </label>\r\n        </div>\r\n    </div>\r\n    <div class=\"col-sm-4 pad0L mrg5T text-center\">\r\n        <div class=\"dataTables_info\">{{pageDesc}}</div>\r\n    </div>\r\n    <div class=\"col-sm-5 dataTables_paginate paging_simple_numbers pad0R mrg5T\">\r\n        <ul class=\"pagination\">\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goFirstPage()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\">First</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item previous\">\r\n                <a class=\"page-link\" (click)=\"goPrevious()\" [ngClass]=\"{'disabled':disabledFirstAndPrevBtn}\"><<</a>\r\n            </li>\r\n            <li class=\"paginate_button page-item\" *ngFor=\"let pageNo of pageButtons\"\r\n                [ngClass]=\"{'active': isActivePage(pageNo)}\">\r\n                <a class=\"page-link\" (click)=\"goToPage(pageNo)\">\r\n                    {{pageNo}}\r\n                </a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goNext()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">>></a>\r\n            </li>\r\n            <li class=\"paginate_button page-item next\">\r\n                <a class=\"page-link\" (click)=\"goLastPage()\" [ngClass]=\"{'disabled':disabledNextAndLastBtn}\">Last</a>\r\n            </li>\r\n        </ul>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -6715,7 +6715,7 @@ var SearchIncentiveFields = /** @class */ (function () {
     SearchIncentiveFields.fields = [
         {
             "fieldName": "keyword",
-            "displayText": "Customer Name or Order No",
+            "displayText": "Customer Name / Order No",
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "keyword",
@@ -6771,6 +6771,17 @@ var SearchIncentiveFields = /** @class */ (function () {
                 "controlType": "dateRange",
                 "required": false,
                 "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "paymentReceived",
+            "displayText": "Payment Received",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "paymentReceived",
+                "controlType": "select",
+                "maxLength": 0,
+                "datasourceUrl": "GetDocStatus"
             }
         }
     ];
@@ -7652,22 +7663,24 @@ var SearchClawbackParams = /** @class */ (function () {
 }());
 exports.SearchClawbackParams = SearchClawbackParams;
 var SearchWithdrawalViewParams = /** @class */ (function () {
-    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
+    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate, isAdmin) {
         this.agent = agent;
         this.status = status;
         this.submittedDate = submittedDate;
         this.completedDate = completedDate;
+        this.isAdmin = isAdmin;
     }
     return SearchWithdrawalViewParams;
 }());
 exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
 var SearchIncentivesParams = /** @class */ (function () {
-    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate) {
+    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate, paymentReceived) {
         this.keyword = keyword;
         this.productId = productId;
         this.productCategoryId = productCategoryId;
         this.productPackageId = productPackageId;
         this.receivedDate = receivedDate;
+        this.paymentReceived = paymentReceived;
     }
     return SearchIncentivesParams;
 }());
@@ -9222,6 +9235,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             incentives: this.totalIncentives,
             deduction: this.totalAmountToDeduct
         };
+        this.isUpdating = true;
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/view-withdrawal']);
@@ -9756,7 +9770,7 @@ exports.EditWithdrawal = EditWithdrawal;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <submission-status-count></submission-status-count>\r\n    </div>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <monthly-applications></monthly-applications>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n\r\n    <div class=\"row\">\r\n        <loading></loading>\r\n        <div class=\"col-lg-6\">\r\n            <announcement></announcement>\r\n        </div>\r\n        <div class=\"col-lg-6\">\r\n            <team-submission></team-submission>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<div class=\"wrapper wrapper-content\">\r\n    <div class=\"row\">\r\n        <submission-status-count></submission-status-count>\r\n    </div>\r\n    <div class=\"row\" *ngIf=\"currentUser.hasFullControl || currentUser.agentId!=null\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"row\">\r\n                        <monthly-applications></monthly-applications>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n\r\n    <div class=\"row\">\r\n        <loading></loading>\r\n        <div class=\"col-lg-6\">\r\n            <announcement></announcement>\r\n        </div>\r\n        <div class=\"col-lg-6\" *ngIf=\"currentUser.hasFullControl || currentUser.agentId!=null\">\r\n            <team-submission></team-submission>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -9775,16 +9789,25 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var authentication_1 = __webpack_require__(/*! ../../services/authentication */ "./src/app/services/authentication.ts");
 var Home = /** @class */ (function () {
-    function Home() {
+    function Home(authenticationService) {
+        this.authenticationService = authenticationService;
+        this.currentUser = this.authenticationService.currentUserValue;
     }
+    Home.prototype.ngOnInit = function () {
+    };
     Home = __decorate([
         core_1.Component({
             selector: 'home',
             template: __webpack_require__(/*! ./home.html */ "./src/app/pages/home/home.html"),
-        })
+        }),
+        __metadata("design:paramtypes", [authentication_1.AuthenticationService])
     ], Home);
     return Home;
 }());
@@ -10930,7 +10953,7 @@ exports.ViewCompletedApp = ViewCompletedApp;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Incentives'\" [parentCategory]=\"'Manage Incentives'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" [forDataFilter]=\"true\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Incentives</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n\r\n                            <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                            <button class=\"btn btn-warning btn-sm mrg10T mrg10L\"  (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\" ></i>Export</button>\r\n                            <div class=\"float-right text-right incentives-amt\">\r\n                                <h4>RM {{totalAmountReceived| number:'1.2-2'}}</h4>\r\n                                <small>Total Incentives</small>\r\n                            </div>\r\n                            <form #tableForm=\"ngForm\">\r\n                                <table class=\"table table-striped table-bordered mrg15T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                            <th class=\"cell-width-6\">Action</th>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                            <td *ngFor=\"let field of dataRowMapper\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                              [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                 [searchType]=\"customerSearchType.completed\" (onItemSelected)=\"setNewCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                            <td>\r\n                                                <button class=\"btn btn-primary btn-xs mrg5R\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                                <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                    <i class=\"fa fa-times\"></i>\r\n                                                </button>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                            <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                                <td *ngIf=\"!record.onEdit\">\r\n                                                    <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                </td>\r\n                                                <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                    <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                    <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                     [displayText]=\"editedRecord[field.dataFieldControl.controlName]\" [disabledEdit]=\"true\"></customer-finder>\r\n                                                </td>\r\n                                            </ng-container>\r\n                                            <td>\r\n                                                <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\"></tablerow-buttons>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"dataSource.length === 0\">\r\n                                            <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                                <div class=\"mrg45A text-center opacity-40\">\r\n                                                    <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                    <h4>No Records Available</h4>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </form>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'View Incentives'\" [parentCategory]=\"'Manage Incentives'\"></page-header>\r\n\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <ng-container *ngFor=\"let field of searchFields\">\r\n                <div class=\"col-sm-2\" *ngIf=\"!field.hidden\">\r\n                    <div class=\"form-group\">\r\n                        <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                        <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                      [field]=\"field.dataFieldControl\" [forDataFilter]=\"true\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                    </div>\r\n                </div>\r\n            </ng-container>\r\n\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"reloadData()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title\">\r\n                    <h5>View Incentives</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n\r\n                            <button class=\"btn btn-primary btn-sm mrg10T\" (click)=\"showNewRow = true\"><i class=\"fa fa-plus mrg5R\"></i>Add</button>\r\n                            <button class=\"btn btn-warning btn-sm mrg10T mrg10L\"  (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\" ></i>Export</button>\r\n                            <div class=\"float-right text-right incentives-amt\">\r\n                                <h4>RM {{totalAmountReceived| number:'1.2-2'}}</h4>\r\n                                <small>Total Incentives</small>\r\n                            </div>\r\n                            <form #tableForm=\"ngForm\">\r\n                                <table class=\"table table-striped table-bordered mrg15T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                    <thead>\r\n                                        <tr>\r\n                                            <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                            <th class=\"cell-width-7\">Action</th>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"showNewRow\" class=\"new-row\">\r\n                                            <td *ngFor=\"let field of dataRowMapper\">\r\n                                                <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                                              [field]=\"field.dataFieldControl\" [formName]=\"'manageProductForm'\" name=\"{{field.dataFieldControl.controlName}}\"></data-control>\r\n                                                <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                 [searchType]=\"customerSearchType.completed\" (onItemSelected)=\"setNewCustomerDetails($event)\"></customer-finder>\r\n                                            </td>\r\n                                            <td>\r\n                                                <button class=\"btn btn-primary btn-xs mrg5R\" (click)=\"addRow()\"><i class=\"fa fa-save\"></i></button>\r\n                                                <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"resetNewRecord()\">\r\n                                                    <i class=\"fa fa-times\"></i>\r\n                                                </button>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </thead>\r\n                                    <tbody>\r\n                                        <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                            <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                                <td *ngIf=\"!record.onEdit\">\r\n                                                    <data-field [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                </td>\r\n                                                <td *ngIf=\"record.onEdit\" class=\"edit-row\">\r\n                                                    <data-control *ngIf=\"field.dataFieldControl.controlType != controlType.customerFinder\" [(ngModel)]=\"editedRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName+rowNo\" [field]=\"field.dataFieldControl\" [onEdit]=\"record.onEdit\" [formName]=\"'editCategoryForm'\" name=\"{{field.dataFieldControl.controlName}}{{rowNo}}\"></data-control>\r\n                                                    <customer-finder *ngIf=\"field.dataFieldControl.controlType == controlType.customerFinder\" [(ngModel)]=\"newRecord[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\" name=\"{{field.dataFieldControl.controlName}}\"\r\n                                                                     [displayText]=\"editedRecord[field.dataFieldControl.controlName]\" [disabledEdit]=\"true\"></customer-finder>\r\n                                                </td>\r\n                                            </ng-container>\r\n                                            <td>\r\n                                                <tablerow-buttons [editMode]=\"record.onEdit\" [hideDelete]=\"false\" (onEdit)=\"editRow(rowNo)\" (onCancelEdit)=\"cancelEdit(rowNo)\" (onUpdate)=\"updateRow(rowNo)\" (onDelete)=\"deleteRow(rowNo)\"></tablerow-buttons>\r\n                                            </td>\r\n                                        </tr>\r\n                                        <tr *ngIf=\"dataSource.length === 0\">\r\n                                            <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                                <div class=\"mrg45A text-center opacity-40\">\r\n                                                    <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                    <h4>No Records Available</h4>\r\n                                                </div>\r\n                                            </td>\r\n                                        </tr>\r\n                                    </tbody>\r\n                                </table>\r\n                            </form>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -10993,7 +11016,7 @@ var ViewIncentives = /** @class */ (function (_super) {
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
         _this.customerSearchType = dataDisplayType_1.CustomerSearchType;
-        _this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        _this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null, null);
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountReceived = data.totalAmountReceived;
         });
@@ -11016,7 +11039,7 @@ var ViewIncentives = /** @class */ (function (_super) {
         return columnMappings;
     };
     ViewIncentives.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null, null);
         this.reloadData();
     };
     ViewIncentives.prototype.exportRecords = function () {
@@ -11272,7 +11295,6 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountPayout = data.totalAmountPayout;
             _this.totalAmountClaimed = data.totalAmountClaimed;
@@ -11284,6 +11306,7 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.controllerName = apiController_1.ApiController.WithdrawalView;
     };
     ViewWithdrawal.prototype.getTablerowDataMapping = function () {
@@ -11298,7 +11321,7 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         return fieldMappings;
     };
     ViewWithdrawal.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.reloadData();
     };
     ViewWithdrawal = __decorate([

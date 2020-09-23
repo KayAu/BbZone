@@ -37,6 +37,7 @@ export class ViewOrder extends ListEvent {
     totalCommINotConfig: number;
     totalOddClaimed: number;
     previousUrl: string;
+
     constructor(public loaderService: LoaderService, public dataService: DataService, private authenticationService: AuthenticationService, private routerExtService: RouterService) {
         super(loaderService, dataService, "applicationId", false);
         this.dataSourceSubject.asObservable().subscribe((data: any) => {
@@ -98,6 +99,8 @@ export class ViewOrder extends ListEvent {
         else {
             this.searchParams.filterByMode = filterBy;
         }
+
+        localStorage.setItem('viewOrderParams', JSON.stringify(this.searchParams));
         this.reloadData();
     }
 

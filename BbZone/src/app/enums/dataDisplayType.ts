@@ -1,11 +1,13 @@
 export enum DataDisplayType {
     text,
     badge,
-    tick
+    tick,
+    date
 }
 
 export enum ControlType {
     label,
+    date,
     textbox,
     textarea,
     select,

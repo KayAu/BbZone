@@ -497,43 +497,6 @@ namespace BroadbandZone_Data
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalSubmitted_Result>("GetWithdrawalSubmitted", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prStatusParameter, prAgentParameter, prSubmittedFromParameter, prSubmittedToParameter, prCompletedFromParameter, prCompletedToParameter, oTotalRecord, oTotalAmountClaimed, oTotalAmountPayout);
         }
     
-        public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord, ObjectParameter oTotalIncentives, ObjectParameter oTotalDeduction)
-        {
-            var prCurrentPageParameter = prCurrentPage.HasValue ?
-                new ObjectParameter("prCurrentPage", prCurrentPage) :
-                new ObjectParameter("prCurrentPage", typeof(int));
-    
-            var prPageSizeParameter = prPageSize.HasValue ?
-                new ObjectParameter("prPageSize", prPageSize) :
-                new ObjectParameter("prPageSize", typeof(int));
-    
-            var prSortColumnParameter = prSortColumn != null ?
-                new ObjectParameter("prSortColumn", prSortColumn) :
-                new ObjectParameter("prSortColumn", typeof(string));
-    
-            var prSortInAscParameter = prSortInAsc.HasValue ?
-                new ObjectParameter("prSortInAsc", prSortInAsc) :
-                new ObjectParameter("prSortInAsc", typeof(bool));
-    
-            var prAgentParameter = prAgent != null ?
-                new ObjectParameter("prAgent", prAgent) :
-                new ObjectParameter("prAgent", typeof(string));
-    
-            var prSearchKeywordParameter = prSearchKeyword != null ?
-                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
-                new ObjectParameter("prSearchKeyword", typeof(string));
-    
-            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
-                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
-                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
-    
-            var prSubmittedToParameter = prSubmittedTo.HasValue ?
-                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
-                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord, oTotalIncentives, oTotalDeduction);
-        }
-    
         public virtual ObjectResult<GetWithdrawalItems_Result> GetWithdrawalItems(Nullable<int> prWithdrawalId)
         {
             var prWithdrawalIdParameter = prWithdrawalId.HasValue ?
@@ -1235,6 +1198,43 @@ namespace BroadbandZone_Data
                 new ObjectParameter("prIsAdmin", typeof(bool));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalById_Result>("GetWithdrawalById", prWithdrawalIdParameter, prIsAdminParameter);
+        }
+    
+        public virtual ObjectResult<GetWithdrawalToSubmit_Result> GetWithdrawalToSubmit(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, string prAgent, string prSearchKeyword, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord, ObjectParameter oTotalIncentives, ObjectParameter oTotalDeduction)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prAgentParameter = prAgent != null ?
+                new ObjectParameter("prAgent", prAgent) :
+                new ObjectParameter("prAgent", typeof(string));
+    
+            var prSearchKeywordParameter = prSearchKeyword != null ?
+                new ObjectParameter("prSearchKeyword", prSearchKeyword) :
+                new ObjectParameter("prSearchKeyword", typeof(string));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord, oTotalIncentives, oTotalDeduction);
         }
     }
 }

@@ -33,12 +33,15 @@ var apiController_1 = require("src/app/enums/apiController");
 var createWithdrawalColumns_1 = require("../../metadata/createWithdrawalColumns");
 var search_params_1 = require("src/app/model/search-params");
 var router_1 = require("@angular/router");
+var authentication_1 = require("../../services/authentication");
+var data_field_control_1 = require("../../model/data.field.control");
 var CreateWithdrawal = /** @class */ (function (_super) {
     __extends(CreateWithdrawal, _super);
-    function CreateWithdrawal(loaderService, dataService, formEvent, router) {
+    function CreateWithdrawal(loaderService, dataService, authenticationService, formEvent, router) {
         var _this = _super.call(this, loaderService, dataService, '', false) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
+        _this.authenticationService = authenticationService;
         _this.formEvent = formEvent;
         _this.router = router;
         _this.isUpdating = false;
@@ -49,23 +52,36 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         _this.totalAmountToDeduct = 0;
         _this.totalSelectedAmount = 0;
         _this.totalIncentives = 0;
-        _this.totalClaimableAmount = 0;
+        _this.totalWithdrawalAmt = 0;
+        _this.totalClaimedItems = 0;
         _this.allowSubmit = true;
         _this.oriDataSource = [];
         _this.viewSelectedItems = false;
+        _this.selectAllItems = false;
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
+            //this.selectAllItems = false;
+            //this.totalClaimedItems = 0;
             _this.totalAmountToDeduct = data.totalAmountToDeduct;
             _this.totalIncentives = data.totalIncentives;
-            _this.totalClaimableAmount = (_this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
+            _this.totalWithdrawalAmt = (_this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
             _this.setDefaultSelectedItems();
             _this.setSelectedItems();
+            _this.checkAllItemsSelected();
         });
         return _this;
     }
     CreateWithdrawal.prototype.ngOnInit = function () {
+        var _this = this;
         this.dataRowMapper = this.getTablerowDataMapping();
-        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
+        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null, null);
         this.controllerName = apiController_1.ApiController.WithdrawalSubmit;
+        this.authenticationService.currentUser.subscribe(function (user) {
+            _this.currentUser = user;
+            _this.searchParams.agent = user.username;
+            if (user.isAdmin) {
+                _this.agentField = new data_field_control_1.SearchFieldControl("agent", dataDisplayType_1.ControlType.select, 0, "GetAgents");
+            }
+        });
     };
     CreateWithdrawal.prototype.getTablerowDataMapping = function () {
         var columnMappings = createWithdrawalColumns_1.CreateWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
@@ -81,20 +97,35 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             if (index >= 0)
                 this.selectedItems.splice(index, 1);
         }
-        this.totalSelectedAmount = this.selectedItems.map(function (d) { return d.claimAmount; }).reduce(function (a, b) { return a + b; }, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
-        this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
+        this.updateWithdrawalAmt();
+        this.checkAllItemsSelected();
+    };
+    CreateWithdrawal.prototype.allItemsSelected = function () {
+        var _this = this;
+        this.dataSource.forEach(function (selectedItem, i, self) {
+            if (self[i].transactionType === 'Own Sales' || self[i].transactionType === 'Override') {
+                if (self[i].selected !== _this.selectAllItems) {
+                    self[i].selected = _this.selectAllItems;
+                    _this.selectedItems.push(self[i]);
+                }
+            }
+        });
+        this.updateWithdrawalAmt();
+    };
+    CreateWithdrawal.prototype.getAgentWithdrawalItems = function () {
+        this.reloadData();
     };
     CreateWithdrawal.prototype.submit = function () {
         var _this = this;
         var claimItems = this.selectedItems.concat(this.defaultSelectedItems);
         var newRecord = {
             withdrawalItems: claimItems,
-            withdrawAmount: this.totalClaimableAmount,
+            withdrawAmount: this.totalWithdrawalAmt,
             claimed: this.totalSelectedAmount,
             incentives: this.totalIncentives,
             deduction: this.totalAmountToDeduct
         };
+        this.isUpdating = true;
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/view-withdrawal']);
@@ -124,7 +155,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         this.reloadData();
     };
     CreateWithdrawal.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null);
+        this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null, this.currentUser.username);
         this.reloadData();
     };
     CreateWithdrawal.prototype.setDefaultSelectedItems = function () {
@@ -136,12 +167,22 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             });
         }
     };
+    CreateWithdrawal.prototype.updateWithdrawalAmt = function () {
+        this.totalSelectedAmount = this.selectedItems.map(function (d) { return d.claimAmount; }).reduce(function (a, b) { return a + b; }, 0);
+        this.totalWithdrawalAmt = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
+        this.allowSubmit = this.totalWithdrawalAmt > 0 ? true : false;
+    };
+    CreateWithdrawal.prototype.checkAllItemsSelected = function () {
+        var selectableItems = this.dataSource.filter(function (i) { return i.transactionType === 'Own Sales' || i.transactionType === 'Override'; });
+        var selectedItems = selectableItems.filter(function (i) { return i.selected === true; });
+        this.selectAllItems = selectableItems.length === selectedItems.length ? true : false;
+    };
     CreateWithdrawal = __decorate([
         core_1.Component({
             selector: 'create-withdrawal',
             templateUrl: './create-withdrawal.html'
         }),
-        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, broadcast_service_1.BroadcastService, router_1.Router])
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, authentication_1.AuthenticationService, broadcast_service_1.BroadcastService, router_1.Router])
     ], CreateWithdrawal);
     return CreateWithdrawal;
 }(listEvent_1.ListEvent));

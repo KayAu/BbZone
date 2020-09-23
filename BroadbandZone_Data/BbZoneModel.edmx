@@ -139,6 +139,7 @@
           <Property Name="ClawbackId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="ApplicationId" Type="int" Nullable="false" />
           <Property Name="Remarks" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Cancelled" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ModifiedOn" Type="smalldatetime" Nullable="false" />
@@ -1231,19 +1232,6 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="oTotalAmountClaimed" Mode="InOut" Type="Decimal" />
             <Parameter Name="oTotalAmountPayout" Mode="InOut" Type="Decimal" />
           </FunctionImport>
-          <FunctionImport Name="GetWithdrawalToSubmit" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalToSubmit_Result)">
-            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
-            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
-            <Parameter Name="prSortColumn" Mode="In" Type="String" />
-            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
-            <Parameter Name="prAgent" Mode="In" Type="String" />
-            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
-            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
-            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
-            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
-            <Parameter Name="oTotalIncentives" Mode="InOut" Type="Decimal" />
-            <Parameter Name="oTotalDeduction" Mode="InOut" Type="Decimal" />
-          </FunctionImport>
           <FunctionImport Name="GetWithdrawalItems" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalItems_Result)">
           <Parameter Name="prWithdrawalId" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1538,6 +1526,19 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="prIsAdmin" Mode="In" Type="Boolean" />
           </FunctionImport>
           <EntitySet Name="Banks" EntityType="BroadbandZoneModel.Bank" />
+          <FunctionImport Name="GetWithdrawalToSubmit" ReturnType="Collection(BroadbandZoneModel.GetWithdrawalToSubmit_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prAgent" Mode="In" Type="String" />
+            <Parameter Name="prSearchKeyword" Mode="In" Type="String" />
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+            <Parameter Name="oTotalIncentives" Mode="InOut" Type="Decimal" />
+            <Parameter Name="oTotalDeduction" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
           <Property Type="Int32" Name="CategoryId" Nullable="false" />
@@ -1681,6 +1682,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="TelNo" Nullable="true" MaxLength="15" />
           <Property Type="Boolean" Name="IsActive" Nullable="true" />
           <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastLoginOn" Nullable="true" MaxLength="15" />
         </ComplexType>
         <ComplexType Name="SelectItem">
           <Property Type="Int32" Name="DisplayValue" Nullable="false" />
@@ -1827,19 +1829,6 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="Int16" Name="AgentCommOnDate" Nullable="true" />
           <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="9" />
         </ComplexType>
-        <ComplexType Name="GetWithdrawalToSubmit_Result">
-          <Property Type="String" Name="TransactionDetails" Nullable="true" MaxLength="250" />
-          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
-          <Property Type="Decimal" Name="ClaimAmount" Nullable="false" Precision="19" />
-          <Property Type="Decimal" Name="DeductAmount" Nullable="false" Precision="19" />
-          <Property Type="Int32" Name="ClaimCommId" Nullable="true" />
-          <Property Type="Decimal" Name="PackageComm" Nullable="true" Precision="19" />
-          <Property Type="Int16" Name="AgentComm" Nullable="true" />
-          <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
-          <Property Type="Boolean" Name="Selected" Nullable="true" />
-          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
-          <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
-        </ComplexType>
         <ComplexType Name="GetPaymentDetails_Result">
           <Property Type="Int32" Name="AgentId" Nullable="false" />
           <Property Type="String" Name="Nric" Nullable="true" MaxLength="12" />
@@ -1860,13 +1849,16 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="Remarks" Nullable="false" MaxLength="200" />
           <Property Type="Boolean" Name="Editable" Nullable="true" />
           <Property Type="String" Name="Agent" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
-          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="ApplicationId" Nullable="false" />
           <Property Type="String" Name="DeductAmount" Nullable="true" MaxLength="4000" />
           <Property Type="Boolean" Name="IsDeducted" Nullable="true" />
           <Property Type="String" Name="DeductedOn" Nullable="true" MaxLength="4000" />
           <Property Type="String" Name="TransactionType" Nullable="false" MaxLength="25" />
+          <Property Type="Boolean" Name="Cancelled" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="ModifiedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="16" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
         </ComplexType>
         <EntityType Name="ClaimableCommission">
           <Key>
@@ -1898,6 +1890,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Name="ModifiedOn" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ModifiedBy" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="CustomerApplication" Relationship="BroadbandZoneModel.FK_Clawback_CustomerApplication" FromRole="Clawback" ToRole="CustomerApplication" />
+          <Property Name="Cancelled" Type="Boolean" />
         </EntityType>
         <EntityType Name="IncentiveReceived">
           <Key>
@@ -2451,8 +2444,9 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="BankAccNo" Nullable="true" MaxLength="20" />
           <Property Type="String" Name="UserLogin" Nullable="true" MaxLength="16" />
           <Property Type="Int32" Name="SuperiorId" Nullable="true" />
-          <Property Type="String" Name="SuperiorName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="SuperiorLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="LastLoginOn" Nullable="true" MaxLength="4000" />
           </ComplexType>
         <ComplexType Name="ResetAgentPassword_Result">
           <Property Type="String" Name="Email" Nullable="true" MaxLength="80" />
@@ -2694,6 +2688,19 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Name="BankId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BankName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
+        <ComplexType Name="GetWithdrawalToSubmit_Result">
+          <Property Type="Int32" Name="ClaimCommId" Nullable="true" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="TransactionDetails" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="4000" />
+          <Property Type="Decimal" Name="PackageComm" Nullable="true" Precision="19" />
+          <Property Type="Int16" Name="AgentComm" Nullable="true" />
+          <Property Type="Decimal" Name="ClaimAmount" Nullable="false" Precision="19" />
+          <Property Type="Decimal" Name="DeductAmount" Nullable="false" Precision="19" />
+          <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
+          <Property Type="Boolean" Name="Selected" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2883,6 +2890,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="TelNo" ColumnName="TelNo" />
                 <ScalarProperty Name="IsActive" ColumnName="IsActive" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="LastLoginOn" ColumnName="LastLoginOn" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3041,23 +3049,6 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetWithdrawalToSubmit" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalToSubmit">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalToSubmit_Result">
-                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
-                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
-                <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
-                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
-                <ScalarProperty Name="ClaimCommId" ColumnName="ClaimCommId" />
-                <ScalarProperty Name="PackageComm" ColumnName="PackageComm" />
-                <ScalarProperty Name="AgentComm" ColumnName="AgentComm" />
-                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
-                <ScalarProperty Name="Selected" ColumnName="Selected" />
-                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
-                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="GetWithdrawalItems" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalItems">
           <ResultMapping>
               <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalItems_Result">
@@ -3101,13 +3092,16 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="Remarks" ColumnName="Remarks" />
                 <ScalarProperty Name="Editable" ColumnName="Editable" />
                 <ScalarProperty Name="Agent" ColumnName="Agent" />
-                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
                 <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
                 <ScalarProperty Name="IsDeducted" ColumnName="IsDeducted" />
                 <ScalarProperty Name="DeductedOn" ColumnName="DeductedOn" />
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3132,6 +3126,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <EntitySetMapping Name="Clawbacks">
             <EntityTypeMapping TypeName="BroadbandZoneModel.Clawback">
               <MappingFragment StoreEntitySet="Clawback">
+                <ScalarProperty Name="Cancelled" ColumnName="Cancelled" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -3626,6 +3621,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
                 <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
                 <ScalarProperty Name="SuperiorLogin" ColumnName="SuperiorLogin" />
+                <ScalarProperty Name="LastLoginOn" ColumnName="LastLoginOn" />
                 </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -3771,6 +3767,23 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetWithdrawalToSubmit" FunctionName="BroadbandZoneModel.Store.prc_GetWithdrawalToSubmit" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.GetWithdrawalToSubmit_Result">
+                <ScalarProperty Name="ClaimCommId" ColumnName="ClaimCommId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="PackageComm" ColumnName="PackageComm" />
+                <ScalarProperty Name="AgentComm" ColumnName="AgentComm" />
+                <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -80,6 +80,7 @@ import { EqualValidator } from './directives/equal-validator.directive';
 import { MandatoryValidator } from './directives/mandatory.directive';
 import { EditPassword } from './pages/edit-password/edit-password';
 import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-password';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
 @NgModule({
   declarations: [
@@ -144,7 +145,8 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
         EditPassword,
         EqualValidator,
         MandatoryValidator,
-        ResetAgentPassword
+        ResetAgentPassword,
+        CKEditorModule
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -154,7 +156,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
         MaterialModule,
         BrowserAnimationsModule,
         NgxDaterangepickerMd.forRoot(),
-        UserIdleModule.forRoot({ idle: 600, timeout: 1800, ping: 60 }),
+        UserIdleModule.forRoot({ idle: 3600, timeout: 3600, ping: 900 }),
         ToastrModule.forRoot({
             maxOpened: 1,
             preventDuplicates: true,

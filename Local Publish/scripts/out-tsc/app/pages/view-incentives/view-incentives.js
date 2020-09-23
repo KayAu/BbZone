@@ -49,7 +49,7 @@ var ViewIncentives = /** @class */ (function (_super) {
         _this.displayType = dataDisplayType_1.DataDisplayType;
         _this.controlType = dataDisplayType_1.ControlType;
         _this.customerSearchType = dataDisplayType_1.CustomerSearchType;
-        _this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        _this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null, null);
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountReceived = data.totalAmountReceived;
         });
@@ -72,7 +72,7 @@ var ViewIncentives = /** @class */ (function (_super) {
         return columnMappings;
     };
     ViewIncentives.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null);
+        this.searchParams = new search_params_1.SearchIncentivesParams(null, null, null, null, null, null);
         this.reloadData();
     };
     ViewIncentives.prototype.exportRecords = function () {

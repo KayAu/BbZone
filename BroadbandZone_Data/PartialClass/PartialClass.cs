@@ -47,6 +47,7 @@ namespace BroadbandZone_Data
 
     public partial class Withdrawal
     {
+        public bool WithdrawAll { get; set; }
         public bool AllowEdit { get; set; }
         public bool AllowTerminate { get; set; }
         public decimal? TotalAmountToDeduct { get; set; }

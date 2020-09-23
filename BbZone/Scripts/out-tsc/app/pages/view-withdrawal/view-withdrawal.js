@@ -47,7 +47,6 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         _this.dataRowMapper = [];
         _this.searchFields = [];
         _this.displayType = dataDisplayType_1.DataDisplayType;
-        _this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
         _this.dataSourceSubject.asObservable().subscribe(function (data) {
             _this.totalAmountPayout = data.totalAmountPayout;
             _this.totalAmountClaimed = data.totalAmountClaimed;
@@ -59,6 +58,7 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(function (d) { return d.keyField === true; }).fieldName;
+        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.controllerName = apiController_1.ApiController.WithdrawalView;
     };
     ViewWithdrawal.prototype.getTablerowDataMapping = function () {
@@ -73,7 +73,7 @@ var ViewWithdrawal = /** @class */ (function (_super) {
         return fieldMappings;
     };
     ViewWithdrawal.prototype.clearSearchParam = function () {
-        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null);
+        this.searchParams = new search_params_1.SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.reloadData();
     };
     ViewWithdrawal = __decorate([

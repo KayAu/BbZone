@@ -10,6 +10,9 @@ import { ApiController } from 'src/app/enums/apiController';
 import { CreateWithdrawalColumns } from '../../metadata/createWithdrawalColumns';
 import { SearchWithdrawalToSubmitParams } from 'src/app/model/search-params';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication';
+import { LoginUser } from '../../model/login-user';
+import { SearchFieldControl } from '../../model/data.field.control';
 
 @Component({
     selector: 'create-withdrawal',
@@ -24,26 +27,42 @@ export class CreateWithdrawal extends ListEvent {
     totalAmountToDeduct: any = 0;
     totalSelectedAmount: any = 0;
     totalIncentives: any = 0;
-    totalClaimableAmount: any = 0;
+    totalWithdrawalAmt: any = 0;
+    totalClaimedItems: any = 0;
     allowSubmit: boolean = true;
     oriDataSource: any[] = [];
     viewSelectedItems: boolean = false;
+    selectAllItems: boolean = false;
+    currentUser: LoginUser;
+    agentField: SearchFieldControl;
+    selectedAgent: any;
 
-    constructor(public loaderService: LoaderService, public dataService: DataService, private formEvent: BroadcastService, private router: Router) {
+    constructor(public loaderService: LoaderService, public dataService: DataService, private authenticationService: AuthenticationService, private formEvent: BroadcastService, private router: Router) {
         super(loaderService, dataService, '', false);
-        this.dataSourceSubject.asObservable().subscribe((data: any)  => {
+        this.dataSourceSubject.asObservable().subscribe((data: any) => {
+            //this.selectAllItems = false;
+            //this.totalClaimedItems = 0;
             this.totalAmountToDeduct = data.totalAmountToDeduct;
             this.totalIncentives = data.totalIncentives;
-            this.totalClaimableAmount = (this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
+            this.totalWithdrawalAmt = (this.totalSelectedAmount + data.totalIncentives) - data.totalAmountToDeduct;
             this.setDefaultSelectedItems();
             this.setSelectedItems();
+            this.checkAllItemsSelected();
         });
     }
 
     ngOnInit() {
         this.dataRowMapper = this.getTablerowDataMapping();
-        this.searchParams = new SearchWithdrawalToSubmitParams(null, null);
+        this.searchParams = new SearchWithdrawalToSubmitParams(null, null, null);
         this.controllerName = ApiController.WithdrawalSubmit;
+
+        this.authenticationService.currentUser.subscribe(user => {
+            this.currentUser = user; 
+            this.searchParams.agent = user.username;
+            if (user.isAdmin) {
+                this.agentField = new SearchFieldControl("agent", ControlType.select, 0, "GetAgents");
+            }
+        });
     }
 
     getTablerowDataMapping(): TablerowDataMapping[] {
@@ -62,26 +81,44 @@ export class CreateWithdrawal extends ListEvent {
                 this.selectedItems.push(item);
         }
         else {
-            let index = this.selectedItems.findIndex(p => p.claimCommId === item.claimCommId);
+            const index = this.selectedItems.findIndex(p => p.claimCommId === item.claimCommId);
             if (index >= 0)
                 this.selectedItems.splice(index, 1);
         }
 
-        this.totalSelectedAmount = this.selectedItems.map(d => d.claimAmount).reduce((a, b) => a + b, 0);
-        this.totalClaimableAmount = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
-        this.allowSubmit = this.totalClaimableAmount > 0 ? true : false;
+        this.updateWithdrawalAmt();
+        this.checkAllItemsSelected();
+    }
+
+    allItemsSelected() {
+        this.dataSource.forEach((selectedItem, i, self) => {              
+            if (self[i].transactionType === 'Own Sales' || self[i].transactionType === 'Override') {               
+                if (self[i].selected !== this.selectAllItems) {
+                    self[i].selected = this.selectAllItems;
+                    this.selectedItems.push(self[i]);
+                }        
+            }
+        });
+
+        this.updateWithdrawalAmt();
+    }
+
+    getAgentWithdrawalItems() {
+        this.searchParams.agent = this.selectedAgent;
+        this.reloadData();
     }
 
     submit() {
         let claimItems = this.selectedItems.concat(this.defaultSelectedItems);
         let newRecord = {
             withdrawalItems: claimItems,
-            withdrawAmount: this.totalClaimableAmount,
+            withdrawAmount: this.totalWithdrawalAmt,
             claimed: this.totalSelectedAmount,
             incentives: this.totalIncentives,
             deduction: this.totalAmountToDeduct
         }
 
+        this.isUpdating = true;
         this.dataService.postForm(ApiController.WithdrawalSubmit, newRecord).subscribe(data => {
             this.isUpdating = false;
             this.router.navigate(['/view-withdrawal']);
@@ -113,7 +150,8 @@ export class CreateWithdrawal extends ListEvent {
     }
 
     clearSearchParam() {
-        this.searchParams = new SearchWithdrawalToSubmitParams(null, null);
+        this.selectedAgent = null;
+        this.searchParams = new SearchWithdrawalToSubmitParams(null, null, this.currentUser.username);
         this.reloadData();
     }
 
@@ -124,6 +162,19 @@ export class CreateWithdrawal extends ListEvent {
                 this.defaultSelectedItems.push(item);
             });
         }
+    }
+
+    private updateWithdrawalAmt() {
+        this.totalSelectedAmount = this.selectedItems.map(d => d.claimAmount).reduce((a, b) => a + b, 0);
+        this.totalWithdrawalAmt = this.totalSelectedAmount === 0 ? 0 : (this.totalSelectedAmount + this.totalIncentives) - this.totalAmountToDeduct;
+        this.allowSubmit = this.totalWithdrawalAmt > 0 ? true : false;
+    }
+
+    private checkAllItemsSelected() {
+        if (this.dataSource.length === 0) return;
+        const selectableItems = this.dataSource.filter(i => i.transactionType === 'Own Sales' || i.transactionType === 'Override');
+        const selectedItems = selectableItems.filter(i => i.selected === true);
+        this.selectAllItems = selectableItems.length === selectedItems.length ? true : false;
     }
 }
 

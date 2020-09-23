@@ -676,7 +676,7 @@ var AgentMaintenanceColumns = /** @class */ (function () {
             "displayType": "text",
             "keyField": false,
             "readonly": true,
-            "colWidth": "cell-width-20"
+            "colWidth": "cell-width-15"
         },
         {
             "fieldName": "companyName",
@@ -706,6 +706,14 @@ var AgentMaintenanceColumns = /** @class */ (function () {
             "fieldName": "isActive",
             "headerText": "Is Active",
             "displayType": "tick",
+            "keyField": false,
+            "readonly": true,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "lastLoginOn",
+            "headerText": "Last Login",
+            "displayType": "text",
             "keyField": false,
             "readonly": true,
             "colWidth": "cell-width-10"

@@ -26,16 +26,17 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
-                    AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                    //AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                     
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
                     ObjectParameter totalIncentives = new ObjectParameter("oTotalIncentives", typeof(decimal));
                     ObjectParameter totalDeduction = new ObjectParameter("oTotalDeduction", typeof(decimal));
+
                     totalDeduction.Value = 100000.00m;
                     totalIncentives.Value = 100000.00m;
                     var results = (new BroadbandZoneEntities()).GetWithdrawalToSubmit(currentPage, pageSize, sortColumn, sortInAsc,
-                                                                                    currentUser.Username ,
+                                                                                    filterBy.Agent ,
                                                                                     filterBy.Keyword,
                                                                                     filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
                                                                                     filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,

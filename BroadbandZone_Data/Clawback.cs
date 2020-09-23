@@ -21,6 +21,7 @@ namespace BroadbandZone_Data
         public string CreatedBy { get; set; }
         public System.DateTime ModifiedOn { get; set; }
         public string ModifiedBy { get; set; }
+        public Nullable<bool> Cancelled { get; set; }
     
         public virtual CustomerApplication CustomerApplication { get; set; }
     }

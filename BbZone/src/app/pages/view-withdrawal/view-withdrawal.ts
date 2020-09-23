@@ -26,7 +26,7 @@ export class ViewWithdrawal extends ListEvent {
     dataRowMapper: TablerowDataMapping[] = [];
     searchFields: FormDataMapping[] = [];
     displayType = DataDisplayType;
-    searchParams = new SearchWithdrawalViewParams(null, null, null, null);
+    searchParams: any;
     keyField: string;   
     totalAmountPayout: any;
     totalAmountClaimed: any;
@@ -44,6 +44,7 @@ export class ViewWithdrawal extends ListEvent {
         this.dataRowMapper = this.getTablerowDataMapping();
         this.searchFields = this.getSearchFeldsMapping();
         this.keyField = this.dataRowMapper.find(d => d.keyField === true).fieldName;
+        this.searchParams = new SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.controllerName = ApiController.WithdrawalView;
     }
 
@@ -74,7 +75,7 @@ export class ViewWithdrawal extends ListEvent {
     }
 
     clearSearchParam() {
-        this.searchParams = new SearchWithdrawalViewParams(null, null, null, null);
+        this.searchParams = new SearchWithdrawalViewParams(null, null, null, null, this.currentUser.isAdmin);
         this.reloadData();
     }
 

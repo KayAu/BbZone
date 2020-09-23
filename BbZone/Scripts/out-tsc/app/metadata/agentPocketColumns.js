@@ -36,7 +36,7 @@ var AgentPocketColumns = /** @class */ (function () {
             "headerText": "Description",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-30",
+            "colWidth": "cell-width-25",
             "dataFieldControl": {
                 "controlName": "description",
                 "controlType": "textbox",
@@ -96,7 +96,20 @@ var AgentPocketColumns = /** @class */ (function () {
                 "required": false,
                 "maxLength": 0
             }
-        }
+        },
+        {
+            "fieldName": "modifiedOn",
+            "headerText": "Last Modified",
+            "displayType": "date",
+            "keyField": false,
+            "colWidth": "cell-width-15",
+            "dataFieldControl": {
+                "controlName": "modifiedOn",
+                "controlType": "date",
+                "required": false,
+                "maxLength": 0
+            }
+        },
     ];
     return AgentPocketColumns;
 }());

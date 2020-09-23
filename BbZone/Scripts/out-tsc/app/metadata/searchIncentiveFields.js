@@ -6,7 +6,7 @@ var SearchIncentiveFields = /** @class */ (function () {
     SearchIncentiveFields.fields = [
         {
             "fieldName": "keyword",
-            "displayText": "Customer Name or Order No",
+            "displayText": "Customer Name / Order No",
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "keyword",

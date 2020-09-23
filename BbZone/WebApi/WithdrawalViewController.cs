@@ -69,7 +69,7 @@ namespace BroadbandZone_App.WebApi
             {
                 SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
                 AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
+                //isAdmin = currentUser == null ?
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
@@ -78,7 +78,8 @@ namespace BroadbandZone_App.WebApi
 
                     var results = (new BroadbandZoneEntities()).GetWithdrawalSubmitted(currentPage, pageSize, sortColumn, sortInAsc,
                                                                                 filterBy.Status,
-                                                                                !currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
+                                                                                //!currentUser.IsAdmin ? currentUser.Username : filterBy.Agent,
+                                                                                !filterBy.IsAdmin ? currentUser.Username : filterBy.Agent,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.StartDate : null,
                                                                                 filterBy.SubmittedDate != null ? filterBy.SubmittedDate.EndDate : null,
                                                                                 filterBy.CompletedDate != null ? filterBy.CompletedDate.StartDate : null,

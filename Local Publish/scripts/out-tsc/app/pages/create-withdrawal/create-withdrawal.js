@@ -95,6 +95,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             incentives: this.totalIncentives,
             deduction: this.totalAmountToDeduct
         };
+        this.isUpdating = true;
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
             _this.isUpdating = false;
             _this.router.navigate(['/view-withdrawal']);

@@ -182,7 +182,7 @@
                     <div class="form-group row">
                         <div class="text-right pad20R">
                             <button type="button" class="btn btn-primary" (click)="update()" [ngClass]="{'show-spinner':isUpdating}"
-                                    [disabled]="isUpdating" *ngIf="currentUser.isAdmin && formRecord.allowEdit">
+                                    [disabled]="isUpdating" *ngIf="currentUser.isAdmin">
                                 {{isUpdating ? 'Updating' : 'Update'}}
                                 <span class="loading"></span>
                             </button>

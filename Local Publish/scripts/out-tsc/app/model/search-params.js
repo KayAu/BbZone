@@ -48,22 +48,24 @@ var SearchClawbackParams = /** @class */ (function () {
 }());
 exports.SearchClawbackParams = SearchClawbackParams;
 var SearchWithdrawalViewParams = /** @class */ (function () {
-    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
+    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate, isAdmin) {
         this.agent = agent;
         this.status = status;
         this.submittedDate = submittedDate;
         this.completedDate = completedDate;
+        this.isAdmin = isAdmin;
     }
     return SearchWithdrawalViewParams;
 }());
 exports.SearchWithdrawalViewParams = SearchWithdrawalViewParams;
 var SearchIncentivesParams = /** @class */ (function () {
-    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate) {
+    function SearchIncentivesParams(keyword, productId, productCategoryId, productPackageId, receivedDate, paymentReceived) {
         this.keyword = keyword;
         this.productId = productId;
         this.productCategoryId = productCategoryId;
         this.productPackageId = productPackageId;
         this.receivedDate = receivedDate;
+        this.paymentReceived = paymentReceived;
     }
     return SearchIncentivesParams;
 }());

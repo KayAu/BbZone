@@ -89,10 +89,12 @@ namespace BroadbandZone_App.WebApi
                     var deleteRecord = db.Clawbacks.Find(id);
                     if (deleteRecord != null)
                     {
-                        db.Clawbacks.Remove(deleteRecord);
+                        AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                        deleteRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
+                        deleteRecord.Cancelled = true;
                         db.SaveChanges();
                     }
-                    return Ok();
+                    return Ok(deleteRecord);
                 }
             }
             catch (Exception ex)

@@ -19159,6 +19159,17 @@ td.cell-t-center, th.cell-t-center {
     width: 5%
 }
 
+.cell-width-6 {
+    width: 6%
+}
+
+.cell-width-7 {
+    width: 7%
+}
+.cell-width-8 {
+    width: 8%
+}
+
 .cell-width-10 {
     width: 10%
 }

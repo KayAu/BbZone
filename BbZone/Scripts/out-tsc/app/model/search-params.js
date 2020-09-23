@@ -32,9 +32,10 @@ var ApprovalParams = /** @class */ (function () {
 }());
 exports.ApprovalParams = ApprovalParams;
 var SearchWithdrawalToSubmitParams = /** @class */ (function () {
-    function SearchWithdrawalToSubmitParams(keyword, submittedDate) {
+    function SearchWithdrawalToSubmitParams(keyword, submittedDate, agent) {
         this.keyword = keyword;
         this.submittedDate = submittedDate;
+        this.agent = agent;
     }
     return SearchWithdrawalToSubmitParams;
 }());
@@ -48,11 +49,12 @@ var SearchClawbackParams = /** @class */ (function () {
 }());
 exports.SearchClawbackParams = SearchClawbackParams;
 var SearchWithdrawalViewParams = /** @class */ (function () {
-    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate) {
+    function SearchWithdrawalViewParams(agent, status, submittedDate, completedDate, isAdmin) {
         this.agent = agent;
         this.status = status;
         this.submittedDate = submittedDate;
         this.completedDate = completedDate;
+        this.isAdmin = isAdmin;
     }
     return SearchWithdrawalViewParams;
 }());

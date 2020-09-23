@@ -20,5 +20,6 @@ namespace BroadbandZone_Data
         public string TelNo { get; set; }
         public Nullable<bool> IsActive { get; set; }
         public string SuperiorName { get; set; }
+        public string LastLoginOn { get; set; }
     }
 }

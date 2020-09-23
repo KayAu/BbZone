@@ -19,12 +19,15 @@ namespace BroadbandZone_Data
         public string Remarks { get; set; }
         public Nullable<bool> Editable { get; set; }
         public string Agent { get; set; }
-        public System.DateTime CreatedOn { get; set; }
-        public string CreatedBy { get; set; }
         public int ApplicationId { get; set; }
         public string DeductAmount { get; set; }
         public Nullable<bool> IsDeducted { get; set; }
         public string DeductedOn { get; set; }
         public string TransactionType { get; set; }
+        public Nullable<bool> Cancelled { get; set; }
+        public System.DateTime ModifiedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string CreatedBy { get; set; }
     }
 }

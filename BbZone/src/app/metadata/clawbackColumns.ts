@@ -73,7 +73,7 @@ export class ClawbackColumns {
             "headerText": "Remarks",
             "displayType": "text",
             "keyField": false,
-            "colWidth": "cell-width-20",
+            "colWidth": "cell-width-15",
             "dataFieldControl": {
                 "controlName": "remarks",
                 "controlType": "textbox",
@@ -119,6 +119,33 @@ export class ClawbackColumns {
                 "required": false,
                 "maxLength": 20
             }
+        },
+        {
+            "fieldName": "cancelled",
+            "headerText": "Cancelled",
+            "displayType": "tick",
+            "keyField": false,
+            "colWidth": "cell-width-5",
+            "dataFieldControl": {
+                "controlName": "cancelled",
+                "controlType": "checkbox",
+                "required": false,
+                "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "modifiedOn",
+            "headerText": "Last Modified",
+            "displayType": "date",
+            "keyField": false,
+            "colWidth": "cell-width-5",
+            "dataFieldControl": {
+                "controlName": "modifiedOn",
+                "controlType": "date",
+                "required": false,
+                "maxLength": 20
+            }
         }
+
      ]
 }

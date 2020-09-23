@@ -36,7 +36,7 @@
                                     <thead>
                                         <tr>
                                             <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
-                                            <th class="cell-width-5" *ngIf="currentUser.isAdmin">Action</th>
+                                            <th class="cell-width-5" *ngIf="currentUser.isAdmin">Cancel</th>
                                         </tr>
                                         <tr *ngIf="showNewRow" class="new-row">
                                             <td *ngFor="let field of dataRowMapper">
@@ -56,24 +56,28 @@
                                     <tbody>
                                         <tr *ngFor="let record of dataSource; let rowNo = index">
                                             <ng-container *ngFor="let field of dataRowMapper">
-                                                <td>
-                                                    <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
-                                                    <ng-template #displayBadge>
-                                                        <span class="badge" 
-                                                              [ngClass]="{'badge-info': record.transactionType == 'Override',
-                                                                          'badge-success': record.transactionType == 'Own Sales'}">
-                                                            {{record.transactionType}}
-                                                        </span>
-                                                    </ng-template>
-                                                </td>
-                                                <!--<td *ngIf="record.onEdit" class="edit-row">
+                                                <td *ngIf="record.onEdit && field.fieldName=='cancelled'; else displayData" class="edit-row">
                                                     <data-control *ngIf="field.dataFieldControl.controlType != controlType.customerFinder" [parentForm]="tableForm" [(ngModel)]="editedRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName+rowNo" [field]="field.dataFieldControl" [onEdit]="record.onEdit" name="{{field.dataFieldControl.controlName}}{{rowNo}}"></data-control>
-                                                    <customer-finder *ngIf="field.dataFieldControl.controlType == controlType.customerFinder" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName" name="{{field.dataFieldControl.controlName}}"
-                                                                     [displayText]="editedRecord[field.dataFieldControl.controlName]" [disabledEdit]="true" (onItemSelected)="setEditCustomerDetails($event)"></customer-finder>
-                                                </td>-->
+                                                </td>
+                                                <ng-template #displayData>
+                                                    <td>
+                                                        <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                                        <ng-template #displayBadge>
+                                                            <span class="badge"
+                                                                  [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                                                          'badge-success': record.transactionType == 'Own Sales'}">
+                                                                {{record.transactionType}}
+                                                            </span>
+                                                        </ng-template>
+                                                    </td>
+                                                </ng-template>
+
+
                                             </ng-container>
                                             <td *ngIf="currentUser.isAdmin">
-                                                <tablerow-buttons [editMode]="record.onEdit" [hideEdit]="true" [hideDelete]="false" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" (onDelete)="deleteRow(rowNo)" [disabledEdit]="!record.editable" [disabledDelete]="!record.editable"></tablerow-buttons>
+                                                <tablerow-buttons [editMode]="record.onEdit" [hideEdit]="false" [hideDelete]="true" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" (onDelete)="deleteRow(rowNo)" [disabledEdit]="!record.editable"></tablerow-buttons>
+
+                                                <!--<tablerow-buttons [editMode]="record.onEdit" [hideEdit]="true" [hideDelete]="false" (onEdit)="editRow(rowNo)" (onCancelEdit)="cancelEdit(rowNo)" (onUpdate)="updateRow(rowNo)" (onDelete)="deleteRow(rowNo)" [disabledEdit]="!record.editable" [disabledDelete]="!record.editable"></tablerow-buttons>-->
                                             </td>
                                         </tr>
                                         <tr *ngIf="dataSource.length === 0">

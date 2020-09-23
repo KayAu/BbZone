@@ -6,7 +6,7 @@ var SearchIncentiveFields = /** @class */ (function () {
     SearchIncentiveFields.fields = [
         {
             "fieldName": "keyword",
-            "displayText": "Customer Name or Order No",
+            "displayText": "Customer Name / Order No",
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "keyword",
@@ -62,6 +62,17 @@ var SearchIncentiveFields = /** @class */ (function () {
                 "controlType": "dateRange",
                 "required": false,
                 "maxLength": 0
+            }
+        },
+        {
+            "fieldName": "paymentReceived",
+            "displayText": "Payment Received",
+            "width": "col-sm-2",
+            "dataFieldControl": {
+                "controlName": "paymentReceived",
+                "controlType": "select",
+                "maxLength": 0,
+                "datasourceUrl": "GetDocStatus"
             }
         }
     ];

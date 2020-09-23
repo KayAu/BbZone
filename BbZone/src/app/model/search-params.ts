@@ -33,7 +33,8 @@ export class ApprovalParams {
 export class SearchWithdrawalToSubmitParams {
     constructor(
         public keyword: string,
-        public submittedDate: DateRange
+        public submittedDate: DateRange,
+        public agent: string,
     ) { }
 
 }
@@ -51,6 +52,7 @@ export class SearchWithdrawalViewParams {
         public status: string,
         public submittedDate: DateRange,
         public completedDate: DateRange,
+        public isAdmin: boolean
     ) { }
 
 }
