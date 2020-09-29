@@ -88,6 +88,8 @@ var equal_validator_directive_1 = require("./directives/equal-validator.directiv
 var mandatory_directive_1 = require("./directives/mandatory.directive");
 var edit_password_1 = require("./pages/edit-password/edit-password");
 var reset_agent_password_1 = require("./pages/reset-agent-password/reset-agent-password");
+var report_agent_submission_1 = require("./pages/report-agent-submission/report-agent-submission");
+var report_agent_withdrawal_1 = require("./pages/report-agent-withdrawal/report-agent-withdrawal");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -155,7 +157,9 @@ var AppModule = /** @class */ (function () {
                 edit_password_1.EditPassword,
                 equal_validator_directive_1.EqualValidator,
                 mandatory_directive_1.MandatoryValidator,
-                reset_agent_password_1.ResetAgentPassword
+                reset_agent_password_1.ResetAgentPassword,
+                report_agent_submission_1.ReportAgentSubmission,
+                report_agent_withdrawal_1.ReportAgentWithdrawal
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -201,7 +205,9 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
-                    { path: 'reset-agent-password', component: reset_agent_password_1.ResetAgentPassword, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } }
+                    { path: 'reset-agent-password', component: reset_agent_password_1.ResetAgentPassword, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'report-agent-submission', component: report_agent_submission_1.ReportAgentSubmission, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'report-agent-withdrawal', component: report_agent_withdrawal_1.ReportAgentWithdrawal, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } }
                 ])
             ],
             providers: [

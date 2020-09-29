@@ -924,6 +924,32 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Parameter Name="prStoreProcName" Type="varchar" Mode="In" />
           <Parameter Name="ErrorLogID" Type="int" Mode="InOut" />
         </Function>
+        <Function Name="prc_ReportAgentSubmissionStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_ReportAgentSubmissionStatusDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prSubmittedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prSubmittedTo" Type="smalldatetime" Mode="In" />
+        </Function>
+        <Function Name="prc_ReportAgentWithdrawal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prCurrentPage" Type="int" Mode="In" />
+          <Parameter Name="prPageSize" Type="int" Mode="In" />
+          <Parameter Name="prSortColumn" Type="varchar" Mode="In" />
+          <Parameter Name="prSortInAsc" Type="bit" Mode="In" />
+          <Parameter Name="prApprovedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prApprovedTo" Type="smalldatetime" Mode="In" />
+          <Parameter Name="oTotalRecord" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prc_ReportAgentWithdrawalDownload" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prApprovedFrom" Type="smalldatetime" Mode="In" />
+          <Parameter Name="prApprovedTo" Type="smalldatetime" Mode="In" />
+        </Function>
         <Function Name="prc_ResetAgentPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="prAgentId" Type="varchar" Mode="In" />
           <Parameter Name="prNewPassword" Type="varchar" Mode="In" />
@@ -1538,6 +1564,32 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
             <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
             <Parameter Name="oTotalIncentives" Mode="InOut" Type="Decimal" />
             <Parameter Name="oTotalDeduction" Mode="InOut" Type="Decimal" />
+          </FunctionImport>
+          <FunctionImport Name="ReportAgentSubmissionStatus" ReturnType="Collection(BroadbandZoneModel.ReportAgentSubmissionStatus_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReportAgentWithdrawal" ReturnType="Collection(BroadbandZoneModel.ReportAgentWithdrawal_Result)">
+            <Parameter Name="prCurrentPage" Mode="In" Type="Int32" />
+            <Parameter Name="prPageSize" Mode="In" Type="Int32" />
+            <Parameter Name="prSortColumn" Mode="In" Type="String" />
+            <Parameter Name="prSortInAsc" Mode="In" Type="Boolean" />
+            <Parameter Name="prApprovedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prApprovedTo" Mode="In" Type="DateTime" />
+            <Parameter Name="oTotalRecord" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ReportAgentSubmissionStatusDownload" ReturnType="Collection(BroadbandZoneModel.ReportAgentSubmissionStatusDownload_Result)">
+            <Parameter Name="prSubmittedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prSubmittedTo" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ReportAgentWithdrawalDownload" ReturnType="Collection(BroadbandZoneModel.ReportAgentWithdrawalDownload_Result)">
+            <Parameter Name="prApprovedFrom" Mode="In" Type="DateTime" />
+            <Parameter Name="prApprovedTo" Mode="In" Type="DateTime" />
           </FunctionImport>
           </EntityContainer>
         <ComplexType Name="GetProductCategory_Result">
@@ -2701,6 +2753,60 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
           <Property Type="Boolean" Name="Selected" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ReportAgentWithdrawal_Result">
+          <Property Type="Int32" Name="WithdrawalId" Nullable="false" />
+          <Property Type="String" Name="Agent" Nullable="true" MaxLength="16" />
+          <Property Type="Decimal" Name="WithdrawAmount" Nullable="true" Precision="19" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="TransactionDetails" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="PackageComm" Nullable="true" Precision="19" />
+          <Property Type="Int16" Name="AgentComm" Nullable="true" />
+          <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DeductAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="ApprovedOn" Nullable="true" MaxLength="25" />
+        </ComplexType>
+        <ComplexType Name="ReportAgentSubmissionStatus_Result">
+          <Property Type="Int32" Name="AgentId" Nullable="true" />
+          <Property Type="String" Name="AgentLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="AgentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AgentLevel" Nullable="true" />
+          <Property Type="Int32" Name="SuperiorId" Nullable="true" />
+          <Property Type="String" Name="SuperiorLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalCompleted" Nullable="true" />
+          <Property Type="Int32" Name="TotalInProgress" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ReportAgentSubmissionStatusDownload_Result">
+          <Property Type="Int32" Name="AgentId" Nullable="true" />
+          <Property Type="String" Name="AgentLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="AgentName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="AgentLevel" Nullable="true" />
+          <Property Type="Int32" Name="SuperiorId" Nullable="true" />
+          <Property Type="String" Name="SuperiorLogin" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="SuperiorName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="TotalCompleted" Nullable="false" />
+          <Property Type="Int32" Name="TotalInProgress" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="ReportAgentWithdrawalDownload_Result">
+          <Property Type="Int32" Name="WithdrawalId" Nullable="false" />
+          <Property Type="String" Name="Agent" Nullable="true" MaxLength="16" />
+          <Property Type="Decimal" Name="WithdrawAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="SubmittedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="String" Name="ApprovedOn" Nullable="true" MaxLength="4000" />
+          <Property Type="Int32" Name="ApplicationId" Nullable="true" />
+          <Property Type="String" Name="TransactionDetails" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="PackageName" Nullable="true" MaxLength="150" />
+          <Property Type="Decimal" Name="PackageComm" Nullable="true" Precision="19" />
+          <Property Type="Int16" Name="AgentComm" Nullable="true" />
+          <Property Type="Decimal" Name="ClaimAmount" Nullable="true" Precision="19" />
+          <Property Type="Decimal" Name="DeductAmount" Nullable="true" Precision="19" />
+          <Property Type="String" Name="TransactionType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TransactionDate" Nullable="true" MaxLength="12" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3781,6 +3887,76 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
                 <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
                 <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
                 <ScalarProperty Name="Selected" ColumnName="Selected" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportAgentSubmissionStatus" FunctionName="BroadbandZoneModel.Store.prc_ReportAgentSubmissionStatus">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.ReportAgentSubmissionStatus_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="AgentLogin" ColumnName="AgentLogin" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="AgentLevel" ColumnName="AgentLevel" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="SuperiorLogin" ColumnName="SuperiorLogin" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="TotalCompleted" ColumnName="TotalCompleted" />
+                <ScalarProperty Name="TotalInProgress" ColumnName="TotalInProgress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportAgentWithdrawal" FunctionName="BroadbandZoneModel.Store.prc_ReportAgentWithdrawal">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.ReportAgentWithdrawal_Result">
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="WithdrawAmount" ColumnName="WithdrawAmount" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="PackageComm" ColumnName="PackageComm" />
+                <ScalarProperty Name="AgentComm" ColumnName="AgentComm" />
+                <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportAgentSubmissionStatusDownload" FunctionName="BroadbandZoneModel.Store.prc_ReportAgentSubmissionStatusDownload">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.ReportAgentSubmissionStatusDownload_Result">
+                <ScalarProperty Name="AgentId" ColumnName="AgentId" />
+                <ScalarProperty Name="AgentLogin" ColumnName="AgentLogin" />
+                <ScalarProperty Name="AgentName" ColumnName="AgentName" />
+                <ScalarProperty Name="AgentLevel" ColumnName="AgentLevel" />
+                <ScalarProperty Name="SuperiorId" ColumnName="SuperiorId" />
+                <ScalarProperty Name="SuperiorLogin" ColumnName="SuperiorLogin" />
+                <ScalarProperty Name="SuperiorName" ColumnName="SuperiorName" />
+                <ScalarProperty Name="TotalCompleted" ColumnName="TotalCompleted" />
+                <ScalarProperty Name="TotalInProgress" ColumnName="TotalInProgress" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ReportAgentWithdrawalDownload" FunctionName="BroadbandZoneModel.Store.prc_ReportAgentWithdrawalDownload">
+          <ResultMapping>
+              <ComplexTypeMapping TypeName="BroadbandZoneModel.ReportAgentWithdrawalDownload_Result">
+                <ScalarProperty Name="WithdrawalId" ColumnName="WithdrawalId" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="WithdrawAmount" ColumnName="WithdrawAmount" />
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="ApprovedOn" ColumnName="ApprovedOn" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
+                <ScalarProperty Name="PackageName" ColumnName="PackageName" />
+                <ScalarProperty Name="PackageComm" ColumnName="PackageComm" />
+                <ScalarProperty Name="AgentComm" ColumnName="AgentComm" />
+                <ScalarProperty Name="ClaimAmount" ColumnName="ClaimAmount" />
+                <ScalarProperty Name="DeductAmount" ColumnName="DeductAmount" />
+                <ScalarProperty Name="TransactionType" ColumnName="TransactionType" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -28,7 +28,7 @@ namespace BroadbandZone_App
                       "~/Scripts/broadbandzone.js"));
 
             // Angular bundles
-            bundles.Add(new ScriptBundle("~/bundles/Angular")
+            bundles.Add(new ScriptBundle("~/bundles/angular")
               .Include(
                 "~/Scripts/libs/runtime.*",
                 "~/Scripts/libs/polyfills.*",

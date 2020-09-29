@@ -269,6 +269,18 @@
     <Compile Include="RegistrationDocument.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReportAgentSubmissionStatusDownload_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportAgentSubmissionStatus_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportAgentWithdrawalDownload_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ReportAgentWithdrawal_Result.cs">
+      <DependentUpon>BbZoneModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="ResetAgentPassword_Result.cs">
       <DependentUpon>BbZoneModel.tt</DependentUpon>
     </Compile>

@@ -1236,5 +1236,89 @@ namespace BroadbandZone_Data
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetWithdrawalToSubmit_Result>("GetWithdrawalToSubmit", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prAgentParameter, prSearchKeywordParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord, oTotalIncentives, oTotalDeduction);
         }
+    
+        public virtual ObjectResult<ReportAgentSubmissionStatus_Result> ReportAgentSubmissionStatus(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportAgentSubmissionStatus_Result>("ReportAgentSubmissionStatus", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prSubmittedFromParameter, prSubmittedToParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<ReportAgentWithdrawal_Result> ReportAgentWithdrawal(Nullable<int> prCurrentPage, Nullable<int> prPageSize, string prSortColumn, Nullable<bool> prSortInAsc, Nullable<System.DateTime> prApprovedFrom, Nullable<System.DateTime> prApprovedTo, ObjectParameter oTotalRecord)
+        {
+            var prCurrentPageParameter = prCurrentPage.HasValue ?
+                new ObjectParameter("prCurrentPage", prCurrentPage) :
+                new ObjectParameter("prCurrentPage", typeof(int));
+    
+            var prPageSizeParameter = prPageSize.HasValue ?
+                new ObjectParameter("prPageSize", prPageSize) :
+                new ObjectParameter("prPageSize", typeof(int));
+    
+            var prSortColumnParameter = prSortColumn != null ?
+                new ObjectParameter("prSortColumn", prSortColumn) :
+                new ObjectParameter("prSortColumn", typeof(string));
+    
+            var prSortInAscParameter = prSortInAsc.HasValue ?
+                new ObjectParameter("prSortInAsc", prSortInAsc) :
+                new ObjectParameter("prSortInAsc", typeof(bool));
+    
+            var prApprovedFromParameter = prApprovedFrom.HasValue ?
+                new ObjectParameter("prApprovedFrom", prApprovedFrom) :
+                new ObjectParameter("prApprovedFrom", typeof(System.DateTime));
+    
+            var prApprovedToParameter = prApprovedTo.HasValue ?
+                new ObjectParameter("prApprovedTo", prApprovedTo) :
+                new ObjectParameter("prApprovedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportAgentWithdrawal_Result>("ReportAgentWithdrawal", prCurrentPageParameter, prPageSizeParameter, prSortColumnParameter, prSortInAscParameter, prApprovedFromParameter, prApprovedToParameter, oTotalRecord);
+        }
+    
+        public virtual ObjectResult<ReportAgentSubmissionStatusDownload_Result> ReportAgentSubmissionStatusDownload(Nullable<System.DateTime> prSubmittedFrom, Nullable<System.DateTime> prSubmittedTo)
+        {
+            var prSubmittedFromParameter = prSubmittedFrom.HasValue ?
+                new ObjectParameter("prSubmittedFrom", prSubmittedFrom) :
+                new ObjectParameter("prSubmittedFrom", typeof(System.DateTime));
+    
+            var prSubmittedToParameter = prSubmittedTo.HasValue ?
+                new ObjectParameter("prSubmittedTo", prSubmittedTo) :
+                new ObjectParameter("prSubmittedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportAgentSubmissionStatusDownload_Result>("ReportAgentSubmissionStatusDownload", prSubmittedFromParameter, prSubmittedToParameter);
+        }
+    
+        public virtual ObjectResult<ReportAgentWithdrawalDownload_Result> ReportAgentWithdrawalDownload(Nullable<System.DateTime> prApprovedFrom, Nullable<System.DateTime> prApprovedTo)
+        {
+            var prApprovedFromParameter = prApprovedFrom.HasValue ?
+                new ObjectParameter("prApprovedFrom", prApprovedFrom) :
+                new ObjectParameter("prApprovedFrom", typeof(System.DateTime));
+    
+            var prApprovedToParameter = prApprovedTo.HasValue ?
+                new ObjectParameter("prApprovedTo", prApprovedTo) :
+                new ObjectParameter("prApprovedTo", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ReportAgentWithdrawalDownload_Result>("ReportAgentWithdrawalDownload", prApprovedFromParameter, prApprovedToParameter);
+        }
     }
 }

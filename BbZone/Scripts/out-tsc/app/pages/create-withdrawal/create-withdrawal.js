@@ -113,6 +113,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         this.updateWithdrawalAmt();
     };
     CreateWithdrawal.prototype.getAgentWithdrawalItems = function () {
+        this.searchParams.agent = this.selectedAgent;
         this.reloadData();
     };
     CreateWithdrawal.prototype.submit = function () {
@@ -155,6 +156,7 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         this.reloadData();
     };
     CreateWithdrawal.prototype.clearSearchParam = function () {
+        this.selectedAgent = null;
         this.searchParams = new search_params_1.SearchWithdrawalToSubmitParams(null, null, this.currentUser.username);
         this.reloadData();
     };
@@ -173,6 +175,8 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         this.allowSubmit = this.totalWithdrawalAmt > 0 ? true : false;
     };
     CreateWithdrawal.prototype.checkAllItemsSelected = function () {
+        if (this.dataSource.length === 0)
+            return;
         var selectableItems = this.dataSource.filter(function (i) { return i.transactionType === 'Own Sales' || i.transactionType === 'Override'; });
         var selectedItems = selectableItems.filter(function (i) { return i.selected === true; });
         this.selectAllItems = selectableItems.length === selectedItems.length ? true : false;

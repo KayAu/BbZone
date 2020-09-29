@@ -547,6 +547,8 @@ var equal_validator_directive_1 = __webpack_require__(/*! ./directives/equal-val
 var mandatory_directive_1 = __webpack_require__(/*! ./directives/mandatory.directive */ "./src/app/directives/mandatory.directive.ts");
 var edit_password_1 = __webpack_require__(/*! ./pages/edit-password/edit-password */ "./src/app/pages/edit-password/edit-password.ts");
 var reset_agent_password_1 = __webpack_require__(/*! ./pages/reset-agent-password/reset-agent-password */ "./src/app/pages/reset-agent-password/reset-agent-password.ts");
+var report_agent_submission_1 = __webpack_require__(/*! ./pages/report-agent-submission/report-agent-submission */ "./src/app/pages/report-agent-submission/report-agent-submission.ts");
+var report_agent_withdrawal_1 = __webpack_require__(/*! ./pages/report-agent-withdrawal/report-agent-withdrawal */ "./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.ts");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -614,7 +616,9 @@ var AppModule = /** @class */ (function () {
                 edit_password_1.EditPassword,
                 equal_validator_directive_1.EqualValidator,
                 mandatory_directive_1.MandatoryValidator,
-                reset_agent_password_1.ResetAgentPassword
+                reset_agent_password_1.ResetAgentPassword,
+                report_agent_submission_1.ReportAgentSubmission,
+                report_agent_withdrawal_1.ReportAgentWithdrawal
             ],
             imports: [
                 platform_browser_1.BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -660,7 +664,9 @@ var AppModule = /** @class */ (function () {
                     { path: 'view-announcement', component: view_announcement_1.ViewAnnouncement },
                     { path: 'edit-announcement/:id', component: edit_announcement_1.EditAnnouncement, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
                     { path: 'manage-login-banner', component: manage_login_banner_1.ManageLoginBanner, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
-                    { path: 'reset-agent-password', component: reset_agent_password_1.ResetAgentPassword, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } }
+                    { path: 'reset-agent-password', component: reset_agent_password_1.ResetAgentPassword, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'report-agent-submission', component: report_agent_submission_1.ReportAgentSubmission, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } },
+                    { path: 'report-agent-withdrawal', component: report_agent_withdrawal_1.ReportAgentWithdrawal, canActivate: [user_auth_guard_1.UserAuthGuard], data: { roles: [role_1.Role.SuperAdmin] } }
                 ])
             ],
             providers: [
@@ -3710,6 +3716,8 @@ var ApiController;
     ApiController["IncentivesUpload"] = "IncentivesUpload";
     ApiController["LoginBanner"] = "LoginBanner";
     ApiController["Password"] = "Password";
+    ApiController["ReportAgentSubmission"] = "ReportAgentSubmission";
+    ApiController["ReportAgentWithdrawal"] = "ReportAgentWithdrawal";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -7393,6 +7401,201 @@ exports.ViewOrderColumns = ViewOrderColumns;
 
 /***/ }),
 
+/***/ "./src/app/metadata/viewReportColumns.ts":
+/*!***********************************************!*\
+  !*** ./src/app/metadata/viewReportColumns.ts ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ViewAgentSubmissionStatusColumns = /** @class */ (function () {
+    function ViewAgentSubmissionStatusColumns() {
+    }
+    ViewAgentSubmissionStatusColumns.fields = [
+        {
+            "fieldName": "agentId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-3"
+        },
+        {
+            "fieldName": "agentLogin",
+            "headerText": "Agent Login",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "agentName",
+            "headerText": "Agent Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "agentLevel",
+            "headerText": "Agent Level",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-3"
+        },
+        {
+            "fieldName": "superiorId",
+            "headerText": "Superior Id",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "superiorLogin",
+            "headerText": "Superior Login",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "superiorName",
+            "headerText": "Superior Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "totalCompleted",
+            "headerText": "TotalCompleted",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "totalInProgress",
+            "headerText": "Total InProgress",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+    ];
+    return ViewAgentSubmissionStatusColumns;
+}());
+exports.ViewAgentSubmissionStatusColumns = ViewAgentSubmissionStatusColumns;
+var ViewAgentWithdrawalColumns = /** @class */ (function () {
+    function ViewAgentWithdrawalColumns() {
+    }
+    ViewAgentWithdrawalColumns.fields = [
+        {
+            "fieldName": "withdrawalId",
+            "headerText": "Id",
+            "displayType": "text",
+            "keyField": true,
+            "colWidth": "cell-width-3"
+        },
+        {
+            "fieldName": "agent",
+            "headerText": "Agent",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "withdrawAmount",
+            "headerText": "Withdraw Amount",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "submittedOn",
+            "headerText": "Submitted On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "approvedOn",
+            "headerText": "Approved On",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "applicationId",
+            "headerText": "Application Id",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-3"
+        },
+        {
+            "fieldName": "transactionDetails",
+            "headerText": "Transaction Details",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-15"
+        },
+        {
+            "fieldName": "packageName",
+            "headerText": "Package Name",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-10"
+        },
+        {
+            "fieldName": "packageComm",
+            "headerText": "Package Comm",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "agentComm",
+            "headerText": "Agent Comm",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "claimAmount",
+            "headerText": "Claim Amount",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "deductAmount",
+            "headerText": "Deduct Amount",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "transactionType",
+            "headerText": "Transaction Type",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+        {
+            "fieldName": "transactionDate",
+            "headerText": "Transaction Date",
+            "displayType": "text",
+            "keyField": false,
+            "colWidth": "cell-width-5"
+        },
+    ];
+    return ViewAgentWithdrawalColumns;
+}());
+exports.ViewAgentWithdrawalColumns = ViewAgentWithdrawalColumns;
+//    , ClaimAmount
+//    , DeductAmount
+//    , TransactionType
+//    , TransactionDate
+
+
+/***/ }),
+
 /***/ "./src/app/metadata/viewWithdrawalColumns.ts":
 /*!***************************************************!*\
   !*** ./src/app/metadata/viewWithdrawalColumns.ts ***!
@@ -7523,6 +7726,29 @@ var SearchFieldControl = /** @class */ (function () {
     return SearchFieldControl;
 }());
 exports.SearchFieldControl = SearchFieldControl;
+
+
+/***/ }),
+
+/***/ "./src/app/model/date.range.ts":
+/*!*************************************!*\
+  !*** ./src/app/model/date.range.ts ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var moment = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+var DateRange = /** @class */ (function () {
+    function DateRange() {
+        this.startDate = moment().subtract(30, 'days');
+        this.endDate = moment();
+    }
+    return DateRange;
+}());
+exports.DateRange = DateRange;
 
 
 /***/ }),
@@ -7749,6 +7975,18 @@ var SearchCompletedOrderParams = /** @class */ (function () {
     return SearchCompletedOrderParams;
 }());
 exports.SearchCompletedOrderParams = SearchCompletedOrderParams;
+//export class SearchByDateParams {
+//    constructor(
+//        public productId: string,
+//        public productCategoryId: string,
+//        public productPackageId: string,
+//        public agent: string,
+//        public activatedDate: DateRange,
+//        public paymentDate: DateRange,
+//        public documentCompleted: boolean,
+//        public commissionStatus: string,
+//    ) { }
+//}
 
 
 /***/ }),
@@ -7819,7 +8057,7 @@ module.exports = "li .glyphicon {\r\n    margin-right: 10px;\r\n}\r\n\r\n/* High
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n    <div class=\"sidebar-collapse\">\r\n        <ul class=\"nav metismenu\" id=\"side-menu\" data-widget=\"tree\">\r\n            <li class=\"nav-header w-p100\">\r\n                <div class=\"dropdown profile-element\">\r\n                    <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n            height: 36px;\r\n            width: 36px;\r\n            padding: 8px 12px;\">\r\n                        <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n                    </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n                        <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n                        <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n                    </a>\r\n                    <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n                        <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n                        <li><a class=\"dropdown-item\" [routerLink]='[\"/edit-password/\"]'>Update Password</a></li>\r\n                        <li class=\"dropdown-divider\"></li>\r\n                        <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"logo-element\">\r\n                    BZ+\r\n                </div>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 1}\" (click)=\"menuClickedIndex = 1\">\r\n                <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 2}\" (click)=\"menuClickedIndex = 2\">\r\n                <a href=\"#\"><i class=\"fa fa-desktop\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 2}\">\r\n                    <li><a [routerLink]='[\"/create-order\"]'>New Order</a></li>\r\n                    <li><a [routerLink]='[\"/view-order\"]'>View Orders</a></li>\r\n                    <li><a [routerLink]='[\"/view-complete-app\"]' *ngIf=\"currentUser.role != 'Admin'\">View Completed Orders</a></li>\r\n                </ul>\r\n            </li>\r\n            <li  [ngClass]=\"{'active': menuClickedIndex == 3}\" (click)=\"menuClickedIndex = 3\" *ngIf=\"currentUser.role != 'Admin'\">\r\n                <a href=\"#\"><i class=\"fa fa-user\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 3}\">\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-registration-list\"]'>Agent Registrations</a></li>\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-maintenance\"]'>Agents Maintenance</a></li>\r\n                    <li><a [routerLink]='[\"/agent-comission\"]'>Agent Commissions</a></li>\r\n                    <li><a [routerLink]='[\"/reset-agent-password\"]' [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\">Reset Agent Password</a></li>\r\n                </ul>\r\n            </li>\r\n            <li  [ngClass]=\"{'active': menuClickedIndex == 4}\" (click)=\"menuClickedIndex = 4\" *ngIf=\"currentUser.role != 'Admin'\">\r\n                <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 4}\">\r\n                    <li><a [routerLink]='[\"/view-withdrawal\"]'>View Withdrawal</a></li>\r\n                    <li><a [routerLink]='[\"/create-withdrawal\"]'>Submit Withdrawal</a></li>\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-pocket\"]'>Agent Pocket Flow</a></li>\r\n                    <li><a [routerLink]='[\"/manage-clawback\"]'>Debit Note</a></li>\r\n                </ul>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 5}\" (click)=\"menuClickedIndex = 5\" *ngIf=\"currentUser.role == 'SuperAdmin'\">\r\n                <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-money\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 5}\">\r\n                    <li><a [routerLink]='[\"/upload-incentives\"]'>Upload Incentives</a></li>\r\n                    <li><a [routerLink]='[\"/view-incentives\"]'>View Incentives</a></li>\r\n                </ul>\r\n            </li>\r\n            <li (click)=\"menuClickedIndex = 6\" *ngIf=\"currentUser.role == 'SuperAdmin'\">\r\n                <a href=\"#\"><i class=\"fa fa-cog\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 6}\">\r\n                    <li><a [routerLink]='[\"/admin-access\"]'>Admin Access</a></li>\r\n                    <li><a [routerLink]='[\"/manage-product\"]'>Manage Products</a></li>\r\n                    <li><a [routerLink]='[\"/manage-packages\"]'>Manage Packages</a></li>\r\n                    <li><a [routerLink]='[\"/manage-category\"]'>Manage Category</a></li>\r\n                    <li><a [routerLink]='[\"/view-announcement\"]'>Manage Announcement</a></li>\r\n                    <li><a [routerLink]='[\"/manage-login-banner\"]'>Manage Login Banner</a></li>\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n\r\n    </div>\r\n</nav>\r\n\r\n"
+module.exports = "<nav class=\"navbar-default navbar-static-side\" #navMenu role=\"navigation\" *ngIf=\"currentUser\">\r\n    <div class=\"sidebar-collapse\">\r\n        <ul class=\"nav metismenu\" id=\"side-menu\" data-widget=\"tree\">\r\n            <li class=\"nav-header w-p100\">\r\n                <div class=\"dropdown profile-element\">\r\n                    <div _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"rounded-circle bg-success\" style=\"\r\n            height: 36px;\r\n            width: 36px;\r\n            padding: 8px 12px;\">\r\n                        <i _ngcontent-ng-cli-universal-c1=\"\" alt=\"image\" class=\"fa fa-user-o\"></i>\r\n                    </div>          <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"#\">\r\n                        <span class=\"block m-t-xs font-bold\">{{currentUser.fullname}}</span>\r\n                        <span class=\"text-muted text-xs block\">{{currentUser.role}}<b class=\"caret\"></b></span>\r\n                    </a>\r\n                    <ul class=\"dropdown-menu animated fadeInRight m-t-xs\">\r\n                        <li *ngIf=\"!currentUser.isAdmin\"><a class=\"dropdown-item\" [routerLink]='[\"/agent-profile/\", currentUser.agentId]'>Profile</a></li>\r\n                        <li><a class=\"dropdown-item\" [routerLink]='[\"/edit-password/\"]'>Update Password</a></li>\r\n                        <li class=\"dropdown-divider\"></li>\r\n                        <li><a class=\"dropdown-item\" (click)=\"logout()\">Logout</a></li>\r\n                    </ul>\r\n                </div>\r\n                <div class=\"logo-element\">\r\n                    BZ+\r\n                </div>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 1}\" (click)=\"menuClickedIndex = 1\">\r\n                <a [routerLink]='[\"/home\"]'><i class=\"fa fa-home\"></i> <span class=\"nav-label\">Home</span></a>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 2}\" (click)=\"menuClickedIndex = 2\">\r\n                <a href=\"#\"><i class=\"fa fa-desktop\"></i> <span class=\"nav-label\">Manage Orders</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 2}\">\r\n                    <li><a [routerLink]='[\"/create-order\"]'>New Order</a></li>\r\n                    <li><a [routerLink]='[\"/view-order\"]'>View Orders</a></li>\r\n                    <li><a [routerLink]='[\"/view-complete-app\"]' *ngIf=\"currentUser.role != 'Admin'\">View Completed Orders</a></li>\r\n                </ul>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 3}\" (click)=\"menuClickedIndex = 3\" *ngIf=\"currentUser.role != 'Admin'\">\r\n                <a href=\"#\"><i class=\"fa fa-user\"></i> <span class=\"nav-label\">Manage Agents</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 3}\">\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-registration-list\"]'>Agent Registrations</a></li>\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\"><a [routerLink]='[\"/agent-maintenance\"]'>Agents Maintenance</a></li>\r\n                    <li><a [routerLink]='[\"/agent-comission\"]'>Agent Commissions</a></li>\r\n                    <li><a [routerLink]='[\"/reset-agent-password\"]' [ngClass]=\"{'hidden' : !currentUser.hasFullControl}\">Reset Agent Password</a></li>\r\n                </ul>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 4}\" (click)=\"menuClickedIndex = 4\" *ngIf=\"currentUser.role != 'Admin'\">\r\n                <a href=\"#\"><i class=\"fa fa-edit\"></i> <span class=\"nav-label\">Manage Withdrawal</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 4}\">\r\n                    <li><a [routerLink]='[\"/view-withdrawal\"]'>View Withdrawal</a></li>\r\n                    <li><a [routerLink]='[\"/create-withdrawal\"]'>Submit Withdrawal</a></li>\r\n                    <li [ngClass]=\"{'hidden' : !currentUser.isAdmin}\"><a [routerLink]='[\"/agent-pocket\"]'>Agent Pocket Flow</a></li>\r\n                    <li><a [routerLink]='[\"/manage-clawback\"]'>Debit Note</a></li>\r\n                </ul>\r\n            </li>\r\n            <li [ngClass]=\"{'active': menuClickedIndex == 5}\" (click)=\"menuClickedIndex = 5\" *ngIf=\"currentUser.role == 'SuperAdmin'\">\r\n                <a [routerLink]='[\"/manage-withdrawal\"]'><i class=\"fa fa-money\"></i> <span class=\"nav-label\">Manage Incentives</span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 5}\">\r\n                    <li><a [routerLink]='[\"/upload-incentives\"]'>Upload Incentives</a></li>\r\n                    <li><a [routerLink]='[\"/view-incentives\"]'>View Incentives</a></li>\r\n                </ul>\r\n            </li>\r\n            <li (click)=\"menuClickedIndex = 6\" *ngIf=\"currentUser.role == 'SuperAdmin'\">\r\n                <a href=\"#\"><i class=\"fa fa-cog\"></i> <span class=\"nav-label\">Administration</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 6}\">\r\n                    <li><a [routerLink]='[\"/admin-access\"]'>Admin Access</a></li>\r\n                    <li><a [routerLink]='[\"/manage-product\"]'>Manage Products</a></li>\r\n                    <li><a [routerLink]='[\"/manage-packages\"]'>Manage Packages</a></li>\r\n                    <li><a [routerLink]='[\"/manage-category\"]'>Manage Category</a></li>\r\n                    <li><a [routerLink]='[\"/view-announcement\"]'>Manage Announcement</a></li>\r\n                    <li><a [routerLink]='[\"/manage-login-banner\"]'>Manage Login Banner</a></li>\r\n                </ul>\r\n            </li>\r\n            <li (click)=\"menuClickedIndex = 7\" *ngIf=\"currentUser.role == 'SuperAdmin'\">\r\n                <a href=\"#\"><i class=\"fa fa-cog\"></i> <span class=\"nav-label\">Reports</span><span class=\"fa arrow\"></span></a>\r\n                <ul class=\"nav nav-second-level collapse\" [ngClass]=\"{'in': menuClickedIndex == 7}\">\r\n                    <li><a [routerLink]='[\"/report-agent-submission\"]'>Agent Submissions</a></li>\r\n                    <li><a [routerLink]='[\"/report-agent-withdrawal\"]'>Agent Withdrawal</a></li>\r\n\r\n                </ul>\r\n            </li>\r\n        </ul>\r\n\r\n    </div>\r\n</nav>\r\n\r\n"
 
 /***/ }),
 
@@ -10506,6 +10744,224 @@ var ManageProduct = /** @class */ (function (_super) {
     return ManageProduct;
 }(ListDataCrud_1.ListDataCrud));
 exports.ManageProduct = ManageProduct;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/report-agent-submission/report-agent-submission.html":
+/*!****************************************************************************!*\
+  !*** ./src/app/pages/report-agent-submission/report-agent-submission.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Agent Submissions Report'\" [parentCategory]=\"'Reports'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Agent Submissions Report</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 mrg5T pad0L flexbox\">\r\n                        <div class=\"col-sm-8 m-b-xs pad0L\">\r\n                            <div class=\"input-group mrg5R\">\r\n                                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                                <input type=\"text\"\r\n                                       ngxDaterangepickerMd\r\n                                       class=\"form-control form-control-sm mrg10R \"\r\n                                       [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                       [(ngModel)]=\"searchParams\"\r\n                                       (ngModelChange)=\"filterDataByDate();\"\r\n                                       placeholder=\"Submission date\"\r\n                                       startKey=\"startDate\"\r\n                                       endKey=\"endDate\" />\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-default mrg10B mrg10R\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"col-md-6 mrg5T\">\r\n                        <button class=\"btn btn-warning float-right\" (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\"></i>Export</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n\r\n                            <table class=\"table table-striped mrg10T dataTable table-bordered\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td>\r\n                                                <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                <ng-template #displayBadge>\r\n                                                    <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                          [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                'badge-warning': record.transactionType == 'Charges',\r\n                                                                'badge-blue-alt': record.transactionType == 'Incentives',\r\n                                                                'badge-success': record.transactionType == 'Own Sales',\r\n                                                                'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                        {{record.transactionType}}\r\n                                                    </span>\r\n                                                    <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                                </ng-template>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/report-agent-submission/report-agent-submission.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/pages/report-agent-submission/report-agent-submission.ts ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+var RecordMode_1 = __webpack_require__(/*! src/app/enums/RecordMode */ "./src/app/enums/RecordMode.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
+var router_service_1 = __webpack_require__(/*! src/app/services/router.service */ "./src/app/services/router.service.ts");
+var date_range_1 = __webpack_require__(/*! ../../model/date.range */ "./src/app/model/date.range.ts");
+var viewReportColumns_1 = __webpack_require__(/*! ../../metadata/viewReportColumns */ "./src/app/metadata/viewReportColumns.ts");
+var ReportAgentSubmission = /** @class */ (function (_super) {
+    __extends(ReportAgentSubmission, _super);
+    function ReportAgentSubmission(loaderService, dataService, authenticationService, routerExtService) {
+        var _this = _super.call(this, loaderService, dataService, "agentLevel", true) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.authenticationService = authenticationService;
+        _this.routerExtService = routerExtService;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.orderFilter = RecordMode_1.OrderFilter;
+        _this.searchParams = new date_range_1.DateRange();
+        return _this;
+    }
+    ReportAgentSubmission.prototype.ngOnInit = function () {
+        this.controllerName = apiController_1.ApiController.ReportAgentSubmission;
+        this.dataRowMapper = this.getTablerowDataMapping();
+    };
+    ReportAgentSubmission.prototype.getTablerowDataMapping = function () {
+        var columnMappings = viewReportColumns_1.ViewAgentSubmissionStatusColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    ReportAgentSubmission.prototype.filterDataByDate = function () {
+        if (!this.searchParams.startDate || !this.searchParams.endDate)
+            return;
+        this.reloadData();
+    };
+    ReportAgentSubmission.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.ReportAgentSubmission + "/Download", this.searchParams).subscribe(function (data) {
+            var filename = "reportAgentSubmission_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
+    };
+    ReportAgentSubmission.prototype.clearSearchParam = function () {
+        this.searchParams = new date_range_1.DateRange();
+        this.reloadData();
+    };
+    ReportAgentSubmission = __decorate([
+        core_1.Component({
+            selector: 'report-agent-submission',
+            template: __webpack_require__(/*! ./report-agent-submission.html */ "./src/app/pages/report-agent-submission/report-agent-submission.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, authentication_1.AuthenticationService, router_service_1.RouterService])
+    ], ReportAgentSubmission);
+    return ReportAgentSubmission;
+}(listEvent_1.ListEvent));
+exports.ReportAgentSubmission = ReportAgentSubmission;
+
+
+/***/ }),
+
+/***/ "./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.html":
+/*!****************************************************************************!*\
+  !*** ./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.html ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<page-header [title]=\"'Agent Submissions Report'\" [parentCategory]=\"'Reports'\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-title pad10R\">\r\n                    <h5>Agent Submissions Report</h5>\r\n                </div>\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"col-md-6 mrg5T pad0L flexbox\">\r\n                        <div class=\"col-sm-8 m-b-xs pad0L\">\r\n                            <div class=\"input-group mrg5R\">\r\n                                <span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i></span>\r\n                                <input type=\"text\"\r\n                                       ngxDaterangepickerMd\r\n                                       class=\"form-control form-control-sm mrg10R \"\r\n                                       [locale]=\"{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}\"\r\n                                       [(ngModel)]=\"searchParams\"\r\n                                       (ngModelChange)=\"filterDataByDate();\"\r\n                                       placeholder=\"Submission date\"\r\n                                       startKey=\"startDate\"\r\n                                       endKey=\"endDate\" />\r\n                            </div>\r\n                        </div>\r\n                        <button type=\"button\" class=\"btn btn-default mrg10B mrg10R\" (click)=\"clearSearchParam()\">Reset</button>\r\n                    </div>\r\n                    <div class=\"col-md-6 mrg5T\">\r\n                        <button class=\"btn btn-warning float-right\" (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\"><i class=\"fa fa-file-excel-o mrg5R\"></i>Export</button>\r\n                    </div>\r\n                    <div class=\"table-responsive mrg10T\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n\r\n                            <table class=\"table table-striped mrg10T dataTable table-bordered\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td>\r\n                                                <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                <ng-template #displayBadge>\r\n                                                    <span class=\"badge\" *ngIf=\"record.transactionType\"\r\n                                                          [ngClass]=\"{'badge-info': record.transactionType == 'Override',\r\n                                                                'badge-warning': record.transactionType == 'Charges',\r\n                                                                'badge-blue-alt': record.transactionType == 'Incentives',\r\n                                                                'badge-success': record.transactionType == 'Own Sales',\r\n                                                                'badge-danger': record.transactionType == 'Clawback'}\">\r\n                                                        {{record.transactionType}}\r\n                                                    </span>\r\n                                                    <small class=\"float-right text-navy mrg25R\" *ngIf=\"record.agentComm\">{{record.agentComm}}%</small>\r\n                                                </ng-template>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                            <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                        </div>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.ts":
+/*!**************************************************************************!*\
+  !*** ./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.ts ***!
+  \**************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var tablerow_data_mapping_1 = __webpack_require__(/*! src/app/model/tablerow.data.mapping */ "./src/app/model/tablerow.data.mapping.ts");
+var loader_service_1 = __webpack_require__(/*! src/app/loader/loader.service */ "./src/app/loader/loader.service.ts");
+var data_service_1 = __webpack_require__(/*! src/app/services/data.service */ "./src/app/services/data.service.ts");
+var dataDisplayType_1 = __webpack_require__(/*! src/app/enums/dataDisplayType */ "./src/app/enums/dataDisplayType.ts");
+var listEvent_1 = __webpack_require__(/*! src/app/interfaces/listEvent */ "./src/app/interfaces/listEvent.ts");
+var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var common_1 = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+var file_saver_1 = __webpack_require__(/*! file-saver */ "./node_modules/file-saver/dist/FileSaver.min.js");
+var RecordMode_1 = __webpack_require__(/*! src/app/enums/RecordMode */ "./src/app/enums/RecordMode.ts");
+var authentication_1 = __webpack_require__(/*! src/app/services/authentication */ "./src/app/services/authentication.ts");
+var router_service_1 = __webpack_require__(/*! src/app/services/router.service */ "./src/app/services/router.service.ts");
+var date_range_1 = __webpack_require__(/*! ../../model/date.range */ "./src/app/model/date.range.ts");
+var viewReportColumns_1 = __webpack_require__(/*! ../../metadata/viewReportColumns */ "./src/app/metadata/viewReportColumns.ts");
+var ReportAgentWithdrawal = /** @class */ (function (_super) {
+    __extends(ReportAgentWithdrawal, _super);
+    function ReportAgentWithdrawal(loaderService, dataService, authenticationService, routerExtService) {
+        var _this = _super.call(this, loaderService, dataService, "withdrawalId", true) || this;
+        _this.loaderService = loaderService;
+        _this.dataService = dataService;
+        _this.authenticationService = authenticationService;
+        _this.routerExtService = routerExtService;
+        _this.dataRowMapper = [];
+        _this.displayType = dataDisplayType_1.DataDisplayType;
+        _this.orderFilter = RecordMode_1.OrderFilter;
+        _this.searchParams = new date_range_1.DateRange();
+        return _this;
+    }
+    ReportAgentWithdrawal.prototype.ngOnInit = function () {
+        this.controllerName = apiController_1.ApiController.ReportAgentWithdrawal;
+        this.dataRowMapper = this.getTablerowDataMapping();
+    };
+    ReportAgentWithdrawal.prototype.getTablerowDataMapping = function () {
+        var columnMappings = viewReportColumns_1.ViewAgentWithdrawalColumns.fields.map(function (o) { return new tablerow_data_mapping_1.TablerowDataMapping(o.fieldName, o.headerText, dataDisplayType_1.DataDisplayType[o.displayType], o.keyField, o.colWidth); });
+        return columnMappings;
+    };
+    ReportAgentWithdrawal.prototype.filterDataByDate = function () {
+        if (!this.searchParams.startDate || !this.searchParams.endDate)
+            return;
+        this.reloadData();
+    };
+    ReportAgentWithdrawal.prototype.exportRecords = function () {
+        this.dataService.export(apiController_1.ApiController.ReportAgentWithdrawal + "/Download", this.searchParams).subscribe(function (data) {
+            var filename = "reportAgentWithdrawal_" + common_1.formatDate(new Date(), 'ddMMyyyyhhmm', 'en-US') + ".xlsx";
+            var file = new Blob([data], { type: 'application/xlsx' });
+            file_saver_1.saveAs(file, filename);
+        });
+    };
+    ReportAgentWithdrawal.prototype.clearSearchParam = function () {
+        this.searchParams = new date_range_1.DateRange();
+        this.reloadData();
+    };
+    ReportAgentWithdrawal = __decorate([
+        core_1.Component({
+            selector: 'report-agent-withdrawal',
+            template: __webpack_require__(/*! ./report-agent-withdrawal.html */ "./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.html")
+        }),
+        __metadata("design:paramtypes", [loader_service_1.LoaderService, data_service_1.DataService, authentication_1.AuthenticationService, router_service_1.RouterService])
+    ], ReportAgentWithdrawal);
+    return ReportAgentWithdrawal;
+}(listEvent_1.ListEvent));
+exports.ReportAgentWithdrawal = ReportAgentWithdrawal;
 
 
 /***/ }),

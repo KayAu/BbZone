@@ -80,7 +80,8 @@ import { EqualValidator } from './directives/equal-validator.directive';
 import { MandatoryValidator } from './directives/mandatory.directive';
 import { EditPassword } from './pages/edit-password/edit-password';
 import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-password';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ReportAgentSubmission } from './pages/report-agent-submission/report-agent-submission';
+import { ReportAgentWithdrawal } from './pages/report-agent-withdrawal/report-agent-withdrawal';
 
 @NgModule({
   declarations: [
@@ -146,7 +147,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
         EqualValidator,
         MandatoryValidator,
         ResetAgentPassword,
-        CKEditorModule
+        ReportAgentSubmission,
+        ReportAgentWithdrawal
   ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -197,8 +199,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
             { path: 'view-announcement', component: ViewAnnouncement },
             { path: 'edit-announcement/:id', component: EditAnnouncement, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
             { path: 'manage-login-banner', component: ManageLoginBanner, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},            
-            { path: 'reset-agent-password', component: ResetAgentPassword, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }}
-    ])
+            { path: 'reset-agent-password', component: ResetAgentPassword, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
+            { path: 'report-agent-submission', component: ReportAgentSubmission, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] }},
+            { path: 'report-agent-withdrawal', component: ReportAgentWithdrawal, canActivate: [UserAuthGuard], data: { roles: [Role.SuperAdmin] } }
+
+        ])
   ],
   providers: [
     DataService,

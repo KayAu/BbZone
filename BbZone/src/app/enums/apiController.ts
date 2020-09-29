@@ -22,5 +22,7 @@ export enum ApiController {
     Incentives = "Incentives",
     IncentivesUpload = "IncentivesUpload",
     LoginBanner = "LoginBanner",
-    Password = "Password"
+    Password = "Password",
+    ReportAgentSubmission = "ReportAgentSubmission",
+    ReportAgentWithdrawal = "ReportAgentWithdrawal"
 }

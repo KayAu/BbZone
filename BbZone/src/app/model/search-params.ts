@@ -80,3 +80,17 @@ export class SearchCompletedOrderParams {
         public commissionStatus: string,
     ) { }
 }
+
+
+//export class SearchByDateParams {
+//    constructor(
+//        public productId: string,
+//        public productCategoryId: string,
+//        public productPackageId: string,
+//        public agent: string,
+//        public activatedDate: DateRange,
+//        public paymentDate: DateRange,
+//        public documentCompleted: boolean,
+//        public commissionStatus: string,
+//    ) { }
+//}
