@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiController } from '../../enums/apiController';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'create-announcement',
@@ -23,13 +24,39 @@ export class CreateAnnouncement {
     formFields: FormDataMapping[] = [];
     newRecord: any = {};
     isUpdating: boolean = false;
+    controlType = ControlType;
+    richTextConfig: AngularEditorConfig = {
+        editable: true,
+        spellcheck: true,
+        height: '15rem',
+        minHeight: '5rem',
+        placeholder: 'Enter text here...',
+        translate: 'no',
+        defaultParagraphSeparator: 'p',
+        defaultFontName: 'Arial',
+        customClasses: [
+            {
+                name: "quote",
+                class: "quote",
+            },
+            {
+                name: 'redText',
+                class: 'redText'
+            },
+            {
+                name: "titleText",
+                class: "titleText",
+                tag: "h1",
+            },
+        ]
+    };
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService,
                 private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
 
     ngOnInit() {
         this.formFields = this.getFormFeldsMapping();
-        this.loadApplication(this.route.snapshot.params.id);
+        this.loadApplication(this.route.snapshot.params.id); 
     }
 
     getFormFeldsMapping(): FormDataMapping[] {
@@ -58,7 +85,7 @@ export class CreateAnnouncement {
         formData.append('data', JSON.stringify(this.newRecord));
 
         if (this.newRecord.files) {
-            for (var i = 0; i < this.newRecord.files.length; i++) {
+            for (let i = 0; i < this.newRecord.files.length; i++) {
                 formData.append("file" + i, this.newRecord.files[i]);
             }
         }
@@ -77,7 +104,7 @@ export class CreateAnnouncement {
     }
 
     private setControlsAsTouched() {
-        for (var i in this.form.controls) {
+        for (let i in this.form.controls) {
             this.form.controls[i].markAsTouched();
         }
     }

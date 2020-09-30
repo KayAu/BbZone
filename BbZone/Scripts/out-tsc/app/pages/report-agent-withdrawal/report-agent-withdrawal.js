@@ -39,7 +39,7 @@ var viewReportColumns_1 = require("../../metadata/viewReportColumns");
 var ReportAgentWithdrawal = /** @class */ (function (_super) {
     __extends(ReportAgentWithdrawal, _super);
     function ReportAgentWithdrawal(loaderService, dataService, authenticationService, routerExtService) {
-        var _this = _super.call(this, loaderService, dataService, "agentLevel", true) || this;
+        var _this = _super.call(this, loaderService, dataService, "withdrawalId", true) || this;
         _this.loaderService = loaderService;
         _this.dataService = dataService;
         _this.authenticationService = authenticationService;

@@ -17,7 +17,8 @@ export enum ControlType {
     dateRange,
     password,
     number,
-    customerFinder
+    customerFinder,
+    richTextEditor
 }
 
 export enum CustomerSearchType {

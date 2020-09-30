@@ -33,6 +33,32 @@ var CreateAnnouncement = /** @class */ (function () {
         this.formFields = [];
         this.newRecord = {};
         this.isUpdating = false;
+        this.controlType = dataDisplayType_1.ControlType;
+        this.richTextConfig = {
+            editable: true,
+            spellcheck: true,
+            height: '15rem',
+            minHeight: '5rem',
+            placeholder: 'Enter text here...',
+            translate: 'no',
+            defaultParagraphSeparator: 'p',
+            defaultFontName: 'Arial',
+            customClasses: [
+                {
+                    name: "quote",
+                    class: "quote",
+                },
+                {
+                    name: 'redText',
+                    class: 'redText'
+                },
+                {
+                    name: "titleText",
+                    class: "titleText",
+                    tag: "h1",
+                },
+            ]
+        };
     }
     CreateAnnouncement.prototype.ngOnInit = function () {
         this.formFields = this.getFormFeldsMapping();

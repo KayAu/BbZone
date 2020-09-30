@@ -90,6 +90,7 @@ var edit_password_1 = require("./pages/edit-password/edit-password");
 var reset_agent_password_1 = require("./pages/reset-agent-password/reset-agent-password");
 var report_agent_submission_1 = require("./pages/report-agent-submission/report-agent-submission");
 var report_agent_withdrawal_1 = require("./pages/report-agent-withdrawal/report-agent-withdrawal");
+var angular_editor_1 = require("@kolkov/angular-editor");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -168,6 +169,7 @@ var AppModule = /** @class */ (function () {
                 forms_1.ReactiveFormsModule,
                 material_1.MaterialModule,
                 animations_1.BrowserAnimationsModule,
+                angular_editor_1.AngularEditorModule,
                 ngx_daterangepicker_material_1.NgxDaterangepickerMd.forRoot(),
                 angular_user_idle_1.UserIdleModule.forRoot({ idle: 3600, timeout: 3600, ping: 900 }),
                 ngx_toastr_1.ToastrModule.forRoot({

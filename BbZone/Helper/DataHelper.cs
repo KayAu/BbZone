@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.Entity.Core.Objects;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -36,6 +37,13 @@ namespace BroadbandZone_App.Helper
         public static string NullToString(this object Value)
         {
             return Value == null ? "" : Value.ToString();
+        }
+
+        public static Stream Base64ToImageStream(string base64String)
+        {
+            byte[] imageBytes = Convert.FromBase64String(base64String);
+            MemoryStream ms = new MemoryStream(imageBytes, 0, imageBytes.Length);
+            return ms;
         }
 
         public static bool IsBase64(this string base64String)

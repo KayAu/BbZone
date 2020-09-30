@@ -6,7 +6,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace BroadbandZone_App.Helper
@@ -96,13 +98,62 @@ namespace BroadbandZone_App.Helper
                 mail.Subject = announcement.Title;
                 mail.IsBodyHtml = true;
                 mail.Body = sb.ToString();
-        
+                mail.AlternateViews.Add(ContentToAlternateView(sb.ToString()));
+
+                foreach (var attachedFile in GetAttachedFiles(announcement))
+                {
+                    System.Net.Mail.Attachment attachment = new System.Net.Mail.Attachment(attachedFile);
+                    mail.Attachments.Add(attachment);
+                }
+
                 SmtpClient.Send(mail);
             }
             catch (Exception ex)
             {
                 throw new Exception($"MailHelper.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
+        }
+        private static IEnumerable<string> GetAttachedFiles(Announcement annc)
+        {
+            foreach(var attachedFile in annc.AnnouncementDocuments)
+            {
+                var path = HttpContext.Current.Server.MapPath(attachedFile.Path);
+                Console.WriteLine(path);
+                yield return HttpContext.Current.Server.MapPath(attachedFile.Path);
+            }
+        }
+
+        private static AlternateView ContentToAlternateView(string content)
+        {
+            var imgCount = 0;
+            List<LinkedResource> resourceCollection = new List<LinkedResource>();
+            foreach (Match m in Regex.Matches(content, "<img(?<value>.*?)>"))
+            {
+                imgCount++;
+                var imgContent = m.Groups["value"].Value;
+                string type = Regex.Match(imgContent, ":(?<type>.*?);base64,").Groups["type"].Value;
+                string base64 = Regex.Match(imgContent, "base64,(?<base64>.*?)\"").Groups["base64"].Value;
+                if (String.IsNullOrEmpty(type) || String.IsNullOrEmpty(base64))
+                {
+                    //ignore replacement when match normal <img> tag
+                    continue;
+                }
+                var replacement = " src=\"cid:" + imgCount + "\"";
+                content = content.Replace(imgContent, replacement);
+                var tempResource = new LinkedResource(DataHelper.Base64ToImageStream(base64), new ContentType(type))
+                {
+                    ContentId = imgCount.ToString()
+                };
+                resourceCollection.Add(tempResource);
+            }
+
+            AlternateView alternateView = AlternateView.CreateAlternateViewFromString(content, null, MediaTypeNames.Text.Html);
+            foreach (var item in resourceCollection)
+            {
+                alternateView.LinkedResources.Add(item);
+            }
+
+            return alternateView;
         }
 
         public static void SendNewApplicationEmail(CustomerApplication newApp)

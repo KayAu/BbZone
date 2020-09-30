@@ -17,7 +17,7 @@
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
-                "controlType": "textarea",
+                "controlType": "richTextEditor",
                 "required": false,
                 "maxLength": 500
             }
@@ -117,7 +117,7 @@ export class EditAnnouncementFields {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
-                "controlType": "textarea",
+                "controlType": "richTextEditor",
                 "required": false,
                 "maxLength": 500
             }

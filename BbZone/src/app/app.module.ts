@@ -82,6 +82,7 @@ import { EditPassword } from './pages/edit-password/edit-password';
 import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-password';
 import { ReportAgentSubmission } from './pages/report-agent-submission/report-agent-submission';
 import { ReportAgentWithdrawal } from './pages/report-agent-withdrawal/report-agent-withdrawal';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -157,6 +158,7 @@ import { ReportAgentWithdrawal } from './pages/report-agent-withdrawal/report-ag
         ReactiveFormsModule,
         MaterialModule,
         BrowserAnimationsModule,
+        AngularEditorModule ,
         NgxDaterangepickerMd.forRoot(),
         UserIdleModule.forRoot({ idle: 3600, timeout: 3600, ping: 900 }),
         ToastrModule.forRoot({

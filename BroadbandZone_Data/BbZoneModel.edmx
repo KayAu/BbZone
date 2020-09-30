@@ -83,7 +83,7 @@
           </Key>
           <Property Name="AnncId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="200" Nullable="false" />
-          <Property Name="Descriptions" Type="nvarchar" MaxLength="500" />
+          <Property Name="Descriptions" Type="nvarchar(max)" />
           <Property Name="FilePath" Type="nvarchar" MaxLength="300" />
           <Property Name="IsActive" Type="bit" />
           <Property Name="CreatedOn" Type="smalldatetime" Nullable="false" />
@@ -2039,7 +2039,7 @@ warning 6002: The table/view 'bbzone.dbo.SProcErrorLog' does not have a primary 
           </Key>
           <Property Name="AnncId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
-          <Property Name="Descriptions" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Descriptions" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FilePath" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
           <Property Name="IsActive" Type="Boolean" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="0" />

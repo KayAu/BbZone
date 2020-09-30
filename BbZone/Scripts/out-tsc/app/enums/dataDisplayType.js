@@ -21,6 +21,7 @@ var ControlType;
     ControlType[ControlType["password"] = 9] = "password";
     ControlType[ControlType["number"] = 10] = "number";
     ControlType[ControlType["customerFinder"] = 11] = "customerFinder";
+    ControlType[ControlType["richTextEditor"] = 12] = "richTextEditor";
 })(ControlType = exports.ControlType || (exports.ControlType = {}));
 var CustomerSearchType;
 (function (CustomerSearchType) {

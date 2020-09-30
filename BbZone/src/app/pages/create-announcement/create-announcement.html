@@ -17,10 +17,15 @@
                                     {{field.displayText}}
                                     <span *ngIf="field.dataFieldControl.required" class="text-danger">*</span>
                                 </label>
-                                <div class="col-sm-10">
-                                    <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
-                                                  [field]="field.dataFieldControl" [parentForm]="dataForm" name="{{field.dataFieldControl.controlName}}" [onEdit]="true"></data-control>
+                                <div class="col-sm-10" *ngIf="field.dataFieldControl.controlType == controlType.richTextEditor; else otherControls">
+                                    <angular-editor name="{{field.dataFieldControl.controlName}}" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [config]="richTextConfig"></angular-editor>
                                 </div>
+                                <ng-template #otherControls>
+                                    <div class="col-sm-10">
+                                        <data-control *ngIf="field.dataFieldControl" [(ngModel)]="newRecord[field.dataFieldControl.controlName]" [fieldId]="field.dataFieldControl.controlName"
+                                                      [field]="field.dataFieldControl" [parentForm]="dataForm" name="{{field.dataFieldControl.controlName}}" [onEdit]="true"></data-control>
+                                    </div>
+                                </ng-template>
                             </div>
                             <div class="hr-line-dashed"></div>
                         </ng-container>

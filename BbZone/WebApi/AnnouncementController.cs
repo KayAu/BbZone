@@ -32,6 +32,8 @@ namespace BroadbandZone_App.WebApi
                     if (annc != null)
                     {
                         var agents = db.Agents.Where(a => a.IsActive == true && !string.IsNullOrEmpty(a.Email)).ToList();
+
+                       // MailHelper.SendAnnouncementEmail("kayeau80@gmail.com", "Kaye", annc);
                         foreach (var agent in agents)
                         {
                             MailHelper.SendAnnouncementEmail(agent.Email, agent.Fullname, annc);

@@ -12,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiController } from '../../enums/apiController';
 import { FormSubmit } from 'src/app/model/form-submit';
 import { NgForm } from '@angular/forms';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
   selector: 'edit-announcement',
@@ -24,6 +25,32 @@ export class EditAnnouncement {
     formRecord: any = {};
     isUpdating: boolean = false;
     recordId: number;
+    controlType = ControlType;
+    richTextConfig: AngularEditorConfig = {
+        editable: true,
+        spellcheck: true,
+        height: '15rem',
+        minHeight: '5rem',
+        placeholder: 'Enter text here...',
+        translate: 'no',
+        defaultParagraphSeparator: 'p',
+        defaultFontName: 'Arial',
+        customClasses: [
+            {
+                name: "quote",
+                class: "quote",
+            },
+            {
+                name: 'redText',
+                class: 'redText'
+            },
+            {
+                name: "titleText",
+                class: "titleText",
+                tag: "h1",
+            },
+        ]
+    };
 
     constructor(public loaderService: LoaderService, public dataService: DataService, public formEvent: BroadcastService,
         private router: Router, private route: ActivatedRoute, private toastr: ToastrService) { }
@@ -59,9 +86,9 @@ export class EditAnnouncement {
         const formData = new FormData();
         formData.append('data', JSON.stringify(this.formRecord));
 
-        if (this.formRecord.customerDocuments) {
-            for (var i = 0; i < this.formRecord.announcementDocuments.length; i++) {
-                if (!this.formRecord.customerDocuments[i].deleted) {
+        if (this.formRecord.announcementDocuments) {
+            for (let i = 0; i < this.formRecord.announcementDocuments.length; i++) {
+                if (!this.formRecord.announcementDocuments[i].deleted) {
                     formData.append("file" + i, this.formRecord.announcementDocuments[i]);
                 }
             }
