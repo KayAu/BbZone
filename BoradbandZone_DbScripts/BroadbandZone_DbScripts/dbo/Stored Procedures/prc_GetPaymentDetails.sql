@@ -41,12 +41,12 @@ BEGIN
 									  (SELECT p.PackageName AS 'td' FOR XML PATH(''), TYPE),									  
 									  (SELECT p.TransactionDate AS 'td' FOR XML PATH(''), TYPE),
 									  (SELECT p.TransactionType AS 'td' FOR XML PATH(''), TYPE),
-									  (SELECT p.ClaimAmount AS 'td' FOR XML PATH(''), TYPE)
+									  (SELECT FORMAT(p.ClaimAmount , 'C2', 'ms-MY') AS 'td' FOR XML PATH(''), TYPE)
 									  -- (SELECT p.DeductAmount AS 'td' FOR XML PATH(''), TYPE)
 									FROM @vPaymentItems p
 									FOR XML PATH('tr'))
 
-		SELECT  SlipNo = RIGHT('0000' + CAST(w.WithdrawalId AS VARCHAR),6),
+		SELECT  SlipNo = CAST(w.WithdrawalId AS VARCHAR), --RIGHT('0000' + CAST(w.WithdrawalId AS VARCHAR),6),
 				a.AgentId,
 				PayTo = CASE WHEN NOT  a.CompanyName IS NULL THEN  a.CompanyName ELSE a.Fullname END,
 				a.Nric,

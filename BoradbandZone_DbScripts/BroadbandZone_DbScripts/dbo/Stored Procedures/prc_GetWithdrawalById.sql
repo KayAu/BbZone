@@ -8,12 +8,12 @@ BEGIN
 
 	BEGIN TRY
 		SELECT w.* ,
-			   PayTo = CASE WHEN NOT  a.CompanyName IS NULL THEN  a.CompanyName ELSE a.Fullname END,
+			   PayTo = CASE WHEN ISNULL(a.CompanyName, '') <> ''  THEN  a.CompanyName ELSE a.Fullname END,
 			   a.Nric,
 			   a.Email,
 		       a.BankName,
 			   a.BankAccNo,
-			   AllowEdit = CAST(CASE WHEN @prIsAdmin = 0 OR w.Status IN ('Completed','Rejected','Terminated') THEN 0 ELSE 1 END AS BIT),
+			   AllowEdit = CAST(CASE WHEN @prIsAdmin = 0  THEN 0 ELSE 1 END AS BIT),
 			   AllowTerminate = CAST(CASE WHEN w.Status = 'Pending' THEN 1 ELSE 0 END AS BIT)			                    
 		FROM Withdrawal w
 		INNER JOIN Agent a ON w.Agent = a.UserLogin

@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-4 mrg10T mrg25B text-right">
             <label class="text-uppercase font-normal">Claimable Amount</label>
-            <div class="mrg0T amt-claimable font-bold" [ngClass]="{'text-success': allowSubmit,'text-danger': !allowSubmit }">RM {{totalClaimableAmount | number:'1.2-2'}}</div>
+            <div class="mrg0T amt-claimable font-bold" [ngClass]="{'text-success': allowSubmit,'text-danger': !allowSubmit }">RM {{totalWithdrawalAmt | number:'1.2-2'}}</div>
         </div>
         <div class="col-lg-12">
             <div class="ibox ">
@@ -56,27 +56,36 @@
                     <h5>Submit Withdrawal</h5>
                 </div>
                 <div class="ibox-content">
-                    <div class="col-md-6 pad0L mrg20B flexbox">
-                        <div class="input-group mrg5R">
-                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                            <input type="text"
-                                   ngxDaterangepickerMd
-                                   class="form-control form-control-sm mrg10R "
-                                   [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
-                                   [(ngModel)]="searchParams.submittedDate"
-                                   (ngModelChange)="filterDataByDate();"
-                                   placeholder="Submission date"
-                                   startKey="startDate"
-                                   endKey="endDate" />
+                    <div class="col-md-12 pad0L mrg20B flexbox">
+                        <div class="col-sm-3 m-b-xs pad0L">
+                            <data-control [(ngModel)]="selectedAgent" [fieldId]="agentField.controlName"
+                                          [field]="agentField" [forDataFilter]="false" name="{{agentField.controlName}}"
+                                          (onModelChanged)="getAgentWithdrawalItems()"
+                                          *ngIf="currentUser.isAdmin"></data-control>
                         </div>
-                        <div class="input-group mrg5R">
-                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                            <input placeholder="Application Id or Customer Name" type="text" class="form-control form-control-sm"
-                                   (keydown.enter)="reloadData()" [(ngModel)]="searchParams.keyword">
+                        <div class="col-sm-4 m-b-xs pad0L">
+                            <div class="input-group mrg5R">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text"
+                                       ngxDaterangepickerMd
+                                       class="form-control form-control-sm mrg10R "
+                                       [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
+                                       [(ngModel)]="searchParams.submittedDate"
+                                       (ngModelChange)="filterDataByDate();"
+                                       placeholder="Submission date"
+                                       startKey="startDate"
+                                       endKey="endDate" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4 m-b-xs pad0L">
+                            <div class="input-group mrg5R">
+                                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                <input placeholder="Application Id or Customer Name" type="text" class="form-control form-control-sm"
+                                       (keydown.enter)="reloadData()" [(ngModel)]="searchParams.keyword">
+                            </div>
                         </div>
                         <button type="button" class="btn btn-outline btn-default" (click)="clearSearchParam()">Reset</button>
                     </div>
-                    <div class="col-md-6"></div>
                     <div class="table-responsive mrg10T">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
                             <div class="col-md-12 pad0L mrg25B mrg20T" *ngIf="selectedItems.length > 0">
@@ -100,7 +109,13 @@
                             <table class="table table-striped mrg10T dataTable table-bordered" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        <th>
+                                            <div class="checkbox checkbox-primary mrg0A">
+                                                <input id="checkboxAll" type="checkbox" [(ngModel)]="selectAllItems" (ngModelChange)="allItemsSelected()">
+                                                <label for="checkboxAll" class="pad0L">
+                                                </label>
+                                            </div>
+                                        </th>
                                         <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
                                     </tr>
                                 </thead>
@@ -119,10 +134,10 @@
                                                 <ng-template #displayBadge>
                                                     <span class="badge" *ngIf="record.transactionType"
                                                           [ngClass]="{'badge-info': record.transactionType == 'Override',
-                                                                  'badge-warning': record.transactionType == 'Charges',
-                                                                  'badge-blue-alt': record.transactionType == 'Incentives',
-                                                                  'badge-success': record.transactionType == 'Own Sales',
-                                                                  'badge-danger': record.transactionType == 'Clawback'}">
+                                                                'badge-warning': record.transactionType == 'Charges',
+                                                                'badge-blue-alt': record.transactionType == 'Incentives',
+                                                                'badge-success': record.transactionType == 'Own Sales',
+                                                                'badge-danger': record.transactionType == 'Clawback'}">
                                                         {{record.transactionType}}
                                                     </span>
                                                     <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>

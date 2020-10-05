@@ -2,6 +2,9 @@
     <!-- LABEL -->
     <label *ngSwitchCase="controlType.label" class="font-normal">{{data}}</label>
 
+    <!-- LABEL -->
+    <label *ngSwitchCase="controlType.date" class="font-normal">{{data | date: 'dd/MM/yyyy HH:mm a'}}</label>
+
     <!-- TEXT -->
     <input *ngSwitchCase="controlType.textbox" id="{{fieldId}}" name="{{fieldId}}" type="text" class="form-control form-control-sm" maxlength="{{field.maxLength}}"
            [required]="field.required" [(ngModel)]="data" (ngModelChange)="setChanges()" [readonly]="readonly" placeholder="{{field.placeholder}}">

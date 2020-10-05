@@ -56,9 +56,9 @@ BEGIN
 			  ,ca.UserId
 			  ,a.UserLogin
 			  ,ca.DocumentCompleted
-			  ,PackageComm = FORMAT(cc.PackageCommOnDate,'c','ms-MY')
+			  ,PackageComm = FORMAT(cc.PackageCommOnDate,'c2','ms-MY')
 			  ,AgentCommPer = cc.AgentCommOnDate
-			  ,AgentCommAmount = FORMAT(CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY),'c','ms-MY') 
+			  ,AgentCommAmount = FORMAT(CAST(ROUND((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100, 2) AS MONEY),'c2','ms-MY') 
 			  --,AgentCommAmount = FORMAT((cc.PackageCommOnDate * cc.AgentCommOnDate) * 1.0 / 100,'c','ms-MY')
 			  ,CommStatus = CASE WHEN NOT cc.ClaimWithdrawalId IS NULL AND s.Status <> 'Post Complete' THEN 'Odd Claim'
 								 WHEN ISNULL(ca.DocumentCompleted,0) = 0 THEN 'Claim Disallowed'
@@ -115,7 +115,8 @@ BEGIN
 					 ELSE 0
 				END	
 		AND 1 = CASE wHEN @prDocumentCompleted IS NULL THEN 1
-		             wHEN @prDocumentCompleted  = ca.DocumentCompleted THEN 1
+		             wHEN @prDocumentCompleted = 0 AND ISNULL(ca.DocumentCompleted, 0) = 0 THEN 1
+		             wHEN @prDocumentCompleted = 1 AND ca.DocumentCompleted = 1 THEN 1
 					 ELSE 0 
 				END
 		AND 1 = CASE wHEN @prCommStatus IS NULL THEN 1

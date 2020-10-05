@@ -12,3 +12,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [ix_Communication_ApplicationId]
+    ON [dbo].[Communication]([ApplicationId] ASC);
+

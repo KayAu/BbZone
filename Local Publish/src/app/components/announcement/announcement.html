@@ -20,7 +20,7 @@
                 <div>
                     <small class="float-right text-navy">Posted On: {{data.createdOn | date:'dd MMM yyy'}}</small>
                     <strong>{{data.title}}</strong>
-                    <div class="mrg10T">{{data.descriptions}}</div>
+                    <div class="mrg10T" [innerHTML]="data.descriptions"></div>
                     <div class="flexbox mrg10T">
                         <ng-container *ngFor="let file of data.announcementDocuments; let fileNo = index">
                             View &nbsp;

@@ -33,6 +33,32 @@ var EditAnnouncement = /** @class */ (function () {
         this.formFields = [];
         this.formRecord = {};
         this.isUpdating = false;
+        this.controlType = dataDisplayType_1.ControlType;
+        this.richTextConfig = {
+            editable: true,
+            spellcheck: true,
+            height: '15rem',
+            minHeight: '5rem',
+            placeholder: 'Enter text here...',
+            translate: 'no',
+            defaultParagraphSeparator: 'p',
+            defaultFontName: 'Arial',
+            customClasses: [
+                {
+                    name: "quote",
+                    class: "quote",
+                },
+                {
+                    name: 'redText',
+                    class: 'redText'
+                },
+                {
+                    name: "titleText",
+                    class: "titleText",
+                    tag: "h1",
+                },
+            ]
+        };
     }
     EditAnnouncement.prototype.ngOnInit = function () {
         this.recordId = this.route.snapshot.params.id;
@@ -52,9 +78,9 @@ var EditAnnouncement = /** @class */ (function () {
         this.isUpdating = true;
         var formData = new FormData();
         formData.append('data', JSON.stringify(this.formRecord));
-        if (this.formRecord.customerDocuments) {
+        if (this.formRecord.announcementDocuments) {
             for (var i = 0; i < this.formRecord.announcementDocuments.length; i++) {
-                if (!this.formRecord.customerDocuments[i].deleted) {
+                if (!this.formRecord.announcementDocuments[i].deleted) {
                     formData.append("file" + i, this.formRecord.announcementDocuments[i]);
                 }
             }

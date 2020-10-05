@@ -1,4 +1,5 @@
-﻿CREATE FUNCTION [dbo].[fn_GenerateDynamicQuery]
+﻿
+CREATE FUNCTION [dbo].[fn_GenerateDynamicQuery]
 (
 	@prCurrentPage INT,
 	@prPageSize INT,
@@ -14,7 +15,7 @@ BEGIN
 
 	SELECT @vFromRow = CAST(((@prCurrentPage - 1) * @prPageSize) + 1 AS VARCHAR(5))
 	SELECT @vToRow = CAST(CASE WHEN @prCurrentPage = 1 THEN @prPageSize 
-	                          ELSE (((@prCurrentPage - 1) * @prPageSize) + 1) + @prPageSize 
+	                          ELSE (((@prCurrentPage - 1) * @prPageSize)) + @prPageSize 
 						  END AS VARCHAR(5))
 	SELECT @prSortColumn = CASE WHEN ISNULL(@prSortColumn, '') = '' THEN 'CreatedOn' ELSE @prSortColumn END
 	SELECT @prSortColumn = @prSortColumn + SPACE(1) + CASE WHEN @prSortInAsc = 1 THEN 'ASC' ELSE 'DESC' END

@@ -22,10 +22,18 @@ BEGIN
 			  ,a1.BankAccNo
 			  ,a1.UserLogin
 			  ,a1.SuperiorId
+			  ,l.LastLoginOn	
 			  ,a2.Fullname AS SuperiorName
 			  ,a2.UserLogin AS SuperiorLogin
 		FROM Agent a1
 		LEFT JOIN Agent a2 ON a2.AgentId = a1.SuperiorId
+		CROSS APPLY
+		(
+			SELECT TOP 1 LastLoginOn = FORMAT(LoginDate, 'MM/dd/yyyy')
+			FROM LoginTrail
+			WHERE AgentId = a1.AgentId
+			ORDER BY LoginDate DESC
+		) l
 
 	END TRY 
 	BEGIN CATCH

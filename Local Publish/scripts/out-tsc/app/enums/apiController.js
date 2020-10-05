@@ -26,5 +26,7 @@ var ApiController;
     ApiController["IncentivesUpload"] = "IncentivesUpload";
     ApiController["LoginBanner"] = "LoginBanner";
     ApiController["Password"] = "Password";
+    ApiController["ReportAgentSubmission"] = "ReportAgentSubmission";
+    ApiController["ReportAgentWithdrawal"] = "ReportAgentWithdrawal";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map

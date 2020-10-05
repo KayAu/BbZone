@@ -25,10 +25,22 @@
 
 AS
 BEGIN
-	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
-			@vSelectQuery NVARCHAR(MAX)
+	IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
+	IF OBJECT_ID('tempdb..##TeamMembers') IS NOT NULL DROP TABLE ##TeamMembers
 
-	DECLARE @vTeamMembers TABLE 
+	DECLARE @vStoreProcName VARCHAR(50) = OBJECT_NAME(@@PROCID),
+			@vSelectQuery NVARCHAR(MAX),
+			@vOrderByQuery NVARCHAR(MAX),
+			@vWhereQuery NVARCHAR(MAX) = '',
+	        @vFromRow VARCHAR(5),
+			@vToRow VARCHAR(5)
+
+	SELECT @vFromRow = CAST(((@prCurrentPage - 1) * @prPageSize) + 1 AS VARCHAR(5))
+	SELECT @vToRow = CAST(CASE WHEN @prCurrentPage = 1 THEN @prPageSize 
+	                          ELSE (((@prCurrentPage - 1) * @prPageSize) + 1) + @prPageSize 
+						  END AS VARCHAR(5))	
+
+	CREATE TABLE ##TeamMembers  
 	(	
 		AgentUsername NVARCHAR(16),
 		FullName VARCHAR(50),
@@ -58,15 +70,68 @@ BEGIN
 	)
 
 	BEGIN TRY
-		IF OBJECT_ID('tempdb..##temp_Table') IS NOT NULL DROP TABLE ##temp_Table
 
-		INSERT INTO @vTeamMembers
+		INSERT INTO ##TeamMembers
 		EXEC prc_GetMyEntireTeam @prAgentId
 
 		-- get row from and row to based on current page
-		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
+		SELECT @vOrderByQuery =  dbo.fn_GenerateOrderByQuery(@prSortColumn, @prSortInAsc)
 
-		SELECT ca.ApplicationId,
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prProduct,0) <> 0 THEN  'p.ProductId = @vProduct' ELSE  @vWhereQuery + '' END  
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prProductCategory,0) <> 0 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND pc.CategoryId = @vProductCategory' 
+									WHEN ISNULL(@prProductCategory,0) <> 0 AND @vWhereQuery = '' THEN @vWhereQuery + 'pc.CategoryId = @vProductCategory' 
+									ELSE  @vWhereQuery + '' END   
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prProductPackage,0) <> 0 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND pp.ProdPkgId = @vProductPackage' 
+									WHEN ISNULL(@prProductPackage,0) <> 0 AND @vWhereQuery = '' THEN @vWhereQuery + 'pp.ProdPkgId = @vProductPackage' 
+									ELSE  @vWhereQuery + '' END   	
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prStatus,0) <> 0 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND a.AppStatusId = @vStatus' 
+									WHEN ISNULL(@prStatus,0) <> 0 AND @vWhereQuery = '' THEN @vWhereQuery + 'a.AppStatusId = @vStatus' 
+									ELSE  @vWhereQuery + '' END  
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prAgent,'') <> '' AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ca.Agent = @vAgent' 
+									WHEN ISNULL(@prAgent,'') <> '' AND @vWhereQuery = '' THEN @vWhereQuery + 'ca.Agent = @vAgent' 
+									ELSE  @vWhereQuery + '' END  	
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prSubmittedFrom,'') <> '' AND ISNULL(@prSubmittedTo,'') <> '' AND @vWhereQuery <> '' THEN 
+										 @vWhereQuery + ' AND CONVERT(DATE, ca.CreatedOn) BETWEEN @vSubmittedFrom AND @vSubmittedTo'
+									WHEN ISNULL(@prSubmittedFrom,'') <> '' AND ISNULL(@prSubmittedTo,'') <> '' AND @vWhereQuery = '' THEN 
+										 @vWhereQuery + 'CONVERT(DATE, ca.CreatedOn) BETWEEN @vSubmittedFrom AND @vSubmittedTo'
+									ELSE  @vWhereQuery + '' END  
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prActivatedFrom,'') <> '' AND ISNULL(@prActivatedTo,'') <> '' AND @vWhereQuery <> '' THEN 
+										  @vWhereQuery + ' AND CONVERT(DATE, ca.ActivationDate) BETWEEN @vActivatedFrom AND @vActivatedTo'
+									WHEN ISNULL(@prActivatedFrom,'') <> '' AND ISNULL(@prActivatedTo,'') <> '' AND @vWhereQuery = '' THEN 
+										@vWhereQuery + 'CONVERT(DATE, ca.ActivationDate) BETWEEN @vActivatedFrom AND @vActivatedTo'
+									ELSE  @vWhereQuery + '' END  	
+		SELECT @vWhereQuery =  CASE WHEN ISNULL(@prResidentialType,'') <> '' AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ca.ResidentialType = @vResidentialType' 
+									WHEN ISNULL(@prResidentialType,'') <> '' AND @vWhereQuery = '' THEN @vWhereQuery + 'ca.ResidentialType = @vResidentialType' 
+								    ELSE  @vWhereQuery + '' END  	
+		SELECT @vWhereQuery =  CASE WHEN @prIsAdmin = 0 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ca.Agent = tm.AgentUsername'
+									WHEN @prIsAdmin = 0 AND @vWhereQuery = '' THEN @vWhereQuery + 'ca.Agent = tm.AgentUsername'
+								    ELSE  @vWhereQuery + '' END  
+		SELECT @vWhereQuery =  CASE WHEN @prDocumentCompleted = 0 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ISNULL(ca.DocumentCompleted, 0) = 0'
+									WHEN @prDocumentCompleted = 1 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ca.DocumentCompleted = 1'
+									WHEN @prDocumentCompleted = 0 AND @vWhereQuery = '' THEN @vWhereQuery + 'ISNULL(ca.DocumentCompleted, 0) = 0'
+									WHEN @prDocumentCompleted = 1 AND @vWhereQuery = '' THEN @vWhereQuery + 'ca.DocumentCompleted = 1'
+								    ELSE  @vWhereQuery + '' END  
+		SELECT @vWhereQuery = CASE WHEN NOT @prKeyword IS NULL AND @vWhereQuery <> '' THEN  @vWhereQuery + 
+									' AND (ca.CustomerName LIKE ''%' + @prKeyword + '%''
+									  OR ca.CompanyName LIKE ''%' + @prKeyword + '%''
+									  OR ca.OrderNo LIKE ''%' + @prKeyword + '%''
+									  OR ca.ResidentialName LIKE ''%' + @prKeyword + '%'')'
+								   WHEN NOT @prKeyword IS NULL AND @vWhereQuery = '' THEN @vWhereQuery + 
+									 'ca.CustomerName LIKE ''%' + @prKeyword + '%''
+									  OR ca.CompanyName LIKE ''%' + @prKeyword + '%''
+									  OR ca.OrderNo LIKE ''%' + @prKeyword + '%''
+									  OR ca.ResidentialName LIKE ''%' + @prKeyword + '%'''
+							       ELSE  @vWhereQuery + '' END  		
+		SELECT @vWhereQuery = CASE WHEN @prFilterMode = 1 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND msg.TotalUnreadMsg > 0'
+								   WHEN @prFilterMode = 2 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND ac.CommId IS NULL'
+								   WHEN @prFilterMode = 3 AND @vWhereQuery <> '' THEN @vWhereQuery + ' AND cl.OddClaimed = 1'
+								   WHEN @prFilterMode = 1 AND @vWhereQuery = '' THEN @vWhereQuery + 'msg.TotalUnreadMsg > 0'
+								   WHEN @prFilterMode = 2 AND @vWhereQuery = '' THEN @vWhereQuery + 'ac.CommId IS NULL'
+								   WHEN @prFilterMode = 3 AND @vWhereQuery = '' THEN @vWhereQuery + 'cl.OddClaimed = 1'
+								   ELSE @vWhereQuery + '' END  
+							
+
+		SELECT @vSelectQuery = 'SELECT ca.ApplicationId,
 				ca.CustomerName,
 				ca.CompanyName,
 				pp.PackageName,
@@ -81,88 +146,74 @@ BEGIN
 				a.Status,
 				msg.TotalUnreadMsg,
 				CommIsConfigured = CAST(CASE WHEN NOT ac.CommId IS NULL THEN 1 ELSE 0 END AS BIT),
-				cl.OddClaimed
+				cl.OddClaimed,
+			    ROW_NUMBER() OVER (ORDER BY ' + @vOrderByQuery + ') AS RowNum
 		INTO ##temp_Table
 		FROM CustomerApplication ca
 		INNER JOIN ProductPackage PP ON ca.ProdPkgId = pp.ProdPkgId
 		INNER JOIN ProductCategory PC ON pc.CategoryId = pp.CategoryId
 		INNER JOIN Product p ON pc.ProductId = p.ProductId
 		INNER JOIN ApplicationStatus a ON ca.AppStatusId = a.AppStatusId
-		INNER JOIN @vTeamMembers tm ON ca.Agent = tm.AgentUsername
+		INNER JOIN ##TeamMembers tm ON ca.Agent = tm.AgentUsername
 		LEFT JOIN AgentCommission ac ON ac.AgentId = tm.AgentId AND ac.CategoryId = ca.CategoryId
 		CROSS APPLY
 		(
 			SELECT TotalUnreadMsg = COUNT(CommId)
 			FROM Communication
 			WHERE ApplicationId = ca.ApplicationId
-			AND [Role] = CASE WHEN @prIsAdmin = 1 THEN 'AG' ELSE 'AD' END
+			AND [Role] = CASE WHEN @vIsAdmin = 1 THEN ''AG'' ELSE ''AD'' END
 			AND MsgRead = 0
 		) msg
 		CROSS APPLY
 		(
-			SELECT OddClaimed = CASE WHEN COUNT(ClaimCommId) > 0 AND a.Status<>'Post Complete' THEN 1 ELSE 0 END
+			SELECT OddClaimed = CASE WHEN COUNT(ClaimCommId) > 0 AND a.Status <> ''Post Complete'' THEN 1 ELSE 0 END
 			FROM ClaimableCommission
 			WHERE ApplicationId = ca.ApplicationId
 			AND NOT ClaimWithdrawalId IS NULL
-		) cl
-		WHERE 1 = CASE WHEN ISNULL(@prProduct,0) = 0 THEN 1
-					   WHEN p.ProductId = @prProduct THEN 1
-					   ELSE 0
-				  END
-		AND 1 = CASE WHEN ISNULL(@prProductCategory,0) = 0 THEN 1
-					   WHEN Pc.CategoryId = @prProductCategory THEN 1
-					   ELSE 0
-				  END
-		AND 1 = CASE WHEN ISNULL(@prProductPackage,0) = 0 THEN 1
-					 WHEN PP.ProdPkgId = @prProductPackage THEN 1
-					 ELSE 0
-				END
-		AND 1 = CASE WHEN ISNULL(@prStatus,0) = 0 THEN 1
-					 WHEN a.AppStatusId = @prStatus THEN 1
-					 ELSE 0
-				END
-		AND 1 = CASE WHEN ISNULL(@prAgent,'') = '' THEN 1
-					 WHEN ca.Agent = @prAgent THEN 1
-					 ELSE 0
-				END
-		AND 1 = CASE WHEN ISNULL(@prSubmittedFrom,'') = '' OR ISNULL(@prSubmittedTo,'') = '' THEN 1
-					 WHEN CONVERT(DATE, ca.CreatedOn) BETWEEN @prSubmittedFrom AND @prSubmittedTo THEN 1
-					 ELSE 0
-				END	
-		AND 1 = CASE WHEN ISNULL(@prActivatedFrom,'') = '' OR ISNULL(@prActivatedTo,'') = '' THEN 1
-					 WHEN CONVERT(DATE, ca.ActivationDate)  BETWEEN @prActivatedFrom AND @prActivatedTo THEN 1
-					 ELSE 0
-				END	
-		AND 1 = CASE WHEN ISNULL(@prResidentialType,'') = '' THEN 1
-					 WHEN ca.ResidentialType = @prResidentialType THEN 1
-					 ELSE 0
-				END	
-		AND 1 = CASE WHEN @prIsAdmin  = 1 THEN 1
-		             WHEN @prIsAdmin  = 0 AND ca.Agent = tm.AgentUsername THEN 1
-					 ELSE 0
-				END
-		AND 1 = CASE wHEN @prDocumentCompleted IS NULL THEN 1
-		             wHEN @prDocumentCompleted = 0 AND ISNULL(ca.DocumentCompleted, 0) = 0 THEN 1
-		             wHEN @prDocumentCompleted = 1 AND ca.DocumentCompleted = 1 THEN 1
-					 ELSE 0 
-				END
-		AND 1 = CASE WHEN ISNULL(@prKeyword,'') = '' THEN 1
-					 WHEN ca.CustomerName LIKE '%' + @prKeyword + '%' 
-						  OR ca.OrderNo LIKE '%' + @prKeyword + '%'
-					      OR ca.ResidentialName LIKE '%' + @prKeyword + '%' THEN 1
-					 ELSE 0
-				END	
-		AND 1 = CASE WHEN ISNULL(@prFilterMode , 0) = 0 THEN 1
-					 WHEN @prFilterMode = 1 AND msg.TotalUnreadMsg > 0 THEN 1   -- IncomingMessage
-					 WHEN @prFilterMode = 2 AND ac.CommId IS NULL THEN 1   -- NoCommissionSetup
-					 WHEN @prFilterMode = 3 AND cl.OddClaimed = 1 THEN 1 -- OddCLaim
-					 ELSE 0
-		        END
-
+		) cl'  + 
+		CASE WHEN @vWhereQuery <> '' THEN ' WHERE ' + @vWhereQuery  ELSE '' END
+		
 		PRINT @vSelectQuery
-		-- insert the dynamic query results into temp table
+		---- insert the dynamic query results into temp table
+		--INSERT INTO @var_Table
+		EXEC SP_ExecuteSQL @vSelectQuery, N'@vCurrentPage INT,
+											@vPageSize INT,
+											@vProduct INT,
+											@vProductCategory INT,
+											@vProductPackage INT,
+											@vStatus INT,
+											@vAgent VARCHAR(50),
+											@vSubmittedFrom SMALLDATETIME,
+											@vSubmittedTo SMALLDATETIME,
+											@vActivatedFrom SMALLDATETIME,
+											@vActivatedTo SMALLDATETIME,
+											@vResidentialType VARCHAR(30),
+											@vKeyword VARCHAR(100),
+											@vDocumentCompleted BIT,
+											@vIsAdmin BIT,
+											@vAgentId INT,
+											@vFilterMode INT ', 
+											@vCurrentPage = @prCurrentPage,
+											@vPageSize = @prPageSize,
+											@vProduct = @prProduct,
+											@vProductCategory = @prProductCategory,
+											@vProductPackage = @prProductPackage,
+											@vStatus = @prStatus,
+											@vAgent = @prAgent,
+											@vSubmittedFrom = @prSubmittedFrom,
+											@vSubmittedTo = @prSubmittedTo,
+											@vActivatedFrom = @prActivatedFrom,
+											@vActivatedTo = @prActivatedTo,
+											@vResidentialType = @prResidentialType,
+											@vKeyword = @prKeyword,
+											@vDocumentCompleted = @prDocumentCompleted,
+											@vIsAdmin = @prIsAdmin,
+											@vAgentId = @prAgentId,
+											@vFilterMode = @prFilterMode;
+
 		INSERT INTO @var_Table
-		EXEC SP_ExecuteSQL @vSelectQuery
+		SELECT *
+		FROM  ##temp_Table
 
 		SELECT ApplicationId,
 				CustomerName,
@@ -180,6 +231,7 @@ BEGIN
 				CommIsConfigured,
 				OddClaimed
 		FROM  @var_Table
+		WHERE RowNum Between @vFromRow AND @vToRow
 
 		SELECT @oTotalRecord = COUNT(ApplicationId) FROM ##temp_Table
 		SELECT @oTotalUnreadMsg = COUNT(ApplicationId) FROM ##temp_Table WHERE TotalUnreadMsg > 0
@@ -187,7 +239,7 @@ BEGIN
 		SELECT @oTotalOddClaimed = COUNT(ApplicationId) FROM ##temp_Table WHERE OddClaimed = 1
 
 		DROP TABLE  ##temp_Table
-
+		DROP TABLE  ##TeamMembers
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

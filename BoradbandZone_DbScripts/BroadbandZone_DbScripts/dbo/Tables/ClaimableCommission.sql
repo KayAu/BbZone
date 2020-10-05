@@ -17,3 +17,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [ix_ClaimableCommission_ApplicationId]
+    ON [dbo].[ClaimableCommission]([ApplicationId] ASC);
+

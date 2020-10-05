@@ -28,6 +28,7 @@ BEGIN
 		Status VARCHAR(20),
 		CompletedOn SMALLDATETIME,
 		ReferenceNo VARCHAR(25),
+		RecNo INT,
 		RowNum INT
 	)
 
@@ -37,13 +38,18 @@ BEGIN
 		-- get row from and row to based on current page
 		SELECT @vSelectQuery =  dbo.fn_GenerateDynamicQuery(@prCurrentPage, @prPageSize, @prSortColumn, @prSortInAsc)
 
-		SELECT w.WithdrawalId,			
+		SELECT  w.WithdrawalId,			
 				w.Agent,
 				w.WithdrawAmount,
 				w.CreatedOn,
 				w.Status,
 				w.CompletedOn,
-				w.ReferenceNo
+				w.ReferenceNo,
+				RecNo = ROW_NUMBER() OVER (PARTITION BY w.Agent
+														,w.WithdrawAmount
+														,w.CreatedOn
+														,w.Status
+											ORDER BY w.WithdrawalId ASC) 
 		INTO ##temp_Table
 		FROM Withdrawal w
 		WHERE 1 = CASE WHEN ISNULL(@prStatus,'') = '' THEN 1
@@ -63,20 +69,22 @@ BEGIN
 					 ELSE 0
 				END
 
+		-- Remove duplicate submissions
+		DELETE FROM ##temp_Table WHERE RecNo = 2
+
 		PRINT @vSelectQuery
 		-- insert the dynamic query results into temp table
 		INSERT INTO @var_Table
 		EXEC SP_ExecuteSQL @vSelectQuery
 
-		SELECT 
-			WithdrawalId,			
-			Agent,
-			Amount = FORMAT(Amount, 'C2', 'ms-MY'),
-			SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
-			Status,
-			CompletedOn = FORMAT(CompletedOn, 'MM/dd/yyyy'),
-			ReferenceNo
-		FROM  @var_Table
+		SELECT  WithdrawalId,			
+				Agent,
+				Amount = FORMAT(Amount, 'C2', 'ms-MY'),
+				SubmittedOn = FORMAT(SubmittedOn, 'MM/dd/yyyy'),
+				Status,
+				CompletedOn = FORMAT(CompletedOn, 'MM/dd/yyyy'),
+				ReferenceNo
+		FROM @var_Table
 
 		SELECT @oTotalRecord = COUNT(*) FROM ##temp_Table
 		SELECT @oTotalAmountClaimed = CASE WHEN @oTotalRecord = 0 THEN 0 

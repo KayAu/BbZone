@@ -37,7 +37,7 @@ BEGIN
 			AND ac.CommId IS NULL
 			AND pc.IsActive = 1
 		)
-		AND 1 = CASE WHEN @prSuperiorId IS NULL AND a1.SuperiorId IS NULL THEN 1  -- ADMIN
+		AND 1 = CASE WHEN @prSuperiorId IS NULL AND ISNULL(a1.SuperiorId,0) = 0 THEN 1  -- ADMIN
 					 WHEN a1.SuperiorId = @prSuperiorId THEN 1
 					 ELSE 0
 				END

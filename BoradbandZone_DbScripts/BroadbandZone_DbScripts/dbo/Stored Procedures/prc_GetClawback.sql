@@ -25,8 +25,11 @@ BEGIN
 		DeductAmount MONEY,
 		IsDeducted BIT,
 		DeductedOn SMALLDATETIME NULL,
+		Cancelled BIT,
 		CreatedOn SMALLDATETIME NOT NULL,
 		CreatedBy VARCHAR(50) NOT NULL,
+		ModifiedOn SMALLDATETIME NOT NULL,
+		ModifiedBy VARCHAR(50) NOT NULL,
 		Editable BIT NULL,
 		RowNum INT
 	)
@@ -44,14 +47,20 @@ BEGIN
 					   ca.CustomerName,
 					   ca.OrderNo,
 					   a.UserLogin,
-					   TransactionType = CASE WHEN cc.IsOverride = 1  THEN 'Override' ELSE 'Own Sales' END,
+					   TransactionType = CASE WHEN cc.IsOverride = 1 THEN 'Override' ELSE 'Own Sales' END,
 					   c.Remarks,
 					   wi.DeductAmount,
 					   IsDeducted = CASE WHEN NOT wi.WithdrawalItemId IS NULL THEN 1 ELSE 0 END,
 					   DeductedOn = wi.TransactionDate,
+					   c.Cancelled,
 					   c.CreatedOn,
 					   c.CreatedBy,
-					   Editable = 1 -- CASE WHEN NOT wi.WithdrawalId IS NULL THEN 1 ELSE 0 END
+					   c.ModifiedOn,
+					   c.ModifiedBy,
+					   Editable = CASE WHEN wi.WithdrawalItemId IS NULL THEN 1 
+									   WHEN c.Cancelled IS NULL THEN 1 
+									   ELSE 0 
+								  END
 		INTO ##temp_Table
 		FROM Clawback c
 		INNER JOIN ClaimableCommission cc ON cc.ApplicationId = c.ApplicationId
@@ -89,8 +98,11 @@ BEGIN
 				DeductAmount = FORMAT(DeductAmount, 'C', 'ms-MY'),
 				IsDeducted,
 				DeductedOn = FORMAT(DeductedOn, 'MM/dd/yyyy') ,
+				Cancelled,
 				CreatedOn,
 				CreatedBy,
+				ModifiedOn,
+				ModifiedBy,
 				Editable
 		FROM  @var_Table
 

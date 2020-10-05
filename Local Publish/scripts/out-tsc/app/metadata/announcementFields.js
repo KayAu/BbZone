@@ -21,7 +21,7 @@ var NewAnnouncementFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
-                "controlType": "textarea",
+                "controlType": "richTextEditor",
                 "required": false,
                 "maxLength": 500
             }
@@ -125,7 +125,7 @@ var EditAnnouncementFields = /** @class */ (function () {
             "hidden": false,
             "dataFieldControl": {
                 "controlName": "descriptions",
-                "controlType": "textarea",
+                "controlType": "richTextEditor",
                 "required": false,
                 "maxLength": 500
             }

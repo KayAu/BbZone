@@ -41,11 +41,11 @@ BEGIN
 		
 		IF @vIsCompleted = 1 
 		BEGIN	
+			INSERT INTO @tSuperiorHierarchy
+			SELECT * FROM [dbo].[fnGetMySuperiors](@vAgentId) 
+
 			IF @vHasClaimExists = 0
 			BEGIN
-				INSERT INTO @tSuperiorHierarchy
-				SELECT * FROM [dbo].[fnGetMySuperiors](@vAgentId) 
-
 				INSERT INTO ClaimableCommission
 				SELECT @prAppId,
 					   @vAgentId,
@@ -73,13 +73,40 @@ BEGIN
 					   @prCreatedBy		   
 				FROM @tSuperiorHierarchy a
 				LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
-				WHERE ISNULL(a1.SuperiorId,0) <> 0
+				WHERE ISNULL(a.SuperiorId, 0) <> 0
 			END
+			ELSE
+				BEGIN
+					WITH cteUpdateComm (ApplicationId, AgentId, Commission)
+					AS
+					(
+						SELECT @prAppId,
+							   @vAgentId,
+							   ISNULL(ac.AgentCommission, 0)	    
+						FROM @tSuperiorHierarchy a
+						LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
+						WHERE a.AgentLevel = 1 -- the agent who submitted order
+						UNION ALL
+						SELECT @prAppId,
+							   a.SuperiorId,
+							   ISNULL(ac.SuperiorCommission, 0)	   
+						FROM @tSuperiorHierarchy a
+						LEFT JOIN AgentCommission ac ON ac.AgentId = a.AgentId and ac.CategoryId = @vCategoryId
+						WHERE ISNULL(a.SuperiorId, 0) <> 0	
+					)
 
-			UPDATE CustomerApplication
-			SET ActivationDate = GETDATE()
-			WHERE ApplicationId = @prAppId
+					UPDATE cc
+					SET cc.AgentCommOnDate = u.Commission
+					FROM ClaimableCommission cc
+					INNER JOIN cteUpdateComm u ON cc.ApplicationId = u.ApplicationId AND cc.AgentId = u.AgentId
+				END			
 		END
+		
+		UPDATE CustomerApplication
+		SET ActivationDate = GETDATE()
+		WHERE ApplicationId = @prAppId
+		AND @vIsCompleted = 1 
+		AND ActivationDate IS NULL
 
 	END TRY 
 	BEGIN CATCH

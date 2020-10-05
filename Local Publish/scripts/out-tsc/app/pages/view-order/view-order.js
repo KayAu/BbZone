@@ -90,6 +90,7 @@ var ViewOrder = /** @class */ (function (_super) {
         else {
             this.searchParams.filterByMode = filterBy;
         }
+        localStorage.setItem('viewOrderParams', JSON.stringify(this.searchParams));
         this.reloadData();
     };
     ViewOrder.prototype.filterRecords = function () {

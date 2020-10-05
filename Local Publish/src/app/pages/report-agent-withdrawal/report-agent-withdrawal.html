@@ -1,0 +1,76 @@
+﻿<page-header [title]="'Agent Withdrawal Report'" [parentCategory]="'Reports'"></page-header>
+<div class="wrapper wrapper-content animated fadeInRight">
+    <loading></loading>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox ">
+                <div class="ibox-title pad10R">
+                    <h5>Agent Withdrawal Report</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="col-md-6 mrg5T pad0L flexbox">
+                        <div class="col-sm-8 m-b-xs pad0L">
+                            <div class="input-group mrg5R">
+                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                <input type="text"
+                                       ngxDaterangepickerMd
+                                       class="form-control form-control-sm mrg10R "
+                                       [locale]="{applyLabel: 'OK', format: 'DD-MMM-YYYY', autoApply: true}"
+                                       [(ngModel)]="searchParams"
+                                       (ngModelChange)="filterDataByDate();"
+                                       placeholder="Submission date"
+                                       startKey="startDate"
+                                       endKey="endDate" />
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-default mrg10B mrg10R" (click)="clearSearchParam()">Reset</button>
+                    </div>
+                    <div class="col-md-6 mrg5T">
+                        <button class="btn btn-warning float-right" (click)="exportRecords()" [disabled]="dataSource.length == 0"><i class="fa fa-file-excel-o mrg5R"></i>Export</button>
+                    </div>
+                    <div class="table-responsive mrg10T">
+                        <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap4">
+
+                            <table class="table table-striped mrg10T dataTable table-bordered" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
+                                <thead>
+                                    <tr>
+                                        <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let record of dataSource; let rowNo = index">
+                                        <ng-container *ngFor="let field of dataRowMapper">
+                                            <td>
+                                                <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
+                                                <ng-template #displayBadge>
+                                                    <span class="badge" *ngIf="record.transactionType"
+                                                          [ngClass]="{'badge-info': record.transactionType == 'Override',
+                                                                'badge-warning': record.transactionType == 'Charges',
+                                                                'badge-blue-alt': record.transactionType == 'Incentives',
+                                                                'badge-success': record.transactionType == 'Own Sales',
+                                                                'badge-danger': record.transactionType == 'Clawback'}">
+                                                        {{record.transactionType}}
+                                                    </span>
+                                                    <small class="float-right text-navy mrg25R" *ngIf="record.agentComm">{{record.agentComm}}%</small>
+                                                </ng-template>
+                                            </td>
+                                        </ng-container>
+                                    </tr>
+                                    <tr *ngIf="dataSource.length === 0">
+                                        <td [attr.colspan]="dataRowMapper.length+1">
+                                            <div class="mrg45A text-center opacity-40">
+                                                <i class="fa fa-fw fa-file-text font-size-35"></i>
+                                                <h4>No Records Available</h4>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <pager [totalRecord]="totalRecords" (pageClick)="pageChanged($event)" (pageSizeClick)="pageSizeChanged($event)"></pager>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -10,6 +10,7 @@ BEGIN
 	SELECT @oEmails = COALESCE(@oEmails + '; ', '') + Email 
 	FROM AdminUser
 	WHERE NOT Email IS NULL
+	AND IsActive = 1
 
 	END TRY 
 	BEGIN CATCH

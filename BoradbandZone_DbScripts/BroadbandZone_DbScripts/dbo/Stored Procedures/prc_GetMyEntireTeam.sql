@@ -13,8 +13,9 @@ BEGIN
 			   AgentId,
 			   SuperiorId,
 			   AgentLevel = 0
-		FROM Agent
+		FROM Agent 
 		WHERE AgentId = @prSuperiorId
+		AND IsActive = 1
 		UNION ALL
 		SELECT AgentUsername AS UserLogin,
 			   FullName,

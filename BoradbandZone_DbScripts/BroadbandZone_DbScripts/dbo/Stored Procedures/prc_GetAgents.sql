@@ -21,6 +21,7 @@ BEGIN
 		IsActive BIT,
 		SuperiorName VARCHAR(50),
 		CreatedOn SMALLDATETIME,
+		LastLoginOn VARCHAR(15),
 		RowNum INT
 	)
 
@@ -38,12 +39,20 @@ BEGIN
 			  ,a1.IsActive
 			  ,SuperiorName = CASE WHEN NOT a1.SuperiorId IS NULL THEN a2.UserLogin ELSE NULL END
 			  ,a1.CreatedOn
+			  ,l.LastLoginOn	
 		INTO ##temp_Table
 		FROM Agent a1
 		LEFT JOIN Agent a2 ON a1.SuperiorId = a2.AgentId
+		CROSS APPLY
+		(
+			SELECT TOP 1 LastLoginOn = FORMAT(LoginDate, 'MM/dd/yyyy')
+			FROM LoginTrail
+			WHERE AgentId = a1.AgentId
+			ORDER BY LoginDate DESC
+		) l
 		WHERE 1 = CASE WHEN ISNULL(@prSearchKeyword,'') = ''  THEN 1
-					   WHEN a1.Fullname LIKE @prSearchKeyword + '%' OR
-					        a2.Fullname LIKE @prSearchKeyword + '%' THEN 1
+					   WHEN a1.UserLogin LIKE '%' + @prSearchKeyword + '%' OR
+					        a2.UserLogin LIKE '%' + @prSearchKeyword + '%' THEN 1
 					   ELSE 0
 				  END
 		AND 1 = CASE WHEN @prRecordStatus IS NULL THEN 1
@@ -64,7 +73,8 @@ BEGIN
 				MobileNo,
 				TelNo,
 				IsActive,
-				SuperiorName
+				SuperiorName,
+				LastLoginOn
 		FROM  @var_Table
 
 		SELECT @oTotalRecord = COUNT(AgentId) FROM ##temp_Table

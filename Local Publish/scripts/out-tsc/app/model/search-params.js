@@ -32,9 +32,10 @@ var ApprovalParams = /** @class */ (function () {
 }());
 exports.ApprovalParams = ApprovalParams;
 var SearchWithdrawalToSubmitParams = /** @class */ (function () {
-    function SearchWithdrawalToSubmitParams(keyword, submittedDate) {
+    function SearchWithdrawalToSubmitParams(keyword, submittedDate, agent) {
         this.keyword = keyword;
         this.submittedDate = submittedDate;
+        this.agent = agent;
     }
     return SearchWithdrawalToSubmitParams;
 }());
@@ -84,4 +85,16 @@ var SearchCompletedOrderParams = /** @class */ (function () {
     return SearchCompletedOrderParams;
 }());
 exports.SearchCompletedOrderParams = SearchCompletedOrderParams;
+//export class SearchByDateParams {
+//    constructor(
+//        public productId: string,
+//        public productCategoryId: string,
+//        public productPackageId: string,
+//        public agent: string,
+//        public activatedDate: DateRange,
+//        public paymentDate: DateRange,
+//        public documentCompleted: boolean,
+//        public commissionStatus: string,
+//    ) { }
+//}
 //# sourceMappingURL=search-params.js.map

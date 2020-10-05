@@ -40,7 +40,7 @@ BEGIN
 			   ca.ApplicationId
 			  ,pc.Category
 			  ,pp.PackageName
-			  ,Commission = FORMAT(pp.Commission, 'C', 'ms-MY')
+			  ,Commission = FORMAT(pp.Commission, 'C', 'ms-my')
 			  ,ca.Agent
 			  ,ca.CompanyName
 			  ,ca.CompanyRegNo
@@ -111,11 +111,13 @@ BEGIN
 					 ELSE 0
 				END
 		AND 1 = CASE wHEN @prDocumentCompleted IS NULL THEN 1
-		             wHEN @prDocumentCompleted  = ca.DocumentCompleted THEN 1
+		             wHEN @prDocumentCompleted = 1 AND ca.DocumentCompleted = 1 THEN 1
+					 wHEN ISNULL(ca.DocumentCompleted, 0) = @prDocumentCompleted THEN 1
 					 ELSE 0 
 				END
 		AND 1 = CASE WHEN ISNULL(@prKeyword,'') = '' THEN 1
 					 WHEN ca.CustomerName LIKE '%' + @prKeyword + '%' 
+						  OR ca.CompanyName LIKE '%' + @prKeyword + '%'
 						  OR ca.OrderNo LIKE '%' + @prKeyword + '%'
 					      OR ca.ResidentialName LIKE '%' + @prKeyword + '%' THEN 1
 					 ELSE 0

@@ -21,6 +21,7 @@ BEGIN
 		AND NOT cc.ClaimWithdrawalId IS NULL
 		AND cc.DeductedWithdrawalId IS NULL -- No clawback submitted yet
 		AND c.ClawbackId IS NULL
+		AND s.Status = 'Post Complete'
 	END TRY 
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;

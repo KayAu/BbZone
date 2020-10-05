@@ -51,3 +51,10 @@
 
 
 
+
+
+
+GO
+CREATE NONCLUSTERED INDEX [ix_CustomerApplication_Agent]
+    ON [dbo].[CustomerApplication]([Agent] ASC);
+

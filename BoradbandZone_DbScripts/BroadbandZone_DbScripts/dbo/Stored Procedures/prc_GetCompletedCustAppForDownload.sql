@@ -83,7 +83,8 @@ BEGIN
 					 ELSE 0
 				END	
 		AND 1 = CASE wHEN @prDocumentCompleted IS NULL THEN 1
-		             wHEN @prDocumentCompleted  = ca.DocumentCompleted THEN 1
+		             wHEN @prDocumentCompleted = 0 AND ISNULL(ca.DocumentCompleted, 0) = 0 THEN 1
+		             wHEN @prDocumentCompleted = 1 AND ca.DocumentCompleted = 1 THEN 1
 					 ELSE 0 
 				END
 		AND 1 = CASE wHEN @prCommStatus IS NULL THEN 1
@@ -106,4 +107,5 @@ BEGIN
 	BEGIN CATCH
 		EXECUTE prc_LogError @vStoreProcName;
 	END CATCH;	
+
 END
