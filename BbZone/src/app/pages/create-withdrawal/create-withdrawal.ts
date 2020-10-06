@@ -92,11 +92,16 @@ export class CreateWithdrawal extends ListEvent {
 
     allItemsSelected() {
         this.dataSource.forEach((selectedItem, i, self) => {              
-            if (self[i].transactionType === 'Own Sales' || self[i].transactionType === 'Override') {               
-                if (self[i].selected !== this.selectAllItems) {
-                    self[i].selected = this.selectAllItems;
-                    this.selectedItems.push(self[i]);
-                }        
+            if (self[i].transactionType === 'Own Sales' || self[i].transactionType === 'Override') {  
+                if (this.selectAllItems) {
+                    if (self[i].selected !== this.selectAllItems) {
+                        this.selectedItems.push(self[i]);
+                    }     
+                }
+                else {
+                    this.selectedItems.splice(this.selectedItems.indexOf(self[i]), 1);
+                }
+                self[i].selected = this.selectAllItems;
             }
         });
 

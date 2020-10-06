@@ -104,10 +104,15 @@ var CreateWithdrawal = /** @class */ (function (_super) {
         var _this = this;
         this.dataSource.forEach(function (selectedItem, i, self) {
             if (self[i].transactionType === 'Own Sales' || self[i].transactionType === 'Override') {
-                if (self[i].selected !== _this.selectAllItems) {
-                    self[i].selected = _this.selectAllItems;
-                    _this.selectedItems.push(self[i]);
+                if (_this.selectAllItems) {
+                    if (self[i].selected !== _this.selectAllItems) {
+                        _this.selectedItems.push(self[i]);
+                    }
                 }
+                else {
+                    _this.selectedItems.splice(_this.selectedItems.indexOf(self[i]), 1);
+                }
+                self[i].selected = _this.selectAllItems;
             }
         });
         this.updateWithdrawalAmt();

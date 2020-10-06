@@ -57,11 +57,10 @@
                 </div>
                 <div class="ibox-content">
                     <div class="col-md-12 pad0L mrg20B flexbox">
-                        <div class="col-sm-3 m-b-xs pad0L">
+                        <div class="col-sm-3 m-b-xs pad0L" *ngIf="currentUser.isAdmin">
                             <data-control [(ngModel)]="selectedAgent" [fieldId]="agentField.controlName"
                                           [field]="agentField" [forDataFilter]="false" name="{{agentField.controlName}}"
-                                          (onModelChanged)="getAgentWithdrawalItems()"
-                                          *ngIf="currentUser.isAdmin"></data-control>
+                                          (onModelChanged)="getAgentWithdrawalItems()"></data-control>
                         </div>
                         <div class="col-sm-4 m-b-xs pad0L">
                             <div class="input-group mrg5R">
