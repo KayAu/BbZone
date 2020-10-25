@@ -120,7 +120,8 @@ export class CreateWithdrawal extends ListEvent {
             withdrawAmount: this.totalWithdrawalAmt,
             claimed: this.totalSelectedAmount,
             incentives: this.totalIncentives,
-            deduction: this.totalAmountToDeduct
+            deduction: this.totalAmountToDeduct,
+            agent: this.selectedAgent ? this.selectedAgent: null
         }
 
         this.isUpdating = true;

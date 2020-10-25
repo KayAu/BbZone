@@ -68,7 +68,7 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     // Create Withdrawal transaction
-                    newRecord.Agent = currentUser.Username;
+                    newRecord.Agent = string.IsNullOrEmpty(newRecord.Agent) ?  currentUser.Username : newRecord.Agent;
                     newRecord.Status = WithdrawalStatus.Pending.ToString();
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
                     db.Withdrawals.Add(newRecord);

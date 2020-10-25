@@ -9586,7 +9586,8 @@ var CreateWithdrawal = /** @class */ (function (_super) {
             withdrawAmount: this.totalWithdrawalAmt,
             claimed: this.totalSelectedAmount,
             incentives: this.totalIncentives,
-            deduction: this.totalAmountToDeduct
+            deduction: this.totalAmountToDeduct,
+            agent: this.selectedAgent ? this.selectedAgent : null
         };
         this.isUpdating = true;
         this.dataService.postForm(apiController_1.ApiController.WithdrawalSubmit, newRecord).subscribe(function (data) {
