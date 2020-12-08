@@ -7,15 +7,22 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 using DropdownItem = BroadbandZone_App.Models.DropdownItem;
 
 namespace BroadbandZone_App.WebApi
 {
+    //[Authorize]
     public class DropdownController : ApiController
     {
-        
+        //private AuthenticatedUser currentUser;
+        //public DropdownController()
+        //{
+        //    currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        //}
+
         [Route("api/Dropdown/GetDocStatus")]
         // GET api/<controller>
         public IHttpActionResult GetDocStatus()
@@ -214,13 +221,13 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+        [Authorize]
         [Route("api/Dropdown/GetAgents")]
         public IHttpActionResult GetAgents()
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
+                AuthenticatedUser  currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
                 using (var db = new BroadbandZoneEntities())
                 {
                     var agentId = !currentUser.IsAdmin ? currentUser.AgentId : null;

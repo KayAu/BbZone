@@ -373,19 +373,19 @@ var AppComponent = /** @class */ (function () {
         });
     }
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        //Start watching for user inactivity.
-        this.userIdle.startWatching();
-        // Start watching when user idle is starting.
-        this.userIdle.onTimerStart().subscribe(function (count) { return console.log(count); });
-        // Start watch when time is up.
-        this.userIdle.onTimeout().subscribe(function () {
-            return _this.logout();
-        });
+        ////Start watching for user inactivity.
+        //this.userIdle.startWatching();
+        //// Start watching when user idle is starting.
+        //this.userIdle.onTimerStart().subscribe(count => console.log(count));
+        //// Start watch when time is up.
+        //this.userIdle.onTimeout().subscribe(() =>
+        //    this.logout()
+        //);
     };
-    AppComponent.prototype.unloadHandler = function (event) {
-        localStorage.removeItem('currentUser');
-    };
+    //@HostListener('window:unload', ['$event'])
+    //unloadHandler(event) {
+    //   // localStorage.removeItem('currentUser');
+    //}
     AppComponent.prototype.onWindowScroll = function () {
         if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
             this.showScroll = true;
@@ -419,12 +419,6 @@ var AppComponent = /** @class */ (function () {
         core_1.ViewChild(nav_menu_component_1.NavMenuComponent),
         __metadata("design:type", nav_menu_component_1.NavMenuComponent)
     ], AppComponent.prototype, "navMenu", void 0);
-    __decorate([
-        core_1.HostListener('window:unload', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], AppComponent.prototype, "unloadHandler", null);
     __decorate([
         core_1.HostListener('window:scroll', []),
         __metadata("design:type", Function),
@@ -550,6 +544,7 @@ var reset_agent_password_1 = __webpack_require__(/*! ./pages/reset-agent-passwor
 var report_agent_submission_1 = __webpack_require__(/*! ./pages/report-agent-submission/report-agent-submission */ "./src/app/pages/report-agent-submission/report-agent-submission.ts");
 var report_agent_withdrawal_1 = __webpack_require__(/*! ./pages/report-agent-withdrawal/report-agent-withdrawal */ "./src/app/pages/report-agent-withdrawal/report-agent-withdrawal.ts");
 var angular_editor_1 = __webpack_require__(/*! @kolkov/angular-editor */ "./node_modules/@kolkov/angular-editor/fesm5/kolkov-angular-editor.js");
+var cookies_service_1 = __webpack_require__(/*! angular2-cookie/services/cookies.service */ "./node_modules/angular2-cookie/services/cookies.service.js");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -676,6 +671,7 @@ var AppModule = /** @class */ (function () {
                 broadcast_service_1.BroadcastService,
                 cascade_service_1.CascadeService,
                 router_service_1.RouterService,
+                cookies_service_1.CookieService,
                 loader_service_1.LoaderService,
                 {
                     provide: http_2.HTTP_INTERCEPTORS,
@@ -954,9 +950,6 @@ var BackButton = /** @class */ (function () {
         if (this.location.path) {
             this.location.back();
         }
-        //else {
-        //    this.router.navigate(['/']);
-        //}
     };
     BackButton = __decorate([
         core_1.Component({
@@ -3043,7 +3036,7 @@ var TableRowButtons = /** @class */ (function (_super) {
     TableRowButtons = __decorate([
         core_1.Component({
             selector: 'tablerow-buttons',
-            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\" *ngIf=\"!hideEdit\">\n                <i class=\"fa fa-edit\"></i>\n                 <span *ngIf=\"hideDelete\">Edit</span>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
+            template: "<div *ngIf=\"!editMode; else editActions\">\n              <button type=\"button\" class=\"btn btn-success mrg5R\" (click)=\"editRow()\" [ngClass]=\"{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }\" [disabled]=\"disabledEdit\" *ngIf=\"!hideEdit\">\n                <i class=\"fa fa-edit\"></i>\n                \n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-info\" (click)=\"deleteRow()\" *ngIf=\"!hideDelete\" [disabled]=\"disabledDelete\">\n                <i class=\"fa fa-trash\"></i>\n              </button>\n            </div>\n            <ng-template #editActions>\n              <button type=\"button\" class=\"btn btn-xs btn-primary mrg5R\" (click)=\"updateRow()\">\n                <i class=\"fa fa-check\"></i>\n              </button>\n              <button type=\"button\" class=\"btn btn-xs btn-warning\" (click)=\"cancelEdit()\">\n                <i class=\"fa fa-times\"></i>\n              </button>\n            </ng-template>"
         })
     ], TableRowButtons);
     return TableRowButtons;
@@ -3720,6 +3713,7 @@ var ApiController;
     ApiController["Password"] = "Password";
     ApiController["ReportAgentSubmission"] = "ReportAgentSubmission";
     ApiController["ReportAgentWithdrawal"] = "ReportAgentWithdrawal";
+    ApiController["Token"] = "token";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 
 
@@ -10262,6 +10256,10 @@ var Login = /** @class */ (function () {
         this.loadBanner();
         this.user = new login_user_1.LoginUser();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
+        if (!this.authenticationService.isCookiesCleared()) {
+            this.authenticationService.logout();
+        }
+        ;
     };
     Login.prototype.login = function () {
         var _this = this;
@@ -11699,7 +11697,7 @@ exports.ViewIncentives = ViewIncentives;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<page-header [title]=\"'View Orders'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <div *ngFor=\"let field of searchFields\" class=\"{{field.width}}\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                    <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                  [field]=\"field.dataFieldControl\" [forDataFilter]=\"true\" name=\"{{field.dataFieldControl.controlName}}\" ></data-control>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"filterRecords()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"float-left w-p100 mrg10T mrg5B\">\r\n                        <div class=\"col-md-8 pad0L\">\r\n                            <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.IncomingMessage, '': searchParams.filterByMode != orderFilter.IncomingMessage}\" (click)=\"filterView(orderFilter.IncomingMessage)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-envelope text-warning mrg5R\"></i> Incoming Message\r\n                                    <span class=\"label label-warning\">{{totalUnreadMsg}}</span>\r\n                                </label>\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.NoCommissionSetup, '': searchParams.filterByMode != orderFilter.NoCommissionSetup}\" (click)=\"filterView(orderFilter.NoCommissionSetup)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-exclamation-circle text-danger mrg5R\"></i> No Commission Setup\r\n                                    <span class=\"label label-danger\">{{totalCommINotConfig}}</span>\r\n                                </label>\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.OddClaim, '': searchParams.filterByMode != orderFilter.OddClaim}\" (click)=\"filterView(orderFilter.OddClaim)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-ban font-azure mrg5R\"></i> Odd Claim\r\n                                    <span class=\"label label-azure\">{{totalOddClaimed}}</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <button class=\"btn btn-warning mrg10B float-right\" (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\" *ngIf=\"currentUser.role == 'SuperAdmin'\"><i class=\"fa fa-file-excel-o mrg5R\"></i>Export</button>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td>\r\n                                                <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                <ng-template #displayBadge>\r\n                                                    <span class=\"badge \" [ngClass]=\"{'badge-info': record.status == 'Early Stage',\r\n                                                                                     'badge-primary': record.status == 'Post Complete'}\">\r\n                                                        {{record.status}}\r\n                                                    </span>\r\n                                                </ng-template>\r\n                                                <i class=\"fa fa-envelope float-right text-warning\" title=\"New incoming message\" *ngIf=\"field.fieldName == 'customerName' && record.totalUnreadMsg > 0\"></i>\r\n                                                <i class=\"fa fa-exclamation-circle float-right text-danger\" title=\"Commission is not been set for this category\" *ngIf=\"field.fieldName == 'agent' && !record.commIsConfigured\"></i>\r\n                                                <i class=\"fa fa-ban float-right font-azure\" title=\"Commission claimed for non completed order\" *ngIf=\"field.fieldName == 'status' && record.oddClaimed\"></i>\r\n                                            </td>\r\n                                        </ng-container>\r\n                                        <td>\r\n                                            <a class=\"btn btn-success \" [routerLink]='[\"/edit-order/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                        </td>\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
+module.exports = "<page-header [title]=\"'View Orders'\" [parentCategory]=\"''\"></page-header>\r\n<div class=\"wrapper wrapper-content animated fadeInRight\">\r\n    <div class=\"ibox-content m-b-sm border-bottom\" *ngIf=\"this.searchParams\">\r\n        <div class=\"row\">\r\n            <div *ngFor=\"let field of searchFields\" class=\"{{field.width}}\">\r\n                <div class=\"form-group\">\r\n                    <label class=\"col-form-label\" for=\"product_name\">{{field.displayText}}</label>\r\n                    <data-control [(ngModel)]=\"searchParams[field.dataFieldControl.controlName]\" [fieldId]=\"field.dataFieldControl.controlName\"\r\n                                  [field]=\"field.dataFieldControl\" [forDataFilter]=\"true\" name=\"{{field.dataFieldControl.controlName}}\" ></data-control>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-sm-2\">\r\n                <div class=\"form-group mrg30T\">\r\n                    <button class=\"btn btn-success mrg10R\" (click)=\"filterRecords()\">Search</button>\r\n                    <button class=\"btn btn-clear\" (click)=\"clearSearchParam()\">Clear</button>\r\n                </div>\r\n            </div>\r\n            \r\n        </div>\r\n    </div>\r\n    <loading></loading>\r\n    <div class=\"row\">\r\n        <div class=\"col-lg-12\">\r\n            <div class=\"ibox \">\r\n                <div class=\"ibox-content\">\r\n                    <div class=\"float-left w-p100 mrg10T mrg5B\">\r\n                        <div class=\"col-md-8 pad0L\">\r\n                            <div class=\"btn-group btn-group-toggle\" data-toggle=\"buttons\">\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.IncomingMessage, '': searchParams.filterByMode != orderFilter.IncomingMessage}\" (click)=\"filterView(orderFilter.IncomingMessage)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-envelope text-warning mrg5R\"></i> Incoming Message\r\n                                    <span class=\"label label-warning\">{{totalUnreadMsg}}</span>\r\n                                </label>\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.NoCommissionSetup, '': searchParams.filterByMode != orderFilter.NoCommissionSetup}\" (click)=\"filterView(orderFilter.NoCommissionSetup)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-exclamation-circle text-danger mrg5R\"></i> No Commission Setup\r\n                                    <span class=\"label label-danger\">{{totalCommINotConfig}}</span>\r\n                                </label>\r\n                                <label class=\"btn btn-white count-info pad35R pad20L pos-rel\" [ngClass]=\"{'active': searchParams.filterByMode == orderFilter.OddClaim, '': searchParams.filterByMode != orderFilter.OddClaim}\" (click)=\"filterView(orderFilter.OddClaim)\">\r\n                                    <input type=\"radio\" name=\"filter\">\r\n                                    <i class=\"fa fa-ban font-azure mrg5R\"></i> Odd Claim\r\n                                    <span class=\"label label-azure\">{{totalOddClaimed}}</span>\r\n                                </label>\r\n                            </div>\r\n                        </div>\r\n                        <button class=\"btn btn-warning mrg10B float-right\" (click)=\"exportRecords()\" [disabled]=\"dataSource.length == 0\" *ngIf=\"currentUser.role == 'SuperAdmin'\"><i class=\"fa fa-file-excel-o mrg5R\"></i>Export</button>\r\n                    </div>\r\n                    <div class=\"table-responsive\">\r\n                        <div id=\"DataTables_Table_0_wrapper\" class=\"dataTables_wrapper dt-bootstrap4\">\r\n                            <table class=\"table table-striped table-bordered mrg10T dataTable\" sortable [sort-column]=\"sortBy\" (onHeaderClick)=\"sortList($event)\">\r\n                                <thead>\r\n                                    <tr>\r\n                                        <th class=\"cell-width-5\">Action</th>\r\n                                        <th *ngFor=\"let col of dataRowMapper\" [sort-cell]=\"col.displayType == displayType.text ? col.fieldName: ''\" [ngClass]=\"col.colWidth\">{{col.headerText}}</th>                                       \r\n                                    </tr>\r\n                                </thead>\r\n                                <tbody>\r\n                                    <tr *ngFor=\"let record of dataSource; let rowNo = index\">\r\n                                        <td>\r\n                                            <a class=\"btn btn-success \" [routerLink]='[\"/edit-order/\", record[keyField]]'><i class=\"fa fa-file-text-o\"></i></a>\r\n                                        </td>\r\n                                        <ng-container *ngFor=\"let field of dataRowMapper\">\r\n                                            <td>\r\n                                                <data-field *ngIf=\"field.displayType != displayType.badge; else displayBadge\" [displayType]=\"field.displayType\" [displayValue]=\"record[field.fieldName]\"></data-field>\r\n                                                <ng-template #displayBadge>\r\n                                                    <span class=\"badge \" [ngClass]=\"{'badge-info': record.status == 'Early Stage',\r\n                                                                                     'badge-primary': record.status == 'Post Complete'}\">\r\n                                                        {{record.status}}\r\n                                                    </span>\r\n                                                </ng-template>\r\n                                                <i class=\"fa fa-envelope float-right text-warning\" title=\"New incoming message\" *ngIf=\"field.fieldName == 'customerName' && record.totalUnreadMsg > 0\"></i>\r\n                                                <i class=\"fa fa-exclamation-circle float-right text-danger\" title=\"Commission is not been set for this category\" *ngIf=\"field.fieldName == 'agent' && !record.commIsConfigured\"></i>\r\n                                                <i class=\"fa fa-ban float-right font-azure\" title=\"Commission claimed for non completed order\" *ngIf=\"field.fieldName == 'status' && record.oddClaimed\"></i>\r\n                                            </td>\r\n                                        </ng-container>\r\n\r\n                                    </tr>\r\n                                    <tr *ngIf=\"dataSource.length === 0\">\r\n                                        <td [attr.colspan]=\"dataRowMapper.length+1\">\r\n                                            <div class=\"mrg45A text-center opacity-40\">\r\n                                                <i class=\"fa fa-fw fa-file-text font-size-35\"></i>\r\n                                                <h4>No Records Available</h4>\r\n                                            </div>\r\n                                        </td>\r\n                                    </tr>\r\n                                </tbody>\r\n                            </table>\r\n                        </div>\r\n                        <pager [totalRecord]=\"totalRecords\" (pageClick)=\"pageChanged($event)\" (pageSizeClick)=\"pageSizeChanged($event)\"></pager>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n        </div>\r\n    </div>\r\n</div>\r\n"
 
 /***/ }),
 
@@ -12010,11 +12008,16 @@ var rxjs_1 = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js
 var operators_1 = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var data_service_1 = __webpack_require__(/*! ./data.service */ "./src/app/services/data.service.ts");
 var apiController_1 = __webpack_require__(/*! src/app/enums/apiController */ "./src/app/enums/apiController.ts");
+var core_2 = __webpack_require__(/*! angular2-cookie/core */ "./node_modules/angular2-cookie/core.js");
 var AuthenticationService = /** @class */ (function () {
-    function AuthenticationService(dataService) {
+    function AuthenticationService(dataService, cookieService) {
         this.dataService = dataService;
-        this.currentUserSubject = new rxjs_1.BehaviorSubject(JSON.parse(localStorage.getItem('currentUser')));
+        this.cookieService = cookieService;
+        var currentUser = this.cookieService.get('currentUser') !== undefined ? JSON.parse(this.cookieService.get('currentUser')) : null;
+        this.currentUserSubject = new rxjs_1.BehaviorSubject(currentUser);
         this.currentUser = this.currentUserSubject.asObservable();
+        //this.currentUserSubject = new BehaviorSubject<LoginUser>(JSON.parse(localStorage.getItem('currentUser')));
+        //this.currentUser = this.currentUserSubject.asObservable();
     }
     Object.defineProperty(AuthenticationService.prototype, "currentUserValue", {
         get: function () {
@@ -12025,11 +12028,11 @@ var AuthenticationService = /** @class */ (function () {
     });
     AuthenticationService.prototype.login = function (loginuser) {
         var _this = this;
-        return this.dataService.add(apiController_1.ApiController.User, loginuser).pipe(operators_1.map(function (user) {
+        return this.dataService.login(apiController_1.ApiController.Token, loginuser.username, loginuser.password, loginuser.isAdmin).pipe(operators_1.map(function (user) {
             // login successful if there's a jwt token in the response
             if (user && user.isAuthenticated) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem('currentUser', JSON.stringify(user));
+                _this.cookieService.put('currentUser', JSON.stringify(user));
                 _this.currentUserSubject.next(user);
             }
             return user;
@@ -12037,19 +12040,28 @@ var AuthenticationService = /** @class */ (function () {
     };
     AuthenticationService.prototype.updateLogin = function (user) {
         if (user) {
-            localStorage.setItem('currentUser', JSON.stringify(user));
+            //localStorage.setItem('currentUser', JSON.stringify(user));
+            this.cookieService.put('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
         }
     };
+    AuthenticationService.prototype.isCookiesCleared = function () {
+        return this.cookieService.get('currentUser') === '' ? true : false;
+    };
+    AuthenticationService.prototype.clearCookies = function () {
+        localStorage.removeItem('viewOrderParams');
+        this.cookieService.removeAll();
+    };
     AuthenticationService.prototype.logout = function () {
         // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+        //localStorage.removeItem('currentUser');
         localStorage.removeItem('viewOrderParams');
+        this.cookieService.removeAll();
         this.currentUserSubject.next(null);
     };
     AuthenticationService = __decorate([
         core_1.Injectable({ providedIn: 'root' }),
-        __metadata("design:paramtypes", [data_service_1.DataService])
+        __metadata("design:paramtypes", [data_service_1.DataService, core_2.CookieService])
     ], AuthenticationService);
     return AuthenticationService;
 }());
@@ -12161,41 +12173,68 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 var http_1 = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 var Rx_1 = __webpack_require__(/*! rxjs/Rx */ "./node_modules/rxjs-compat/_esm5/Rx.js");
+var angular2_cookie_1 = __webpack_require__(/*! angular2-cookie */ "./node_modules/angular2-cookie/core.js");
 var DataService = /** @class */ (function () {
-    function DataService(http) {
+    //headerOptions: any;
+    function DataService(http, cookieService) {
         this.http = http;
-        this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
+        this.cookieService = cookieService;
+        this.currentUser = null;
+        //this.headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }) };
     }
-    DataService.prototype.export = function (apiControllerName, filterParams) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob' }).catch(this.errorHandler);
+    DataService.prototype.getHeaderOptions = function () {
+        this.currentUser = this.cookieService.get('currentUser') !== undefined ? JSON.parse(this.cookieService.get('currentUser')) : null;
+        if (this.currentUser !== null) {
+            return {
+                headers: new http_1.HttpHeaders({
+                    'Content-Type': "application/json",
+                    Authorization: "Bearer " + this.currentUser.access_token
+                })
+            };
+        }
+        else {
+            return { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
+        }
     };
-    //login(loginuser: LoginUser): any {
-    //    const body = new HttpParams()
-    //        .set('grant_type', loginuser.isAdmin.toString())
-    //        .set('username', loginuser.username)
-    //        .set('password', loginuser.password)
-    //    return this.http.post('/token', body.toString(), {
-    //        observe: 'response',
-    //        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    //    }).catch(this.errorHandler); 
-    //}
+    DataService.prototype.getHeaderTokenOnlyOption = function () {
+        this.currentUser = this.cookieService.get('currentUser') !== undefined ? JSON.parse(this.cookieService.get('currentUser')) : null;
+        if (this.currentUser !== null) {
+            return { headers: new http_1.HttpHeaders({ Authorization: "Bearer " + this.currentUser.access_token }) };
+        }
+    };
+    DataService.prototype.export = function (apiControllerName, filterParams) {
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), {
+            headers: new http_1.HttpHeaders({ 'Content-Type': "application/json", Authorization: "Bearer " + this.currentUser.access_token }),
+            responseType: 'blob'
+        }).catch(this.errorHandler);
+    };
+    DataService.prototype.login = function (apiControllerName, username, password, isAdmin) {
+        var userData = "username=" + username + "&password=" + password + "&isAdmin=" + isAdmin + "&grant_type=password";
+        var loginHeaderOptions = new http_1.HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'No-Auth': 'True'
+        });
+        return this.http.post(this.getWebMethodUrl(apiControllerName), userData, {
+            headers: loginHeaderOptions
+        }).catch(this.errorHandler);
+    };
     DataService.prototype.get = function (apiControllerName, recordId) {
-        return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
+        return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.add = function (apiControllerName, record) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(record), this.headerOptions).catch(this.errorHandler);
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(record), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.postForm = function (apiControllerName, formData) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), formData).catch(this.errorHandler);
+        return this.http.post(this.getWebMethodUrl(apiControllerName), formData, this.getHeaderTokenOnlyOption()).catch(this.errorHandler);
     };
     DataService.prototype.updateForm = function (apiControllerName, recordId, formData) {
-        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), formData).catch(this.errorHandler);
+        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), formData, this.getHeaderTokenOnlyOption()).catch(this.errorHandler);
     };
     DataService.prototype.update = function (apiControllerName, recordId, record) {
-        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), JSON.stringify(record), this.headerOptions).catch(this.errorHandler);
+        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), JSON.stringify(record), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.remove = function (apiControllerName, recordId) {
-        return this.http.delete(this.getWebMethodUrl(apiControllerName, recordId)).catch(this.errorHandler);
+        return this.http.delete(this.getWebMethodUrl(apiControllerName, recordId), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.getListDataByPage = function (apiControllerName, fromRecord, pageSize, filterParams, sortColumn, sortInAsc) {
         if (pageSize === void 0) { pageSize = 25; }
@@ -12206,10 +12245,15 @@ var DataService = /** @class */ (function () {
             .append('sortColumn', sortColumn)
             .append('sortInAsc', sortInAsc.toString())
             .append('searchParams', searchParams);
-        return this.http.get(this.getWebMethodUrl(apiControllerName), { params: params }).catch(this.errorHandler);
+        var headers = new http_1.HttpHeaders({
+            'Content-Type': "application/json",
+            Authorization: "Bearer " + this.currentUser.access_token
+        });
+        var options = { headers: headers, params: params };
+        return this.http.get(this.getWebMethodUrl(apiControllerName), options).catch(this.errorHandler);
     };
     DataService.prototype.getAll = function (apiControllerName) {
-        return this.http.get(this.getWebMethodUrl(apiControllerName), this.headerOptions).catch(this.errorHandler);
+        return this.http.get(this.getWebMethodUrl(apiControllerName), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.getWebMethodUrl = function (apiControllerName, param) {
         if (param)
@@ -12233,7 +12277,7 @@ var DataService = /** @class */ (function () {
     };
     DataService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, angular2_cookie_1.CookieService])
     ], DataService);
     return DataService;
 }());

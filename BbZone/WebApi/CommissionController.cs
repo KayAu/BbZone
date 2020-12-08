@@ -10,12 +10,20 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class CommissionController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public CommissionController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
+
         //GetAppWithoutCommissionSet
         [HttpGet]
         [Route("api/Commission/GetAppWithoutCommissionSet")]
@@ -24,7 +32,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     var commSettings = db.GetAppWithoutCommAssigned(currentUser.AgentId).ToList();
@@ -45,7 +52,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     var commSettings = db.GetCommissionSettings(productId, currentUser.Username).ToList();
@@ -66,7 +72,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter allowCommConfig = new ObjectParameter("oAllowCommConfig", typeof(bool));
@@ -113,7 +118,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 DataTable dt = new DataTable();
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.Database.Connection.Open();
@@ -198,8 +202,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 using (var db = new BroadbandZoneEntities())
                 {
                     string strAgents = string.Join(";", newRecord.Agents);
@@ -231,9 +233,7 @@ namespace BroadbandZone_App.WebApi
         // PUT api/<controller>/5
         public IHttpActionResult Put(int id, CommissionSettings[] editedRecords)
         {
-            try { 
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
+            try {
                 using (var db = new BroadbandZoneEntities())
                 {
                     DataTable commSettings = editedRecords.ToDataTable();

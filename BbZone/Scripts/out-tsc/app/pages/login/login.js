@@ -32,6 +32,10 @@ var Login = /** @class */ (function () {
         this.loadBanner();
         this.user = new login_user_1.LoginUser();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
+        if (!this.authenticationService.isCookiesCleared()) {
+            this.authenticationService.logout();
+        }
+        ;
     };
     Login.prototype.login = function () {
         var _this = this;

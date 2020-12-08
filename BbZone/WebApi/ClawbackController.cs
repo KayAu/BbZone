@@ -9,12 +9,20 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class ClawbackController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public ClawbackController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
+
         // GET: api/<controller>
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
@@ -38,7 +46,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     newRecord.SetDateAndAuthor(currentUser.Fullname, "CreatedBy", "CreatedOn", "ModifiedBy", "ModifiedOn");
@@ -62,7 +69,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.Entry(editedRecord).State = EntityState.Modified;
@@ -89,7 +95,6 @@ namespace BroadbandZone_App.WebApi
                     var deleteRecord = db.Clawbacks.Find(id);
                     if (deleteRecord != null)
                     {
-                        AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                         deleteRecord.SetDateAndAuthor(currentUser.Fullname, "ModifiedBy", "ModifiedOn");
                         deleteRecord.Cancelled = true;
                         db.SaveChanges();
@@ -106,7 +111,6 @@ namespace BroadbandZone_App.WebApi
 
         private Gridview<GetClawback_Result> LoadClawback(int currentPage, int pageSize, string sortColumn, bool sortInAsc, SearchClawbackParams filterBy)
         {
-            AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
             ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
             var results = (new BroadbandZoneEntities()).GetClawback(currentPage,
                                                                     pageSize,

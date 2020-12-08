@@ -15,8 +15,5 @@ export class BackButton {
         if (this.location.path) {
             this.location.back();
         }
-        //else {
-        //    this.router.navigate(['/']);
-        //}
     }
 }

@@ -174,7 +174,6 @@ namespace BroadbandZone_App.Helper
                 sb.Append("</table>");
                 sb.Append("</html></body>");
 
-                //string receipientEmail = "kayeau80@gmail.com";// GetAdminEmails();
                 SmtpClient SmtpClient = new SmtpClient();
                 MailMessage mail = new MailMessage();
                 foreach (string adminEmail in GetAdminEmails())
@@ -186,11 +185,11 @@ namespace BroadbandZone_App.Helper
                 mail.IsBodyHtml = true;
                 mail.Body = sb.ToString();
 
-                SmtpClient.Send(mail);
+               SmtpClient.Send(mail);
             }
             catch (Exception ex)
             {
-                throw new Exception($"MailHelper.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
+                throw new Exception($"MailHelper.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message},{ex.InnerException.Message}");
             }
         }
 

@@ -6,10 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class PasswordController : ApiController
     {
         [HttpPost]
@@ -17,7 +19,7 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
                 var agent = (new BroadbandZoneEntities()).ResetAgentPassword(editedRecord.Agent, editedRecord.NewPassword, currentUser.Fullname).FirstOrDefault();
                 MailHelper.SendPasswordResetEmail(agent.Email, agent.Fullname, editedRecord.NewPassword);
                 return Ok();

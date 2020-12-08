@@ -45,7 +45,6 @@ export class ViewOrder extends ListEvent {
             this.totalCommINotConfig = data.totalCommINotConfig;
             this.totalOddClaimed = data.totalOddClaimed;
         });
-
     }
 
     ngOnInit() {

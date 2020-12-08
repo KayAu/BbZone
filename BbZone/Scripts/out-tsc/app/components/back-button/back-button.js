@@ -21,9 +21,6 @@ var BackButton = /** @class */ (function () {
         if (this.location.path) {
             this.location.back();
         }
-        //else {
-        //    this.router.navigate(['/']);
-        //}
     };
     BackButton = __decorate([
         core_1.Component({

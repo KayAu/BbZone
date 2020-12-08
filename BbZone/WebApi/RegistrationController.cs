@@ -10,15 +10,15 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
-{
+{    
     public class RegistrationController : ApiController
     {
-
         [HttpGet]
         [Route("api/Registration/ResendActivationCode/{regId}")]
         public IHttpActionResult ResendActivationCode(int regId)
@@ -98,7 +98,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 Registration newRecord = new Registration();
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.RegistrationFilePath));
@@ -151,11 +150,12 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+        [Authorize]
         public async Task<IHttpActionResult> Put(int id)
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
 
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.RegistrationFilePath));
@@ -221,41 +221,5 @@ namespace BroadbandZone_App.WebApi
                 throw new Exception($"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}:{ex.Message}");
             }
         }
-
-        //// PUT api/<controller>/5
-        //public IHttpActionResult Put(int id, [FromBody] Registration editedRecord)
-        //{
-        //    try
-        //    {
-        //        AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-        //        using (var db = new BroadbandZoneEntities())
-        //        {
-        //            if (editedRecord.IsApproved != null)
-        //            {
-        //                editedRecord.ApprovalDate = DateTime.Now;
-        //                editedRecord.ApprovedBy = currentUser.Username;
-        //            }
-
-        //            db.Entry(editedRecord).State = EntityState.Modified;
-        //            db.SaveChanges();
-
-        //            if (editedRecord.IsApproved == true)
-        //            {
-        //                ObjectParameter activationCode = new ObjectParameter("oActivationCode", typeof(string));
-        //                db.GenerateActivationCode(editedRecord.RegId, activationCode);
-        //                MailHelper.SendActivationEmail(editedRecord.Email, editedRecord.Fullname, activationCode.Value);
-        //            }
-
-        //            return Ok(editedRecord);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
-        //        return Content(HttpStatusCode.BadRequest, ex.Message);
-        //    }
-        //}
-
-
     }
 }

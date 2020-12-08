@@ -16,12 +16,18 @@ using System.Web.Http;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class CustomerApplicationController : ApiController
     {
-
+        private AuthenticatedUser currentUser;
+        public CustomerApplicationController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         [HttpGet]
         [Route("api/CustomerApplication/CheckCommissionSettings/{categoryId}/{agent}")]
@@ -87,7 +93,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 SearchOrderParams filterBy = JsonConvert.DeserializeObject<SearchOrderParams>(searchParams);
 
                 using (var db = new BroadbandZoneEntities())
@@ -131,8 +136,8 @@ namespace BroadbandZone_App.WebApi
             }
             catch (Exception ex)
             {
-                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
-                return Content(HttpStatusCode.BadRequest, ex.Message);
+                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name} => {ex.InnerException.Message}");
+                return Content(HttpStatusCode.BadRequest, ex.InnerException.Message);
             }
         }
 
@@ -141,7 +146,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     GetApplicationDetails_Result results = db.GetApplicationDetails(id, currentUser.IsAdmin).FirstOrDefault();
@@ -168,7 +172,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 CustomerApplication newRecord = new CustomerApplication();
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
@@ -203,8 +206,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);

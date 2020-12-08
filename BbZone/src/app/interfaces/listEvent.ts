@@ -55,7 +55,7 @@ export abstract class ListEvent {
         this.loadDataList();
     }
 
-  private loadDataList() {
+    private loadDataList() {
 
         if (this.controllerName) {
             this.dataService.getListDataByPage(this.controllerName, this.listPage.currentPage, this.listPage.pageSize, this.searchParams, this.sortBy.header, this.sortBy.isAscOrder)
@@ -64,7 +64,7 @@ export abstract class ListEvent {
                     this.dataSourceSubject.next(data);
                 });
         }
-  }
+    }
 
  
 }

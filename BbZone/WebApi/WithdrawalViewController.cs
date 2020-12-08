@@ -14,14 +14,21 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
+
     public class WithdrawalViewController : ApiController
     {
-        private AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+        private AuthenticatedUser currentUser;
+        public WithdrawalViewController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         [HttpGet]
         //[Route("api/Incentives/Download/{searchParams}")]
@@ -68,8 +75,7 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-                //isAdmin = currentUser == null ?
+
                 using (var db = new BroadbandZoneEntities())
                 {
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
@@ -109,15 +115,9 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                //AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromToken();
                 using (var db = new BroadbandZoneEntities(true))
                 {
-                    //var withdrawal = db.Withdrawals.Include(w => w.WithdrawalItems).Where(w=>w.WithdrawalId == id).FirstOrDefault();
-                    //withdrawal.AllowEdit = !currentUser.IsAdmin ||
-                    //                        withdrawal.Status == WithdrawalStatus.Completed.ToString() ||
-                    //                        withdrawal.Status == WithdrawalStatus.Rejected.ToString() ||
-                    //                        withdrawal.Status == WithdrawalStatus.Terminated.ToString() ? false : true;
-                    //withdrawal.AllowTerminate = withdrawal.Status == WithdrawalStatus.Pending.ToString() ? true : false;
                     var withdrawal = db.GetWithdrawalById(id, currentUser.IsAdmin).FirstOrDefault();
                     withdrawal.WithdrawalItems = db.WithdrawalItems.Where(w => w.WithdrawalId == id).ToList();
                     return Ok(withdrawal);
@@ -136,7 +136,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     if (editRecord.Status == WithdrawalStatus.Completed.ToString())
@@ -172,7 +171,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.TerminateWithdrawal(id, currentUser.Fullname);

@@ -36,22 +36,22 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        //Start watching for user inactivity.
-        this.userIdle.startWatching();
+        ////Start watching for user inactivity.
+        //this.userIdle.startWatching();
 
-        // Start watching when user idle is starting.
-        this.userIdle.onTimerStart().subscribe(count => console.log(count));
+        //// Start watching when user idle is starting.
+        //this.userIdle.onTimerStart().subscribe(count => console.log(count));
 
-        // Start watch when time is up.
-        this.userIdle.onTimeout().subscribe(() =>
-            this.logout()
-        );
+        //// Start watch when time is up.
+        //this.userIdle.onTimeout().subscribe(() =>
+        //    this.logout()
+        //);
     }
 
-    @HostListener('window:unload', ['$event'])
-    unloadHandler(event) {
-        localStorage.removeItem('currentUser');
-    }
+    //@HostListener('window:unload', ['$event'])
+    //unloadHandler(event) {
+    //   // localStorage.removeItem('currentUser');
+    //}
 
     @HostListener('window:scroll', [])
     onWindowScroll() {

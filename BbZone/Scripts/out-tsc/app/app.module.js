@@ -91,6 +91,7 @@ var reset_agent_password_1 = require("./pages/reset-agent-password/reset-agent-p
 var report_agent_submission_1 = require("./pages/report-agent-submission/report-agent-submission");
 var report_agent_withdrawal_1 = require("./pages/report-agent-withdrawal/report-agent-withdrawal");
 var angular_editor_1 = require("@kolkov/angular-editor");
+var cookies_service_1 = require("angular2-cookie/services/cookies.service");
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }
@@ -217,6 +218,7 @@ var AppModule = /** @class */ (function () {
                 broadcast_service_1.BroadcastService,
                 cascade_service_1.CascadeService,
                 router_service_1.RouterService,
+                cookies_service_1.CookieService,
                 loader_service_1.LoaderService,
                 {
                     provide: http_2.HTTP_INTERCEPTORS,

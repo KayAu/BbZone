@@ -32,6 +32,9 @@ export class Login {
         this.loadBanner();
         this.user = new LoginUser();
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'home';
+        if (!this.authenticationService.isCookiesCleared()) {
+            this.authenticationService.logout();
+        };
     }
 
     login() {
@@ -40,10 +43,8 @@ export class Login {
         }
 
         this.authenticationService.login(this.user).subscribe(user => {
-            if (user.isAuthenticated) {
-              
+            if (user.isAuthenticated) {              
                 this.router.navigate([this.returnUrl]);
-                
             }
             else {
                 this.error = "Login Failed. You do not have the permission to login to the system";

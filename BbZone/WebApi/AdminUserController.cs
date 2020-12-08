@@ -8,12 +8,19 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class AdminUserController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public AdminUserController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         [HttpGet]
         // GET: api/StorageLocations
@@ -37,7 +44,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     newRecord.PasswordHash = db.GenerateEncryptedPwd(newRecord.Password).FirstOrDefault();
@@ -62,7 +68,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.Entry(editedRecord).State = EntityState.Modified;

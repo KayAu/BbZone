@@ -8,18 +8,28 @@ using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class CompletedApplicationController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public CompletedApplicationController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
+
+        //
+
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
         {
-            try
+             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+                //AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
                 SearchCompletedOrderParams filterBy = JsonConvert.DeserializeObject<SearchCompletedOrderParams>(searchParams);
 
                 using (var db = new BroadbandZoneEntities())

@@ -14,11 +14,19 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 using System.Collections.ObjectModel;
+using System.Security.Claims;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class AnnouncementController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public AnnouncementController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
+
         [HttpGet]
         [Route("api/Announcement/EmailAgents/{id}")]
         public IHttpActionResult EmailAgents(int id)
@@ -133,7 +141,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 Announcement newRecord = new Announcement();
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.AnnouncementFilePath));
@@ -165,8 +172,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                Console.Write(HttpContext.Current.User.Identity.Name);
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.AnnouncementFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);

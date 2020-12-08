@@ -12,28 +12,28 @@ namespace BroadbandZone_App.WebApi
 {
     public class UserController : ApiController
     {
-        // GET: User
-        // POST api/<controller>
-        public IHttpActionResult Authenticate([FromBody]AuthenticatedUser userLogin)
-        {
-            try
-            {               
-                var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin ,false);
-                if (user.IsAuthenticated == true)
-                {
-                    FormsAuthentication.SetAuthCookie(userLogin.Username, false);
-                    UserIdentityHelper.SetLoginAccountToCookie(user);
-                    LogUserAccess(user);
-                }
+        //// GET: User
+        //// POST api/<controller>
+        //public IHttpActionResult Authenticate([FromBody]AuthenticatedUser userLogin)
+        //{
+        //    try
+        //    {               
+        //        var user = UserIdentityHelper.AuthenticateUser(userLogin.Username, userLogin.Password, userLogin.IsAdmin ,false);
+        //        if (user.IsAuthenticated == true)
+        //        {
+        //            FormsAuthentication.SetAuthCookie(userLogin.Username, false);
+        //            UserIdentityHelper.SetLoginAccountToCookie(user);
+        //            LogUserAccess(user);
+        //        }
  
-                return Ok(user);
-            }
-            catch (Exception ex)
-            {
-                ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
-                return Content(HttpStatusCode.BadRequest, ex.Message);
-            }
-        }
+        //        return Ok(user);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        ExceptionUtility.LogError(ex, $"{this.GetType().Name}.{(new System.Diagnostics.StackTrace()).GetFrame(0).GetMethod().Name}");
+        //        return Content(HttpStatusCode.BadRequest, ex.Message);
+        //    }
+        //}
 
         [HttpGet]
         [Route("api/User/HasLoginExists/{userLogin}")]

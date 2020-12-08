@@ -8,5 +8,6 @@
     hasFullControl: boolean;
     isAdmin: boolean;
     agentId: number;
+    access_token: string;
 }
 

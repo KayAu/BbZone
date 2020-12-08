@@ -10,15 +10,23 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class DownloadController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public DownloadController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         // GET api/<controller>
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/Download/CustomerApplicationDocument/{fileName}")]
         public HttpResponseMessage CustomerApplicationDocument(string fileName)
@@ -35,6 +43,7 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/Download/Announcement/{fileName}")]
         public HttpResponseMessage Announcement(string fileName)
@@ -51,6 +60,7 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("api/Download/RegistrationDocument/{fileName}")]
         public HttpResponseMessage RegistrationDocument(string fileName)
@@ -72,7 +82,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     var results = (new BroadbandZoneEntities()).GetCustomerApplicationForDownload(
@@ -158,7 +167,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     using (XLWorkbook wb = new XLWorkbook())

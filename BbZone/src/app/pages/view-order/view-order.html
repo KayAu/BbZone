@@ -50,12 +50,15 @@
                             <table class="table table-striped table-bordered mrg10T dataTable" sortable [sort-column]="sortBy" (onHeaderClick)="sortList($event)">
                                 <thead>
                                     <tr>
-                                        <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>
                                         <th class="cell-width-5">Action</th>
+                                        <th *ngFor="let col of dataRowMapper" [sort-cell]="col.displayType == displayType.text ? col.fieldName: ''" [ngClass]="col.colWidth">{{col.headerText}}</th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr *ngFor="let record of dataSource; let rowNo = index">
+                                        <td>
+                                            <a class="btn btn-success " [routerLink]='["/edit-order/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
+                                        </td>
                                         <ng-container *ngFor="let field of dataRowMapper">
                                             <td>
                                                 <data-field *ngIf="field.displayType != displayType.badge; else displayBadge" [displayType]="field.displayType" [displayValue]="record[field.fieldName]"></data-field>
@@ -70,9 +73,7 @@
                                                 <i class="fa fa-ban float-right font-azure" title="Commission claimed for non completed order" *ngIf="field.fieldName == 'status' && record.oddClaimed"></i>
                                             </td>
                                         </ng-container>
-                                        <td>
-                                            <a class="btn btn-success " [routerLink]='["/edit-order/", record[keyField]]'><i class="fa fa-file-text-o"></i></a>
-                                        </td>
+
                                     </tr>
                                     <tr *ngIf="dataSource.length === 0">
                                         <td [attr.colspan]="dataRowMapper.length+1">

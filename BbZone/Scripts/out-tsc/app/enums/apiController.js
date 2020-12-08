@@ -28,5 +28,6 @@ var ApiController;
     ApiController["Password"] = "Password";
     ApiController["ReportAgentSubmission"] = "ReportAgentSubmission";
     ApiController["ReportAgentWithdrawal"] = "ReportAgentWithdrawal";
+    ApiController["Token"] = "token";
 })(ApiController = exports.ApiController || (exports.ApiController = {}));
 //# sourceMappingURL=apiController.js.map

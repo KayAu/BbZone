@@ -9,14 +9,20 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
-	public class WithdrawalSubmitController : ApiController
+    [Authorize]
+    public class WithdrawalSubmitController : ApiController
 	{
-        private AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
+        private AuthenticatedUser currentUser;
+        public WithdrawalSubmitController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         [HttpGet]
         public IHttpActionResult GetAll(int currentPage, int pageSize, string sortColumn, bool sortInAsc, string searchParams)
@@ -26,8 +32,6 @@ namespace BroadbandZone_App.WebApi
                 using (var db = new BroadbandZoneEntities())
                 {
                     SearchWithdrawalParams filterBy = JsonConvert.DeserializeObject<SearchWithdrawalParams>(searchParams);
-                    //AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                     
                     ObjectParameter totalRecord = new ObjectParameter("oTotalRecord", typeof(int));
                     ObjectParameter totalIncentives = new ObjectParameter("oTotalIncentives", typeof(decimal));
@@ -76,9 +80,9 @@ namespace BroadbandZone_App.WebApi
 
                     // Update claim able commission with the new Withdrawal transaction id
                     db.UpdateClaimableCommission(newRecord.WithdrawalId);
-
+                   
                     // update agent charges with the newly submitted withdrawal Id
-                    db.UpdateAgentPocket(currentUser.Username, newRecord.WithdrawalId);
+                    db.UpdateAgentPocket(newRecord.Agent, newRecord.WithdrawalId);
                 }
 
                 return Ok();

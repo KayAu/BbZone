@@ -5,20 +5,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class CommunicationController : ApiController
     {
-
+        private AuthenticatedUser currentUser;
+        public CommunicationController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
         // GET api/<controller>/5
         public IHttpActionResult Get(int id)
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 using (var db = new BroadbandZoneEntities(true))
                 {
                     var communications = db.Communications.Where(c => c.ApplicationId == id).ToList();
@@ -41,7 +45,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     newRecord.MsgRead = false;
@@ -63,7 +66,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
                 using (var db = new BroadbandZoneEntities())
                 {
                     db.UpdateMessagesToRead(id, currentUser.IsAdmin);

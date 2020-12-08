@@ -12,41 +12,68 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 var Rx_1 = require("rxjs/Rx");
+var angular2_cookie_1 = require("angular2-cookie");
 var DataService = /** @class */ (function () {
-    function DataService(http) {
+    //headerOptions: any;
+    function DataService(http, cookieService) {
         this.http = http;
-        this.headerOptions = { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
+        this.cookieService = cookieService;
+        this.currentUser = null;
+        //this.headerOptions = { headers: new HttpHeaders({ 'Content-Type': "application/json" }) };
     }
-    DataService.prototype.export = function (apiControllerName, filterParams) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }), responseType: 'blob' }).catch(this.errorHandler);
+    DataService.prototype.getHeaderOptions = function () {
+        this.currentUser = this.cookieService.get('currentUser') !== undefined ? JSON.parse(this.cookieService.get('currentUser')) : null;
+        if (this.currentUser !== null) {
+            return {
+                headers: new http_1.HttpHeaders({
+                    'Content-Type': "application/json",
+                    Authorization: "Bearer " + this.currentUser.access_token
+                })
+            };
+        }
+        else {
+            return { headers: new http_1.HttpHeaders({ 'Content-Type': "application/json" }) };
+        }
     };
-    //login(loginuser: LoginUser): any {
-    //    const body = new HttpParams()
-    //        .set('grant_type', loginuser.isAdmin.toString())
-    //        .set('username', loginuser.username)
-    //        .set('password', loginuser.password)
-    //    return this.http.post('/token', body.toString(), {
-    //        observe: 'response',
-    //        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    //    }).catch(this.errorHandler); 
-    //}
+    DataService.prototype.getHeaderTokenOnlyOption = function () {
+        this.currentUser = this.cookieService.get('currentUser') !== undefined ? JSON.parse(this.cookieService.get('currentUser')) : null;
+        if (this.currentUser !== null) {
+            return { headers: new http_1.HttpHeaders({ Authorization: "Bearer " + this.currentUser.access_token }) };
+        }
+    };
+    DataService.prototype.export = function (apiControllerName, filterParams) {
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(filterParams), {
+            headers: new http_1.HttpHeaders({ 'Content-Type': "application/json", Authorization: "Bearer " + this.currentUser.access_token }),
+            responseType: 'blob'
+        }).catch(this.errorHandler);
+    };
+    DataService.prototype.login = function (apiControllerName, username, password, isAdmin) {
+        var userData = "username=" + username + "&password=" + password + "&isAdmin=" + isAdmin + "&grant_type=password";
+        var loginHeaderOptions = new http_1.HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'No-Auth': 'True'
+        });
+        return this.http.post(this.getWebMethodUrl(apiControllerName), userData, {
+            headers: loginHeaderOptions
+        }).catch(this.errorHandler);
+    };
     DataService.prototype.get = function (apiControllerName, recordId) {
-        return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.headerOptions).catch(this.errorHandler);
+        return this.http.get(this.getWebMethodUrl(apiControllerName, recordId), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.add = function (apiControllerName, record) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(record), this.headerOptions).catch(this.errorHandler);
+        return this.http.post(this.getWebMethodUrl(apiControllerName), JSON.stringify(record), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.postForm = function (apiControllerName, formData) {
-        return this.http.post(this.getWebMethodUrl(apiControllerName), formData).catch(this.errorHandler);
+        return this.http.post(this.getWebMethodUrl(apiControllerName), formData, this.getHeaderTokenOnlyOption()).catch(this.errorHandler);
     };
     DataService.prototype.updateForm = function (apiControllerName, recordId, formData) {
-        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), formData).catch(this.errorHandler);
+        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), formData, this.getHeaderTokenOnlyOption()).catch(this.errorHandler);
     };
     DataService.prototype.update = function (apiControllerName, recordId, record) {
-        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), JSON.stringify(record), this.headerOptions).catch(this.errorHandler);
+        return this.http.put(this.getWebMethodUrl(apiControllerName, recordId), JSON.stringify(record), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.remove = function (apiControllerName, recordId) {
-        return this.http.delete(this.getWebMethodUrl(apiControllerName, recordId)).catch(this.errorHandler);
+        return this.http.delete(this.getWebMethodUrl(apiControllerName, recordId), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.getListDataByPage = function (apiControllerName, fromRecord, pageSize, filterParams, sortColumn, sortInAsc) {
         if (pageSize === void 0) { pageSize = 25; }
@@ -57,10 +84,15 @@ var DataService = /** @class */ (function () {
             .append('sortColumn', sortColumn)
             .append('sortInAsc', sortInAsc.toString())
             .append('searchParams', searchParams);
-        return this.http.get(this.getWebMethodUrl(apiControllerName), { params: params }).catch(this.errorHandler);
+        var headers = new http_1.HttpHeaders({
+            'Content-Type': "application/json",
+            Authorization: "Bearer " + this.currentUser.access_token
+        });
+        var options = { headers: headers, params: params };
+        return this.http.get(this.getWebMethodUrl(apiControllerName), options).catch(this.errorHandler);
     };
     DataService.prototype.getAll = function (apiControllerName) {
-        return this.http.get(this.getWebMethodUrl(apiControllerName), this.headerOptions).catch(this.errorHandler);
+        return this.http.get(this.getWebMethodUrl(apiControllerName), this.getHeaderOptions()).catch(this.errorHandler);
     };
     DataService.prototype.getWebMethodUrl = function (apiControllerName, param) {
         if (param)
@@ -84,7 +116,7 @@ var DataService = /** @class */ (function () {
     };
     DataService = __decorate([
         core_1.Injectable(),
-        __metadata("design:paramtypes", [http_1.HttpClient])
+        __metadata("design:paramtypes", [http_1.HttpClient, angular2_cookie_1.CookieService])
     ], DataService);
     return DataService;
 }());

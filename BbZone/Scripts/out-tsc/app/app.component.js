@@ -32,19 +32,19 @@ var AppComponent = /** @class */ (function () {
         });
     }
     AppComponent.prototype.ngOnInit = function () {
-        var _this = this;
-        //Start watching for user inactivity.
-        this.userIdle.startWatching();
-        // Start watching when user idle is starting.
-        this.userIdle.onTimerStart().subscribe(function (count) { return console.log(count); });
-        // Start watch when time is up.
-        this.userIdle.onTimeout().subscribe(function () {
-            return _this.logout();
-        });
+        ////Start watching for user inactivity.
+        //this.userIdle.startWatching();
+        //// Start watching when user idle is starting.
+        //this.userIdle.onTimerStart().subscribe(count => console.log(count));
+        //// Start watch when time is up.
+        //this.userIdle.onTimeout().subscribe(() =>
+        //    this.logout()
+        //);
     };
-    AppComponent.prototype.unloadHandler = function (event) {
-        localStorage.removeItem('currentUser');
-    };
+    //@HostListener('window:unload', ['$event'])
+    //unloadHandler(event) {
+    //   // localStorage.removeItem('currentUser');
+    //}
     AppComponent.prototype.onWindowScroll = function () {
         if ((window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) > this.showScrollHeight) {
             this.showScroll = true;
@@ -78,12 +78,6 @@ var AppComponent = /** @class */ (function () {
         core_1.ViewChild(nav_menu_component_1.NavMenuComponent),
         __metadata("design:type", nav_menu_component_1.NavMenuComponent)
     ], AppComponent.prototype, "navMenu", void 0);
-    __decorate([
-        core_1.HostListener('window:unload', ['$event']),
-        __metadata("design:type", Function),
-        __metadata("design:paramtypes", [Object]),
-        __metadata("design:returntype", void 0)
-    ], AppComponent.prototype, "unloadHandler", null);
     __decorate([
         core_1.HostListener('window:scroll', []),
         __metadata("design:type", Function),

@@ -8,21 +8,26 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class IncentivesUploadController : ApiController
     {
+        private AuthenticatedUser currentUser;
+        public IncentivesUploadController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
         // POST api/<controller>
         public async Task<IHttpActionResult> Post()//[FromBody]CustomerOrder newRecord
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.UploadFilePath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
@@ -66,7 +71,6 @@ namespace BroadbandZone_App.WebApi
             try
             {
                 dt = new DataTable();
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
 
                 using (var db = new BroadbandZoneEntities())
                 {

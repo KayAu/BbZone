@@ -83,6 +83,7 @@ import { ResetAgentPassword } from './pages/reset-agent-password/reset-agent-pas
 import { ReportAgentSubmission } from './pages/report-agent-submission/report-agent-submission';
 import { ReportAgentWithdrawal } from './pages/report-agent-withdrawal/report-agent-withdrawal';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
   declarations: [
@@ -211,7 +212,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     DataService,
     BroadcastService,
     CascadeService,
-    RouterService,
+      RouterService,
+      CookieService,
     LoaderService,
     {
         provide: HTTP_INTERCEPTORS,

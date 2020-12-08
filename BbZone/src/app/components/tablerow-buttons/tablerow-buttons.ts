@@ -6,7 +6,7 @@ import { DataRowAction } from "../../interfaces/dataRowAction";
   template: `<div *ngIf="!editMode; else editActions">
               <button type="button" class="btn btn-success mrg5R" (click)="editRow()" [ngClass]="{'btn-sm' : hideDelete, 'btn-xs' : !hideDelete }" [disabled]="disabledEdit" *ngIf="!hideEdit">
                 <i class="fa fa-edit"></i>
-                 <span *ngIf="hideDelete">Edit</span>
+                
               </button>
               <button type="button" class="btn btn-xs btn-info" (click)="deleteRow()" *ngIf="!hideDelete" [disabled]="disabledDelete">
                 <i class="fa fa-trash"></i>

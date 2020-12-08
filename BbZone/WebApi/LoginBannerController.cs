@@ -7,15 +7,22 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
 
 namespace BroadbandZone_App.WebApi
 {
+    [Authorize]
     public class LoginBannerController : ApiController
     {
         private BroadbandZoneEntities db = new BroadbandZoneEntities();
+        private AuthenticatedUser currentUser;
+        public LoginBannerController()
+        {
+            currentUser = UserIdentityHelper.GetLoginAccountFromToken((ClaimsIdentity)this.User.Identity);
+        }
 
         [HttpGet]
         // GET: api/StorageLocations
@@ -33,8 +40,9 @@ namespace BroadbandZone_App.WebApi
             }
         }
 
+
+        [AllowAnonymous]
         [HttpGet]
-        // GET: api/StorageLocations
         public IHttpActionResult Get()
         {
             try
@@ -52,8 +60,6 @@ namespace BroadbandZone_App.WebApi
         {
             try
             {
-                AuthenticatedUser currentUser = UserIdentityHelper.GetLoginAccountFromCookie();
-
                 // get the form data contents
                 var provider = new MultipartFormDataStreamProvider(HttpContext.Current.Server.MapPath(Properties.Settings.Default.LoginBannerPath));
                 var result = await Request.Content.ReadAsMultipartAsync(provider);
